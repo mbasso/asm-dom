@@ -12,16 +12,15 @@ typedef void (*DestroyHook)(VNode vNode);
 typedef void (*RemoveHook)(VNode vNode, void (*removeCallback)());
 typedef void (*PostHook)();
 
-class Hooks {
-	public:
-		PreHook* pre;
-		InitHook* init;
-		CreateHook* create;
-		InsertHook* insert;
-		PrePatchHook* prepatch;
-		UpdateHook* update;
-		PostPatchHook* postpatch;
-		DestroyHook* destroy;
-		RemoveHook* remove;
-		PostHook* post;
+struct Hooks {
+	PreHook* pre;
+	InitHook* init;
+	CreateHook* create;
+	InsertHook* insert;
+	PrePatchHook* prepatch;
+	UpdateHook* update;
+	PostPatchHook* postpatch;
+	DestroyHook* destroy;
+	RemoveHook* remove;
+	PostHook* post;
 }
