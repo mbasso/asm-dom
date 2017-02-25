@@ -152,58 +152,6 @@ Module['VoidPtr'] = VoidPtr;
   var self = this.ptr;
   _emscripten_bind_VoidPtr___destroy___0(self);
 };
-// VNode
-function VNode(arg0, arg1) {
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  this.ptr = _emscripten_bind_VNode_VNode_2(arg0, arg1);
-  getCache(VNode)[this.ptr] = this;
-};;
-VNode.prototype = Object.create(WrapperObject.prototype);
-VNode.prototype.constructor = VNode;
-VNode.prototype.__class__ = VNode;
-VNode.__cache__ = {};
-Module['VNode'] = VNode;
-
-VNode.prototype['getName'] = VNode.prototype.getName = function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_VNode_getName_0(self));
-};;
-
-VNode.prototype['setName'] = VNode.prototype.setName = function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_VNode_setName_1(self, arg0);
-};;
-
-VNode.prototype['getKey'] = VNode.prototype.getKey = function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_VNode_getKey_0(self));
-};;
-
-VNode.prototype['setKey'] = VNode.prototype.setKey = function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_VNode_setKey_1(self, arg0);
-};;
-
-VNode.prototype['render'] = VNode.prototype.render = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_VNode_render_1(self, arg0);
-};;
-
-  VNode.prototype['__destroy__'] = VNode.prototype.__destroy__ = function() {
-  var self = this.ptr;
-  _emscripten_bind_VNode___destroy___0(self);
-};
 (function() {
   function setupEnums() {
     

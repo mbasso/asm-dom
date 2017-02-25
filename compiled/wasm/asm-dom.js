@@ -1956,7 +1956,7 @@ var ASM_CONSTS = [];
 
 STATIC_BASE = 1024;
 
-STATICTOP = STATIC_BASE + 8224;
+STATICTOP = STATIC_BASE + 4992;
   /* global initializers */  __ATINIT__.push({ func: function() { __GLOBAL__sub_I_bind_cpp() } });
   
 
@@ -1965,7 +1965,7 @@ memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasm
 
 
 
-var STATIC_BUMP = 8224;
+var STATIC_BUMP = 4992;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 
@@ -2176,104 +2176,328 @@ function copyTempDouble(ptr) {
     }
 
   
-  
-  var emval_methodCallers=[];function __emval_addMethodCaller(caller) {
-      var id = emval_methodCallers.length;
-      emval_methodCallers.push(caller);
-      return id;
+  function _embind_repr(v) {
+      if (v === null) {
+          return 'null';
+      }
+      var t = typeof v;
+      if (t === 'object' || t === 'array' || t === 'function') {
+          return v.toString();
+      } else {
+          return '' + v;
+      }
     }
   
+  function floatReadValueFromPointer(name, shift) {
+      switch (shift) {
+          case 2: return function(pointer) {
+              return this['fromWireType'](HEAPF32[pointer >> 2]);
+          };
+          case 3: return function(pointer) {
+              return this['fromWireType'](HEAPF64[pointer >> 3]);
+          };
+          default:
+              throw new TypeError("Unknown float type: " + name);
+      }
+    }
   
+  function getShiftFromSize(size) {
+      switch (size) {
+          case 1: return 0;
+          case 2: return 1;
+          case 4: return 2;
+          case 8: return 3;
+          default:
+              throw new TypeError('Unknown type size: ' + size);
+      }
+    }function __embind_register_float(rawType, name, size) {
+      var shift = getShiftFromSize(size);
+      name = readLatin1String(name);
+      registerType(rawType, {
+          name: name,
+          'fromWireType': function(value) {
+              return value;
+          },
+          'toWireType': function(destructors, value) {
+              // todo: Here we have an opportunity for -O3 level "unsafe" optimizations: we could
+              // avoid the following if() and assume value is of proper type.
+              if (typeof value !== "number" && typeof value !== "boolean") {
+                  throw new TypeError('Cannot convert "' + _embind_repr(value) + '" to ' + this.name);
+              }
+              return value;
+          },
+          'argPackAdvance': 8,
+          'readValueFromPointer': floatReadValueFromPointer(name, shift),
+          destructorFunction: null, // This type does not need a destructor
+      });
+    }
+
+   
+  Module["_memset"] = _memset;
+
+  function _pthread_cleanup_push(routine, arg) {
+      __ATEXIT__.push(function() { Runtime.dynCall('vi', routine, [arg]) })
+      _pthread_cleanup_push.level = __ATEXIT__.length;
+    }
+
+  function __embind_register_bool(rawType, name, size, trueValue, falseValue) {
+      var shift = getShiftFromSize(size);
   
+      name = readLatin1String(name);
+      registerType(rawType, {
+          name: name,
+          'fromWireType': function(wt) {
+              // ambiguous emscripten ABI: sometimes return values are
+              // true or false, and sometimes integers (0 or 1)
+              return !!wt;
+          },
+          'toWireType': function(destructors, o) {
+              return o ? trueValue : falseValue;
+          },
+          'argPackAdvance': 8,
+          'readValueFromPointer': function(pointer) {
+              // TODO: if heap is fixed (like in asm.js) this could be executed outside
+              var heap;
+              if (size === 1) {
+                  heap = HEAP8;
+              } else if (size === 2) {
+                  heap = HEAP16;
+              } else if (size === 4) {
+                  heap = HEAP32;
+              } else {
+                  throw new TypeError("Unknown boolean type size: " + name);
+              }
+              return this['fromWireType'](heap[pointer >> shift]);
+          },
+          destructorFunction: null, // This type does not need a destructor
+      });
+    }
+
+  function _pthread_cleanup_pop() {
+      assert(_pthread_cleanup_push.level == __ATEXIT__.length, 'cannot pop if something else added meanwhile!');
+      __ATEXIT__.pop();
+      _pthread_cleanup_push.level = __ATEXIT__.length;
+    }
+
+  function _abort() {
+      Module['abort']();
+    }
+
   
   function _free() {
   }
-  Module["_free"] = _free;function getTypeName(type) {
-      var ptr = ___getTypeName(type);
-      var rv = readLatin1String(ptr);
-      _free(ptr);
-      return rv;
-    }function requireRegisteredType(rawType, humanName) {
-      var impl = registeredTypes[rawType];
-      if (undefined === impl) {
-          throwBindingError(humanName + " has unknown type " + getTypeName(rawType));
-      }
-      return impl;
-    }function __emval_lookupTypes(argCount, argTypes, argWireTypes) {
-      var a = new Array(argCount);
-      for (var i = 0; i < argCount; ++i) {
-          a[i] = requireRegisteredType(
-              HEAP32[(argTypes >> 2) + i],
-              "parameter " + i);
-      }
-      return a;
-    }
+  Module["_free"] = _free;
   
-  function new_(constructor, argumentList) {
-      if (!(constructor instanceof Function)) {
-          throw new TypeError('new_ called with constructor type ' + typeof(constructor) + " which is not a function");
-      }
-  
-      /*
-       * Previously, the following line was just:
-  
-       function dummy() {};
-  
-       * Unfortunately, Chrome was preserving 'dummy' as the object's name, even though at creation, the 'dummy' has the
-       * correct constructor name.  Thus, objects created with IMVU.new would show up in the debugger as 'dummy', which
-       * isn't very helpful.  Using IMVU.createNamedFunction addresses the issue.  Doublely-unfortunately, there's no way
-       * to write a test for this behavior.  -NRD 2013.02.22
+  function _malloc(bytes) {
+      /* Over-allocate to make sure it is byte-aligned by 8.
+       * This will leak memory, but this is only the dummy
+       * implementation (replaced by dlmalloc normally) so
+       * not an issue.
        */
-      var dummy = createNamedFunction(constructor.name || 'unknownFunctionName', function(){});
-      dummy.prototype = constructor.prototype;
-      var obj = new dummy;
+      var ptr = Runtime.dynamicAlloc(bytes + 8);
+      return (ptr+8) & 0xFFFFFFF8;
+    }
+  Module["_malloc"] = _malloc;
   
-      var r = constructor.apply(obj, argumentList);
-      return (r instanceof Object) ? r : obj;
-    }function __emval_get_method_caller(argCount, argTypes) {
-      var types = __emval_lookupTypes(argCount, argTypes);
+  function simpleReadValueFromPointer(pointer) {
+      return this['fromWireType'](HEAPU32[pointer >> 2]);
+    }function __embind_register_std_string(rawType, name) {
+      name = readLatin1String(name);
+      registerType(rawType, {
+          name: name,
+          'fromWireType': function(value) {
+              var length = HEAPU32[value >> 2];
+              var a = new Array(length);
+              for (var i = 0; i < length; ++i) {
+                  a[i] = String.fromCharCode(HEAPU8[value + 4 + i]);
+              }
+              _free(value);
+              return a.join('');
+          },
+          'toWireType': function(destructors, value) {
+              if (value instanceof ArrayBuffer) {
+                  value = new Uint8Array(value);
+              }
   
-      var retType = types[0];
-      var signatureName = retType.name + "_$" + types.slice(1).map(function (t) { return t.name; }).join("_") + "$";
+              function getTAElement(ta, index) {
+                  return ta[index];
+              }
+              function getStringElement(string, index) {
+                  return string.charCodeAt(index);
+              }
+              var getElement;
+              if (value instanceof Uint8Array) {
+                  getElement = getTAElement;
+              } else if (value instanceof Uint8ClampedArray) {
+                  getElement = getTAElement;
+              } else if (value instanceof Int8Array) {
+                  getElement = getTAElement;
+              } else if (typeof value === 'string') {
+                  getElement = getStringElement;
+              } else {
+                  throwBindingError('Cannot pass non-string to std::string');
+              }
   
-      var params = ["retType"];
-      var args = [retType];
+              // assumes 4-byte alignment
+              var length = value.length;
+              var ptr = _malloc(4 + length);
+              HEAPU32[ptr >> 2] = length;
+              for (var i = 0; i < length; ++i) {
+                  var charCode = getElement(value, i);
+                  if (charCode > 255) {
+                      _free(ptr);
+                      throwBindingError('String has UTF-16 code units that do not fit in 8 bits');
+                  }
+                  HEAPU8[ptr + 4 + i] = charCode;
+              }
+              if (destructors !== null) {
+                  destructors.push(_free, ptr);
+              }
+              return ptr;
+          },
+          'argPackAdvance': 8,
+          'readValueFromPointer': simpleReadValueFromPointer,
+          destructorFunction: function(ptr) { _free(ptr); },
+      });
+    }
+
   
-      var argsList = ""; // 'arg0, arg1, arg2, ... , argN'
-      for (var i = 0; i < argCount - 1; ++i) {
-          argsList += (i !== 0 ? ", " : "") + "arg" + i;
-          params.push("argType" + i);
-          args.push(types[1 + i]);
+  function integerReadValueFromPointer(name, shift, signed) {
+      // integers are quite common, so generate very specialized functions
+      switch (shift) {
+          case 0: return signed ?
+              function readS8FromPointer(pointer) { return HEAP8[pointer]; } :
+              function readU8FromPointer(pointer) { return HEAPU8[pointer]; };
+          case 1: return signed ?
+              function readS16FromPointer(pointer) { return HEAP16[pointer >> 1]; } :
+              function readU16FromPointer(pointer) { return HEAPU16[pointer >> 1]; };
+          case 2: return signed ?
+              function readS32FromPointer(pointer) { return HEAP32[pointer >> 2]; } :
+              function readU32FromPointer(pointer) { return HEAPU32[pointer >> 2]; };
+          default:
+              throw new TypeError("Unknown integer type: " + name);
+      }
+    }function __embind_register_integer(primitiveType, name, size, minRange, maxRange) {
+      name = readLatin1String(name);
+      if (maxRange === -1) { // LLVM doesn't have signed and unsigned 32-bit types, so u32 literals come out as 'i32 -1'. Always treat those as max u32.
+          maxRange = 4294967295;
       }
   
-      var functionName = makeLegalFunctionName("methodCaller_" + signatureName);
-      var functionBody =
-          "return function " + functionName + "(handle, name, destructors, args) {\n";
+      var shift = getShiftFromSize(size);
+      
+      var fromWireType = function(value) {
+          return value;
+      };
+      
+      if (minRange === 0) {
+          var bitshift = 32 - 8*size;
+          fromWireType = function(value) {
+              return (value << bitshift) >>> bitshift;
+          };
+      }
   
-      var offset = 0;
-      for (var i = 0; i < argCount - 1; ++i) {
-          functionBody +=
-          "    var arg" + i + " = argType" + i + ".readValueFromPointer(args" + (offset ? ("+"+offset) : "") + ");\n";
-          offset += types[i + 1]['argPackAdvance'];
-      }
-      functionBody +=
-          "    var rv = handle[name](" + argsList + ");\n";
-      for (var i = 0; i < argCount - 1; ++i) {
-          if (types[i + 1]['deleteObject']) {
-              functionBody +=
-              "    argType" + i + ".deleteObject(arg" + i + ");\n";
-          }
-      }
-      if (!retType.isVoid) {
-          functionBody +=
-          "    return retType.toWireType(destructors, rv);\n";
-      }
-      functionBody += 
-          "};\n";
+      registerType(primitiveType, {
+          name: name,
+          'fromWireType': fromWireType,
+          'toWireType': function(destructors, value) {
+              // todo: Here we have an opportunity for -O3 level "unsafe" optimizations: we could
+              // avoid the following two if()s and assume value is of proper type.
+              if (typeof value !== "number" && typeof value !== "boolean") {
+                  throw new TypeError('Cannot convert "' + _embind_repr(value) + '" to ' + this.name);
+              }
+              if (value < minRange || value > maxRange) {
+                  throw new TypeError('Passing a number "' + _embind_repr(value) + '" from JS side to C/C++ side to an argument of type "' + name + '", which is outside the valid range [' + minRange + ', ' + maxRange + ']!');
+              }
+              return value | 0;
+          },
+          'argPackAdvance': 8,
+          'readValueFromPointer': integerReadValueFromPointer(name, shift, minRange !== 0),
+          destructorFunction: null, // This type does not need a destructor
+      });
+    }
+
+  function ___lock() {}
+
+  function ___unlock() {}
+
   
-      params.push(functionBody);
-      var invokerFunction = new_(Function, params).apply(null, args);
-      return __emval_addMethodCaller(invokerFunction);
+  var SYSCALLS={varargs:0,get:function (varargs) {
+        SYSCALLS.varargs += 4;
+        var ret = HEAP32[(((SYSCALLS.varargs)-(4))>>2)];
+        return ret;
+      },getStr:function () {
+        var ret = Pointer_stringify(SYSCALLS.get());
+        return ret;
+      },get64:function () {
+        var low = SYSCALLS.get(), high = SYSCALLS.get();
+        if (low >= 0) assert(high === 0);
+        else assert(high === -1);
+        return low;
+      },getZero:function () {
+        assert(SYSCALLS.get() === 0);
+      }};function ___syscall6(which, varargs) {SYSCALLS.varargs = varargs;
+  try {
+   // close
+      var stream = SYSCALLS.getStreamFromFD();
+      FS.close(stream);
+      return 0;
+    } catch (e) {
+    if (typeof FS === 'undefined' || !(e instanceof FS.ErrnoError)) abort(e);
+    return -e.errno;
+  }
+  }
+
+  
+  function ___setErrNo(value) {
+      if (Module['___errno_location']) HEAP32[((Module['___errno_location']())>>2)]=value;
+      else Module.printErr('failed to set errno from JS');
+      return value;
+    } 
+  Module["_sbrk"] = _sbrk;
+
+  function __embind_register_std_wstring(rawType, charSize, name) {
+      // nb. do not cache HEAPU16 and HEAPU32, they may be destroyed by enlargeMemory().
+      name = readLatin1String(name);
+      var getHeap, shift;
+      if (charSize === 2) {
+          getHeap = function() { return HEAPU16; };
+          shift = 1;
+      } else if (charSize === 4) {
+          getHeap = function() { return HEAPU32; };
+          shift = 2;
+      }
+      registerType(rawType, {
+          name: name,
+          'fromWireType': function(value) {
+              var HEAP = getHeap();
+              var length = HEAPU32[value >> 2];
+              var a = new Array(length);
+              var start = (value + 4) >> shift;
+              for (var i = 0; i < length; ++i) {
+                  a[i] = String.fromCharCode(HEAP[start + i]);
+              }
+              _free(value);
+              return a.join('');
+          },
+          'toWireType': function(destructors, value) {
+              // assumes 4-byte alignment
+              var HEAP = getHeap();
+              var length = value.length;
+              var ptr = _malloc(4 + length * charSize);
+              HEAPU32[ptr >> 2] = length;
+              var start = (ptr + 4) >> shift;
+              for (var i = 0; i < length; ++i) {
+                  HEAP[start + i] = value.charCodeAt(i);
+              }
+              if (destructors !== null) {
+                  destructors.push(_free, ptr);
+              }
+              return ptr;
+          },
+          'argPackAdvance': 8,
+          'readValueFromPointer': simpleReadValueFromPointer,
+          destructorFunction: function(ptr) { _free(ptr); },
+      });
     }
 
   
@@ -2354,43 +2578,27 @@ function copyTempDouble(ptr) {
       // typeinfo defined. Best-efforts match just in case.
       thrown = HEAP32[((thrown)>>2)]; // undo indirection
       return ((asm["setTempRet0"](throwntype),thrown)|0);
-    }function ___cxa_throw(ptr, type, destructor) {
-      EXCEPTIONS.infos[ptr] = {
-        ptr: ptr,
-        adjusted: ptr,
-        type: type,
-        destructor: destructor,
-        refcount: 0,
-        caught: false,
-        rethrown: false
-      };
-      EXCEPTIONS.last = ptr;
-      if (!("uncaught_exception" in __ZSt18uncaught_exceptionv)) {
-        __ZSt18uncaught_exceptionv.uncaught_exception = 1;
-      } else {
-        __ZSt18uncaught_exceptionv.uncaught_exception++;
-      }
-      throw ptr;
+    }function ___gxx_personality_v0() {
     }
 
-   
-  Module["_memset"] = _memset;
+  
+  function _emscripten_memcpy_big(dest, src, num) {
+      HEAPU8.set(HEAPU8.subarray(src, src+num), dest);
+      return dest;
+    } 
+  Module["_memcpy"] = _memcpy;
 
-  
-  
-  var emval_symbols={};function getStringOrSymbol(address) {
-      var symbol = emval_symbols[address];
-      if (symbol === undefined) {
-          return readLatin1String(address);
-      } else {
-          return symbol;
-      }
-    }
   
   
   var emval_free_list=[];
   
-  var emval_handle_array=[{},{value:undefined},{value:null},{value:true},{value:false}];
+  var emval_handle_array=[{},{value:undefined},{value:null},{value:true},{value:false}];function __emval_decref(handle) {
+      if (handle > 4 && 0 === --emval_handle_array[handle].refcount) {
+          emval_handle_array[handle] = undefined;
+          emval_free_list.push(handle);
+      }
+    }
+  
   
   
   function count_emval_handles() {
@@ -2429,246 +2637,7 @@ function copyTempDouble(ptr) {
           return handle;
           }
         }
-    }function __emval_new_cstring(v) {
-      return __emval_register(getStringOrSymbol(v));
-    }
-
-  function _abort() {
-      Module['abort']();
-    }
-
-  
-  function __emval_allocateDestructors(destructorsRef) {
-      var destructors = [];
-      HEAP32[destructorsRef >> 2] = __emval_register(destructors);
-      return destructors;
-    }
-  
-  function requireHandle(handle) {
-      if (!handle) {
-          throwBindingError('Cannot use deleted val. handle = ' + handle);
-      }
-      return emval_handle_array[handle].value;
-    }function __emval_call_method(caller, handle, methodName, destructorsRef, args) {
-      caller = emval_methodCallers[caller];
-      handle = requireHandle(handle);
-      methodName = getStringOrSymbol(methodName);
-      return caller(handle, methodName, __emval_allocateDestructors(destructorsRef), args);
-    }
-
-  
-  function _malloc(bytes) {
-      /* Over-allocate to make sure it is byte-aligned by 8.
-       * This will leak memory, but this is only the dummy
-       * implementation (replaced by dlmalloc normally) so
-       * not an issue.
-       */
-      var ptr = Runtime.dynamicAlloc(bytes + 8);
-      return (ptr+8) & 0xFFFFFFF8;
-    }
-  Module["_malloc"] = _malloc;
-  
-  function simpleReadValueFromPointer(pointer) {
-      return this['fromWireType'](HEAPU32[pointer >> 2]);
-    }function __embind_register_std_wstring(rawType, charSize, name) {
-      // nb. do not cache HEAPU16 and HEAPU32, they may be destroyed by enlargeMemory().
-      name = readLatin1String(name);
-      var getHeap, shift;
-      if (charSize === 2) {
-          getHeap = function() { return HEAPU16; };
-          shift = 1;
-      } else if (charSize === 4) {
-          getHeap = function() { return HEAPU32; };
-          shift = 2;
-      }
-      registerType(rawType, {
-          name: name,
-          'fromWireType': function(value) {
-              var HEAP = getHeap();
-              var length = HEAPU32[value >> 2];
-              var a = new Array(length);
-              var start = (value + 4) >> shift;
-              for (var i = 0; i < length; ++i) {
-                  a[i] = String.fromCharCode(HEAP[start + i]);
-              }
-              _free(value);
-              return a.join('');
-          },
-          'toWireType': function(destructors, value) {
-              // assumes 4-byte alignment
-              var HEAP = getHeap();
-              var length = value.length;
-              var ptr = _malloc(4 + length * charSize);
-              HEAPU32[ptr >> 2] = length;
-              var start = (ptr + 4) >> shift;
-              for (var i = 0; i < length; ++i) {
-                  HEAP[start + i] = value.charCodeAt(i);
-              }
-              if (destructors !== null) {
-                  destructors.push(_free, ptr);
-              }
-              return ptr;
-          },
-          'argPackAdvance': 8,
-          'readValueFromPointer': simpleReadValueFromPointer,
-          destructorFunction: function(ptr) { _free(ptr); },
-      });
-    }
-
-  function _pthread_once(ptr, func) {
-      if (!_pthread_once.seen) _pthread_once.seen = {};
-      if (ptr in _pthread_once.seen) return;
-      Runtime.dynCall('v', func);
-      _pthread_once.seen[ptr] = 1;
-    }
-
-  function ___lock() {}
-
-  function ___unlock() {}
-
-  function __emval_decref(handle) {
-      if (handle > 4 && 0 === --emval_handle_array[handle].refcount) {
-          emval_handle_array[handle] = undefined;
-          emval_free_list.push(handle);
-      }
-    }
-
-  
-  var PTHREAD_SPECIFIC={};function _pthread_getspecific(key) {
-      return PTHREAD_SPECIFIC[key] || 0;
-    }
-
-  
-  var PTHREAD_SPECIFIC_NEXT_KEY=1;
-  
-  var ERRNO_CODES={EPERM:1,ENOENT:2,ESRCH:3,EINTR:4,EIO:5,ENXIO:6,E2BIG:7,ENOEXEC:8,EBADF:9,ECHILD:10,EAGAIN:11,EWOULDBLOCK:11,ENOMEM:12,EACCES:13,EFAULT:14,ENOTBLK:15,EBUSY:16,EEXIST:17,EXDEV:18,ENODEV:19,ENOTDIR:20,EISDIR:21,EINVAL:22,ENFILE:23,EMFILE:24,ENOTTY:25,ETXTBSY:26,EFBIG:27,ENOSPC:28,ESPIPE:29,EROFS:30,EMLINK:31,EPIPE:32,EDOM:33,ERANGE:34,ENOMSG:42,EIDRM:43,ECHRNG:44,EL2NSYNC:45,EL3HLT:46,EL3RST:47,ELNRNG:48,EUNATCH:49,ENOCSI:50,EL2HLT:51,EDEADLK:35,ENOLCK:37,EBADE:52,EBADR:53,EXFULL:54,ENOANO:55,EBADRQC:56,EBADSLT:57,EDEADLOCK:35,EBFONT:59,ENOSTR:60,ENODATA:61,ETIME:62,ENOSR:63,ENONET:64,ENOPKG:65,EREMOTE:66,ENOLINK:67,EADV:68,ESRMNT:69,ECOMM:70,EPROTO:71,EMULTIHOP:72,EDOTDOT:73,EBADMSG:74,ENOTUNIQ:76,EBADFD:77,EREMCHG:78,ELIBACC:79,ELIBBAD:80,ELIBSCN:81,ELIBMAX:82,ELIBEXEC:83,ENOSYS:38,ENOTEMPTY:39,ENAMETOOLONG:36,ELOOP:40,EOPNOTSUPP:95,EPFNOSUPPORT:96,ECONNRESET:104,ENOBUFS:105,EAFNOSUPPORT:97,EPROTOTYPE:91,ENOTSOCK:88,ENOPROTOOPT:92,ESHUTDOWN:108,ECONNREFUSED:111,EADDRINUSE:98,ECONNABORTED:103,ENETUNREACH:101,ENETDOWN:100,ETIMEDOUT:110,EHOSTDOWN:112,EHOSTUNREACH:113,EINPROGRESS:115,EALREADY:114,EDESTADDRREQ:89,EMSGSIZE:90,EPROTONOSUPPORT:93,ESOCKTNOSUPPORT:94,EADDRNOTAVAIL:99,ENETRESET:102,EISCONN:106,ENOTCONN:107,ETOOMANYREFS:109,EUSERS:87,EDQUOT:122,ESTALE:116,ENOTSUP:95,ENOMEDIUM:123,EILSEQ:84,EOVERFLOW:75,ECANCELED:125,ENOTRECOVERABLE:131,EOWNERDEAD:130,ESTRPIPE:86};function _pthread_key_create(key, destructor) {
-      if (key == 0) {
-        return ERRNO_CODES.EINVAL;
-      }
-      HEAP32[((key)>>2)]=PTHREAD_SPECIFIC_NEXT_KEY;
-      // values start at 0
-      PTHREAD_SPECIFIC[PTHREAD_SPECIFIC_NEXT_KEY] = 0;
-      PTHREAD_SPECIFIC_NEXT_KEY++;
-      return 0;
-    }
-
-  
-  function getShiftFromSize(size) {
-      switch (size) {
-          case 1: return 0;
-          case 2: return 1;
-          case 4: return 2;
-          case 8: return 3;
-          default:
-              throw new TypeError('Unknown type size: ' + size);
-      }
-    }function __embind_register_bool(rawType, name, size, trueValue, falseValue) {
-      var shift = getShiftFromSize(size);
-  
-      name = readLatin1String(name);
-      registerType(rawType, {
-          name: name,
-          'fromWireType': function(wt) {
-              // ambiguous emscripten ABI: sometimes return values are
-              // true or false, and sometimes integers (0 or 1)
-              return !!wt;
-          },
-          'toWireType': function(destructors, o) {
-              return o ? trueValue : falseValue;
-          },
-          'argPackAdvance': 8,
-          'readValueFromPointer': function(pointer) {
-              // TODO: if heap is fixed (like in asm.js) this could be executed outside
-              var heap;
-              if (size === 1) {
-                  heap = HEAP8;
-              } else if (size === 2) {
-                  heap = HEAP16;
-              } else if (size === 4) {
-                  heap = HEAP32;
-              } else {
-                  throw new TypeError("Unknown boolean type size: " + name);
-              }
-              return this['fromWireType'](heap[pointer >> shift]);
-          },
-          destructorFunction: null, // This type does not need a destructor
-      });
-    }
-
-  
-  function _embind_repr(v) {
-      if (v === null) {
-          return 'null';
-      }
-      var t = typeof v;
-      if (t === 'object' || t === 'array' || t === 'function') {
-          return v.toString();
-      } else {
-          return '' + v;
-      }
-    }
-  
-  function integerReadValueFromPointer(name, shift, signed) {
-      // integers are quite common, so generate very specialized functions
-      switch (shift) {
-          case 0: return signed ?
-              function readS8FromPointer(pointer) { return HEAP8[pointer]; } :
-              function readU8FromPointer(pointer) { return HEAPU8[pointer]; };
-          case 1: return signed ?
-              function readS16FromPointer(pointer) { return HEAP16[pointer >> 1]; } :
-              function readU16FromPointer(pointer) { return HEAPU16[pointer >> 1]; };
-          case 2: return signed ?
-              function readS32FromPointer(pointer) { return HEAP32[pointer >> 2]; } :
-              function readU32FromPointer(pointer) { return HEAPU32[pointer >> 2]; };
-          default:
-              throw new TypeError("Unknown integer type: " + name);
-      }
-    }function __embind_register_integer(primitiveType, name, size, minRange, maxRange) {
-      name = readLatin1String(name);
-      if (maxRange === -1) { // LLVM doesn't have signed and unsigned 32-bit types, so u32 literals come out as 'i32 -1'. Always treat those as max u32.
-          maxRange = 4294967295;
-      }
-  
-      var shift = getShiftFromSize(size);
-      
-      var fromWireType = function(value) {
-          return value;
-      };
-      
-      if (minRange === 0) {
-          var bitshift = 32 - 8*size;
-          fromWireType = function(value) {
-              return (value << bitshift) >>> bitshift;
-          };
-      }
-  
-      registerType(primitiveType, {
-          name: name,
-          'fromWireType': fromWireType,
-          'toWireType': function(destructors, value) {
-              // todo: Here we have an opportunity for -O3 level "unsafe" optimizations: we could
-              // avoid the following two if()s and assume value is of proper type.
-              if (typeof value !== "number" && typeof value !== "boolean") {
-                  throw new TypeError('Cannot convert "' + _embind_repr(value) + '" to ' + this.name);
-              }
-              if (value < minRange || value > maxRange) {
-                  throw new TypeError('Passing a number "' + _embind_repr(value) + '" from JS side to C/C++ side to an argument of type "' + name + '", which is outside the valid range [' + minRange + ', ' + maxRange + ']!');
-              }
-              return value | 0;
-          },
-          'argPackAdvance': 8,
-          'readValueFromPointer': integerReadValueFromPointer(name, shift, minRange !== 0),
-          destructorFunction: null, // This type does not need a destructor
-      });
-    }
-
-  function __emval_get_property(handle, key) {
-      handle = requireHandle(handle);
-      key = requireHandle(key);
-      return __emval_register(handle[key]);
-    }
-
-  function __embind_register_emval(rawType, name) {
+    }function __embind_register_emval(rawType, name) {
       name = readLatin1String(name);
       registerType(rawType, {
           name: name,
@@ -2687,210 +2656,6 @@ function copyTempDouble(ptr) {
           // TODO: do we need a deleteObject here?  write a test where
           // emval is passed into JS via an interface
       });
-    }
-
-  
-  var SYSCALLS={varargs:0,get:function (varargs) {
-        SYSCALLS.varargs += 4;
-        var ret = HEAP32[(((SYSCALLS.varargs)-(4))>>2)];
-        return ret;
-      },getStr:function () {
-        var ret = Pointer_stringify(SYSCALLS.get());
-        return ret;
-      },get64:function () {
-        var low = SYSCALLS.get(), high = SYSCALLS.get();
-        if (low >= 0) assert(high === 0);
-        else assert(high === -1);
-        return low;
-      },getZero:function () {
-        assert(SYSCALLS.get() === 0);
-      }};function ___syscall146(which, varargs) {SYSCALLS.varargs = varargs;
-  try {
-   // writev
-      // hack to support printf in NO_FILESYSTEM
-      var stream = SYSCALLS.get(), iov = SYSCALLS.get(), iovcnt = SYSCALLS.get();
-      var ret = 0;
-      if (!___syscall146.buffer) {
-        ___syscall146.buffers = [null, [], []]; // 1 => stdout, 2 => stderr
-        ___syscall146.printChar = function(stream, curr) {
-          var buffer = ___syscall146.buffers[stream];
-          assert(buffer);
-          if (curr === 0 || curr === 10) {
-            (stream === 1 ? Module['print'] : Module['printErr'])(UTF8ArrayToString(buffer, 0));
-            buffer.length = 0;
-          } else {
-            buffer.push(curr);
-          }
-        };
-      }
-      for (var i = 0; i < iovcnt; i++) {
-        var ptr = HEAP32[(((iov)+(i*8))>>2)];
-        var len = HEAP32[(((iov)+(i*8 + 4))>>2)];
-        for (var j = 0; j < len; j++) {
-          ___syscall146.printChar(stream, HEAPU8[ptr+j]);
-        }
-        ret += len;
-      }
-      return ret;
-    } catch (e) {
-    if (typeof FS === 'undefined' || !(e instanceof FS.ErrnoError)) abort(e);
-    return -e.errno;
-  }
-  }
-
-  function _pthread_setspecific(key, value) {
-      if (!(key in PTHREAD_SPECIFIC)) {
-        return ERRNO_CODES.EINVAL;
-      }
-      PTHREAD_SPECIFIC[key] = value;
-      return 0;
-    }
-
-  function ___cxa_free_exception(ptr) {
-      try {
-        return _free(ptr);
-      } catch(e) { // XXX FIXME
-        Module.printErr('exception during cxa_free_exception: ' + e);
-      }
-    }
-
-  function ___syscall54(which, varargs) {SYSCALLS.varargs = varargs;
-  try {
-   // ioctl
-      return 0;
-    } catch (e) {
-    if (typeof FS === 'undefined' || !(e instanceof FS.ErrnoError)) abort(e);
-    return -e.errno;
-  }
-  }
-
-  
-  function floatReadValueFromPointer(name, shift) {
-      switch (shift) {
-          case 2: return function(pointer) {
-              return this['fromWireType'](HEAPF32[pointer >> 2]);
-          };
-          case 3: return function(pointer) {
-              return this['fromWireType'](HEAPF64[pointer >> 3]);
-          };
-          default:
-              throw new TypeError("Unknown float type: " + name);
-      }
-    }function __embind_register_float(rawType, name, size) {
-      var shift = getShiftFromSize(size);
-      name = readLatin1String(name);
-      registerType(rawType, {
-          name: name,
-          'fromWireType': function(value) {
-              return value;
-          },
-          'toWireType': function(destructors, value) {
-              // todo: Here we have an opportunity for -O3 level "unsafe" optimizations: we could
-              // avoid the following if() and assume value is of proper type.
-              if (typeof value !== "number" && typeof value !== "boolean") {
-                  throw new TypeError('Cannot convert "' + _embind_repr(value) + '" to ' + this.name);
-              }
-              return value;
-          },
-          'argPackAdvance': 8,
-          'readValueFromPointer': floatReadValueFromPointer(name, shift),
-          destructorFunction: null, // This type does not need a destructor
-      });
-    }
-
-  function _pthread_cleanup_push(routine, arg) {
-      __ATEXIT__.push(function() { Runtime.dynCall('vi', routine, [arg]) })
-      _pthread_cleanup_push.level = __ATEXIT__.length;
-    }
-
-  function __emval_call_void_method(caller, handle, methodName, args) {
-      caller = emval_methodCallers[caller];
-      handle = requireHandle(handle);
-      methodName = getStringOrSymbol(methodName);
-      caller(handle, methodName, null, args);
-    }
-
-  function _pthread_cleanup_pop() {
-      assert(_pthread_cleanup_push.level == __ATEXIT__.length, 'cannot pop if something else added meanwhile!');
-      __ATEXIT__.pop();
-      _pthread_cleanup_push.level = __ATEXIT__.length;
-    }
-
-  function ___cxa_find_matching_catch_2() {
-          return ___cxa_find_matching_catch.apply(null, arguments);
-        }
-
-  function ___cxa_find_matching_catch_3() {
-          return ___cxa_find_matching_catch.apply(null, arguments);
-        }
-
-  
-  function runDestructors(destructors) {
-      while (destructors.length) {
-          var ptr = destructors.pop();
-          var del = destructors.pop();
-          del(ptr);
-      }
-    }function __emval_run_destructors(handle) {
-      var destructors = emval_handle_array[handle].value;
-      runDestructors(destructors);
-      __emval_decref(handle);
-    }
-
-  
-  function _emscripten_memcpy_big(dest, src, num) {
-      HEAPU8.set(HEAPU8.subarray(src, src+num), dest);
-      return dest;
-    } 
-  Module["_memcpy"] = _memcpy;
-
-  function ___syscall6(which, varargs) {SYSCALLS.varargs = varargs;
-  try {
-   // close
-      var stream = SYSCALLS.getStreamFromFD();
-      FS.close(stream);
-      return 0;
-    } catch (e) {
-    if (typeof FS === 'undefined' || !(e instanceof FS.ErrnoError)) abort(e);
-    return -e.errno;
-  }
-  }
-
-  
-  function ___setErrNo(value) {
-      if (Module['___errno_location']) HEAP32[((Module['___errno_location']())>>2)]=value;
-      else Module.printErr('failed to set errno from JS');
-      return value;
-    } 
-  Module["_sbrk"] = _sbrk;
-
-  function ___cxa_allocate_exception(size) {
-      return _malloc(size);
-    }
-
-  function ___cxa_begin_catch(ptr) {
-      var info = EXCEPTIONS.infos[ptr];
-      if (info && !info.caught) {
-        info.caught = true;
-        __ZSt18uncaught_exceptionv.uncaught_exception--;
-      }
-      if (info) info.rethrown = false;
-      EXCEPTIONS.caught.push(ptr);
-      EXCEPTIONS.addRef(EXCEPTIONS.deAdjust(ptr));
-      return ptr;
-    }
-
-  function ___gxx_personality_v0() {
-    }
-
-  
-  function emval_get_global() { return (function(){return Function;})()('return this')(); }function __emval_get_global(name) {
-      if(name===0){
-        return __emval_register(emval_get_global());
-      } else {
-        name = getStringOrSymbol(name);
-        return __emval_register(emval_get_global()[name]);
-      }
     }
 
   function __embind_register_memory_view(rawType, dataTypeIndex, name) {
@@ -2926,7 +2691,6 @@ function copyTempDouble(ptr) {
       });
     }
 
-
    
   Module["_pthread_self"] = _pthread_self;
 
@@ -2946,82 +2710,49 @@ function copyTempDouble(ptr) {
   }
   }
 
-  function __emval_incref(handle) {
-      if (handle > 4) {
-          emval_handle_array[handle].refcount += 1;
+  function ___syscall146(which, varargs) {SYSCALLS.varargs = varargs;
+  try {
+   // writev
+      // hack to support printf in NO_FILESYSTEM
+      var stream = SYSCALLS.get(), iov = SYSCALLS.get(), iovcnt = SYSCALLS.get();
+      var ret = 0;
+      if (!___syscall146.buffer) {
+        ___syscall146.buffers = [null, [], []]; // 1 => stdout, 2 => stderr
+        ___syscall146.printChar = function(stream, curr) {
+          var buffer = ___syscall146.buffers[stream];
+          assert(buffer);
+          if (curr === 0 || curr === 10) {
+            (stream === 1 ? Module['print'] : Module['printErr'])(UTF8ArrayToString(buffer, 0));
+            buffer.length = 0;
+          } else {
+            buffer.push(curr);
+          }
+        };
       }
-    }
-
-  function ___cxa_end_catch() {
-      // Clear state flag.
-      asm['setThrew'](0);
-      // Call destructor if one is registered then clear it.
-      var ptr = EXCEPTIONS.caught.pop();
-      if (ptr) {
-        EXCEPTIONS.decRef(EXCEPTIONS.deAdjust(ptr));
-        EXCEPTIONS.last = 0; // XXX in decRef?
+      for (var i = 0; i < iovcnt; i++) {
+        var ptr = HEAP32[(((iov)+(i*8))>>2)];
+        var len = HEAP32[(((iov)+(i*8 + 4))>>2)];
+        for (var j = 0; j < len; j++) {
+          ___syscall146.printChar(stream, HEAPU8[ptr+j]);
+        }
+        ret += len;
       }
-    }
+      return ret;
+    } catch (e) {
+    if (typeof FS === 'undefined' || !(e instanceof FS.ErrnoError)) abort(e);
+    return -e.errno;
+  }
+  }
 
-  function __embind_register_std_string(rawType, name) {
-      name = readLatin1String(name);
-      registerType(rawType, {
-          name: name,
-          'fromWireType': function(value) {
-              var length = HEAPU32[value >> 2];
-              var a = new Array(length);
-              for (var i = 0; i < length; ++i) {
-                  a[i] = String.fromCharCode(HEAPU8[value + 4 + i]);
-              }
-              _free(value);
-              return a.join('');
-          },
-          'toWireType': function(destructors, value) {
-              if (value instanceof ArrayBuffer) {
-                  value = new Uint8Array(value);
-              }
-  
-              function getTAElement(ta, index) {
-                  return ta[index];
-              }
-              function getStringElement(string, index) {
-                  return string.charCodeAt(index);
-              }
-              var getElement;
-              if (value instanceof Uint8Array) {
-                  getElement = getTAElement;
-              } else if (value instanceof Uint8ClampedArray) {
-                  getElement = getTAElement;
-              } else if (value instanceof Int8Array) {
-                  getElement = getTAElement;
-              } else if (typeof value === 'string') {
-                  getElement = getStringElement;
-              } else {
-                  throwBindingError('Cannot pass non-string to std::string');
-              }
-  
-              // assumes 4-byte alignment
-              var length = value.length;
-              var ptr = _malloc(4 + length);
-              HEAPU32[ptr >> 2] = length;
-              for (var i = 0; i < length; ++i) {
-                  var charCode = getElement(value, i);
-                  if (charCode > 255) {
-                      _free(ptr);
-                      throwBindingError('String has UTF-16 code units that do not fit in 8 bits');
-                  }
-                  HEAPU8[ptr + 4 + i] = charCode;
-              }
-              if (destructors !== null) {
-                  destructors.push(_free, ptr);
-              }
-              return ptr;
-          },
-          'argPackAdvance': 8,
-          'readValueFromPointer': simpleReadValueFromPointer,
-          destructorFunction: function(ptr) { _free(ptr); },
-      });
-    }
+  function ___syscall54(which, varargs) {SYSCALLS.varargs = varargs;
+  try {
+   // ioctl
+      return 0;
+    } catch (e) {
+    if (typeof FS === 'undefined' || !(e instanceof FS.ErrnoError)) abort(e);
+    return -e.errno;
+  }
+  }
 embind_init_charCodes();
 BindingError = Module['BindingError'] = extendError(Error, 'BindingError');;
 InternalError = Module['InternalError'] = extendError(Error, 'InternalError');;
@@ -3047,27 +2778,17 @@ function nullFunc_iiii(x) { Module["printErr"]("Invalid function pointer called 
 
 function nullFunc_viiiii(x) { Module["printErr"]("Invalid function pointer called with signature 'viiiii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
-function nullFunc_i(x) { Module["printErr"]("Invalid function pointer called with signature 'i'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
-
 function nullFunc_vi(x) { Module["printErr"]("Invalid function pointer called with signature 'vi'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
-
-function nullFunc_vii(x) { Module["printErr"]("Invalid function pointer called with signature 'vii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
 function nullFunc_ii(x) { Module["printErr"]("Invalid function pointer called with signature 'ii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
-function nullFunc_viii(x) { Module["printErr"]("Invalid function pointer called with signature 'viii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
-
-function nullFunc_v(x) { Module["printErr"]("Invalid function pointer called with signature 'v'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
-
 function nullFunc_viiiiii(x) { Module["printErr"]("Invalid function pointer called with signature 'viiiiii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
-
-function nullFunc_iii(x) { Module["printErr"]("Invalid function pointer called with signature 'iii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
 function nullFunc_viiii(x) { Module["printErr"]("Invalid function pointer called with signature 'viiii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
-Module['wasmTableSize'] = 608;
+Module['wasmTableSize'] = 162;
 
-Module['wasmMaxTableSize'] = 608;
+Module['wasmMaxTableSize'] = 162;
 
 function invoke_iiii(index,a1,a2,a3) {
   try {
@@ -3087,27 +2808,9 @@ function invoke_viiiii(index,a1,a2,a3,a4,a5) {
   }
 }
 
-function invoke_i(index) {
-  try {
-    return Module["dynCall_i"](index);
-  } catch(e) {
-    if (typeof e !== 'number' && e !== 'longjmp') throw e;
-    asm["setThrew"](1, 0);
-  }
-}
-
 function invoke_vi(index,a1) {
   try {
     Module["dynCall_vi"](index,a1);
-  } catch(e) {
-    if (typeof e !== 'number' && e !== 'longjmp') throw e;
-    asm["setThrew"](1, 0);
-  }
-}
-
-function invoke_vii(index,a1,a2) {
-  try {
-    Module["dynCall_vii"](index,a1,a2);
   } catch(e) {
     if (typeof e !== 'number' && e !== 'longjmp') throw e;
     asm["setThrew"](1, 0);
@@ -3123,36 +2826,9 @@ function invoke_ii(index,a1) {
   }
 }
 
-function invoke_viii(index,a1,a2,a3) {
-  try {
-    Module["dynCall_viii"](index,a1,a2,a3);
-  } catch(e) {
-    if (typeof e !== 'number' && e !== 'longjmp') throw e;
-    asm["setThrew"](1, 0);
-  }
-}
-
-function invoke_v(index) {
-  try {
-    Module["dynCall_v"](index);
-  } catch(e) {
-    if (typeof e !== 'number' && e !== 'longjmp') throw e;
-    asm["setThrew"](1, 0);
-  }
-}
-
 function invoke_viiiiii(index,a1,a2,a3,a4,a5,a6) {
   try {
     Module["dynCall_viiiiii"](index,a1,a2,a3,a4,a5,a6);
-  } catch(e) {
-    if (typeof e !== 'number' && e !== 'longjmp') throw e;
-    asm["setThrew"](1, 0);
-  }
-}
-
-function invoke_iii(index,a1,a2) {
-  try {
-    return Module["dynCall_iii"](index,a1,a2);
   } catch(e) {
     if (typeof e !== 'number' && e !== 'longjmp') throw e;
     asm["setThrew"](1, 0);
@@ -3170,16 +2846,10 @@ function invoke_viiii(index,a1,a2,a3,a4) {
 
 Module.asmGlobalArg = { "Math": Math, "Int8Array": Int8Array, "Int16Array": Int16Array, "Int32Array": Int32Array, "Uint8Array": Uint8Array, "Uint16Array": Uint16Array, "Uint32Array": Uint32Array, "Float32Array": Float32Array, "Float64Array": Float64Array, "NaN": NaN, "Infinity": Infinity };
 
-Module.asmLibraryArg = { "abort": abort, "assert": assert, "enlargeMemory": enlargeMemory, "getTotalMemory": getTotalMemory, "abortOnCannotGrowMemory": abortOnCannotGrowMemory, "abortStackOverflow": abortStackOverflow, "nullFunc_iiii": nullFunc_iiii, "nullFunc_viiiii": nullFunc_viiiii, "nullFunc_i": nullFunc_i, "nullFunc_vi": nullFunc_vi, "nullFunc_vii": nullFunc_vii, "nullFunc_ii": nullFunc_ii, "nullFunc_viii": nullFunc_viii, "nullFunc_v": nullFunc_v, "nullFunc_viiiiii": nullFunc_viiiiii, "nullFunc_iii": nullFunc_iii, "nullFunc_viiii": nullFunc_viiii, "invoke_iiii": invoke_iiii, "invoke_viiiii": invoke_viiiii, "invoke_i": invoke_i, "invoke_vi": invoke_vi, "invoke_vii": invoke_vii, "invoke_ii": invoke_ii, "invoke_viii": invoke_viii, "invoke_v": invoke_v, "invoke_viiiiii": invoke_viiiiii, "invoke_iii": invoke_iii, "invoke_viiii": invoke_viiii, "_pthread_cleanup_pop": _pthread_cleanup_pop, "_pthread_getspecific": _pthread_getspecific, "floatReadValueFromPointer": floatReadValueFromPointer, "simpleReadValueFromPointer": simpleReadValueFromPointer, "__emval_call_void_method": __emval_call_void_method, "_pthread_key_create": _pthread_key_create, "__embind_register_memory_view": __embind_register_memory_view, "throwInternalError": throwInternalError, "get_first_emval": get_first_emval, "_abort": _abort, "__emval_addMethodCaller": __emval_addMethodCaller, "requireHandle": requireHandle, "___gxx_personality_v0": ___gxx_personality_v0, "extendError": extendError, "__embind_register_void": __embind_register_void, "___cxa_free_exception": ___cxa_free_exception, "___cxa_find_matching_catch_2": ___cxa_find_matching_catch_2, "__ZSt18uncaught_exceptionv": __ZSt18uncaught_exceptionv, "count_emval_handles": count_emval_handles, "getShiftFromSize": getShiftFromSize, "__emval_get_property": __emval_get_property, "embind_init_charCodes": embind_init_charCodes, "___setErrNo": ___setErrNo, "__emval_register": __emval_register, "___cxa_begin_catch": ___cxa_begin_catch, "_emscripten_memcpy_big": _emscripten_memcpy_big, "___cxa_end_catch": ___cxa_end_catch, "__embind_register_bool": __embind_register_bool, "___resumeException": ___resumeException, "___cxa_find_matching_catch_3": ___cxa_find_matching_catch_3, "__emval_incref": __emval_incref, "_embind_repr": _embind_repr, "__embind_register_std_wstring": __embind_register_std_wstring, "__emval_get_global": __emval_get_global, "createNamedFunction": createNamedFunction, "__embind_register_emval": __embind_register_emval, "readLatin1String": readLatin1String, "getStringOrSymbol": getStringOrSymbol, "__embind_register_integer": __embind_register_integer, "_pthread_once": _pthread_once, "__emval_decref": __emval_decref, "runDestructors": runDestructors, "requireRegisteredType": requireRegisteredType, "makeLegalFunctionName": makeLegalFunctionName, "___syscall54": ___syscall54, "___unlock": ___unlock, "__embind_register_std_string": __embind_register_std_string, "__emval_lookupTypes": __emval_lookupTypes, "whenDependentTypesAreResolved": whenDependentTypesAreResolved, "__emval_call_method": __emval_call_method, "__emval_run_destructors": __emval_run_destructors, "new_": new_, "_pthread_setspecific": _pthread_setspecific, "integerReadValueFromPointer": integerReadValueFromPointer, "registerType": registerType, "___cxa_throw": ___cxa_throw, "___lock": ___lock, "__emval_new_cstring": __emval_new_cstring, "___syscall6": ___syscall6, "throwBindingError": throwBindingError, "init_emval": init_emval, "__emval_allocateDestructors": __emval_allocateDestructors, "___cxa_allocate_exception": ___cxa_allocate_exception, "__embind_register_float": __embind_register_float, "getTypeName": getTypeName, "___syscall140": ___syscall140, "_pthread_cleanup_push": _pthread_cleanup_push, "___cxa_find_matching_catch": ___cxa_find_matching_catch, "emval_get_global": emval_get_global, "___syscall146": ___syscall146, "__emval_get_method_caller": __emval_get_method_caller, "DYNAMICTOP_PTR": DYNAMICTOP_PTR, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX };
+Module.asmLibraryArg = { "abort": abort, "assert": assert, "enlargeMemory": enlargeMemory, "getTotalMemory": getTotalMemory, "abortOnCannotGrowMemory": abortOnCannotGrowMemory, "abortStackOverflow": abortStackOverflow, "nullFunc_iiii": nullFunc_iiii, "nullFunc_viiiii": nullFunc_viiiii, "nullFunc_vi": nullFunc_vi, "nullFunc_ii": nullFunc_ii, "nullFunc_viiiiii": nullFunc_viiiiii, "nullFunc_viiii": nullFunc_viiii, "invoke_iiii": invoke_iiii, "invoke_viiiii": invoke_viiiii, "invoke_vi": invoke_vi, "invoke_ii": invoke_ii, "invoke_viiiiii": invoke_viiiiii, "invoke_viiii": invoke_viiii, "_pthread_cleanup_pop": _pthread_cleanup_pop, "floatReadValueFromPointer": floatReadValueFromPointer, "simpleReadValueFromPointer": simpleReadValueFromPointer, "integerReadValueFromPointer": integerReadValueFromPointer, "__embind_register_memory_view": __embind_register_memory_view, "throwInternalError": throwInternalError, "get_first_emval": get_first_emval, "_abort": _abort, "throwBindingError": throwBindingError, "___gxx_personality_v0": ___gxx_personality_v0, "extendError": extendError, "__embind_register_void": __embind_register_void, "__ZSt18uncaught_exceptionv": __ZSt18uncaught_exceptionv, "getShiftFromSize": getShiftFromSize, "embind_init_charCodes": embind_init_charCodes, "___setErrNo": ___setErrNo, "__emval_register": __emval_register, "__embind_register_std_wstring": __embind_register_std_wstring, "_emscripten_memcpy_big": _emscripten_memcpy_big, "__embind_register_bool": __embind_register_bool, "___resumeException": ___resumeException, "___cxa_find_matching_catch": ___cxa_find_matching_catch, "_embind_repr": _embind_repr, "__embind_register_std_string": __embind_register_std_string, "createNamedFunction": createNamedFunction, "__embind_register_emval": __embind_register_emval, "readLatin1String": readLatin1String, "__embind_register_integer": __embind_register_integer, "__emval_decref": __emval_decref, "__embind_register_float": __embind_register_float, "makeLegalFunctionName": makeLegalFunctionName, "___syscall54": ___syscall54, "___unlock": ___unlock, "init_emval": init_emval, "whenDependentTypesAreResolved": whenDependentTypesAreResolved, "registerType": registerType, "___lock": ___lock, "___syscall6": ___syscall6, "_pthread_cleanup_push": _pthread_cleanup_push, "count_emval_handles": count_emval_handles, "___syscall140": ___syscall140, "___syscall146": ___syscall146, "DYNAMICTOP_PTR": DYNAMICTOP_PTR, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX };
 // EMSCRIPTEN_START_ASM
 var asm =Module["asm"]// EMSCRIPTEN_END_ASM
 (Module.asmGlobalArg, Module.asmLibraryArg, buffer);
-
-var real__emscripten_bind_VNode___destroy___0 = asm["_emscripten_bind_VNode___destroy___0"]; asm["_emscripten_bind_VNode___destroy___0"] = function() {
-assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__emscripten_bind_VNode___destroy___0.apply(null, arguments);
-};
 
 var real__malloc = asm["_malloc"]; asm["_malloc"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
@@ -3187,10 +2857,10 @@ assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it a
 return real__malloc.apply(null, arguments);
 };
 
-var real__emscripten_bind_VNode_render_1 = asm["_emscripten_bind_VNode_render_1"]; asm["_emscripten_bind_VNode_render_1"] = function() {
+var real____cxa_can_catch = asm["___cxa_can_catch"]; asm["___cxa_can_catch"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__emscripten_bind_VNode_render_1.apply(null, arguments);
+return real____cxa_can_catch.apply(null, arguments);
 };
 
 var real___GLOBAL__sub_I_bind_cpp = asm["__GLOBAL__sub_I_bind_cpp"]; asm["__GLOBAL__sub_I_bind_cpp"] = function() {
@@ -3205,22 +2875,10 @@ assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it a
 return real__fflush.apply(null, arguments);
 };
 
-var real____cxa_can_catch = asm["___cxa_can_catch"]; asm["___cxa_can_catch"] = function() {
-assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real____cxa_can_catch.apply(null, arguments);
-};
-
 var real____cxa_is_pointer_type = asm["___cxa_is_pointer_type"]; asm["___cxa_is_pointer_type"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
 return real____cxa_is_pointer_type.apply(null, arguments);
-};
-
-var real__emscripten_bind_VNode_getKey_0 = asm["_emscripten_bind_VNode_getKey_0"]; asm["_emscripten_bind_VNode_getKey_0"] = function() {
-assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__emscripten_bind_VNode_getKey_0.apply(null, arguments);
 };
 
 var real__pthread_self = asm["_pthread_self"]; asm["_pthread_self"] = function() {
@@ -3235,34 +2893,16 @@ assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it a
 return real__emscripten_bind_VoidPtr___destroy___0.apply(null, arguments);
 };
 
-var real__emscripten_bind_VNode_getName_0 = asm["_emscripten_bind_VNode_getName_0"]; asm["_emscripten_bind_VNode_getName_0"] = function() {
-assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__emscripten_bind_VNode_getName_0.apply(null, arguments);
-};
-
 var real__sbrk = asm["_sbrk"]; asm["_sbrk"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
 return real__sbrk.apply(null, arguments);
 };
 
-var real__emscripten_bind_VNode_setName_1 = asm["_emscripten_bind_VNode_setName_1"]; asm["_emscripten_bind_VNode_setName_1"] = function() {
-assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__emscripten_bind_VNode_setName_1.apply(null, arguments);
-};
-
 var real____getTypeName = asm["___getTypeName"]; asm["___getTypeName"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
 return real____getTypeName.apply(null, arguments);
-};
-
-var real__emscripten_bind_VNode_VNode_2 = asm["_emscripten_bind_VNode_VNode_2"]; asm["_emscripten_bind_VNode_VNode_2"] = function() {
-assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__emscripten_bind_VNode_VNode_2.apply(null, arguments);
 };
 
 var real__free = asm["_free"]; asm["_free"] = function() {
@@ -3276,43 +2916,25 @@ assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. w
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
 return real____errno_location.apply(null, arguments);
 };
-
-var real__emscripten_bind_VNode_setKey_1 = asm["_emscripten_bind_VNode_setKey_1"]; asm["_emscripten_bind_VNode_setKey_1"] = function() {
-assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__emscripten_bind_VNode_setKey_1.apply(null, arguments);
-};
-var _emscripten_bind_VNode___destroy___0 = Module["_emscripten_bind_VNode___destroy___0"] = asm["_emscripten_bind_VNode___destroy___0"];
 var _malloc = Module["_malloc"] = asm["_malloc"];
-var _emscripten_bind_VNode_render_1 = Module["_emscripten_bind_VNode_render_1"] = asm["_emscripten_bind_VNode_render_1"];
+var ___cxa_can_catch = Module["___cxa_can_catch"] = asm["___cxa_can_catch"];
 var __GLOBAL__sub_I_bind_cpp = Module["__GLOBAL__sub_I_bind_cpp"] = asm["__GLOBAL__sub_I_bind_cpp"];
 var _fflush = Module["_fflush"] = asm["_fflush"];
-var ___cxa_can_catch = Module["___cxa_can_catch"] = asm["___cxa_can_catch"];
-var ___cxa_is_pointer_type = Module["___cxa_is_pointer_type"] = asm["___cxa_is_pointer_type"];
 var runPostSets = Module["runPostSets"] = asm["runPostSets"];
-var _emscripten_bind_VNode_getKey_0 = Module["_emscripten_bind_VNode_getKey_0"] = asm["_emscripten_bind_VNode_getKey_0"];
+var ___cxa_is_pointer_type = Module["___cxa_is_pointer_type"] = asm["___cxa_is_pointer_type"];
 var _pthread_self = Module["_pthread_self"] = asm["_pthread_self"];
 var _emscripten_bind_VoidPtr___destroy___0 = Module["_emscripten_bind_VoidPtr___destroy___0"] = asm["_emscripten_bind_VoidPtr___destroy___0"];
 var _memset = Module["_memset"] = asm["_memset"];
-var _emscripten_bind_VNode_getName_0 = Module["_emscripten_bind_VNode_getName_0"] = asm["_emscripten_bind_VNode_getName_0"];
 var _sbrk = Module["_sbrk"] = asm["_sbrk"];
-var _emscripten_bind_VNode_setName_1 = Module["_emscripten_bind_VNode_setName_1"] = asm["_emscripten_bind_VNode_setName_1"];
 var _memcpy = Module["_memcpy"] = asm["_memcpy"];
 var ___getTypeName = Module["___getTypeName"] = asm["___getTypeName"];
-var _emscripten_bind_VNode_VNode_2 = Module["_emscripten_bind_VNode_VNode_2"] = asm["_emscripten_bind_VNode_VNode_2"];
 var _free = Module["_free"] = asm["_free"];
 var ___errno_location = Module["___errno_location"] = asm["___errno_location"];
-var _emscripten_bind_VNode_setKey_1 = Module["_emscripten_bind_VNode_setKey_1"] = asm["_emscripten_bind_VNode_setKey_1"];
 var dynCall_iiii = Module["dynCall_iiii"] = asm["dynCall_iiii"];
 var dynCall_viiiii = Module["dynCall_viiiii"] = asm["dynCall_viiiii"];
-var dynCall_i = Module["dynCall_i"] = asm["dynCall_i"];
 var dynCall_vi = Module["dynCall_vi"] = asm["dynCall_vi"];
-var dynCall_vii = Module["dynCall_vii"] = asm["dynCall_vii"];
 var dynCall_ii = Module["dynCall_ii"] = asm["dynCall_ii"];
-var dynCall_viii = Module["dynCall_viii"] = asm["dynCall_viii"];
-var dynCall_v = Module["dynCall_v"] = asm["dynCall_v"];
 var dynCall_viiiiii = Module["dynCall_viiiiii"] = asm["dynCall_viiiiii"];
-var dynCall_iii = Module["dynCall_iii"] = asm["dynCall_iii"];
 var dynCall_viiii = Module["dynCall_viiii"] = asm["dynCall_viiii"];
 ;
 
@@ -3745,58 +3367,6 @@ Module['VoidPtr'] = VoidPtr;
   VoidPtr.prototype['__destroy__'] = VoidPtr.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_VoidPtr___destroy___0(self);
-};
-// VNode
-function VNode(arg0, arg1) {
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
-  else arg1 = ensureString(arg1);
-  this.ptr = _emscripten_bind_VNode_VNode_2(arg0, arg1);
-  getCache(VNode)[this.ptr] = this;
-};;
-VNode.prototype = Object.create(WrapperObject.prototype);
-VNode.prototype.constructor = VNode;
-VNode.prototype.__class__ = VNode;
-VNode.__cache__ = {};
-Module['VNode'] = VNode;
-
-VNode.prototype['getName'] = VNode.prototype.getName = function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_VNode_getName_0(self));
-};;
-
-VNode.prototype['setName'] = VNode.prototype.setName = function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_VNode_setName_1(self, arg0);
-};;
-
-VNode.prototype['getKey'] = VNode.prototype.getKey = function() {
-  var self = this.ptr;
-  return Pointer_stringify(_emscripten_bind_VNode_getKey_0(self));
-};;
-
-VNode.prototype['setKey'] = VNode.prototype.setKey = function(arg0) {
-  var self = this.ptr;
-  ensureCache.prepare();
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  else arg0 = ensureString(arg0);
-  _emscripten_bind_VNode_setKey_1(self, arg0);
-};;
-
-VNode.prototype['render'] = VNode.prototype.render = function(arg0) {
-  var self = this.ptr;
-  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
-  _emscripten_bind_VNode_render_1(self, arg0);
-};;
-
-  VNode.prototype['__destroy__'] = VNode.prototype.__destroy__ = function() {
-  var self = this.ptr;
-  _emscripten_bind_VNode___destroy___0(self);
 };
 (function() {
   function setupEnums() {
