@@ -1,0 +1,99 @@
+{
+  "name": "asm-dom",
+  "version": "0.0.1",
+  "description": "A virtual dom in web assembly",
+  "main": "lib/index.js",
+  "jsnext:main": "es/index.js",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src",
+    "compiled"
+  ],
+  "scripts": {
+    "clean": "rimraf lib dist es .nyc_output compiled",
+    "compile": "mkdir -p compiled && mkdir -p temp && npm run compile:bindings && npm run compile:cpp && npm run compile:asmjs && npm run compile:wasm && rimraf temp",
+    "compile:bindings": "cd src/helpers && python $EMSDK/emscripten/incoming/tools/webidl_binder.py bindings.idl glue && cd ../../",
+    "compile:cpp": "emcc -Oz -Wall -Werror --bind src/app.cpp src/helpers/glue_wrapper.cpp -o temp/asm-dom.bc",
+    "compile:asmjs": "mkdir -p temp/asmjs && mkdir -p compiled/asmjs && emcc --bind temp/asm-dom.bc --post-js src/helpers/glue.js -o temp/asmjs/asm-dom.asm.js && npm run compile:asmjs:module",
+    "compile:wasm": "mkdir -p temp/wasm && mkdir -p compiled/wasm && emcc --bind -s BINARYEN=1 temp/asm-dom.bc --post-js src/helpers/glue.js -o temp/wasm/asm-dom.js && npm run compile:wasm:module",
+    "compile:asmjs:module": "concat-cli -f src/helpers/prefix.js temp/asmjs/asm-dom.asm.js src/helpers/postfix.js -o compiled/asmjs/asm-dom.asm.js",
+    "compile:wasm:module": "ncp temp/wasm compiled/wasm && concat-cli -f src/helpers/prefix.js temp/wasm/asm-dom.js src/helpers/postfix.js -o compiled/wasm/asm-dom.js",
+    "test": "npm run compile && cross-env BABEL_ENV=commonjs nyc --require babel-register mocha --recursive",
+    "test:watch": "npm test -- --watch",
+    "test:cov": "nyc report --reporter=text-lcov | coveralls",
+    "check:src": "npm run lint && npm run test",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --ignore src/helpers",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --ignore src/helpers",
+    "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack src/index.js dist/asm-dom.js",
+    "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/asm-dom.min.js",
+    "build": "npm run build:commonjs",
+    "build:compile": "npm run compile && npm run build",
+    "prepublish": "npm run clean && npm run check:src && npm run build",
+    "lint": "eslint src test build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbasso/asm-dom.git"
+  },
+  "keywords": [
+    "webassembly",
+    "wasm",
+    "asmjs",
+    "asm",
+    "virtualdom"
+  ],
+  "author": "Matteo Basso (https://github.com/mbasso)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mbasso/asm-dom/issues"
+  },
+  "homepage": "https://mbasso.github.io/asm-dom",
+  "devDependencies": {
+    "arraybuffer-loader": "0.2.2",
+    "babel-cli": "6.10.1",
+    "babel-core": "6.9.1",
+    "babel-eslint": "6.0.4",
+    "babel-loader": "6.2.4",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.10.3",
+    "babel-plugin-transform-es3-member-expression-literals": "6.8.0",
+    "babel-plugin-transform-es3-property-literals": "6.8.0",
+    "babel-plugin-transform-object-rest-spread": "6.8.0",
+    "babel-preset-es2015": "6.5.0",
+    "babel-preset-stage-0": "6.5.0",
+    "babel-register": "6.9.0",
+    "check-es3-syntax-cli": "0.1.0",
+    "concat-cli": "4.0.0",
+    "coveralls": "2.11.9",
+    "cross-env": "1.0.7",
+    "eslint": "2.12.0",
+    "eslint-config-airbnb": "9.0.1",
+    "eslint-plugin-import": "1.8.1",
+    "expect": "1.20.2",
+    "istanbul": "0.4.5",
+    "jison": "0.4.17",
+    "jsdom": "9.5.0",
+    "mocha": "3.0.2",
+    "ncp": "2.0.0",
+    "nyc": "8.3.0",
+    "raw-loader": "0.5.1",
+    "rimraf": "2.5.2",
+    "webpack": "1.13.2"
+  },
+  "npmName": "asm-dom",
+  "npmFileMap": [
+    {
+      "basePath": "/dist/",
+      "files": [
+        "*.js",
+        "*.wasm"
+      ]
+    }
+  ],
+  "browserify": {
+    "transform": [
+      "loose-envify"
+    ]
+  }
+}

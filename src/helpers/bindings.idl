@@ -1,0 +1,9 @@
+interface VNode {
+  void VNode (DOMString selector, DOMString nodeKey);
+  DOMString getName();
+  void setName(DOMString selector);
+  DOMString getKey();
+  void setKey(DOMString nodeKey);
+
+  void render(VNode node);
+};

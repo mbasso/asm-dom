@@ -1,0 +1,24 @@
+{
+  "ecmaFeatures": {
+    "modules": true
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "valid-jsdoc": 2,
+    "quotes": [2, "single"],
+    "strict": [2, "never"]
+  },
+  "extends": "airbnb/base",
+  "globals": {
+    "describe"   : false,
+    "it"         : false,
+    "before"     : false,
+    "beforeEach" : false,
+    "after"      : false,
+    "afterEach"  : false
+  }
+}

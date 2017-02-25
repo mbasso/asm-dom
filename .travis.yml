@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  # - "4"
+  - "5"
+  - "6"
+script:
+  - npm run check:src
+  - npm run build
+branches:
+  only:
+    - master
+cache:
+  directories:
+  - $HOME/.npm
+after_success: npm run test:cov
