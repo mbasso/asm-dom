@@ -1,26 +1,23 @@
 #ifndef HtmlDOMApi_hpp
 #define HtmlDOMApi_hpp
 
-#include <emscripten/val.h>
+#include "../Val/Val.hpp"
+#include <string>
 
-emscripten::val createElement(char* tagName);
-emscripten::val createElementNS(char* namespaceURI, char* qualifiedName);
-emscripten::val createTextNode(char* text);
-emscripten::val createComment(char* text);
-emscripten::val createElement(char* tagName);
-emscripten::val createElementNS(char* namespaceURI, char* qualifiedName);
-emscripten::val createTextNode(char* text);
-emscripten::val createComment(char* text);
-void insertBefore(emscripten::val parentNode, emscripten::val newNode, emscripten::val referenceNode);
-void removeChild(emscripten::val node, emscripten::val child);
-void appendChild(emscripten::val node, emscripten::val child);
-emscripten::val parentNode(emscripten::val node);
-emscripten::val nextSibling(emscripten::val node);
-std::string tagName(emscripten::val elm);
-void setTextContent(emscripten::val node, char* text);
-std::string getTextContent(emscripten::val node);
-bool isElement(emscripten::val node);
-bool isText(emscripten::val node);
-bool isComment(emscripten::val node);
+val createElement(std::string tagName);
+val createElementNS(std::string namespaceURI, std::string qualifiedName);
+val createTextNode(std::string text);
+val createComment(std::string text);
+void insertBefore(val parentNode, val newNode, val referenceNode);
+void removeChild(val node, val child);
+void appendChild(val node, val child);
+val parentNode(val node);
+val nextSibling(val node);
+std::string tagName(val elm);
+void setTextContent(val node, std::string text);
+std::string getTextContent(val node);
+bool isElement(val node);
+bool isText(val node);
+bool isComment(val node);
 
 #endif
