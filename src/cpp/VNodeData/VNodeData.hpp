@@ -2,6 +2,7 @@
 #define VNodeData_hpp
 
 #include "../VNode/VNode.hpp"
+#include "../Hooks/Hooks.hpp"
 #include <emscripten/val.h>
 #include <functional>
 #include <vector>
@@ -10,17 +11,17 @@
 struct VNodeData {
   emscripten::val props;
   emscripten::val attrs;
-  emscripten::val class;
+  emscripten::val className;
   emscripten::val style;
   emscripten::val dataset;
   emscripten::val on;
   emscripten::val hero;
   emscripten::val attachData;
-  hook?: Hooks;
+  struct Hooks hook;
   std::string key;
   std::string ns;
-  std::function<VNode(void)> fn;
-  std::vector<emscripte::val> args;
+  std::function<struct VNode(void)> fn;
+  std::vector<emscripten::val> args;
 };
 
 #endif

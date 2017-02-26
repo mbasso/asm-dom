@@ -1,15 +1,18 @@
+#ifndef Hooks_hpp
+#define Hooks_hpp
+
 #include "../VNode/VNode.hpp"
 
 // all returns any
 typedef void (*PreHook)();
-typedef void (*InitHook)(VNode vNode);
-typedef void (*CreateHook)(VNode emptyVNode, VNode vNode);
-typedef void (*InsertHook)(VNode vNode);
-typedef void (*PrePatchHook)(VNode oldVNode, VNode vNode);
-typedef void (*UpdateHook)(VNode oldVNode, VNode vNode);
-typedef void (*PostPatchHook)(VNode oldVNode, VNode vNode);
-typedef void (*DestroyHook)(VNode vNode);
-typedef void (*RemoveHook)(VNode vNode, void (*removeCallback)());
+typedef void (*InitHook)(struct VNode vNode);
+typedef void (*CreateHook)(struct VNode emptyVNode, struct VNode vNode);
+typedef void (*InsertHook)(struct VNode vNode);
+typedef void (*PrePatchHook)(struct VNode oldVNode, struct VNode vNode);
+typedef void (*UpdateHook)(struct VNode oldVNode, struct VNode vNode);
+typedef void (*PostPatchHook)(struct VNode oldVNode, struct VNode vNode);
+typedef void (*DestroyHook)(struct VNode vNode);
+typedef void (*RemoveHook)(struct VNode vNode, void (*removeCallback)());
 typedef void (*PostHook)();
 
 struct Hooks {
@@ -23,4 +26,6 @@ struct Hooks {
 	DestroyHook* destroy;
 	RemoveHook* remove;
 	PostHook* post;
-}
+};
+
+#endif
