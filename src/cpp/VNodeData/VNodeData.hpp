@@ -4,7 +4,6 @@
 #include "../VNode/VNode.hpp"
 #include "../Hooks/Hooks.hpp"
 #include "../Val/Val.hpp"
-#include <emscripten/val.h>
 #include <functional>
 #include <vector>
 #include <string>

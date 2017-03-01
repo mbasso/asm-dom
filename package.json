@@ -20,7 +20,7 @@
     "compile:wasm": "mkdir -p temp/wasm && mkdir -p compiled/wasm && emcc --bind -s BINARYEN=1 temp/asm-dom.bc --post-js src/helpers/glue.js -o temp/wasm/asm-dom.js && npm run compile:wasm:module",
     "compile:asmjs:module": "concat-cli -f src/helpers/prefix.js temp/asmjs/asm-dom.asm.js src/helpers/postfix.js -o compiled/asmjs/asm-dom.asm.js",
     "compile:wasm:module": "ncp temp/wasm compiled/wasm && concat-cli -f src/helpers/prefix.js temp/wasm/asm-dom.js src/helpers/postfix.js -o compiled/wasm/asm-dom.js",
-    "test": "npm run compile && cross-env BABEL_ENV=commonjs nyc --require babel-register mocha --recursive",
+    "test": "npm run compile && cross-env BABEL_ENV=commonjs nyc --require babel-register --require ./test/setup.js mocha --recursive",
     "test:watch": "npm test -- --watch",
     "test:cov": "nyc report --reporter=text-lcov | coveralls",
     "check:src": "npm run lint && npm run test",
