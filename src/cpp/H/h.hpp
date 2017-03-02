@@ -8,17 +8,17 @@
 
 class H {
 	public:
-		struct VNode* h(const char* sel);
-		struct VNode* h(const char* text, bool isText);
+		static struct VNode* h(const char* sel);
+		static struct VNode* h(const char* text, bool isText);
 
-		struct VNode* h(const char* sel, struct VNode* node);
-		struct VNode* h(const char* sel, const char* text);
-		struct VNode* h(const char* sel, struct VNodeData* data);
-		struct VNode* h(const char* sel, std::vector<struct VNode*> children);
+		static struct VNode* h(const char* sel, struct VNode* node);
+		static struct VNode* h(const char* sel, const char* text);
+		static struct VNode* h(const char* sel, struct VNodeData* data);
+		static struct VNode* h(const char* sel, std::vector<struct VNode*> children);
 
-		struct VNode* h(const char* sel, struct VNodeData* data, struct VNode* node);
-		struct VNode* h(const char* sel, struct VNodeData* data, const char* text);
-		struct VNode* h(const char* sel, struct VNodeData* data, std::vector<struct VNode*> children);
+		static struct VNode* h(const char* sel, struct VNodeData* data, struct VNode* node);
+		static struct VNode* h(const char* sel, struct VNodeData* data, const char* text);
+		static struct VNode* h(const char* sel, struct VNodeData* data, std::vector<struct VNode*> children);
 };
 
 #endif

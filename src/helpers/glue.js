@@ -140,6 +140,26 @@ function ensureFloat64(value) {
 }
 
 
+// H
+function H() { throw "cannot construct a H, no constructor in IDL" }
+H.prototype = Object.create(WrapperObject.prototype);
+H.prototype.constructor = H;
+H.prototype.__class__ = H;
+H.__cache__ = {};
+Module['H'] = H;
+
+H.prototype['h'] = H.prototype.h = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_H_h_1(self, arg0), VNode);
+};;
+
+  H.prototype['__destroy__'] = H.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_H___destroy___0(self);
+};
 // VoidPtr
 function VoidPtr() { throw "cannot construct a VoidPtr, no constructor in IDL" }
 VoidPtr.prototype = Object.create(WrapperObject.prototype);
@@ -151,6 +171,94 @@ Module['VoidPtr'] = VoidPtr;
   VoidPtr.prototype['__destroy__'] = VoidPtr.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_VoidPtr___destroy___0(self);
+};
+// VNodeData
+function VNodeData() { throw "cannot construct a VNodeData, no constructor in IDL" }
+VNodeData.prototype = Object.create(WrapperObject.prototype);
+VNodeData.prototype.constructor = VNodeData;
+VNodeData.prototype.__class__ = VNodeData;
+VNodeData.__cache__ = {};
+Module['VNodeData'] = VNodeData;
+
+  VNodeData.prototype['get_key'] = VNodeData.prototype.get_key = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VNodeData_get_key_0(self));
+};
+    VNodeData.prototype['set_key'] = VNodeData.prototype.set_key = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_VNodeData_set_key_1(self, arg0);
+};
+  VNodeData.prototype['get_ns'] = VNodeData.prototype.get_ns = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VNodeData_get_ns_0(self));
+};
+    VNodeData.prototype['set_ns'] = VNodeData.prototype.set_ns = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_VNodeData_set_ns_1(self, arg0);
+};
+  VNodeData.prototype['__destroy__'] = VNodeData.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_VNodeData___destroy___0(self);
+};
+// VNode
+function VNode() { throw "cannot construct a VNode, no constructor in IDL" }
+VNode.prototype = Object.create(WrapperObject.prototype);
+VNode.prototype.constructor = VNode;
+VNode.prototype.__class__ = VNode;
+VNode.__cache__ = {};
+Module['VNode'] = VNode;
+
+  VNode.prototype['get_sel'] = VNode.prototype.get_sel = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VNode_get_sel_0(self));
+};
+    VNode.prototype['set_sel'] = VNode.prototype.set_sel = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_VNode_set_sel_1(self, arg0);
+};
+  VNode.prototype['get_key'] = VNode.prototype.get_key = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VNode_get_key_0(self));
+};
+    VNode.prototype['set_key'] = VNode.prototype.set_key = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_VNode_set_key_1(self, arg0);
+};
+  VNode.prototype['get_text'] = VNode.prototype.get_text = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VNode_get_text_0(self));
+};
+    VNode.prototype['set_text'] = VNode.prototype.set_text = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_VNode_set_text_1(self, arg0);
+};
+  VNode.prototype['get_data'] = VNode.prototype.get_data = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_VNode_get_data_0(self), VNodeData);
+};
+    VNode.prototype['set_data'] = VNode.prototype.set_data = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VNode_set_data_1(self, arg0);
+};
+  VNode.prototype['__destroy__'] = VNode.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_VNode___destroy___0(self);
 };
 (function() {
   function setupEnums() {

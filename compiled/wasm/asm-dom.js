@@ -1965,7 +1965,7 @@ var ASM_CONSTS = [];
 
 STATIC_BASE = 1024;
 
-STATICTOP = STATIC_BASE + 7968;
+STATICTOP = STATIC_BASE + 8080;
   /* global initializers */  __ATINIT__.push({ func: function() { __GLOBAL__sub_I_app_cpp() } }, { func: function() { __GLOBAL__sub_I_glue_wrapper_cpp() } }, { func: function() { __GLOBAL__sub_I_bind_cpp() } });
   
 
@@ -1974,7 +1974,7 @@ memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasm
 
 
 
-var STATIC_BUMP = 7968;
+var STATIC_BUMP = 8080;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 
@@ -2191,6 +2191,103 @@ function copyTempDouble(ptr) {
       });
     }
 
+  
+  function __ZSt18uncaught_exceptionv() { // std::uncaught_exception()
+      return !!__ZSt18uncaught_exceptionv.uncaught_exception;
+    }
+  
+  
+  
+  var EXCEPTIONS={last:0,caught:[],infos:{},deAdjust:function (adjusted) {
+        if (!adjusted || EXCEPTIONS.infos[adjusted]) return adjusted;
+        for (var ptr in EXCEPTIONS.infos) {
+          var info = EXCEPTIONS.infos[ptr];
+          if (info.adjusted === adjusted) {
+            return ptr;
+          }
+        }
+        return adjusted;
+      },addRef:function (ptr) {
+        if (!ptr) return;
+        var info = EXCEPTIONS.infos[ptr];
+        info.refcount++;
+      },decRef:function (ptr) {
+        if (!ptr) return;
+        var info = EXCEPTIONS.infos[ptr];
+        assert(info.refcount > 0);
+        info.refcount--;
+        // A rethrown exception can reach refcount 0; it must not be discarded
+        // Its next handler will clear the rethrown flag and addRef it, prior to
+        // final decRef and destruction here
+        if (info.refcount === 0 && !info.rethrown) {
+          if (info.destructor) {
+            Runtime.dynCall('vi', info.destructor, [ptr]);
+          }
+          delete EXCEPTIONS.infos[ptr];
+          ___cxa_free_exception(ptr);
+        }
+      },clearRef:function (ptr) {
+        if (!ptr) return;
+        var info = EXCEPTIONS.infos[ptr];
+        info.refcount = 0;
+      }};
+  function ___resumeException(ptr) {
+      if (!EXCEPTIONS.last) { EXCEPTIONS.last = ptr; }
+      throw ptr;
+    }function ___cxa_find_matching_catch() {
+      var thrown = EXCEPTIONS.last;
+      if (!thrown) {
+        // just pass through the null ptr
+        return ((asm["setTempRet0"](0),0)|0);
+      }
+      var info = EXCEPTIONS.infos[thrown];
+      var throwntype = info.type;
+      if (!throwntype) {
+        // just pass through the thrown ptr
+        return ((asm["setTempRet0"](0),thrown)|0);
+      }
+      var typeArray = Array.prototype.slice.call(arguments);
+  
+      var pointer = Module['___cxa_is_pointer_type'](throwntype);
+      // can_catch receives a **, add indirection
+      if (!___cxa_find_matching_catch.buffer) ___cxa_find_matching_catch.buffer = _malloc(4);
+      HEAP32[((___cxa_find_matching_catch.buffer)>>2)]=thrown;
+      thrown = ___cxa_find_matching_catch.buffer;
+      // The different catch blocks are denoted by different types.
+      // Due to inheritance, those types may not precisely match the
+      // type of the thrown object. Find one which matches, and
+      // return the type of the catch block which should be called.
+      for (var i = 0; i < typeArray.length; i++) {
+        if (typeArray[i] && Module['___cxa_can_catch'](typeArray[i], throwntype, thrown)) {
+          thrown = HEAP32[((thrown)>>2)]; // undo indirection
+          info.adjusted = thrown;
+          return ((asm["setTempRet0"](typeArray[i]),thrown)|0);
+        }
+      }
+      // Shouldn't happen unless we have bogus data in typeArray
+      // or encounter a type for which emscripten doesn't have suitable
+      // typeinfo defined. Best-efforts match just in case.
+      thrown = HEAP32[((thrown)>>2)]; // undo indirection
+      return ((asm["setTempRet0"](throwntype),thrown)|0);
+    }function ___cxa_throw(ptr, type, destructor) {
+      EXCEPTIONS.infos[ptr] = {
+        ptr: ptr,
+        adjusted: ptr,
+        type: type,
+        destructor: destructor,
+        refcount: 0,
+        caught: false,
+        rethrown: false
+      };
+      EXCEPTIONS.last = ptr;
+      if (!("uncaught_exception" in __ZSt18uncaught_exceptionv)) {
+        __ZSt18uncaught_exceptionv.uncaught_exception = 1;
+      } else {
+        __ZSt18uncaught_exceptionv.uncaught_exception++;
+      }
+      throw ptr;
+    }
+
    
   Module["_memset"] = _memset;
 
@@ -2319,91 +2416,6 @@ function copyTempDouble(ptr) {
       });
     }
 
-  function __embind_register_std_wstring(rawType, charSize, name) {
-      // nb. do not cache HEAPU16 and HEAPU32, they may be destroyed by enlargeMemory().
-      name = readLatin1String(name);
-      var getHeap, shift;
-      if (charSize === 2) {
-          getHeap = function() { return HEAPU16; };
-          shift = 1;
-      } else if (charSize === 4) {
-          getHeap = function() { return HEAPU32; };
-          shift = 2;
-      }
-      registerType(rawType, {
-          name: name,
-          'fromWireType': function(value) {
-              var HEAP = getHeap();
-              var length = HEAPU32[value >> 2];
-              var a = new Array(length);
-              var start = (value + 4) >> shift;
-              for (var i = 0; i < length; ++i) {
-                  a[i] = String.fromCharCode(HEAP[start + i]);
-              }
-              _free(value);
-              return a.join('');
-          },
-          'toWireType': function(destructors, value) {
-              // assumes 4-byte alignment
-              var HEAP = getHeap();
-              var length = value.length;
-              var ptr = _malloc(4 + length * charSize);
-              HEAPU32[ptr >> 2] = length;
-              var start = (ptr + 4) >> shift;
-              for (var i = 0; i < length; ++i) {
-                  HEAP[start + i] = value.charCodeAt(i);
-              }
-              if (destructors !== null) {
-                  destructors.push(_free, ptr);
-              }
-              return ptr;
-          },
-          'argPackAdvance': 8,
-          'readValueFromPointer': simpleReadValueFromPointer,
-          destructorFunction: function(ptr) { _free(ptr); },
-      });
-    }
-
-  function _pthread_once(ptr, func) {
-      if (!_pthread_once.seen) _pthread_once.seen = {};
-      if (ptr in _pthread_once.seen) return;
-      Runtime.dynCall('v', func);
-      _pthread_once.seen[ptr] = 1;
-    }
-
-  function ___lock() {}
-
-  function ___unlock() {}
-
-  
-  var emval_free_list=[];
-  
-  var emval_handle_array=[{},{value:undefined},{value:null},{value:true},{value:false}];function __emval_decref(handle) {
-      if (handle > 4 && 0 === --emval_handle_array[handle].refcount) {
-          emval_handle_array[handle] = undefined;
-          emval_free_list.push(handle);
-      }
-    }
-
-  
-  var PTHREAD_SPECIFIC={};function _pthread_getspecific(key) {
-      return PTHREAD_SPECIFIC[key] || 0;
-    }
-
-  
-  var PTHREAD_SPECIFIC_NEXT_KEY=1;
-  
-  var ERRNO_CODES={EPERM:1,ENOENT:2,ESRCH:3,EINTR:4,EIO:5,ENXIO:6,E2BIG:7,ENOEXEC:8,EBADF:9,ECHILD:10,EAGAIN:11,EWOULDBLOCK:11,ENOMEM:12,EACCES:13,EFAULT:14,ENOTBLK:15,EBUSY:16,EEXIST:17,EXDEV:18,ENODEV:19,ENOTDIR:20,EISDIR:21,EINVAL:22,ENFILE:23,EMFILE:24,ENOTTY:25,ETXTBSY:26,EFBIG:27,ENOSPC:28,ESPIPE:29,EROFS:30,EMLINK:31,EPIPE:32,EDOM:33,ERANGE:34,ENOMSG:42,EIDRM:43,ECHRNG:44,EL2NSYNC:45,EL3HLT:46,EL3RST:47,ELNRNG:48,EUNATCH:49,ENOCSI:50,EL2HLT:51,EDEADLK:35,ENOLCK:37,EBADE:52,EBADR:53,EXFULL:54,ENOANO:55,EBADRQC:56,EBADSLT:57,EDEADLOCK:35,EBFONT:59,ENOSTR:60,ENODATA:61,ETIME:62,ENOSR:63,ENONET:64,ENOPKG:65,EREMOTE:66,ENOLINK:67,EADV:68,ESRMNT:69,ECOMM:70,EPROTO:71,EMULTIHOP:72,EDOTDOT:73,EBADMSG:74,ENOTUNIQ:76,EBADFD:77,EREMCHG:78,ELIBACC:79,ELIBBAD:80,ELIBSCN:81,ELIBMAX:82,ELIBEXEC:83,ENOSYS:38,ENOTEMPTY:39,ENAMETOOLONG:36,ELOOP:40,EOPNOTSUPP:95,EPFNOSUPPORT:96,ECONNRESET:104,ENOBUFS:105,EAFNOSUPPORT:97,EPROTOTYPE:91,ENOTSOCK:88,ENOPROTOOPT:92,ESHUTDOWN:108,ECONNREFUSED:111,EADDRINUSE:98,ECONNABORTED:103,ENETUNREACH:101,ENETDOWN:100,ETIMEDOUT:110,EHOSTDOWN:112,EHOSTUNREACH:113,EINPROGRESS:115,EALREADY:114,EDESTADDRREQ:89,EMSGSIZE:90,EPROTONOSUPPORT:93,ESOCKTNOSUPPORT:94,EADDRNOTAVAIL:99,ENETRESET:102,EISCONN:106,ENOTCONN:107,ETOOMANYREFS:109,EUSERS:87,EDQUOT:122,ESTALE:116,ENOTSUP:95,ENOMEDIUM:123,EILSEQ:84,EOVERFLOW:75,ECANCELED:125,ENOTRECOVERABLE:131,EOWNERDEAD:130,ESTRPIPE:86};function _pthread_key_create(key, destructor) {
-      if (key == 0) {
-        return ERRNO_CODES.EINVAL;
-      }
-      HEAP32[((key)>>2)]=PTHREAD_SPECIFIC_NEXT_KEY;
-      // values start at 0
-      PTHREAD_SPECIFIC[PTHREAD_SPECIFIC_NEXT_KEY] = 0;
-      PTHREAD_SPECIFIC_NEXT_KEY++;
-      return 0;
-    }
-
   
   function _embind_repr(v) {
       if (v === null) {
@@ -2471,6 +2483,46 @@ function copyTempDouble(ptr) {
       });
     }
 
+  function _pthread_once(ptr, func) {
+      if (!_pthread_once.seen) _pthread_once.seen = {};
+      if (ptr in _pthread_once.seen) return;
+      Runtime.dynCall('v', func);
+      _pthread_once.seen[ptr] = 1;
+    }
+
+  function ___lock() {}
+
+  function ___unlock() {}
+
+  
+  var emval_free_list=[];
+  
+  var emval_handle_array=[{},{value:undefined},{value:null},{value:true},{value:false}];function __emval_decref(handle) {
+      if (handle > 4 && 0 === --emval_handle_array[handle].refcount) {
+          emval_handle_array[handle] = undefined;
+          emval_free_list.push(handle);
+      }
+    }
+
+  
+  var PTHREAD_SPECIFIC={};function _pthread_getspecific(key) {
+      return PTHREAD_SPECIFIC[key] || 0;
+    }
+
+  
+  var PTHREAD_SPECIFIC_NEXT_KEY=1;
+  
+  var ERRNO_CODES={EPERM:1,ENOENT:2,ESRCH:3,EINTR:4,EIO:5,ENXIO:6,E2BIG:7,ENOEXEC:8,EBADF:9,ECHILD:10,EAGAIN:11,EWOULDBLOCK:11,ENOMEM:12,EACCES:13,EFAULT:14,ENOTBLK:15,EBUSY:16,EEXIST:17,EXDEV:18,ENODEV:19,ENOTDIR:20,EISDIR:21,EINVAL:22,ENFILE:23,EMFILE:24,ENOTTY:25,ETXTBSY:26,EFBIG:27,ENOSPC:28,ESPIPE:29,EROFS:30,EMLINK:31,EPIPE:32,EDOM:33,ERANGE:34,ENOMSG:42,EIDRM:43,ECHRNG:44,EL2NSYNC:45,EL3HLT:46,EL3RST:47,ELNRNG:48,EUNATCH:49,ENOCSI:50,EL2HLT:51,EDEADLK:35,ENOLCK:37,EBADE:52,EBADR:53,EXFULL:54,ENOANO:55,EBADRQC:56,EBADSLT:57,EDEADLOCK:35,EBFONT:59,ENOSTR:60,ENODATA:61,ETIME:62,ENOSR:63,ENONET:64,ENOPKG:65,EREMOTE:66,ENOLINK:67,EADV:68,ESRMNT:69,ECOMM:70,EPROTO:71,EMULTIHOP:72,EDOTDOT:73,EBADMSG:74,ENOTUNIQ:76,EBADFD:77,EREMCHG:78,ELIBACC:79,ELIBBAD:80,ELIBSCN:81,ELIBMAX:82,ELIBEXEC:83,ENOSYS:38,ENOTEMPTY:39,ENAMETOOLONG:36,ELOOP:40,EOPNOTSUPP:95,EPFNOSUPPORT:96,ECONNRESET:104,ENOBUFS:105,EAFNOSUPPORT:97,EPROTOTYPE:91,ENOTSOCK:88,ENOPROTOOPT:92,ESHUTDOWN:108,ECONNREFUSED:111,EADDRINUSE:98,ECONNABORTED:103,ENETUNREACH:101,ENETDOWN:100,ETIMEDOUT:110,EHOSTDOWN:112,EHOSTUNREACH:113,EINPROGRESS:115,EALREADY:114,EDESTADDRREQ:89,EMSGSIZE:90,EPROTONOSUPPORT:93,ESOCKTNOSUPPORT:94,EADDRNOTAVAIL:99,ENETRESET:102,EISCONN:106,ENOTCONN:107,ETOOMANYREFS:109,EUSERS:87,EDQUOT:122,ESTALE:116,ENOTSUP:95,ENOMEDIUM:123,EILSEQ:84,EOVERFLOW:75,ECANCELED:125,ENOTRECOVERABLE:131,EOWNERDEAD:130,ESTRPIPE:86};function _pthread_key_create(key, destructor) {
+      if (key == 0) {
+        return ERRNO_CODES.EINVAL;
+      }
+      HEAP32[((key)>>2)]=PTHREAD_SPECIFIC_NEXT_KEY;
+      // values start at 0
+      PTHREAD_SPECIFIC[PTHREAD_SPECIFIC_NEXT_KEY] = 0;
+      PTHREAD_SPECIFIC_NEXT_KEY++;
+      return 0;
+    }
+
   
   
   
@@ -2510,7 +2562,27 @@ function copyTempDouble(ptr) {
           return handle;
           }
         }
-    }function __embind_register_emval(rawType, name) {
+    }
+  
+  
+  function getTypeName(type) {
+      var ptr = ___getTypeName(type);
+      var rv = readLatin1String(ptr);
+      _free(ptr);
+      return rv;
+    }function requireRegisteredType(rawType, humanName) {
+      var impl = registeredTypes[rawType];
+      if (undefined === impl) {
+          throwBindingError(humanName + " has unknown type " + getTypeName(rawType));
+      }
+      return impl;
+    }function __emval_take_value(type, argv) {
+      type = requireRegisteredType(type, '_emval_take_value');
+      var v = type['readValueFromPointer'](argv);
+      return __emval_register(v);
+    }
+
+  function __embind_register_emval(rawType, name) {
       name = readLatin1String(name);
       registerType(rawType, {
           name: name,
@@ -2537,6 +2609,10 @@ function copyTempDouble(ptr) {
       }
       PTHREAD_SPECIFIC[key] = value;
       return 0;
+    }
+
+  function ___cxa_allocate_exception(size) {
+      return _malloc(size);
     }
 
   
@@ -2609,48 +2685,15 @@ function copyTempDouble(ptr) {
       _pthread_cleanup_push.level = __ATEXIT__.length;
     }
 
+  function ___cxa_find_matching_catch_2() {
+          return ___cxa_find_matching_catch.apply(null, arguments);
+        }
+
   function ___cxa_find_matching_catch_3() {
           return ___cxa_find_matching_catch.apply(null, arguments);
         }
 
-  
-  function __ZSt18uncaught_exceptionv() { // std::uncaught_exception()
-      return !!__ZSt18uncaught_exceptionv.uncaught_exception;
-    }
-  
-  var EXCEPTIONS={last:0,caught:[],infos:{},deAdjust:function (adjusted) {
-        if (!adjusted || EXCEPTIONS.infos[adjusted]) return adjusted;
-        for (var ptr in EXCEPTIONS.infos) {
-          var info = EXCEPTIONS.infos[ptr];
-          if (info.adjusted === adjusted) {
-            return ptr;
-          }
-        }
-        return adjusted;
-      },addRef:function (ptr) {
-        if (!ptr) return;
-        var info = EXCEPTIONS.infos[ptr];
-        info.refcount++;
-      },decRef:function (ptr) {
-        if (!ptr) return;
-        var info = EXCEPTIONS.infos[ptr];
-        assert(info.refcount > 0);
-        info.refcount--;
-        // A rethrown exception can reach refcount 0; it must not be discarded
-        // Its next handler will clear the rethrown flag and addRef it, prior to
-        // final decRef and destruction here
-        if (info.refcount === 0 && !info.rethrown) {
-          if (info.destructor) {
-            Runtime.dynCall('vi', info.destructor, [ptr]);
-          }
-          delete EXCEPTIONS.infos[ptr];
-          ___cxa_free_exception(ptr);
-        }
-      },clearRef:function (ptr) {
-        if (!ptr) return;
-        var info = EXCEPTIONS.infos[ptr];
-        info.refcount = 0;
-      }};function ___cxa_begin_catch(ptr) {
+  function ___cxa_begin_catch(ptr) {
       var info = EXCEPTIONS.infos[ptr];
       if (info && !info.caught) {
         info.caught = true;
@@ -2689,47 +2732,52 @@ function copyTempDouble(ptr) {
     } 
   Module["_sbrk"] = _sbrk;
 
-  
-  
-  function ___resumeException(ptr) {
-      if (!EXCEPTIONS.last) { EXCEPTIONS.last = ptr; }
-      throw ptr;
-    }function ___cxa_find_matching_catch() {
-      var thrown = EXCEPTIONS.last;
-      if (!thrown) {
-        // just pass through the null ptr
-        return ((asm["setTempRet0"](0),0)|0);
+  function __embind_register_std_wstring(rawType, charSize, name) {
+      // nb. do not cache HEAPU16 and HEAPU32, they may be destroyed by enlargeMemory().
+      name = readLatin1String(name);
+      var getHeap, shift;
+      if (charSize === 2) {
+          getHeap = function() { return HEAPU16; };
+          shift = 1;
+      } else if (charSize === 4) {
+          getHeap = function() { return HEAPU32; };
+          shift = 2;
       }
-      var info = EXCEPTIONS.infos[thrown];
-      var throwntype = info.type;
-      if (!throwntype) {
-        // just pass through the thrown ptr
-        return ((asm["setTempRet0"](0),thrown)|0);
-      }
-      var typeArray = Array.prototype.slice.call(arguments);
-  
-      var pointer = Module['___cxa_is_pointer_type'](throwntype);
-      // can_catch receives a **, add indirection
-      if (!___cxa_find_matching_catch.buffer) ___cxa_find_matching_catch.buffer = _malloc(4);
-      HEAP32[((___cxa_find_matching_catch.buffer)>>2)]=thrown;
-      thrown = ___cxa_find_matching_catch.buffer;
-      // The different catch blocks are denoted by different types.
-      // Due to inheritance, those types may not precisely match the
-      // type of the thrown object. Find one which matches, and
-      // return the type of the catch block which should be called.
-      for (var i = 0; i < typeArray.length; i++) {
-        if (typeArray[i] && Module['___cxa_can_catch'](typeArray[i], throwntype, thrown)) {
-          thrown = HEAP32[((thrown)>>2)]; // undo indirection
-          info.adjusted = thrown;
-          return ((asm["setTempRet0"](typeArray[i]),thrown)|0);
-        }
-      }
-      // Shouldn't happen unless we have bogus data in typeArray
-      // or encounter a type for which emscripten doesn't have suitable
-      // typeinfo defined. Best-efforts match just in case.
-      thrown = HEAP32[((thrown)>>2)]; // undo indirection
-      return ((asm["setTempRet0"](throwntype),thrown)|0);
-    }function ___gxx_personality_v0() {
+      registerType(rawType, {
+          name: name,
+          'fromWireType': function(value) {
+              var HEAP = getHeap();
+              var length = HEAPU32[value >> 2];
+              var a = new Array(length);
+              var start = (value + 4) >> shift;
+              for (var i = 0; i < length; ++i) {
+                  a[i] = String.fromCharCode(HEAP[start + i]);
+              }
+              _free(value);
+              return a.join('');
+          },
+          'toWireType': function(destructors, value) {
+              // assumes 4-byte alignment
+              var HEAP = getHeap();
+              var length = value.length;
+              var ptr = _malloc(4 + length * charSize);
+              HEAPU32[ptr >> 2] = length;
+              var start = (ptr + 4) >> shift;
+              for (var i = 0; i < length; ++i) {
+                  HEAP[start + i] = value.charCodeAt(i);
+              }
+              if (destructors !== null) {
+                  destructors.push(_free, ptr);
+              }
+              return ptr;
+          },
+          'argPackAdvance': 8,
+          'readValueFromPointer': simpleReadValueFromPointer,
+          destructorFunction: function(ptr) { _free(ptr); },
+      });
+    }
+
+  function ___gxx_personality_v0() {
     }
 
   function __embind_register_memory_view(rawType, dataTypeIndex, name) {
@@ -2765,6 +2813,7 @@ function copyTempDouble(ptr) {
       });
     }
 
+
    
   Module["_pthread_self"] = _pthread_self;
 
@@ -2783,6 +2832,12 @@ function copyTempDouble(ptr) {
     return -e.errno;
   }
   }
+
+  function __emval_incref(handle) {
+      if (handle > 4) {
+          emval_handle_array[handle].refcount += 1;
+      }
+    }
 
   function ___syscall146(which, varargs) {SYSCALLS.varargs = varargs;
   try {
@@ -2876,9 +2931,9 @@ function nullFunc_viiiiii(x) { Module["printErr"]("Invalid function pointer call
 
 function nullFunc_viiii(x) { Module["printErr"]("Invalid function pointer called with signature 'viiii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
-Module['wasmTableSize'] = 258;
+Module['wasmTableSize'] = 416;
 
-Module['wasmMaxTableSize'] = 258;
+Module['wasmMaxTableSize'] = 416;
 
 function invoke_iiii(index,a1,a2,a3) {
   try {
@@ -2963,27 +3018,33 @@ function invoke_viiii(index,a1,a2,a3,a4) {
 
 Module.asmGlobalArg = { "Math": Math, "Int8Array": Int8Array, "Int16Array": Int16Array, "Int32Array": Int32Array, "Uint8Array": Uint8Array, "Uint16Array": Uint16Array, "Uint32Array": Uint32Array, "Float32Array": Float32Array, "Float64Array": Float64Array, "NaN": NaN, "Infinity": Infinity };
 
-Module.asmLibraryArg = { "abort": abort, "assert": assert, "enlargeMemory": enlargeMemory, "getTotalMemory": getTotalMemory, "abortOnCannotGrowMemory": abortOnCannotGrowMemory, "abortStackOverflow": abortStackOverflow, "nullFunc_iiii": nullFunc_iiii, "nullFunc_viiiii": nullFunc_viiiii, "nullFunc_i": nullFunc_i, "nullFunc_vi": nullFunc_vi, "nullFunc_vii": nullFunc_vii, "nullFunc_ii": nullFunc_ii, "nullFunc_v": nullFunc_v, "nullFunc_viiiiii": nullFunc_viiiiii, "nullFunc_viiii": nullFunc_viiii, "invoke_iiii": invoke_iiii, "invoke_viiiii": invoke_viiiii, "invoke_i": invoke_i, "invoke_vi": invoke_vi, "invoke_vii": invoke_vii, "invoke_ii": invoke_ii, "invoke_v": invoke_v, "invoke_viiiiii": invoke_viiiiii, "invoke_viiii": invoke_viiii, "_pthread_cleanup_pop": _pthread_cleanup_pop, "floatReadValueFromPointer": floatReadValueFromPointer, "simpleReadValueFromPointer": simpleReadValueFromPointer, "_pthread_key_create": _pthread_key_create, "__embind_register_memory_view": __embind_register_memory_view, "throwInternalError": throwInternalError, "get_first_emval": get_first_emval, "_abort": _abort, "throwBindingError": throwBindingError, "___gxx_personality_v0": ___gxx_personality_v0, "integerReadValueFromPointer": integerReadValueFromPointer, "extendError": extendError, "___cxa_free_exception": ___cxa_free_exception, "__embind_register_void": __embind_register_void, "___cxa_find_matching_catch_3": ___cxa_find_matching_catch_3, "getShiftFromSize": getShiftFromSize, "embind_init_charCodes": embind_init_charCodes, "___setErrNo": ___setErrNo, "__emval_register": __emval_register, "__embind_register_std_wstring": __embind_register_std_wstring, "_emscripten_memcpy_big": _emscripten_memcpy_big, "___cxa_end_catch": ___cxa_end_catch, "__embind_register_bool": __embind_register_bool, "___resumeException": ___resumeException, "__ZSt18uncaught_exceptionv": __ZSt18uncaught_exceptionv, "_embind_repr": _embind_repr, "___cxa_begin_catch": ___cxa_begin_catch, "_pthread_getspecific": _pthread_getspecific, "createNamedFunction": createNamedFunction, "__embind_register_emval": __embind_register_emval, "readLatin1String": readLatin1String, "__embind_register_integer": __embind_register_integer, "_pthread_once": _pthread_once, "__emval_decref": __emval_decref, "__embind_register_float": __embind_register_float, "makeLegalFunctionName": makeLegalFunctionName, "___syscall54": ___syscall54, "___unlock": ___unlock, "init_emval": init_emval, "whenDependentTypesAreResolved": whenDependentTypesAreResolved, "_pthread_setspecific": _pthread_setspecific, "___cxa_atexit": ___cxa_atexit, "registerType": registerType, "___lock": ___lock, "___syscall6": ___syscall6, "_pthread_cleanup_push": _pthread_cleanup_push, "count_emval_handles": count_emval_handles, "_atexit": _atexit, "___syscall140": ___syscall140, "__embind_register_std_string": __embind_register_std_string, "___cxa_find_matching_catch": ___cxa_find_matching_catch, "___syscall146": ___syscall146, "DYNAMICTOP_PTR": DYNAMICTOP_PTR, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX, "___dso_handle": ___dso_handle };
+Module.asmLibraryArg = { "abort": abort, "assert": assert, "enlargeMemory": enlargeMemory, "getTotalMemory": getTotalMemory, "abortOnCannotGrowMemory": abortOnCannotGrowMemory, "abortStackOverflow": abortStackOverflow, "nullFunc_iiii": nullFunc_iiii, "nullFunc_viiiii": nullFunc_viiiii, "nullFunc_i": nullFunc_i, "nullFunc_vi": nullFunc_vi, "nullFunc_vii": nullFunc_vii, "nullFunc_ii": nullFunc_ii, "nullFunc_v": nullFunc_v, "nullFunc_viiiiii": nullFunc_viiiiii, "nullFunc_viiii": nullFunc_viiii, "invoke_iiii": invoke_iiii, "invoke_viiiii": invoke_viiiii, "invoke_i": invoke_i, "invoke_vi": invoke_vi, "invoke_vii": invoke_vii, "invoke_ii": invoke_ii, "invoke_v": invoke_v, "invoke_viiiiii": invoke_viiiiii, "invoke_viiii": invoke_viiii, "_pthread_cleanup_pop": _pthread_cleanup_pop, "floatReadValueFromPointer": floatReadValueFromPointer, "simpleReadValueFromPointer": simpleReadValueFromPointer, "integerReadValueFromPointer": integerReadValueFromPointer, "__embind_register_memory_view": __embind_register_memory_view, "throwInternalError": throwInternalError, "get_first_emval": get_first_emval, "_abort": _abort, "throwBindingError": throwBindingError, "___gxx_personality_v0": ___gxx_personality_v0, "extendError": extendError, "__embind_register_void": __embind_register_void, "___cxa_free_exception": ___cxa_free_exception, "___cxa_find_matching_catch_2": ___cxa_find_matching_catch_2, "___cxa_find_matching_catch_3": ___cxa_find_matching_catch_3, "__emval_take_value": __emval_take_value, "___syscall54": ___syscall54, "getShiftFromSize": getShiftFromSize, "embind_init_charCodes": embind_init_charCodes, "___setErrNo": ___setErrNo, "__emval_register": __emval_register, "___cxa_begin_catch": ___cxa_begin_catch, "_emscripten_memcpy_big": _emscripten_memcpy_big, "___cxa_end_catch": ___cxa_end_catch, "__embind_register_bool": __embind_register_bool, "___resumeException": ___resumeException, "__ZSt18uncaught_exceptionv": __ZSt18uncaught_exceptionv, "__emval_incref": __emval_incref, "_embind_repr": _embind_repr, "__embind_register_std_wstring": __embind_register_std_wstring, "_pthread_getspecific": _pthread_getspecific, "createNamedFunction": createNamedFunction, "__embind_register_emval": __embind_register_emval, "readLatin1String": readLatin1String, "__embind_register_integer": __embind_register_integer, "_pthread_once": _pthread_once, "__emval_decref": __emval_decref, "__embind_register_float": __embind_register_float, "requireRegisteredType": requireRegisteredType, "makeLegalFunctionName": makeLegalFunctionName, "_pthread_key_create": _pthread_key_create, "___unlock": ___unlock, "init_emval": init_emval, "whenDependentTypesAreResolved": whenDependentTypesAreResolved, "_pthread_setspecific": _pthread_setspecific, "___cxa_atexit": ___cxa_atexit, "registerType": registerType, "___cxa_throw": ___cxa_throw, "___lock": ___lock, "___syscall6": ___syscall6, "_pthread_cleanup_push": _pthread_cleanup_push, "count_emval_handles": count_emval_handles, "___cxa_allocate_exception": ___cxa_allocate_exception, "getTypeName": getTypeName, "_atexit": _atexit, "___syscall140": ___syscall140, "__embind_register_std_string": __embind_register_std_string, "___cxa_find_matching_catch": ___cxa_find_matching_catch, "___syscall146": ___syscall146, "DYNAMICTOP_PTR": DYNAMICTOP_PTR, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX, "___dso_handle": ___dso_handle };
 // EMSCRIPTEN_START_ASM
 var asm =Module["asm"]// EMSCRIPTEN_END_ASM
 (Module.asmGlobalArg, Module.asmLibraryArg, buffer);
 
-var real__malloc = asm["_malloc"]; asm["_malloc"] = function() {
+var real__emscripten_bind_VNode_get_key_0 = asm["_emscripten_bind_VNode_get_key_0"]; asm["_emscripten_bind_VNode_get_key_0"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__malloc.apply(null, arguments);
+return real__emscripten_bind_VNode_get_key_0.apply(null, arguments);
 };
 
-var real____cxa_can_catch = asm["___cxa_can_catch"]; asm["___cxa_can_catch"] = function() {
+var real__emscripten_bind_VNode_set_key_1 = asm["_emscripten_bind_VNode_set_key_1"]; asm["_emscripten_bind_VNode_set_key_1"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real____cxa_can_catch.apply(null, arguments);
+return real__emscripten_bind_VNode_set_key_1.apply(null, arguments);
 };
 
-var real___GLOBAL__sub_I_bind_cpp = asm["__GLOBAL__sub_I_bind_cpp"]; asm["__GLOBAL__sub_I_bind_cpp"] = function() {
+var real___GLOBAL__sub_I_glue_wrapper_cpp = asm["__GLOBAL__sub_I_glue_wrapper_cpp"]; asm["__GLOBAL__sub_I_glue_wrapper_cpp"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real___GLOBAL__sub_I_bind_cpp.apply(null, arguments);
+return real___GLOBAL__sub_I_glue_wrapper_cpp.apply(null, arguments);
+};
+
+var real__emscripten_bind_VNode___destroy___0 = asm["_emscripten_bind_VNode___destroy___0"]; asm["_emscripten_bind_VNode___destroy___0"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__emscripten_bind_VNode___destroy___0.apply(null, arguments);
 };
 
 var real__fflush = asm["_fflush"]; asm["_fflush"] = function() {
@@ -2992,16 +3053,28 @@ assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it a
 return real__fflush.apply(null, arguments);
 };
 
+var real__emscripten_bind_VNodeData_get_ns_0 = asm["_emscripten_bind_VNodeData_get_ns_0"]; asm["_emscripten_bind_VNodeData_get_ns_0"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__emscripten_bind_VNodeData_get_ns_0.apply(null, arguments);
+};
+
+var real__emscripten_bind_H___destroy___0 = asm["_emscripten_bind_H___destroy___0"]; asm["_emscripten_bind_H___destroy___0"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__emscripten_bind_H___destroy___0.apply(null, arguments);
+};
+
 var real____cxa_is_pointer_type = asm["___cxa_is_pointer_type"]; asm["___cxa_is_pointer_type"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
 return real____cxa_is_pointer_type.apply(null, arguments);
 };
 
-var real__pthread_self = asm["_pthread_self"]; asm["_pthread_self"] = function() {
+var real__emscripten_bind_H_h_1 = asm["_emscripten_bind_H_h_1"]; asm["_emscripten_bind_H_h_1"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__pthread_self.apply(null, arguments);
+return real__emscripten_bind_H_h_1.apply(null, arguments);
 };
 
 var real__emscripten_bind_VoidPtr___destroy___0 = asm["_emscripten_bind_VoidPtr___destroy___0"]; asm["_emscripten_bind_VoidPtr___destroy___0"] = function() {
@@ -3016,16 +3089,16 @@ assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it a
 return real__sbrk.apply(null, arguments);
 };
 
-var real____getTypeName = asm["___getTypeName"]; asm["___getTypeName"] = function() {
+var real__emscripten_bind_VNode_set_text_1 = asm["_emscripten_bind_VNode_set_text_1"]; asm["_emscripten_bind_VNode_set_text_1"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real____getTypeName.apply(null, arguments);
+return real__emscripten_bind_VNode_set_text_1.apply(null, arguments);
 };
 
-var real___GLOBAL__sub_I_glue_wrapper_cpp = asm["__GLOBAL__sub_I_glue_wrapper_cpp"]; asm["__GLOBAL__sub_I_glue_wrapper_cpp"] = function() {
+var real__emscripten_bind_VNode_get_sel_0 = asm["_emscripten_bind_VNode_get_sel_0"]; asm["_emscripten_bind_VNode_get_sel_0"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real___GLOBAL__sub_I_glue_wrapper_cpp.apply(null, arguments);
+return real__emscripten_bind_VNode_get_sel_0.apply(null, arguments);
 };
 
 var real___GLOBAL__sub_I_app_cpp = asm["__GLOBAL__sub_I_app_cpp"]; asm["__GLOBAL__sub_I_app_cpp"] = function() {
@@ -3034,10 +3107,46 @@ assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it a
 return real___GLOBAL__sub_I_app_cpp.apply(null, arguments);
 };
 
-var real__free = asm["_free"]; asm["_free"] = function() {
+var real__emscripten_bind_VNodeData___destroy___0 = asm["_emscripten_bind_VNodeData___destroy___0"]; asm["_emscripten_bind_VNodeData___destroy___0"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__free.apply(null, arguments);
+return real__emscripten_bind_VNodeData___destroy___0.apply(null, arguments);
+};
+
+var real___GLOBAL__sub_I_bind_cpp = asm["__GLOBAL__sub_I_bind_cpp"]; asm["__GLOBAL__sub_I_bind_cpp"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real___GLOBAL__sub_I_bind_cpp.apply(null, arguments);
+};
+
+var real__pthread_self = asm["_pthread_self"]; asm["_pthread_self"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__pthread_self.apply(null, arguments);
+};
+
+var real____getTypeName = asm["___getTypeName"]; asm["___getTypeName"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real____getTypeName.apply(null, arguments);
+};
+
+var real__emscripten_bind_VNodeData_set_ns_1 = asm["_emscripten_bind_VNodeData_set_ns_1"]; asm["_emscripten_bind_VNodeData_set_ns_1"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__emscripten_bind_VNodeData_set_ns_1.apply(null, arguments);
+};
+
+var real__emscripten_bind_VNode_set_sel_1 = asm["_emscripten_bind_VNode_set_sel_1"]; asm["_emscripten_bind_VNode_set_sel_1"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__emscripten_bind_VNode_set_sel_1.apply(null, arguments);
+};
+
+var real__emscripten_bind_VNode_set_data_1 = asm["_emscripten_bind_VNode_set_data_1"]; asm["_emscripten_bind_VNode_set_data_1"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__emscripten_bind_VNode_set_data_1.apply(null, arguments);
 };
 
 var real____errno_location = asm["___errno_location"]; asm["___errno_location"] = function() {
@@ -3045,22 +3154,80 @@ assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. w
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
 return real____errno_location.apply(null, arguments);
 };
-var _malloc = Module["_malloc"] = asm["_malloc"];
-var ___cxa_can_catch = Module["___cxa_can_catch"] = asm["___cxa_can_catch"];
-var __GLOBAL__sub_I_bind_cpp = Module["__GLOBAL__sub_I_bind_cpp"] = asm["__GLOBAL__sub_I_bind_cpp"];
+
+var real____cxa_can_catch = asm["___cxa_can_catch"]; asm["___cxa_can_catch"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real____cxa_can_catch.apply(null, arguments);
+};
+
+var real__emscripten_bind_VNodeData_set_key_1 = asm["_emscripten_bind_VNodeData_set_key_1"]; asm["_emscripten_bind_VNodeData_set_key_1"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__emscripten_bind_VNodeData_set_key_1.apply(null, arguments);
+};
+
+var real__free = asm["_free"]; asm["_free"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__free.apply(null, arguments);
+};
+
+var real__malloc = asm["_malloc"]; asm["_malloc"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__malloc.apply(null, arguments);
+};
+
+var real__emscripten_bind_VNode_get_data_0 = asm["_emscripten_bind_VNode_get_data_0"]; asm["_emscripten_bind_VNode_get_data_0"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__emscripten_bind_VNode_get_data_0.apply(null, arguments);
+};
+
+var real__emscripten_bind_VNode_get_text_0 = asm["_emscripten_bind_VNode_get_text_0"]; asm["_emscripten_bind_VNode_get_text_0"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__emscripten_bind_VNode_get_text_0.apply(null, arguments);
+};
+
+var real__emscripten_bind_VNodeData_get_key_0 = asm["_emscripten_bind_VNodeData_get_key_0"]; asm["_emscripten_bind_VNodeData_get_key_0"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__emscripten_bind_VNodeData_get_key_0.apply(null, arguments);
+};
+var _emscripten_bind_VNode_get_key_0 = Module["_emscripten_bind_VNode_get_key_0"] = asm["_emscripten_bind_VNode_get_key_0"];
+var _emscripten_bind_VNode_set_key_1 = Module["_emscripten_bind_VNode_set_key_1"] = asm["_emscripten_bind_VNode_set_key_1"];
+var __GLOBAL__sub_I_glue_wrapper_cpp = Module["__GLOBAL__sub_I_glue_wrapper_cpp"] = asm["__GLOBAL__sub_I_glue_wrapper_cpp"];
+var _emscripten_bind_VNode___destroy___0 = Module["_emscripten_bind_VNode___destroy___0"] = asm["_emscripten_bind_VNode___destroy___0"];
 var _fflush = Module["_fflush"] = asm["_fflush"];
-var runPostSets = Module["runPostSets"] = asm["runPostSets"];
+var _emscripten_bind_VNodeData_get_ns_0 = Module["_emscripten_bind_VNodeData_get_ns_0"] = asm["_emscripten_bind_VNodeData_get_ns_0"];
+var _emscripten_bind_H___destroy___0 = Module["_emscripten_bind_H___destroy___0"] = asm["_emscripten_bind_H___destroy___0"];
 var ___cxa_is_pointer_type = Module["___cxa_is_pointer_type"] = asm["___cxa_is_pointer_type"];
-var _pthread_self = Module["_pthread_self"] = asm["_pthread_self"];
+var _emscripten_bind_H_h_1 = Module["_emscripten_bind_H_h_1"] = asm["_emscripten_bind_H_h_1"];
 var _emscripten_bind_VoidPtr___destroy___0 = Module["_emscripten_bind_VoidPtr___destroy___0"] = asm["_emscripten_bind_VoidPtr___destroy___0"];
 var _memset = Module["_memset"] = asm["_memset"];
 var _sbrk = Module["_sbrk"] = asm["_sbrk"];
 var _memcpy = Module["_memcpy"] = asm["_memcpy"];
-var ___getTypeName = Module["___getTypeName"] = asm["___getTypeName"];
-var __GLOBAL__sub_I_glue_wrapper_cpp = Module["__GLOBAL__sub_I_glue_wrapper_cpp"] = asm["__GLOBAL__sub_I_glue_wrapper_cpp"];
+var _emscripten_bind_VNode_set_text_1 = Module["_emscripten_bind_VNode_set_text_1"] = asm["_emscripten_bind_VNode_set_text_1"];
+var _emscripten_bind_VNode_get_sel_0 = Module["_emscripten_bind_VNode_get_sel_0"] = asm["_emscripten_bind_VNode_get_sel_0"];
 var __GLOBAL__sub_I_app_cpp = Module["__GLOBAL__sub_I_app_cpp"] = asm["__GLOBAL__sub_I_app_cpp"];
-var _free = Module["_free"] = asm["_free"];
+var _emscripten_bind_VNodeData___destroy___0 = Module["_emscripten_bind_VNodeData___destroy___0"] = asm["_emscripten_bind_VNodeData___destroy___0"];
+var __GLOBAL__sub_I_bind_cpp = Module["__GLOBAL__sub_I_bind_cpp"] = asm["__GLOBAL__sub_I_bind_cpp"];
+var _pthread_self = Module["_pthread_self"] = asm["_pthread_self"];
+var ___getTypeName = Module["___getTypeName"] = asm["___getTypeName"];
+var _emscripten_bind_VNodeData_set_ns_1 = Module["_emscripten_bind_VNodeData_set_ns_1"] = asm["_emscripten_bind_VNodeData_set_ns_1"];
+var _emscripten_bind_VNode_set_sel_1 = Module["_emscripten_bind_VNode_set_sel_1"] = asm["_emscripten_bind_VNode_set_sel_1"];
+var _emscripten_bind_VNode_set_data_1 = Module["_emscripten_bind_VNode_set_data_1"] = asm["_emscripten_bind_VNode_set_data_1"];
 var ___errno_location = Module["___errno_location"] = asm["___errno_location"];
+var ___cxa_can_catch = Module["___cxa_can_catch"] = asm["___cxa_can_catch"];
+var _emscripten_bind_VNodeData_set_key_1 = Module["_emscripten_bind_VNodeData_set_key_1"] = asm["_emscripten_bind_VNodeData_set_key_1"];
+var _free = Module["_free"] = asm["_free"];
+var runPostSets = Module["runPostSets"] = asm["runPostSets"];
+var _malloc = Module["_malloc"] = asm["_malloc"];
+var _emscripten_bind_VNode_get_data_0 = Module["_emscripten_bind_VNode_get_data_0"] = asm["_emscripten_bind_VNode_get_data_0"];
+var _emscripten_bind_VNode_get_text_0 = Module["_emscripten_bind_VNode_get_text_0"] = asm["_emscripten_bind_VNode_get_text_0"];
+var _emscripten_bind_VNodeData_get_key_0 = Module["_emscripten_bind_VNodeData_get_key_0"] = asm["_emscripten_bind_VNodeData_get_key_0"];
 var dynCall_iiii = Module["dynCall_iiii"] = asm["dynCall_iiii"];
 var dynCall_viiiii = Module["dynCall_viiiii"] = asm["dynCall_viiiii"];
 var dynCall_i = Module["dynCall_i"] = asm["dynCall_i"];
@@ -3490,6 +3657,26 @@ function ensureFloat64(value) {
 }
 
 
+// H
+function H() { throw "cannot construct a H, no constructor in IDL" }
+H.prototype = Object.create(WrapperObject.prototype);
+H.prototype.constructor = H;
+H.prototype.__class__ = H;
+H.__cache__ = {};
+Module['H'] = H;
+
+H.prototype['h'] = H.prototype.h = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  return wrapPointer(_emscripten_bind_H_h_1(self, arg0), VNode);
+};;
+
+  H.prototype['__destroy__'] = H.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_H___destroy___0(self);
+};
 // VoidPtr
 function VoidPtr() { throw "cannot construct a VoidPtr, no constructor in IDL" }
 VoidPtr.prototype = Object.create(WrapperObject.prototype);
@@ -3501,6 +3688,94 @@ Module['VoidPtr'] = VoidPtr;
   VoidPtr.prototype['__destroy__'] = VoidPtr.prototype.__destroy__ = function() {
   var self = this.ptr;
   _emscripten_bind_VoidPtr___destroy___0(self);
+};
+// VNodeData
+function VNodeData() { throw "cannot construct a VNodeData, no constructor in IDL" }
+VNodeData.prototype = Object.create(WrapperObject.prototype);
+VNodeData.prototype.constructor = VNodeData;
+VNodeData.prototype.__class__ = VNodeData;
+VNodeData.__cache__ = {};
+Module['VNodeData'] = VNodeData;
+
+  VNodeData.prototype['get_key'] = VNodeData.prototype.get_key = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VNodeData_get_key_0(self));
+};
+    VNodeData.prototype['set_key'] = VNodeData.prototype.set_key = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_VNodeData_set_key_1(self, arg0);
+};
+  VNodeData.prototype['get_ns'] = VNodeData.prototype.get_ns = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VNodeData_get_ns_0(self));
+};
+    VNodeData.prototype['set_ns'] = VNodeData.prototype.set_ns = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_VNodeData_set_ns_1(self, arg0);
+};
+  VNodeData.prototype['__destroy__'] = VNodeData.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_VNodeData___destroy___0(self);
+};
+// VNode
+function VNode() { throw "cannot construct a VNode, no constructor in IDL" }
+VNode.prototype = Object.create(WrapperObject.prototype);
+VNode.prototype.constructor = VNode;
+VNode.prototype.__class__ = VNode;
+VNode.__cache__ = {};
+Module['VNode'] = VNode;
+
+  VNode.prototype['get_sel'] = VNode.prototype.get_sel = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VNode_get_sel_0(self));
+};
+    VNode.prototype['set_sel'] = VNode.prototype.set_sel = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_VNode_set_sel_1(self, arg0);
+};
+  VNode.prototype['get_key'] = VNode.prototype.get_key = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VNode_get_key_0(self));
+};
+    VNode.prototype['set_key'] = VNode.prototype.set_key = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_VNode_set_key_1(self, arg0);
+};
+  VNode.prototype['get_text'] = VNode.prototype.get_text = function() {
+  var self = this.ptr;
+  return Pointer_stringify(_emscripten_bind_VNode_get_text_0(self));
+};
+    VNode.prototype['set_text'] = VNode.prototype.set_text = function(arg0) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  else arg0 = ensureString(arg0);
+  _emscripten_bind_VNode_set_text_1(self, arg0);
+};
+  VNode.prototype['get_data'] = VNode.prototype.get_data = function() {
+  var self = this.ptr;
+  return wrapPointer(_emscripten_bind_VNode_get_data_0(self), VNodeData);
+};
+    VNode.prototype['set_data'] = VNode.prototype.set_data = function(arg0) {
+  var self = this.ptr;
+  if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
+  _emscripten_bind_VNode_set_data_1(self, arg0);
+};
+  VNode.prototype['__destroy__'] = VNode.prototype.__destroy__ = function() {
+  var self = this.ptr;
+  _emscripten_bind_VNode___destroy___0(self);
 };
 (function() {
   function setupEnums() {

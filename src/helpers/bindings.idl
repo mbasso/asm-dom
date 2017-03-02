@@ -1,0 +1,15 @@
+interface VNodeData {
+	[Const] attribute DOMString key;
+  [Const] attribute DOMString ns;
+};
+
+interface VNode {
+	[Const] attribute DOMString sel;
+  [Const] attribute DOMString key;
+  [Const] attribute DOMString text;
+  attribute VNodeData data;
+};
+
+interface H {
+	static VNode h([Const] DOMString sel);
+};
