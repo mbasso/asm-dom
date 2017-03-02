@@ -2,20 +2,20 @@
 #include "../Val/Val.hpp"
 #include <string>
 
-val createElement(std::string tagName) {
-  return val::global("document").call<val>("createElement", tagName);
+val createElement(char* tagName) {
+  return val::global("document").call<val>("createElement", std::string(tagName));
 }
 
-val createElementNS(std::string namespaceURI, std::string qualifiedName) {
-  return val::global("document").call<val>("createElementNS", namespaceURI, qualifiedName);
+val createElementNS(char* namespaceURI, char* qualifiedName) {
+  return val::global("document").call<val>("createElementNS", std::string(namespaceURI), std::string(qualifiedName));
 }
 
-val createTextNode(std::string text) {
-  return val::global("document").call<val>("createTextNode", text);
+val createTextNode(char* text) {
+  return val::global("document").call<val>("createTextNode", std::string(text));
 }
 
-val createComment(std::string text) {
-  return val::global("document").call<val>("createComment", text);
+val createComment(char* text) {
+  return val::global("document").call<val>("createComment", std::string(text));
 }
 
 void insertBefore(val parentNode, val newNode, val referenceNode) {
@@ -42,8 +42,8 @@ std::string tagName(val elm) {
   return elm["tagName"].as<std::string>();
 }
 
-void setTextContent(val node, std::string text) {
-  node.set("textContent", text);
+void setTextContent(val node, char* text) {
+  node.set("textContent", std::string(text));
 }
 
 std::string getTextContent(val node) {

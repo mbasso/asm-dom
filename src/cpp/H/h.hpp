@@ -3,20 +3,22 @@
 
 #include "../VNodeData/VNodeData.hpp"
 #include "../VNode/VNode.hpp"
-#include "../Val/Val.hpp"
 #include <vector>
-#include <string>
+#include <string.h>
 
-struct VNode* h(const std::string sel);
-struct VNode* h(const std::string text, bool isText);
+class H {
+	public:
+		struct VNode* h(const char* sel);
+		struct VNode* h(const char* text, bool isText);
 
-struct VNode* h(const std::string sel, struct VNode* const node);
-struct VNode* h(const std::string sel, const std::string text);
-struct VNode* h(const std::string sel, struct VNodeData* const data);
-struct VNode* h(const std::string sel, const std::vector<struct VNode*> children);
+		struct VNode* h(const char* sel, struct VNode* node);
+		struct VNode* h(const char* sel, const char* text);
+		struct VNode* h(const char* sel, struct VNodeData* data);
+		struct VNode* h(const char* sel, std::vector<struct VNode*> children);
 
-struct VNode* h(const std::string sel, struct VNodeData* const data, struct VNode* const node);
-struct VNode* h(const std::string sel, struct VNodeData* const data, const std::string text);
-struct VNode* h(const std::string sel, struct VNodeData* const data, const std::vector<struct VNode*> children);
+		struct VNode* h(const char* sel, struct VNodeData* data, struct VNode* node);
+		struct VNode* h(const char* sel, struct VNodeData* data, const char* text);
+		struct VNode* h(const char* sel, struct VNodeData* data, std::vector<struct VNode*> children);
+};
 
 #endif

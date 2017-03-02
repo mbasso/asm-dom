@@ -4,12 +4,12 @@
 #include "../VNodeData/VNodeData.hpp"
 #include "../Val/Val.hpp"
 #include <vector>
-#include <string>
+#include <string.h>
 
 struct VNode {
-  std::string sel;
-  std::string key;
-  std::string text;
+  const char* sel;
+  const char* key;
+  const char* text;
   struct VNodeData* data;
   val elm;
   std::vector<struct VNode*> children;

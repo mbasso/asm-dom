@@ -2,19 +2,19 @@
 #include "../VNode/VNode.hpp"
 #include "../Val/Val.hpp"
 #include <algorithm>
-#include <string>
+#include <string.h>
 
 struct VNode* toVNode(const val node) {
 	struct VNode* vnode = new VNode;
 	if (isElement(node)) {
 		// TODO
 		/*
-		std::string id;
-		if (!node["id"].as<std::string>.empty()) {
+		char* id;
+		if (!node["id"].as<char*>.empty()) {
 			id.append("#");
-			id.append(node["id"].as<std::string>);
+			id.append(node["id"].as<char*>);
 		}
-		std::string c = node.call<std::string>("getAttribute", std::string("class"));
+		char* c = node.call<char*>("getAttribute", char*("class"));
 		if (!c.empty()) {
 			std::replace(c.begin(), c.end(), ' ', '.');
 		}
@@ -23,7 +23,7 @@ struct VNode* toVNode(const val node) {
 		vnode->elm = node;
 		vnode->text = getTextContent(node);
 	} else if (isComment(node)) {
-		vnode->sel = std::string("!");
+		vnode->sel = "!";
 		vnode->text = getTextContent(node);
 	} else {
 

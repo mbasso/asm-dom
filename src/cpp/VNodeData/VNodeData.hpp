@@ -4,9 +4,9 @@
 #include "../VNode/VNode.hpp"
 #include "../Hooks/Hooks.hpp"
 #include "../Val/Val.hpp"
-#include <functional>
+// #include <functional>
 #include <vector>
-#include <string>
+#include <string.h>
 
 struct VNodeData {
   val props;
@@ -18,9 +18,9 @@ struct VNodeData {
   val hero;
   val attachData;
   struct Hooks* hook;
-  std::string key;
-  std::string ns;
-  std::function<struct VNode*(void)> fn;
+  const char* key;
+  const char* ns;
+  // std::function<struct VNode*(void)> fn;
   std::vector<val> args;
 };
 
