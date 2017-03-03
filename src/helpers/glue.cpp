@@ -18,6 +18,10 @@ VNode* EMSCRIPTEN_KEEPALIVE emscripten_bind_H_h_1(H* self, char* arg0) {
   return self->h(arg0);
 }
 
+VNode* EMSCRIPTEN_KEEPALIVE emscripten_bind_H_h_2(H* self, char* arg0, bool arg1) {
+  return self->h(arg0, arg1);
+}
+
 void EMSCRIPTEN_KEEPALIVE emscripten_bind_H___destroy___0(H* self) {
   delete self;
 }
@@ -51,6 +55,10 @@ void EMSCRIPTEN_KEEPALIVE emscripten_bind_VNodeData___destroy___0(VNodeData* sel
 }
 
 // VNode
+
+void EMSCRIPTEN_KEEPALIVE emscripten_bind_VNode_set_children_2(VNode* self, VNode** arg0, int arg1) {
+  self->set_children(arg0, arg1);
+}
 
 const char* EMSCRIPTEN_KEEPALIVE emscripten_bind_VNode_get_sel_0(VNode* self) {
   return self->sel;

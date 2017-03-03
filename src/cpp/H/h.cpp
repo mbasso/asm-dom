@@ -61,9 +61,9 @@ struct VNode* H::h(const char* sel, struct VNodeData* data) {
 	return adjustVNode(vnode);
 };
 
-struct VNode* H::h(const char* sel, std::vector<struct VNode*> children) {
+struct VNode* H::h(const char* sel, struct VNode** children, int childrenNum) {
 	struct VNode* vnode = H::h(sel);
-	vnode->children = children;
+	vnode->set_children(children, childrenNum);
 	return adjustVNode(vnode);
 };
 
@@ -79,8 +79,8 @@ struct VNode* H::h(const char* sel, struct VNodeData* data, const char* text) {
 	return adjustVNode(vnode);
 };
 
-struct VNode* H::h(const char* sel, struct VNodeData* data, std::vector<struct VNode*> children) {
+struct VNode* H::h(const char* sel, struct VNodeData* data, struct VNode** children, int childrenNum) {
 	struct VNode* vnode = H::h(sel, data);
-	vnode->children = children;
+	vnode->set_children(children, childrenNum);
 	return adjustVNode(vnode);
 };

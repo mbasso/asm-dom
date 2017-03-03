@@ -14,11 +14,11 @@ class H {
 		static struct VNode* h(const char* sel, struct VNode* node);
 		static struct VNode* h(const char* sel, const char* text);
 		static struct VNode* h(const char* sel, struct VNodeData* data);
-		static struct VNode* h(const char* sel, std::vector<struct VNode*> children);
+		static struct VNode* h(const char* sel, struct VNode** children, int childrenNum);
 
 		static struct VNode* h(const char* sel, struct VNodeData* data, struct VNode* node);
 		static struct VNode* h(const char* sel, struct VNodeData* data, const char* text);
-		static struct VNode* h(const char* sel, struct VNodeData* data, std::vector<struct VNode*> children);
+		static struct VNode* h(const char* sel, struct VNodeData* data, struct VNode** children, int childrenNum);
 };
 
 #endif

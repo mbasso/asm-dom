@@ -13,6 +13,8 @@ struct VNode {
   struct VNodeData* data;
   val elm;
   std::vector<struct VNode*> children;
+
+  void set_children(struct VNode** vnodes, int num);
 };
 
 #endif

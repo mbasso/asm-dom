@@ -148,12 +148,14 @@ H.prototype.__class__ = H;
 H.__cache__ = {};
 Module['H'] = H;
 
-H.prototype['h'] = H.prototype.h = function(arg0) {
+H.prototype['h'] = H.prototype.h = function(arg0, arg1) {
   var self = this.ptr;
   ensureCache.prepare();
   if (arg0 && typeof arg0 === 'object') arg0 = arg0.ptr;
   else arg0 = ensureString(arg0);
-  return wrapPointer(_emscripten_bind_H_h_1(self, arg0), VNode);
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  if (arg1 === undefined) { return wrapPointer(_emscripten_bind_H_h_1(self, arg0), VNode) }
+  return wrapPointer(_emscripten_bind_H_h_2(self, arg0, arg1), VNode);
 };;
 
   H.prototype['__destroy__'] = H.prototype.__destroy__ = function() {
@@ -213,6 +215,13 @@ VNode.prototype.constructor = VNode;
 VNode.prototype.__class__ = VNode;
 VNode.__cache__ = {};
 Module['VNode'] = VNode;
+
+VNode.prototype['set_children'] = VNode.prototype.set_children = function(arg0, arg1) {
+  var self = this.ptr;
+  ensureCache.prepare();
+  if (arg1 && typeof arg1 === 'object') arg1 = arg1.ptr;
+  _emscripten_bind_VNode_set_children_2(self, arg0, arg1);
+};;
 
   VNode.prototype['get_sel'] = VNode.prototype.get_sel = function() {
   var self = this.ptr;

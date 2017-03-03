@@ -8,8 +8,10 @@ interface VNode {
   [Const] attribute DOMString key;
   [Const] attribute DOMString text;
   attribute VNodeData data;
+  void set_children(VNode[] vnodes, long num);
 };
 
 interface H {
 	static VNode h([Const] DOMString sel);
+	static VNode h([Const] DOMString text, boolean isText);
 };
