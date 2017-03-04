@@ -3,6 +3,7 @@ export default function load(config = {}) {
   if ('WebAssembly' in window) {
     /* eslint-disable */
     config.wasmBinary = new Uint8Array(require('../compiled/wasm/asm-dom.wasm'));
+    config.memoryInitializerPrefixURL = '';
     result = require('../compiled/wasm/asm-dom.js')(config);
     /* eslint-enable */
   } else {
@@ -17,7 +18,7 @@ export default function load(config = {}) {
   result.h = (...params) => {
     const newParams = [...params];
     if (Array.isArray(params[params.length - 1])) {
-      newParams.push(params.length);
+      newParams.push(params[params.length - 1].length);
     }
     return result.H.prototype.h.apply(result.H.prototype, newParams);
   };
