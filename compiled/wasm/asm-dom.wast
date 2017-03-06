@@ -1,16 +1,21 @@
 (module
   (type $FUNCSIG$v (func))
-  (type $FUNCSIG$id (func (param f64) (result i32)))
   (type $FUNCSIG$iii (func (param i32 i32) (result i32)))
-  (type $FUNCSIG$iiii (func (param i32 i32 i32) (result i32)))
+  (type $FUNCSIG$i (func (result i32)))
+  (type $FUNCSIG$vii (func (param i32 i32)))
+  (type $FUNCSIG$viii (func (param i32 i32 i32)))
   (type $FUNCSIG$ii (func (param i32) (result i32)))
+  (type $FUNCSIG$iiii (func (param i32 i32 i32) (result i32)))
+  (type $FUNCSIG$viiiii (func (param i32 i32 i32 i32 i32)))
+  (type $FUNCSIG$id (func (param f64) (result i32)))
   (type $FUNCSIG$viiii (func (param i32 i32 i32 i32)))
   (type $FUNCSIG$viiiiii (func (param i32 i32 i32 i32 i32 i32)))
-  (type $FUNCSIG$viiiii (func (param i32 i32 i32 i32 i32)))
   (type $FUNCSIG$vi (func (param i32)))
-  (type $FUNCSIG$i (func (result i32)))
-  (type $FUNCSIG$viii (func (param i32 i32 i32)))
-  (type $FUNCSIG$vii (func (param i32 i32)))
+  (type $FUNCSIG$iiiii (func (param i32 i32 i32 i32) (result i32)))
+  (type $FUNCSIG$iiiiii (func (param i32 i32 i32 i32 i32) (result i32)))
+  (type $FUNCSIG$viiiiiiii (func (param i32 i32 i32 i32 i32 i32 i32 i32)))
+  (type $FUNCSIG$viiiiiiiiii (func (param i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)))
+  (type $FUNCSIG$viiiiiiiiiiiii (func (param i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)))
   (import "env" "DYNAMICTOP_PTR" (global $DYNAMICTOP_PTR$asm2wasm$import i32))
   (import "env" "STACKTOP" (global $STACKTOP$asm2wasm$import i32))
   (import "env" "STACK_MAX" (global $STACK_MAX$asm2wasm$import i32))
@@ -18,35 +23,42 @@
   (import "env" "enlargeMemory" (func $enlargeMemory (result i32)))
   (import "env" "getTotalMemory" (func $getTotalMemory (result i32)))
   (import "env" "abortOnCannotGrowMemory" (func $abortOnCannotGrowMemory (result i32)))
-  (import "env" "_pthread_key_create" (func $_pthread_key_create (param i32 i32) (result i32)))
-  (import "env" "__embind_register_memory_view" (func $__embind_register_memory_view (param i32 i32 i32)))
-  (import "env" "_abort" (func $_abort))
   (import "env" "___assert_fail" (func $___assert_fail (param i32 i32 i32 i32)))
-  (import "env" "__embind_register_void" (func $__embind_register_void (param i32 i32)))
-  (import "env" "__emval_take_value" (func $__emval_take_value (param i32 i32) (result i32)))
-  (import "env" "___setErrNo" (func $___setErrNo (param i32)))
-  (import "env" "__embind_register_std_wstring" (func $__embind_register_std_wstring (param i32 i32 i32)))
   (import "env" "_emscripten_memcpy_big" (func $_emscripten_memcpy_big (param i32 i32 i32) (result i32)))
+  (import "env" "__embind_register_std_string" (func $__embind_register_std_string (param i32 i32)))
+  (import "env" "__embind_register_class_function" (func $__embind_register_class_function (param i32 i32 i32 i32 i32 i32 i32 i32)))
+  (import "env" "__embind_register_class_constructor" (func $__embind_register_class_constructor (param i32 i32 i32 i32 i32 i32)))
+  (import "env" "___syscall140" (func $___syscall140 (param i32 i32) (result i32)))
+  (import "env" "___syscall146" (func $___syscall146 (param i32 i32) (result i32)))
+  (import "env" "___setErrNo" (func $___setErrNo (param i32)))
   (import "env" "__embind_register_bool" (func $__embind_register_bool (param i32 i32 i32 i32 i32)))
-  (import "env" "__emval_incref" (func $__emval_incref (param i32)))
-  (import "env" "_pthread_getspecific" (func $_pthread_getspecific (param i32) (result i32)))
+  (import "env" "__embind_register_class_property" (func $__embind_register_class_property (param i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)))
   (import "env" "__embind_register_emval" (func $__embind_register_emval (param i32 i32)))
   (import "env" "__emval_decref" (func $__emval_decref (param i32)))
   (import "env" "_pthread_once" (func $_pthread_once (param i32 i32) (result i32)))
+  (import "env" "__embind_register_class" (func $__embind_register_class (param i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)))
+  (import "env" "___syscall6" (func $___syscall6 (param i32 i32) (result i32)))
   (import "env" "__embind_register_integer" (func $__embind_register_integer (param i32 i32 i32 i32 i32)))
+  (import "env" "___cxa_allocate_exception" (func $___cxa_allocate_exception (param i32) (result i32)))
+  (import "env" "__emval_take_value" (func $__emval_take_value (param i32 i32) (result i32)))
+  (import "env" "_pthread_getspecific" (func $_pthread_getspecific (param i32) (result i32)))
+  (import "env" "_pthread_key_create" (func $_pthread_key_create (param i32 i32) (result i32)))
+  (import "env" "_abort" (func $_abort))
+  (import "env" "__embind_register_memory_view" (func $__embind_register_memory_view (param i32 i32 i32)))
+  (import "env" "__embind_register_void" (func $__embind_register_void (param i32 i32)))
+  (import "env" "__embind_register_function" (func $__embind_register_function (param i32 i32 i32 i32 i32 i32)))
+  (import "env" "__embind_register_std_wstring" (func $__embind_register_std_wstring (param i32 i32 i32)))
+  (import "env" "__emval_incref" (func $__emval_incref (param i32)))
   (import "env" "__embind_register_float" (func $__embind_register_float (param i32 i32 i32)))
   (import "env" "_pthread_setspecific" (func $_pthread_setspecific (param i32 i32) (result i32)))
-  (import "env" "___syscall6" (func $___syscall6 (param i32 i32) (result i32)))
-  (import "env" "___syscall140" (func $___syscall140 (param i32 i32) (result i32)))
-  (import "env" "__embind_register_std_string" (func $__embind_register_std_string (param i32 i32)))
-  (import "env" "___syscall146" (func $___syscall146 (param i32 i32) (result i32)))
-  (import "asm2wasm" "f64-to-int" (func $f64-to-int (param f64) (result i32)))
+  (import "env" "___cxa_throw" (func $___cxa_throw (param i32 i32 i32)))
   (import "asm2wasm" "i32s-div" (func $i32s-div (param i32 i32) (result i32)))
+  (import "asm2wasm" "f64-to-int" (func $f64-to-int (param f64) (result i32)))
   (import "asm2wasm" "i32s-rem" (func $i32s-rem (param i32 i32) (result i32)))
   (import "asm2wasm" "i32u-rem" (func $i32u-rem (param i32 i32) (result i32)))
   (import "asm2wasm" "i32u-div" (func $i32u-div (param i32 i32) (result i32)))
   (import "env" "memory" (memory $0 256 256))
-  (import "env" "table" (table 42 42 anyfunc))
+  (import "env" "table" (table 90 90 anyfunc))
   (import "env" "memoryBase" (global $memoryBase i32))
   (import "env" "tableBase" (global $tableBase i32))
   (global $DYNAMICTOP_PTR (mut i32) (get_global $DYNAMICTOP_PTR$asm2wasm$import))
@@ -55,54 +67,37 @@
   (global $__THREW__ (mut i32) (i32.const 0))
   (global $threwValue (mut i32) (i32.const 0))
   (global $tempRet0 (mut i32) (i32.const 0))
-  (elem (get_global $tableBase) $b0 $___stdio_write $___stdio_seek $__ZNK10__cxxabiv117__class_type_info9can_catchEPKNS_16__shim_type_infoERPv $__ZNK10__cxxabiv123__fundamental_type_info9can_catchEPKNS_16__shim_type_infoERPv $b0 $b0 $b0 $b1 $__ZNK10__cxxabiv117__class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib $__ZNK10__cxxabiv120__si_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib $__ZNK10__cxxabiv121__vmi_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib $b2 $__ZN10__cxxabiv116__shim_type_infoD2Ev $__ZN10__cxxabiv117__class_type_infoD0Ev $__ZN10__cxxabiv116__shim_type_infoD2Ev $__ZN10__cxxabiv116__shim_type_infoD2Ev $__ZN10__cxxabiv117__class_type_infoD0Ev $__ZN10__cxxabiv117__class_type_infoD0Ev $__ZN10__cxxabiv117__class_type_infoD0Ev $__ZN10__cxxabiv112_GLOBAL__N_19destruct_EPv $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b3 $___stdio_close $b4 $__ZL25default_terminate_handlerv $__ZN10__cxxabiv112_GLOBAL__N_110construct_Ev $b4 $b5 $__ZNK10__cxxabiv117__class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib $__ZNK10__cxxabiv120__si_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib $__ZNK10__cxxabiv121__vmi_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib $b6 $__ZNK10__cxxabiv117__class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi $__ZNK10__cxxabiv120__si_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi $__ZNK10__cxxabiv121__vmi_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi)
-  (data (i32.const 1024) "\8c\06\00\00\ac\06\00\00\00\00\00\00\01\00\00\00\18\04\00\00\00\00\00\00 \06\00\00\eb\06\00\00 \06\00\00\11\07\00\00\8c\06\00\00\b6\0b\00\00\00\00\00\00\01\00\00\00\18\04\00\00\00\00\00\00\8c\06\00\00w\0b\00\00\00\00\00\00\01\00\00\00\18\04\00\00\00\00\00\00 \06\00\00X\0b\00\00 \06\00\009\0b\00\00 \06\00\00\1a\0b\00\00 \06\00\00\fb\n\00\00 \06\00\00\dc\n\00\00 \06\00\00\bd\n\00\00 \06\00\00\9e\n\00\00 \06\00\00\7f\n\00\00 \06\00\00`\n\00\00 \06\00\00A\n\00\00 \06\00\00\"\n\00\00 \06\00\00\03\n\00\00 \06\00\00\8b\16\00\00H\06\00\00\eb\16\00\00\d0\04\00\00\00\00\00\00H\06\00\00\98\16\00\00\e0\04\00\00\00\00\00\00 \06\00\00\b9\16\00\00H\06\00\00\c6\16\00\00\c0\04\00\00\00\00\00\00H\06\00\00\f1\17\00\00\d0\04\00\00\00\00\00\00H\06\00\00\cd\17\00\00\f8\04\00\00\00\00\00\00H\06\00\00\13\18\00\00\d0\04\00\00\00\00\00\00p\06\00\00;\18\00\00p\06\00\00=\18\00\00p\06\00\00?\18\00\00p\06\00\00A\18\00\00p\06\00\00C\18\00\00p\06\00\00E\18\00\00p\06\00\00G\18\00\00p\06\00\00I\18\00\00p\06\00\00K\18\00\00p\06\00\00M\18\00\00p\06\00\00O\18\00\00p\06\00\00Q\18\00\00p\06\00\00S\18\00\00H\06\00\00U\18\00\00\c0\04\00\00\00\00\00\00\01\00\00\00\05")
-  (data (i32.const 1456) "\01")
-  (data (i32.const 1480) "\01\00\00\00\02\00\00\00\f0\1a")
-  (data (i32.const 1504) "\02")
-  (data (i32.const 1519) "\ff\ff\ff\ff\ff")
-  (data (i32.const 1556) "\01\00\00\00\00\00\00\00\c0\04\00\00\01\00\00\00\02\00\00\00\03\00\00\00\04\00\00\00\03\00\00\00\01\00\00\00\01\00\00\00\01\00\00\00\00\00\00\00\e8\04\00\00\01\00\00\00\05\00\00\00\03\00\00\00\04\00\00\00\03\00\00\00\02\00\00\00\02\00\00\00\02\00\00\00\00\00\00\00\18\05\00\00\01\00\00\00\06\00\00\00\03\00\00\00\04\00\00\00\04\00\00\00\00\00\00\00\90\05\00\00\01\00\00\00\07\00\00\00\03\00\00\00\04\00\00\00\03\00\00\00\03\00\00\00\03\00\00\00\03\00\00\00NSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE\00NSt3__221__basic_string_commonILb1EEE\00N10emscripten3valE\00http://www.w3.org/2000/svg\00foreignObject\00void\00bool\00char\00long\00std::basic_string<unsigned char>\00std::wstring\00emscripten::val\00emscripten::memory_view<char>\00emscripten::memory_view<signed char>\00emscripten::memory_view<unsigned char>\00emscripten::memory_view<short>\00emscripten::memory_view<unsigned short>\00emscripten::memory_view<int>\00emscripten::memory_view<unsigned int>\00emscripten::memory_view<long>\00emscripten::memory_view<unsigned long>\00emscripten::memory_view<int8_t>\00emscripten::memory_view<uint8_t>\00emscripten::memory_view<int16_t>\00emscripten::memory_view<uint16_t>\00emscripten::memory_view<int32_t>\00emscripten::memory_view<uint32_t>\00emscripten::memory_view<float>\00emscripten::memory_view<double>\00emscripten::memory_view<long double>\00N10emscripten11memory_viewIeEE\00N10emscripten11memory_viewIdEE\00N10emscripten11memory_viewIfEE\00N10emscripten11memory_viewImEE\00N10emscripten11memory_viewIlEE\00N10emscripten11memory_viewIjEE\00N10emscripten11memory_viewIiEE\00N10emscripten11memory_viewItEE\00N10emscripten11memory_viewIsEE\00N10emscripten11memory_viewIhEE\00N10emscripten11memory_viewIaEE\00N10emscripten11memory_viewIcEE\00NSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEE\00NSt3__212basic_stringIhNS_11char_traitsIhEENS_9allocatorIhEEEE\00\11\00\n\00\11\11\11\00\00\00\00\05\00\00\00\00\00\00\t\00\00\00\00\0b")
-  (data (i32.const 3093) "\11\00\0f\n\11\11\11\03\n\07\00\01\13\t\0b\0b\00\00\t\06\0b\00\00\0b\00\06\11\00\00\00\11\11\11")
-  (data (i32.const 3142) "\0b")
-  (data (i32.const 3151) "\11\00\n\n\11\11\11\00\n\00\00\02\00\t\0b\00\00\00\t\00\0b\00\00\0b")
-  (data (i32.const 3200) "\0c")
-  (data (i32.const 3212) "\0c\00\00\00\00\0c\00\00\00\00\t\0c\00\00\00\00\00\0c\00\00\0c")
-  (data (i32.const 3258) "\0e")
-  (data (i32.const 3270) "\0d\00\00\00\04\0d\00\00\00\00\t\0e\00\00\00\00\00\0e\00\00\0e")
-  (data (i32.const 3316) "\10")
-  (data (i32.const 3328) "\0f\00\00\00\00\0f\00\00\00\00\t\10\00\00\00\00\00\10\00\00\10\00\00\12\00\00\00\12\12\12")
-  (data (i32.const 3383) "\12\00\00\00\12\12\12\00\00\00\00\00\00\t")
-  (data (i32.const 3432) "\0b")
-  (data (i32.const 3444) "\n\00\00\00\00\n\00\00\00\00\t\0b\00\00\00\00\00\0b\00\00\0b")
-  (data (i32.const 3490) "\0c")
-  (data (i32.const 3502) "\0c\00\00\00\00\0c\00\00\00\00\t\0c\00\00\00\00\00\0c\00\00\0c\00\000123456789ABCDEF-+   0X0x\00(null)\00-0X+0X 0X-0x+0x 0x\00inf\00INF\00NAN\00T!\"\19\0d\01\02\03\11K\1c\0c\10\04\0b\1d\12\1e\'hnopqb \05\06\0f\13\14\15\1a\08\16\07($\17\18\t\n\0e\1b\1f%#\83\82}&*+<=>?CGJMXYZ[\\]^_`acdefgijklrstyz{|\00Illegal byte sequence\00Domain error\00Result not representable\00Not a tty\00Permission denied\00Operation not permitted\00No such file or directory\00No such process\00File exists\00Value too large for data type\00No space left on device\00Out of memory\00Resource busy\00Interrupted system call\00Resource temporarily unavailable\00Invalid seek\00Cross-device link\00Read-only file system\00Directory not empty\00Connection reset by peer\00Operation timed out\00Connection refused\00Host is down\00Host is unreachable\00Address in use\00Broken pipe\00I/O error\00No such device or address\00Block device required\00No such device\00Not a directory\00Is a directory\00Text file busy\00Exec format error\00Invalid argument\00Argument list too long\00Symbolic link loop\00Filename too long\00Too many open files in system\00No file descriptors available\00Bad file descriptor\00No child process\00Bad address\00File too large\00Too many links\00No locks available\00Resource deadlock would occur\00State not recoverable\00Previous owner died\00Operation canceled\00Function not implemented\00No message of desired type\00Identifier removed\00Device not a stream\00No data available\00Device timeout\00Out of streams resources\00Link has been severed\00Protocol error\00Bad message\00File descriptor in bad state\00Not a socket\00Destination address required\00Message too large\00Protocol wrong type for socket\00Protocol not available\00Protocol not supported\00Socket type not supported\00Not supported\00Protocol family not supported\00Address family not supported by protocol\00Address not available\00Network is down\00Network unreachable\00Connection reset by network\00Connection aborted\00No buffer space available\00Socket is connected\00Socket not connected\00Cannot send after socket shutdown\00Operation already in progress\00Operation in progress\00Stale file handle\00Remote I/O error\00Quota exceeded\00No medium found\00Wrong medium type\00No error information\00\00nan\00!\"vector length_error\"\00/Users/mauriziobasso/Documents/javascript/emsdk/emscripten/incoming/system/include/libcxx/vector\00__throw_length_error\00terminating with %s exception of type %s: %s\00terminating with %s exception of type %s\00terminating with %s foreign exception\00terminating\00uncaught\00St9exception\00N10__cxxabiv116__shim_type_infoE\00St9type_info\00N10__cxxabiv120__si_class_type_infoE\00N10__cxxabiv117__class_type_infoE\00pthread_once failure in __cxa_get_globals_fast()\00cannot create pthread key for __cxa_get_globals()\00cannot zero out thread value for __cxa_get_globals()\00terminate_handler unexpectedly returned\00N10__cxxabiv119__pointer_type_infoE\00N10__cxxabiv117__pbase_type_infoE\00N10__cxxabiv123__fundamental_type_infoE\00v\00b\00c\00h\00a\00s\00t\00i\00j\00l\00m\00f\00d\00N10__cxxabiv121__vmi_class_type_infoE\00std::string\00signed char\00unsigned char\00short\00unsigned short\00.\00int\00unsigned int\00unsigned long\00float\00double")
-  (export "_emscripten_bind_VNode_get_key_0" (func $_emscripten_bind_VNode_get_key_0))
-  (export "_emscripten_bind_VNode_set_key_1" (func $_emscripten_bind_VNode_set_key_1))
-  (export "_emscripten_bind_VNode___destroy___0" (func $_emscripten_bind_VNode___destroy___0))
-  (export "_emscripten_bind_VNodeData_get_ns_0" (func $_emscripten_bind_VNodeData_get_ns_0))
-  (export "_emscripten_bind_H___destroy___0" (func $_emscripten_bind_H___destroy___0))
-  (export "___cxa_is_pointer_type" (func $___cxa_is_pointer_type))
-  (export "_emscripten_bind_H_h_2" (func $_emscripten_bind_H_h_2))
-  (export "_emscripten_bind_H_h_1" (func $_emscripten_bind_H_h_1))
-  (export "_emscripten_bind_VoidPtr___destroy___0" (func $_emscripten_bind_H___destroy___0))
-  (export "_memset" (func $_memset))
+  (elem (get_global $tableBase) $b0 $___stdio_write $___stdio_seek $__ZNK10__cxxabiv117__class_type_info9can_catchEPKNS_16__shim_type_infoERPv $__ZNK10__cxxabiv123__fundamental_type_info9can_catchEPKNS_16__shim_type_infoERPv $__ZNK10__cxxabiv119__pointer_type_info9can_catchEPKNS_16__shim_type_infoERPv $__ZN10emscripten8internal15FunctionInvokerIPFNS_3valERKNSt3__26vectorI5VNodeNS3_9allocatorIS5_EEEEjES2_SA_JjEE6invokeEPSC_PS8_j $__ZN10emscripten8internal12VectorAccessINSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEE3setERS7_jRKS4_ $b1 $__ZNK10__cxxabiv117__class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib $__ZNK10__cxxabiv120__si_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib $__ZNK10__cxxabiv121__vmi_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib $__Z1hNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES5_9VNodeDataNS_6vectorI5VNodeNS3_IS8_EEEE $b1 $b1 $b1 $b2 $__ZN10emscripten8internal12operator_newI9VNodeDataJEEEPT_DpOT0_ $__ZN10emscripten8internal12operator_newI5VNodeJEEEPT_DpOT0_ $__ZN10emscripten8internal12operator_newINSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEJEEEPT_DpOT0_ $b3 $__ZN10__cxxabiv116__shim_type_infoD2Ev $__ZN10__cxxabiv117__class_type_infoD0Ev $__ZN10__cxxabiv116__shim_type_infoD2Ev $__ZN10__cxxabiv116__shim_type_infoD2Ev $__ZN10__cxxabiv117__class_type_infoD0Ev $__ZN10__cxxabiv116__shim_type_infoD2Ev $__ZN10__cxxabiv117__class_type_infoD0Ev $__ZN10__cxxabiv117__class_type_infoD0Ev $__ZN10__cxxabiv117__class_type_infoD0Ev $__ZN10__cxxabiv117__class_type_infoD0Ev $__ZN10emscripten8internal14raw_destructorI9VNodeDataEEvPT_ $__ZN10emscripten8internal14raw_destructorI5VNodeEEvPT_ $__ZN10emscripten8internal14raw_destructorINSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEEEvPT_ $__ZN10__cxxabiv112_GLOBAL__N_19destruct_EPv $b3 $b4 $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE9push_backERKS1_ $b5 $___stdio_close $__ZNKSt9bad_alloc4whatEv $__ZN10emscripten8internal13getActualTypeI9VNodeDataEEPKvPT_ $__ZN10emscripten8internal7InvokerIP9VNodeDataJEE6invokeEPFS3_vE $__ZN10emscripten8internal13getActualTypeI5VNodeEEPKvPT_ $__ZN10emscripten8internal7InvokerIP9VNodeDataJEE6invokeEPFS3_vE $__ZN10emscripten8internal13getActualTypeINSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEEEPKvPT_ $__ZN10emscripten8internal7InvokerIP9VNodeDataJEE6invokeEPFS3_vE $__ZNKSt3__26vectorI5VNodeNS_9allocatorIS1_EEE4sizeEv $b5 $b5 $b5 $b5 $b5 $b5 $b6 $__ZN10emscripten8internal12MemberAccessI9VNodeDataNSt3__212basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEEE7setWireIS2_EEvRKMS2_S9_RT_PNS0_11BindingTypeIS9_EUt_E $__ZN10emscripten8internal12MemberAccessI9VNodeDataNSt3__212basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEEE7setWireIS2_EEvRKMS2_S9_RT_PNS0_11BindingTypeIS9_EUt_E $__ZN10emscripten8internal12MemberAccessI5VNode9VNodeDataE7setWireIS2_EEvRKMS2_S3_RT_PS3_ $__ZN10emscripten8internal12MemberAccessI5VNodeNSt3__26vectorIS2_NS3_9allocatorIS2_EEEEE7setWireIS2_EEvRKMS2_S7_RT_PS7_ $__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEFvRKS4_EvPS7_JS9_EE6invokeERKSB_SC_PS4_ $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE6resizeEjRKS1_ $b6 $b7 $__ZL25default_terminate_handlerv $__ZN10__cxxabiv112_GLOBAL__N_110construct_Ev $b7 $b8 $__ZN10emscripten8internal15FunctionInvokerIPFbRNSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEjRKS4_EbS8_JjSA_EE6invokeEPSC_PS7_jPS4_ $b9 $__ZNK10__cxxabiv117__class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib $__ZNK10__cxxabiv120__si_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib $__ZNK10__cxxabiv121__vmi_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib $b10 $__ZN10emscripten8internal12MemberAccessI9VNodeDataNSt3__212basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEEE7getWireIS2_EEPNS0_11BindingTypeIS9_EUt_ERKMS2_S9_RKT_ $__ZN10emscripten8internal12MemberAccessI9VNodeDataNSt3__212basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEEE7getWireIS2_EEPNS0_11BindingTypeIS9_EUt_ERKMS2_S9_RKT_ $__ZN10emscripten8internal12MemberAccessI5VNode9VNodeDataE7getWireIS2_EEPS3_RKMS2_S3_RKT_ $__ZN10emscripten8internal12MemberAccessI5VNodeNSt3__26vectorIS2_NS3_9allocatorIS2_EEEEE7getWireIS2_EEPS7_RKMS2_S7_RKT_ $__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEKFjvEjPKS7_JEE6invokeERKS9_SB_ $__ZN10emscripten8internal12VectorAccessINSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEE3getERKS7_j $b10 $b11 $__ZN10emscripten8internal7InvokerI5VNodeJNSt3__212basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEES9_9VNodeDataNS3_6vectorIS2_NS7_IS2_EEEEEE6invokeEPFS2_S9_S9_SA_SD_EPNS0_11BindingTypeIS9_EUt_ESK_PSA_PSD_ $b12 $__ZNK10__cxxabiv117__class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi $__ZNK10__cxxabiv120__si_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi $__ZNK10__cxxabiv121__vmi_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi $__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEFvjRKS4_EvPS7_JjS9_EE6invokeERKSB_SC_jPS4_ $b12 $b12 $b12)
+  (data (i32.const 1024) "<\07\00\00[\08\00\00<\07\00\00n\08\00\00\bc\07\00\00y\08\00\00\00\00\00\00\08\04\00\00\bc\07\00\00\85\08\00\00\01\00\00\00\08\04\00\00<\07\00\00\d9\08\00\00\d8\07\00\00\9a\08\00\00\00\00\00\00\01\00\00\000\04\00\00\00\00\00\00<\07\00\00\08\t\00\00\bc\07\00\00\0f\t\00\00\00\00\00\00P\04\00\00\bc\07\00\00\17\t\00\00\01\00\00\00P\04\00\00<\07\00\00~\t\00\00\d8\07\00\00K\t\00\00\00\00\00\00\01\00\00\00x\04\00\00\00\00\00\00\d8\07\00\00 \t\00\00\00\00\00\00\01\00\00\00\80\04\00\00\00\00\00\00\bc\07\00\00\c1\t\00\00\00\00\00\00\98\04\00\00\bc\07\00\00\ed\t\00\00\01\00\00\00\98\04\00\00\d8\07\00\00\9b\0e\00\00\00\00\00\00\01\00\00\000\04\00\00\00\00\00\00\d8\07\00\00\\\0e\00\00\00\00\00\00\01\00\00\000\04\00\00\00\00\00\00<\07\00\00=\0e\00\00<\07\00\00\1e\0e\00\00<\07\00\00\ff\0d\00\00<\07\00\00\e0\0d\00\00<\07\00\00\c1\0d\00\00<\07\00\00\a2\0d\00\00<\07\00\00\83\0d\00\00<\07\00\00d\0d\00\00<\07\00\00E\0d\00\00<\07\00\00&\0d\00\00<\07\00\00\07\0d\00\00<\07\00\00\e8\0c\00\00<\07\00\00\ee\19\00\00d\07\00\00N\1a\00\00x\05\00\00\00\00\00\00d\07\00\00\fb\19\00\00\88\05\00\00\00\00\00\00<\07\00\00\1c\1a\00\00d\07\00\00)\1a\00\00h\05\00\00\00\00\00\00d\07\00\00?\1b\00\00`\05\00\00\00\00\00\00d\07\00\00p\1b\00\00x\05\00\00\00\00\00\00d\07\00\00L\1b\00\00\b0\05\00\00\00\00\00\00d\07\00\00\92\1b\00\00x\05\00\00\00\00\00\00\a0\07\00\00\ba\1b\00\00\a0\07\00\00\bc\1b\00\00\a0\07\00\00\bf\1b\00\00\a0\07\00\00\c1\1b\00\00\a0\07\00\00\c3\1b\00\00\a0\07\00\00\c5\1b\00\00\a0\07\00\00\c7\1b\00\00\a0\07\00\00\c9\1b\00\00\a0\07\00\00\cb\1b\00\00\a0\07\00\00\cd\1b\00\00\a0\07\00\00\cf\1b\00\00\a0\07\00\00\d1\1b\00\00\a0\07\00\00\d3\1b\00\00\a0\07\00\00\d5\1b\00\00d\07\00\00\d7\1b\00\00h\05\00\00\00\00\00\00\10\04\00\00X\04\00\00\b0\04\00\00\e0\05\00\00\b0\04\00\00P\04\00\00\e0\05\00\00\b0\04\00\00(\06\00\00P\04\00\00(\06\00\00\c0\04\00\00\00\04\00\00\98\04\00\00(\06\00\00\f0\05\00\00\98\04\00\00(\06\00\00P\04\00\00P\04\00\008\04\00\008\04\00\00\08\04\00\00\98\04\00\00\05")
+  (data (i32.const 1740) "\01")
+  (data (i32.const 1764) "\01\00\00\00\02\00\00\00t\1e")
+  (data (i32.const 1788) "\02")
+  (data (i32.const 1803) "\ff\ff\ff\ff\ff")
+  (data (i32.const 1840) "\01\00\00\00\00\00\00\00h\05\00\00\01\00\00\00\02\00\00\00\03\00\00\00\04\00\00\00\03\00\00\00\01\00\00\00\01\00\00\00\01\00\00\00\00\00\00\00\90\05\00\00\01\00\00\00\05\00\00\00\03\00\00\00\04\00\00\00\03\00\00\00\02\00\00\00\02\00\00\00\02\00\00\00\00\00\00\00\a0\05\00\00\06\00\00\00\07\00\00\00\02\00\00\00\00\00\00\00\d0\05\00\00\01\00\00\00\08\00\00\00\03\00\00\00\04\00\00\00\04\00\00\00\00\00\00\00\c0\05\00\00\01\00\00\00\t\00\00\00\03\00\00\00\04\00\00\00\05\00\00\00\00\00\00\00P\06\00\00\01\00\00\00\n\00\00\00\03\00\00\00\04\00\00\00\03\00\00\00\03\00\00\00\03\00\00\00\03\00\00\00VNodeData\00key\00ns\00VNode\00sel\00text\00data\00children\00VNodeVector\00http://www.w3.org/2000/svg\00foreignObject\00N10emscripten3valE\009VNodeData\00P9VNodeData\00PK9VNodeData\00ii\00v\00vi\00NSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE\00NSt3__221__basic_string_commonILb1EEE\00iii\00viii\005VNode\00P5VNode\00PK5VNode\00NSt3__26vectorI5VNodeNS_9allocatorIS1_EEEE\00NSt3__213__vector_baseI5VNodeNS_9allocatorIS1_EEEE\00NSt3__220__vector_base_commonILb1EEE\00push_back\00resize\00size\00get\00set\00PNSt3__26vectorI5VNodeNS_9allocatorIS1_EEEE\00PKNSt3__26vectorI5VNodeNS_9allocatorIS1_EEEE\00viiii\00iiii\00iiiii\00iiiiii\00void\00bool\00char\00long\00std::basic_string<unsigned char>\00std::wstring\00emscripten::val\00emscripten::memory_view<char>\00emscripten::memory_view<signed char>\00emscripten::memory_view<unsigned char>\00emscripten::memory_view<short>\00emscripten::memory_view<unsigned short>\00emscripten::memory_view<int>\00emscripten::memory_view<unsigned int>\00emscripten::memory_view<long>\00emscripten::memory_view<unsigned long>\00emscripten::memory_view<int8_t>\00emscripten::memory_view<uint8_t>\00emscripten::memory_view<int16_t>\00emscripten::memory_view<uint16_t>\00emscripten::memory_view<int32_t>\00emscripten::memory_view<uint32_t>\00emscripten::memory_view<float>\00emscripten::memory_view<double>\00emscripten::memory_view<long double>\00N10emscripten11memory_viewIeEE\00N10emscripten11memory_viewIdEE\00N10emscripten11memory_viewIfEE\00N10emscripten11memory_viewImEE\00N10emscripten11memory_viewIlEE\00N10emscripten11memory_viewIjEE\00N10emscripten11memory_viewIiEE\00N10emscripten11memory_viewItEE\00N10emscripten11memory_viewIsEE\00N10emscripten11memory_viewIhEE\00N10emscripten11memory_viewIaEE\00N10emscripten11memory_viewIcEE\00NSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEE\00NSt3__212basic_stringIhNS_11char_traitsIhEENS_9allocatorIhEEEE\00\11\00\n\00\11\11\11\00\00\00\00\05\00\00\00\00\00\00\t\00\00\00\00\0b")
+  (data (i32.const 3834) "\11\00\0f\n\11\11\11\03\n\07\00\01\13\t\0b\0b\00\00\t\06\0b\00\00\0b\00\06\11\00\00\00\11\11\11")
+  (data (i32.const 3883) "\0b")
+  (data (i32.const 3892) "\11\00\n\n\11\11\11\00\n\00\00\02\00\t\0b\00\00\00\t\00\0b\00\00\0b")
+  (data (i32.const 3941) "\0c")
+  (data (i32.const 3953) "\0c\00\00\00\00\0c\00\00\00\00\t\0c\00\00\00\00\00\0c\00\00\0c")
+  (data (i32.const 3999) "\0e")
+  (data (i32.const 4011) "\0d\00\00\00\04\0d\00\00\00\00\t\0e\00\00\00\00\00\0e\00\00\0e")
+  (data (i32.const 4057) "\10")
+  (data (i32.const 4069) "\0f\00\00\00\00\0f\00\00\00\00\t\10\00\00\00\00\00\10\00\00\10\00\00\12\00\00\00\12\12\12")
+  (data (i32.const 4124) "\12\00\00\00\12\12\12\00\00\00\00\00\00\t")
+  (data (i32.const 4173) "\0b")
+  (data (i32.const 4185) "\n\00\00\00\00\n\00\00\00\00\t\0b\00\00\00\00\00\0b\00\00\0b")
+  (data (i32.const 4231) "\0c")
+  (data (i32.const 4243) "\0c\00\00\00\00\0c\00\00\00\00\t\0c\00\00\00\00\00\0c\00\00\0c\00\000123456789ABCDEF-+   0X0x\00(null)\00-0X+0X 0X-0x+0x 0x\00inf\00INF\00NAN\00T!\"\19\0d\01\02\03\11K\1c\0c\10\04\0b\1d\12\1e\'hnopqb \05\06\0f\13\14\15\1a\08\16\07($\17\18\t\n\0e\1b\1f%#\83\82}&*+<=>?CGJMXYZ[\\]^_`acdefgijklrstyz{|\00Illegal byte sequence\00Domain error\00Result not representable\00Not a tty\00Permission denied\00Operation not permitted\00No such file or directory\00No such process\00File exists\00Value too large for data type\00No space left on device\00Out of memory\00Resource busy\00Interrupted system call\00Resource temporarily unavailable\00Invalid seek\00Cross-device link\00Read-only file system\00Directory not empty\00Connection reset by peer\00Operation timed out\00Connection refused\00Host is down\00Host is unreachable\00Address in use\00Broken pipe\00I/O error\00No such device or address\00Block device required\00No such device\00Not a directory\00Is a directory\00Text file busy\00Exec format error\00Invalid argument\00Argument list too long\00Symbolic link loop\00Filename too long\00Too many open files in system\00No file descriptors available\00Bad file descriptor\00No child process\00Bad address\00File too large\00Too many links\00No locks available\00Resource deadlock would occur\00State not recoverable\00Previous owner died\00Operation canceled\00Function not implemented\00No message of desired type\00Identifier removed\00Device not a stream\00No data available\00Device timeout\00Out of streams resources\00Link has been severed\00Protocol error\00Bad message\00File descriptor in bad state\00Not a socket\00Destination address required\00Message too large\00Protocol wrong type for socket\00Protocol not available\00Protocol not supported\00Socket type not supported\00Not supported\00Protocol family not supported\00Address family not supported by protocol\00Address not available\00Network is down\00Network unreachable\00Connection reset by network\00Connection aborted\00No buffer space available\00Socket is connected\00Socket not connected\00Cannot send after socket shutdown\00Operation already in progress\00Operation in progress\00Stale file handle\00Remote I/O error\00Quota exceeded\00No medium found\00Wrong medium type\00No error information\00\00nan\00!\"vector length_error\"\00/Users/mauriziobasso/Documents/javascript/emsdk/emscripten/incoming/system/include/libcxx/vector\00!\"basic_string length_error\"\00/Users/mauriziobasso/Documents/javascript/emsdk/emscripten/incoming/system/include/libcxx/string\00__throw_length_error\00terminating with %s exception of type %s: %s\00terminating with %s exception of type %s\00terminating with %s foreign exception\00terminating\00uncaught\00St9exception\00N10__cxxabiv116__shim_type_infoE\00St9type_info\00N10__cxxabiv120__si_class_type_infoE\00N10__cxxabiv117__class_type_infoE\00pthread_once failure in __cxa_get_globals_fast()\00cannot create pthread key for __cxa_get_globals()\00cannot zero out thread value for __cxa_get_globals()\00terminate_handler unexpectedly returned\00std::bad_alloc\00St9bad_alloc\00N10__cxxabiv119__pointer_type_infoE\00N10__cxxabiv117__pbase_type_infoE\00N10__cxxabiv123__fundamental_type_infoE\00v\00Dn\00b\00c\00h\00a\00s\00t\00i\00j\00l\00m\00f\00d\00N10__cxxabiv121__vmi_class_type_infoE\00std::string\00signed char\00unsigned char\00short\00unsigned short\00.\00int\00unsigned int\00unsigned long\00float\00double")
   (export "_sbrk" (func $_sbrk))
-  (export "_memcpy" (func $_memcpy))
-  (export "_emscripten_bind_VNode_get_sel_0" (func $_emscripten_bind_VNode_get_sel_0))
-  (export "_emscripten_bind_VNodeData___destroy___0" (func $_emscripten_bind_VNodeData___destroy___0))
-  (export "___getTypeName" (func $___getTypeName))
-  (export "_emscripten_bind_VNodeData_set_ns_1" (func $_emscripten_bind_VNodeData_set_ns_1))
-  (export "_emscripten_bind_VNode_set_sel_1" (func $_emscripten_bind_VNode_set_sel_1))
-  (export "_emscripten_bind_VNode_set_data_1" (func $_emscripten_bind_VNode_set_data_1))
-  (export "_emscripten_bind_VNode_set_children_2" (func $_emscripten_bind_VNode_set_children_2))
-  (export "_emscripten_bind_VNode_set_text_1" (func $_emscripten_bind_VNode_set_text_1))
   (export "___cxa_can_catch" (func $___cxa_can_catch))
-  (export "_emscripten_bind_VNodeData_set_key_1" (func $_emscripten_bind_VNodeData_set_key_1))
   (export "_free" (func $_free))
+  (export "___cxa_is_pointer_type" (func $___cxa_is_pointer_type))
+  (export "_memmove" (func $_memmove))
+  (export "_memset" (func $_memset))
   (export "_malloc" (func $_malloc))
-  (export "_emscripten_bind_VNodeData_get_key_0" (func $_emscripten_bind_VNodeData_get_key_0))
-  (export "_emscripten_bind_VNode_get_text_0" (func $_emscripten_bind_VNode_get_text_0))
-  (export "_emscripten_bind_VNode_get_data_0" (func $_emscripten_bind_VNode_get_data_0))
+  (export "_memcpy" (func $_memcpy))
+  (export "___getTypeName" (func $___getTypeName))
+  (export "__GLOBAL__sub_I_app_cpp" (func $__GLOBAL__sub_I_app_cpp))
   (export "__GLOBAL__sub_I_bind_cpp" (func $__GLOBAL__sub_I_bind_cpp))
   (export "runPostSets" (func $runPostSets))
   (export "stackAlloc" (func $stackAlloc))
@@ -114,10 +109,16 @@
   (export "getTempRet0" (func $getTempRet0))
   (export "dynCall_iiii" (func $dynCall_iiii))
   (export "dynCall_viiiii" (func $dynCall_viiiii))
+  (export "dynCall_i" (func $__ZN10emscripten8internal7InvokerIP9VNodeDataJEE6invokeEPFS3_vE))
   (export "dynCall_vi" (func $dynCall_vi))
+  (export "dynCall_vii" (func $dynCall_vii))
   (export "dynCall_ii" (func $dynCall_ii))
+  (export "dynCall_viii" (func $dynCall_viii))
   (export "dynCall_v" (func $dynCall_v))
+  (export "dynCall_iiiii" (func $dynCall_iiiii))
   (export "dynCall_viiiiii" (func $dynCall_viiiiii))
+  (export "dynCall_iii" (func $dynCall_iii))
+  (export "dynCall_iiiiii" (func $dynCall_iiiiii))
   (export "dynCall_viiii" (func $dynCall_viiii))
   (func $stackAlloc (param $0 i32) (result i32)
     (local $1 i32)
@@ -180,77 +181,283 @@
   (func $getTempRet0 (result i32)
     (get_global $tempRet0)
   )
-  (func $__Z5addNSP5VNode (param $0 i32)
+  (func $__Z5addNS5VNode (param $0 i32)
     (local $1 i32)
     (local $2 i32)
     (local $3 i32)
     (local $4 i32)
-    (i32.store offset=40
-      (i32.load offset=12
-        (get_local $0)
-      )
-      (i32.const 1828)
+    (local $5 i32)
+    (local $6 i32)
+    (local $7 i32)
+    (local $8 i32)
+    (set_local $7
+      (get_global $STACKTOP)
     )
-    (if
-      (i32.eq
-        (i32.load8_s
-          (tee_local $1
-            (i32.load
-              (get_local $0)
+    (set_global $STACKTOP
+      (i32.add
+        (get_global $STACKTOP)
+        (i32.const 128)
+      )
+    )
+    (set_local $4
+      (i32.add
+        (get_local $0)
+        (i32.const 80)
+      )
+    )
+    (block $__rjto$0
+      (block $__rjti$0
+        (set_local $2
+          (i32.const 2098)
+        )
+        (set_local $1
+          (i32.const 2098)
+        )
+        (loop $while-in
+          (if
+            (i32.eqz
+              (i32.load8_s
+                (get_local $1)
+              )
+            )
+            (block
+              (set_local $1
+                (get_local $2)
+              )
+              (br $__rjto$0)
+            )
+          )
+          (br_if $while-in
+            (i32.and
+              (tee_local $2
+                (tee_local $1
+                  (i32.add
+                    (get_local $1)
+                    (i32.const 1)
+                  )
+                )
+              )
+              (i32.const 3)
+            )
+          )
+          (br $__rjti$0)
+        )
+      )
+      (loop $while-in1
+        (set_local $2
+          (i32.add
+            (get_local $1)
+            (i32.const 4)
+          )
+        )
+        (if
+          (i32.eqz
+            (i32.and
+              (i32.xor
+                (i32.and
+                  (tee_local $5
+                    (i32.load
+                      (get_local $1)
+                    )
+                  )
+                  (i32.const -2139062144)
+                )
+                (i32.const -2139062144)
+              )
+              (i32.add
+                (get_local $5)
+                (i32.const -16843009)
+              )
+            )
+          )
+          (block
+            (set_local $1
+              (get_local $2)
+            )
+            (br $while-in1)
+          )
+        )
+      )
+      (if
+        (i32.shr_s
+          (i32.shl
+            (i32.and
+              (get_local $5)
+              (i32.const 255)
+            )
+            (i32.const 24)
+          )
+          (i32.const 24)
+        )
+        (loop $while-in3
+          (br_if $while-in3
+            (i32.load8_s
+              (tee_local $1
+                (i32.add
+                  (get_local $1)
+                  (i32.const 1)
+                )
+              )
             )
           )
         )
-        (i32.const 102)
       )
-      (block
-        (set_local $2
-          (i32.const 1855)
+    )
+    (if
+      (i32.gt_u
+        (tee_local $3
+          (i32.sub
+            (get_local $1)
+            (i32.const 2098)
+          )
         )
-        (loop $while-in
-          (br_if $while-in
-            (i32.eqz
-              (i32.or
-                (i32.eqz
-                  (i32.shr_s
-                    (i32.shl
-                      (tee_local $3
-                        (i32.load8_s
-                          (tee_local $1
-                            (i32.add
-                              (get_local $1)
-                              (i32.const 1)
-                            )
-                          )
-                        )
-                      )
-                      (i32.const 24)
+        (tee_local $6
+          (if i32
+            (tee_local $2
+              (i32.lt_s
+                (i32.load8_s
+                  (tee_local $5
+                    (i32.add
+                      (get_local $4)
+                      (i32.const 11)
                     )
-                    (i32.const 24)
                   )
                 )
-                (i32.ne
-                  (i32.shr_s
-                    (i32.shl
+                (i32.const 0)
+              )
+            )
+            (i32.add
+              (i32.and
+                (i32.load offset=88
+                  (get_local $0)
+                )
+                (i32.const 2147483647)
+              )
+              (i32.const -1)
+            )
+            (i32.const 10)
+          )
+        )
+      )
+      (block
+        (if
+          (i32.lt_u
+            (i32.sub
+              (i32.const -18)
+              (get_local $6)
+            )
+            (i32.sub
+              (get_local $3)
+              (get_local $6)
+            )
+          )
+          (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+        )
+        (set_local $8
+          (if i32
+            (get_local $2)
+            (i32.load
+              (get_local $4)
+            )
+            (get_local $4)
+          )
+        )
+        (if
+          (i32.lt_u
+            (get_local $6)
+            (i32.const 2147483623)
+          )
+          (block
+            (set_local $1
+              (i32.and
+                (i32.add
+                  (if i32
+                    (i32.lt_u
                       (get_local $3)
-                      (i32.const 24)
-                    )
-                    (i32.const 24)
-                  )
-                  (i32.shr_s
-                    (i32.shl
-                      (tee_local $4
-                        (i32.load8_s
-                          (tee_local $2
-                            (i32.add
-                              (get_local $2)
-                              (i32.const 1)
-                            )
-                          )
+                      (tee_local $2
+                        (i32.shl
+                          (get_local $6)
+                          (i32.const 1)
                         )
                       )
-                      (i32.const 24)
                     )
-                    (i32.const 24)
+                    (get_local $2)
+                    (tee_local $2
+                      (get_local $3)
+                    )
+                  )
+                  (i32.const 16)
+                )
+                (i32.const -16)
+              )
+            )
+            (if
+              (i32.lt_u
+                (get_local $2)
+                (i32.const 11)
+              )
+              (set_local $1
+                (i32.const 11)
+              )
+            )
+          )
+          (set_local $1
+            (i32.const -17)
+          )
+        )
+        (block $label$break$L30
+          (if
+            (i32.eqz
+              (tee_local $2
+                (call $_malloc
+                  (tee_local $5
+                    (if i32
+                      (get_local $1)
+                      (get_local $1)
+                      (i32.const 1)
+                    )
+                  )
+                )
+              )
+            )
+            (loop $while-in7
+              (i32.store
+                (i32.const 7784)
+                (i32.add
+                  (tee_local $2
+                    (i32.load
+                      (i32.const 7784)
+                    )
+                  )
+                  (i32.const 0)
+                )
+              )
+              (if
+                (i32.eqz
+                  (get_local $2)
+                )
+                (block
+                  (set_local $2
+                    (i32.const 0)
+                  )
+                  (br $label$break$L30)
+                )
+              )
+              (call_indirect $FUNCSIG$v
+                (i32.add
+                  (i32.and
+                    (get_local $2)
+                    (i32.const 3)
+                  )
+                  (i32.const 62)
+                )
+              )
+              (br_if $while-in7
+                (i32.eqz
+                  (tee_local $2
+                    (call $_malloc
+                      (get_local $5)
+                    )
                   )
                 )
               )
@@ -258,58 +465,3213 @@
           )
         )
         (if
+          (get_local $3)
+          (drop
+            (call $_memcpy
+              (get_local $2)
+              (i32.const 2098)
+              (get_local $3)
+            )
+          )
+        )
+        (if
+          (i32.ne
+            (get_local $6)
+            (i32.const 10)
+          )
+          (call $_free
+            (get_local $8)
+          )
+        )
+        (i32.store
+          (get_local $4)
+          (get_local $2)
+        )
+        (i32.store offset=88
+          (get_local $0)
+          (i32.or
+            (get_local $1)
+            (i32.const -2147483648)
+          )
+        )
+        (i32.store offset=84
+          (get_local $0)
+          (get_local $3)
+        )
+        (i32.store8
+          (i32.add
+            (get_local $2)
+            (get_local $3)
+          )
+          (i32.const 0)
+        )
+      )
+      (block
+        (if
+          (get_local $2)
+          (set_local $4
+            (i32.load
+              (get_local $4)
+            )
+          )
+        )
+        (if
+          (get_local $3)
+          (drop
+            (call $_memcpy
+              (get_local $4)
+              (i32.const 2098)
+              (get_local $3)
+            )
+          )
+        )
+        (i32.store8
+          (i32.add
+            (get_local $4)
+            (get_local $3)
+          )
+          (i32.const 0)
+        )
+        (if
+          (i32.lt_s
+            (i32.load8_s
+              (get_local $5)
+            )
+            (i32.const 0)
+          )
+          (i32.store offset=84
+            (get_local $0)
+            (get_local $3)
+          )
+          (i32.store8
+            (get_local $5)
+            (get_local $3)
+          )
+        )
+      )
+    )
+    (block $label$break$L53
+      (if
+        (i32.eqz
+          (tee_local $1
+            (call $_malloc
+              (i32.const 16)
+            )
+          )
+        )
+        (loop $while-in10
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $1
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $1)
+            )
+            (block
+              (set_local $1
+                (i32.const 0)
+              )
+              (br $label$break$L53)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $1)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in10
+            (i32.eqz
+              (tee_local $1
+                (call $_malloc
+                  (i32.const 16)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i64.store align=1
+      (get_local $1)
+      (i64.load align=1
+        (i32.const 2125)
+      )
+    )
+    (i32.store offset=8 align=1
+      (get_local $1)
+      (i32.load align=1
+        (i32.const 2133)
+      )
+    )
+    (i32.store8 offset=12
+      (get_local $1)
+      (i32.load8_s
+        (i32.const 2137)
+      )
+    )
+    (i32.store8 offset=13
+      (get_local $1)
+      (i32.const 0)
+    )
+    (set_local $5
+      (if i32
+        (i32.lt_s
+          (i32.shr_s
+            (i32.shl
+              (tee_local $2
+                (i32.load8_s offset=11
+                  (get_local $0)
+                )
+              )
+              (i32.const 24)
+            )
+            (i32.const 24)
+          )
+          (i32.const 0)
+        )
+        (block i32
+          (set_local $6
+            (i32.load offset=4
+              (get_local $0)
+            )
+          )
+          (i32.load
+            (get_local $0)
+          )
+        )
+        (block i32
+          (set_local $6
+            (i32.and
+              (get_local $2)
+              (i32.const 255)
+            )
+          )
+          (get_local $0)
+        )
+      )
+    )
+    (set_local $8
+      (get_local $7)
+    )
+    (block $__rjto$1
+      (block $__rjti$1
+        (br_if $__rjti$1
+          (i32.eqz
+            (tee_local $4
+              (if i32
+                (tee_local $3
+                  (i32.gt_u
+                    (get_local $6)
+                    (i32.const 13)
+                  )
+                )
+                (i32.const 13)
+                (get_local $6)
+              )
+            )
+          )
+        )
+        (if
           (i32.eq
-            (i32.shr_s
-              (i32.shl
-                (get_local $3)
-                (i32.const 24)
-              )
-              (i32.const 24)
+            (i32.load8_s
+              (get_local $5)
             )
-            (i32.shr_s
-              (i32.shl
-                (get_local $4)
-                (i32.const 24)
-              )
-              (i32.const 24)
+            (i32.const 102)
+          )
+          (block
+            (set_local $2
+              (get_local $1)
             )
+            (loop $while-in13
+              (br_if $__rjti$1
+                (i32.eqz
+                  (tee_local $4
+                    (i32.add
+                      (get_local $4)
+                      (i32.const -1)
+                    )
+                  )
+                )
+              )
+              (br_if $while-in13
+                (i32.eq
+                  (i32.load8_s
+                    (tee_local $5
+                      (i32.add
+                        (get_local $5)
+                        (i32.const 1)
+                      )
+                    )
+                  )
+                  (i32.load8_s
+                    (tee_local $2
+                      (i32.add
+                        (get_local $2)
+                        (i32.const 1)
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+        (br $__rjto$1)
+      )
+      (if
+        (i32.and
+          (i32.gt_u
+            (get_local $6)
+            (i32.const 12)
+          )
+          (i32.xor
+            (get_local $3)
+            (i32.const 1)
+          )
+        )
+        (block
+          (call $_free
+            (get_local $1)
+          )
+          (set_global $STACKTOP
+            (get_local $7)
           )
           (return)
         )
       )
     )
-    (if
+    (set_local $0
       (i32.eq
-        (tee_local $1
-          (i32.load offset=20
-            (get_local $0)
+        (i32.load
+          (tee_local $4
+            (i32.add
+              (get_local $0)
+              (i32.const 108)
+            )
           )
         )
-        (tee_local $2
-          (i32.load offset=24
+        (i32.load
+          (tee_local $2
+            (i32.add
+              (get_local $0)
+              (i32.const 112)
+            )
+          )
+        )
+      )
+    )
+    (call $_free
+      (get_local $1)
+    )
+    (if
+      (get_local $0)
+      (block
+        (set_global $STACKTOP
+          (get_local $7)
+        )
+        (return)
+      )
+    )
+    (if
+      (i32.eq
+        (tee_local $0
+          (i32.load
+            (get_local $4)
+          )
+        )
+        (tee_local $1
+          (i32.load
+            (get_local $2)
+          )
+        )
+      )
+      (block
+        (set_global $STACKTOP
+          (get_local $7)
+        )
+        (return)
+      )
+    )
+    (loop $while-in15
+      (call $__ZN5VNodeC2ERKS_
+        (get_local $8)
+        (get_local $0)
+      )
+      (call $__Z5addNS5VNode
+        (get_local $8)
+      )
+      (call $__ZN5VNodeD2Ev
+        (get_local $8)
+      )
+      (br_if $while-in15
+        (i32.ne
+          (tee_local $0
+            (i32.add
+              (get_local $0)
+              (i32.const 120)
+            )
+          )
+          (get_local $1)
+        )
+      )
+    )
+    (set_global $STACKTOP
+      (get_local $7)
+    )
+  )
+  (func $__ZN5VNodeC2ERKS_ (param $0 i32) (param $1 i32)
+    (local $2 i32)
+    (local $3 i32)
+    (local $4 i32)
+    (local $5 i32)
+    (local $6 i32)
+    (local $7 i32)
+    (i64.store align=4
+      (get_local $0)
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $0)
+      (i32.const 0)
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s offset=11
+          (get_local $1)
+        )
+        (i32.const 0)
+      )
+      (block
+        (set_local $6
+          (i32.load
+            (get_local $1)
+          )
+        )
+        (if
+          (i32.gt_u
+            (tee_local $5
+              (i32.load offset=4
+                (get_local $1)
+              )
+            )
+            (i32.const -17)
+          )
+          (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+        )
+        (block $__rjto$0
+          (block $__rjti$0
+            (if
+              (i32.lt_u
+                (get_local $5)
+                (i32.const 11)
+              )
+              (block
+                (i32.store8 offset=11
+                  (get_local $0)
+                  (get_local $5)
+                )
+                (if
+                  (get_local $5)
+                  (block
+                    (set_local $2
+                      (get_local $0)
+                    )
+                    (br $__rjti$0)
+                  )
+                  (set_local $2
+                    (get_local $0)
+                  )
+                )
+              )
+              (block
+                (block $label$break$L9
+                  (if
+                    (i32.eqz
+                      (tee_local $2
+                        (call $_malloc
+                          (tee_local $3
+                            (if i32
+                              (tee_local $7
+                                (i32.and
+                                  (i32.add
+                                    (get_local $5)
+                                    (i32.const 16)
+                                  )
+                                  (i32.const -16)
+                                )
+                              )
+                              (get_local $7)
+                              (i32.const 1)
+                            )
+                          )
+                        )
+                      )
+                    )
+                    (loop $while-in
+                      (i32.store
+                        (i32.const 7784)
+                        (i32.add
+                          (tee_local $2
+                            (i32.load
+                              (i32.const 7784)
+                            )
+                          )
+                          (i32.const 0)
+                        )
+                      )
+                      (if
+                        (i32.eqz
+                          (get_local $2)
+                        )
+                        (block
+                          (set_local $2
+                            (i32.const 0)
+                          )
+                          (br $label$break$L9)
+                        )
+                      )
+                      (call_indirect $FUNCSIG$v
+                        (i32.add
+                          (i32.and
+                            (get_local $2)
+                            (i32.const 3)
+                          )
+                          (i32.const 62)
+                        )
+                      )
+                      (br_if $while-in
+                        (i32.eqz
+                          (tee_local $2
+                            (call $_malloc
+                              (get_local $3)
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+                (i32.store
+                  (get_local $0)
+                  (get_local $2)
+                )
+                (i32.store offset=8
+                  (get_local $0)
+                  (i32.or
+                    (get_local $7)
+                    (i32.const -2147483648)
+                  )
+                )
+                (i32.store offset=4
+                  (get_local $0)
+                  (get_local $5)
+                )
+                (br $__rjti$0)
+              )
+            )
+            (br $__rjto$0)
+          )
+          (drop
+            (call $_memcpy
+              (get_local $2)
+              (get_local $6)
+              (get_local $5)
+            )
+          )
+        )
+        (i32.store8
+          (i32.add
+            (get_local $2)
+            (get_local $5)
+          )
+          (i32.const 0)
+        )
+      )
+      (block
+        (i64.store align=4
+          (get_local $0)
+          (i64.load align=4
+            (get_local $1)
+          )
+        )
+        (i32.store offset=8
+          (get_local $0)
+          (i32.load offset=8
+            (get_local $1)
+          )
+        )
+      )
+    )
+    (i64.store align=4
+      (tee_local $3
+        (i32.add
+          (get_local $0)
+          (i32.const 12)
+        )
+      )
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $3)
+      (i32.const 0)
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s offset=11
+          (tee_local $2
+            (i32.add
+              (get_local $1)
+              (i32.const 12)
+            )
+          )
+        )
+        (i32.const 0)
+      )
+      (block
+        (set_local $5
+          (i32.load
+            (get_local $2)
+          )
+        )
+        (if
+          (i32.gt_u
+            (tee_local $4
+              (i32.load offset=16
+                (get_local $1)
+              )
+            )
+            (i32.const -17)
+          )
+          (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+        )
+        (block $__rjto$1
+          (block $__rjti$1
+            (if
+              (i32.lt_u
+                (get_local $4)
+                (i32.const 11)
+              )
+              (block
+                (i32.store8 offset=11
+                  (get_local $3)
+                  (get_local $4)
+                )
+                (if
+                  (get_local $4)
+                  (block
+                    (set_local $2
+                      (get_local $3)
+                    )
+                    (br $__rjti$1)
+                  )
+                  (set_local $2
+                    (get_local $3)
+                  )
+                )
+              )
+              (block
+                (block $label$break$L27
+                  (if
+                    (i32.eqz
+                      (tee_local $2
+                        (call $_malloc
+                          (tee_local $7
+                            (if i32
+                              (tee_local $6
+                                (i32.and
+                                  (i32.add
+                                    (get_local $4)
+                                    (i32.const 16)
+                                  )
+                                  (i32.const -16)
+                                )
+                              )
+                              (get_local $6)
+                              (i32.const 1)
+                            )
+                          )
+                        )
+                      )
+                    )
+                    (loop $while-in2
+                      (i32.store
+                        (i32.const 7784)
+                        (i32.add
+                          (tee_local $2
+                            (i32.load
+                              (i32.const 7784)
+                            )
+                          )
+                          (i32.const 0)
+                        )
+                      )
+                      (if
+                        (i32.eqz
+                          (get_local $2)
+                        )
+                        (block
+                          (set_local $2
+                            (i32.const 0)
+                          )
+                          (br $label$break$L27)
+                        )
+                      )
+                      (call_indirect $FUNCSIG$v
+                        (i32.add
+                          (i32.and
+                            (get_local $2)
+                            (i32.const 3)
+                          )
+                          (i32.const 62)
+                        )
+                      )
+                      (br_if $while-in2
+                        (i32.eqz
+                          (tee_local $2
+                            (call $_malloc
+                              (get_local $7)
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+                (i32.store
+                  (get_local $3)
+                  (get_local $2)
+                )
+                (i32.store offset=20
+                  (get_local $0)
+                  (i32.or
+                    (get_local $6)
+                    (i32.const -2147483648)
+                  )
+                )
+                (i32.store offset=16
+                  (get_local $0)
+                  (get_local $4)
+                )
+                (br $__rjti$1)
+              )
+            )
+            (br $__rjto$1)
+          )
+          (drop
+            (call $_memcpy
+              (get_local $2)
+              (get_local $5)
+              (get_local $4)
+            )
+          )
+        )
+        (i32.store8
+          (i32.add
+            (get_local $2)
+            (get_local $4)
+          )
+          (i32.const 0)
+        )
+      )
+      (block
+        (i64.store align=4
+          (get_local $3)
+          (i64.load align=4
+            (get_local $2)
+          )
+        )
+        (i32.store offset=8
+          (get_local $3)
+          (i32.load offset=8
+            (get_local $2)
+          )
+        )
+      )
+    )
+    (i64.store align=4
+      (tee_local $3
+        (i32.add
+          (get_local $0)
+          (i32.const 24)
+        )
+      )
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $3)
+      (i32.const 0)
+    )
+    (if
+      (i32.ge_s
+        (i32.load8_s offset=11
+          (tee_local $2
+            (i32.add
+              (get_local $1)
+              (i32.const 24)
+            )
+          )
+        )
+        (i32.const 0)
+      )
+      (block
+        (i64.store align=4
+          (get_local $3)
+          (i64.load align=4
+            (get_local $2)
+          )
+        )
+        (i32.store offset=8
+          (get_local $3)
+          (i32.load offset=8
+            (get_local $2)
+          )
+        )
+        (call $__ZN9VNodeDataC2ERKS_
+          (i32.add
             (get_local $0)
+            (i32.const 36)
+          )
+          (i32.add
+            (get_local $1)
+            (i32.const 36)
+          )
+        )
+        (i32.store offset=104
+          (get_local $0)
+          (tee_local $2
+            (i32.load offset=104
+              (get_local $1)
+            )
+          )
+        )
+        (call $__emval_incref
+          (get_local $2)
+        )
+        (call $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEEC2ERKS4_
+          (i32.add
+            (get_local $0)
+            (i32.const 108)
+          )
+          (i32.add
+            (get_local $1)
+            (i32.const 108)
+          )
+        )
+        (return)
+      )
+    )
+    (set_local $5
+      (i32.load
+        (get_local $2)
+      )
+    )
+    (if
+      (i32.gt_u
+        (tee_local $4
+          (i32.load offset=28
+            (get_local $1)
+          )
+        )
+        (i32.const -17)
+      )
+      (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+    )
+    (block $__rjto$2
+      (block $__rjti$2
+        (if
+          (i32.lt_u
+            (get_local $4)
+            (i32.const 11)
+          )
+          (block
+            (i32.store8 offset=11
+              (get_local $3)
+              (get_local $4)
+            )
+            (if
+              (get_local $4)
+              (block
+                (set_local $2
+                  (get_local $3)
+                )
+                (br $__rjti$2)
+              )
+              (set_local $2
+                (get_local $3)
+              )
+            )
+          )
+          (block
+            (block $label$break$L47
+              (if
+                (i32.eqz
+                  (tee_local $2
+                    (call $_malloc
+                      (tee_local $7
+                        (if i32
+                          (tee_local $6
+                            (i32.and
+                              (i32.add
+                                (get_local $4)
+                                (i32.const 16)
+                              )
+                              (i32.const -16)
+                            )
+                          )
+                          (get_local $6)
+                          (i32.const 1)
+                        )
+                      )
+                    )
+                  )
+                )
+                (loop $while-in5
+                  (i32.store
+                    (i32.const 7784)
+                    (i32.add
+                      (tee_local $2
+                        (i32.load
+                          (i32.const 7784)
+                        )
+                      )
+                      (i32.const 0)
+                    )
+                  )
+                  (if
+                    (i32.eqz
+                      (get_local $2)
+                    )
+                    (block
+                      (set_local $2
+                        (i32.const 0)
+                      )
+                      (br $label$break$L47)
+                    )
+                  )
+                  (call_indirect $FUNCSIG$v
+                    (i32.add
+                      (i32.and
+                        (get_local $2)
+                        (i32.const 3)
+                      )
+                      (i32.const 62)
+                    )
+                  )
+                  (br_if $while-in5
+                    (i32.eqz
+                      (tee_local $2
+                        (call $_malloc
+                          (get_local $7)
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+            (i32.store
+              (get_local $3)
+              (get_local $2)
+            )
+            (i32.store offset=32
+              (get_local $0)
+              (i32.or
+                (get_local $6)
+                (i32.const -2147483648)
+              )
+            )
+            (i32.store offset=28
+              (get_local $0)
+              (get_local $4)
+            )
+            (br $__rjti$2)
+          )
+        )
+        (br $__rjto$2)
+      )
+      (drop
+        (call $_memcpy
+          (get_local $2)
+          (get_local $5)
+          (get_local $4)
+        )
+      )
+    )
+    (i32.store8
+      (i32.add
+        (get_local $2)
+        (get_local $4)
+      )
+      (i32.const 0)
+    )
+    (call $__ZN9VNodeDataC2ERKS_
+      (i32.add
+        (get_local $0)
+        (i32.const 36)
+      )
+      (i32.add
+        (get_local $1)
+        (i32.const 36)
+      )
+    )
+    (i32.store offset=104
+      (get_local $0)
+      (tee_local $2
+        (i32.load offset=104
+          (get_local $1)
+        )
+      )
+    )
+    (call $__emval_incref
+      (get_local $2)
+    )
+    (call $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEEC2ERKS4_
+      (i32.add
+        (get_local $0)
+        (i32.const 108)
+      )
+      (i32.add
+        (get_local $1)
+        (i32.const 108)
+      )
+    )
+  )
+  (func $__ZN5VNodeD2Ev (param $0 i32)
+    (local $1 i32)
+    (local $2 i32)
+    (local $3 i32)
+    (local $4 i32)
+    (if
+      (tee_local $2
+        (i32.load
+          (tee_local $4
+            (i32.add
+              (get_local $0)
+              (i32.const 108)
+            )
+          )
+        )
+      )
+      (block
+        (if
+          (i32.ne
+            (tee_local $1
+              (i32.load
+                (tee_local $3
+                  (i32.add
+                    (get_local $0)
+                    (i32.const 112)
+                  )
+                )
+              )
+            )
+            (get_local $2)
+          )
+          (block
+            (loop $while-in
+              (i32.store
+                (get_local $3)
+                (tee_local $1
+                  (i32.add
+                    (get_local $1)
+                    (i32.const -120)
+                  )
+                )
+              )
+              (call $__ZN5VNodeD2Ev
+                (get_local $1)
+              )
+              (br_if $while-in
+                (i32.ne
+                  (tee_local $1
+                    (i32.load
+                      (get_local $3)
+                    )
+                  )
+                  (get_local $2)
+                )
+              )
+            )
+            (set_local $2
+              (i32.load
+                (get_local $4)
+              )
+            )
+          )
+        )
+        (call $_free
+          (get_local $2)
+        )
+      )
+    )
+    (call $__emval_decref
+      (i32.load offset=104
+        (get_local $0)
+      )
+    )
+    (call $__ZN9VNodeDataD2Ev
+      (i32.add
+        (get_local $0)
+        (i32.const 36)
+      )
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s offset=11
+          (tee_local $1
+            (i32.add
+              (get_local $0)
+              (i32.const 24)
+            )
+          )
+        )
+        (i32.const 0)
+      )
+      (call $_free
+        (i32.load
+          (get_local $1)
+        )
+      )
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s offset=11
+          (tee_local $1
+            (i32.add
+              (get_local $0)
+              (i32.const 12)
+            )
+          )
+        )
+        (i32.const 0)
+      )
+      (call $_free
+        (i32.load
+          (get_local $1)
+        )
+      )
+    )
+    (if
+      (i32.ge_s
+        (i32.load8_s offset=11
+          (get_local $0)
+        )
+        (i32.const 0)
+      )
+      (return)
+    )
+    (call $_free
+      (i32.load
+        (get_local $0)
+      )
+    )
+  )
+  (func $__Z1hNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES5_9VNodeDataNS_6vectorI5VNodeNS3_IS8_EEEE (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32)
+    (local $5 i32)
+    (local $6 i32)
+    (local $7 i32)
+    (local $8 i32)
+    (local $9 i32)
+    (local $10 i32)
+    (local $11 i32)
+    (local $12 i32)
+    (local $13 i32)
+    (local $14 i32)
+    (set_local $10
+      (get_global $STACKTOP)
+    )
+    (set_global $STACKTOP
+      (i32.add
+        (get_global $STACKTOP)
+        (i32.const 464)
+      )
+    )
+    (i64.store align=4
+      (tee_local $6
+        (i32.add
+          (get_local $10)
+          (i32.const 332)
+        )
+      )
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $6)
+      (i32.const 0)
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s offset=11
+          (get_local $1)
+        )
+        (i32.const 0)
+      )
+      (block
+        (set_local $9
+          (i32.load
+            (get_local $1)
+          )
+        )
+        (if
+          (i32.gt_u
+            (tee_local $8
+              (i32.load offset=4
+                (get_local $1)
+              )
+            )
+            (i32.const -17)
+          )
+          (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+        )
+        (block $__rjto$0
+          (block $__rjti$0
+            (if
+              (i32.lt_u
+                (get_local $8)
+                (i32.const 11)
+              )
+              (block
+                (i32.store8 offset=11
+                  (get_local $6)
+                  (get_local $8)
+                )
+                (if
+                  (get_local $8)
+                  (block
+                    (set_local $1
+                      (get_local $6)
+                    )
+                    (br $__rjti$0)
+                  )
+                  (set_local $1
+                    (get_local $6)
+                  )
+                )
+              )
+              (block
+                (block $label$break$L9
+                  (if
+                    (i32.eqz
+                      (tee_local $1
+                        (call $_malloc
+                          (tee_local $7
+                            (if i32
+                              (tee_local $5
+                                (i32.and
+                                  (i32.add
+                                    (get_local $8)
+                                    (i32.const 16)
+                                  )
+                                  (i32.const -16)
+                                )
+                              )
+                              (get_local $5)
+                              (i32.const 1)
+                            )
+                          )
+                        )
+                      )
+                    )
+                    (loop $while-in
+                      (i32.store
+                        (i32.const 7784)
+                        (i32.add
+                          (tee_local $1
+                            (i32.load
+                              (i32.const 7784)
+                            )
+                          )
+                          (i32.const 0)
+                        )
+                      )
+                      (if
+                        (i32.eqz
+                          (get_local $1)
+                        )
+                        (block
+                          (set_local $1
+                            (i32.const 0)
+                          )
+                          (br $label$break$L9)
+                        )
+                      )
+                      (call_indirect $FUNCSIG$v
+                        (i32.add
+                          (i32.and
+                            (get_local $1)
+                            (i32.const 3)
+                          )
+                          (i32.const 62)
+                        )
+                      )
+                      (br_if $while-in
+                        (i32.eqz
+                          (tee_local $1
+                            (call $_malloc
+                              (get_local $7)
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+                (i32.store
+                  (get_local $6)
+                  (get_local $1)
+                )
+                (i32.store offset=8
+                  (get_local $6)
+                  (i32.or
+                    (get_local $5)
+                    (i32.const -2147483648)
+                  )
+                )
+                (i32.store offset=4
+                  (get_local $6)
+                  (get_local $8)
+                )
+                (br $__rjti$0)
+              )
+            )
+            (br $__rjto$0)
+          )
+          (drop
+            (call $_memcpy
+              (get_local $1)
+              (get_local $9)
+              (get_local $8)
+            )
+          )
+        )
+        (i32.store8
+          (i32.add
+            (get_local $1)
+            (get_local $8)
+          )
+          (i32.const 0)
+        )
+      )
+      (block
+        (i64.store align=4
+          (get_local $6)
+          (i64.load align=4
+            (get_local $1)
+          )
+        )
+        (i32.store offset=8
+          (get_local $6)
+          (i32.load offset=8
+            (get_local $1)
+          )
+        )
+      )
+    )
+    (i64.store align=4
+      (tee_local $7
+        (i32.add
+          (get_local $10)
+          (i32.const 320)
+        )
+      )
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $7)
+      (i32.const 0)
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s offset=11
+          (get_local $2)
+        )
+        (i32.const 0)
+      )
+      (block
+        (set_local $9
+          (i32.load
+            (get_local $2)
+          )
+        )
+        (if
+          (i32.gt_u
+            (tee_local $8
+              (i32.load offset=4
+                (get_local $2)
+              )
+            )
+            (i32.const -17)
+          )
+          (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+        )
+        (block $__rjto$1
+          (block $__rjti$1
+            (if
+              (i32.lt_u
+                (get_local $8)
+                (i32.const 11)
+              )
+              (block
+                (i32.store8 offset=11
+                  (get_local $7)
+                  (get_local $8)
+                )
+                (if
+                  (get_local $8)
+                  (block
+                    (set_local $1
+                      (get_local $7)
+                    )
+                    (br $__rjti$1)
+                  )
+                  (set_local $1
+                    (get_local $7)
+                  )
+                )
+              )
+              (block
+                (block $label$break$L27
+                  (if
+                    (i32.eqz
+                      (tee_local $1
+                        (call $_malloc
+                          (tee_local $2
+                            (if i32
+                              (tee_local $5
+                                (i32.and
+                                  (i32.add
+                                    (get_local $8)
+                                    (i32.const 16)
+                                  )
+                                  (i32.const -16)
+                                )
+                              )
+                              (get_local $5)
+                              (i32.const 1)
+                            )
+                          )
+                        )
+                      )
+                    )
+                    (loop $while-in2
+                      (i32.store
+                        (i32.const 7784)
+                        (i32.add
+                          (tee_local $1
+                            (i32.load
+                              (i32.const 7784)
+                            )
+                          )
+                          (i32.const 0)
+                        )
+                      )
+                      (if
+                        (i32.eqz
+                          (get_local $1)
+                        )
+                        (block
+                          (set_local $1
+                            (i32.const 0)
+                          )
+                          (br $label$break$L27)
+                        )
+                      )
+                      (call_indirect $FUNCSIG$v
+                        (i32.add
+                          (i32.and
+                            (get_local $1)
+                            (i32.const 3)
+                          )
+                          (i32.const 62)
+                        )
+                      )
+                      (br_if $while-in2
+                        (i32.eqz
+                          (tee_local $1
+                            (call $_malloc
+                              (get_local $2)
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+                (i32.store
+                  (get_local $7)
+                  (get_local $1)
+                )
+                (i32.store offset=8
+                  (get_local $7)
+                  (i32.or
+                    (get_local $5)
+                    (i32.const -2147483648)
+                  )
+                )
+                (i32.store offset=4
+                  (get_local $7)
+                  (get_local $8)
+                )
+                (br $__rjti$1)
+              )
+            )
+            (br $__rjto$1)
+          )
+          (drop
+            (call $_memcpy
+              (get_local $1)
+              (get_local $9)
+              (get_local $8)
+            )
+          )
+        )
+        (i32.store8
+          (i32.add
+            (get_local $1)
+            (get_local $8)
+          )
+          (i32.const 0)
+        )
+      )
+      (block
+        (i64.store align=4
+          (get_local $7)
+          (i64.load align=4
+            (get_local $2)
+          )
+        )
+        (i32.store offset=8
+          (get_local $7)
+          (i32.load offset=8
+            (get_local $2)
+          )
+        )
+      )
+    )
+    (call $__ZN9VNodeDataC2ERKS_
+      (tee_local $13
+        (i32.add
+          (get_local $10)
+          (i32.const 252)
+        )
+      )
+      (get_local $3)
+    )
+    (call $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEEC2ERKS4_
+      (tee_local $12
+        (i32.add
+          (get_local $10)
+          (i32.const 240)
+        )
+      )
+      (get_local $4)
+    )
+    (i64.store align=4
+      (tee_local $3
+        (i32.add
+          (get_local $10)
+          (i32.const 344)
+        )
+      )
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $3)
+      (i32.const 0)
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s
+          (tee_local $14
+            (i32.add
+              (get_local $6)
+              (i32.const 11)
+            )
+          )
+        )
+        (i32.const 0)
+      )
+      (block
+        (set_local $5
+          (i32.load
+            (get_local $6)
+          )
+        )
+        (if
+          (i32.gt_u
+            (tee_local $9
+              (i32.load offset=4
+                (get_local $6)
+              )
+            )
+            (i32.const -17)
+          )
+          (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+        )
+        (block $__rjto$2
+          (block $__rjti$2
+            (if
+              (i32.lt_u
+                (get_local $9)
+                (i32.const 11)
+              )
+              (block
+                (i32.store8 offset=11
+                  (get_local $3)
+                  (get_local $9)
+                )
+                (if
+                  (get_local $9)
+                  (block
+                    (set_local $1
+                      (get_local $3)
+                    )
+                    (br $__rjti$2)
+                  )
+                  (set_local $1
+                    (get_local $3)
+                  )
+                )
+              )
+              (block
+                (block $label$break$L45
+                  (if
+                    (i32.eqz
+                      (tee_local $1
+                        (call $_malloc
+                          (tee_local $2
+                            (if i32
+                              (tee_local $4
+                                (i32.and
+                                  (i32.add
+                                    (get_local $9)
+                                    (i32.const 16)
+                                  )
+                                  (i32.const -16)
+                                )
+                              )
+                              (get_local $4)
+                              (i32.const 1)
+                            )
+                          )
+                        )
+                      )
+                    )
+                    (loop $while-in5
+                      (i32.store
+                        (i32.const 7784)
+                        (i32.add
+                          (tee_local $1
+                            (i32.load
+                              (i32.const 7784)
+                            )
+                          )
+                          (i32.const 0)
+                        )
+                      )
+                      (if
+                        (i32.eqz
+                          (get_local $1)
+                        )
+                        (block
+                          (set_local $1
+                            (i32.const 0)
+                          )
+                          (br $label$break$L45)
+                        )
+                      )
+                      (call_indirect $FUNCSIG$v
+                        (i32.add
+                          (i32.and
+                            (get_local $1)
+                            (i32.const 3)
+                          )
+                          (i32.const 62)
+                        )
+                      )
+                      (br_if $while-in5
+                        (i32.eqz
+                          (tee_local $1
+                            (call $_malloc
+                              (get_local $2)
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+                (i32.store
+                  (get_local $3)
+                  (get_local $1)
+                )
+                (i32.store offset=8
+                  (get_local $3)
+                  (i32.or
+                    (get_local $4)
+                    (i32.const -2147483648)
+                  )
+                )
+                (i32.store offset=4
+                  (get_local $3)
+                  (get_local $9)
+                )
+                (br $__rjti$2)
+              )
+            )
+            (br $__rjto$2)
+          )
+          (drop
+            (call $_memcpy
+              (get_local $1)
+              (get_local $5)
+              (get_local $9)
+            )
+          )
+        )
+        (i32.store8
+          (i32.add
+            (get_local $1)
+            (get_local $9)
+          )
+          (i32.const 0)
+        )
+      )
+      (block
+        (i64.store align=4
+          (get_local $3)
+          (i64.load align=4
+            (get_local $6)
+          )
+        )
+        (i32.store offset=8
+          (get_local $3)
+          (i32.load offset=8
+            (get_local $6)
+          )
+        )
+      )
+    )
+    (set_local $2
+      (i32.add
+        (get_local $3)
+        (i32.const 24)
+      )
+    )
+    (i64.store align=4
+      (tee_local $1
+        (i32.add
+          (get_local $3)
+          (i32.const 12)
+        )
+      )
+      (i64.const 0)
+    )
+    (i64.store offset=8 align=4
+      (get_local $1)
+      (i64.const 0)
+    )
+    (i64.store offset=16 align=4
+      (get_local $1)
+      (i64.const 0)
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s
+          (tee_local $8
+            (i32.add
+              (get_local $7)
+              (i32.const 11)
+            )
+          )
+        )
+        (i32.const 0)
+      )
+      (block
+        (set_local $9
+          (i32.load
+            (get_local $7)
+          )
+        )
+        (if
+          (i32.gt_u
+            (tee_local $11
+              (i32.load offset=4
+                (get_local $7)
+              )
+            )
+            (i32.const -17)
+          )
+          (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+        )
+        (block $__rjto$3
+          (block $__rjti$3
+            (if
+              (i32.lt_u
+                (get_local $11)
+                (i32.const 11)
+              )
+              (block
+                (i32.store8 offset=11
+                  (get_local $2)
+                  (get_local $11)
+                )
+                (if
+                  (get_local $11)
+                  (block
+                    (set_local $1
+                      (get_local $2)
+                    )
+                    (br $__rjti$3)
+                  )
+                  (set_local $1
+                    (get_local $2)
+                  )
+                )
+              )
+              (block
+                (block $label$break$L63
+                  (if
+                    (i32.eqz
+                      (tee_local $1
+                        (call $_malloc
+                          (tee_local $4
+                            (if i32
+                              (tee_local $5
+                                (i32.and
+                                  (i32.add
+                                    (get_local $11)
+                                    (i32.const 16)
+                                  )
+                                  (i32.const -16)
+                                )
+                              )
+                              (get_local $5)
+                              (i32.const 1)
+                            )
+                          )
+                        )
+                      )
+                    )
+                    (loop $while-in8
+                      (i32.store
+                        (i32.const 7784)
+                        (i32.add
+                          (tee_local $1
+                            (i32.load
+                              (i32.const 7784)
+                            )
+                          )
+                          (i32.const 0)
+                        )
+                      )
+                      (if
+                        (i32.eqz
+                          (get_local $1)
+                        )
+                        (block
+                          (set_local $1
+                            (i32.const 0)
+                          )
+                          (br $label$break$L63)
+                        )
+                      )
+                      (call_indirect $FUNCSIG$v
+                        (i32.add
+                          (i32.and
+                            (get_local $1)
+                            (i32.const 3)
+                          )
+                          (i32.const 62)
+                        )
+                      )
+                      (br_if $while-in8
+                        (i32.eqz
+                          (tee_local $1
+                            (call $_malloc
+                              (get_local $4)
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+                (i32.store
+                  (get_local $2)
+                  (get_local $1)
+                )
+                (i32.store offset=32
+                  (get_local $3)
+                  (i32.or
+                    (get_local $5)
+                    (i32.const -2147483648)
+                  )
+                )
+                (i32.store offset=28
+                  (get_local $3)
+                  (get_local $11)
+                )
+                (br $__rjti$3)
+              )
+            )
+            (br $__rjto$3)
+          )
+          (drop
+            (call $_memcpy
+              (get_local $1)
+              (get_local $9)
+              (get_local $11)
+            )
+          )
+        )
+        (i32.store8
+          (i32.add
+            (get_local $1)
+            (get_local $11)
+          )
+          (i32.const 0)
+        )
+      )
+      (block
+        (i64.store align=4
+          (get_local $2)
+          (i64.load align=4
+            (get_local $7)
+          )
+        )
+        (i32.store offset=8
+          (get_local $2)
+          (i32.load offset=8
+            (get_local $7)
+          )
+        )
+      )
+    )
+    (call $__ZN9VNodeDataC2ERKS_
+      (i32.add
+        (get_local $3)
+        (i32.const 36)
+      )
+      (get_local $13)
+    )
+    (call $__emval_incref
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store
+      (tee_local $4
+        (get_local $10)
+      )
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store offset=104
+      (get_local $3)
+      (call $__emval_take_value
+        (i32.const 1024)
+        (get_local $4)
+      )
+    )
+    (call $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEEC2ERKS4_
+      (i32.add
+        (get_local $3)
+        (i32.const 108)
+      )
+      (get_local $12)
+    )
+    (if
+      (tee_local $2
+        (i32.load
+          (get_local $12)
+        )
+      )
+      (call $_free
+        (tee_local $1
+          (if i32
+            (i32.eq
+              (tee_local $1
+                (i32.load
+                  (tee_local $5
+                    (i32.add
+                      (get_local $12)
+                      (i32.const 4)
+                    )
+                  )
+                )
+              )
+              (get_local $2)
+            )
+            (get_local $2)
+            (block i32
+              (loop $while-in10
+                (i32.store
+                  (get_local $5)
+                  (tee_local $1
+                    (i32.add
+                      (get_local $1)
+                      (i32.const -120)
+                    )
+                  )
+                )
+                (call $__ZN5VNodeD2Ev
+                  (get_local $1)
+                )
+                (br_if $while-in10
+                  (i32.ne
+                    (tee_local $1
+                      (i32.load
+                        (get_local $5)
+                      )
+                    )
+                    (get_local $2)
+                  )
+                )
+              )
+              (i32.load
+                (get_local $12)
+              )
+            )
+          )
+        )
+      )
+    )
+    (call $__ZN9VNodeDataD2Ev
+      (get_local $13)
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s
+          (get_local $8)
+        )
+        (i32.const 0)
+      )
+      (call $_free
+        (i32.load
+          (get_local $7)
+        )
+      )
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s
+          (get_local $14)
+        )
+        (i32.const 0)
+      )
+      (call $_free
+        (i32.load
+          (get_local $6)
+        )
+      )
+    )
+    (call $__ZN5VNodeC2ERKS_
+      (tee_local $5
+        (i32.add
+          (get_local $10)
+          (i32.const 120)
+        )
+      )
+      (get_local $3)
+    )
+    (set_local $6
+      (i32.lt_s
+        (i32.shr_s
+          (i32.shl
+            (tee_local $7
+              (i32.load8_s offset=11
+                (get_local $5)
+              )
+            )
+            (i32.const 24)
+          )
+          (i32.const 24)
+        )
+        (i32.const 0)
+      )
+    )
+    (set_local $2
+      (i32.load offset=4
+        (get_local $5)
+      )
+    )
+    (set_local $1
+      (i32.and
+        (get_local $7)
+        (i32.const 255)
+      )
+    )
+    (block $do-once
+      (if
+        (i32.gt_u
+          (if i32
+            (get_local $6)
+            (get_local $2)
+            (get_local $1)
+          )
+          (i32.const 2)
+        )
+        (block
+          (set_local $1
+            (i32.load
+              (get_local $5)
+            )
+          )
+          (if
+            (i32.eq
+              (i32.load8_s
+                (if i32
+                  (get_local $6)
+                  (get_local $1)
+                  (get_local $5)
+                )
+              )
+              (i32.const 115)
+            )
+            (block
+              (set_local $1
+                (i32.load
+                  (get_local $5)
+                )
+              )
+              (if
+                (i32.eq
+                  (i32.load8_s offset=1
+                    (if i32
+                      (get_local $6)
+                      (get_local $1)
+                      (get_local $5)
+                    )
+                  )
+                  (i32.const 118)
+                )
+                (block
+                  (set_local $1
+                    (i32.load
+                      (get_local $5)
+                    )
+                  )
+                  (if
+                    (i32.eq
+                      (i32.load8_s offset=2
+                        (if i32
+                          (get_local $6)
+                          (get_local $1)
+                          (get_local $5)
+                        )
+                      )
+                      (i32.const 103)
+                    )
+                    (block
+                      (set_local $2
+                        (i32.load offset=4
+                          (get_local $5)
+                        )
+                      )
+                      (set_local $1
+                        (i32.and
+                          (get_local $7)
+                          (i32.const 255)
+                        )
+                      )
+                      (if
+                        (i32.ne
+                          (if i32
+                            (get_local $6)
+                            (get_local $2)
+                            (get_local $1)
+                          )
+                          (i32.const 3)
+                        )
+                        (block
+                          (set_local $1
+                            (i32.load
+                              (get_local $5)
+                            )
+                          )
+                          (if
+                            (i32.ne
+                              (i32.load8_s offset=3
+                                (if i32
+                                  (get_local $6)
+                                  (get_local $1)
+                                  (get_local $5)
+                                )
+                              )
+                              (i32.const 46)
+                            )
+                            (block
+                              (set_local $1
+                                (i32.load
+                                  (get_local $5)
+                                )
+                              )
+                              (br_if $do-once
+                                (i32.ne
+                                  (i32.load8_s offset=3
+                                    (if i32
+                                      (get_local $6)
+                                      (get_local $1)
+                                      (get_local $5)
+                                    )
+                                  )
+                                  (i32.const 35)
+                                )
+                              )
+                            )
+                          )
+                        )
+                      )
+                      (call $__ZN5VNodeC2ERKS_
+                        (get_local $4)
+                        (get_local $5)
+                      )
+                      (call $__Z5addNS5VNode
+                        (get_local $4)
+                      )
+                      (call $__ZN5VNodeD2Ev
+                        (get_local $4)
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i64.store align=4
+      (get_local $0)
+      (i64.load align=4
+        (get_local $5)
+      )
+    )
+    (i32.store offset=8
+      (get_local $0)
+      (i32.load offset=8
+        (get_local $5)
+      )
+    )
+    (i64.store align=4
+      (get_local $5)
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $5)
+      (i32.const 0)
+    )
+    (i64.store align=4
+      (tee_local $1
+        (i32.add
+          (get_local $0)
+          (i32.const 12)
+        )
+      )
+      (i64.load align=4
+        (tee_local $2
+          (i32.add
+            (get_local $5)
+            (i32.const 12)
+          )
+        )
+      )
+    )
+    (i32.store offset=8
+      (get_local $1)
+      (i32.load offset=8
+        (get_local $2)
+      )
+    )
+    (i64.store align=4
+      (get_local $2)
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $2)
+      (i32.const 0)
+    )
+    (i64.store align=4
+      (tee_local $1
+        (i32.add
+          (get_local $0)
+          (i32.const 24)
+        )
+      )
+      (i64.load align=4
+        (tee_local $2
+          (i32.add
+            (get_local $5)
+            (i32.const 24)
+          )
+        )
+      )
+    )
+    (i32.store offset=8
+      (get_local $1)
+      (i32.load offset=8
+        (get_local $2)
+      )
+    )
+    (i64.store align=4
+      (get_local $2)
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $2)
+      (i32.const 0)
+    )
+    (i32.store offset=36
+      (get_local $0)
+      (i32.load
+        (tee_local $1
+          (i32.add
+            (get_local $5)
+            (i32.const 36)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 0)
+    )
+    (i32.store offset=40
+      (get_local $0)
+      (i32.load
+        (tee_local $1
+          (i32.add
+            (get_local $5)
+            (i32.const 40)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 0)
+    )
+    (i32.store offset=44
+      (get_local $0)
+      (i32.load
+        (tee_local $1
+          (i32.add
+            (get_local $5)
+            (i32.const 44)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 0)
+    )
+    (i32.store offset=48
+      (get_local $0)
+      (i32.load
+        (tee_local $1
+          (i32.add
+            (get_local $5)
+            (i32.const 48)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 0)
+    )
+    (i32.store offset=52
+      (get_local $0)
+      (i32.load
+        (tee_local $1
+          (i32.add
+            (get_local $5)
+            (i32.const 52)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 0)
+    )
+    (i32.store offset=56
+      (get_local $0)
+      (i32.load
+        (tee_local $1
+          (i32.add
+            (get_local $5)
+            (i32.const 56)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 0)
+    )
+    (i32.store offset=60
+      (get_local $0)
+      (i32.load
+        (tee_local $1
+          (i32.add
+            (get_local $5)
+            (i32.const 60)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 0)
+    )
+    (i32.store offset=64
+      (get_local $0)
+      (i32.load
+        (tee_local $1
+          (i32.add
+            (get_local $5)
+            (i32.const 64)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 0)
+    )
+    (i64.store align=4
+      (tee_local $1
+        (i32.add
+          (get_local $0)
+          (i32.const 68)
+        )
+      )
+      (i64.load align=4
+        (tee_local $2
+          (i32.add
+            (get_local $5)
+            (i32.const 68)
+          )
+        )
+      )
+    )
+    (i32.store offset=8
+      (get_local $1)
+      (i32.load offset=8
+        (get_local $2)
+      )
+    )
+    (i64.store align=4
+      (get_local $2)
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $2)
+      (i32.const 0)
+    )
+    (i64.store align=4
+      (tee_local $1
+        (i32.add
+          (get_local $0)
+          (i32.const 80)
+        )
+      )
+      (i64.load align=4
+        (tee_local $2
+          (i32.add
+            (get_local $5)
+            (i32.const 80)
+          )
+        )
+      )
+    )
+    (i32.store offset=8
+      (get_local $1)
+      (i32.load offset=8
+        (get_local $2)
+      )
+    )
+    (i64.store align=4
+      (get_local $2)
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $2)
+      (i32.const 0)
+    )
+    (i32.store offset=92
+      (get_local $0)
+      (i32.load
+        (tee_local $4
+          (i32.add
+            (get_local $5)
+            (i32.const 92)
+          )
+        )
+      )
+    )
+    (i32.store offset=96
+      (get_local $0)
+      (i32.load
+        (tee_local $2
+          (i32.add
+            (get_local $5)
+            (i32.const 96)
+          )
+        )
+      )
+    )
+    (i32.store offset=100
+      (get_local $0)
+      (i32.load
+        (tee_local $1
+          (i32.add
+            (get_local $5)
+            (i32.const 100)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 0)
+    )
+    (i32.store
+      (get_local $2)
+      (i32.const 0)
+    )
+    (i32.store
+      (get_local $4)
+      (i32.const 0)
+    )
+    (i32.store offset=104
+      (get_local $0)
+      (i32.load
+        (tee_local $1
+          (i32.add
+            (get_local $5)
+            (i32.const 104)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 0)
+    )
+    (i32.store offset=108
+      (get_local $0)
+      (i32.load
+        (tee_local $2
+          (i32.add
+            (get_local $5)
+            (i32.const 108)
+          )
+        )
+      )
+    )
+    (i32.store offset=112
+      (get_local $0)
+      (i32.load
+        (tee_local $1
+          (i32.add
+            (get_local $5)
+            (i32.const 112)
+          )
+        )
+      )
+    )
+    (i32.store offset=116
+      (get_local $0)
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $5)
+            (i32.const 116)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 0)
+    )
+    (i32.store
+      (get_local $2)
+      (i32.const 0)
+    )
+    (call $__ZN5VNodeD2Ev
+      (get_local $5)
+    )
+    (call $__ZN5VNodeD2Ev
+      (get_local $3)
+    )
+    (set_global $STACKTOP
+      (get_local $10)
+    )
+  )
+  (func $__ZN9VNodeDataC2ERKS_ (param $0 i32) (param $1 i32)
+    (local $2 i32)
+    (local $3 i32)
+    (local $4 i32)
+    (local $5 i32)
+    (local $6 i32)
+    (local $7 i32)
+    (i32.store
+      (get_local $0)
+      (tee_local $2
+        (i32.load
+          (get_local $1)
+        )
+      )
+    )
+    (call $__emval_incref
+      (get_local $2)
+    )
+    (i32.store offset=4
+      (get_local $0)
+      (tee_local $2
+        (i32.load offset=4
+          (get_local $1)
+        )
+      )
+    )
+    (call $__emval_incref
+      (get_local $2)
+    )
+    (i32.store offset=8
+      (get_local $0)
+      (tee_local $2
+        (i32.load offset=8
+          (get_local $1)
+        )
+      )
+    )
+    (call $__emval_incref
+      (get_local $2)
+    )
+    (i32.store offset=12
+      (get_local $0)
+      (tee_local $2
+        (i32.load offset=12
+          (get_local $1)
+        )
+      )
+    )
+    (call $__emval_incref
+      (get_local $2)
+    )
+    (i32.store offset=16
+      (get_local $0)
+      (tee_local $2
+        (i32.load offset=16
+          (get_local $1)
+        )
+      )
+    )
+    (call $__emval_incref
+      (get_local $2)
+    )
+    (i32.store offset=20
+      (get_local $0)
+      (tee_local $2
+        (i32.load offset=20
+          (get_local $1)
+        )
+      )
+    )
+    (call $__emval_incref
+      (get_local $2)
+    )
+    (i32.store offset=24
+      (get_local $0)
+      (tee_local $2
+        (i32.load offset=24
+          (get_local $1)
+        )
+      )
+    )
+    (call $__emval_incref
+      (get_local $2)
+    )
+    (i32.store offset=28
+      (get_local $0)
+      (tee_local $2
+        (i32.load offset=28
+          (get_local $1)
+        )
+      )
+    )
+    (call $__emval_incref
+      (get_local $2)
+    )
+    (i64.store align=4
+      (tee_local $4
+        (i32.add
+          (get_local $0)
+          (i32.const 32)
+        )
+      )
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $4)
+      (i32.const 0)
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s offset=11
+          (tee_local $2
+            (i32.add
+              (get_local $1)
+              (i32.const 32)
+            )
+          )
+        )
+        (i32.const 0)
+      )
+      (block
+        (set_local $6
+          (i32.load
+            (get_local $2)
+          )
+        )
+        (if
+          (i32.gt_u
+            (tee_local $3
+              (i32.load offset=36
+                (get_local $1)
+              )
+            )
+            (i32.const -17)
+          )
+          (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+        )
+        (block $__rjto$0
+          (block $__rjti$0
+            (if
+              (i32.lt_u
+                (get_local $3)
+                (i32.const 11)
+              )
+              (block
+                (i32.store8 offset=11
+                  (get_local $4)
+                  (get_local $3)
+                )
+                (if
+                  (get_local $3)
+                  (block
+                    (set_local $2
+                      (get_local $4)
+                    )
+                    (br $__rjti$0)
+                  )
+                  (set_local $2
+                    (get_local $4)
+                  )
+                )
+              )
+              (block
+                (block $label$break$L9
+                  (if
+                    (i32.eqz
+                      (tee_local $2
+                        (call $_malloc
+                          (tee_local $7
+                            (if i32
+                              (tee_local $5
+                                (i32.and
+                                  (i32.add
+                                    (get_local $3)
+                                    (i32.const 16)
+                                  )
+                                  (i32.const -16)
+                                )
+                              )
+                              (get_local $5)
+                              (i32.const 1)
+                            )
+                          )
+                        )
+                      )
+                    )
+                    (loop $while-in
+                      (i32.store
+                        (i32.const 7784)
+                        (i32.add
+                          (tee_local $2
+                            (i32.load
+                              (i32.const 7784)
+                            )
+                          )
+                          (i32.const 0)
+                        )
+                      )
+                      (if
+                        (i32.eqz
+                          (get_local $2)
+                        )
+                        (block
+                          (set_local $2
+                            (i32.const 0)
+                          )
+                          (br $label$break$L9)
+                        )
+                      )
+                      (call_indirect $FUNCSIG$v
+                        (i32.add
+                          (i32.and
+                            (get_local $2)
+                            (i32.const 3)
+                          )
+                          (i32.const 62)
+                        )
+                      )
+                      (br_if $while-in
+                        (i32.eqz
+                          (tee_local $2
+                            (call $_malloc
+                              (get_local $7)
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+                (i32.store
+                  (get_local $4)
+                  (get_local $2)
+                )
+                (i32.store offset=40
+                  (get_local $0)
+                  (i32.or
+                    (get_local $5)
+                    (i32.const -2147483648)
+                  )
+                )
+                (i32.store offset=36
+                  (get_local $0)
+                  (get_local $3)
+                )
+                (br $__rjti$0)
+              )
+            )
+            (br $__rjto$0)
+          )
+          (drop
+            (call $_memcpy
+              (get_local $2)
+              (get_local $6)
+              (get_local $3)
+            )
+          )
+        )
+        (i32.store8
+          (i32.add
+            (get_local $2)
+            (get_local $3)
+          )
+          (i32.const 0)
+        )
+      )
+      (block
+        (i64.store align=4
+          (get_local $4)
+          (i64.load align=4
+            (get_local $2)
+          )
+        )
+        (i32.store offset=8
+          (get_local $4)
+          (i32.load offset=8
+            (get_local $2)
+          )
+        )
+      )
+    )
+    (i64.store align=4
+      (tee_local $4
+        (i32.add
+          (get_local $0)
+          (i32.const 44)
+        )
+      )
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $4)
+      (i32.const 0)
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s offset=11
+          (tee_local $2
+            (i32.add
+              (get_local $1)
+              (i32.const 44)
+            )
+          )
+        )
+        (i32.const 0)
+      )
+      (block
+        (set_local $6
+          (i32.load
+            (get_local $2)
+          )
+        )
+        (if
+          (i32.gt_u
+            (tee_local $3
+              (i32.load offset=48
+                (get_local $1)
+              )
+            )
+            (i32.const -17)
+          )
+          (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+        )
+        (block $__rjto$1
+          (block $__rjti$1
+            (if
+              (i32.lt_u
+                (get_local $3)
+                (i32.const 11)
+              )
+              (block
+                (i32.store8 offset=11
+                  (get_local $4)
+                  (get_local $3)
+                )
+                (if
+                  (get_local $3)
+                  (block
+                    (set_local $2
+                      (get_local $4)
+                    )
+                    (br $__rjti$1)
+                  )
+                  (set_local $2
+                    (get_local $4)
+                  )
+                )
+              )
+              (block
+                (block $label$break$L27
+                  (if
+                    (i32.eqz
+                      (tee_local $2
+                        (call $_malloc
+                          (tee_local $7
+                            (if i32
+                              (tee_local $5
+                                (i32.and
+                                  (i32.add
+                                    (get_local $3)
+                                    (i32.const 16)
+                                  )
+                                  (i32.const -16)
+                                )
+                              )
+                              (get_local $5)
+                              (i32.const 1)
+                            )
+                          )
+                        )
+                      )
+                    )
+                    (loop $while-in2
+                      (i32.store
+                        (i32.const 7784)
+                        (i32.add
+                          (tee_local $2
+                            (i32.load
+                              (i32.const 7784)
+                            )
+                          )
+                          (i32.const 0)
+                        )
+                      )
+                      (if
+                        (i32.eqz
+                          (get_local $2)
+                        )
+                        (block
+                          (set_local $2
+                            (i32.const 0)
+                          )
+                          (br $label$break$L27)
+                        )
+                      )
+                      (call_indirect $FUNCSIG$v
+                        (i32.add
+                          (i32.and
+                            (get_local $2)
+                            (i32.const 3)
+                          )
+                          (i32.const 62)
+                        )
+                      )
+                      (br_if $while-in2
+                        (i32.eqz
+                          (tee_local $2
+                            (call $_malloc
+                              (get_local $7)
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+                (i32.store
+                  (get_local $4)
+                  (get_local $2)
+                )
+                (i32.store offset=52
+                  (get_local $0)
+                  (i32.or
+                    (get_local $5)
+                    (i32.const -2147483648)
+                  )
+                )
+                (i32.store offset=48
+                  (get_local $0)
+                  (get_local $3)
+                )
+                (br $__rjti$1)
+              )
+            )
+            (br $__rjto$1)
+          )
+          (drop
+            (call $_memcpy
+              (get_local $2)
+              (get_local $6)
+              (get_local $3)
+            )
+          )
+        )
+        (i32.store8
+          (i32.add
+            (get_local $2)
+            (get_local $3)
+          )
+          (i32.const 0)
+        )
+      )
+      (block
+        (i64.store align=4
+          (get_local $4)
+          (i64.load align=4
+            (get_local $2)
+          )
+        )
+        (i32.store offset=8
+          (get_local $4)
+          (i32.load offset=8
+            (get_local $2)
+          )
+        )
+      )
+    )
+    (i32.store
+      (tee_local $5
+        (i32.add
+          (get_local $0)
+          (i32.const 56)
+        )
+      )
+      (i32.const 0)
+    )
+    (i32.store
+      (tee_local $3
+        (i32.add
+          (get_local $0)
+          (i32.const 60)
+        )
+      )
+      (i32.const 0)
+    )
+    (i32.store offset=64
+      (get_local $0)
+      (i32.const 0)
+    )
+    (if
+      (i32.eqz
+        (tee_local $6
+          (i32.shr_s
+            (tee_local $2
+              (i32.sub
+                (i32.load
+                  (tee_local $7
+                    (i32.add
+                      (get_local $1)
+                      (i32.const 60)
+                    )
+                  )
+                )
+                (i32.load
+                  (tee_local $4
+                    (i32.add
+                      (get_local $1)
+                      (i32.const 56)
+                    )
+                  )
+                )
+              )
+            )
+            (i32.const 2)
           )
         )
       )
       (return)
-      (set_local $0
-        (get_local $1)
-      )
     )
-    (loop $while-in1
+    (if
+      (i32.gt_u
+        (get_local $6)
+        (i32.const 1073741823)
+      )
+      (call $__ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv)
+    )
+    (block $label$break$L43
       (if
-        (i32.load offset=12
+        (i32.eqz
           (tee_local $1
-            (i32.load
-              (get_local $0)
+            (call $_malloc
+              (if i32
+                (get_local $2)
+                (get_local $2)
+                (tee_local $2
+                  (i32.const 1)
+                )
+              )
             )
           )
         )
-        (call $__Z5addNSP5VNode
-          (get_local $1)
+        (loop $while-in5
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $1
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $1)
+            )
+            (block
+              (set_local $1
+                (i32.const 0)
+              )
+              (br $label$break$L43)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $1)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in5
+            (i32.eqz
+              (tee_local $1
+                (call $_malloc
+                  (get_local $2)
+                )
+              )
+            )
+          )
         )
       )
-      (br_if $while-in1
+    )
+    (i32.store
+      (get_local $3)
+      (get_local $1)
+    )
+    (i32.store
+      (get_local $5)
+      (get_local $1)
+    )
+    (i32.store offset=64
+      (get_local $0)
+      (i32.add
+        (get_local $1)
+        (i32.shl
+          (get_local $6)
+          (i32.const 2)
+        )
+      )
+    )
+    (if
+      (i32.eq
+        (tee_local $0
+          (i32.load
+            (get_local $4)
+          )
+        )
+        (tee_local $2
+          (i32.load
+            (get_local $7)
+          )
+        )
+      )
+      (return)
+    )
+    (loop $while-in7
+      (i32.store
+        (get_local $1)
+        (tee_local $1
+          (i32.load
+            (get_local $0)
+          )
+        )
+      )
+      (call $__emval_incref
+        (get_local $1)
+      )
+      (i32.store
+        (get_local $3)
+        (tee_local $1
+          (i32.add
+            (i32.load
+              (get_local $3)
+            )
+            (i32.const 4)
+          )
+        )
+      )
+      (br_if $while-in7
         (i32.ne
           (tee_local $0
             (i32.add
@@ -322,41 +3684,77 @@
       )
     )
   )
-  (func $__ZN1H1hEPKc (param $0 i32) (result i32)
-    (local $1 i32)
+  (func $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEEC2ERKS4_ (param $0 i32) (param $1 i32)
     (local $2 i32)
     (local $3 i32)
     (local $4 i32)
     (local $5 i32)
     (local $6 i32)
-    (set_local $4
-      (get_global $STACKTOP)
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
     )
-    (set_global $STACKTOP
-      (i32.add
-        (get_global $STACKTOP)
-        (i32.const 16)
+    (i32.store
+      (tee_local $3
+        (i32.add
+          (get_local $0)
+          (i32.const 4)
+        )
       )
+      (i32.const 0)
     )
-    (set_local $1
-      (get_local $4)
+    (i32.store offset=8
+      (get_local $0)
+      (i32.const 0)
     )
-    (block $label$break$L1
+    (if
+      (i32.eqz
+        (tee_local $4
+          (i32.sub
+            (i32.load
+              (tee_local $5
+                (i32.add
+                  (get_local $1)
+                  (i32.const 4)
+                )
+              )
+            )
+            (i32.load
+              (get_local $1)
+            )
+          )
+        )
+      )
+      (return)
+    )
+    (if
+      (i32.gt_u
+        (tee_local $6
+          (call $i32s-div
+            (get_local $4)
+            (i32.const 120)
+          )
+        )
+        (i32.const 35791394)
+      )
+      (call $__ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv)
+    )
+    (block $label$break$L7
       (if
         (i32.eqz
           (tee_local $2
             (call $_malloc
-              (i32.const 32)
+              (get_local $4)
             )
           )
         )
         (loop $while-in
           (i32.store
-            (i32.const 6884)
+            (i32.const 7784)
             (i32.add
-              (tee_local $3
+              (tee_local $2
                 (i32.load
-                  (i32.const 6884)
+                  (i32.const 7784)
                 )
               )
               (i32.const 0)
@@ -364,29 +3762,29 @@
           )
           (if
             (i32.eqz
-              (get_local $3)
+              (get_local $2)
             )
             (block
               (set_local $2
                 (i32.const 0)
               )
-              (br $label$break$L1)
+              (br $label$break$L7)
             )
           )
           (call_indirect $FUNCSIG$v
             (i32.add
               (i32.and
-                (get_local $3)
+                (get_local $2)
                 (i32.const 3)
               )
-              (i32.const 30)
+              (i32.const 62)
             )
           )
           (br_if $while-in
             (i32.eqz
               (tee_local $2
                 (call $_malloc
-                  (i32.const 32)
+                  (get_local $4)
                 )
               )
             )
@@ -394,652 +3792,114 @@
         )
       )
     )
-    (call $__emval_incref
-      (i32.const 1)
+    (i32.store
+      (get_local $3)
+      (get_local $2)
     )
     (i32.store
-      (get_local $1)
-      (i32.load
-        (i32.const 1440)
-      )
-    )
-    (i32.store offset=16
-      (get_local $2)
-      (call $__emval_take_value
-        (i32.const 1056)
-        (get_local $1)
-      )
-    )
-    (i32.store offset=20
-      (get_local $2)
-      (i32.const 0)
-    )
-    (i32.store offset=24
-      (get_local $2)
-      (i32.const 0)
-    )
-    (i32.store offset=28
-      (get_local $2)
-      (i32.const 0)
-    )
-    (i32.store
-      (get_local $2)
       (get_local $0)
+      (get_local $2)
     )
-    (block $__rjto$0
-      (block $__rjti$0
-        (if
-          (i32.and
-            (tee_local $5
-              (get_local $0)
-            )
-            (i32.const 3)
-          )
-          (block
-            (set_local $1
-              (get_local $5)
-            )
-            (set_local $3
-              (get_local $0)
-            )
-            (loop $while-in2
-              (br_if $__rjto$0
-                (i32.eqz
-                  (i32.load8_s
-                    (get_local $3)
-                  )
-                )
-              )
-              (br_if $while-in2
-                (i32.and
-                  (tee_local $1
-                    (tee_local $3
-                      (i32.add
-                        (get_local $3)
-                        (i32.const 1)
-                      )
-                    )
-                  )
-                  (i32.const 3)
-                )
-              )
-              (set_local $1
-                (get_local $3)
-              )
-              (br $__rjti$0)
-            )
-          )
-          (block
-            (set_local $1
-              (get_local $0)
-            )
-            (br $__rjti$0)
-          )
-        )
-      )
-      (loop $while-in4
-        (set_local $3
-          (i32.add
-            (get_local $1)
-            (i32.const 4)
-          )
-        )
-        (if
-          (i32.eqz
-            (i32.and
-              (i32.xor
-                (i32.and
-                  (tee_local $6
-                    (i32.load
-                      (get_local $1)
-                    )
-                  )
-                  (i32.const -2139062144)
-                )
-                (i32.const -2139062144)
-              )
-              (i32.add
-                (get_local $6)
-                (i32.const -16843009)
-              )
-            )
-          )
-          (block
-            (set_local $1
-              (get_local $3)
-            )
-            (br $while-in4)
-          )
-        )
-      )
-      (if
-        (i32.shr_s
-          (i32.shl
-            (i32.and
-              (get_local $6)
-              (i32.const 255)
-            )
-            (i32.const 24)
-          )
-          (i32.const 24)
-        )
-        (loop $while-in6
-          (br_if $while-in6
-            (i32.load8_s
-              (tee_local $1
-                (i32.add
-                  (get_local $1)
-                  (i32.const 1)
-                )
-              )
-            )
-          )
+    (i32.store offset=8
+      (get_local $0)
+      (i32.add
+        (get_local $2)
+        (i32.mul
+          (get_local $6)
+          (i32.const 120)
         )
       )
     )
     (if
-      (i32.le_u
-        (tee_local $1
-          (i32.sub
+      (i32.eq
+        (tee_local $0
+          (i32.load
             (get_local $1)
+          )
+        )
+        (tee_local $1
+          (i32.load
             (get_local $5)
           )
         )
-        (i32.const 2)
-      )
-      (block
-        (set_global $STACKTOP
-          (get_local $4)
-        )
-        (return
-          (get_local $2)
-        )
-      )
-    )
-    (if
-      (i32.ne
-        (i32.load8_s
-          (get_local $0)
-        )
-        (i32.const 115)
-      )
-      (block
-        (set_global $STACKTOP
-          (get_local $4)
-        )
-        (return
-          (get_local $2)
-        )
-      )
-    )
-    (if
-      (i32.ne
-        (i32.load8_s offset=1
-          (get_local $0)
-        )
-        (i32.const 118)
-      )
-      (block
-        (set_global $STACKTOP
-          (get_local $4)
-        )
-        (return
-          (get_local $2)
-        )
-      )
-    )
-    (if
-      (i32.ne
-        (i32.load8_s offset=2
-          (get_local $0)
-        )
-        (i32.const 103)
-      )
-      (block
-        (set_global $STACKTOP
-          (get_local $4)
-        )
-        (return
-          (get_local $2)
-        )
-      )
-    )
-    (block $label$break$L32
-      (if
-        (i32.ne
-          (get_local $1)
-          (i32.const 3)
-        )
-        (block
-          (block $switch-default
-            (block $switch-case
-              (br_table $switch-case $switch-default $switch-default $switch-default $switch-default $switch-default $switch-default $switch-default $switch-default $switch-default $switch-default $switch-case $switch-default
-                (i32.sub
-                  (i32.load8_s offset=3
-                    (get_local $0)
-                  )
-                  (i32.const 35)
-                )
-              )
-            )
-            (br $label$break$L32)
-          )
-          (set_global $STACKTOP
-            (get_local $4)
-          )
-          (return
-            (get_local $2)
-          )
-        )
-      )
-    )
-    (call $__Z5addNSP5VNode
-      (get_local $2)
-    )
-    (set_global $STACKTOP
-      (get_local $4)
-    )
-    (get_local $2)
-  )
-  (func $_emscripten_bind_H___destroy___0 (param $0 i32)
-    (if
-      (i32.eqz
-        (get_local $0)
       )
       (return)
     )
-    (call $_free
-      (get_local $0)
-    )
-  )
-  (func $_emscripten_bind_H_h_1 (param $0 i32) (param $1 i32) (result i32)
-    (call $__ZN1H1hEPKc
-      (get_local $1)
-    )
-  )
-  (func $_emscripten_bind_H_h_2 (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
-    (local $3 i32)
-    (local $4 i32)
-    (local $5 i32)
-    (local $6 i32)
-    (set_local $4
-      (get_global $STACKTOP)
-    )
-    (set_global $STACKTOP
-      (i32.add
-        (get_global $STACKTOP)
-        (i32.const 16)
+    (loop $while-in1
+      (call $__ZN5VNodeC2ERKS_
+        (get_local $2)
+        (get_local $0)
       )
-    )
-    (set_local $3
-      (get_local $4)
-    )
-    (block $__rjto$0
-      (block $__rjti$0
-        (if
-          (i32.and
-            (tee_local $5
-              (tee_local $2
-                (i32.load
-                  (tee_local $3
-                    (if i32
-                      (get_local $2)
-                      (block i32
-                        (block $label$break$L3
-                          (if
-                            (i32.eqz
-                              (tee_local $0
-                                (call $_malloc
-                                  (i32.const 32)
-                                )
-                              )
-                            )
-                            (loop $while-in
-                              (i32.store
-                                (i32.const 6884)
-                                (i32.add
-                                  (tee_local $0
-                                    (i32.load
-                                      (i32.const 6884)
-                                    )
-                                  )
-                                  (i32.const 0)
-                                )
-                              )
-                              (if
-                                (i32.eqz
-                                  (get_local $0)
-                                )
-                                (block
-                                  (set_local $0
-                                    (i32.const 0)
-                                  )
-                                  (br $label$break$L3)
-                                )
-                              )
-                              (call_indirect $FUNCSIG$v
-                                (i32.add
-                                  (i32.and
-                                    (get_local $0)
-                                    (i32.const 3)
-                                  )
-                                  (i32.const 30)
-                                )
-                              )
-                              (br_if $while-in
-                                (i32.eqz
-                                  (tee_local $0
-                                    (call $_malloc
-                                      (i32.const 32)
-                                    )
-                                  )
-                                )
-                              )
-                            )
-                          )
-                        )
-                        (call $__emval_incref
-                          (i32.const 1)
-                        )
-                        (i32.store
-                          (get_local $3)
-                          (i32.load
-                            (i32.const 1440)
-                          )
-                        )
-                        (i32.store offset=16
-                          (get_local $0)
-                          (call $__emval_take_value
-                            (i32.const 1056)
-                            (get_local $3)
-                          )
-                        )
-                        (i32.store offset=20
-                          (get_local $0)
-                          (i32.const 0)
-                        )
-                        (i32.store offset=24
-                          (get_local $0)
-                          (i32.const 0)
-                        )
-                        (i32.store offset=28
-                          (get_local $0)
-                          (i32.const 0)
-                        )
-                        (i32.store offset=8
-                          (get_local $0)
-                          (get_local $1)
-                        )
-                        (get_local $0)
-                      )
-                      (call $__ZN1H1hEPKc
-                        (get_local $1)
-                      )
-                    )
-                  )
-                )
-              )
-            )
-            (i32.const 3)
-          )
-          (block
-            (set_local $0
-              (get_local $5)
-            )
-            (set_local $1
-              (get_local $2)
-            )
-            (loop $while-in2
-              (br_if $__rjto$0
-                (i32.eqz
-                  (i32.load8_s
-                    (get_local $1)
-                  )
-                )
-              )
-              (br_if $while-in2
-                (i32.and
-                  (tee_local $0
-                    (tee_local $1
-                      (i32.add
-                        (get_local $1)
-                        (i32.const 1)
-                      )
-                    )
-                  )
-                  (i32.const 3)
-                )
-              )
-              (set_local $0
-                (get_local $1)
-              )
-              (br $__rjti$0)
-            )
-          )
-          (block
-            (set_local $0
-              (get_local $2)
-            )
-            (br $__rjti$0)
-          )
-        )
-      )
-      (loop $while-in4
-        (set_local $1
+      (i32.store
+        (get_local $3)
+        (tee_local $2
           (i32.add
-            (get_local $0)
-            (i32.const 4)
-          )
-        )
-        (if
-          (i32.eqz
-            (i32.and
-              (i32.xor
-                (i32.and
-                  (tee_local $6
-                    (i32.load
-                      (get_local $0)
-                    )
-                  )
-                  (i32.const -2139062144)
-                )
-                (i32.const -2139062144)
-              )
-              (i32.add
-                (get_local $6)
-                (i32.const -16843009)
-              )
+            (i32.load
+              (get_local $3)
             )
-          )
-          (block
-            (set_local $0
-              (get_local $1)
-            )
-            (br $while-in4)
+            (i32.const 120)
           )
         )
       )
-      (if
-        (i32.shr_s
-          (i32.shl
-            (i32.and
-              (get_local $6)
-              (i32.const 255)
-            )
-            (i32.const 24)
-          )
-          (i32.const 24)
-        )
-        (loop $while-in6
-          (br_if $while-in6
-            (i32.load8_s
-              (tee_local $0
-                (i32.add
-                  (get_local $0)
-                  (i32.const 1)
-                )
-              )
-            )
-          )
-        )
-      )
-    )
-    (if
-      (i32.le_u
-        (tee_local $0
-          (i32.sub
-            (get_local $0)
-            (get_local $5)
-          )
-        )
-        (i32.const 2)
-      )
-      (block
-        (set_global $STACKTOP
-          (get_local $4)
-        )
-        (return
-          (get_local $3)
-        )
-      )
-    )
-    (if
-      (i32.ne
-        (i32.load8_s
-          (get_local $2)
-        )
-        (i32.const 115)
-      )
-      (block
-        (set_global $STACKTOP
-          (get_local $4)
-        )
-        (return
-          (get_local $3)
-        )
-      )
-    )
-    (if
-      (i32.ne
-        (i32.load8_s offset=1
-          (get_local $2)
-        )
-        (i32.const 118)
-      )
-      (block
-        (set_global $STACKTOP
-          (get_local $4)
-        )
-        (return
-          (get_local $3)
-        )
-      )
-    )
-    (if
-      (i32.ne
-        (i32.load8_s offset=2
-          (get_local $2)
-        )
-        (i32.const 103)
-      )
-      (block
-        (set_global $STACKTOP
-          (get_local $4)
-        )
-        (return
-          (get_local $3)
-        )
-      )
-    )
-    (block $label$break$L36
-      (if
+      (br_if $while-in1
         (i32.ne
-          (get_local $0)
-          (i32.const 3)
-        )
-        (block
-          (block $switch-default
-            (block $switch-case
-              (br_table $switch-case $switch-default $switch-default $switch-default $switch-default $switch-default $switch-default $switch-default $switch-default $switch-default $switch-default $switch-case $switch-default
-                (i32.sub
-                  (i32.load8_s offset=3
-                    (get_local $2)
-                  )
-                  (i32.const 35)
-                )
-              )
+          (tee_local $0
+            (i32.add
+              (get_local $0)
+              (i32.const 120)
             )
-            (br $label$break$L36)
           )
-          (set_global $STACKTOP
-            (get_local $4)
-          )
-          (return
-            (get_local $3)
-          )
+          (get_local $1)
         )
       )
     )
-    (call $__Z5addNSP5VNode
-      (get_local $3)
-    )
-    (set_global $STACKTOP
-      (get_local $4)
-    )
-    (get_local $3)
   )
-  (func $_emscripten_bind_VNodeData___destroy___0 (param $0 i32)
+  (func $__ZN9VNodeDataD2Ev (param $0 i32)
     (local $1 i32)
     (local $2 i32)
     (local $3 i32)
     (local $4 i32)
-    (if
-      (i32.eqz
-        (get_local $0)
-      )
-      (return)
-    )
     (if
       (tee_local $4
         (i32.load
           (tee_local $3
             (i32.add
               (get_local $0)
-              (i32.const 44)
+              (i32.const 56)
             )
           )
         )
       )
       (block
-        (set_local $2
+        (set_local $1
           (i32.add
             (get_local $0)
-            (i32.const 48)
+            (i32.const 60)
           )
         )
         (loop $while-in
           (if
             (i32.ne
-              (tee_local $1
+              (tee_local $2
                 (i32.load
-                  (get_local $2)
+                  (get_local $1)
                 )
               )
               (get_local $4)
             )
             (block
               (i32.store
-                (get_local $2)
-                (tee_local $1
+                (get_local $1)
+                (tee_local $2
                   (i32.add
-                    (get_local $1)
+                    (get_local $2)
                     (i32.const -4)
                   )
                 )
               )
               (call $__emval_decref
                 (i32.load
-                  (get_local $1)
+                  (get_local $2)
                 )
               )
               (br $while-in)
@@ -1050,6 +3910,42 @@
           (i32.load
             (get_local $3)
           )
+        )
+      )
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s offset=11
+          (tee_local $1
+            (i32.add
+              (get_local $0)
+              (i32.const 44)
+            )
+          )
+        )
+        (i32.const 0)
+      )
+      (call $_free
+        (i32.load
+          (get_local $1)
+        )
+      )
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s offset=11
+          (tee_local $1
+            (i32.add
+              (get_local $0)
+              (i32.const 32)
+            )
+          )
+        )
+        (i32.const 0)
+      )
+      (call $_free
+        (i32.load
+          (get_local $1)
         )
       )
     )
@@ -1093,86 +3989,6420 @@
         (get_local $0)
       )
     )
-    (call $_free
-      (get_local $0)
-    )
   )
-  (func $_emscripten_bind_VNodeData_get_key_0 (param $0 i32) (result i32)
-    (i32.load offset=36
-      (get_local $0)
-    )
+  (func $__ZN10emscripten8internal13getActualTypeI9VNodeDataEEPKvPT_ (param $0 i32) (result i32)
+    (i32.const 1032)
   )
-  (func $_emscripten_bind_VNodeData_get_ns_0 (param $0 i32) (result i32)
-    (i32.load offset=40
-      (get_local $0)
-    )
-  )
-  (func $_emscripten_bind_VNodeData_set_key_1 (param $0 i32) (param $1 i32)
-    (i32.store offset=36
-      (get_local $0)
-      (get_local $1)
-    )
-  )
-  (func $_emscripten_bind_VNodeData_set_ns_1 (param $0 i32) (param $1 i32)
-    (i32.store offset=40
-      (get_local $0)
-      (get_local $1)
-    )
-  )
-  (func $_emscripten_bind_VNode___destroy___0 (param $0 i32)
-    (local $1 i32)
-    (local $2 i32)
-    (local $3 i32)
-    (local $4 i32)
+  (func $__ZN10emscripten8internal14raw_destructorI9VNodeDataEEvPT_ (param $0 i32)
     (if
       (i32.eqz
         (get_local $0)
       )
       (return)
     )
-    (set_local $3
+    (call $__ZN9VNodeDataD2Ev
+      (get_local $0)
+    )
+    (call $_free
+      (get_local $0)
+    )
+  )
+  (func $__ZN10emscripten8internal12operator_newI9VNodeDataJEEEPT_DpOT0_ (result i32)
+    (local $0 i32)
+    (block $label$break$L1
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 68)
+            )
+          )
+        )
+        (loop $while-in
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L1)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 68)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (call $__ZN9VNodeDataC2Ev
+      (get_local $0)
+    )
+    (get_local $0)
+  )
+  (func $__ZN10emscripten8internal7InvokerIP9VNodeDataJEE6invokeEPFS3_vE (param $0 i32) (result i32)
+    (call_indirect $FUNCSIG$i
+      (i32.add
+        (i32.and
+          (get_local $0)
+          (i32.const 3)
+        )
+        (i32.const 16)
+      )
+    )
+  )
+  (func $__ZN9VNodeDataC2Ev (param $0 i32)
+    (local $1 i32)
+    (local $2 i32)
+    (set_local $2
+      (get_global $STACKTOP)
+    )
+    (set_global $STACKTOP
+      (i32.add
+        (get_global $STACKTOP)
+        (i32.const 16)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store
       (tee_local $1
-        (i32.load offset=20
+        (get_local $2)
+      )
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (call $__emval_take_value
+        (i32.const 1024)
+        (get_local $1)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store offset=4
+      (get_local $0)
+      (call $__emval_take_value
+        (i32.const 1024)
+        (get_local $1)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store offset=8
+      (get_local $0)
+      (call $__emval_take_value
+        (i32.const 1024)
+        (get_local $1)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store offset=12
+      (get_local $0)
+      (call $__emval_take_value
+        (i32.const 1024)
+        (get_local $1)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store offset=16
+      (get_local $0)
+      (call $__emval_take_value
+        (i32.const 1024)
+        (get_local $1)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store offset=20
+      (get_local $0)
+      (call $__emval_take_value
+        (i32.const 1024)
+        (get_local $1)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store offset=24
+      (get_local $0)
+      (call $__emval_take_value
+        (i32.const 1024)
+        (get_local $1)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store offset=28
+      (get_local $0)
+      (call $__emval_take_value
+        (i32.const 1024)
+        (get_local $1)
+      )
+    )
+    (i64.store align=4
+      (tee_local $0
+        (i32.add
+          (get_local $0)
+          (i32.const 32)
+        )
+      )
+      (i64.const 0)
+    )
+    (i64.store offset=8 align=4
+      (get_local $0)
+      (i64.const 0)
+    )
+    (i64.store offset=16 align=4
+      (get_local $0)
+      (i64.const 0)
+    )
+    (i64.store offset=24 align=4
+      (get_local $0)
+      (i64.const 0)
+    )
+    (i32.store offset=32
+      (get_local $0)
+      (i32.const 0)
+    )
+    (set_global $STACKTOP
+      (get_local $2)
+    )
+  )
+  (func $__ZN10emscripten8internal12MemberAccessI9VNodeDataNSt3__212basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEEE7getWireIS2_EEPNS0_11BindingTypeIS9_EUt_ERKMS2_S9_RKT_ (param $0 i32) (param $1 i32) (result i32)
+    (local $2 i32)
+    (local $3 i32)
+    (local $4 i32)
+    (set_local $3
+      (i32.lt_s
+        (i32.shr_s
+          (i32.shl
+            (tee_local $2
+              (i32.load8_s offset=11
+                (tee_local $1
+                  (i32.add
+                    (get_local $1)
+                    (i32.load
+                      (get_local $0)
+                    )
+                  )
+                )
+              )
+            )
+            (i32.const 24)
+          )
+          (i32.const 24)
+        )
+        (i32.const 0)
+      )
+    )
+    (set_local $0
+      (i32.load offset=4
+        (get_local $1)
+      )
+    )
+    (set_local $2
+      (i32.and
+        (get_local $2)
+        (i32.const 255)
+      )
+    )
+    (i32.store
+      (tee_local $2
+        (call $_malloc
+          (i32.add
+            (if i32
+              (get_local $3)
+              (get_local $0)
+              (tee_local $0
+                (get_local $2)
+              )
+            )
+            (i32.const 4)
+          )
+        )
+      )
+      (get_local $0)
+    )
+    (set_local $4
+      (i32.load
+        (get_local $1)
+      )
+    )
+    (drop
+      (call $_memcpy
+        (i32.add
+          (get_local $2)
+          (i32.const 4)
+        )
+        (if i32
+          (get_local $3)
+          (get_local $4)
+          (get_local $1)
+        )
+        (get_local $0)
+      )
+    )
+    (get_local $2)
+  )
+  (func $__ZN10emscripten8internal12MemberAccessI9VNodeDataNSt3__212basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEEE7setWireIS2_EEvRKMS2_S9_RT_PNS0_11BindingTypeIS9_EUt_E (param $0 i32) (param $1 i32) (param $2 i32)
+    (local $3 i32)
+    (local $4 i32)
+    (local $5 i32)
+    (local $6 i32)
+    (local $7 i32)
+    (local $8 i32)
+    (local $9 i32)
+    (local $10 i32)
+    (set_local $8
+      (get_global $STACKTOP)
+    )
+    (set_global $STACKTOP
+      (i32.add
+        (get_global $STACKTOP)
+        (i32.const 16)
+      )
+    )
+    (set_local $0
+      (i32.load
+        (get_local $0)
+      )
+    )
+    (set_local $3
+      (i32.load
+        (get_local $2)
+      )
+    )
+    (i64.store align=4
+      (tee_local $4
+        (get_local $8)
+      )
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $4)
+      (i32.const 0)
+    )
+    (if
+      (i32.gt_u
+        (get_local $3)
+        (i32.const -17)
+      )
+      (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+    )
+    (set_local $1
+      (i32.add
+        (get_local $1)
+        (get_local $0)
+      )
+    )
+    (set_local $6
+      (i32.add
+        (get_local $2)
+        (i32.const 4)
+      )
+    )
+    (block $__rjto$0
+      (block $__rjti$0
+        (if
+          (i32.lt_u
+            (get_local $3)
+            (i32.const 11)
+          )
+          (block
+            (i32.store8 offset=11
+              (get_local $4)
+              (get_local $3)
+            )
+            (if
+              (get_local $3)
+              (block
+                (set_local $0
+                  (get_local $4)
+                )
+                (br $__rjti$0)
+              )
+              (set_local $0
+                (get_local $4)
+              )
+            )
+          )
+          (block
+            (block $label$break$L7
+              (if
+                (tee_local $5
+                  (call $_malloc
+                    (tee_local $0
+                      (if i32
+                        (tee_local $2
+                          (i32.and
+                            (i32.add
+                              (get_local $3)
+                              (i32.const 16)
+                            )
+                            (i32.const -16)
+                          )
+                        )
+                        (get_local $2)
+                        (i32.const 1)
+                      )
+                    )
+                  )
+                )
+                (set_local $0
+                  (get_local $5)
+                )
+                (loop $while-in
+                  (i32.store
+                    (i32.const 7784)
+                    (i32.add
+                      (tee_local $5
+                        (i32.load
+                          (i32.const 7784)
+                        )
+                      )
+                      (i32.const 0)
+                    )
+                  )
+                  (if
+                    (i32.eqz
+                      (get_local $5)
+                    )
+                    (block
+                      (set_local $0
+                        (i32.const 0)
+                      )
+                      (br $label$break$L7)
+                    )
+                  )
+                  (call_indirect $FUNCSIG$v
+                    (i32.add
+                      (i32.and
+                        (get_local $5)
+                        (i32.const 3)
+                      )
+                      (i32.const 62)
+                    )
+                  )
+                  (br_if $while-in
+                    (i32.eqz
+                      (tee_local $5
+                        (call $_malloc
+                          (get_local $0)
+                        )
+                      )
+                    )
+                  )
+                  (set_local $0
+                    (get_local $5)
+                  )
+                )
+              )
+            )
+            (i32.store
+              (get_local $4)
+              (get_local $0)
+            )
+            (i32.store offset=8
+              (get_local $4)
+              (i32.or
+                (get_local $2)
+                (i32.const -2147483648)
+              )
+            )
+            (i32.store offset=4
+              (get_local $4)
+              (get_local $3)
+            )
+            (br $__rjti$0)
+          )
+        )
+        (br $__rjto$0)
+      )
+      (drop
+        (call $_memcpy
+          (get_local $0)
+          (get_local $6)
+          (get_local $3)
+        )
+      )
+    )
+    (i32.store8
+      (i32.add
+        (get_local $0)
+        (get_local $3)
+      )
+      (i32.const 0)
+    )
+    (block $__rjto$1
+      (block $__rjti$1
+        (if
+          (i32.lt_s
+            (i32.load8_s
+              (tee_local $9
+                (i32.add
+                  (get_local $1)
+                  (i32.const 11)
+                )
+              )
+            )
+            (i32.const 0)
+          )
+          (block
+            (i32.store8
+              (i32.load
+                (get_local $1)
+              )
+              (i32.const 0)
+            )
+            (i32.store offset=4
+              (get_local $1)
+              (i32.const 0)
+            )
+            (br_if $__rjti$1
+              (i32.ge_s
+                (i32.shr_s
+                  (i32.shl
+                    (tee_local $0
+                      (i32.load8_s
+                        (get_local $9)
+                      )
+                    )
+                    (i32.const 24)
+                  )
+                  (i32.const 24)
+                )
+                (i32.const 0)
+              )
+            )
+            (set_local $5
+              (get_local $0)
+            )
+            (set_local $7
+              (i32.const 0)
+            )
+            (set_local $0
+              (i32.add
+                (i32.and
+                  (i32.load offset=8
+                    (get_local $1)
+                  )
+                  (i32.const 2147483647)
+                )
+                (i32.const -1)
+              )
+            )
+            (set_local $3
+              (i32.const 1)
+            )
+          )
+          (block
+            (i32.store8
+              (get_local $1)
+              (i32.const 0)
+            )
+            (i32.store8
+              (get_local $9)
+              (i32.const 0)
+            )
+            (set_local $0
+              (i32.const 0)
+            )
+            (br $__rjti$1)
+          )
+        )
+        (br $__rjto$1)
+      )
+      (set_local $5
+        (get_local $0)
+      )
+      (set_local $7
+        (i32.and
+          (get_local $0)
+          (i32.const 255)
+        )
+      )
+      (set_local $0
+        (i32.const 10)
+      )
+      (set_local $3
+        (i32.const 0)
+      )
+    )
+    (set_local $6
+      (i32.add
+        (i32.and
+          (i32.add
+            (get_local $7)
+            (i32.const 16)
+          )
+          (i32.const 496)
+        )
+        (i32.const -1)
+      )
+    )
+    (if
+      (i32.eq
+        (if i32
+          (tee_local $2
+            (i32.lt_u
+              (get_local $7)
+              (i32.const 11)
+            )
+          )
+          (tee_local $6
+            (i32.const 10)
+          )
+          (get_local $6)
+        )
+        (get_local $0)
+      )
+      (block
+        (i64.store align=4
+          (get_local $1)
+          (i64.load align=4
+            (get_local $4)
+          )
+        )
+        (i32.store offset=8
+          (get_local $1)
+          (i32.load offset=8
+            (get_local $4)
+          )
+        )
+        (set_global $STACKTOP
+          (get_local $8)
+        )
+        (return)
+      )
+    )
+    (if
+      (tee_local $5
+        (i32.add
+          (tee_local $5
+            (block $__rjto$3 i32
+              (block $__rjti$3
+                (if
+                  (get_local $2)
+                  (block
+                    (set_local $2
+                      (i32.load
+                        (get_local $1)
+                      )
+                    )
+                    (if
+                      (get_local $3)
+                      (block
+                        (set_local $0
+                          (get_local $1)
+                        )
+                        (set_local $3
+                          (i32.const 0)
+                        )
+                      )
+                      (block
+                        (set_local $0
+                          (get_local $1)
+                        )
+                        (set_local $3
+                          (i32.const 0)
+                        )
+                        (set_local $10
+                          (i32.const 1)
+                        )
+                        (br $__rjti$3)
+                      )
+                    )
+                  )
+                  (block
+                    (block $label$break$L28
+                      (if
+                        (tee_local $2
+                          (call $_malloc
+                            (if i32
+                              (tee_local $0
+                                (i32.add
+                                  (get_local $6)
+                                  (i32.const 1)
+                                )
+                              )
+                              (get_local $0)
+                              (tee_local $0
+                                (i32.const 1)
+                              )
+                            )
+                          )
+                        )
+                        (set_local $0
+                          (get_local $2)
+                        )
+                        (loop $while-in2
+                          (i32.store
+                            (i32.const 7784)
+                            (i32.add
+                              (tee_local $2
+                                (i32.load
+                                  (i32.const 7784)
+                                )
+                              )
+                              (i32.const 0)
+                            )
+                          )
+                          (if
+                            (i32.eqz
+                              (get_local $2)
+                            )
+                            (block
+                              (set_local $0
+                                (i32.const 0)
+                              )
+                              (br $label$break$L28)
+                            )
+                          )
+                          (call_indirect $FUNCSIG$v
+                            (i32.add
+                              (i32.and
+                                (get_local $2)
+                                (i32.const 3)
+                              )
+                              (i32.const 62)
+                            )
+                          )
+                          (br_if $while-in2
+                            (i32.eqz
+                              (tee_local $2
+                                (call $_malloc
+                                  (get_local $0)
+                                )
+                              )
+                            )
+                          )
+                          (set_local $0
+                            (get_local $2)
+                          )
+                        )
+                      )
+                    )
+                    (if
+                      (get_local $3)
+                      (block
+                        (set_local $3
+                          (i32.const 1)
+                        )
+                        (set_local $2
+                          (i32.load
+                            (get_local $1)
+                          )
+                        )
+                      )
+                      (block
+                        (set_local $3
+                          (i32.const 1)
+                        )
+                        (set_local $2
+                          (get_local $1)
+                        )
+                        (set_local $10
+                          (i32.const 0)
+                        )
+                        (br $__rjti$3)
+                      )
+                    )
+                  )
+                )
+                (set_local $10
+                  (i32.const 1)
+                )
+                (br $__rjto$3
+                  (i32.load offset=4
+                    (get_local $1)
+                  )
+                )
+              )
+              (i32.and
+                (get_local $5)
+                (i32.const 255)
+              )
+            )
+          )
+          (i32.const 1)
+        )
+      )
+      (drop
+        (call $_memcpy
+          (get_local $0)
+          (get_local $2)
+          (get_local $5)
+        )
+      )
+    )
+    (if
+      (get_local $10)
+      (call $_free
+        (get_local $2)
+      )
+    )
+    (if
+      (get_local $3)
+      (block
+        (i32.store offset=8
+          (get_local $1)
+          (i32.or
+            (i32.add
+              (get_local $6)
+              (i32.const 1)
+            )
+            (i32.const -2147483648)
+          )
+        )
+        (i32.store offset=4
+          (get_local $1)
+          (get_local $7)
+        )
+        (i32.store
+          (get_local $1)
+          (get_local $0)
+        )
+        (i64.store align=4
+          (get_local $1)
+          (i64.load align=4
+            (get_local $4)
+          )
+        )
+        (i32.store offset=8
+          (get_local $1)
+          (i32.load offset=8
+            (get_local $4)
+          )
+        )
+        (set_global $STACKTOP
+          (get_local $8)
+        )
+      )
+      (block
+        (i32.store8
+          (get_local $9)
+          (get_local $7)
+        )
+        (i64.store align=4
+          (get_local $1)
+          (i64.load align=4
+            (get_local $4)
+          )
+        )
+        (i32.store offset=8
+          (get_local $1)
+          (i32.load offset=8
+            (get_local $4)
+          )
+        )
+        (set_global $STACKTOP
+          (get_local $8)
+        )
+      )
+    )
+  )
+  (func $__ZNKSt3__26vectorI5VNodeNS_9allocatorIS1_EEE4sizeEv (param $0 i32) (result i32)
+    (call $i32s-div
+      (i32.sub
+        (i32.load offset=4
+          (get_local $0)
+        )
+        (i32.load
+          (get_local $0)
+        )
+      )
+      (i32.const 120)
+    )
+  )
+  (func $__ZN10emscripten8internal13getActualTypeI5VNodeEEPKvPT_ (param $0 i32) (result i32)
+    (i32.const 1104)
+  )
+  (func $__ZN10emscripten8internal14raw_destructorI5VNodeEEvPT_ (param $0 i32)
+    (if
+      (i32.eqz
+        (get_local $0)
+      )
+      (return)
+    )
+    (call $__ZN5VNodeD2Ev
+      (get_local $0)
+    )
+    (call $_free
+      (get_local $0)
+    )
+  )
+  (func $__ZN10emscripten8internal12operator_newI5VNodeJEEEPT_DpOT0_ (result i32)
+    (local $0 i32)
+    (local $1 i32)
+    (local $2 i32)
+    (set_local $1
+      (get_global $STACKTOP)
+    )
+    (set_global $STACKTOP
+      (i32.add
+        (get_global $STACKTOP)
+        (i32.const 16)
+      )
+    )
+    (set_local $2
+      (get_local $1)
+    )
+    (block $label$break$L1
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 120)
+            )
+          )
+        )
+        (loop $while-in
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L1)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 120)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i64.store align=4
+      (get_local $0)
+      (i64.const 0)
+    )
+    (i64.store offset=8 align=4
+      (get_local $0)
+      (i64.const 0)
+    )
+    (i64.store offset=16 align=4
+      (get_local $0)
+      (i64.const 0)
+    )
+    (i64.store offset=24 align=4
+      (get_local $0)
+      (i64.const 0)
+    )
+    (i32.store offset=32
+      (get_local $0)
+      (i32.const 0)
+    )
+    (call $__ZN9VNodeDataC2Ev
+      (i32.add
+        (get_local $0)
+        (i32.const 36)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store
+      (get_local $2)
+      (i32.load
+        (i32.const 7272)
+      )
+    )
+    (i32.store offset=104
+      (get_local $0)
+      (call $__emval_take_value
+        (i32.const 1024)
+        (get_local $2)
+      )
+    )
+    (i32.store offset=108
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store offset=112
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store offset=116
+      (get_local $0)
+      (i32.const 0)
+    )
+    (set_global $STACKTOP
+      (get_local $1)
+    )
+    (get_local $0)
+  )
+  (func $__ZN10emscripten8internal12MemberAccessI5VNode9VNodeDataE7getWireIS2_EEPS3_RKMS2_S3_RKT_ (param $0 i32) (param $1 i32) (result i32)
+    (set_local $1
+      (i32.add
+        (get_local $1)
+        (i32.load
+          (get_local $0)
+        )
+      )
+    )
+    (block $label$break$L1
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 68)
+            )
+          )
+        )
+        (loop $while-in
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L1)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 68)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (call $__ZN9VNodeDataC2ERKS_
+      (get_local $0)
+      (get_local $1)
+    )
+    (get_local $0)
+  )
+  (func $__ZN10emscripten8internal12MemberAccessI5VNode9VNodeDataE7setWireIS2_EEvRKMS2_S3_RT_PS3_ (param $0 i32) (param $1 i32) (param $2 i32)
+    (call $__ZN9VNodeDataaSERKS_
+      (i32.add
+        (get_local $1)
+        (i32.load
+          (get_local $0)
+        )
+      )
+      (get_local $2)
+    )
+  )
+  (func $__ZN9VNodeDataaSERKS_ (param $0 i32) (param $1 i32)
+    (local $2 i32)
+    (local $3 i32)
+    (local $4 i32)
+    (local $5 i32)
+    (local $6 i32)
+    (local $7 i32)
+    (local $8 i32)
+    (local $9 i32)
+    (call $__emval_incref
+      (i32.load
+        (get_local $1)
+      )
+    )
+    (call $__emval_decref
+      (i32.load
+        (get_local $0)
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.load
+        (get_local $1)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (tee_local $5
+          (i32.add
+            (get_local $1)
+            (i32.const 4)
+          )
+        )
+      )
+    )
+    (call $__emval_decref
+      (i32.load
+        (tee_local $2
+          (i32.add
+            (get_local $0)
+            (i32.const 4)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $2)
+      (i32.load
+        (get_local $5)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (tee_local $5
+          (i32.add
+            (get_local $1)
+            (i32.const 8)
+          )
+        )
+      )
+    )
+    (call $__emval_decref
+      (i32.load
+        (tee_local $2
+          (i32.add
+            (get_local $0)
+            (i32.const 8)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $2)
+      (i32.load
+        (get_local $5)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (tee_local $5
+          (i32.add
+            (get_local $1)
+            (i32.const 12)
+          )
+        )
+      )
+    )
+    (call $__emval_decref
+      (i32.load
+        (tee_local $2
+          (i32.add
+            (get_local $0)
+            (i32.const 12)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $2)
+      (i32.load
+        (get_local $5)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (tee_local $5
+          (i32.add
+            (get_local $1)
+            (i32.const 16)
+          )
+        )
+      )
+    )
+    (call $__emval_decref
+      (i32.load
+        (tee_local $2
+          (i32.add
+            (get_local $0)
+            (i32.const 16)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $2)
+      (i32.load
+        (get_local $5)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (tee_local $5
+          (i32.add
+            (get_local $1)
+            (i32.const 20)
+          )
+        )
+      )
+    )
+    (call $__emval_decref
+      (i32.load
+        (tee_local $2
+          (i32.add
+            (get_local $0)
+            (i32.const 20)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $2)
+      (i32.load
+        (get_local $5)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (tee_local $5
+          (i32.add
+            (get_local $1)
+            (i32.const 24)
+          )
+        )
+      )
+    )
+    (call $__emval_decref
+      (i32.load
+        (tee_local $2
+          (i32.add
+            (get_local $0)
+            (i32.const 24)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $2)
+      (i32.load
+        (get_local $5)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (tee_local $5
+          (i32.add
+            (get_local $1)
+            (i32.const 28)
+          )
+        )
+      )
+    )
+    (call $__emval_decref
+      (i32.load
+        (tee_local $2
+          (i32.add
+            (get_local $0)
+            (i32.const 28)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $2)
+      (i32.load
+        (get_local $5)
+      )
+    )
+    (if
+      (i32.eq
+        (get_local $0)
+        (get_local $1)
+      )
+      (return)
+    )
+    (set_local $8
+      (if i32
+        (tee_local $4
+          (i32.lt_s
+            (i32.load8_s
+              (tee_local $2
+                (i32.add
+                  (tee_local $5
+                    (i32.add
+                      (get_local $0)
+                      (i32.const 32)
+                    )
+                  )
+                  (i32.const 11)
+                )
+              )
+            )
+            (i32.const 0)
+          )
+        )
+        (i32.add
+          (i32.and
+            (i32.load offset=40
+              (get_local $0)
+            )
+            (i32.const 2147483647)
+          )
+          (i32.const -1)
+        )
+        (i32.const 10)
+      )
+    )
+    (set_local $7
+      (i32.lt_s
+        (i32.shr_s
+          (i32.shl
+            (tee_local $6
+              (i32.load8_s offset=11
+                (tee_local $3
+                  (i32.add
+                    (get_local $1)
+                    (i32.const 32)
+                  )
+                )
+              )
+            )
+            (i32.const 24)
+          )
+          (i32.const 24)
+        )
+        (i32.const 0)
+      )
+    )
+    (set_local $9
+      (i32.load
+        (get_local $3)
+      )
+    )
+    (if
+      (i32.eqz
+        (get_local $7)
+      )
+      (set_local $9
+        (get_local $3)
+      )
+    )
+    (set_local $3
+      (i32.load offset=36
+        (get_local $1)
+      )
+    )
+    (set_local $6
+      (i32.and
+        (get_local $6)
+        (i32.const 255)
+      )
+    )
+    (if
+      (i32.gt_u
+        (if i32
+          (get_local $7)
+          (get_local $3)
+          (tee_local $3
+            (get_local $6)
+          )
+        )
+        (get_local $8)
+      )
+      (block
+        (if
+          (i32.lt_u
+            (i32.sub
+              (i32.const -18)
+              (get_local $8)
+            )
+            (i32.sub
+              (get_local $3)
+              (get_local $8)
+            )
+          )
+          (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+        )
+        (set_local $7
+          (if i32
+            (get_local $4)
+            (i32.load
+              (get_local $5)
+            )
+            (get_local $5)
+          )
+        )
+        (if
+          (i32.lt_u
+            (get_local $8)
+            (i32.const 2147483623)
+          )
+          (block
+            (set_local $4
+              (i32.and
+                (i32.add
+                  (if i32
+                    (i32.lt_u
+                      (get_local $3)
+                      (tee_local $2
+                        (i32.shl
+                          (get_local $8)
+                          (i32.const 1)
+                        )
+                      )
+                    )
+                    (get_local $2)
+                    (tee_local $2
+                      (get_local $3)
+                    )
+                  )
+                  (i32.const 16)
+                )
+                (i32.const -16)
+              )
+            )
+            (if
+              (i32.lt_u
+                (get_local $2)
+                (i32.const 11)
+              )
+              (set_local $4
+                (i32.const 11)
+              )
+            )
+          )
+          (set_local $4
+            (i32.const -17)
+          )
+        )
+        (block $label$break$L19
+          (if
+            (tee_local $6
+              (call $_malloc
+                (tee_local $2
+                  (if i32
+                    (get_local $4)
+                    (get_local $4)
+                    (i32.const 1)
+                  )
+                )
+              )
+            )
+            (set_local $2
+              (get_local $6)
+            )
+            (loop $while-in
+              (i32.store
+                (i32.const 7784)
+                (i32.add
+                  (tee_local $6
+                    (i32.load
+                      (i32.const 7784)
+                    )
+                  )
+                  (i32.const 0)
+                )
+              )
+              (if
+                (i32.eqz
+                  (get_local $6)
+                )
+                (block
+                  (set_local $2
+                    (i32.const 0)
+                  )
+                  (br $label$break$L19)
+                )
+              )
+              (call_indirect $FUNCSIG$v
+                (i32.add
+                  (i32.and
+                    (get_local $6)
+                    (i32.const 3)
+                  )
+                  (i32.const 62)
+                )
+              )
+              (br_if $while-in
+                (i32.eqz
+                  (tee_local $6
+                    (call $_malloc
+                      (get_local $2)
+                    )
+                  )
+                )
+              )
+              (set_local $2
+                (get_local $6)
+              )
+            )
+          )
+        )
+        (if
+          (get_local $3)
+          (drop
+            (call $_memcpy
+              (get_local $2)
+              (get_local $9)
+              (get_local $3)
+            )
+          )
+        )
+        (if
+          (i32.ne
+            (get_local $8)
+            (i32.const 10)
+          )
+          (call $_free
+            (get_local $7)
+          )
+        )
+        (i32.store
+          (get_local $5)
+          (get_local $2)
+        )
+        (i32.store offset=40
+          (get_local $0)
+          (i32.or
+            (get_local $4)
+            (i32.const -2147483648)
+          )
+        )
+        (i32.store offset=36
+          (get_local $0)
+          (get_local $3)
+        )
+        (i32.store8
+          (i32.add
+            (get_local $2)
+            (get_local $3)
+          )
+          (i32.const 0)
+        )
+      )
+      (block
+        (if
+          (get_local $4)
+          (set_local $5
+            (i32.load
+              (get_local $5)
+            )
+          )
+        )
+        (if
+          (get_local $3)
+          (drop
+            (call $_memmove
+              (get_local $5)
+              (get_local $9)
+              (get_local $3)
+            )
+          )
+        )
+        (i32.store8
+          (i32.add
+            (get_local $5)
+            (get_local $3)
+          )
+          (i32.const 0)
+        )
+        (if
+          (i32.lt_s
+            (i32.load8_s
+              (get_local $2)
+            )
+            (i32.const 0)
+          )
+          (i32.store offset=36
+            (get_local $0)
+            (get_local $3)
+          )
+          (i32.store8
+            (get_local $2)
+            (get_local $3)
+          )
+        )
+      )
+    )
+    (set_local $8
+      (if i32
+        (tee_local $4
+          (i32.lt_s
+            (i32.load8_s
+              (tee_local $2
+                (i32.add
+                  (tee_local $5
+                    (i32.add
+                      (get_local $0)
+                      (i32.const 44)
+                    )
+                  )
+                  (i32.const 11)
+                )
+              )
+            )
+            (i32.const 0)
+          )
+        )
+        (i32.add
+          (i32.and
+            (i32.load offset=52
+              (get_local $0)
+            )
+            (i32.const 2147483647)
+          )
+          (i32.const -1)
+        )
+        (i32.const 10)
+      )
+    )
+    (set_local $7
+      (i32.lt_s
+        (i32.shr_s
+          (i32.shl
+            (tee_local $6
+              (i32.load8_s offset=11
+                (tee_local $3
+                  (i32.add
+                    (get_local $1)
+                    (i32.const 44)
+                  )
+                )
+              )
+            )
+            (i32.const 24)
+          )
+          (i32.const 24)
+        )
+        (i32.const 0)
+      )
+    )
+    (set_local $9
+      (i32.load
+        (get_local $3)
+      )
+    )
+    (if
+      (i32.eqz
+        (get_local $7)
+      )
+      (set_local $9
+        (get_local $3)
+      )
+    )
+    (set_local $3
+      (i32.load offset=48
+        (get_local $1)
+      )
+    )
+    (set_local $6
+      (i32.and
+        (get_local $6)
+        (i32.const 255)
+      )
+    )
+    (if
+      (i32.gt_u
+        (if i32
+          (get_local $7)
+          (get_local $3)
+          (tee_local $3
+            (get_local $6)
+          )
+        )
+        (get_local $8)
+      )
+      (block
+        (if
+          (i32.lt_u
+            (i32.sub
+              (i32.const -18)
+              (get_local $8)
+            )
+            (i32.sub
+              (get_local $3)
+              (get_local $8)
+            )
+          )
+          (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+        )
+        (set_local $7
+          (if i32
+            (get_local $4)
+            (i32.load
+              (get_local $5)
+            )
+            (get_local $5)
+          )
+        )
+        (if
+          (i32.lt_u
+            (get_local $8)
+            (i32.const 2147483623)
+          )
+          (block
+            (set_local $4
+              (i32.and
+                (i32.add
+                  (if i32
+                    (i32.lt_u
+                      (get_local $3)
+                      (tee_local $2
+                        (i32.shl
+                          (get_local $8)
+                          (i32.const 1)
+                        )
+                      )
+                    )
+                    (get_local $2)
+                    (tee_local $2
+                      (get_local $3)
+                    )
+                  )
+                  (i32.const 16)
+                )
+                (i32.const -16)
+              )
+            )
+            (if
+              (i32.lt_u
+                (get_local $2)
+                (i32.const 11)
+              )
+              (set_local $4
+                (i32.const 11)
+              )
+            )
+          )
+          (set_local $4
+            (i32.const -17)
+          )
+        )
+        (block $label$break$L57
+          (if
+            (tee_local $6
+              (call $_malloc
+                (tee_local $2
+                  (if i32
+                    (get_local $4)
+                    (get_local $4)
+                    (i32.const 1)
+                  )
+                )
+              )
+            )
+            (set_local $2
+              (get_local $6)
+            )
+            (loop $while-in5
+              (i32.store
+                (i32.const 7784)
+                (i32.add
+                  (tee_local $6
+                    (i32.load
+                      (i32.const 7784)
+                    )
+                  )
+                  (i32.const 0)
+                )
+              )
+              (if
+                (i32.eqz
+                  (get_local $6)
+                )
+                (block
+                  (set_local $2
+                    (i32.const 0)
+                  )
+                  (br $label$break$L57)
+                )
+              )
+              (call_indirect $FUNCSIG$v
+                (i32.add
+                  (i32.and
+                    (get_local $6)
+                    (i32.const 3)
+                  )
+                  (i32.const 62)
+                )
+              )
+              (br_if $while-in5
+                (i32.eqz
+                  (tee_local $6
+                    (call $_malloc
+                      (get_local $2)
+                    )
+                  )
+                )
+              )
+              (set_local $2
+                (get_local $6)
+              )
+            )
+          )
+        )
+        (if
+          (get_local $3)
+          (drop
+            (call $_memcpy
+              (get_local $2)
+              (get_local $9)
+              (get_local $3)
+            )
+          )
+        )
+        (if
+          (i32.ne
+            (get_local $8)
+            (i32.const 10)
+          )
+          (call $_free
+            (get_local $7)
+          )
+        )
+        (i32.store
+          (get_local $5)
+          (get_local $2)
+        )
+        (i32.store offset=52
+          (get_local $0)
+          (i32.or
+            (get_local $4)
+            (i32.const -2147483648)
+          )
+        )
+        (i32.store offset=48
+          (get_local $0)
+          (get_local $3)
+        )
+        (i32.store8
+          (i32.add
+            (get_local $2)
+            (get_local $3)
+          )
+          (i32.const 0)
+        )
+      )
+      (block
+        (if
+          (get_local $4)
+          (set_local $5
+            (i32.load
+              (get_local $5)
+            )
+          )
+        )
+        (if
+          (get_local $3)
+          (drop
+            (call $_memmove
+              (get_local $5)
+              (get_local $9)
+              (get_local $3)
+            )
+          )
+        )
+        (i32.store8
+          (i32.add
+            (get_local $5)
+            (get_local $3)
+          )
+          (i32.const 0)
+        )
+        (if
+          (i32.lt_s
+            (i32.load8_s
+              (get_local $2)
+            )
+            (i32.const 0)
+          )
+          (i32.store offset=48
+            (get_local $0)
+            (get_local $3)
+          )
+          (i32.store8
+            (get_local $2)
+            (get_local $3)
+          )
+        )
+      )
+    )
+    (set_local $2
+      (tee_local $6
+        (i32.load
+          (tee_local $3
+            (i32.add
+              (get_local $0)
+              (i32.const 56)
+            )
+          )
+        )
+      )
+    )
+    (if
+      (i32.le_u
+        (tee_local $1
+          (i32.shr_s
+            (i32.sub
+              (tee_local $9
+                (i32.load offset=60
+                  (get_local $1)
+                )
+              )
+              (tee_local $5
+                (i32.load offset=56
+                  (get_local $1)
+                )
+              )
+            )
+            (i32.const 2)
+          )
+        )
+        (i32.shr_s
+          (i32.sub
+            (tee_local $4
+              (i32.load
+                (tee_local $7
+                  (i32.add
+                    (get_local $0)
+                    (i32.const 64)
+                  )
+                )
+              )
+            )
+            (get_local $6)
+          )
+          (i32.const 2)
+        )
+      )
+      (block
+        (set_local $6
+          (i32.gt_u
+            (get_local $1)
+            (tee_local $0
+              (i32.shr_s
+                (i32.sub
+                  (i32.load
+                    (tee_local $7
+                      (i32.add
+                        (get_local $0)
+                        (i32.const 60)
+                      )
+                    )
+                  )
+                  (get_local $6)
+                )
+                (i32.const 2)
+              )
+            )
+          )
+        )
+        (set_local $4
+          (i32.add
+            (get_local $5)
+            (i32.shl
+              (get_local $0)
+              (i32.const 2)
+            )
+          )
+        )
+        (if
+          (i32.eq
+            (tee_local $3
+              (if i32
+                (get_local $6)
+                (get_local $4)
+                (get_local $9)
+              )
+            )
+            (get_local $5)
+          )
+          (set_local $1
+            (get_local $2)
+          )
+          (block
+            (set_local $0
+              (get_local $5)
+            )
+            (set_local $1
+              (get_local $2)
+            )
+            (loop $while-in7
+              (call $__emval_incref
+                (i32.load
+                  (get_local $0)
+                )
+              )
+              (call $__emval_decref
+                (i32.load
+                  (get_local $1)
+                )
+              )
+              (i32.store
+                (get_local $1)
+                (i32.load
+                  (get_local $0)
+                )
+              )
+              (set_local $1
+                (i32.add
+                  (get_local $1)
+                  (i32.const 4)
+                )
+              )
+              (br_if $while-in7
+                (i32.ne
+                  (tee_local $0
+                    (i32.add
+                      (get_local $0)
+                      (i32.const 4)
+                    )
+                  )
+                  (get_local $3)
+                )
+              )
+            )
+          )
+        )
+        (if
+          (i32.eqz
+            (get_local $6)
+          )
+          (block
+            (loop $while-in9
+              (if
+                (i32.ne
+                  (tee_local $0
+                    (i32.load
+                      (get_local $7)
+                    )
+                  )
+                  (get_local $1)
+                )
+                (block
+                  (i32.store
+                    (get_local $7)
+                    (tee_local $0
+                      (i32.add
+                        (get_local $0)
+                        (i32.const -4)
+                      )
+                    )
+                  )
+                  (call $__emval_decref
+                    (i32.load
+                      (get_local $0)
+                    )
+                  )
+                  (br $while-in9)
+                )
+              )
+            )
+            (return)
+          )
+        )
+        (if
+          (i32.eq
+            (get_local $3)
+            (get_local $9)
+          )
+          (return)
+        )
+        (set_local $1
+          (i32.load
+            (get_local $7)
+          )
+        )
+        (set_local $0
+          (get_local $4)
+        )
+        (loop $while-in11
+          (i32.store
+            (get_local $1)
+            (tee_local $1
+              (i32.load
+                (get_local $0)
+              )
+            )
+          )
+          (call $__emval_incref
+            (get_local $1)
+          )
+          (i32.store
+            (get_local $7)
+            (tee_local $1
+              (i32.add
+                (i32.load
+                  (get_local $7)
+                )
+                (i32.const 4)
+              )
+            )
+          )
+          (br_if $while-in11
+            (i32.ne
+              (tee_local $0
+                (i32.add
+                  (get_local $0)
+                  (i32.const 4)
+                )
+              )
+              (get_local $9)
+            )
+          )
+        )
+        (return)
+      )
+    )
+    (set_local $2
+      (if i32
+        (get_local $6)
+        (block i32
+          (set_local $4
+            (i32.add
+              (get_local $0)
+              (i32.const 60)
+            )
+          )
+          (loop $while-in13
+            (if
+              (i32.ne
+                (tee_local $6
+                  (i32.load
+                    (get_local $4)
+                  )
+                )
+                (get_local $2)
+              )
+              (block
+                (i32.store
+                  (get_local $4)
+                  (tee_local $6
+                    (i32.add
+                      (get_local $6)
+                      (i32.const -4)
+                    )
+                  )
+                )
+                (call $__emval_decref
+                  (i32.load
+                    (get_local $6)
+                  )
+                )
+                (br $while-in13)
+              )
+            )
+          )
+          (call $_free
+            (i32.load
+              (get_local $3)
+            )
+          )
+          (i32.store
+            (get_local $7)
+            (i32.const 0)
+          )
+          (i32.store
+            (get_local $4)
+            (i32.const 0)
+          )
+          (i32.store
+            (get_local $3)
+            (i32.const 0)
+          )
+          (i32.const 0)
+        )
+        (get_local $4)
+      )
+    )
+    (if
+      (i32.gt_u
+        (get_local $1)
+        (i32.const 1073741823)
+      )
+      (call $__ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv)
+    )
+    (set_local $4
+      (i32.lt_u
+        (i32.shr_s
+          (get_local $2)
+          (i32.const 2)
+        )
+        (i32.const 536870911)
+      )
+    )
+    (if
+      (i32.ge_u
+        (tee_local $2
+          (i32.shr_s
+            (get_local $2)
+            (i32.const 1)
+          )
+        )
+        (get_local $1)
+      )
+      (set_local $1
+        (get_local $2)
+      )
+    )
+    (if
+      (i32.gt_u
+        (tee_local $2
+          (if i32
+            (get_local $4)
+            (get_local $1)
+            (i32.const 1073741823)
+          )
+        )
+        (i32.const 1073741823)
+      )
+      (call $__ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv)
+    )
+    (block $label$break$L112
+      (if
+        (tee_local $4
+          (call $_malloc
+            (if i32
+              (tee_local $1
+                (i32.shl
+                  (get_local $2)
+                  (i32.const 2)
+                )
+              )
+              (get_local $1)
+              (tee_local $1
+                (i32.const 1)
+              )
+            )
+          )
+        )
+        (set_local $1
+          (get_local $4)
+        )
+        (loop $while-in16
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $4
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $4)
+            )
+            (block
+              (set_local $1
+                (i32.const 0)
+              )
+              (br $label$break$L112)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $4)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in16
+            (i32.eqz
+              (tee_local $4
+                (call $_malloc
+                  (get_local $1)
+                )
+              )
+            )
+          )
+          (set_local $1
+            (get_local $4)
+          )
+        )
+      )
+    )
+    (i32.store
+      (tee_local $4
+        (i32.add
+          (get_local $0)
+          (i32.const 60)
+        )
+      )
+      (get_local $1)
+    )
+    (i32.store
+      (get_local $3)
+      (get_local $1)
+    )
+    (i32.store
+      (get_local $7)
+      (i32.add
+        (get_local $1)
+        (i32.shl
+          (get_local $2)
+          (i32.const 2)
+        )
+      )
+    )
+    (if
+      (i32.eq
+        (get_local $5)
+        (get_local $9)
+      )
+      (return)
+      (set_local $0
+        (get_local $5)
+      )
+    )
+    (loop $while-in18
+      (i32.store
+        (get_local $1)
+        (tee_local $1
+          (i32.load
+            (get_local $0)
+          )
+        )
+      )
+      (call $__emval_incref
+        (get_local $1)
+      )
+      (i32.store
+        (get_local $4)
+        (tee_local $1
+          (i32.add
+            (i32.load
+              (get_local $4)
+            )
+            (i32.const 4)
+          )
+        )
+      )
+      (br_if $while-in18
+        (i32.ne
+          (tee_local $0
+            (i32.add
+              (get_local $0)
+              (i32.const 4)
+            )
+          )
+          (get_local $9)
+        )
+      )
+    )
+  )
+  (func $__ZN10emscripten8internal12MemberAccessI5VNodeNSt3__26vectorIS2_NS3_9allocatorIS2_EEEEE7getWireIS2_EEPS7_RKMS2_S7_RKT_ (param $0 i32) (param $1 i32) (result i32)
+    (set_local $1
+      (i32.add
+        (get_local $1)
+        (i32.load
+          (get_local $0)
+        )
+      )
+    )
+    (block $label$break$L1
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 12)
+            )
+          )
+        )
+        (loop $while-in
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L1)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 12)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (call $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEEC2ERKS4_
+      (get_local $0)
+      (get_local $1)
+    )
+    (get_local $0)
+  )
+  (func $__ZN10emscripten8internal12MemberAccessI5VNodeNSt3__26vectorIS2_NS3_9allocatorIS2_EEEEE7setWireIS2_EEvRKMS2_S7_RT_PS7_ (param $0 i32) (param $1 i32) (param $2 i32)
+    (local $3 i32)
+    (if
+      (i32.eq
+        (tee_local $3
+          (i32.add
+            (get_local $1)
+            (i32.load
+              (get_local $0)
+            )
+          )
+        )
+        (get_local $2)
+      )
+      (return)
+    )
+    (call $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE6assignIPS1_EENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIS1_NS_15iterator_traitsIS8_E9referenceEEE5valueEvE4typeES8_S8_
+      (get_local $3)
+      (i32.load
+        (get_local $2)
+      )
+      (i32.load offset=4
+        (get_local $2)
+      )
+    )
+  )
+  (func $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE6assignIPS1_EENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIS1_NS_15iterator_traitsIS8_E9referenceEEE5valueEvE4typeES8_S8_ (param $0 i32) (param $1 i32) (param $2 i32)
+    (local $3 i32)
+    (local $4 i32)
+    (local $5 i32)
+    (local $6 i32)
+    (local $7 i32)
+    (local $8 i32)
+    (local $9 i32)
+    (local $10 i32)
+    (local $11 i32)
+    (local $12 i32)
+    (local $13 i32)
+    (local $14 i32)
+    (local $15 i32)
+    (local $16 i32)
+    (local $17 i32)
+    (local $18 i32)
+    (set_local $7
+      (call $i32s-div
+        (i32.sub
+          (get_local $2)
+          (get_local $1)
+        )
+        (i32.const 120)
+      )
+    )
+    (set_local $4
+      (tee_local $3
+        (i32.load
           (get_local $0)
         )
       )
     )
     (if
+      (i32.gt_u
+        (get_local $7)
+        (call $i32s-div
+          (i32.sub
+            (tee_local $5
+              (i32.load
+                (tee_local $9
+                  (i32.add
+                    (get_local $0)
+                    (i32.const 8)
+                  )
+                )
+              )
+            )
+            (get_local $3)
+          )
+          (i32.const 120)
+        )
+      )
+      (block
+        (if
+          (get_local $3)
+          (block
+            (set_local $5
+              (get_local $3)
+            )
+            (if
+              (i32.ne
+                (tee_local $10
+                  (i32.load
+                    (tee_local $3
+                      (i32.add
+                        (get_local $0)
+                        (i32.const 4)
+                      )
+                    )
+                  )
+                )
+                (get_local $4)
+              )
+              (block
+                (set_local $5
+                  (get_local $10)
+                )
+                (loop $while-in
+                  (i32.store
+                    (get_local $3)
+                    (tee_local $5
+                      (i32.add
+                        (get_local $5)
+                        (i32.const -120)
+                      )
+                    )
+                  )
+                  (call $__ZN5VNodeD2Ev
+                    (get_local $5)
+                  )
+                  (br_if $while-in
+                    (i32.ne
+                      (tee_local $5
+                        (i32.load
+                          (get_local $3)
+                        )
+                      )
+                      (get_local $4)
+                    )
+                  )
+                )
+                (set_local $5
+                  (i32.load
+                    (get_local $0)
+                  )
+                )
+              )
+            )
+            (call $_free
+              (get_local $5)
+            )
+            (i32.store
+              (get_local $9)
+              (i32.const 0)
+            )
+            (i32.store
+              (get_local $3)
+              (i32.const 0)
+            )
+            (i32.store
+              (get_local $0)
+              (i32.const 0)
+            )
+            (set_local $5
+              (i32.const 0)
+            )
+          )
+        )
+        (if
+          (i32.gt_u
+            (get_local $7)
+            (i32.const 35791394)
+          )
+          (call $__ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv)
+        )
+        (set_local $10
+          (i32.lt_u
+            (tee_local $5
+              (call $i32s-div
+                (get_local $5)
+                (i32.const 120)
+              )
+            )
+            (i32.const 17895697)
+          )
+        )
+        (if
+          (i32.lt_u
+            (tee_local $5
+              (i32.shl
+                (get_local $5)
+                (i32.const 1)
+              )
+            )
+            (get_local $7)
+          )
+          (set_local $5
+            (get_local $7)
+          )
+        )
+        (if
+          (i32.gt_u
+            (tee_local $4
+              (if i32
+                (get_local $10)
+                (get_local $5)
+                (i32.const 35791394)
+              )
+            )
+            (i32.const 35791394)
+          )
+          (call $__ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv)
+        )
+        (block $label$break$L17
+          (if
+            (i32.eqz
+              (tee_local $5
+                (call $_malloc
+                  (if i32
+                    (tee_local $10
+                      (i32.mul
+                        (get_local $4)
+                        (i32.const 120)
+                      )
+                    )
+                    (get_local $10)
+                    (tee_local $10
+                      (i32.const 1)
+                    )
+                  )
+                )
+              )
+            )
+            (loop $while-in1
+              (i32.store
+                (i32.const 7784)
+                (i32.add
+                  (tee_local $5
+                    (i32.load
+                      (i32.const 7784)
+                    )
+                  )
+                  (i32.const 0)
+                )
+              )
+              (if
+                (i32.eqz
+                  (get_local $5)
+                )
+                (block
+                  (set_local $5
+                    (i32.const 0)
+                  )
+                  (br $label$break$L17)
+                )
+              )
+              (call_indirect $FUNCSIG$v
+                (i32.add
+                  (i32.and
+                    (get_local $5)
+                    (i32.const 3)
+                  )
+                  (i32.const 62)
+                )
+              )
+              (br_if $while-in1
+                (i32.eqz
+                  (tee_local $5
+                    (call $_malloc
+                      (get_local $10)
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+        (i32.store
+          (tee_local $10
+            (i32.add
+              (get_local $0)
+              (i32.const 4)
+            )
+          )
+          (get_local $5)
+        )
+        (i32.store
+          (get_local $0)
+          (get_local $5)
+        )
+        (i32.store
+          (get_local $9)
+          (i32.add
+            (get_local $5)
+            (i32.mul
+              (get_local $4)
+              (i32.const 120)
+            )
+          )
+        )
+        (if
+          (i32.eq
+            (get_local $1)
+            (get_local $2)
+          )
+          (return)
+        )
+        (loop $while-in3
+          (call $__ZN5VNodeC2ERKS_
+            (get_local $5)
+            (get_local $1)
+          )
+          (i32.store
+            (get_local $10)
+            (tee_local $5
+              (i32.add
+                (i32.load
+                  (get_local $10)
+                )
+                (i32.const 120)
+              )
+            )
+          )
+          (br_if $while-in3
+            (i32.ne
+              (tee_local $1
+                (i32.add
+                  (get_local $1)
+                  (i32.const 120)
+                )
+              )
+              (get_local $2)
+            )
+          )
+        )
+        (return)
+      )
+    )
+    (set_local $16
+      (i32.gt_u
+        (get_local $7)
+        (tee_local $0
+          (call $i32s-div
+            (i32.sub
+              (i32.load
+                (tee_local $14
+                  (i32.add
+                    (get_local $0)
+                    (i32.const 4)
+                  )
+                )
+              )
+              (get_local $3)
+            )
+            (i32.const 120)
+          )
+        )
+      )
+    )
+    (set_local $5
+      (i32.add
+        (get_local $1)
+        (i32.mul
+          (get_local $0)
+          (i32.const 120)
+        )
+      )
+    )
+    (block $label$break$L28
+      (if
+        (i32.eq
+          (tee_local $17
+            (if i32
+              (get_local $16)
+              (get_local $5)
+              (get_local $2)
+            )
+          )
+          (get_local $1)
+        )
+        (set_local $10
+          (get_local $4)
+        )
+        (block
+          (set_local $0
+            (get_local $4)
+          )
+          (block $__rjto$2
+            (block $__rjti$2
+              (block $__rjti$1
+                (block $__rjti$0
+                  (loop $label$continue$L29
+                    (block $do-once
+                      (if
+                        (i32.eqz
+                          (tee_local $18
+                            (i32.eq
+                              (get_local $0)
+                              (get_local $1)
+                            )
+                          )
+                        )
+                        (block
+                          (set_local $12
+                            (if i32
+                              (tee_local $9
+                                (i32.lt_s
+                                  (i32.load8_s
+                                    (tee_local $6
+                                      (i32.add
+                                        (get_local $0)
+                                        (i32.const 11)
+                                      )
+                                    )
+                                  )
+                                  (i32.const 0)
+                                )
+                              )
+                              (i32.add
+                                (i32.and
+                                  (i32.load offset=8
+                                    (get_local $0)
+                                  )
+                                  (i32.const 2147483647)
+                                )
+                                (i32.const -1)
+                              )
+                              (i32.const 10)
+                            )
+                          )
+                          (set_local $4
+                            (i32.load
+                              (get_local $1)
+                            )
+                          )
+                          (set_local $13
+                            (if i32
+                              (tee_local $7
+                                (i32.lt_s
+                                  (i32.shr_s
+                                    (i32.shl
+                                      (tee_local $3
+                                        (i32.load8_s offset=11
+                                          (get_local $1)
+                                        )
+                                      )
+                                      (i32.const 24)
+                                    )
+                                    (i32.const 24)
+                                  )
+                                  (i32.const 0)
+                                )
+                              )
+                              (get_local $4)
+                              (get_local $1)
+                            )
+                          )
+                          (set_local $4
+                            (i32.load offset=4
+                              (get_local $1)
+                            )
+                          )
+                          (set_local $3
+                            (i32.and
+                              (get_local $3)
+                              (i32.const 255)
+                            )
+                          )
+                          (if
+                            (i32.gt_u
+                              (tee_local $8
+                                (if i32
+                                  (get_local $7)
+                                  (get_local $4)
+                                  (get_local $3)
+                                )
+                              )
+                              (get_local $12)
+                            )
+                            (block
+                              (br_if $__rjti$0
+                                (i32.lt_u
+                                  (i32.sub
+                                    (i32.const -18)
+                                    (get_local $12)
+                                  )
+                                  (i32.sub
+                                    (get_local $8)
+                                    (get_local $12)
+                                  )
+                                )
+                              )
+                              (set_local $9
+                                (if i32
+                                  (get_local $9)
+                                  (i32.load
+                                    (get_local $0)
+                                  )
+                                  (get_local $0)
+                                )
+                              )
+                              (if
+                                (i32.lt_u
+                                  (get_local $12)
+                                  (i32.const 2147483623)
+                                )
+                                (block
+                                  (set_local $4
+                                    (i32.and
+                                      (i32.add
+                                        (if i32
+                                          (i32.lt_u
+                                            (get_local $8)
+                                            (tee_local $3
+                                              (i32.shl
+                                                (get_local $12)
+                                                (i32.const 1)
+                                              )
+                                            )
+                                          )
+                                          (get_local $3)
+                                          (tee_local $3
+                                            (get_local $8)
+                                          )
+                                        )
+                                        (i32.const 16)
+                                      )
+                                      (i32.const -16)
+                                    )
+                                  )
+                                  (if
+                                    (i32.lt_u
+                                      (get_local $3)
+                                      (i32.const 11)
+                                    )
+                                    (set_local $4
+                                      (i32.const 11)
+                                    )
+                                  )
+                                )
+                                (set_local $4
+                                  (i32.const -17)
+                                )
+                              )
+                              (block $label$break$L46
+                                (if
+                                  (i32.eqz
+                                    (tee_local $3
+                                      (call $_malloc
+                                        (tee_local $7
+                                          (if i32
+                                            (get_local $4)
+                                            (get_local $4)
+                                            (i32.const 1)
+                                          )
+                                        )
+                                      )
+                                    )
+                                  )
+                                  (loop $while-in10
+                                    (i32.store
+                                      (i32.const 7784)
+                                      (i32.add
+                                        (tee_local $3
+                                          (i32.load
+                                            (i32.const 7784)
+                                          )
+                                        )
+                                        (i32.const 0)
+                                      )
+                                    )
+                                    (if
+                                      (i32.eqz
+                                        (get_local $3)
+                                      )
+                                      (block
+                                        (set_local $3
+                                          (i32.const 0)
+                                        )
+                                        (br $label$break$L46)
+                                      )
+                                    )
+                                    (call_indirect $FUNCSIG$v
+                                      (i32.add
+                                        (i32.and
+                                          (get_local $3)
+                                          (i32.const 3)
+                                        )
+                                        (i32.const 62)
+                                      )
+                                    )
+                                    (br_if $while-in10
+                                      (i32.eqz
+                                        (tee_local $3
+                                          (call $_malloc
+                                            (get_local $7)
+                                          )
+                                        )
+                                      )
+                                    )
+                                  )
+                                )
+                              )
+                              (if
+                                (get_local $8)
+                                (drop
+                                  (call $_memcpy
+                                    (get_local $3)
+                                    (get_local $13)
+                                    (get_local $8)
+                                  )
+                                )
+                              )
+                              (if
+                                (i32.ne
+                                  (get_local $12)
+                                  (i32.const 10)
+                                )
+                                (call $_free
+                                  (get_local $9)
+                                )
+                              )
+                              (i32.store
+                                (get_local $0)
+                                (get_local $3)
+                              )
+                              (i32.store offset=8
+                                (get_local $0)
+                                (i32.or
+                                  (get_local $4)
+                                  (i32.const -2147483648)
+                                )
+                              )
+                              (i32.store offset=4
+                                (get_local $0)
+                                (get_local $8)
+                              )
+                              (i32.store8
+                                (i32.add
+                                  (get_local $3)
+                                  (get_local $8)
+                                )
+                                (i32.const 0)
+                              )
+                            )
+                            (block
+                              (set_local $4
+                                (if i32
+                                  (get_local $9)
+                                  (i32.load
+                                    (get_local $0)
+                                  )
+                                  (get_local $0)
+                                )
+                              )
+                              (if
+                                (get_local $8)
+                                (drop
+                                  (call $_memmove
+                                    (get_local $4)
+                                    (get_local $13)
+                                    (get_local $8)
+                                  )
+                                )
+                              )
+                              (i32.store8
+                                (i32.add
+                                  (get_local $4)
+                                  (get_local $8)
+                                )
+                                (i32.const 0)
+                              )
+                              (if
+                                (i32.lt_s
+                                  (i32.load8_s
+                                    (get_local $6)
+                                  )
+                                  (i32.const 0)
+                                )
+                                (i32.store offset=4
+                                  (get_local $0)
+                                  (get_local $8)
+                                )
+                                (i32.store8
+                                  (get_local $6)
+                                  (get_local $8)
+                                )
+                              )
+                            )
+                          )
+                          (set_local $11
+                            (if i32
+                              (tee_local $12
+                                (i32.lt_s
+                                  (i32.load8_s
+                                    (tee_local $15
+                                      (i32.add
+                                        (tee_local $7
+                                          (i32.add
+                                            (get_local $0)
+                                            (i32.const 12)
+                                          )
+                                        )
+                                        (i32.const 11)
+                                      )
+                                    )
+                                  )
+                                  (i32.const 0)
+                                )
+                              )
+                              (i32.add
+                                (i32.and
+                                  (i32.load offset=20
+                                    (get_local $0)
+                                  )
+                                  (i32.const 2147483647)
+                                )
+                                (i32.const -1)
+                              )
+                              (i32.const 10)
+                            )
+                          )
+                          (set_local $9
+                            (i32.lt_s
+                              (i32.shr_s
+                                (i32.shl
+                                  (tee_local $3
+                                    (i32.load8_s offset=11
+                                      (tee_local $13
+                                        (i32.add
+                                          (get_local $1)
+                                          (i32.const 12)
+                                        )
+                                      )
+                                    )
+                                  )
+                                  (i32.const 24)
+                                )
+                                (i32.const 24)
+                              )
+                              (i32.const 0)
+                            )
+                          )
+                          (set_local $4
+                            (i32.load
+                              (get_local $13)
+                            )
+                          )
+                          (set_local $8
+                            (if i32
+                              (get_local $9)
+                              (get_local $4)
+                              (get_local $13)
+                            )
+                          )
+                          (set_local $4
+                            (i32.load offset=16
+                              (get_local $1)
+                            )
+                          )
+                          (set_local $3
+                            (i32.and
+                              (get_local $3)
+                              (i32.const 255)
+                            )
+                          )
+                          (if
+                            (i32.gt_u
+                              (tee_local $6
+                                (if i32
+                                  (get_local $9)
+                                  (get_local $4)
+                                  (get_local $3)
+                                )
+                              )
+                              (get_local $11)
+                            )
+                            (block
+                              (br_if $__rjti$1
+                                (i32.lt_u
+                                  (i32.sub
+                                    (i32.const -18)
+                                    (get_local $11)
+                                  )
+                                  (i32.sub
+                                    (get_local $6)
+                                    (get_local $11)
+                                  )
+                                )
+                              )
+                              (set_local $13
+                                (if i32
+                                  (get_local $12)
+                                  (i32.load
+                                    (get_local $7)
+                                  )
+                                  (get_local $7)
+                                )
+                              )
+                              (if
+                                (i32.lt_u
+                                  (get_local $11)
+                                  (i32.const 2147483623)
+                                )
+                                (block
+                                  (set_local $4
+                                    (i32.and
+                                      (i32.add
+                                        (if i32
+                                          (i32.lt_u
+                                            (get_local $6)
+                                            (tee_local $3
+                                              (i32.shl
+                                                (get_local $11)
+                                                (i32.const 1)
+                                              )
+                                            )
+                                          )
+                                          (get_local $3)
+                                          (tee_local $3
+                                            (get_local $6)
+                                          )
+                                        )
+                                        (i32.const 16)
+                                      )
+                                      (i32.const -16)
+                                    )
+                                  )
+                                  (if
+                                    (i32.lt_u
+                                      (get_local $3)
+                                      (i32.const 11)
+                                    )
+                                    (set_local $4
+                                      (i32.const 11)
+                                    )
+                                  )
+                                )
+                                (set_local $4
+                                  (i32.const -17)
+                                )
+                              )
+                              (block $label$break$L82
+                                (if
+                                  (i32.eqz
+                                    (tee_local $3
+                                      (call $_malloc
+                                        (tee_local $9
+                                          (if i32
+                                            (get_local $4)
+                                            (get_local $4)
+                                            (i32.const 1)
+                                          )
+                                        )
+                                      )
+                                    )
+                                  )
+                                  (loop $while-in15
+                                    (i32.store
+                                      (i32.const 7784)
+                                      (i32.add
+                                        (tee_local $3
+                                          (i32.load
+                                            (i32.const 7784)
+                                          )
+                                        )
+                                        (i32.const 0)
+                                      )
+                                    )
+                                    (if
+                                      (i32.eqz
+                                        (get_local $3)
+                                      )
+                                      (block
+                                        (set_local $3
+                                          (i32.const 0)
+                                        )
+                                        (br $label$break$L82)
+                                      )
+                                    )
+                                    (call_indirect $FUNCSIG$v
+                                      (i32.add
+                                        (i32.and
+                                          (get_local $3)
+                                          (i32.const 3)
+                                        )
+                                        (i32.const 62)
+                                      )
+                                    )
+                                    (br_if $while-in15
+                                      (i32.eqz
+                                        (tee_local $3
+                                          (call $_malloc
+                                            (get_local $9)
+                                          )
+                                        )
+                                      )
+                                    )
+                                  )
+                                )
+                              )
+                              (if
+                                (get_local $6)
+                                (drop
+                                  (call $_memcpy
+                                    (get_local $3)
+                                    (get_local $8)
+                                    (get_local $6)
+                                  )
+                                )
+                              )
+                              (if
+                                (i32.ne
+                                  (get_local $11)
+                                  (i32.const 10)
+                                )
+                                (call $_free
+                                  (get_local $13)
+                                )
+                              )
+                              (i32.store
+                                (get_local $7)
+                                (get_local $3)
+                              )
+                              (i32.store offset=20
+                                (get_local $0)
+                                (i32.or
+                                  (get_local $4)
+                                  (i32.const -2147483648)
+                                )
+                              )
+                              (i32.store offset=16
+                                (get_local $0)
+                                (get_local $6)
+                              )
+                              (i32.store8
+                                (i32.add
+                                  (get_local $3)
+                                  (get_local $6)
+                                )
+                                (i32.const 0)
+                              )
+                            )
+                            (block
+                              (if
+                                (get_local $12)
+                                (set_local $7
+                                  (i32.load
+                                    (get_local $7)
+                                  )
+                                )
+                              )
+                              (if
+                                (get_local $6)
+                                (drop
+                                  (call $_memmove
+                                    (get_local $7)
+                                    (get_local $8)
+                                    (get_local $6)
+                                  )
+                                )
+                              )
+                              (i32.store8
+                                (i32.add
+                                  (get_local $7)
+                                  (get_local $6)
+                                )
+                                (i32.const 0)
+                              )
+                              (if
+                                (i32.lt_s
+                                  (i32.load8_s
+                                    (get_local $15)
+                                  )
+                                  (i32.const 0)
+                                )
+                                (i32.store offset=16
+                                  (get_local $0)
+                                  (get_local $6)
+                                )
+                                (i32.store8
+                                  (get_local $15)
+                                  (get_local $6)
+                                )
+                              )
+                            )
+                          )
+                          (set_local $11
+                            (if i32
+                              (tee_local $12
+                                (i32.lt_s
+                                  (i32.load8_s
+                                    (tee_local $15
+                                      (i32.add
+                                        (tee_local $7
+                                          (i32.add
+                                            (get_local $0)
+                                            (i32.const 24)
+                                          )
+                                        )
+                                        (i32.const 11)
+                                      )
+                                    )
+                                  )
+                                  (i32.const 0)
+                                )
+                              )
+                              (i32.add
+                                (i32.and
+                                  (i32.load offset=32
+                                    (get_local $0)
+                                  )
+                                  (i32.const 2147483647)
+                                )
+                                (i32.const -1)
+                              )
+                              (i32.const 10)
+                            )
+                          )
+                          (set_local $9
+                            (i32.lt_s
+                              (i32.shr_s
+                                (i32.shl
+                                  (tee_local $3
+                                    (i32.load8_s offset=11
+                                      (tee_local $13
+                                        (i32.add
+                                          (get_local $1)
+                                          (i32.const 24)
+                                        )
+                                      )
+                                    )
+                                  )
+                                  (i32.const 24)
+                                )
+                                (i32.const 24)
+                              )
+                              (i32.const 0)
+                            )
+                          )
+                          (set_local $4
+                            (i32.load
+                              (get_local $13)
+                            )
+                          )
+                          (set_local $8
+                            (if i32
+                              (get_local $9)
+                              (get_local $4)
+                              (get_local $13)
+                            )
+                          )
+                          (set_local $4
+                            (i32.load offset=28
+                              (get_local $1)
+                            )
+                          )
+                          (set_local $3
+                            (i32.and
+                              (get_local $3)
+                              (i32.const 255)
+                            )
+                          )
+                          (if
+                            (i32.le_u
+                              (tee_local $6
+                                (if i32
+                                  (get_local $9)
+                                  (get_local $4)
+                                  (get_local $3)
+                                )
+                              )
+                              (get_local $11)
+                            )
+                            (block
+                              (if
+                                (get_local $12)
+                                (set_local $7
+                                  (i32.load
+                                    (get_local $7)
+                                  )
+                                )
+                              )
+                              (if
+                                (get_local $6)
+                                (drop
+                                  (call $_memmove
+                                    (get_local $7)
+                                    (get_local $8)
+                                    (get_local $6)
+                                  )
+                                )
+                              )
+                              (i32.store8
+                                (i32.add
+                                  (get_local $7)
+                                  (get_local $6)
+                                )
+                                (i32.const 0)
+                              )
+                              (if
+                                (i32.lt_s
+                                  (i32.load8_s
+                                    (get_local $15)
+                                  )
+                                  (i32.const 0)
+                                )
+                                (block
+                                  (i32.store offset=28
+                                    (get_local $0)
+                                    (get_local $6)
+                                  )
+                                  (br $do-once)
+                                )
+                                (block
+                                  (i32.store8
+                                    (get_local $15)
+                                    (get_local $6)
+                                  )
+                                  (br $do-once)
+                                )
+                              )
+                            )
+                          )
+                          (br_if $__rjti$2
+                            (i32.lt_u
+                              (i32.sub
+                                (i32.const -18)
+                                (get_local $11)
+                              )
+                              (i32.sub
+                                (get_local $6)
+                                (get_local $11)
+                              )
+                            )
+                          )
+                          (set_local $13
+                            (if i32
+                              (get_local $12)
+                              (i32.load
+                                (get_local $7)
+                              )
+                              (get_local $7)
+                            )
+                          )
+                          (if
+                            (i32.lt_u
+                              (get_local $11)
+                              (i32.const 2147483623)
+                            )
+                            (block
+                              (set_local $4
+                                (i32.and
+                                  (i32.add
+                                    (if i32
+                                      (i32.lt_u
+                                        (get_local $6)
+                                        (tee_local $3
+                                          (i32.shl
+                                            (get_local $11)
+                                            (i32.const 1)
+                                          )
+                                        )
+                                      )
+                                      (get_local $3)
+                                      (tee_local $3
+                                        (get_local $6)
+                                      )
+                                    )
+                                    (i32.const 16)
+                                  )
+                                  (i32.const -16)
+                                )
+                              )
+                              (if
+                                (i32.lt_u
+                                  (get_local $3)
+                                  (i32.const 11)
+                                )
+                                (set_local $4
+                                  (i32.const 11)
+                                )
+                              )
+                            )
+                            (set_local $4
+                              (i32.const -17)
+                            )
+                          )
+                          (block $label$break$L129
+                            (if
+                              (i32.eqz
+                                (tee_local $3
+                                  (call $_malloc
+                                    (tee_local $9
+                                      (if i32
+                                        (get_local $4)
+                                        (get_local $4)
+                                        (i32.const 1)
+                                      )
+                                    )
+                                  )
+                                )
+                              )
+                              (loop $while-in18
+                                (i32.store
+                                  (i32.const 7784)
+                                  (i32.add
+                                    (tee_local $3
+                                      (i32.load
+                                        (i32.const 7784)
+                                      )
+                                    )
+                                    (i32.const 0)
+                                  )
+                                )
+                                (if
+                                  (i32.eqz
+                                    (get_local $3)
+                                  )
+                                  (block
+                                    (set_local $3
+                                      (i32.const 0)
+                                    )
+                                    (br $label$break$L129)
+                                  )
+                                )
+                                (call_indirect $FUNCSIG$v
+                                  (i32.add
+                                    (i32.and
+                                      (get_local $3)
+                                      (i32.const 3)
+                                    )
+                                    (i32.const 62)
+                                  )
+                                )
+                                (br_if $while-in18
+                                  (i32.eqz
+                                    (tee_local $3
+                                      (call $_malloc
+                                        (get_local $9)
+                                      )
+                                    )
+                                  )
+                                )
+                              )
+                            )
+                          )
+                          (if
+                            (get_local $6)
+                            (drop
+                              (call $_memcpy
+                                (get_local $3)
+                                (get_local $8)
+                                (get_local $6)
+                              )
+                            )
+                          )
+                          (if
+                            (i32.ne
+                              (get_local $11)
+                              (i32.const 10)
+                            )
+                            (call $_free
+                              (get_local $13)
+                            )
+                          )
+                          (i32.store
+                            (get_local $7)
+                            (get_local $3)
+                          )
+                          (i32.store offset=32
+                            (get_local $0)
+                            (i32.or
+                              (get_local $4)
+                              (i32.const -2147483648)
+                            )
+                          )
+                          (i32.store offset=28
+                            (get_local $0)
+                            (get_local $6)
+                          )
+                          (i32.store8
+                            (i32.add
+                              (get_local $3)
+                              (get_local $6)
+                            )
+                            (i32.const 0)
+                          )
+                        )
+                      )
+                    )
+                    (call $__ZN9VNodeDataaSERKS_
+                      (i32.add
+                        (get_local $0)
+                        (i32.const 36)
+                      )
+                      (i32.add
+                        (get_local $1)
+                        (i32.const 36)
+                      )
+                    )
+                    (call $__emval_incref
+                      (i32.load
+                        (tee_local $3
+                          (i32.add
+                            (get_local $1)
+                            (i32.const 104)
+                          )
+                        )
+                      )
+                    )
+                    (call $__emval_decref
+                      (i32.load
+                        (tee_local $4
+                          (i32.add
+                            (get_local $0)
+                            (i32.const 104)
+                          )
+                        )
+                      )
+                    )
+                    (i32.store
+                      (get_local $4)
+                      (i32.load
+                        (get_local $3)
+                      )
+                    )
+                    (if
+                      (i32.eqz
+                        (get_local $18)
+                      )
+                      (call $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE6assignIPS1_EENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIS1_NS_15iterator_traitsIS8_E9referenceEEE5valueEvE4typeES8_S8_
+                        (i32.add
+                          (get_local $0)
+                          (i32.const 108)
+                        )
+                        (i32.load offset=108
+                          (get_local $1)
+                        )
+                        (i32.load offset=112
+                          (get_local $1)
+                        )
+                      )
+                    )
+                    (set_local $0
+                      (i32.add
+                        (get_local $0)
+                        (i32.const 120)
+                      )
+                    )
+                    (br_if $label$continue$L29
+                      (i32.ne
+                        (tee_local $1
+                          (i32.add
+                            (get_local $1)
+                            (i32.const 120)
+                          )
+                        )
+                        (get_local $17)
+                      )
+                    )
+                    (set_local $10
+                      (get_local $0)
+                    )
+                    (br $label$break$L28)
+                  )
+                )
+                (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+                (br $__rjto$2)
+              )
+              (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+              (br $__rjto$2)
+            )
+            (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+          )
+        )
+      )
+    )
+    (if
+      (i32.eqz
+        (get_local $16)
+      )
+      (block
+        (if
+          (i32.eq
+            (tee_local $0
+              (i32.load
+                (get_local $14)
+              )
+            )
+            (get_local $10)
+          )
+          (return)
+        )
+        (loop $while-in20
+          (i32.store
+            (get_local $14)
+            (tee_local $0
+              (i32.add
+                (get_local $0)
+                (i32.const -120)
+              )
+            )
+          )
+          (call $__ZN5VNodeD2Ev
+            (get_local $0)
+          )
+          (br_if $while-in20
+            (i32.ne
+              (tee_local $0
+                (i32.load
+                  (get_local $14)
+                )
+              )
+              (get_local $10)
+            )
+          )
+        )
+        (return)
+      )
+    )
+    (if
+      (i32.eq
+        (get_local $17)
+        (get_local $2)
+      )
+      (return)
+    )
+    (set_local $1
+      (i32.load
+        (get_local $14)
+      )
+    )
+    (set_local $0
+      (get_local $5)
+    )
+    (loop $while-in22
+      (call $__ZN5VNodeC2ERKS_
+        (get_local $1)
+        (get_local $0)
+      )
+      (i32.store
+        (get_local $14)
+        (tee_local $1
+          (i32.add
+            (i32.load
+              (get_local $14)
+            )
+            (i32.const 120)
+          )
+        )
+      )
+      (br_if $while-in22
+        (i32.ne
+          (tee_local $0
+            (i32.add
+              (get_local $0)
+              (i32.const 120)
+            )
+          )
+          (get_local $2)
+        )
+      )
+    )
+  )
+  (func $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE9push_backERKS1_ (param $0 i32) (param $1 i32)
+    (local $2 i32)
+    (local $3 i32)
+    (local $4 i32)
+    (local $5 i32)
+    (local $6 i32)
+    (local $7 i32)
+    (local $8 i32)
+    (local $9 i32)
+    (local $10 i32)
+    (local $11 i32)
+    (set_local $10
+      (get_global $STACKTOP)
+    )
+    (set_global $STACKTOP
+      (i32.add
+        (get_global $STACKTOP)
+        (i32.const 32)
+      )
+    )
+    (if
+      (i32.ne
+        (tee_local $2
+          (i32.load
+            (tee_local $7
+              (i32.add
+                (get_local $0)
+                (i32.const 4)
+              )
+            )
+          )
+        )
+        (tee_local $4
+          (i32.load
+            (tee_local $11
+              (i32.add
+                (get_local $0)
+                (i32.const 8)
+              )
+            )
+          )
+        )
+      )
+      (block
+        (call $__ZN5VNodeC2ERKS_
+          (get_local $2)
+          (get_local $1)
+        )
+        (i32.store
+          (get_local $7)
+          (i32.add
+            (i32.load
+              (get_local $7)
+            )
+            (i32.const 120)
+          )
+        )
+        (set_global $STACKTOP
+          (get_local $10)
+        )
+        (return)
+      )
+    )
+    (if
+      (i32.gt_u
+        (tee_local $2
+          (i32.add
+            (tee_local $8
+              (call $i32s-div
+                (i32.sub
+                  (get_local $2)
+                  (tee_local $3
+                    (i32.load
+                      (get_local $0)
+                    )
+                  )
+                )
+                (i32.const 120)
+              )
+            )
+            (i32.const 1)
+          )
+        )
+        (i32.const 35791394)
+      )
+      (call $__ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv)
+    )
+    (set_local $5
+      (get_local $10)
+    )
+    (set_local $6
+      (i32.add
+        (get_local $0)
+        (i32.const 8)
+      )
+    )
+    (set_local $4
+      (i32.lt_u
+        (tee_local $3
+          (call $i32s-div
+            (i32.sub
+              (get_local $4)
+              (get_local $3)
+            )
+            (i32.const 120)
+          )
+        )
+        (i32.const 17895697)
+      )
+    )
+    (if
+      (i32.ge_u
+        (tee_local $3
+          (i32.shl
+            (get_local $3)
+            (i32.const 1)
+          )
+        )
+        (get_local $2)
+      )
+      (set_local $2
+        (get_local $3)
+      )
+    )
+    (i32.store offset=12
+      (get_local $5)
+      (i32.const 0)
+    )
+    (i32.store offset=16
+      (get_local $5)
+      (get_local $6)
+    )
+    (if
+      (tee_local $4
+        (if i32
+          (get_local $4)
+          (get_local $2)
+          (i32.const 35791394)
+        )
+      )
+      (block
+        (if
+          (i32.gt_u
+            (get_local $4)
+            (i32.const 35791394)
+          )
+          (block
+            (i32.store
+              (tee_local $2
+                (call $___cxa_allocate_exception
+                  (i32.const 4)
+                )
+              )
+              (i32.const 1932)
+            )
+            (call $___cxa_throw
+              (get_local $2)
+              (i32.const 1440)
+              (i32.const 6)
+            )
+          )
+        )
+        (block $label$break$L13
+          (if
+            (i32.eqz
+              (tee_local $2
+                (call $_malloc
+                  (if i32
+                    (tee_local $3
+                      (i32.mul
+                        (get_local $4)
+                        (i32.const 120)
+                      )
+                    )
+                    (get_local $3)
+                    (tee_local $3
+                      (i32.const 1)
+                    )
+                  )
+                )
+              )
+            )
+            (loop $while-in
+              (i32.store
+                (i32.const 7784)
+                (i32.add
+                  (tee_local $2
+                    (i32.load
+                      (i32.const 7784)
+                    )
+                  )
+                  (i32.const 0)
+                )
+              )
+              (if
+                (i32.eqz
+                  (get_local $2)
+                )
+                (block
+                  (set_local $2
+                    (i32.const 0)
+                  )
+                  (br $label$break$L13)
+                )
+              )
+              (call_indirect $FUNCSIG$v
+                (i32.add
+                  (i32.and
+                    (get_local $2)
+                    (i32.const 3)
+                  )
+                  (i32.const 62)
+                )
+              )
+              (br_if $while-in
+                (i32.eqz
+                  (tee_local $2
+                    (call $_malloc
+                      (get_local $3)
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+      (set_local $2
+        (i32.const 0)
+      )
+    )
+    (i32.store
+      (get_local $5)
+      (get_local $2)
+    )
+    (i32.store
+      (tee_local $9
+        (i32.add
+          (get_local $5)
+          (i32.const 8)
+        )
+      )
+      (tee_local $6
+        (i32.add
+          (get_local $2)
+          (i32.mul
+            (get_local $8)
+            (i32.const 120)
+          )
+        )
+      )
+    )
+    (i32.store
+      (tee_local $3
+        (i32.add
+          (get_local $5)
+          (i32.const 4)
+        )
+      )
+      (get_local $6)
+    )
+    (i32.store
+      (tee_local $8
+        (i32.add
+          (get_local $5)
+          (i32.const 12)
+        )
+      )
+      (i32.add
+        (get_local $2)
+        (i32.mul
+          (get_local $4)
+          (i32.const 120)
+        )
+      )
+    )
+    (call $__ZN5VNodeC2ERKS_
+      (get_local $6)
       (get_local $1)
+    )
+    (i32.store
+      (get_local $9)
+      (i32.add
+        (i32.load
+          (get_local $9)
+        )
+        (i32.const 120)
+      )
+    )
+    (set_local $4
+      (if i32
+        (i32.eq
+          (tee_local $1
+            (i32.load
+              (get_local $7)
+            )
+          )
+          (tee_local $6
+            (i32.load
+              (get_local $0)
+            )
+          )
+        )
+        (block i32
+          (set_local $2
+            (get_local $3)
+          )
+          (set_local $3
+            (i32.load
+              (get_local $3)
+            )
+          )
+          (tee_local $1
+            (get_local $6)
+          )
+        )
+        (block i32
+          (set_local $4
+            (i32.load
+              (get_local $3)
+            )
+          )
+          (loop $while-in1
+            (call $__ZN5VNodeC2ERKS_
+              (i32.add
+                (get_local $4)
+                (i32.const -120)
+              )
+              (tee_local $2
+                (i32.add
+                  (get_local $1)
+                  (i32.const -120)
+                )
+              )
+            )
+            (i32.store
+              (get_local $3)
+              (tee_local $1
+                (i32.add
+                  (i32.load
+                    (get_local $3)
+                  )
+                  (i32.const -120)
+                )
+              )
+            )
+            (if
+              (i32.ne
+                (get_local $2)
+                (get_local $6)
+              )
+              (block
+                (set_local $4
+                  (get_local $1)
+                )
+                (set_local $1
+                  (get_local $2)
+                )
+                (br $while-in1)
+              )
+            )
+          )
+          (set_local $2
+            (get_local $3)
+          )
+          (set_local $3
+            (get_local $1)
+          )
+          (set_local $1
+            (i32.load
+              (get_local $7)
+            )
+          )
+          (i32.load
+            (get_local $0)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (get_local $3)
+    )
+    (i32.store
+      (get_local $2)
+      (get_local $4)
+    )
+    (i32.store
+      (get_local $7)
+      (i32.load
+        (get_local $9)
+      )
+    )
+    (i32.store
+      (get_local $9)
+      (get_local $1)
+    )
+    (set_local $0
+      (i32.load
+        (get_local $11)
+      )
+    )
+    (i32.store
+      (get_local $11)
+      (i32.load
+        (get_local $8)
+      )
+    )
+    (i32.store
+      (get_local $8)
+      (get_local $0)
+    )
+    (i32.store
+      (get_local $5)
+      (i32.load
+        (get_local $2)
+      )
+    )
+    (call $__ZNSt3__214__split_bufferI5VNodeRNS_9allocatorIS1_EEED2Ev
+      (get_local $5)
+    )
+    (set_global $STACKTOP
+      (get_local $10)
+    )
+  )
+  (func $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE6resizeEjRKS1_ (param $0 i32) (param $1 i32) (param $2 i32)
+    (local $3 i32)
+    (local $4 i32)
+    (local $5 i32)
+    (local $6 i32)
+    (local $7 i32)
+    (local $8 i32)
+    (local $9 i32)
+    (local $10 i32)
+    (local $11 i32)
+    (local $12 i32)
+    (local $13 i32)
+    (set_local $9
+      (get_global $STACKTOP)
+    )
+    (set_global $STACKTOP
+      (i32.add
+        (get_global $STACKTOP)
+        (i32.const 32)
+      )
+    )
+    (set_local $10
+      (call $i32s-div
+        (i32.sub
+          (tee_local $6
+            (i32.load
+              (tee_local $8
+                (i32.add
+                  (get_local $0)
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+          (tee_local $4
+            (i32.load
+              (get_local $0)
+            )
+          )
+        )
+        (i32.const 120)
+      )
+    )
+    (set_local $5
+      (get_local $4)
+    )
+    (set_local $3
+      (get_local $6)
+    )
+    (if
+      (i32.ge_u
+        (get_local $10)
+        (get_local $1)
+      )
+      (block
+        (if
+          (i32.le_u
+            (get_local $10)
+            (get_local $1)
+          )
+          (block
+            (set_global $STACKTOP
+              (get_local $9)
+            )
+            (return)
+          )
+        )
+        (if
+          (i32.eq
+            (get_local $3)
+            (tee_local $1
+              (i32.add
+                (get_local $5)
+                (i32.mul
+                  (get_local $1)
+                  (i32.const 120)
+                )
+              )
+            )
+          )
+          (block
+            (set_global $STACKTOP
+              (get_local $9)
+            )
+            (return)
+          )
+        )
+        (loop $while-in
+          (i32.store
+            (get_local $8)
+            (tee_local $0
+              (i32.add
+                (get_local $3)
+                (i32.const -120)
+              )
+            )
+          )
+          (call $__ZN5VNodeD2Ev
+            (get_local $0)
+          )
+          (br_if $while-in
+            (i32.ne
+              (tee_local $3
+                (i32.load
+                  (get_local $8)
+                )
+              )
+              (get_local $1)
+            )
+          )
+        )
+        (set_global $STACKTOP
+          (get_local $9)
+        )
+        (return)
+      )
+    )
+    (if
+      (i32.ge_u
+        (call $i32s-div
+          (i32.sub
+            (tee_local $11
+              (i32.load
+                (tee_local $13
+                  (i32.add
+                    (get_local $0)
+                    (i32.const 8)
+                  )
+                )
+              )
+            )
+            (get_local $6)
+          )
+          (i32.const 120)
+        )
+        (tee_local $5
+          (i32.sub
+            (get_local $1)
+            (get_local $10)
+          )
+        )
+      )
+      (block
+        (set_local $0
+          (get_local $5)
+        )
+        (loop $while-in1
+          (call $__ZN5VNodeC2ERKS_
+            (get_local $3)
+            (get_local $2)
+          )
+          (i32.store
+            (get_local $8)
+            (tee_local $3
+              (i32.add
+                (i32.load
+                  (get_local $8)
+                )
+                (i32.const 120)
+              )
+            )
+          )
+          (br_if $while-in1
+            (tee_local $0
+              (i32.add
+                (get_local $0)
+                (i32.const -1)
+              )
+            )
+          )
+        )
+        (set_global $STACKTOP
+          (get_local $9)
+        )
+        (return)
+      )
+    )
+    (if
+      (i32.gt_u
+        (get_local $1)
+        (i32.const 35791394)
+      )
+      (call $__ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv)
+    )
+    (set_local $7
+      (get_local $9)
+    )
+    (set_local $6
+      (i32.add
+        (get_local $0)
+        (i32.const 8)
+      )
+    )
+    (set_local $4
+      (i32.lt_u
+        (tee_local $3
+          (call $i32s-div
+            (i32.sub
+              (get_local $11)
+              (get_local $4)
+            )
+            (i32.const 120)
+          )
+        )
+        (i32.const 17895697)
+      )
+    )
+    (if
+      (i32.ge_u
+        (tee_local $3
+          (i32.shl
+            (get_local $3)
+            (i32.const 1)
+          )
+        )
+        (get_local $1)
+      )
+      (set_local $1
+        (get_local $3)
+      )
+    )
+    (i32.store offset=12
+      (get_local $7)
+      (i32.const 0)
+    )
+    (i32.store offset=16
+      (get_local $7)
+      (get_local $6)
+    )
+    (if
+      (tee_local $6
+        (if i32
+          (get_local $4)
+          (get_local $1)
+          (i32.const 35791394)
+        )
+      )
+      (block
+        (if
+          (i32.gt_u
+            (get_local $6)
+            (i32.const 35791394)
+          )
+          (block
+            (i32.store
+              (tee_local $1
+                (call $___cxa_allocate_exception
+                  (i32.const 4)
+                )
+              )
+              (i32.const 1932)
+            )
+            (call $___cxa_throw
+              (get_local $1)
+              (i32.const 1440)
+              (i32.const 6)
+            )
+          )
+        )
+        (block $label$break$L25
+          (if
+            (i32.eqz
+              (tee_local $1
+                (call $_malloc
+                  (if i32
+                    (tee_local $3
+                      (i32.mul
+                        (get_local $6)
+                        (i32.const 120)
+                      )
+                    )
+                    (get_local $3)
+                    (tee_local $3
+                      (i32.const 1)
+                    )
+                  )
+                )
+              )
+            )
+            (loop $while-in3
+              (i32.store
+                (i32.const 7784)
+                (i32.add
+                  (tee_local $1
+                    (i32.load
+                      (i32.const 7784)
+                    )
+                  )
+                  (i32.const 0)
+                )
+              )
+              (if
+                (i32.eqz
+                  (get_local $1)
+                )
+                (block
+                  (set_local $1
+                    (i32.const 0)
+                  )
+                  (br $label$break$L25)
+                )
+              )
+              (call_indirect $FUNCSIG$v
+                (i32.add
+                  (i32.and
+                    (get_local $1)
+                    (i32.const 3)
+                  )
+                  (i32.const 62)
+                )
+              )
+              (br_if $while-in3
+                (i32.eqz
+                  (tee_local $1
+                    (call $_malloc
+                      (get_local $3)
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+      (set_local $1
+        (i32.const 0)
+      )
+    )
+    (i32.store
+      (get_local $7)
+      (get_local $1)
+    )
+    (i32.store
+      (tee_local $12
+        (i32.add
+          (get_local $7)
+          (i32.const 8)
+        )
+      )
+      (tee_local $3
+        (i32.add
+          (get_local $1)
+          (i32.mul
+            (get_local $10)
+            (i32.const 120)
+          )
+        )
+      )
+    )
+    (i32.store
+      (tee_local $4
+        (i32.add
+          (get_local $7)
+          (i32.const 4)
+        )
+      )
+      (get_local $3)
+    )
+    (i32.store
+      (tee_local $11
+        (i32.add
+          (get_local $7)
+          (i32.const 12)
+        )
+      )
+      (i32.add
+        (get_local $1)
+        (i32.mul
+          (get_local $6)
+          (i32.const 120)
+        )
+      )
+    )
+    (set_local $1
+      (get_local $5)
+    )
+    (loop $while-in5
+      (call $__ZN5VNodeC2ERKS_
+        (get_local $3)
+        (get_local $2)
+      )
+      (i32.store
+        (get_local $12)
+        (tee_local $3
+          (i32.add
+            (i32.load
+              (get_local $12)
+            )
+            (i32.const 120)
+          )
+        )
+      )
+      (br_if $while-in5
+        (tee_local $1
+          (i32.add
+            (get_local $1)
+            (i32.const -1)
+          )
+        )
+      )
+    )
+    (set_local $2
+      (if i32
+        (i32.eq
+          (tee_local $1
+            (i32.load
+              (get_local $8)
+            )
+          )
+          (tee_local $5
+            (i32.load
+              (get_local $0)
+            )
+          )
+        )
+        (block i32
+          (set_local $3
+            (i32.load
+              (get_local $4)
+            )
+          )
+          (set_local $5
+            (tee_local $1
+              (get_local $5)
+            )
+          )
+          (get_local $4)
+        )
+        (block i32
+          (set_local $3
+            (i32.load
+              (get_local $4)
+            )
+          )
+          (loop $while-in7
+            (call $__ZN5VNodeC2ERKS_
+              (i32.add
+                (get_local $3)
+                (i32.const -120)
+              )
+              (tee_local $2
+                (i32.add
+                  (get_local $1)
+                  (i32.const -120)
+                )
+              )
+            )
+            (i32.store
+              (get_local $4)
+              (tee_local $1
+                (i32.add
+                  (i32.load
+                    (get_local $4)
+                  )
+                  (i32.const -120)
+                )
+              )
+            )
+            (if
+              (i32.ne
+                (get_local $2)
+                (get_local $5)
+              )
+              (block
+                (set_local $3
+                  (get_local $1)
+                )
+                (set_local $1
+                  (get_local $2)
+                )
+                (br $while-in7)
+              )
+            )
+          )
+          (set_local $3
+            (get_local $1)
+          )
+          (set_local $5
+            (i32.load
+              (get_local $0)
+            )
+          )
+          (set_local $1
+            (i32.load
+              (get_local $8)
+            )
+          )
+          (get_local $4)
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (get_local $3)
+    )
+    (i32.store
+      (get_local $2)
+      (get_local $5)
+    )
+    (i32.store
+      (get_local $8)
+      (i32.load
+        (get_local $12)
+      )
+    )
+    (i32.store
+      (get_local $12)
+      (get_local $1)
+    )
+    (set_local $0
+      (i32.load
+        (get_local $13)
+      )
+    )
+    (i32.store
+      (get_local $13)
+      (i32.load
+        (get_local $11)
+      )
+    )
+    (i32.store
+      (get_local $11)
+      (get_local $0)
+    )
+    (i32.store
+      (get_local $7)
+      (i32.load
+        (get_local $2)
+      )
+    )
+    (call $__ZNSt3__214__split_bufferI5VNodeRNS_9allocatorIS1_EEED2Ev
+      (get_local $7)
+    )
+    (set_global $STACKTOP
+      (get_local $9)
+    )
+  )
+  (func $__ZN10emscripten8internal12VectorAccessINSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEE3getERKS7_j (param $0 i32) (param $1 i32) (result i32)
+    (local $2 i32)
+    (local $3 i32)
+    (set_local $2
+      (get_global $STACKTOP)
+    )
+    (set_global $STACKTOP
+      (i32.add
+        (get_global $STACKTOP)
+        (i32.const 16)
+      )
+    )
+    (if
+      (i32.le_u
+        (call $i32s-div
+          (i32.sub
+            (i32.load offset=4
+              (get_local $0)
+            )
+            (tee_local $0
+              (i32.load
+                (get_local $0)
+              )
+            )
+          )
+          (i32.const 120)
+        )
+        (get_local $1)
+      )
+      (block
+        (set_global $STACKTOP
+          (get_local $2)
+        )
+        (return
+          (i32.const 1)
+        )
+      )
+    )
+    (set_local $3
+      (get_local $2)
+    )
+    (set_local $1
+      (i32.add
+        (get_local $0)
+        (i32.mul
+          (get_local $1)
+          (i32.const 120)
+        )
+      )
+    )
+    (block $label$break$L4
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 120)
+            )
+          )
+        )
+        (loop $while-in
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L4)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 120)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (call $__ZN5VNodeC2ERKS_
+      (get_local $0)
+      (get_local $1)
+    )
+    (i32.store
+      (get_local $3)
+      (get_local $0)
+    )
+    (set_local $0
+      (call $__emval_take_value
+        (i32.const 1104)
+        (get_local $3)
+      )
+    )
+    (set_global $STACKTOP
+      (get_local $2)
+    )
+    (get_local $0)
+  )
+  (func $__ZN10emscripten8internal12VectorAccessINSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEE3setERS7_jRKS4_ (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+    (local $3 i32)
+    (local $4 i32)
+    (local $5 i32)
+    (local $6 i32)
+    (local $7 i32)
+    (local $8 i32)
+    (local $9 i32)
+    (local $10 i32)
+    (local $11 i32)
+    (local $12 i32)
+    (block $do-once
+      (if
+        (i32.eqz
+          (tee_local $12
+            (i32.eq
+              (tee_local $0
+                (i32.add
+                  (tee_local $8
+                    (i32.load
+                      (get_local $0)
+                    )
+                  )
+                  (i32.mul
+                    (get_local $1)
+                    (i32.const 120)
+                  )
+                )
+              )
+              (get_local $2)
+            )
+          )
+        )
+        (block
+          (set_local $7
+            (if i32
+              (tee_local $5
+                (i32.lt_s
+                  (i32.load8_s
+                    (tee_local $3
+                      (i32.add
+                        (get_local $0)
+                        (i32.const 11)
+                      )
+                    )
+                  )
+                  (i32.const 0)
+                )
+              )
+              (i32.add
+                (i32.and
+                  (i32.load offset=8
+                    (i32.add
+                      (get_local $8)
+                      (i32.mul
+                        (get_local $1)
+                        (i32.const 120)
+                      )
+                    )
+                  )
+                  (i32.const 2147483647)
+                )
+                (i32.const -1)
+              )
+              (i32.const 10)
+            )
+          )
+          (set_local $10
+            (i32.load
+              (get_local $2)
+            )
+          )
+          (if
+            (i32.eqz
+              (tee_local $6
+                (i32.lt_s
+                  (i32.shr_s
+                    (i32.shl
+                      (tee_local $9
+                        (i32.load8_s offset=11
+                          (get_local $2)
+                        )
+                      )
+                      (i32.const 24)
+                    )
+                    (i32.const 24)
+                  )
+                  (i32.const 0)
+                )
+              )
+            )
+            (set_local $10
+              (get_local $2)
+            )
+          )
+          (set_local $4
+            (i32.load offset=4
+              (get_local $2)
+            )
+          )
+          (set_local $9
+            (i32.and
+              (get_local $9)
+              (i32.const 255)
+            )
+          )
+          (if
+            (i32.le_u
+              (if i32
+                (get_local $6)
+                (get_local $4)
+                (tee_local $4
+                  (get_local $9)
+                )
+              )
+              (get_local $7)
+            )
+            (block
+              (if
+                (get_local $5)
+                (set_local $0
+                  (i32.load
+                    (get_local $0)
+                  )
+                )
+              )
+              (if
+                (get_local $4)
+                (drop
+                  (call $_memmove
+                    (get_local $0)
+                    (get_local $10)
+                    (get_local $4)
+                  )
+                )
+              )
+              (i32.store8
+                (i32.add
+                  (get_local $0)
+                  (get_local $4)
+                )
+                (i32.const 0)
+              )
+              (if
+                (i32.lt_s
+                  (i32.load8_s
+                    (get_local $3)
+                  )
+                  (i32.const 0)
+                )
+                (block
+                  (i32.store offset=4
+                    (i32.add
+                      (get_local $8)
+                      (i32.mul
+                        (get_local $1)
+                        (i32.const 120)
+                      )
+                    )
+                    (get_local $4)
+                  )
+                  (br $do-once)
+                )
+                (block
+                  (i32.store8
+                    (get_local $3)
+                    (get_local $4)
+                  )
+                  (br $do-once)
+                )
+              )
+            )
+          )
+          (if
+            (i32.lt_u
+              (i32.sub
+                (i32.const -18)
+                (get_local $7)
+              )
+              (i32.sub
+                (get_local $4)
+                (get_local $7)
+              )
+            )
+            (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+          )
+          (set_local $9
+            (if i32
+              (get_local $5)
+              (i32.load
+                (get_local $0)
+              )
+              (get_local $0)
+            )
+          )
+          (if
+            (i32.lt_u
+              (get_local $7)
+              (i32.const 2147483623)
+            )
+            (block
+              (set_local $5
+                (i32.and
+                  (i32.add
+                    (if i32
+                      (i32.lt_u
+                        (get_local $4)
+                        (tee_local $3
+                          (i32.shl
+                            (get_local $7)
+                            (i32.const 1)
+                          )
+                        )
+                      )
+                      (get_local $3)
+                      (tee_local $3
+                        (get_local $4)
+                      )
+                    )
+                    (i32.const 16)
+                  )
+                  (i32.const -16)
+                )
+              )
+              (if
+                (i32.lt_u
+                  (get_local $3)
+                  (i32.const 11)
+                )
+                (set_local $5
+                  (i32.const 11)
+                )
+              )
+            )
+            (set_local $5
+              (i32.const -17)
+            )
+          )
+          (block $label$break$L29
+            (if
+              (tee_local $6
+                (call $_malloc
+                  (tee_local $3
+                    (if i32
+                      (get_local $5)
+                      (get_local $5)
+                      (i32.const 1)
+                    )
+                  )
+                )
+              )
+              (set_local $3
+                (get_local $6)
+              )
+              (loop $while-in
+                (i32.store
+                  (i32.const 7784)
+                  (i32.add
+                    (tee_local $6
+                      (i32.load
+                        (i32.const 7784)
+                      )
+                    )
+                    (i32.const 0)
+                  )
+                )
+                (if
+                  (i32.eqz
+                    (get_local $6)
+                  )
+                  (block
+                    (set_local $3
+                      (i32.const 0)
+                    )
+                    (br $label$break$L29)
+                  )
+                )
+                (call_indirect $FUNCSIG$v
+                  (i32.add
+                    (i32.and
+                      (get_local $6)
+                      (i32.const 3)
+                    )
+                    (i32.const 62)
+                  )
+                )
+                (br_if $while-in
+                  (i32.eqz
+                    (tee_local $6
+                      (call $_malloc
+                        (get_local $3)
+                      )
+                    )
+                  )
+                )
+                (set_local $3
+                  (get_local $6)
+                )
+              )
+            )
+          )
+          (if
+            (get_local $4)
+            (drop
+              (call $_memcpy
+                (get_local $3)
+                (get_local $10)
+                (get_local $4)
+              )
+            )
+          )
+          (if
+            (i32.ne
+              (get_local $7)
+              (i32.const 10)
+            )
+            (call $_free
+              (get_local $9)
+            )
+          )
+          (i32.store
+            (get_local $0)
+            (get_local $3)
+          )
+          (i32.store offset=8
+            (i32.add
+              (get_local $8)
+              (i32.mul
+                (get_local $1)
+                (i32.const 120)
+              )
+            )
+            (i32.or
+              (get_local $5)
+              (i32.const -2147483648)
+            )
+          )
+          (i32.store offset=4
+            (i32.add
+              (get_local $8)
+              (i32.mul
+                (get_local $1)
+                (i32.const 120)
+              )
+            )
+            (get_local $4)
+          )
+          (i32.store8
+            (i32.add
+              (get_local $3)
+              (get_local $4)
+            )
+            (i32.const 0)
+          )
+        )
+      )
+    )
+    (block $do-once1
+      (if
+        (i32.ne
+          (tee_local $0
+            (i32.add
+              (i32.add
+                (get_local $8)
+                (i32.mul
+                  (get_local $1)
+                  (i32.const 120)
+                )
+              )
+              (i32.const 12)
+            )
+          )
+          (tee_local $3
+            (i32.add
+              (get_local $2)
+              (i32.const 12)
+            )
+          )
+        )
+        (block
+          (set_local $7
+            (if i32
+              (tee_local $9
+                (i32.lt_s
+                  (i32.load8_s
+                    (tee_local $5
+                      (i32.add
+                        (get_local $0)
+                        (i32.const 11)
+                      )
+                    )
+                  )
+                  (i32.const 0)
+                )
+              )
+              (i32.add
+                (i32.and
+                  (i32.load offset=20
+                    (i32.add
+                      (get_local $8)
+                      (i32.mul
+                        (get_local $1)
+                        (i32.const 120)
+                      )
+                    )
+                  )
+                  (i32.const 2147483647)
+                )
+                (i32.const -1)
+              )
+              (i32.const 10)
+            )
+          )
+          (set_local $10
+            (i32.load
+              (get_local $3)
+            )
+          )
+          (if
+            (i32.eqz
+              (tee_local $11
+                (i32.lt_s
+                  (i32.shr_s
+                    (i32.shl
+                      (tee_local $6
+                        (i32.load8_s offset=11
+                          (get_local $3)
+                        )
+                      )
+                      (i32.const 24)
+                    )
+                    (i32.const 24)
+                  )
+                  (i32.const 0)
+                )
+              )
+            )
+            (set_local $10
+              (get_local $3)
+            )
+          )
+          (set_local $4
+            (i32.load offset=16
+              (get_local $2)
+            )
+          )
+          (set_local $3
+            (i32.and
+              (get_local $6)
+              (i32.const 255)
+            )
+          )
+          (if
+            (i32.le_u
+              (if i32
+                (get_local $11)
+                (get_local $4)
+                (tee_local $4
+                  (get_local $3)
+                )
+              )
+              (get_local $7)
+            )
+            (block
+              (if
+                (get_local $9)
+                (set_local $0
+                  (i32.load
+                    (get_local $0)
+                  )
+                )
+              )
+              (if
+                (get_local $4)
+                (drop
+                  (call $_memmove
+                    (get_local $0)
+                    (get_local $10)
+                    (get_local $4)
+                  )
+                )
+              )
+              (i32.store8
+                (i32.add
+                  (get_local $0)
+                  (get_local $4)
+                )
+                (i32.const 0)
+              )
+              (if
+                (i32.lt_s
+                  (i32.load8_s
+                    (get_local $5)
+                  )
+                  (i32.const 0)
+                )
+                (block
+                  (i32.store offset=16
+                    (i32.add
+                      (get_local $8)
+                      (i32.mul
+                        (get_local $1)
+                        (i32.const 120)
+                      )
+                    )
+                    (get_local $4)
+                  )
+                  (br $do-once1)
+                )
+                (block
+                  (i32.store8
+                    (get_local $5)
+                    (get_local $4)
+                  )
+                  (br $do-once1)
+                )
+              )
+            )
+          )
+          (if
+            (i32.lt_u
+              (i32.sub
+                (i32.const -18)
+                (get_local $7)
+              )
+              (i32.sub
+                (get_local $4)
+                (get_local $7)
+              )
+            )
+            (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+          )
+          (set_local $9
+            (if i32
+              (get_local $9)
+              (i32.load
+                (get_local $0)
+              )
+              (get_local $0)
+            )
+          )
+          (if
+            (i32.lt_u
+              (get_local $7)
+              (i32.const 2147483623)
+            )
+            (block
+              (set_local $5
+                (i32.and
+                  (i32.add
+                    (if i32
+                      (i32.lt_u
+                        (get_local $4)
+                        (tee_local $3
+                          (i32.shl
+                            (get_local $7)
+                            (i32.const 1)
+                          )
+                        )
+                      )
+                      (get_local $3)
+                      (tee_local $3
+                        (get_local $4)
+                      )
+                    )
+                    (i32.const 16)
+                  )
+                  (i32.const -16)
+                )
+              )
+              (if
+                (i32.lt_u
+                  (get_local $3)
+                  (i32.const 11)
+                )
+                (set_local $5
+                  (i32.const 11)
+                )
+              )
+            )
+            (set_local $5
+              (i32.const -17)
+            )
+          )
+          (block $label$break$L69
+            (if
+              (tee_local $6
+                (call $_malloc
+                  (tee_local $3
+                    (if i32
+                      (get_local $5)
+                      (get_local $5)
+                      (i32.const 1)
+                    )
+                  )
+                )
+              )
+              (set_local $3
+                (get_local $6)
+              )
+              (loop $while-in5
+                (i32.store
+                  (i32.const 7784)
+                  (i32.add
+                    (tee_local $6
+                      (i32.load
+                        (i32.const 7784)
+                      )
+                    )
+                    (i32.const 0)
+                  )
+                )
+                (if
+                  (i32.eqz
+                    (get_local $6)
+                  )
+                  (block
+                    (set_local $3
+                      (i32.const 0)
+                    )
+                    (br $label$break$L69)
+                  )
+                )
+                (call_indirect $FUNCSIG$v
+                  (i32.add
+                    (i32.and
+                      (get_local $6)
+                      (i32.const 3)
+                    )
+                    (i32.const 62)
+                  )
+                )
+                (br_if $while-in5
+                  (i32.eqz
+                    (tee_local $6
+                      (call $_malloc
+                        (get_local $3)
+                      )
+                    )
+                  )
+                )
+                (set_local $3
+                  (get_local $6)
+                )
+              )
+            )
+          )
+          (if
+            (get_local $4)
+            (drop
+              (call $_memcpy
+                (get_local $3)
+                (get_local $10)
+                (get_local $4)
+              )
+            )
+          )
+          (if
+            (i32.ne
+              (get_local $7)
+              (i32.const 10)
+            )
+            (call $_free
+              (get_local $9)
+            )
+          )
+          (i32.store
+            (get_local $0)
+            (get_local $3)
+          )
+          (i32.store offset=20
+            (i32.add
+              (get_local $8)
+              (i32.mul
+                (get_local $1)
+                (i32.const 120)
+              )
+            )
+            (i32.or
+              (get_local $5)
+              (i32.const -2147483648)
+            )
+          )
+          (i32.store offset=16
+            (i32.add
+              (get_local $8)
+              (i32.mul
+                (get_local $1)
+                (i32.const 120)
+              )
+            )
+            (get_local $4)
+          )
+          (i32.store8
+            (i32.add
+              (get_local $3)
+              (get_local $4)
+            )
+            (i32.const 0)
+          )
+        )
+      )
+    )
+    (block $do-once6
+      (if
+        (i32.ne
+          (tee_local $0
+            (i32.add
+              (i32.add
+                (get_local $8)
+                (i32.mul
+                  (get_local $1)
+                  (i32.const 120)
+                )
+              )
+              (i32.const 24)
+            )
+          )
+          (tee_local $3
+            (i32.add
+              (get_local $2)
+              (i32.const 24)
+            )
+          )
+        )
+        (block
+          (set_local $7
+            (if i32
+              (tee_local $9
+                (i32.lt_s
+                  (i32.load8_s
+                    (tee_local $5
+                      (i32.add
+                        (get_local $0)
+                        (i32.const 11)
+                      )
+                    )
+                  )
+                  (i32.const 0)
+                )
+              )
+              (i32.add
+                (i32.and
+                  (i32.load offset=32
+                    (i32.add
+                      (get_local $8)
+                      (i32.mul
+                        (get_local $1)
+                        (i32.const 120)
+                      )
+                    )
+                  )
+                  (i32.const 2147483647)
+                )
+                (i32.const -1)
+              )
+              (i32.const 10)
+            )
+          )
+          (set_local $10
+            (i32.load
+              (get_local $3)
+            )
+          )
+          (if
+            (i32.eqz
+              (tee_local $11
+                (i32.lt_s
+                  (i32.shr_s
+                    (i32.shl
+                      (tee_local $6
+                        (i32.load8_s offset=11
+                          (get_local $3)
+                        )
+                      )
+                      (i32.const 24)
+                    )
+                    (i32.const 24)
+                  )
+                  (i32.const 0)
+                )
+              )
+            )
+            (set_local $10
+              (get_local $3)
+            )
+          )
+          (set_local $4
+            (i32.load offset=28
+              (get_local $2)
+            )
+          )
+          (set_local $3
+            (i32.and
+              (get_local $6)
+              (i32.const 255)
+            )
+          )
+          (if
+            (i32.le_u
+              (if i32
+                (get_local $11)
+                (get_local $4)
+                (tee_local $4
+                  (get_local $3)
+                )
+              )
+              (get_local $7)
+            )
+            (block
+              (if
+                (get_local $9)
+                (set_local $0
+                  (i32.load
+                    (get_local $0)
+                  )
+                )
+              )
+              (if
+                (get_local $4)
+                (drop
+                  (call $_memmove
+                    (get_local $0)
+                    (get_local $10)
+                    (get_local $4)
+                  )
+                )
+              )
+              (i32.store8
+                (i32.add
+                  (get_local $0)
+                  (get_local $4)
+                )
+                (i32.const 0)
+              )
+              (if
+                (i32.lt_s
+                  (i32.load8_s
+                    (get_local $5)
+                  )
+                  (i32.const 0)
+                )
+                (block
+                  (i32.store offset=28
+                    (i32.add
+                      (get_local $8)
+                      (i32.mul
+                        (get_local $1)
+                        (i32.const 120)
+                      )
+                    )
+                    (get_local $4)
+                  )
+                  (br $do-once6)
+                )
+                (block
+                  (i32.store8
+                    (get_local $5)
+                    (get_local $4)
+                  )
+                  (br $do-once6)
+                )
+              )
+            )
+          )
+          (if
+            (i32.lt_u
+              (i32.sub
+                (i32.const -18)
+                (get_local $7)
+              )
+              (i32.sub
+                (get_local $4)
+                (get_local $7)
+              )
+            )
+            (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+          )
+          (set_local $9
+            (if i32
+              (get_local $9)
+              (i32.load
+                (get_local $0)
+              )
+              (get_local $0)
+            )
+          )
+          (if
+            (i32.lt_u
+              (get_local $7)
+              (i32.const 2147483623)
+            )
+            (block
+              (set_local $5
+                (i32.and
+                  (i32.add
+                    (if i32
+                      (i32.lt_u
+                        (get_local $4)
+                        (tee_local $3
+                          (i32.shl
+                            (get_local $7)
+                            (i32.const 1)
+                          )
+                        )
+                      )
+                      (get_local $3)
+                      (tee_local $3
+                        (get_local $4)
+                      )
+                    )
+                    (i32.const 16)
+                  )
+                  (i32.const -16)
+                )
+              )
+              (if
+                (i32.lt_u
+                  (get_local $3)
+                  (i32.const 11)
+                )
+                (set_local $5
+                  (i32.const 11)
+                )
+              )
+            )
+            (set_local $5
+              (i32.const -17)
+            )
+          )
+          (block $label$break$L109
+            (if
+              (tee_local $6
+                (call $_malloc
+                  (tee_local $3
+                    (if i32
+                      (get_local $5)
+                      (get_local $5)
+                      (i32.const 1)
+                    )
+                  )
+                )
+              )
+              (set_local $3
+                (get_local $6)
+              )
+              (loop $while-in10
+                (i32.store
+                  (i32.const 7784)
+                  (i32.add
+                    (tee_local $6
+                      (i32.load
+                        (i32.const 7784)
+                      )
+                    )
+                    (i32.const 0)
+                  )
+                )
+                (if
+                  (i32.eqz
+                    (get_local $6)
+                  )
+                  (block
+                    (set_local $3
+                      (i32.const 0)
+                    )
+                    (br $label$break$L109)
+                  )
+                )
+                (call_indirect $FUNCSIG$v
+                  (i32.add
+                    (i32.and
+                      (get_local $6)
+                      (i32.const 3)
+                    )
+                    (i32.const 62)
+                  )
+                )
+                (br_if $while-in10
+                  (i32.eqz
+                    (tee_local $6
+                      (call $_malloc
+                        (get_local $3)
+                      )
+                    )
+                  )
+                )
+                (set_local $3
+                  (get_local $6)
+                )
+              )
+            )
+          )
+          (if
+            (get_local $4)
+            (drop
+              (call $_memcpy
+                (get_local $3)
+                (get_local $10)
+                (get_local $4)
+              )
+            )
+          )
+          (if
+            (i32.ne
+              (get_local $7)
+              (i32.const 10)
+            )
+            (call $_free
+              (get_local $9)
+            )
+          )
+          (i32.store
+            (get_local $0)
+            (get_local $3)
+          )
+          (i32.store offset=32
+            (i32.add
+              (get_local $8)
+              (i32.mul
+                (get_local $1)
+                (i32.const 120)
+              )
+            )
+            (i32.or
+              (get_local $5)
+              (i32.const -2147483648)
+            )
+          )
+          (i32.store offset=28
+            (i32.add
+              (get_local $8)
+              (i32.mul
+                (get_local $1)
+                (i32.const 120)
+              )
+            )
+            (get_local $4)
+          )
+          (i32.store8
+            (i32.add
+              (get_local $3)
+              (get_local $4)
+            )
+            (i32.const 0)
+          )
+        )
+      )
+    )
+    (call $__ZN9VNodeDataaSERKS_
+      (i32.add
+        (i32.add
+          (get_local $8)
+          (i32.mul
+            (get_local $1)
+            (i32.const 120)
+          )
+        )
+        (i32.const 36)
+      )
+      (i32.add
+        (get_local $2)
+        (i32.const 36)
+      )
+    )
+    (call $__emval_incref
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $2)
+            (i32.const 104)
+          )
+        )
+      )
+    )
+    (call $__emval_decref
+      (i32.load
+        (tee_local $3
+          (i32.add
+            (i32.add
+              (get_local $8)
+              (i32.mul
+                (get_local $1)
+                (i32.const 120)
+              )
+            )
+            (i32.const 104)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $3)
+      (i32.load
+        (get_local $0)
+      )
+    )
+    (if
+      (get_local $12)
+      (return
+        (i32.const 1)
+      )
+    )
+    (call $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE6assignIPS1_EENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIS1_NS_15iterator_traitsIS8_E9referenceEEE5valueEvE4typeES8_S8_
+      (i32.add
+        (i32.add
+          (get_local $8)
+          (i32.mul
+            (get_local $1)
+            (i32.const 120)
+          )
+        )
+        (i32.const 108)
+      )
+      (i32.load offset=108
+        (get_local $2)
+      )
+      (i32.load offset=112
+        (get_local $2)
+      )
+    )
+    (i32.const 1)
+  )
+  (func $__ZNSt3__214__split_bufferI5VNodeRNS_9allocatorIS1_EEED2Ev (param $0 i32)
+    (local $1 i32)
+    (local $2 i32)
+    (local $3 i32)
+    (local $4 i32)
+    (local $5 i32)
+    (local $6 i32)
+    (local $7 i32)
+    (local $8 i32)
+    (if
+      (i32.ne
+        (tee_local $1
+          (i32.load
+            (tee_local $4
+              (i32.add
+                (get_local $0)
+                (i32.const 8)
+              )
+            )
+          )
+        )
+        (tee_local $7
+          (i32.load offset=4
+            (get_local $0)
+          )
+        )
+      )
+      (loop $while-in
+        (i32.store
+          (get_local $4)
+          (tee_local $5
+            (i32.add
+              (get_local $1)
+              (i32.const -120)
+            )
+          )
+        )
+        (if
+          (tee_local $3
+            (i32.load
+              (tee_local $8
+                (i32.add
+                  (get_local $1)
+                  (i32.const -12)
+                )
+              )
+            )
+          )
+          (block
+            (if
+              (i32.ne
+                (tee_local $2
+                  (i32.load
+                    (tee_local $6
+                      (i32.add
+                        (get_local $1)
+                        (i32.const -8)
+                      )
+                    )
+                  )
+                )
+                (get_local $3)
+              )
+              (block
+                (loop $while-in1
+                  (i32.store
+                    (get_local $6)
+                    (tee_local $2
+                      (i32.add
+                        (get_local $2)
+                        (i32.const -120)
+                      )
+                    )
+                  )
+                  (call $__ZN5VNodeD2Ev
+                    (get_local $2)
+                  )
+                  (br_if $while-in1
+                    (i32.ne
+                      (tee_local $2
+                        (i32.load
+                          (get_local $6)
+                        )
+                      )
+                      (get_local $3)
+                    )
+                  )
+                )
+                (set_local $3
+                  (i32.load
+                    (get_local $8)
+                  )
+                )
+              )
+            )
+            (call $_free
+              (get_local $3)
+            )
+          )
+        )
+        (call $__emval_decref
+          (i32.load
+            (i32.add
+              (get_local $1)
+              (i32.const -16)
+            )
+          )
+        )
+        (call $__ZN9VNodeDataD2Ev
+          (i32.add
+            (get_local $1)
+            (i32.const -84)
+          )
+        )
+        (if
+          (i32.lt_s
+            (i32.load8_s offset=11
+              (tee_local $2
+                (i32.add
+                  (get_local $1)
+                  (i32.const -96)
+                )
+              )
+            )
+            (i32.const 0)
+          )
+          (call $_free
+            (i32.load
+              (get_local $2)
+            )
+          )
+        )
+        (if
+          (i32.lt_s
+            (i32.load8_s offset=11
+              (tee_local $1
+                (i32.add
+                  (get_local $1)
+                  (i32.const -108)
+                )
+              )
+            )
+            (i32.const 0)
+          )
+          (call $_free
+            (i32.load
+              (get_local $1)
+            )
+          )
+        )
+        (if
+          (i32.lt_s
+            (i32.load8_s offset=11
+              (get_local $5)
+            )
+            (i32.const 0)
+          )
+          (call $_free
+            (i32.load
+              (get_local $5)
+            )
+          )
+        )
+        (br_if $while-in
+          (i32.ne
+            (tee_local $1
+              (i32.load
+                (get_local $4)
+              )
+            )
+            (get_local $7)
+          )
+        )
+      )
+    )
+    (if
+      (i32.eqz
+        (tee_local $0
+          (i32.load
+            (get_local $0)
+          )
+        )
+      )
+      (return)
+    )
+    (call $_free
+      (get_local $0)
+    )
+  )
+  (func $__ZN10emscripten8internal13getActualTypeINSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEEEPKvPT_ (param $0 i32) (result i32)
+    (i32.const 1176)
+  )
+  (func $__ZN10emscripten8internal14raw_destructorINSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEEEvPT_ (param $0 i32)
+    (local $1 i32)
+    (local $2 i32)
+    (local $3 i32)
+    (if
+      (i32.eqz
+        (get_local $0)
+      )
+      (return)
+    )
+    (if
+      (tee_local $1
+        (i32.load
+          (get_local $0)
+        )
+      )
       (block
         (if
           (i32.ne
             (tee_local $2
               (i32.load
-                (tee_local $4
+                (tee_local $3
                   (i32.add
                     (get_local $0)
-                    (i32.const 24)
+                    (i32.const 4)
                   )
                 )
               )
             )
             (get_local $1)
           )
-          (i32.store
-            (get_local $4)
-            (i32.add
-              (get_local $2)
-              (i32.shl
-                (i32.xor
-                  (i32.shr_u
-                    (i32.sub
-                      (i32.add
-                        (get_local $2)
-                        (i32.const -4)
-                      )
+          (block
+            (loop $while-in
+              (i32.store
+                (get_local $3)
+                (tee_local $2
+                  (i32.add
+                    (get_local $2)
+                    (i32.const -120)
+                  )
+                )
+              )
+              (call $__ZN5VNodeD2Ev
+                (get_local $2)
+              )
+              (br_if $while-in
+                (i32.ne
+                  (tee_local $2
+                    (i32.load
                       (get_local $3)
                     )
-                    (i32.const 2)
                   )
-                  (i32.const -1)
+                  (get_local $1)
                 )
-                (i32.const 2)
+              )
+            )
+            (set_local $1
+              (i32.load
+                (get_local $0)
               )
             )
           )
@@ -1182,493 +10412,2710 @@
         )
       )
     )
-    (call $__emval_decref
-      (i32.load offset=16
-        (get_local $0)
-      )
-    )
     (call $_free
       (get_local $0)
     )
   )
-  (func $_emscripten_bind_VNode_get_data_0 (param $0 i32) (result i32)
-    (i32.load offset=12
-      (get_local $0)
+  (func $__ZN10emscripten8internal12operator_newINSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEJEEEPT_DpOT0_ (result i32)
+    (local $0 i32)
+    (block $label$break$L1
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 12)
+            )
+          )
+        )
+        (loop $while-in
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L1)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 12)
+                )
+              )
+            )
+          )
+        )
+      )
     )
-  )
-  (func $_emscripten_bind_VNode_get_key_0 (param $0 i32) (result i32)
-    (i32.load offset=4
+    (i32.store
       (get_local $0)
+      (i32.const 0)
     )
-  )
-  (func $_emscripten_bind_VNode_get_sel_0 (param $0 i32) (result i32)
-    (i32.load
+    (i32.store offset=4
       (get_local $0)
+      (i32.const 0)
     )
-  )
-  (func $_emscripten_bind_VNode_get_text_0 (param $0 i32) (result i32)
-    (i32.load offset=8
+    (i32.store offset=8
       (get_local $0)
+      (i32.const 0)
     )
+    (get_local $0)
   )
-  (func $_emscripten_bind_VNode_set_children_2 (param $0 i32) (param $1 i32) (param $2 i32)
+  (func $__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEFvRKS4_EvPS7_JS9_EE6invokeERKSB_SC_PS4_ (param $0 i32) (param $1 i32) (param $2 i32)
     (local $3 i32)
+    (set_local $3
+      (i32.load
+        (get_local $0)
+      )
+    )
+    (set_local $0
+      (i32.add
+        (get_local $1)
+        (i32.shr_s
+          (tee_local $1
+            (i32.load offset=4
+              (get_local $0)
+            )
+          )
+          (i32.const 1)
+        )
+      )
+    )
+    (if
+      (i32.and
+        (get_local $1)
+        (i32.const 1)
+      )
+      (call_indirect $FUNCSIG$vii
+        (get_local $0)
+        (get_local $2)
+        (i32.add
+          (i32.and
+            (i32.load
+              (i32.add
+                (i32.load
+                  (get_local $0)
+                )
+                (get_local $3)
+              )
+            )
+            (i32.const 1)
+          )
+          (i32.const 36)
+        )
+      )
+      (call_indirect $FUNCSIG$vii
+        (get_local $0)
+        (get_local $2)
+        (i32.add
+          (i32.and
+            (get_local $3)
+            (i32.const 1)
+          )
+          (i32.const 36)
+        )
+      )
+    )
+  )
+  (func $__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEFvjRKS4_EvPS7_JjS9_EE6invokeERKSB_SC_jPS4_ (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
     (local $4 i32)
+    (set_local $4
+      (i32.load
+        (get_local $0)
+      )
+    )
+    (set_local $0
+      (i32.add
+        (get_local $1)
+        (i32.shr_s
+          (tee_local $1
+            (i32.load offset=4
+              (get_local $0)
+            )
+          )
+          (i32.const 1)
+        )
+      )
+    )
+    (if
+      (i32.and
+        (get_local $1)
+        (i32.const 1)
+      )
+      (call_indirect $FUNCSIG$viii
+        (get_local $0)
+        (get_local $2)
+        (get_local $3)
+        (i32.add
+          (i32.and
+            (i32.load
+              (i32.add
+                (i32.load
+                  (get_local $0)
+                )
+                (get_local $4)
+              )
+            )
+            (i32.const 7)
+          )
+          (i32.const 54)
+        )
+      )
+      (call_indirect $FUNCSIG$viii
+        (get_local $0)
+        (get_local $2)
+        (get_local $3)
+        (i32.add
+          (i32.and
+            (get_local $4)
+            (i32.const 7)
+          )
+          (i32.const 54)
+        )
+      )
+    )
+  )
+  (func $__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEKFjvEjPKS7_JEE6invokeERKS9_SB_ (param $0 i32) (param $1 i32) (result i32)
+    (local $2 i32)
+    (set_local $2
+      (i32.load
+        (get_local $0)
+      )
+    )
+    (set_local $0
+      (i32.add
+        (get_local $1)
+        (i32.shr_s
+          (tee_local $1
+            (i32.load offset=4
+              (get_local $0)
+            )
+          )
+          (i32.const 1)
+        )
+      )
+    )
+    (if i32
+      (i32.and
+        (get_local $1)
+        (i32.const 1)
+      )
+      (call_indirect $FUNCSIG$ii
+        (get_local $0)
+        (i32.add
+          (i32.and
+            (i32.load
+              (i32.add
+                (i32.load
+                  (get_local $0)
+                )
+                (get_local $2)
+              )
+            )
+            (i32.const 15)
+          )
+          (i32.const 38)
+        )
+      )
+      (call_indirect $FUNCSIG$ii
+        (get_local $0)
+        (i32.add
+          (i32.and
+            (get_local $2)
+            (i32.const 15)
+          )
+          (i32.const 38)
+        )
+      )
+    )
+  )
+  (func $__ZN10emscripten8internal15FunctionInvokerIPFNS_3valERKNSt3__26vectorI5VNodeNS3_9allocatorIS5_EEEEjES2_SA_JjEE6invokeEPSC_PS8_j (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+    (local $3 i32)
+    (call $__emval_incref
+      (tee_local $3
+        (call_indirect $FUNCSIG$iii
+          (get_local $1)
+          (get_local $2)
+          (i32.add
+            (i32.and
+              (i32.load
+                (get_local $0)
+              )
+              (i32.const 7)
+            )
+            (i32.const 72)
+          )
+        )
+      )
+    )
+    (call $__emval_decref
+      (get_local $3)
+    )
+    (get_local $3)
+  )
+  (func $__ZN10emscripten8internal15FunctionInvokerIPFbRNSt3__26vectorI5VNodeNS2_9allocatorIS4_EEEEjRKS4_EbS8_JjSA_EE6invokeEPSC_PS7_jPS4_ (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (result i32)
+    (call_indirect $FUNCSIG$iiii
+      (get_local $1)
+      (get_local $2)
+      (get_local $3)
+      (i32.add
+        (i32.and
+          (i32.load
+            (get_local $0)
+          )
+          (i32.const 7)
+        )
+        (i32.const 0)
+      )
+    )
+  )
+  (func $__ZN10emscripten8internal7InvokerI5VNodeJNSt3__212basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEES9_9VNodeDataNS3_6vectorIS2_NS7_IS2_EEEEEE6invokeEPFS2_S9_S9_SA_SD_EPNS0_11BindingTypeIS9_EUt_ESK_PSA_PSD_ (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (result i32)
     (local $5 i32)
     (local $6 i32)
     (local $7 i32)
     (local $8 i32)
-    (if
-      (tee_local $4
-        (i32.shr_s
-          (tee_local $5
-            (i32.shl
-              (get_local $2)
-              (i32.const 2)
-            )
-          )
-          (i32.const 2)
+    (local $9 i32)
+    (local $10 i32)
+    (local $11 i32)
+    (local $12 i32)
+    (local $13 i32)
+    (set_local $11
+      (get_global $STACKTOP)
+    )
+    (set_global $STACKTOP
+      (i32.add
+        (get_global $STACKTOP)
+        (i32.const 224)
+      )
+    )
+    (set_local $6
+      (i32.load
+        (get_local $1)
+      )
+    )
+    (i64.store align=4
+      (tee_local $8
+        (i32.add
+          (get_local $11)
+          (i32.const 92)
         )
       )
-      (block
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $8)
+      (i32.const 0)
+    )
+    (if
+      (i32.gt_u
+        (get_local $6)
+        (i32.const -17)
+      )
+      (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+    )
+    (set_local $7
+      (i32.add
+        (get_local $11)
+        (i32.const 80)
+      )
+    )
+    (set_local $13
+      (i32.add
+        (get_local $1)
+        (i32.const 4)
+      )
+    )
+    (block $__rjto$0
+      (block $__rjti$0
         (if
-          (i32.gt_u
-            (get_local $4)
-            (i32.const 1073741823)
-          )
-          (call $___assert_fail
-            (i32.const 5485)
-            (i32.const 5508)
-            (i32.const 304)
-            (i32.const 5605)
-          )
-        )
-        (block $label$break$L6
-          (if
-            (i32.eqz
-              (tee_local $3
-                (call $_malloc
-                  (tee_local $2
-                    (if i32
-                      (get_local $2)
-                      (get_local $5)
-                      (i32.const 1)
-                    )
-                  )
-                )
-              )
-            )
-            (loop $while-in
-              (i32.store
-                (i32.const 6884)
-                (i32.add
-                  (tee_local $3
-                    (i32.load
-                      (i32.const 6884)
-                    )
-                  )
-                  (i32.const 0)
-                )
-              )
-              (if
-                (i32.eqz
-                  (get_local $3)
-                )
-                (block
-                  (set_local $3
-                    (i32.const 0)
-                  )
-                  (br $label$break$L6)
-                )
-              )
-              (call_indirect $FUNCSIG$v
-                (i32.add
-                  (i32.and
-                    (get_local $3)
-                    (i32.const 3)
-                  )
-                  (i32.const 30)
-                )
-              )
-              (br_if $while-in
-                (i32.eqz
-                  (tee_local $3
-                    (call $_malloc
-                      (get_local $2)
-                    )
-                  )
-                )
-              )
-            )
-          )
-        )
-        (set_local $2
-          (get_local $3)
-        )
-        (set_local $4
-          (i32.add
-            (get_local $3)
-            (i32.shl
-              (get_local $4)
-              (i32.const 2)
-            )
-          )
-        )
-        (if
-          (i32.gt_s
-            (get_local $5)
-            (i32.const 0)
+          (i32.lt_u
+            (get_local $6)
+            (i32.const 11)
           )
           (block
-            (drop
-              (call $_memcpy
-                (get_local $3)
-                (get_local $1)
-                (get_local $5)
+            (i32.store8 offset=11
+              (get_local $8)
+              (get_local $6)
+            )
+            (if
+              (get_local $6)
+              (block
+                (set_local $1
+                  (get_local $8)
+                )
+                (br $__rjti$0)
+              )
+              (set_local $1
+                (get_local $8)
               )
             )
-            (set_local $1
-              (get_local $2)
-            )
-            (set_local $2
-              (get_local $4)
-            )
           )
-          (set_local $1
-            (get_local $2)
+          (block
+            (block $label$break$L7
+              (if
+                (i32.eqz
+                  (tee_local $1
+                    (call $_malloc
+                      (tee_local $12
+                        (if i32
+                          (tee_local $9
+                            (i32.and
+                              (i32.add
+                                (get_local $6)
+                                (i32.const 16)
+                              )
+                              (i32.const -16)
+                            )
+                          )
+                          (get_local $9)
+                          (i32.const 1)
+                        )
+                      )
+                    )
+                  )
+                )
+                (loop $while-in
+                  (i32.store
+                    (i32.const 7784)
+                    (i32.add
+                      (tee_local $1
+                        (i32.load
+                          (i32.const 7784)
+                        )
+                      )
+                      (i32.const 0)
+                    )
+                  )
+                  (if
+                    (i32.eqz
+                      (get_local $1)
+                    )
+                    (block
+                      (set_local $1
+                        (i32.const 0)
+                      )
+                      (br $label$break$L7)
+                    )
+                  )
+                  (call_indirect $FUNCSIG$v
+                    (i32.add
+                      (i32.and
+                        (get_local $1)
+                        (i32.const 3)
+                      )
+                      (i32.const 62)
+                    )
+                  )
+                  (br_if $while-in
+                    (i32.eqz
+                      (tee_local $1
+                        (call $_malloc
+                          (get_local $12)
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+            (i32.store
+              (get_local $8)
+              (get_local $1)
+            )
+            (i32.store offset=8
+              (get_local $8)
+              (i32.or
+                (get_local $9)
+                (i32.const -2147483648)
+              )
+            )
+            (i32.store offset=4
+              (get_local $8)
+              (get_local $6)
+            )
+            (br $__rjti$0)
           )
+        )
+        (br $__rjto$0)
+      )
+      (drop
+        (call $_memcpy
+          (get_local $1)
+          (get_local $13)
+          (get_local $6)
         )
       )
-      (block
-        (set_local $1
-          (i32.const 0)
-        )
-        (set_local $2
-          (i32.const 0)
-        )
-        (set_local $4
-          (i32.const 0)
-        )
+    )
+    (i32.store8
+      (i32.add
+        (get_local $1)
+        (get_local $6)
+      )
+      (i32.const 0)
+    )
+    (set_local $10
+      (i32.load
+        (get_local $2)
+      )
+    )
+    (i64.store align=4
+      (get_local $7)
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $7)
+      (i32.const 0)
+    )
+    (if
+      (i32.gt_u
+        (get_local $10)
+        (i32.const -17)
+      )
+      (call $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv)
+    )
+    (set_local $5
+      (i32.add
+        (get_local $11)
+        (i32.const 104)
       )
     )
     (set_local $6
       (i32.add
-        (get_local $0)
-        (i32.const 24)
+        (get_local $11)
+        (i32.const 12)
       )
     )
-    (if
-      (i32.eqz
-        (tee_local $3
-          (i32.load
-            (tee_local $7
-              (i32.add
-                (get_local $0)
-                (i32.const 20)
+    (set_local $9
+      (get_local $11)
+    )
+    (set_local $13
+      (i32.add
+        (get_local $2)
+        (i32.const 4)
+      )
+    )
+    (block $__rjto$1
+      (block $__rjti$1
+        (if
+          (i32.lt_u
+            (get_local $10)
+            (i32.const 11)
+          )
+          (block
+            (i32.store8 offset=11
+              (get_local $7)
+              (get_local $10)
+            )
+            (if
+              (get_local $10)
+              (block
+                (set_local $1
+                  (get_local $7)
+                )
+                (br $__rjti$1)
+              )
+              (set_local $1
+                (get_local $7)
               )
             )
           )
+          (block
+            (block $label$break$L21
+              (if
+                (i32.eqz
+                  (tee_local $1
+                    (call $_malloc
+                      (tee_local $2
+                        (if i32
+                          (tee_local $12
+                            (i32.and
+                              (i32.add
+                                (get_local $10)
+                                (i32.const 16)
+                              )
+                              (i32.const -16)
+                            )
+                          )
+                          (get_local $12)
+                          (i32.const 1)
+                        )
+                      )
+                    )
+                  )
+                )
+                (loop $while-in2
+                  (i32.store
+                    (i32.const 7784)
+                    (i32.add
+                      (tee_local $1
+                        (i32.load
+                          (i32.const 7784)
+                        )
+                      )
+                      (i32.const 0)
+                    )
+                  )
+                  (if
+                    (i32.eqz
+                      (get_local $1)
+                    )
+                    (block
+                      (set_local $1
+                        (i32.const 0)
+                      )
+                      (br $label$break$L21)
+                    )
+                  )
+                  (call_indirect $FUNCSIG$v
+                    (i32.add
+                      (i32.and
+                        (get_local $1)
+                        (i32.const 3)
+                      )
+                      (i32.const 62)
+                    )
+                  )
+                  (br_if $while-in2
+                    (i32.eqz
+                      (tee_local $1
+                        (call $_malloc
+                          (get_local $2)
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+            (i32.store
+              (get_local $7)
+              (get_local $1)
+            )
+            (i32.store offset=8
+              (get_local $7)
+              (i32.or
+                (get_local $12)
+                (i32.const -2147483648)
+              )
+            )
+            (i32.store offset=4
+              (get_local $7)
+              (get_local $10)
+            )
+            (br $__rjti$1)
+          )
         )
+        (br $__rjto$1)
       )
-      (block
-        (i32.store
-          (get_local $7)
+      (drop
+        (call $_memcpy
           (get_local $1)
+          (get_local $13)
+          (get_local $10)
         )
-        (i32.store
-          (get_local $6)
-          (get_local $2)
-        )
-        (i32.store offset=28
-          (get_local $0)
-          (get_local $4)
-        )
-        (return)
       )
     )
-    (set_local $5
+    (i32.store8
+      (i32.add
+        (get_local $1)
+        (get_local $10)
+      )
+      (i32.const 0)
+    )
+    (call $__ZN9VNodeDataC2ERKS_
+      (get_local $6)
       (get_local $3)
     )
-    (if
-      (i32.ne
-        (tee_local $8
-          (i32.load
-            (get_local $6)
+    (call $__ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEEC2ERKS4_
+      (get_local $9)
+      (get_local $4)
+    )
+    (call_indirect $FUNCSIG$viiiii
+      (get_local $5)
+      (get_local $8)
+      (get_local $7)
+      (get_local $6)
+      (get_local $9)
+      (i32.add
+        (i32.and
+          (get_local $0)
+          (i32.const 7)
+        )
+        (i32.const 8)
+      )
+    )
+    (block $label$break$L29
+      (if
+        (i32.eqz
+          (tee_local $1
+            (call $_malloc
+              (i32.const 120)
+            )
           )
         )
-        (get_local $3)
-      )
-      (i32.store
-        (get_local $6)
-        (i32.add
-          (get_local $8)
-          (i32.shl
-            (i32.xor
-              (i32.shr_u
-                (i32.sub
-                  (i32.add
-                    (get_local $8)
-                    (i32.const -4)
-                  )
-                  (get_local $5)
+        (loop $while-in5
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
                 )
-                (i32.const 2)
               )
-              (i32.const -1)
+              (i32.const 0)
             )
-            (i32.const 2)
           )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $1
+                (i32.const 0)
+              )
+              (br $label$break$L29)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in5
+            (i32.eqz
+              (tee_local $1
+                (call $_malloc
+                  (i32.const 120)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i64.store align=4
+      (get_local $1)
+      (i64.load align=4
+        (get_local $5)
+      )
+    )
+    (i32.store offset=8
+      (get_local $1)
+      (i32.load offset=8
+        (get_local $5)
+      )
+    )
+    (i64.store align=4
+      (get_local $5)
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $5)
+      (i32.const 0)
+    )
+    (i64.store align=4
+      (tee_local $0
+        (i32.add
+          (get_local $1)
+          (i32.const 12)
+        )
+      )
+      (i64.load align=4
+        (tee_local $2
+          (i32.add
+            (get_local $5)
+            (i32.const 12)
+          )
+        )
+      )
+    )
+    (i32.store offset=8
+      (get_local $0)
+      (i32.load offset=8
+        (get_local $2)
+      )
+    )
+    (i64.store align=4
+      (get_local $2)
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $2)
+      (i32.const 0)
+    )
+    (i64.store align=4
+      (tee_local $0
+        (i32.add
+          (get_local $1)
+          (i32.const 24)
+        )
+      )
+      (i64.load align=4
+        (tee_local $2
+          (i32.add
+            (get_local $5)
+            (i32.const 24)
+          )
+        )
+      )
+    )
+    (i32.store offset=8
+      (get_local $0)
+      (i32.load offset=8
+        (get_local $2)
+      )
+    )
+    (i64.store align=4
+      (get_local $2)
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $2)
+      (i32.const 0)
+    )
+    (i32.store offset=36
+      (get_local $1)
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $5)
+            (i32.const 36)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store offset=40
+      (get_local $1)
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $5)
+            (i32.const 40)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store offset=44
+      (get_local $1)
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $5)
+            (i32.const 44)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store offset=48
+      (get_local $1)
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $5)
+            (i32.const 48)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store offset=52
+      (get_local $1)
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $5)
+            (i32.const 52)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store offset=56
+      (get_local $1)
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $5)
+            (i32.const 56)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store offset=60
+      (get_local $1)
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $5)
+            (i32.const 60)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store offset=64
+      (get_local $1)
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $5)
+            (i32.const 64)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i64.store align=4
+      (tee_local $0
+        (i32.add
+          (get_local $1)
+          (i32.const 68)
+        )
+      )
+      (i64.load align=4
+        (tee_local $2
+          (i32.add
+            (get_local $5)
+            (i32.const 68)
+          )
+        )
+      )
+    )
+    (i32.store offset=8
+      (get_local $0)
+      (i32.load offset=8
+        (get_local $2)
+      )
+    )
+    (i64.store align=4
+      (get_local $2)
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $2)
+      (i32.const 0)
+    )
+    (i64.store align=4
+      (tee_local $0
+        (i32.add
+          (get_local $1)
+          (i32.const 80)
+        )
+      )
+      (i64.load align=4
+        (tee_local $2
+          (i32.add
+            (get_local $5)
+            (i32.const 80)
+          )
+        )
+      )
+    )
+    (i32.store offset=8
+      (get_local $0)
+      (i32.load offset=8
+        (get_local $2)
+      )
+    )
+    (i64.store align=4
+      (get_local $2)
+      (i64.const 0)
+    )
+    (i32.store offset=8
+      (get_local $2)
+      (i32.const 0)
+    )
+    (i32.store offset=92
+      (get_local $1)
+      (i32.load
+        (tee_local $3
+          (i32.add
+            (get_local $5)
+            (i32.const 92)
+          )
+        )
+      )
+    )
+    (i32.store offset=96
+      (get_local $1)
+      (i32.load
+        (tee_local $2
+          (i32.add
+            (get_local $5)
+            (i32.const 96)
+          )
+        )
+      )
+    )
+    (i32.store offset=100
+      (get_local $1)
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $5)
+            (i32.const 100)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store
+      (get_local $2)
+      (i32.const 0)
+    )
+    (i32.store
+      (get_local $3)
+      (i32.const 0)
+    )
+    (i32.store offset=104
+      (get_local $1)
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $5)
+            (i32.const 104)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store offset=108
+      (get_local $1)
+      (i32.load
+        (tee_local $3
+          (i32.add
+            (get_local $5)
+            (i32.const 108)
+          )
+        )
+      )
+    )
+    (i32.store offset=112
+      (get_local $1)
+      (i32.load
+        (tee_local $2
+          (i32.add
+            (get_local $5)
+            (i32.const 112)
+          )
+        )
+      )
+    )
+    (i32.store offset=116
+      (get_local $1)
+      (i32.load
+        (tee_local $0
+          (i32.add
+            (get_local $5)
+            (i32.const 116)
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (i32.store
+      (get_local $2)
+      (i32.const 0)
+    )
+    (i32.store
+      (get_local $3)
+      (i32.const 0)
+    )
+    (call $__ZN5VNodeD2Ev
+      (get_local $5)
+    )
+    (if
+      (tee_local $2
+        (i32.load
+          (get_local $9)
+        )
+      )
+      (call $_free
+        (tee_local $0
+          (if i32
+            (i32.eq
+              (tee_local $0
+                (i32.load
+                  (tee_local $3
+                    (i32.add
+                      (get_local $9)
+                      (i32.const 4)
+                    )
+                  )
+                )
+              )
+              (get_local $2)
+            )
+            (get_local $2)
+            (block i32
+              (loop $while-in7
+                (i32.store
+                  (get_local $3)
+                  (tee_local $0
+                    (i32.add
+                      (get_local $0)
+                      (i32.const -120)
+                    )
+                  )
+                )
+                (call $__ZN5VNodeD2Ev
+                  (get_local $0)
+                )
+                (br_if $while-in7
+                  (i32.ne
+                    (tee_local $0
+                      (i32.load
+                        (get_local $3)
+                      )
+                    )
+                    (get_local $2)
+                  )
+                )
+              )
+              (i32.load
+                (get_local $9)
+              )
+            )
+          )
+        )
+      )
+    )
+    (call $__ZN9VNodeDataD2Ev
+      (get_local $6)
+    )
+    (if
+      (i32.lt_s
+        (i32.load8_s offset=11
+          (get_local $7)
+        )
+        (i32.const 0)
+      )
+      (call $_free
+        (i32.load
+          (get_local $7)
+        )
+      )
+    )
+    (if
+      (i32.ge_s
+        (i32.load8_s offset=11
+          (get_local $8)
+        )
+        (i32.const 0)
+      )
+      (block
+        (set_global $STACKTOP
+          (get_local $11)
+        )
+        (return
+          (get_local $1)
         )
       )
     )
     (call $_free
-      (get_local $3)
+      (i32.load
+        (get_local $8)
+      )
     )
+    (set_global $STACKTOP
+      (get_local $11)
+    )
+    (get_local $1)
+  )
+  (func $__GLOBAL__sub_I_app_cpp
+    (local $0 i32)
+    (local $1 i32)
     (i32.store
-      (tee_local $0
-        (i32.add
-          (get_local $0)
-          (i32.const 28)
+      (i32.const 7272)
+      (i32.const 1)
+    )
+    (call $__embind_register_class
+      (i32.const 1032)
+      (i32.const 1040)
+      (i32.const 1056)
+      (i32.const 0)
+      (i32.const 2194)
+      (i32.const 3)
+      (i32.const 2197)
+      (i32.const 0)
+      (i32.const 2197)
+      (i32.const 0)
+      (i32.const 2040)
+      (i32.const 2199)
+      (i32.const 11)
+    )
+    (call $__embind_register_class_constructor
+      (i32.const 1032)
+      (i32.const 1)
+      (i32.const 1632)
+      (i32.const 2194)
+      (i32.const 4)
+      (i32.const 1)
+    )
+    (block $label$break$L1
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L1)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
         )
       )
-      (i32.const 0)
-    )
-    (i32.store
-      (get_local $6)
-      (i32.const 0)
-    )
-    (i32.store
-      (get_local $7)
-      (i32.const 0)
-    )
-    (i32.store
-      (get_local $7)
-      (get_local $1)
-    )
-    (i32.store
-      (get_local $6)
-      (get_local $2)
     )
     (i32.store
       (get_local $0)
-      (get_local $4)
+      (i32.const 32)
     )
-  )
-  (func $_emscripten_bind_VNode_set_data_1 (param $0 i32) (param $1 i32)
-    (i32.store offset=12
+    (block $label$break$L6
+      (if
+        (i32.eqz
+          (tee_local $1
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in2
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $1
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $1)
+            )
+            (block
+              (set_local $1
+                (i32.const 0)
+              )
+              (br $label$break$L6)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $1)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in2
+            (i32.eqz
+              (tee_local $1
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 32)
+    )
+    (call $__embind_register_class_property
+      (i32.const 1032)
+      (i32.const 2050)
+      (i32.const 1080)
+      (i32.const 2303)
+      (i32.const 1)
       (get_local $0)
+      (i32.const 1080)
+      (i32.const 2307)
+      (i32.const 1)
       (get_local $1)
     )
-  )
-  (func $_emscripten_bind_VNode_set_key_1 (param $0 i32) (param $1 i32)
+    (block $label$break$L11
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in5
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L11)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in5
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 44)
+    )
+    (block $label$break$L16
+      (if
+        (i32.eqz
+          (tee_local $1
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in8
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $1
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $1)
+            )
+            (block
+              (set_local $1
+                (i32.const 0)
+              )
+              (br $label$break$L16)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $1)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in8
+            (i32.eqz
+              (tee_local $1
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 44)
+    )
+    (call $__embind_register_class_property
+      (i32.const 1032)
+      (i32.const 2054)
+      (i32.const 1080)
+      (i32.const 2303)
+      (i32.const 1)
+      (get_local $0)
+      (i32.const 1080)
+      (i32.const 2307)
+      (i32.const 1)
+      (get_local $1)
+    )
+    (call $__embind_register_class
+      (i32.const 1104)
+      (i32.const 1112)
+      (i32.const 1128)
+      (i32.const 0)
+      (i32.const 2194)
+      (i32.const 5)
+      (i32.const 2197)
+      (i32.const 0)
+      (i32.const 2197)
+      (i32.const 0)
+      (i32.const 2057)
+      (i32.const 2199)
+      (i32.const 12)
+    )
+    (call $__embind_register_class_constructor
+      (i32.const 1104)
+      (i32.const 1)
+      (i32.const 1636)
+      (i32.const 2194)
+      (i32.const 6)
+      (i32.const 2)
+    )
+    (block $label$break$L21
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in11
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L21)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in11
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 0)
+    )
+    (block $label$break$L26
+      (if
+        (i32.eqz
+          (tee_local $1
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in14
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $1
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $1)
+            )
+            (block
+              (set_local $1
+                (i32.const 0)
+              )
+              (br $label$break$L26)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $1)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in14
+            (i32.eqz
+              (tee_local $1
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 0)
+    )
+    (call $__embind_register_class_property
+      (i32.const 1104)
+      (i32.const 2063)
+      (i32.const 1080)
+      (i32.const 2303)
+      (i32.const 2)
+      (get_local $0)
+      (i32.const 1080)
+      (i32.const 2307)
+      (i32.const 2)
+      (get_local $1)
+    )
+    (block $label$break$L31
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in17
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L31)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in17
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 12)
+    )
+    (block $label$break$L36
+      (if
+        (i32.eqz
+          (tee_local $1
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in20
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $1
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $1)
+            )
+            (block
+              (set_local $1
+                (i32.const 0)
+              )
+              (br $label$break$L36)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $1)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in20
+            (i32.eqz
+              (tee_local $1
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 12)
+    )
+    (call $__embind_register_class_property
+      (i32.const 1104)
+      (i32.const 2050)
+      (i32.const 1080)
+      (i32.const 2303)
+      (i32.const 2)
+      (get_local $0)
+      (i32.const 1080)
+      (i32.const 2307)
+      (i32.const 2)
+      (get_local $1)
+    )
+    (block $label$break$L41
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in23
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L41)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in23
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 24)
+    )
+    (block $label$break$L46
+      (if
+        (i32.eqz
+          (tee_local $1
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in26
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $1
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $1)
+            )
+            (block
+              (set_local $1
+                (i32.const 0)
+              )
+              (br $label$break$L46)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $1)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in26
+            (i32.eqz
+              (tee_local $1
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 24)
+    )
+    (call $__embind_register_class_property
+      (i32.const 1104)
+      (i32.const 2067)
+      (i32.const 1080)
+      (i32.const 2303)
+      (i32.const 2)
+      (get_local $0)
+      (i32.const 1080)
+      (i32.const 2307)
+      (i32.const 2)
+      (get_local $1)
+    )
+    (block $label$break$L51
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in29
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L51)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in29
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 36)
+    )
+    (block $label$break$L56
+      (if
+        (i32.eqz
+          (tee_local $1
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in32
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $1
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $1)
+            )
+            (block
+              (set_local $1
+                (i32.const 0)
+              )
+              (br $label$break$L56)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $1)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in32
+            (i32.eqz
+              (tee_local $1
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 36)
+    )
+    (call $__embind_register_class_property
+      (i32.const 1104)
+      (i32.const 2072)
+      (i32.const 1032)
+      (i32.const 2303)
+      (i32.const 3)
+      (get_local $0)
+      (i32.const 1032)
+      (i32.const 2307)
+      (i32.const 3)
+      (get_local $1)
+    )
+    (block $label$break$L61
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in35
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L61)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in35
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 108)
+    )
+    (block $label$break$L66
+      (if
+        (i32.eqz
+          (tee_local $1
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in38
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $1
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $1)
+            )
+            (block
+              (set_local $1
+                (i32.const 0)
+              )
+              (br $label$break$L66)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $1)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in38
+            (i32.eqz
+              (tee_local $1
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $1)
+      (i32.const 108)
+    )
+    (call $__embind_register_class_property
+      (i32.const 1104)
+      (i32.const 2077)
+      (i32.const 1176)
+      (i32.const 2303)
+      (i32.const 4)
+      (get_local $0)
+      (i32.const 1176)
+      (i32.const 2307)
+      (i32.const 4)
+      (get_local $1)
+    )
+    (call $__embind_register_class
+      (i32.const 1176)
+      (i32.const 1200)
+      (i32.const 1216)
+      (i32.const 0)
+      (i32.const 2194)
+      (i32.const 7)
+      (i32.const 2197)
+      (i32.const 0)
+      (i32.const 2197)
+      (i32.const 0)
+      (i32.const 2086)
+      (i32.const 2199)
+      (i32.const 13)
+    )
+    (call $__embind_register_class_constructor
+      (i32.const 1176)
+      (i32.const 1)
+      (i32.const 1640)
+      (i32.const 2194)
+      (i32.const 8)
+      (i32.const 3)
+    )
+    (block $label$break$L71
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 8)
+            )
+          )
+        )
+        (loop $while-in41
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L71)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in41
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 8)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 1)
+    )
     (i32.store offset=4
       (get_local $0)
-      (get_local $1)
+      (i32.const 0)
     )
-  )
-  (func $_emscripten_bind_VNode_set_sel_1 (param $0 i32) (param $1 i32)
+    (call $__embind_register_class_function
+      (i32.const 1176)
+      (i32.const 2467)
+      (i32.const 3)
+      (i32.const 1644)
+      (i32.const 2307)
+      (i32.const 5)
+      (get_local $0)
+      (i32.const 0)
+    )
+    (block $label$break$L76
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 8)
+            )
+          )
+        )
+        (loop $while-in44
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L76)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in44
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 8)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
     (i32.store
       (get_local $0)
-      (get_local $1)
+      (i32.const 6)
     )
-  )
-  (func $_emscripten_bind_VNode_set_text_1 (param $0 i32) (param $1 i32)
-    (i32.store offset=8
+    (i32.store offset=4
       (get_local $0)
-      (get_local $1)
+      (i32.const 0)
+    )
+    (call $__embind_register_class_function
+      (i32.const 1176)
+      (i32.const 2477)
+      (i32.const 4)
+      (i32.const 1656)
+      (i32.const 2586)
+      (i32.const 4)
+      (get_local $0)
+      (i32.const 0)
+    )
+    (block $label$break$L81
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 8)
+            )
+          )
+        )
+        (loop $while-in47
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L81)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in47
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 8)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 9)
+    )
+    (i32.store offset=4
+      (get_local $0)
+      (i32.const 0)
+    )
+    (call $__embind_register_class_function
+      (i32.const 1176)
+      (i32.const 2484)
+      (i32.const 2)
+      (i32.const 1672)
+      (i32.const 2303)
+      (i32.const 5)
+      (get_local $0)
+      (i32.const 0)
+    )
+    (block $label$break$L86
+      (if
+        (i32.eqz
+          (tee_local $0
+            (call $_malloc
+              (i32.const 4)
+            )
+          )
+        )
+        (loop $while-in50
+          (i32.store
+            (i32.const 7784)
+            (i32.add
+              (tee_local $0
+                (i32.load
+                  (i32.const 7784)
+                )
+              )
+              (i32.const 0)
+            )
+          )
+          (if
+            (i32.eqz
+              (get_local $0)
+            )
+            (block
+              (set_local $0
+                (i32.const 0)
+              )
+              (br $label$break$L86)
+            )
+          )
+          (call_indirect $FUNCSIG$v
+            (i32.add
+              (i32.and
+                (get_local $0)
+                (i32.const 3)
+              )
+              (i32.const 62)
+            )
+          )
+          (br_if $while-in50
+            (i32.eqz
+              (tee_local $0
+                (call $_malloc
+                  (i32.const 4)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 6)
+    )
+    (call $__embind_register_class_function
+      (i32.const 1176)
+      (i32.const 2489)
+      (i32.const 3)
+      (i32.const 1680)
+      (i32.const 2592)
+      (i32.const 6)
+      (get_local $0)
+      (i32.const 0)
+    )
+    (if
+      (tee_local $0
+        (call $_malloc
+          (i32.const 4)
+        )
+      )
+      (block
+        (i32.store
+          (get_local $0)
+          (i32.const 7)
+        )
+        (call $__embind_register_class_function
+          (i32.const 1176)
+          (i32.const 2493)
+          (i32.const 4)
+          (i32.const 1692)
+          (i32.const 2597)
+          (i32.const 1)
+          (get_local $0)
+          (i32.const 0)
+        )
+        (call $__embind_register_function
+          (i32.const 7107)
+          (i32.const 5)
+          (i32.const 1708)
+          (i32.const 2603)
+          (i32.const 1)
+          (i32.const 4)
+        )
+        (return)
+      )
+    )
+    (block $__rjti$0
+      (loop $while-in52
+        (i32.store
+          (i32.const 7784)
+          (i32.add
+            (tee_local $0
+              (i32.load
+                (i32.const 7784)
+              )
+            )
+            (i32.const 0)
+          )
+        )
+        (if
+          (i32.eqz
+            (get_local $0)
+          )
+          (block
+            (set_local $0
+              (i32.const 0)
+            )
+            (br $__rjti$0)
+          )
+        )
+        (call_indirect $FUNCSIG$v
+          (i32.add
+            (i32.and
+              (get_local $0)
+              (i32.const 3)
+            )
+            (i32.const 62)
+          )
+        )
+        (br_if $while-in52
+          (i32.eqz
+            (tee_local $0
+              (call $_malloc
+                (i32.const 4)
+              )
+            )
+          )
+        )
+        (br $__rjti$0)
+      )
+    )
+    (i32.store
+      (get_local $0)
+      (i32.const 7)
+    )
+    (call $__embind_register_class_function
+      (i32.const 1176)
+      (i32.const 2493)
+      (i32.const 4)
+      (i32.const 1692)
+      (i32.const 2597)
+      (i32.const 1)
+      (get_local $0)
+      (i32.const 0)
+    )
+    (call $__embind_register_function
+      (i32.const 7107)
+      (i32.const 5)
+      (i32.const 1708)
+      (i32.const 2603)
+      (i32.const 1)
+      (i32.const 4)
     )
   )
   (func $__GLOBAL__sub_I_bind_cpp
     (call $__embind_register_void
-      (i32.const 1320)
-      (i32.const 1869)
+      (i32.const 1504)
+      (i32.const 2610)
     )
     (call $__embind_register_bool
-      (i32.const 1328)
-      (i32.const 1874)
+      (i32.const 1520)
+      (i32.const 2615)
       (i32.const 1)
       (i32.const 1)
       (i32.const 0)
     )
     (call $__embind_register_integer
-      (i32.const 1336)
-      (i32.const 1879)
+      (i32.const 1528)
+      (i32.const 2620)
       (i32.const 1)
       (i32.const -128)
       (i32.const 127)
     )
     (call $__embind_register_integer
-      (i32.const 1352)
-      (i32.const 6279)
+      (i32.const 1544)
+      (i32.const 7177)
       (i32.const 1)
       (i32.const -128)
       (i32.const 127)
     )
     (call $__embind_register_integer
-      (i32.const 1344)
-      (i32.const 6291)
+      (i32.const 1536)
+      (i32.const 7189)
       (i32.const 1)
       (i32.const 0)
       (i32.const 255)
     )
     (call $__embind_register_integer
-      (i32.const 1360)
-      (i32.const 6305)
+      (i32.const 1552)
+      (i32.const 7203)
       (i32.const 2)
       (i32.const -32768)
       (i32.const 32767)
     )
     (call $__embind_register_integer
-      (i32.const 1368)
-      (i32.const 6311)
+      (i32.const 1560)
+      (i32.const 7209)
       (i32.const 2)
       (i32.const 0)
       (i32.const 65535)
     )
     (call $__embind_register_integer
-      (i32.const 1376)
-      (i32.const 6328)
+      (i32.const 1568)
+      (i32.const 7226)
       (i32.const 4)
       (i32.const -2147483648)
       (i32.const 2147483647)
     )
     (call $__embind_register_integer
-      (i32.const 1384)
-      (i32.const 6332)
+      (i32.const 1576)
+      (i32.const 7230)
       (i32.const 4)
       (i32.const 0)
       (i32.const -1)
     )
     (call $__embind_register_integer
-      (i32.const 1392)
-      (i32.const 1884)
+      (i32.const 1584)
+      (i32.const 2625)
       (i32.const 4)
       (i32.const -2147483648)
       (i32.const 2147483647)
     )
     (call $__embind_register_integer
-      (i32.const 1400)
-      (i32.const 6345)
+      (i32.const 1592)
+      (i32.const 7243)
       (i32.const 4)
       (i32.const 0)
       (i32.const -1)
     )
     (call $__embind_register_float
-      (i32.const 1408)
-      (i32.const 6359)
+      (i32.const 1600)
+      (i32.const 7257)
       (i32.const 4)
     )
     (call $__embind_register_float
-      (i32.const 1416)
-      (i32.const 6365)
+      (i32.const 1608)
+      (i32.const 7263)
       (i32.const 8)
     )
     (call $__embind_register_std_string
-      (i32.const 1024)
-      (i32.const 6267)
+      (i32.const 1080)
+      (i32.const 7165)
     )
     (call $__embind_register_std_string
-      (i32.const 1064)
-      (i32.const 1889)
+      (i32.const 1232)
+      (i32.const 2630)
     )
     (call $__embind_register_std_wstring
-      (i32.const 1088)
+      (i32.const 1256)
       (i32.const 4)
-      (i32.const 1922)
+      (i32.const 2663)
     )
     (call $__embind_register_emval
-      (i32.const 1056)
-      (i32.const 1935)
+      (i32.const 1024)
+      (i32.const 2676)
     )
     (call $__embind_register_memory_view
-      (i32.const 1112)
+      (i32.const 1280)
       (i32.const 0)
-      (i32.const 1951)
+      (i32.const 2692)
     )
     (call $__embind_register_memory_view
-      (i32.const 1120)
+      (i32.const 1288)
       (i32.const 0)
-      (i32.const 1981)
+      (i32.const 2722)
     )
     (call $__embind_register_memory_view
-      (i32.const 1128)
+      (i32.const 1296)
       (i32.const 1)
-      (i32.const 2018)
+      (i32.const 2759)
     )
     (call $__embind_register_memory_view
-      (i32.const 1136)
+      (i32.const 1304)
       (i32.const 2)
-      (i32.const 2057)
+      (i32.const 2798)
     )
     (call $__embind_register_memory_view
-      (i32.const 1144)
+      (i32.const 1312)
       (i32.const 3)
-      (i32.const 2088)
+      (i32.const 2829)
     )
     (call $__embind_register_memory_view
-      (i32.const 1152)
+      (i32.const 1320)
       (i32.const 4)
-      (i32.const 2128)
+      (i32.const 2869)
     )
     (call $__embind_register_memory_view
-      (i32.const 1160)
+      (i32.const 1328)
       (i32.const 5)
-      (i32.const 2157)
+      (i32.const 2898)
     )
     (call $__embind_register_memory_view
-      (i32.const 1168)
+      (i32.const 1336)
       (i32.const 4)
-      (i32.const 2195)
+      (i32.const 2936)
     )
     (call $__embind_register_memory_view
-      (i32.const 1176)
+      (i32.const 1344)
       (i32.const 5)
-      (i32.const 2225)
+      (i32.const 2966)
     )
     (call $__embind_register_memory_view
-      (i32.const 1120)
+      (i32.const 1288)
       (i32.const 0)
-      (i32.const 2264)
+      (i32.const 3005)
     )
     (call $__embind_register_memory_view
-      (i32.const 1128)
+      (i32.const 1296)
       (i32.const 1)
-      (i32.const 2296)
+      (i32.const 3037)
     )
     (call $__embind_register_memory_view
-      (i32.const 1136)
+      (i32.const 1304)
       (i32.const 2)
-      (i32.const 2329)
+      (i32.const 3070)
     )
     (call $__embind_register_memory_view
-      (i32.const 1144)
+      (i32.const 1312)
       (i32.const 3)
-      (i32.const 2362)
+      (i32.const 3103)
     )
     (call $__embind_register_memory_view
-      (i32.const 1152)
+      (i32.const 1320)
       (i32.const 4)
-      (i32.const 2396)
+      (i32.const 3137)
     )
     (call $__embind_register_memory_view
-      (i32.const 1160)
+      (i32.const 1328)
       (i32.const 5)
-      (i32.const 2429)
+      (i32.const 3170)
     )
     (call $__embind_register_memory_view
-      (i32.const 1184)
+      (i32.const 1352)
       (i32.const 6)
-      (i32.const 2463)
+      (i32.const 3204)
     )
     (call $__embind_register_memory_view
-      (i32.const 1192)
+      (i32.const 1360)
       (i32.const 7)
-      (i32.const 2494)
+      (i32.const 3235)
     )
     (call $__embind_register_memory_view
-      (i32.const 1200)
+      (i32.const 1368)
       (i32.const 7)
-      (i32.const 2526)
+      (i32.const 3267)
     )
   )
   (func $___getTypeName (param $0 i32) (result i32)
@@ -1852,7 +13299,7 @@
       )
       (block
         (i32.store
-          (i32.const 6376)
+          (i32.const 7276)
           (i32.sub
             (i32.const 0)
             (get_local $0)
@@ -1988,7 +13435,7 @@
               )
               (block
                 (i32.store
-                  (i32.const 6376)
+                  (i32.const 7276)
                   (i32.sub
                     (i32.const 0)
                     (get_local $3)
@@ -2233,7 +13680,7 @@
           )
           (block
             (i32.store
-              (i32.const 6376)
+              (i32.const 7276)
               (i32.sub
                 (i32.const 0)
                 (get_local $0)
@@ -2509,7 +13956,7 @@
                   )
                   (block i32
                     (i32.store
-                      (i32.const 6376)
+                      (i32.const 7276)
                       (i32.const 75)
                     )
                     (i32.const -1)
@@ -3360,7 +14807,7 @@
                                   (get_local $7)
                                   (i32.const 58)
                                 )
-                                (i32.const 3061)
+                                (i32.const 3802)
                               )
                               (get_local $8)
                             )
@@ -3801,7 +15248,7 @@
                                                   (i32.const 0)
                                                 )
                                                 (set_local $8
-                                                  (i32.const 3541)
+                                                  (i32.const 4282)
                                                 )
                                                 (br $__rjti$11)
                                               )
@@ -3810,7 +15257,7 @@
                                                   (i32.const 0)
                                                 )
                                                 (set_local $8
-                                                  (i32.const 3541)
+                                                  (i32.const 4282)
                                                 )
                                                 (br $__rjti$11)
                                               )
@@ -3839,7 +15286,7 @@
                                                 (i32.const 1)
                                               )
                                               (set_local $8
-                                                (i32.const 3541)
+                                                (i32.const 4282)
                                               )
                                               (br $__rjti$7)
                                             )
@@ -3860,7 +15307,7 @@
                                                 (i32.const 1)
                                               )
                                               (set_local $8
-                                                (i32.const 3542)
+                                                (i32.const 4283)
                                               )
                                               (br $__rjti$7)
                                             )
@@ -3871,8 +15318,8 @@
                                               (set_local $8
                                                 (if i32
                                                   (get_local $1)
-                                                  (i32.const 3543)
-                                                  (i32.const 3541)
+                                                  (i32.const 4284)
+                                                  (i32.const 4282)
                                                 )
                                               )
                                               (br $__rjti$7)
@@ -3888,7 +15335,7 @@
                                           (i32.const 0)
                                         )
                                         (set_local $8
-                                          (i32.const 3541)
+                                          (i32.const 4282)
                                         )
                                         (br $__rjti$7)
                                       )
@@ -3911,7 +15358,7 @@
                                         (i32.const 0)
                                       )
                                       (set_local $8
-                                        (i32.const 3541)
+                                        (i32.const 4282)
                                       )
                                       (set_local $5
                                         (get_local $24)
@@ -3920,7 +15367,7 @@
                                     )
                                     (set_local $9
                                       (i32.load
-                                        (i32.const 6376)
+                                        (i32.const 7276)
                                       )
                                     )
                                     (set_local $1
@@ -3934,7 +15381,7 @@
                                               (i32.load8_u
                                                 (i32.add
                                                   (get_local $1)
-                                                  (i32.const 3589)
+                                                  (i32.const 4330)
                                                 )
                                               )
                                               (get_local $9)
@@ -3955,7 +15402,7 @@
                                             (i32.const 87)
                                           )
                                           (set_local $9
-                                            (i32.const 3677)
+                                            (i32.const 4418)
                                           )
                                         )
                                         (br $__rjto$1)
@@ -3963,11 +15410,11 @@
                                       (if
                                         (get_local $1)
                                         (set_local $9
-                                          (i32.const 3677)
+                                          (i32.const 4418)
                                         )
                                         (block
                                           (set_local $9
-                                            (i32.const 3677)
+                                            (i32.const 4418)
                                           )
                                           (br $__rjti$8)
                                         )
@@ -4016,7 +15463,7 @@
                                       )
                                     )
                                     (set_local $9
-                                      (i32.const 3551)
+                                      (i32.const 4292)
                                     )
                                   )
                                   (br $__rjti$8)
@@ -4097,7 +15544,7 @@
                                       (get_local $15)
                                     )
                                   )
-                                  (i32.const 3558)
+                                  (i32.const 4299)
                                 )
                                 (block i32
                                   (set_local $1
@@ -4115,7 +15562,7 @@
                                       (set_local $27
                                         (i32.const 1)
                                       )
-                                      (i32.const 3561)
+                                      (i32.const 4302)
                                     )
                                     (block i32
                                       (set_local $27
@@ -4123,8 +15570,8 @@
                                       )
                                       (if i32
                                         (get_local $1)
-                                        (i32.const 3564)
-                                        (i32.const 3559)
+                                        (i32.const 4305)
+                                        (i32.const 4300)
                                       )
                                     )
                                   )
@@ -4364,7 +15811,7 @@
                                                     (get_local $15)
                                                   )
                                                 )
-                                                (i32.const 3525)
+                                                (i32.const 4266)
                                               )
                                             )
                                             (get_local $7)
@@ -6019,7 +17466,7 @@
                                                 )
                                               )
                                               (call $___fwritex
-                                                (i32.const 6326)
+                                                (i32.const 7224)
                                                 (i32.const 1)
                                                 (get_local $0)
                                               )
@@ -6248,7 +17695,7 @@
                                                       )
                                                     )
                                                     (call $___fwritex
-                                                      (i32.const 6326)
+                                                      (i32.const 7224)
                                                       (i32.const 1)
                                                       (get_local $0)
                                                     )
@@ -6453,15 +17900,15 @@
                                           (i32.const 0)
                                         )
                                       )
-                                      (i32.const 3577)
-                                      (i32.const 3581)
+                                      (i32.const 4318)
+                                      (i32.const 4322)
                                     )
                                   )
                                   (set_local $5
                                     (if i32
                                       (get_local $5)
-                                      (i32.const 5481)
-                                      (i32.const 3585)
+                                      (i32.const 6222)
+                                      (i32.const 4326)
                                     )
                                   )
                                   (if
@@ -6519,7 +17966,7 @@
                             (i32.const 0)
                           )
                           (set_local $8
-                            (i32.const 3541)
+                            (i32.const 4282)
                           )
                           (set_local $5
                             (get_local $24)
@@ -6569,7 +18016,7 @@
                                           )
                                           (i32.const 15)
                                         )
-                                        (i32.const 3525)
+                                        (i32.const 4266)
                                       )
                                     )
                                     (get_local $6)
@@ -6602,7 +18049,7 @@
                               (get_local $10)
                               (i32.const 4)
                             )
-                            (i32.const 3541)
+                            (i32.const 4282)
                           )
                         )
                         (if
@@ -6621,7 +18068,7 @@
                             )
                           )
                           (set_local $8
-                            (i32.const 3541)
+                            (i32.const 4282)
                           )
                         )
                         (set_local $7
@@ -6861,7 +18308,7 @@
                       (i32.const 0)
                     )
                     (set_local $8
-                      (i32.const 3541)
+                      (i32.const 4282)
                     )
                     (set_local $5
                       (if i32
@@ -8320,7 +19767,7 @@
             )
             (block i32
               (i32.store
-                (i32.const 6376)
+                (i32.const 7276)
                 (i32.const 84)
               )
               (i32.const -1)
@@ -8434,13 +19881,13 @@
         (br_if $__rjti$0
           (tee_local $0
             (i32.load
-              (i32.const 1460)
+              (i32.const 1744)
             )
           )
         )
         (if
           (call $___towrite
-            (i32.const 1444)
+            (i32.const 1728)
           )
           (set_local $0
             (i32.const -1)
@@ -8448,7 +19895,7 @@
           (block
             (set_local $0
               (i32.load
-                (i32.const 1460)
+                (i32.const 1744)
               )
             )
             (br $__rjti$0)
@@ -8462,14 +19909,14 @@
             (i32.ge_u
               (tee_local $3
                 (i32.load
-                  (i32.const 1464)
+                  (i32.const 1748)
                 )
               )
               (get_local $0)
             )
             (i32.eq
               (i32.load8_s
-                (i32.const 1519)
+                (i32.const 1803)
               )
               (i32.const 10)
             )
@@ -8477,7 +19924,7 @@
         )
         (block
           (i32.store
-            (i32.const 1464)
+            (i32.const 1748)
             (i32.add
               (get_local $3)
               (i32.const 1)
@@ -8497,13 +19944,13 @@
         (if i32
           (i32.eq
             (call_indirect $FUNCSIG$iiii
-              (i32.const 1444)
+              (i32.const 1728)
               (get_local $2)
               (i32.const 1)
               (i32.add
                 (i32.and
                   (i32.load
-                    (i32.const 1480)
+                    (i32.const 1764)
                   )
                   (i32.const 7)
                 )
@@ -8580,7 +20027,7 @@
                 (i32.shr_u
                   (tee_local $8
                     (i32.load
-                      (i32.const 6380)
+                      (i32.const 7280)
                     )
                   )
                   (tee_local $2
@@ -8631,7 +20078,7 @@
                                     )
                                     (i32.const 2)
                                   )
-                                  (i32.const 6420)
+                                  (i32.const 7320)
                                 )
                               )
                               (i32.const 8)
@@ -8650,7 +20097,7 @@
                   (get_local $4)
                 )
                 (i32.store
-                  (i32.const 6380)
+                  (i32.const 7280)
                   (i32.and
                     (get_local $8)
                     (i32.xor
@@ -8667,7 +20114,7 @@
                     (i32.lt_u
                       (get_local $4)
                       (i32.load
-                        (i32.const 6396)
+                        (i32.const 7296)
                       )
                     )
                     (call $_abort)
@@ -8740,7 +20187,7 @@
               (get_local $3)
               (tee_local $16
                 (i32.load
-                  (i32.const 6388)
+                  (i32.const 7288)
                 )
               )
             )
@@ -8876,7 +20323,7 @@
                                         )
                                         (i32.const 2)
                                       )
-                                      (i32.const 6420)
+                                      (i32.const 7320)
                                     )
                                   )
                                   (i32.const 8)
@@ -8895,7 +20342,7 @@
                       (get_local $12)
                     )
                     (i32.store
-                      (i32.const 6380)
+                      (i32.const 7280)
                       (tee_local $7
                         (i32.and
                           (get_local $8)
@@ -8914,7 +20361,7 @@
                         (i32.lt_u
                           (get_local $12)
                           (i32.load
-                            (i32.const 6396)
+                            (i32.const 7296)
                           )
                         )
                         (call $_abort)
@@ -8987,7 +20434,7 @@
                     (block
                       (set_local $9
                         (i32.load
-                          (i32.const 6400)
+                          (i32.const 7300)
                         )
                       )
                       (set_local $2
@@ -9004,7 +20451,7 @@
                             )
                             (i32.const 2)
                           )
-                          (i32.const 6420)
+                          (i32.const 7320)
                         )
                       )
                       (if
@@ -9030,7 +20477,7 @@
                               )
                             )
                             (i32.load
-                              (i32.const 6396)
+                              (i32.const 7296)
                             )
                           )
                           (call $_abort)
@@ -9045,7 +20492,7 @@
                         )
                         (block
                           (i32.store
-                            (i32.const 6380)
+                            (i32.const 7280)
                             (i32.or
                               (get_local $7)
                               (get_local $0)
@@ -9081,11 +20528,11 @@
                     )
                   )
                   (i32.store
-                    (i32.const 6388)
+                    (i32.const 7288)
                     (get_local $11)
                   )
                   (i32.store
-                    (i32.const 6400)
+                    (i32.const 7300)
                     (get_local $4)
                   )
                   (set_global $STACKTOP
@@ -9099,7 +20546,7 @@
               (if
                 (tee_local $6
                   (i32.load
-                    (i32.const 6384)
+                    (i32.const 7284)
                   )
                 )
                 (block
@@ -9204,7 +20651,7 @@
                                   )
                                   (i32.const 2)
                                 )
-                                (i32.const 6684)
+                                (i32.const 7584)
                               )
                             )
                           )
@@ -9275,7 +20722,7 @@
                       (get_local $2)
                       (tee_local $12
                         (i32.load
-                          (i32.const 6396)
+                          (i32.const 7296)
                         )
                       )
                     )
@@ -9478,7 +20925,7 @@
                                     )
                                     (i32.const 2)
                                   )
-                                  (i32.const 6684)
+                                  (i32.const 7584)
                                 )
                               )
                             )
@@ -9494,7 +20941,7 @@
                               )
                               (block
                                 (i32.store
-                                  (i32.const 6384)
+                                  (i32.const 7284)
                                   (i32.and
                                     (get_local $6)
                                     (i32.xor
@@ -9515,7 +20962,7 @@
                               (i32.lt_u
                                 (get_local $15)
                                 (i32.load
-                                  (i32.const 6396)
+                                  (i32.const 7296)
                                 )
                               )
                               (call $_abort)
@@ -9553,7 +21000,7 @@
                             (get_local $4)
                             (tee_local $0
                               (i32.load
-                                (i32.const 6396)
+                                (i32.const 7296)
                               )
                             )
                           )
@@ -9597,7 +21044,7 @@
                             (i32.lt_u
                               (get_local $0)
                               (i32.load
-                                (i32.const 6396)
+                                (i32.const 7296)
                               )
                             )
                             (call $_abort)
@@ -9679,7 +21126,7 @@
                         (block
                           (set_local $7
                             (i32.load
-                              (i32.const 6400)
+                              (i32.const 7300)
                             )
                           )
                           (set_local $3
@@ -9696,7 +21143,7 @@
                                 )
                                 (i32.const 2)
                               )
-                              (i32.const 6420)
+                              (i32.const 7320)
                             )
                           )
                           (if
@@ -9722,7 +21169,7 @@
                                   )
                                 )
                                 (i32.load
-                                  (i32.const 6396)
+                                  (i32.const 7296)
                                 )
                               )
                               (call $_abort)
@@ -9737,7 +21184,7 @@
                             )
                             (block
                               (i32.store
-                                (i32.const 6380)
+                                (i32.const 7280)
                                 (i32.or
                                   (get_local $0)
                                   (get_local $8)
@@ -9773,11 +21220,11 @@
                         )
                       )
                       (i32.store
-                        (i32.const 6388)
+                        (i32.const 7288)
                         (get_local $9)
                       )
                       (i32.store
-                        (i32.const 6400)
+                        (i32.const 7300)
                         (get_local $13)
                       )
                     )
@@ -9825,7 +21272,7 @@
             (if
               (tee_local $5
                 (i32.load
-                  (i32.const 6384)
+                  (i32.const 7284)
                 )
               )
               (block
@@ -9943,7 +21390,7 @@
                                 (get_local $17)
                                 (i32.const 2)
                               )
-                              (i32.const 6684)
+                              (i32.const 7584)
                             )
                           )
                         )
@@ -10232,7 +21679,7 @@
                                   )
                                   (i32.const 2)
                                 )
-                                (i32.const 6684)
+                                (i32.const 7584)
                               )
                             )
                           )
@@ -10305,7 +21752,7 @@
                       (get_local $3)
                       (i32.sub
                         (i32.load
-                          (i32.const 6388)
+                          (i32.const 7288)
                         )
                         (get_local $7)
                       )
@@ -10316,7 +21763,7 @@
                           (get_local $4)
                           (tee_local $12
                             (i32.load
-                              (i32.const 6396)
+                              (i32.const 7296)
                             )
                           )
                         )
@@ -10519,7 +21966,7 @@
                                         )
                                         (i32.const 2)
                                       )
-                                      (i32.const 6684)
+                                      (i32.const 7584)
                                     )
                                   )
                                 )
@@ -10535,7 +21982,7 @@
                                   )
                                   (block
                                     (i32.store
-                                      (i32.const 6384)
+                                      (i32.const 7284)
                                       (tee_local $2
                                         (i32.and
                                           (get_local $5)
@@ -10558,7 +22005,7 @@
                                   (i32.lt_u
                                     (get_local $10)
                                     (i32.load
-                                      (i32.const 6396)
+                                      (i32.const 7296)
                                     )
                                   )
                                   (call $_abort)
@@ -10602,7 +22049,7 @@
                                 (get_local $13)
                                 (tee_local $0
                                   (i32.load
-                                    (i32.const 6396)
+                                    (i32.const 7296)
                                   )
                                 )
                               )
@@ -10646,7 +22093,7 @@
                                 (i32.lt_u
                                   (get_local $0)
                                   (i32.load
-                                    (i32.const 6396)
+                                    (i32.const 7296)
                                   )
                                 )
                                 (call $_abort)
@@ -10754,14 +22201,14 @@
                                       )
                                       (i32.const 2)
                                     )
-                                    (i32.const 6420)
+                                    (i32.const 7320)
                                   )
                                 )
                                 (if
                                   (i32.and
                                     (tee_local $1
                                       (i32.load
-                                        (i32.const 6380)
+                                        (i32.const 7280)
                                       )
                                     )
                                     (tee_local $0
@@ -10784,7 +22231,7 @@
                                         )
                                       )
                                       (i32.load
-                                        (i32.const 6396)
+                                        (i32.const 7296)
                                       )
                                     )
                                     (call $_abort)
@@ -10799,7 +22246,7 @@
                                   )
                                   (block
                                     (i32.store
-                                      (i32.const 6380)
+                                      (i32.const 7280)
                                       (i32.or
                                         (get_local $1)
                                         (get_local $0)
@@ -10937,7 +22384,7 @@
                                   )
                                   (i32.const 2)
                                 )
-                                (i32.const 6684)
+                                (i32.const 7584)
                               )
                             )
                             (i32.store offset=28
@@ -10971,7 +22418,7 @@
                               )
                               (block
                                 (i32.store
-                                  (i32.const 6384)
+                                  (i32.const 7284)
                                   (i32.or
                                     (get_local $0)
                                     (get_local $2)
@@ -11080,7 +22527,7 @@
                                   (i32.lt_u
                                     (get_local $5)
                                     (i32.load
-                                      (i32.const 6396)
+                                      (i32.const 7296)
                                     )
                                   )
                                   (call $_abort)
@@ -11121,7 +22568,7 @@
                                     )
                                     (tee_local $1
                                       (i32.load
-                                        (i32.const 6396)
+                                        (i32.const 7296)
                                       )
                                     )
                                   )
@@ -11189,7 +22636,7 @@
       (i32.ge_u
         (tee_local $1
           (i32.load
-            (i32.const 6388)
+            (i32.const 7288)
           )
         )
         (get_local $0)
@@ -11197,7 +22644,7 @@
       (block
         (set_local $2
           (i32.load
-            (i32.const 6400)
+            (i32.const 7300)
           )
         )
         (if
@@ -11212,7 +22659,7 @@
           )
           (block
             (i32.store
-              (i32.const 6400)
+              (i32.const 7300)
               (tee_local $1
                 (i32.add
                   (get_local $2)
@@ -11221,7 +22668,7 @@
               )
             )
             (i32.store
-              (i32.const 6388)
+              (i32.const 7288)
               (get_local $3)
             )
             (i32.store offset=4
@@ -11248,11 +22695,11 @@
           )
           (block
             (i32.store
-              (i32.const 6388)
+              (i32.const 7288)
               (i32.const 0)
             )
             (i32.store
-              (i32.const 6400)
+              (i32.const 7300)
               (i32.const 0)
             )
             (i32.store offset=4
@@ -11296,14 +22743,14 @@
       (i32.gt_u
         (tee_local $10
           (i32.load
-            (i32.const 6392)
+            (i32.const 7292)
           )
         )
         (get_local $0)
       )
       (block
         (i32.store
-          (i32.const 6392)
+          (i32.const 7292)
           (tee_local $3
             (i32.sub
               (get_local $10)
@@ -11312,12 +22759,12 @@
           )
         )
         (i32.store
-          (i32.const 6404)
+          (i32.const 7304)
           (tee_local $1
             (i32.add
               (tee_local $2
                 (i32.load
-                  (i32.const 6404)
+                  (i32.const 7304)
                 )
               )
               (get_local $0)
@@ -11358,34 +22805,34 @@
                 (tee_local $1
                   (if i32
                     (i32.load
-                      (i32.const 6852)
+                      (i32.const 7752)
                     )
                     (i32.load
-                      (i32.const 6860)
+                      (i32.const 7760)
                     )
                     (block i32
                       (i32.store
-                        (i32.const 6860)
+                        (i32.const 7760)
                         (i32.const 4096)
                       )
                       (i32.store
-                        (i32.const 6856)
+                        (i32.const 7756)
                         (i32.const 4096)
                       )
                       (i32.store
-                        (i32.const 6864)
+                        (i32.const 7764)
                         (i32.const -1)
                       )
                       (i32.store
-                        (i32.const 6868)
+                        (i32.const 7768)
                         (i32.const -1)
                       )
                       (i32.store
-                        (i32.const 6872)
+                        (i32.const 7772)
                         (i32.const 0)
                       )
                       (i32.store
-                        (i32.const 6824)
+                        (i32.const 7724)
                         (i32.const 0)
                       )
                       (i32.store
@@ -11401,7 +22848,7 @@
                         )
                       )
                       (i32.store
-                        (i32.const 6852)
+                        (i32.const 7752)
                         (get_local $1)
                       )
                       (i32.const 4096)
@@ -11438,7 +22885,7 @@
     (if
       (tee_local $2
         (i32.load
-          (i32.const 6820)
+          (i32.const 7720)
         )
       )
       (if
@@ -11448,7 +22895,7 @@
               (i32.add
                 (tee_local $3
                   (i32.load
-                    (i32.const 6812)
+                    (i32.const 7712)
                   )
                 )
                 (get_local $6)
@@ -11483,7 +22930,7 @@
           (i32.eqz
             (i32.and
               (i32.load
-                (i32.const 6824)
+                (i32.const 7724)
               )
               (i32.const 4)
             )
@@ -11496,13 +22943,13 @@
                     (i32.eqz
                       (tee_local $3
                         (i32.load
-                          (i32.const 6404)
+                          (i32.const 7304)
                         )
                       )
                     )
                   )
                   (set_local $2
-                    (i32.const 6828)
+                    (i32.const 7728)
                   )
                   (loop $while-in32
                     (block $while-out31
@@ -11613,7 +23060,7 @@
                               (i32.add
                                 (tee_local $2
                                   (i32.load
-                                    (i32.const 6856)
+                                    (i32.const 7756)
                                   )
                                 )
                                 (i32.const -1)
@@ -11648,7 +23095,7 @@
                         )
                         (tee_local $5
                           (i32.load
-                            (i32.const 6812)
+                            (i32.const 7712)
                           )
                         )
                       )
@@ -11668,7 +23115,7 @@
                         (if
                           (tee_local $2
                             (i32.load
-                              (i32.const 6820)
+                              (i32.const 7720)
                             )
                           )
                           (br_if $label$break$L274
@@ -11738,7 +23185,7 @@
                           )
                           (tee_local $3
                             (i32.load
-                              (i32.const 6860)
+                              (i32.const 7760)
                             )
                           )
                         )
@@ -11794,10 +23241,10 @@
               )
             )
             (i32.store
-              (i32.const 6824)
+              (i32.const 7724)
               (i32.or
                 (i32.load
-                  (i32.const 6824)
+                  (i32.const 7724)
                 )
                 (i32.const 4)
               )
@@ -11853,11 +23300,11 @@
         (br $__rjto$13)
       )
       (i32.store
-        (i32.const 6812)
+        (i32.const 7712)
         (tee_local $2
           (i32.add
             (i32.load
-              (i32.const 6812)
+              (i32.const 7712)
             )
             (get_local $3)
           )
@@ -11867,11 +23314,11 @@
         (i32.gt_u
           (get_local $2)
           (i32.load
-            (i32.const 6816)
+            (i32.const 7716)
           )
         )
         (i32.store
-          (i32.const 6816)
+          (i32.const 7716)
           (get_local $2)
         )
       )
@@ -11879,12 +23326,12 @@
         (if
           (tee_local $8
             (i32.load
-              (i32.const 6404)
+              (i32.const 7304)
             )
           )
           (block
             (set_local $2
-              (i32.const 6828)
+              (i32.const 7728)
             )
             (block $__rjto$10
               (block $__rjti$10
@@ -11951,7 +23398,7 @@
                     )
                     (set_local $5
                       (i32.load
-                        (i32.const 6392)
+                        (i32.const 7292)
                       )
                     )
                     (set_local $1
@@ -11969,7 +23416,7 @@
                       )
                     )
                     (i32.store
-                      (i32.const 6404)
+                      (i32.const 7304)
                       (tee_local $2
                         (i32.add
                           (get_local $8)
@@ -11987,7 +23434,7 @@
                       )
                     )
                     (i32.store
-                      (i32.const 6392)
+                      (i32.const 7292)
                       (tee_local $1
                         (i32.add
                           (get_local $5)
@@ -12013,9 +23460,9 @@
                       (i32.const 40)
                     )
                     (i32.store
-                      (i32.const 6408)
+                      (i32.const 7308)
                       (i32.load
-                        (i32.const 6868)
+                        (i32.const 7768)
                       )
                     )
                     (br $do-once38)
@@ -12028,13 +23475,13 @@
                 (get_local $1)
                 (tee_local $2
                   (i32.load
-                    (i32.const 6396)
+                    (i32.const 7296)
                   )
                 )
               )
               (block
                 (i32.store
-                  (i32.const 6396)
+                  (i32.const 7296)
                   (get_local $1)
                 )
                 (set_local $2
@@ -12049,7 +23496,7 @@
               )
             )
             (set_local $5
-              (i32.const 6828)
+              (i32.const 7728)
             )
             (block $__rjto$11
               (block $__rjti$11
@@ -12070,7 +23517,7 @@
                     )
                   )
                   (set_local $5
-                    (i32.const 6828)
+                    (i32.const 7728)
                   )
                 )
                 (br $__rjto$11)
@@ -12083,7 +23530,7 @@
                   (i32.const 8)
                 )
                 (set_local $5
-                  (i32.const 6828)
+                  (i32.const 7728)
                 )
                 (block
                   (i32.store
@@ -12186,18 +23633,18 @@
                       )
                       (block
                         (i32.store
-                          (i32.const 6392)
+                          (i32.const 7292)
                           (tee_local $0
                             (i32.add
                               (i32.load
-                                (i32.const 6392)
+                                (i32.const 7292)
                               )
                               (get_local $7)
                             )
                           )
                         )
                         (i32.store
-                          (i32.const 6404)
+                          (i32.const 7304)
                           (get_local $6)
                         )
                         (i32.store offset=4
@@ -12213,23 +23660,23 @@
                           (i32.eq
                             (get_local $4)
                             (i32.load
-                              (i32.const 6400)
+                              (i32.const 7300)
                             )
                           )
                           (block
                             (i32.store
-                              (i32.const 6388)
+                              (i32.const 7288)
                               (tee_local $0
                                 (i32.add
                                   (i32.load
-                                    (i32.const 6388)
+                                    (i32.const 7288)
                                   )
                                   (get_local $7)
                                 )
                               )
                             )
                             (i32.store
-                              (i32.const 6400)
+                              (i32.const 7300)
                               (get_local $6)
                             )
                             (i32.store offset=4
@@ -12307,7 +23754,7 @@
                                                       )
                                                       (i32.const 2)
                                                     )
-                                                    (i32.const 6420)
+                                                    (i32.const 7320)
                                                   )
                                                 )
                                               )
@@ -12338,10 +23785,10 @@
                                             )
                                             (block
                                               (i32.store
-                                                (i32.const 6380)
+                                                (i32.const 7280)
                                                 (i32.and
                                                   (i32.load
-                                                    (i32.const 6380)
+                                                    (i32.const 7280)
                                                   )
                                                   (i32.xor
                                                     (i32.shl
@@ -12596,7 +24043,7 @@
                                                         )
                                                         (i32.const 2)
                                                       )
-                                                      (i32.const 6684)
+                                                      (i32.const 7584)
                                                     )
                                                   )
                                                 )
@@ -12610,10 +24057,10 @@
                                                   (get_local $12)
                                                 )
                                                 (i32.store
-                                                  (i32.const 6384)
+                                                  (i32.const 7284)
                                                   (i32.and
                                                     (i32.load
-                                                      (i32.const 6384)
+                                                      (i32.const 7284)
                                                     )
                                                     (i32.xor
                                                       (i32.shl
@@ -12631,7 +24078,7 @@
                                                   (i32.lt_u
                                                     (get_local $8)
                                                     (i32.load
-                                                      (i32.const 6396)
+                                                      (i32.const 7296)
                                                     )
                                                   )
                                                   (call $_abort)
@@ -12670,7 +24117,7 @@
                                               (get_local $12)
                                               (tee_local $1
                                                 (i32.load
-                                                  (i32.const 6396)
+                                                  (i32.const 7296)
                                                 )
                                               )
                                             )
@@ -12722,7 +24169,7 @@
                                             (i32.lt_u
                                               (get_local $0)
                                               (i32.load
-                                                (i32.const 6396)
+                                                (i32.const 7296)
                                               )
                                             )
                                             (call $_abort)
@@ -12799,7 +24246,7 @@
                                   )
                                   (i32.const 2)
                                 )
-                                (i32.const 6420)
+                                (i32.const 7320)
                               )
                             )
                             (block $do-once61
@@ -12807,7 +24254,7 @@
                                 (i32.and
                                   (tee_local $1
                                     (i32.load
-                                      (i32.const 6380)
+                                      (i32.const 7280)
                                     )
                                   )
                                   (tee_local $0
@@ -12831,7 +24278,7 @@
                                         )
                                       )
                                       (i32.load
-                                        (i32.const 6396)
+                                        (i32.const 7296)
                                       )
                                     )
                                     (block
@@ -12848,7 +24295,7 @@
                                 )
                                 (block
                                   (i32.store
-                                    (i32.const 6380)
+                                    (i32.const 7280)
                                     (i32.or
                                       (get_local $1)
                                       (get_local $0)
@@ -12993,7 +24440,7 @@
                               )
                               (i32.const 2)
                             )
-                            (i32.const 6684)
+                            (i32.const 7584)
                           )
                         )
                         (i32.store offset=28
@@ -13018,7 +24465,7 @@
                             (i32.and
                               (tee_local $1
                                 (i32.load
-                                  (i32.const 6384)
+                                  (i32.const 7284)
                                 )
                               )
                               (tee_local $0
@@ -13031,7 +24478,7 @@
                           )
                           (block
                             (i32.store
-                              (i32.const 6384)
+                              (i32.const 7284)
                               (i32.or
                                 (get_local $1)
                                 (get_local $0)
@@ -13140,7 +24587,7 @@
                               (i32.lt_u
                                 (get_local $2)
                                 (i32.load
-                                  (i32.const 6396)
+                                  (i32.const 7296)
                                 )
                               )
                               (call $_abort)
@@ -13181,7 +24628,7 @@
                                 )
                                 (tee_local $1
                                   (i32.load
-                                    (i32.const 6396)
+                                    (i32.const 7296)
                                   )
                                 )
                               )
@@ -13341,7 +24788,7 @@
               )
             )
             (i32.store
-              (i32.const 6404)
+              (i32.const 7304)
               (tee_local $4
                 (i32.add
                   (get_local $1)
@@ -13359,7 +24806,7 @@
               )
             )
             (i32.store
-              (i32.const 6392)
+              (i32.const 7292)
               (tee_local $2
                 (i32.sub
                   (get_local $9)
@@ -13382,9 +24829,9 @@
               (i32.const 40)
             )
             (i32.store
-              (i32.const 6408)
+              (i32.const 7308)
               (i32.load
-                (i32.const 6868)
+                (i32.const 7768)
               )
             )
             (i32.store
@@ -13399,29 +24846,29 @@
             (i64.store align=4
               (get_local $10)
               (i64.load align=4
-                (i32.const 6828)
+                (i32.const 7728)
               )
             )
             (i64.store offset=8 align=4
               (get_local $10)
               (i64.load align=4
-                (i32.const 6836)
+                (i32.const 7736)
               )
             )
             (i32.store
-              (i32.const 6828)
+              (i32.const 7728)
               (get_local $1)
             )
             (i32.store
-              (i32.const 6832)
+              (i32.const 7732)
               (get_local $3)
             )
             (i32.store
-              (i32.const 6840)
+              (i32.const 7740)
               (i32.const 0)
             )
             (i32.store
-              (i32.const 6836)
+              (i32.const 7736)
               (get_local $10)
             )
             (set_local $1
@@ -13499,14 +24946,14 @@
                           )
                           (i32.const 2)
                         )
-                        (i32.const 6420)
+                        (i32.const 7320)
                       )
                     )
                     (if
                       (i32.and
                         (tee_local $3
                           (i32.load
-                            (i32.const 6380)
+                            (i32.const 7280)
                           )
                         )
                         (tee_local $1
@@ -13529,7 +24976,7 @@
                             )
                           )
                           (i32.load
-                            (i32.const 6396)
+                            (i32.const 7296)
                           )
                         )
                         (call $_abort)
@@ -13544,7 +24991,7 @@
                       )
                       (block
                         (i32.store
-                          (i32.const 6380)
+                          (i32.const 7280)
                           (i32.or
                             (get_local $3)
                             (get_local $1)
@@ -13682,7 +25129,7 @@
                       )
                       (i32.const 2)
                     )
-                    (i32.const 6684)
+                    (i32.const 7584)
                   )
                 )
                 (i32.store offset=28
@@ -13702,7 +25149,7 @@
                     (i32.and
                       (tee_local $3
                         (i32.load
-                          (i32.const 6384)
+                          (i32.const 7284)
                         )
                       )
                       (tee_local $1
@@ -13715,7 +25162,7 @@
                   )
                   (block
                     (i32.store
-                      (i32.const 6384)
+                      (i32.const 7284)
                       (i32.or
                         (get_local $3)
                         (get_local $1)
@@ -13824,7 +25271,7 @@
                       (i32.lt_u
                         (get_local $5)
                         (i32.load
-                          (i32.const 6396)
+                          (i32.const 7296)
                         )
                       )
                       (call $_abort)
@@ -13865,7 +25312,7 @@
                         )
                         (tee_local $3
                           (i32.load
-                            (i32.const 6396)
+                            (i32.const 7296)
                           )
                         )
                       )
@@ -13908,7 +25355,7 @@
                 (i32.eqz
                   (tee_local $2
                     (i32.load
-                      (i32.const 6396)
+                      (i32.const 7296)
                     )
                   )
                 )
@@ -13918,30 +25365,30 @@
                 )
               )
               (i32.store
-                (i32.const 6396)
+                (i32.const 7296)
                 (get_local $1)
               )
             )
             (i32.store
-              (i32.const 6828)
+              (i32.const 7728)
               (get_local $1)
             )
             (i32.store
-              (i32.const 6832)
+              (i32.const 7732)
               (get_local $3)
             )
             (i32.store
-              (i32.const 6840)
+              (i32.const 7740)
               (i32.const 0)
             )
             (i32.store
-              (i32.const 6416)
+              (i32.const 7316)
               (i32.load
-                (i32.const 6852)
+                (i32.const 7752)
               )
             )
             (i32.store
-              (i32.const 6412)
+              (i32.const 7312)
               (i32.const -1)
             )
             (set_local $2
@@ -13958,7 +25405,7 @@
                       )
                       (i32.const 2)
                     )
-                    (i32.const 6420)
+                    (i32.const 7320)
                   )
                 )
                 (get_local $5)
@@ -14000,7 +25447,7 @@
               )
             )
             (i32.store
-              (i32.const 6404)
+              (i32.const 7304)
               (tee_local $3
                 (i32.add
                   (get_local $1)
@@ -14018,7 +25465,7 @@
               )
             )
             (i32.store
-              (i32.const 6392)
+              (i32.const 7292)
               (tee_local $1
                 (i32.sub
                   (get_local $5)
@@ -14041,9 +25488,9 @@
               (i32.const 40)
             )
             (i32.store
-              (i32.const 6408)
+              (i32.const 7308)
               (i32.load
-                (i32.const 6868)
+                (i32.const 7768)
               )
             )
           )
@@ -14053,14 +25500,14 @@
         (i32.gt_u
           (tee_local $1
             (i32.load
-              (i32.const 6392)
+              (i32.const 7292)
             )
           )
           (get_local $0)
         )
         (block
           (i32.store
-            (i32.const 6392)
+            (i32.const 7292)
             (tee_local $3
               (i32.sub
                 (get_local $1)
@@ -14069,12 +25516,12 @@
             )
           )
           (i32.store
-            (i32.const 6404)
+            (i32.const 7304)
             (tee_local $1
               (i32.add
                 (tee_local $2
                   (i32.load
-                    (i32.const 6404)
+                    (i32.const 7304)
                   )
                 )
                 (get_local $0)
@@ -14108,7 +25555,7 @@
       )
     )
     (i32.store
-      (i32.const 6376)
+      (i32.const 7276)
       (i32.const 12)
     )
     (set_global $STACKTOP
@@ -14148,7 +25595,7 @@
         )
         (tee_local $11
           (i32.load
-            (i32.const 6396)
+            (i32.const 7296)
           )
         )
       )
@@ -14234,7 +25681,7 @@
             (i32.eq
               (get_local $0)
               (i32.load
-                (i32.const 6400)
+                (i32.const 7300)
               )
             )
             (block
@@ -14266,7 +25713,7 @@
                 )
               )
               (i32.store
-                (i32.const 6388)
+                (i32.const 7288)
                 (get_local $1)
               )
               (i32.store
@@ -14326,7 +25773,7 @@
                         )
                         (i32.const 2)
                       )
-                      (i32.const 6420)
+                      (i32.const 7320)
                     )
                   )
                 )
@@ -14356,10 +25803,10 @@
                 )
                 (block
                   (i32.store
-                    (i32.const 6380)
+                    (i32.const 7280)
                     (i32.and
                       (i32.load
-                        (i32.const 6380)
+                        (i32.const 7280)
                       )
                       (i32.xor
                         (i32.shl
@@ -14619,7 +26066,7 @@
                           )
                           (i32.const 2)
                         )
-                        (i32.const 6684)
+                        (i32.const 7584)
                       )
                     )
                   )
@@ -14635,10 +26082,10 @@
                     )
                     (block
                       (i32.store
-                        (i32.const 6384)
+                        (i32.const 7284)
                         (i32.and
                           (i32.load
-                            (i32.const 6384)
+                            (i32.const 7284)
                           )
                           (i32.xor
                             (i32.shl
@@ -14664,7 +26111,7 @@
                     (i32.lt_u
                       (get_local $12)
                       (i32.load
-                        (i32.const 6396)
+                        (i32.const 7296)
                       )
                     )
                     (call $_abort)
@@ -14711,7 +26158,7 @@
                   (get_local $7)
                   (tee_local $5
                     (i32.load
-                      (i32.const 6396)
+                      (i32.const 7296)
                     )
                   )
                 )
@@ -14760,7 +26207,7 @@
                   (i32.lt_u
                     (get_local $4)
                     (i32.load
-                      (i32.const 6396)
+                      (i32.const 7296)
                     )
                   )
                   (call $_abort)
@@ -14861,23 +26308,23 @@
           (i32.eq
             (get_local $6)
             (i32.load
-              (i32.const 6404)
+              (i32.const 7304)
             )
           )
           (block
             (i32.store
-              (i32.const 6392)
+              (i32.const 7292)
               (tee_local $0
                 (i32.add
                   (i32.load
-                    (i32.const 6392)
+                    (i32.const 7292)
                   )
                   (get_local $2)
                 )
               )
             )
             (i32.store
-              (i32.const 6404)
+              (i32.const 7304)
               (get_local $3)
             )
             (i32.store offset=4
@@ -14891,17 +26338,17 @@
               (i32.ne
                 (get_local $3)
                 (i32.load
-                  (i32.const 6400)
+                  (i32.const 7300)
                 )
               )
               (return)
             )
             (i32.store
-              (i32.const 6400)
+              (i32.const 7300)
               (i32.const 0)
             )
             (i32.store
-              (i32.const 6388)
+              (i32.const 7288)
               (i32.const 0)
             )
             (return)
@@ -14911,23 +26358,23 @@
           (i32.eq
             (get_local $6)
             (i32.load
-              (i32.const 6400)
+              (i32.const 7300)
             )
           )
           (block
             (i32.store
-              (i32.const 6388)
+              (i32.const 7288)
               (tee_local $0
                 (i32.add
                   (i32.load
-                    (i32.const 6388)
+                    (i32.const 7288)
                   )
                   (get_local $2)
                 )
               )
             )
             (i32.store
-              (i32.const 6400)
+              (i32.const 7300)
               (get_local $3)
             )
             (i32.store offset=4
@@ -14990,7 +26437,7 @@
                         )
                         (i32.const 2)
                       )
-                      (i32.const 6420)
+                      (i32.const 7320)
                     )
                   )
                 )
@@ -14999,7 +26446,7 @@
                     (i32.lt_u
                       (get_local $1)
                       (i32.load
-                        (i32.const 6396)
+                        (i32.const 7296)
                       )
                     )
                     (call $_abort)
@@ -15022,10 +26469,10 @@
                 )
                 (block
                   (i32.store
-                    (i32.const 6380)
+                    (i32.const 7280)
                     (i32.and
                       (i32.load
-                        (i32.const 6380)
+                        (i32.const 7280)
                       )
                       (i32.xor
                         (i32.shl
@@ -15055,7 +26502,7 @@
                     (i32.lt_u
                       (get_local $2)
                       (i32.load
-                        (i32.const 6396)
+                        (i32.const 7296)
                       )
                     )
                     (call $_abort)
@@ -15188,7 +26635,7 @@
                       (i32.lt_u
                         (get_local $2)
                         (i32.load
-                          (i32.const 6396)
+                          (i32.const 7296)
                         )
                       )
                       (call $_abort)
@@ -15212,7 +26659,7 @@
                           )
                         )
                         (i32.load
-                          (i32.const 6396)
+                          (i32.const 7296)
                         )
                       )
                       (call $_abort)
@@ -15278,7 +26725,7 @@
                               )
                               (i32.const 2)
                             )
-                            (i32.const 6684)
+                            (i32.const 7584)
                           )
                         )
                       )
@@ -15294,10 +26741,10 @@
                         )
                         (block
                           (i32.store
-                            (i32.const 6384)
+                            (i32.const 7284)
                             (i32.and
                               (i32.load
-                                (i32.const 6384)
+                                (i32.const 7284)
                               )
                               (i32.xor
                                 (i32.shl
@@ -15317,7 +26764,7 @@
                         (i32.lt_u
                           (get_local $7)
                           (i32.load
-                            (i32.const 6396)
+                            (i32.const 7296)
                           )
                         )
                         (call $_abort)
@@ -15355,7 +26802,7 @@
                       (get_local $9)
                       (tee_local $2
                         (i32.load
-                          (i32.const 6396)
+                          (i32.const 7296)
                         )
                       )
                     )
@@ -15404,7 +26851,7 @@
                       (i32.lt_u
                         (get_local $0)
                         (i32.load
-                          (i32.const 6396)
+                          (i32.const 7296)
                         )
                       )
                       (call $_abort)
@@ -15443,12 +26890,12 @@
           (i32.eq
             (get_local $3)
             (i32.load
-              (i32.const 6400)
+              (i32.const 7300)
             )
           )
           (block
             (i32.store
-              (i32.const 6388)
+              (i32.const 7288)
               (get_local $5)
             )
             (return)
@@ -15480,14 +26927,14 @@
               )
               (i32.const 2)
             )
-            (i32.const 6420)
+            (i32.const 7320)
           )
         )
         (if
           (i32.and
             (tee_local $2
               (i32.load
-                (i32.const 6380)
+                (i32.const 7280)
               )
             )
             (tee_local $1
@@ -15510,7 +26957,7 @@
                 )
               )
               (i32.load
-                (i32.const 6396)
+                (i32.const 7296)
               )
             )
             (call $_abort)
@@ -15525,7 +26972,7 @@
           )
           (block
             (i32.store
-              (i32.const 6380)
+              (i32.const 7280)
               (i32.or
                 (get_local $2)
                 (get_local $1)
@@ -15663,7 +27110,7 @@
           )
           (i32.const 2)
         )
-        (i32.const 6684)
+        (i32.const 7584)
       )
     )
     (i32.store offset=28
@@ -15683,7 +27130,7 @@
         (i32.and
           (tee_local $4
             (i32.load
-              (i32.const 6384)
+              (i32.const 7284)
             )
           )
           (tee_local $5
@@ -15778,7 +27225,7 @@
                 (i32.lt_u
                   (get_local $1)
                   (i32.load
-                    (i32.const 6396)
+                    (i32.const 7296)
                   )
                 )
                 (call $_abort)
@@ -15819,7 +27266,7 @@
                   )
                   (tee_local $4
                     (i32.load
-                      (i32.const 6396)
+                      (i32.const 7296)
                     )
                   )
                 )
@@ -15856,7 +27303,7 @@
         )
         (block
           (i32.store
-            (i32.const 6384)
+            (i32.const 7284)
             (i32.or
               (get_local $4)
               (get_local $5)
@@ -15882,11 +27329,11 @@
       )
     )
     (i32.store
-      (i32.const 6412)
+      (i32.const 7312)
       (tee_local $0
         (i32.add
           (i32.load
-            (i32.const 6412)
+            (i32.const 7312)
           )
           (i32.const -1)
         )
@@ -15896,7 +27343,7 @@
       (get_local $0)
       (return)
       (set_local $0
-        (i32.const 6836)
+        (i32.const 7736)
       )
     )
     (loop $while-in17
@@ -15915,8 +27362,24 @@
       )
     )
     (i32.store
-      (i32.const 6412)
+      (i32.const 7312)
       (i32.const -1)
+    )
+  )
+  (func $__ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv
+    (call $___assert_fail
+      (i32.const 6226)
+      (i32.const 6249)
+      (i32.const 304)
+      (i32.const 6472)
+    )
+  )
+  (func $__ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv
+    (call $___assert_fail
+      (i32.const 6346)
+      (i32.const 6375)
+      (i32.const 1183)
+      (i32.const 6472)
     )
   )
   (func $__ZL25default_terminate_handlerv
@@ -15941,11 +27404,11 @@
     )
     (if
       (call $_pthread_once
-        (i32.const 6876)
+        (i32.const 7776)
         (i32.const 2)
       )
       (call $_abort_message
-        (i32.const 5901)
+        (i32.const 6768)
         (get_local $1)
       )
     )
@@ -15977,7 +27440,7 @@
       (tee_local $0
         (call $_pthread_getspecific
           (i32.load
-            (i32.const 6880)
+            (i32.const 7780)
           )
         )
       )
@@ -16003,10 +27466,10 @@
             (block
               (i32.store
                 (get_local $1)
-                (i32.const 5762)
+                (i32.const 6629)
               )
               (call $_abort_message
-                (i32.const 5712)
+                (i32.const 6579)
                 (get_local $1)
               )
             )
@@ -16043,7 +27506,7 @@
           )
           (if
             (call $__ZNK10__cxxabiv117__class_type_info9can_catchEPKNS_16__shim_type_infoERPv
-              (i32.const 1208)
+              (i32.const 1376)
               (get_local $0)
               (get_local $5)
             )
@@ -16062,15 +27525,15 @@
                           (get_local $0)
                         )
                       )
-                      (i32.const 1)
+                      (i32.const 15)
                     )
-                    (i32.const 28)
+                    (i32.const 38)
                   )
                 )
               )
               (i32.store
                 (get_local $3)
-                (i32.const 5762)
+                (i32.const 6629)
               )
               (i32.store offset=4
                 (get_local $3)
@@ -16081,21 +27544,21 @@
                 (get_local $0)
               )
               (call $_abort_message
-                (i32.const 5626)
+                (i32.const 6493)
                 (get_local $3)
               )
             )
             (block
               (i32.store
                 (get_local $4)
-                (i32.const 5762)
+                (i32.const 6629)
               )
               (i32.store offset=4
                 (get_local $4)
                 (get_local $1)
               )
               (call $_abort_message
-                (i32.const 5671)
+                (i32.const 6538)
                 (get_local $4)
               )
             )
@@ -16104,7 +27567,7 @@
       )
     )
     (call $_abort_message
-      (i32.const 5750)
+      (i32.const 6617)
       (i32.add
         (get_local $2)
         (i32.const 40)
@@ -16191,18 +27654,18 @@
       (block
         (set_local $4
           (i32.load
-            (i32.const 1444)
+            (i32.const 1728)
           )
         )
         (if
           (i32.lt_s
             (i32.load8_s
-              (i32.const 1518)
+              (i32.const 1802)
             )
             (i32.const 1)
           )
           (i32.store
-            (i32.const 1444)
+            (i32.const 1728)
             (i32.and
               (get_local $4)
               (i32.const -33)
@@ -16211,11 +27674,11 @@
         )
         (if
           (i32.load
-            (i32.const 1492)
+            (i32.const 1776)
           )
           (drop
             (call $_printf_core
-              (i32.const 1444)
+              (i32.const 1728)
               (get_local $0)
               (get_local $5)
               (get_local $2)
@@ -16225,27 +27688,27 @@
           (block
             (set_local $6
               (i32.load
-                (i32.const 1488)
+                (i32.const 1772)
               )
             )
             (i32.store
-              (i32.const 1488)
+              (i32.const 1772)
               (get_local $3)
             )
             (i32.store
-              (i32.const 1472)
+              (i32.const 1756)
               (get_local $3)
             )
             (i32.store
-              (i32.const 1464)
+              (i32.const 1748)
               (get_local $3)
             )
             (i32.store
-              (i32.const 1492)
+              (i32.const 1776)
               (i32.const 80)
             )
             (i32.store
-              (i32.const 1460)
+              (i32.const 1744)
               (i32.add
                 (get_local $3)
                 (i32.const 80)
@@ -16253,7 +27716,7 @@
             )
             (drop
               (call $_printf_core
-                (i32.const 1444)
+                (i32.const 1728)
                 (get_local $0)
                 (get_local $5)
                 (get_local $2)
@@ -16265,13 +27728,13 @@
               (block
                 (drop
                   (call_indirect $FUNCSIG$iiii
-                    (i32.const 1444)
+                    (i32.const 1728)
                     (i32.const 0)
                     (i32.const 0)
                     (i32.add
                       (i32.and
                         (i32.load
-                          (i32.const 1480)
+                          (i32.const 1764)
                         )
                         (i32.const 7)
                       )
@@ -16280,23 +27743,23 @@
                   )
                 )
                 (i32.store
-                  (i32.const 1488)
+                  (i32.const 1772)
                   (get_local $6)
                 )
                 (i32.store
-                  (i32.const 1492)
+                  (i32.const 1776)
                   (i32.const 0)
                 )
                 (i32.store
-                  (i32.const 1460)
+                  (i32.const 1744)
                   (i32.const 0)
                 )
                 (i32.store
-                  (i32.const 1472)
+                  (i32.const 1756)
                   (i32.const 0)
                 )
                 (i32.store
-                  (i32.const 1464)
+                  (i32.const 1748)
                   (i32.const 0)
                 )
               )
@@ -16304,10 +27767,10 @@
           )
         )
         (i32.store
-          (i32.const 1444)
+          (i32.const 1728)
           (i32.or
             (i32.load
-              (i32.const 1444)
+              (i32.const 1728)
             )
             (i32.and
               (get_local $4)
@@ -16320,7 +27783,7 @@
     (set_local $0
       (i32.eq
         (i32.load8_s
-          (i32.const 1519)
+          (i32.const 1803)
         )
         (i32.const 10)
       )
@@ -16329,7 +27792,7 @@
       (if
         (i32.lt_s
           (i32.load
-            (i32.const 1520)
+            (i32.const 1804)
           )
           (i32.const 0)
         )
@@ -16342,16 +27805,16 @@
               (i32.lt_u
                 (tee_local $0
                   (i32.load
-                    (i32.const 1464)
+                    (i32.const 1748)
                   )
                 )
                 (i32.load
-                  (i32.const 1460)
+                  (i32.const 1744)
                 )
               )
               (block
                 (i32.store
-                  (i32.const 1464)
+                  (i32.const 1748)
                   (i32.add
                     (get_local $0)
                     (i32.const 1)
@@ -16378,16 +27841,16 @@
               (i32.lt_u
                 (tee_local $0
                   (i32.load
-                    (i32.const 1464)
+                    (i32.const 1748)
                   )
                 )
                 (i32.load
-                  (i32.const 1460)
+                  (i32.const 1744)
                 )
               )
               (block
                 (i32.store
-                  (i32.const 1464)
+                  (i32.const 1748)
                   (i32.add
                     (get_local $0)
                     (i32.const 1)
@@ -16446,7 +27909,7 @@
             (tee_local $1
               (call $___dynamic_cast
                 (get_local $1)
-                (i32.const 1216)
+                (i32.const 1384)
               )
             )
             (block i32
@@ -16513,9 +27976,9 @@
                         (get_local $1)
                       )
                     )
-                    (i32.const 3)
+                    (i32.const 7)
                   )
-                  (i32.const 38)
+                  (i32.const 82)
                 )
               )
               (if i32
@@ -16982,7 +28445,7 @@
     )
     (i32.store offset=8
       (get_local $2)
-      (i32.const 1232)
+      (i32.const 1400)
     )
     (set_local $11
       (i32.add
@@ -17081,7 +28544,7 @@
                   )
                   (i32.const 3)
                 )
-                (i32.const 34)
+                (i32.const 68)
               )
             )
             (if i32
@@ -17109,7 +28572,7 @@
                       (get_local $5)
                     )
                   )
-                  (i32.const 3)
+                  (i32.const 7)
                 )
                 (i32.const 8)
               )
@@ -17256,7 +28719,7 @@
             )
             (i32.const 3)
           )
-          (i32.const 34)
+          (i32.const 68)
         )
       )
     )
@@ -17324,7 +28787,7 @@
                         (get_local $0)
                       )
                     )
-                    (i32.const 3)
+                    (i32.const 7)
                   )
                   (i32.const 8)
                 )
@@ -17407,7 +28870,7 @@
                       )
                       (i32.const 3)
                     )
-                    (i32.const 34)
+                    (i32.const 68)
                   )
                 )
                 (i32.store
@@ -17536,9 +28999,9 @@
                 (get_local $4)
               )
             )
-            (i32.const 3)
+            (i32.const 7)
           )
-          (i32.const 38)
+          (i32.const 82)
         )
       )
     )
@@ -17560,11 +29023,11 @@
     )
     (if
       (call $_pthread_key_create
-        (i32.const 6880)
-        (i32.const 8)
+        (i32.const 7780)
+        (i32.const 14)
       )
       (call $_abort_message
-        (i32.const 5950)
+        (i32.const 6817)
         (get_local $1)
       )
       (set_global $STACKTOP
@@ -17593,12 +29056,12 @@
     (if
       (call $_pthread_setspecific
         (i32.load
-          (i32.const 6880)
+          (i32.const 7780)
         )
         (i32.const 0)
       )
       (call $_abort_message
-        (i32.const 6000)
+        (i32.const 6867)
         (get_local $2)
       )
       (set_global $STACKTOP
@@ -17606,11 +29069,227 @@
       )
     )
   )
+  (func $__ZNKSt9bad_alloc4whatEv (param $0 i32) (result i32)
+    (i32.const 6960)
+  )
   (func $__ZNK10__cxxabiv123__fundamental_type_info9can_catchEPKNS_16__shim_type_infoERPv (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
     (i32.eq
       (get_local $0)
       (get_local $1)
     )
+  )
+  (func $__ZNK10__cxxabiv119__pointer_type_info9can_catchEPKNS_16__shim_type_infoERPv (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+    (local $3 i32)
+    (local $4 i32)
+    (local $5 i32)
+    (set_local $4
+      (get_global $STACKTOP)
+    )
+    (set_global $STACKTOP
+      (i32.add
+        (get_global $STACKTOP)
+        (i32.const 64)
+      )
+    )
+    (set_local $3
+      (get_local $4)
+    )
+    (i32.store
+      (get_local $2)
+      (i32.load
+        (i32.load
+          (get_local $2)
+        )
+      )
+    )
+    (set_local $0
+      (if i32
+        (i32.or
+          (i32.eq
+            (get_local $0)
+            (get_local $1)
+          )
+          (i32.eq
+            (get_local $1)
+            (i32.const 1512)
+          )
+        )
+        (i32.const 1)
+        (if i32
+          (get_local $1)
+          (if i32
+            (tee_local $1
+              (call $___dynamic_cast
+                (get_local $1)
+                (i32.const 1472)
+              )
+            )
+            (if i32
+              (i32.and
+                (i32.load offset=8
+                  (get_local $1)
+                )
+                (i32.xor
+                  (i32.load offset=8
+                    (get_local $0)
+                  )
+                  (i32.const -1)
+                )
+              )
+              (i32.const 0)
+              (if i32
+                (i32.or
+                  (i32.eq
+                    (tee_local $0
+                      (i32.load offset=12
+                        (get_local $0)
+                      )
+                    )
+                    (i32.const 1504)
+                  )
+                  (i32.eq
+                    (get_local $0)
+                    (i32.load
+                      (tee_local $1
+                        (i32.add
+                          (get_local $1)
+                          (i32.const 12)
+                        )
+                      )
+                    )
+                  )
+                )
+                (i32.const 1)
+                (if i32
+                  (get_local $0)
+                  (if i32
+                    (tee_local $5
+                      (call $___dynamic_cast
+                        (get_local $0)
+                        (i32.const 1384)
+                      )
+                    )
+                    (if i32
+                      (tee_local $0
+                        (i32.load
+                          (get_local $1)
+                        )
+                      )
+                      (if i32
+                        (tee_local $1
+                          (call $___dynamic_cast
+                            (get_local $0)
+                            (i32.const 1384)
+                          )
+                        )
+                        (block i32
+                          (i64.store align=4
+                            (tee_local $0
+                              (i32.add
+                                (get_local $3)
+                                (i32.const 4)
+                              )
+                            )
+                            (i64.const 0)
+                          )
+                          (i64.store offset=8 align=4
+                            (get_local $0)
+                            (i64.const 0)
+                          )
+                          (i64.store offset=16 align=4
+                            (get_local $0)
+                            (i64.const 0)
+                          )
+                          (i64.store offset=24 align=4
+                            (get_local $0)
+                            (i64.const 0)
+                          )
+                          (i64.store offset=32 align=4
+                            (get_local $0)
+                            (i64.const 0)
+                          )
+                          (i64.store offset=40 align=4
+                            (get_local $0)
+                            (i64.const 0)
+                          )
+                          (i32.store offset=48
+                            (get_local $0)
+                            (i32.const 0)
+                          )
+                          (i32.store
+                            (get_local $3)
+                            (get_local $1)
+                          )
+                          (i32.store offset=8
+                            (get_local $3)
+                            (get_local $5)
+                          )
+                          (i32.store offset=12
+                            (get_local $3)
+                            (i32.const -1)
+                          )
+                          (i32.store offset=48
+                            (get_local $3)
+                            (i32.const 1)
+                          )
+                          (call_indirect $FUNCSIG$viiii
+                            (get_local $1)
+                            (get_local $3)
+                            (i32.load
+                              (get_local $2)
+                            )
+                            (i32.const 1)
+                            (i32.add
+                              (i32.and
+                                (i32.load offset=28
+                                  (i32.load
+                                    (get_local $1)
+                                  )
+                                )
+                                (i32.const 7)
+                              )
+                              (i32.const 82)
+                            )
+                          )
+                          (if i32
+                            (i32.eq
+                              (i32.load offset=24
+                                (get_local $3)
+                              )
+                              (i32.const 1)
+                            )
+                            (block i32
+                              (i32.store
+                                (get_local $2)
+                                (i32.load offset=16
+                                  (get_local $3)
+                                )
+                              )
+                              (i32.const 1)
+                            )
+                            (i32.const 0)
+                          )
+                        )
+                        (i32.const 0)
+                      )
+                      (i32.const 0)
+                    )
+                    (i32.const 0)
+                  )
+                  (i32.const 0)
+                )
+              )
+            )
+            (i32.const 0)
+          )
+          (i32.const 0)
+        )
+      )
+    )
+    (set_global $STACKTOP
+      (get_local $4)
+    )
+    (get_local $0)
   )
   (func $__ZNK10__cxxabiv121__vmi_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (param $5 i32)
     (local $6 i32)
@@ -18539,9 +30218,9 @@
       (i32.add
         (i32.and
           (get_local $6)
-          (i32.const 3)
+          (i32.const 7)
         )
-        (i32.const 38)
+        (i32.const 82)
       )
     )
   )
@@ -18608,7 +30287,7 @@
           (get_local $8)
           (i32.const 3)
         )
-        (i32.const 34)
+        (i32.const 68)
       )
     )
   )
@@ -18672,7 +30351,7 @@
       (i32.add
         (i32.and
           (get_local $7)
-          (i32.const 3)
+          (i32.const 7)
         )
         (i32.const 8)
       )
@@ -18739,7 +30418,7 @@
         (i32.ne
           (call $___dynamic_cast
             (get_local $0)
-            (i32.const 1288)
+            (i32.const 1472)
           )
           (i32.const 0)
         )
@@ -19115,6 +30794,85 @@
     )
     (get_local $2)
   )
+  (func $_memmove (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+    (local $3 i32)
+    (if
+      (i32.and
+        (i32.lt_s
+          (get_local $1)
+          (get_local $0)
+        )
+        (i32.lt_s
+          (get_local $0)
+          (i32.add
+            (get_local $1)
+            (get_local $2)
+          )
+        )
+      )
+      (block
+        (set_local $3
+          (get_local $0)
+        )
+        (set_local $1
+          (i32.add
+            (get_local $1)
+            (get_local $2)
+          )
+        )
+        (set_local $0
+          (i32.add
+            (get_local $0)
+            (get_local $2)
+          )
+        )
+        (loop $while-in
+          (if
+            (i32.gt_s
+              (get_local $2)
+              (i32.const 0)
+            )
+            (block
+              (set_local $2
+                (i32.sub
+                  (get_local $2)
+                  (i32.const 1)
+                )
+              )
+              (i32.store8
+                (tee_local $0
+                  (i32.sub
+                    (get_local $0)
+                    (i32.const 1)
+                  )
+                )
+                (i32.load8_s
+                  (tee_local $1
+                    (i32.sub
+                      (get_local $1)
+                      (i32.const 1)
+                    )
+                  )
+                )
+              )
+              (br $while-in)
+            )
+          )
+        )
+        (set_local $0
+          (get_local $3)
+        )
+      )
+      (drop
+        (call $_memcpy
+          (get_local $0)
+          (get_local $1)
+          (get_local $2)
+        )
+      )
+    )
+    (get_local $0)
+  )
   (func $dynCall_iiii (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (result i32)
     (call_indirect $FUNCSIG$iiii
       (get_local $1)
@@ -19139,7 +30897,7 @@
       (i32.add
         (i32.and
           (get_local $0)
-          (i32.const 3)
+          (i32.const 7)
         )
         (i32.const 8)
       )
@@ -19153,7 +30911,20 @@
           (get_local $0)
           (i32.const 15)
         )
-        (i32.const 12)
+        (i32.const 20)
+      )
+    )
+  )
+  (func $dynCall_vii (param $0 i32) (param $1 i32) (param $2 i32)
+    (call_indirect $FUNCSIG$vii
+      (get_local $1)
+      (get_local $2)
+      (i32.add
+        (i32.and
+          (get_local $0)
+          (i32.const 1)
+        )
+        (i32.const 36)
       )
     )
   )
@@ -19163,9 +30934,23 @@
       (i32.add
         (i32.and
           (get_local $0)
-          (i32.const 1)
+          (i32.const 15)
         )
-        (i32.const 28)
+        (i32.const 38)
+      )
+    )
+  )
+  (func $dynCall_viii (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
+    (call_indirect $FUNCSIG$viii
+      (get_local $1)
+      (get_local $2)
+      (get_local $3)
+      (i32.add
+        (i32.and
+          (get_local $0)
+          (i32.const 7)
+        )
+        (i32.const 54)
       )
     )
   )
@@ -19176,7 +30961,22 @@
           (get_local $0)
           (i32.const 3)
         )
-        (i32.const 30)
+        (i32.const 62)
+      )
+    )
+  )
+  (func $dynCall_iiiii (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (result i32)
+    (call_indirect $FUNCSIG$iiiii
+      (get_local $1)
+      (get_local $2)
+      (get_local $3)
+      (get_local $4)
+      (i32.add
+        (i32.and
+          (get_local $0)
+          (i32.const 1)
+        )
+        (i32.const 66)
       )
     )
   )
@@ -19193,7 +30993,36 @@
           (get_local $0)
           (i32.const 3)
         )
-        (i32.const 34)
+        (i32.const 68)
+      )
+    )
+  )
+  (func $dynCall_iii (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+    (call_indirect $FUNCSIG$iii
+      (get_local $1)
+      (get_local $2)
+      (i32.add
+        (i32.and
+          (get_local $0)
+          (i32.const 7)
+        )
+        (i32.const 72)
+      )
+    )
+  )
+  (func $dynCall_iiiiii (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (param $5 i32) (result i32)
+    (call_indirect $FUNCSIG$iiiiii
+      (get_local $1)
+      (get_local $2)
+      (get_local $3)
+      (get_local $4)
+      (get_local $5)
+      (i32.add
+        (i32.and
+          (get_local $0)
+          (i32.const 1)
+        )
+        (i32.const 80)
       )
     )
   )
@@ -19206,9 +31035,9 @@
       (i32.add
         (i32.and
           (get_local $0)
-          (i32.const 3)
+          (i32.const 7)
         )
-        (i32.const 38)
+        (i32.const 82)
       )
     )
   )
@@ -19223,30 +31052,64 @@
       (i32.const 1)
     )
   )
-  (func $b2 (param $0 i32)
+  (func $b2 (result i32)
     (call $abort
       (i32.const 2)
     )
+    (i32.const 0)
   )
-  (func $b3 (param $0 i32) (result i32)
+  (func $b3 (param $0 i32)
     (call $abort
       (i32.const 3)
     )
-    (i32.const 0)
   )
-  (func $b4
+  (func $b4 (param $0 i32) (param $1 i32)
     (call $abort
       (i32.const 4)
     )
   )
-  (func $b5 (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (param $5 i32)
+  (func $b5 (param $0 i32) (result i32)
     (call $abort
       (i32.const 5)
     )
+    (i32.const 0)
   )
-  (func $b6 (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
+  (func $b6 (param $0 i32) (param $1 i32) (param $2 i32)
     (call $abort
       (i32.const 6)
+    )
+  )
+  (func $b7
+    (call $abort
+      (i32.const 7)
+    )
+  )
+  (func $b8 (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (result i32)
+    (call $abort
+      (i32.const 8)
+    )
+    (i32.const 0)
+  )
+  (func $b9 (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (param $5 i32)
+    (call $abort
+      (i32.const 9)
+    )
+  )
+  (func $b10 (param $0 i32) (param $1 i32) (result i32)
+    (call $abort
+      (i32.const 10)
+    )
+    (i32.const 0)
+  )
+  (func $b11 (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (result i32)
+    (call $abort
+      (i32.const 11)
+    )
+    (i32.const 0)
+  )
+  (func $b12 (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
+    (call $abort
+      (i32.const 12)
     )
   )
 )

@@ -4,18 +4,23 @@
 #include "../VNodeData/VNodeData.hpp"
 #include "../Val/Val.hpp"
 #include <vector>
-#include <string.h>
+#include <string>
 
-struct VNode {
-  const char* sel;
-  const char* key;
-  const char* text;
-  struct VNodeData* data;
-  val elm;
-  std::vector<struct VNode*> children;
-
-  // struct VNode** get_children();
-  void set_children(struct VNode** vnodes, int num);
+class VNode {
+  public:
+    VNode() {};
+    VNode(
+      std::string nodeSel,
+      std::string nodeText,
+      VNodeData nodeData,
+      std::vector<VNode> nodeChildren
+    ): sel(nodeSel), text(nodeText), data(nodeData), children(nodeChildren) {};
+    std::string sel;
+    std::string key;
+    std::string text;
+    VNodeData data;
+    val elm;
+    std::vector<VNode> children;
 };
 
 #endif

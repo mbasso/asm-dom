@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <string.h>
 
-struct VNode* toVNode(const val node) {
-	struct VNode* vnode = new VNode;
+VNode* toVNode(const val node) {
+	VNode* vnode = new VNode;
 	if (isElement(node)) {
 		// TODO
 		/*

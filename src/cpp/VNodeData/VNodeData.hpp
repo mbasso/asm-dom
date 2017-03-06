@@ -1,27 +1,30 @@
 #ifndef VNodeData_hpp
 #define VNodeData_hpp
 
-#include "../VNode/VNode.hpp"
-#include "../Hooks/Hooks.hpp"
+// #include "../VNode/VNode.hpp"
+// #include "../Hooks/Hooks.hpp"
 #include "../Val/Val.hpp"
 // #include <functional>
+#include <emscripten/bind.h>
 #include <vector>
-#include <string.h>
+#include <string>
 
-struct VNodeData {
-  val props;
-  val attrs;
-  val className;
-  val style;
-  val dataset;
-  val on;
-  val hero;
-  val attachData;
-  struct Hooks* hook;
-  const char* key;
-  const char* ns;
-  // std::function<struct VNode*(void)> fn;
-  std::vector<val> args;
+class VNodeData {
+  public:
+    VNodeData() {};
+    val props;
+    val attrs;
+    val className;
+    val style;
+    val dataset;
+    val on;
+    val hero;
+    val attachData;
+    // struct Hooks* hook;
+    std::string key;
+    std::string ns;
+    // std::function<VNode*(void)> fn;
+    std::vector<val> args;
 };
 
 #endif

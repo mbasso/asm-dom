@@ -4,6 +4,6 @@
 #include "../VNode/VNode.hpp"
 #include "../Val/Val.hpp"
 
-struct VNode* toVNode(const val node);
+VNode* toVNode(const val node);
 
 #endif

@@ -1,27 +1,49 @@
 export default function load(config = {}) {
-  let result;
+  let lib;
   if ('WebAssembly' in window) {
     /* eslint-disable */
     config.wasmBinary = new Uint8Array(require('../compiled/wasm/asm-dom.wasm'));
     config.memoryInitializerPrefixURL = '';
-    result = require('../compiled/wasm/asm-dom.js')(config);
+    lib = require('../compiled/wasm/asm-dom.js')(config);
     /* eslint-enable */
   } else {
     // eslint-disable-next-line
-    result = require('../compiled/asmjs/asm-dom.asm.js')(config);
+    lib = require('../compiled/asmjs/asm-dom.asm.js')(config);
   }
 
-  // improve APIs (due to bindings problems)
+  const asmH = lib.h;
+  lib.h = (a, b, c) => {
+    let sel = a;
+    let text = '';
+    let data;
+    const children = new lib.VNodeVector();
 
-  // automatically inject children length in functions like:
-  // static struct VNode* h(const char* sel, struct VNode** children, int childrenNum);
-  result.h = (...params) => {
-    const newParams = [...params];
-    if (Array.isArray(params[params.length - 1])) {
-      newParams.push(params[params.length - 1].length);
+    if (b === true) {
+      sel = '';
+      text = a;
+    } else if (Array.isArray(b)) {
+      b.forEach(x => children.push_back(x));
+    } else if (typeof b === 'string') {
+      text = b;
+    } else if (typeof b === 'number') {
+      children.push_back(b);
+    } else {
+      data = b;
+      if (typeof c === 'string') {
+        text = c;
+      } else if (typeof c === 'number') {
+        children.push_back(c);
+      } else if (Array.isArray(c)) {
+        c.forEach(x => children.push_back(x));
+      }
     }
-    return result.H.prototype.h.apply(result.H.prototype, newParams);
+
+    if (!data) {
+      data = new lib.VNodeData();
+    }
+
+    return asmH(sel, text, data, children);
   };
 
-  return result;
+  return lib;
 }

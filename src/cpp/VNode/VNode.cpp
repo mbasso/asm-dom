@@ -1,10 +1,14 @@
 #include "VNode.hpp"
-#include <vector>
+#include <emscripten/bind.h>
 
-/* struct VNode** VNode::get_children() {
-	return &children[0];
-}; */
-
-void VNode::set_children(struct VNode** vnodes, int num) {
-	children = std::vector<struct VNode*>(vnodes, vnodes + num);
-};
+EMSCRIPTEN_BINDINGS(vnode) {
+  emscripten::class_<VNode>("VNode")
+    .constructor<>()
+    .property("sel", &VNode::sel)
+    .property("key", &VNode::key)
+    .property("text", &VNode::text)
+    .property("data", &VNode::data)
+    .property("children", &VNode::children);
+  
+  emscripten::register_vector<VNode>("VNodeVector");
+}
