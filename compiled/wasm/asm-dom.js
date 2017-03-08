@@ -1857,7 +1857,7 @@ var ASM_CONSTS = [];
 
 STATIC_BASE = 1024;
 
-STATICTOP = STATIC_BASE + 7808;
+STATICTOP = STATIC_BASE + 7760;
   /* global initializers */  __ATINIT__.push({ func: function() { __GLOBAL__sub_I_app_cpp() } }, { func: function() { __GLOBAL__sub_I_bind_cpp() } });
   
 
@@ -1866,7 +1866,7 @@ memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasm
 
 
 
-var STATIC_BUMP = 7808;
+var STATIC_BUMP = 7760;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 
