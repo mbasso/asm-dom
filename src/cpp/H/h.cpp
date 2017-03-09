@@ -29,5 +29,5 @@ VNode h(std::string sel, std::string text, VNodeData data, std::vector<VNode> ch
 };
 
 EMSCRIPTEN_BINDINGS(h_function) {
-	emscripten::function("h", &h);
+	emscripten::function("_h", &h);
 }

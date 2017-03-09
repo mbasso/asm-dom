@@ -11,7 +11,6 @@ export default function load(config = {}) {
     lib = require('../compiled/asmjs/asm-dom.asm.js')(config);
   }
 
-  const asmH = lib.h;
   lib.h = (a, b, c) => {
     let sel = a;
     let text = '';
@@ -42,7 +41,8 @@ export default function load(config = {}) {
       data = new lib.VNodeData();
     }
 
-    return asmH(sel, text, data, children);
+    // eslint-disable-next-line
+    return lib._h(sel, text, data, children);
   };
 
   return lib;
