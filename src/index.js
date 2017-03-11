@@ -2,10 +2,10 @@ import { getHFunction } from './js/h';
 
 export default function load(config = {}) {
   let lib;
-  if ('WebAssembly' in window) {
+  if ((config.useWasm || 'WebAssembly' in window) && !config.useAsmJS) {
     /* eslint-disable */
-    config.wasmBinary = new Uint8Array(require('../compiled/wasm/asm-dom.wasm'));
     config.memoryInitializerPrefixURL = '';
+    config.wasmBinary = new Uint8Array(require('../compiled/wasm/asm-dom.wasm'));
     lib = require('../compiled/wasm/asm-dom.js')(config);
     /* eslint-enable */
   } else {
