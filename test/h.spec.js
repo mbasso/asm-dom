@@ -31,6 +31,16 @@ describe('h', () => {
     expect(vnode.children.get(0).sel).toEqual('video');
   });
 
+  it('should create an svg vnode', () => {
+    const vnode = h('svg', [
+      h('video'),
+    ]);
+    expect(vnode.sel).toEqual('svg');
+    expect(vnode.data.ns).toEqual('http://www.w3.org/2000/svg');
+    expect(vnode.children.get(0).sel).toEqual('video');
+    expect(vnode.children.get(0).data.ns).toEqual('http://www.w3.org/2000/svg');
+  });
+
   it('should create a vnode with a single child', () => {
     const vnode = h('div', h('video'));
     expect(vnode.sel).toEqual('div');

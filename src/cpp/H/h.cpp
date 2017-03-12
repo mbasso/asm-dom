@@ -4,28 +4,28 @@
 #include <emscripten/bind.h>
 #include <string>
 
-/*
-void addNS(VNode vnode) {
-	vnode.data.ns = "http://www.w3.org/2000/svg";
-  if (vnode.sel.compare(std::string("foreignObject")) && !vnode.children.empty()) {
-		for(auto const& value: vnode.children) {
-			addNS(value);
+void addNS(VNode& vnode) {
+	vnode.data.ns = std::string("http://www.w3.org/2000/svg");
+	if (vnode.sel.compare(std::string("foreignObject")) != 0 && !vnode.children.empty()) {
+		for(std::vector<VNode>::size_type i = 0; i != vnode.children.size(); i++) {
+			addNS(vnode.children[i]);
 		}
-  }
+	}
 }
-*/
 
-VNode h_s(std::string sel) {
-	VNode vnode = VNode();
-	vnode.sel = sel;
-	/*
+void adjustVNode(VNode& vnode) {
 	if (
   	vnode.sel.length() >= 3 && vnode.sel[0] == 's' && vnode.sel[1] == 'v' && vnode.sel[2] == 'g' &&
     (vnode.sel.length() == 3 || vnode.sel[3] == '.' || vnode.sel[3] == '#')
   ) {
-    addNS(vnode);
-  }
-	*/
+		addNS(vnode);
+	}
+}
+
+VNode h_s(std::string sel) {
+	VNode vnode = VNode();
+	vnode.sel = sel;
+	adjustVNode(vnode);
 	return vnode;
 };
 
@@ -36,12 +36,14 @@ VNode h_ti(std::string text, bool isText) {
 	} else {
 		vnode.sel = text;
 	}
+	adjustVNode(vnode);
 	return vnode;
 };
 
 VNode h_sn(std::string sel, VNode node) {
 	VNode vnode = h_s(sel);
 	vnode.children = std::vector<VNode> { node };
+	adjustVNode(vnode);
 	return vnode;
 };
 
@@ -60,12 +62,14 @@ VNode h_sd(std::string sel, VNodeData data) {
 VNode h_sc(std::string sel, std::vector<VNode> children) {
 	VNode vnode = h_s(sel);
 	vnode.children = children;
+	adjustVNode(vnode);
 	return vnode;
 };
 
 VNode h_sdn(std::string sel, VNodeData data, VNode node) {
 	VNode vnode = h_sd(sel, data);
 	vnode.children = std::vector<VNode> { node };
+	adjustVNode(vnode);
 	return vnode;
 };
 
@@ -78,11 +82,14 @@ VNode h_sdt(std::string sel, VNodeData data, std::string text) {
 VNode h_sdc(std::string sel, VNodeData data, std::vector<VNode> children) {
 	VNode vnode = h_sd(sel, data);
 	vnode.children = children;
+	adjustVNode(vnode);
 	return vnode;
 };
 
+// addNS
 VNode h_stdc(std::string sel, std::string text, VNodeData data, std::vector<VNode> children) {
 	VNode vnode(sel, text, data, children);
+	adjustVNode(vnode);
 	return vnode;
 };
 
