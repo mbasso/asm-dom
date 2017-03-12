@@ -86,7 +86,6 @@ VNode h_sdc(std::string sel, VNodeData data, std::vector<VNode> children) {
 	return vnode;
 };
 
-// addNS
 VNode h_stdc(std::string sel, std::string text, VNodeData data, std::vector<VNode> children) {
 	VNode vnode(sel, text, data, children);
 	adjustVNode(vnode);
