@@ -14,6 +14,7 @@ void addNS(VNode& vnode) {
 }
 
 void adjustVNode(VNode& vnode) {
+	vnode.key = vnode.data.key;
 	if (
   	vnode.sel.length() >= 3 && vnode.sel[0] == 's' && vnode.sel[1] == 'v' && vnode.sel[2] == 'g' &&
     (vnode.sel.length() == 3 || vnode.sel[3] == '.' || vnode.sel[3] == '#')
