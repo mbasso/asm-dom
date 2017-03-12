@@ -1,6 +1,8 @@
 #include "VNode.hpp"
 #include <emscripten/bind.h>
 
+// TODO : elm as property
+
 EMSCRIPTEN_BINDINGS(vnode) {
   emscripten::class_<VNode>("VNode")
     .constructor<>()
