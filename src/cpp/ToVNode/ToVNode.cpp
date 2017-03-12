@@ -1,10 +1,10 @@
 #include "../HtmlDOMApi/HtmlDOMApi.hpp"
 #include "../VNode/VNode.hpp"
-#include "../Val/Val.hpp"
-#include <algorithm>
-#include <string.h>
+#include <emscripten/val.h>
+// #include <algorithm>
+#include <string>
 
-VNode toVNode(const val node) {
+VNode to_VNode(const emscripten::val node) {
 	VNode vnode = VNode();
 	if (isElement(node)) {
 		// TODO
@@ -20,13 +20,15 @@ VNode toVNode(const val node) {
 		}
 		*/
 	} else if (isText(node)) {
-		vnode->elm = node;
-		vnode->text = getTextContent(node);
+		vnode.elm = node;
+		vnode.text = getTextContent(node);
 	} else if (isComment(node)) {
-		vnode->sel = "!";
-		vnode->text = getTextContent(node);
-	} else {
-
+		vnode.sel = std::string("!");
+		vnode.text = getTextContent(node);
 	}
 	return vnode;
 };
+
+EMSCRIPTEN_BINDINGS(to_vnode_function) {
+	emscripten::function("toVNode", &to_VNode);
+}

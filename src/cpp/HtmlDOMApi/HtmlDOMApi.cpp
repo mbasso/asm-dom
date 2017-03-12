@@ -1,63 +1,63 @@
 #include "HtmlDOMApi.hpp"
-#include "../Val/Val.hpp"
+#include <emscripten/val.h>
 #include <string>
 
-val createElement(std::string tagName) {
-  return val::global("document").call<val>("createElement", tagName);
+emscripten::val createElement(std::string tagName) {
+  return emscripten::val::global("document").call<emscripten::val>("createElement", tagName);
 }
 
-val createElementNS(std::string namespaceURI, std::string qualifiedName) {
-  return val::global("document").call<val>("createElementNS", namespaceURI, qualifiedName);
+emscripten::val createElementNS(std::string namespaceURI, std::string qualifiedName) {
+  return emscripten::val::global("document").call<emscripten::val>("createElementNS", namespaceURI, qualifiedName);
 }
 
-val createTextNode(std::string text) {
-  return val::global("document").call<val>("createTextNode", text);
+emscripten::val createTextNode(std::string text) {
+  return emscripten::val::global("document").call<emscripten::val>("createTextNode", text);
 }
 
-val createComment(std::string text) {
-  return val::global("document").call<val>("createComment", text);
+emscripten::val createComment(std::string text) {
+  return emscripten::val::global("document").call<emscripten::val>("createComment", text);
 }
 
-void insertBefore(val parentNode, val newNode, val referenceNode) {
+void insertBefore(emscripten::val parentNode, emscripten::val newNode, emscripten::val referenceNode) {
   parentNode.call<void>("insertBefore", newNode, referenceNode);
 }
 
-void removeChild(val node, val child) {
+void removeChild(emscripten::val node, emscripten::val child) {
   node.call<void>("removeChild", child);
 }
 
-void appendChild(val node, val child) {
+void appendChild(emscripten::val node, emscripten::val child) {
   node.call<void>("appendChild", child);
 }
 
-val parentNode(val node) {
+emscripten::val parentNode(emscripten::val node) {
   return node["parentNode"];
 }
 
-val nextSibling(val node) {
+emscripten::val nextSibling(emscripten::val node) {
   return node["nextSibling"];
 }
 
-std::string tagName(val elm) {
+std::string tagName(emscripten::val elm) {
   return elm["tagName"].as<std::string>();
 }
 
-void setTextContent(val node, std::string text) {
+void setTextContent(emscripten::val node, std::string text) {
   node.set("textContent", text);
 }
 
-std::string getTextContent(val node) {
-  return node["nodeType"].as<std::string>();
+std::string getTextContent(emscripten::val node) {
+  return node["textContent"].as<std::string>();
 }
 
-bool isElement(val node) {
+bool isElement(emscripten::val node) {
   return node["nodeType"].as<int>() == 1;
 }
 
-bool isText(val node) {
+bool isText(emscripten::val node) {
   return node["nodeType"].as<int>() == 3;
 }
 
-bool isComment(val node) {
+bool isComment(emscripten::val node) {
   return node["nodeType"].as<int>() == 8;
 }

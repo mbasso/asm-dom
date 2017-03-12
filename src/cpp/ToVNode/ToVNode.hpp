@@ -4,6 +4,6 @@
 #include "../VNode/VNode.hpp"
 #include "../Val/Val.hpp"
 
-VNode toVNode(const val node);
+VNode to_VNode(const val node);
 
 #endif
