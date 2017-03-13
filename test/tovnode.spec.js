@@ -25,6 +25,16 @@ describe('toVNode', () => {
     expect(vnode.sel.toLowerCase()).toEqual('div');
   });
 
+  it('should convert a node with id and class to VNode', () => {
+    const node = document.createElement('div');
+    node.appendChild(document.createElement('video'));
+    node.appendChild(document.createElement('span'));
+    node.className = 'nodeClass1 nodeClass2';
+    node.setAttribute('id', 'nodeId');
+    const vnode = toVNode(node);
+    expect(vnode.sel.toLowerCase()).toEqual('div#nodeid.nodeclass1.nodeclass2');
+  });
+
   it('should convert a node with children to VNode', () => {
     const node = document.createElement('div');
     node.appendChild(document.createElement('video'));

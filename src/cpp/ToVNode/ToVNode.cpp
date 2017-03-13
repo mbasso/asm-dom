@@ -8,16 +8,16 @@
 VNode to_VNode(const emscripten::val node) {
 	VNode vnode = VNode();
 	if (isElement(node)) {
-		// TODO
 		std::string id;
 		if (!node["id"].as<std::string>().empty()) {
-			id.append("#");
+			id += '#';
 			id.append(node["id"].as<std::string>());
 		}
 		std::string c;
-		// throw a binding error if undefined
-		// c.append(node.call<std::string>("getAttribute", std::string("class")));
-		if (!c.empty()) {
+		emscripten::val nodeClass = node.call<emscripten::val>("getAttribute", std::string("class"));
+		if (nodeClass.typeOf().as<std::string>().compare(std::string("string")) == 0) {
+			c += '.';
+			c.append(nodeClass.as<std::string>());
 			std::replace(c.begin(), c.end(), ' ', '.');
 		}
 		vnode.sel.append(tagName(node));
