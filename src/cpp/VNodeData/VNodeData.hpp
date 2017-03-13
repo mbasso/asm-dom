@@ -7,13 +7,14 @@
 // #include <functional>
 #include <emscripten/bind.h>
 #include <vector>
+#include <map>
 #include <string>
 
 class VNodeData {
   public:
     VNodeData() {};
     val props;
-    val attrs;
+    std::map<std::string, std::string> attrs;
     val className;
     val style;
     val dataset;

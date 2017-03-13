@@ -23,9 +23,14 @@ VNode to_VNode(const emscripten::val node) {
 		vnode.sel.append(tagName(node));
 		vnode.sel.append(id);
 		vnode.sel.append(c);
-		// TODO : attributes
-		int childrenSize = node["childNodes"]["length"].as<int>();
-		for(int i = 0; i != childrenSize; i++) {
+		emscripten::val attributes = node["attributes"];
+		for(int i = 0, n = attributes["length"].as<int>(); i < n; i++) {
+			std::string name = attributes[i]["nodeName"].as<std::string>();
+			if (name.compare(std::string("id")) != 0 && name.compare(std::string("class")) != 0) {
+				vnode.data.attrs.insert(std::make_pair(name, attributes[i]["nodeValue"].as<std::string>()));
+			}
+		}
+		for(int i = 0, n = node["childNodes"]["length"].as<int>(); i < n; i++) {
 			vnode.children.push_back(to_VNode(node["childNodes"][i]));
 		}
 		vnode.elm = node;
