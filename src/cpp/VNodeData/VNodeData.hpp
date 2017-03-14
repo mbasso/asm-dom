@@ -13,7 +13,7 @@
 class VNodeData {
   public:
     VNodeData() {};
-    val props;
+    std::map<std::string, std::string> props;
     std::map<std::string, std::string> attrs;
     val className;
     val style;
