@@ -15,7 +15,7 @@ class VNodeData {
     VNodeData() {};
     std::map<std::string, std::string> props;
     std::map<std::string, std::string> attrs;
-    val className;
+    std::map<std::string, bool> classNames;
     val style;
     val dataset;
     val on;

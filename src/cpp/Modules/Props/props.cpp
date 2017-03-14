@@ -12,7 +12,6 @@ void updateProps(VNode oldVnode, VNode vnode) {
 	if (oldProps == props) return;
 
 	std::string cur;
-	std::string old;
 	std::map<std::string, std::string>::iterator it = oldProps.begin();
 	while (it != oldProps.end())
 	{
@@ -27,10 +26,9 @@ void updateProps(VNode oldVnode, VNode vnode) {
 	{
 		cur = it->second;
 		if (oldProps.count(it->first) != 0) {
-			old = oldProps.at(it->first);
 			emscripten::val currentProp = vnode.elm[it->first.c_str()];
 			if (
-				old.compare(cur) != 0 &&
+				oldProps.at(it->first).compare(cur) != 0 &&
 				(it->first.compare("value") != 0 || isDefined(currentProp) && currentProp.as<std::string>().compare(cur) != 0)
 			) {
 				vnode.elm.set(it->first.c_str(), emscripten::val(it->second.c_str()));
