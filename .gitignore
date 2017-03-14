@@ -7,3 +7,4 @@ es
 coverage
 _book
 .nyc_output
+.vscode
