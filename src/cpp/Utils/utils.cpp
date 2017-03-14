@@ -14,7 +14,7 @@ bool isNull(emscripten::val obj) {
 
 bool isDefined(emscripten::val obj) {
   std::string type = obj.typeOf().as<std::string>();
-  return type.compare(std::string("undefined")) =! 0 && type.compare(std::string("null")) != 0;
+  return type.compare(std::string("undefined")) != 0 && type.compare(std::string("null")) != 0;
 };
 
 bool sameVnode(VNode vnode1, VNode vnode2) {
@@ -38,6 +38,6 @@ VNode emptyNodeAt(emscripten::val elm) {
   vnode.sel.append(tagName(elm));
   std::transform(vnode.sel.begin(), vnode.sel.end(), vnode.sel.begin(), ::tolower);
   vnode.sel.append(id);
-  vnode.sel.append(c)
+  vnode.sel.append(c);
   return vnode;
 };

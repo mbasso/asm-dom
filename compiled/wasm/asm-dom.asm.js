@@ -109,7 +109,7 @@ Module["asm"] =  (function(global, env, buffer) {
   var __embind_register_bool=env.__embind_register_bool;
   var ___resumeException=env.___resumeException;
   var createNamedFunction=env.createNamedFunction;
-  var __embind_register_class_property=env.__embind_register_class_property;
+  var validateThis=env.validateThis;
   var __embind_register_emval=env.__embind_register_emval;
   var __emval_decref=env.__emval_decref;
   var _pthread_once=env._pthread_once;
@@ -150,7 +150,7 @@ Module["asm"] =  (function(global, env, buffer) {
   var _abort=env._abort;
   var requireHandle=env.requireHandle;
   var getTypeName=env.getTypeName;
-  var validateThis=env.validateThis;
+  var __embind_register_class_property=env.__embind_register_class_property;
   var exposePublicSymbol=env.exposePublicSymbol;
   var __embind_register_std_string=env.__embind_register_std_string;
   var __emval_get_method_caller=env.__emval_get_method_caller;
@@ -458,6 +458,74 @@ function __Z9isCommentN10emscripten3valE($0) {
  $8 = ($7|0)==(8);
  STACKTOP = sp;return ($8|0);
 }
+function __ZN5VNodeC2Ev($0) {
+ $0 = $0|0;
+ var $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0;
+ $1 = sp;
+ $2 = ((($0)) + 36|0);
+ ; store8($0,i64_const(0,0),4); store8($0+8|0,i64_const(0,0),4); store8($0+16|0,i64_const(0,0),4); store8($0+24|0,i64_const(0,0),4); store4($0+32|0,0,4);
+ __ZN9VNodeDataC2Ev($2);
+ $3 = load4(8040);
+ __emval_incref(($3|0));
+ $4 = load4(8040);
+ store4($1,$4);
+ $5 = (__emval_take_value((1024|0),($1|0))|0);
+ $6 = ((($0)) + 112|0);
+ store4($6,$5);
+ $7 = ((($0)) + 116|0);
+ store4($7,0);
+ $8 = ((($0)) + 120|0);
+ store4($8,0);
+ $9 = ((($0)) + 124|0);
+ store4($9,0);
+ STACKTOP = sp;return;
+}
+function __ZN5VNodeD2Ev($0) {
+ $0 = $0|0;
+ var $$pre = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ $1 = ((($0)) + 116|0);
+ $2 = load4($1);
+ $3 = ($2|0)==(0|0);
+ if (!($3)) {
+  $4 = ((($0)) + 120|0);
+  $5 = load4($4);
+  $6 = ($5|0)==($2|0);
+  if ($6) {
+   $11 = $2;
+  } else {
+   $8 = $5;
+   while(1) {
+    $7 = ((($8)) + -128|0);
+    store4($4,$7);
+    __ZN5VNodeD2Ev($7);
+    $9 = load4($4);
+    $10 = ($9|0)==($2|0);
+    if ($10) {
+     break;
+    } else {
+     $8 = $9;
+    }
+   }
+   $$pre = load4($1);
+   $11 = $$pre;
+  }
+  __ZdlPv($11);
+ }
+ $12 = ((($0)) + 112|0);
+ $13 = load4($12);
+ __emval_decref(($13|0));
+ $14 = ((($0)) + 36|0);
+ __ZN9VNodeDataD2Ev($14);
+ $15 = ((($0)) + 24|0);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($15);
+ $16 = ((($0)) + 12|0);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($16);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($0);
+ return;
+}
 function __Z5addNSR5VNode($0) {
  $0 = $0|0;
  var $$08 = 0, $$in = 0, $$sroa$speculated$i = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0;
@@ -468,7 +536,7 @@ function __Z5addNSR5VNode($0) {
  $1 = sp;
  $2 = ((($0)) + 88|0);
  ; store8($1,i64_const(0,0),4); store4($1+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($1,2359,26);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($1,2362,26);
  $3 = ((($2)) + 11|0);
  $4 = load1($3);
  $5 = ($4<<24>>24)<(0);
@@ -486,7 +554,7 @@ function __Z5addNSR5VNode($0) {
  ; store8($1,i64_const(0,0),4); store4($1+8|0,0,4);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($1);
  ; store8($1,i64_const(0,0),4); store4($1+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($1,2386,13);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($1,2389,13);
  $8 = ((($0)) + 11|0);
  $9 = load1($8);
  $10 = ($9<<24>>24)<(0);
@@ -630,74 +698,6 @@ function __Z3h_sNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE($
   }
  } while(0);
  __Z5addNSR5VNode($0);
- return;
-}
-function __ZN5VNodeC2Ev($0) {
- $0 = $0|0;
- var $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
- sp = STACKTOP;
- STACKTOP = STACKTOP + 16|0;
- $1 = sp;
- $2 = ((($0)) + 36|0);
- ; store8($0,i64_const(0,0),4); store8($0+8|0,i64_const(0,0),4); store8($0+16|0,i64_const(0,0),4); store8($0+24|0,i64_const(0,0),4); store4($0+32|0,0,4);
- __ZN9VNodeDataC2Ev($2);
- $3 = load4(8040);
- __emval_incref(($3|0));
- $4 = load4(8040);
- store4($1,$4);
- $5 = (__emval_take_value((1024|0),($1|0))|0);
- $6 = ((($0)) + 112|0);
- store4($6,$5);
- $7 = ((($0)) + 116|0);
- store4($7,0);
- $8 = ((($0)) + 120|0);
- store4($8,0);
- $9 = ((($0)) + 124|0);
- store4($9,0);
- STACKTOP = sp;return;
-}
-function __ZN5VNodeD2Ev($0) {
- $0 = $0|0;
- var $$pre = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $1 = ((($0)) + 116|0);
- $2 = load4($1);
- $3 = ($2|0)==(0|0);
- if (!($3)) {
-  $4 = ((($0)) + 120|0);
-  $5 = load4($4);
-  $6 = ($5|0)==($2|0);
-  if ($6) {
-   $11 = $2;
-  } else {
-   $8 = $5;
-   while(1) {
-    $7 = ((($8)) + -128|0);
-    store4($4,$7);
-    __ZN5VNodeD2Ev($7);
-    $9 = load4($4);
-    $10 = ($9|0)==($2|0);
-    if ($10) {
-     break;
-    } else {
-     $8 = $9;
-    }
-   }
-   $$pre = load4($1);
-   $11 = $$pre;
-  }
-  __ZdlPv($11);
- }
- $12 = ((($0)) + 112|0);
- $13 = load4($12);
- __emval_decref(($13|0));
- $14 = ((($0)) + 36|0);
- __ZN9VNodeDataD2Ev($14);
- $15 = ((($0)) + 24|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($15);
- $16 = ((($0)) + 12|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($16);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($0);
  return;
 }
 function __Z4h_tiNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEb($0,$1,$2) {
@@ -1682,16 +1682,16 @@ function __ZN39EmscriptenBindingInitializer_h_functionC2Ev($0) {
  $0 = $0|0;
  var label = 0, sp = 0;
  sp = STACKTOP;
- __embind_register_function((2400|0),2,(1788|0),(2939|0),(10|0),(2|0));
- __embind_register_function((2405|0),3,(1796|0),(3044|0),(9|0),(9|0));
- __embind_register_function((2411|0),3,(1808|0),(3044|0),(10|0),(10|0));
- __embind_register_function((2417|0),3,(1820|0),(3044|0),(11|0),(11|0));
- __embind_register_function((2423|0),3,(1832|0),(3044|0),(12|0),(12|0));
- __embind_register_function((2429|0),3,(1844|0),(3044|0),(13|0),(13|0));
- __embind_register_function((2435|0),4,(1856|0),(3357|0),(2|0),(6|0));
- __embind_register_function((2442|0),4,(1872|0),(3357|0),(3|0),(7|0));
- __embind_register_function((2449|0),4,(1888|0),(3357|0),(4|0),(8|0));
- __embind_register_function((2456|0),5,(1904|0),(3363|0),(1|0),(4|0));
+ __embind_register_function((2403|0),2,(1788|0),(2939|0),(10|0),(2|0));
+ __embind_register_function((2408|0),3,(1796|0),(3044|0),(9|0),(9|0));
+ __embind_register_function((2414|0),3,(1808|0),(3044|0),(10|0),(10|0));
+ __embind_register_function((2420|0),3,(1820|0),(3044|0),(11|0),(11|0));
+ __embind_register_function((2426|0),3,(1832|0),(3044|0),(12|0),(12|0));
+ __embind_register_function((2432|0),3,(1844|0),(3044|0),(13|0),(13|0));
+ __embind_register_function((2438|0),4,(1856|0),(3357|0),(2|0),(6|0));
+ __embind_register_function((2445|0),4,(1872|0),(3357|0),(3|0),(7|0));
+ __embind_register_function((2452|0),4,(1888|0),(3357|0),(4|0),(8|0));
+ __embind_register_function((2459|0),5,(1904|0),(3363|0),(1|0),(4|0));
  return;
 }
 function __Z8to_VNodeN10emscripten3valE($0,$1) {
@@ -1835,7 +1835,7 @@ function __Z8to_VNodeN10emscripten3valE($0,$1) {
  }
  ; store8($4,i64_const(0,0),4); store4($4+8|0,0,4);
  $25 = load4($1);
- $26 = (__emval_new_cstring((2464|0))|0);
+ $26 = (__emval_new_cstring((2359|0))|0);
  $27 = (__emval_get_property(($25|0),($26|0))|0);
  __emval_decref(($26|0));
  store4($6,$27);
@@ -1854,7 +1854,7 @@ function __Z8to_VNodeN10emscripten3valE($0,$1) {
  if (!($36)) {
   __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE9push_backEc($4,35);
   $37 = load4($1);
-  $38 = (__emval_new_cstring((2464|0))|0);
+  $38 = (__emval_new_cstring((2359|0))|0);
   $39 = (__emval_get_property(($37|0),($38|0))|0);
   __emval_decref(($38|0));
   store4($7,$39);
@@ -2047,7 +2047,7 @@ function __Z8to_VNodeN10emscripten3valE($0,$1) {
    __emval_decref(($165|0));
    __emval_decref(($162|0));
    ; store8($2,i64_const(0,0),4); store4($2+8|0,0,4);
-   __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($2,2464,2);
+   __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($2,2359,2);
    $166 = load1($142);
    $167 = ($166<<24>>24)<(0);
    $168 = load4($143);
