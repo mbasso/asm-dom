@@ -1,3 +1,4 @@
+#include "cpp/Utils/utils.cpp"
 #include "cpp/VNodeData/VNodeData.cpp"
 #include "cpp/VNode/VNode.cpp"
 #include "cpp/HtmlDOMApi/HtmlDOMApi.cpp"
