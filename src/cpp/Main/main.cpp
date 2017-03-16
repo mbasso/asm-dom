@@ -41,3 +41,16 @@ emscripten::val createElm(VNode vnode, std::vector<VNode> insertedVnodeQueue) {
 	}
 	return vnode.elm;
 };
+
+void addVnodes(
+	emscripten::val parentElm,
+	emscripten::val before,
+	std::vector<VNode> vnodes,
+	std::vector<VNode>::size_type startIdx,
+	std::vector<VNode>::size_type endIdx,
+	std::vector<VNode> insertedVnodeQueue
+) {
+	for (; startIdx <= endIdx; startIdx++) {
+		insertBefore(parentElm, createElm(vnodes[startIdx], insertedVnodeQueue), before);
+	}
+};
