@@ -20,5 +20,16 @@ void removeVnodes(
 	std::vector<VNode>::size_type startIdx,
 	std::vector<VNode>::size_type endIdx
 );
+void updateChildren(
+	emscripten::val parentElm,
+	std::vector<VNode> oldCh,
+	std::vector<VNode> newCh,
+	std::vector<VNode> insertedVnodeQueue
+);
+void patchVnode(
+	VNode oldVnode,
+	VNode vnode,
+	std::vector<VNode> insertedVnodeQueue
+);
 
 #endif

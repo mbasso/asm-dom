@@ -71,3 +71,29 @@ void removeVnodes(
 		// }
 	}
 };
+
+void patchVnode(
+	VNode oldVnode,
+	VNode vnode,
+	std::vector<VNode> insertedVnodeQueue
+) {
+	// TODO: prepatch hook
+	// if (oldVnode == vnode) return;
+	// TODO: update hook
+	if (vnode.text.empty()) {
+		if (!vnode.children.empty() && !oldVnode.children.empty()) {
+			// if (vnode.children != oldVnode.children)
+			updateChildren(vnode.elm, oldVnode.children, vnode.children, insertedVnodeQueue);
+		} else if(!vnode.children.empty()) {
+			if (!oldVnode.text.empty()) setTextContent(vnode.elm, std::string(""));
+			addVnodes(vnode.elm, emscripten::val::null(), vnode.children, 0, vnode.children.size() - 1, insertedVnodeQueue);
+		} else if(!oldVnode.children.empty()) {
+			removeVnodes(vnode.elm, oldVnode.children, 0, oldVnode.children.size() - 1);
+		} else if (!oldVnode.text.empty()) {
+			setTextContent(vnode.elm, oldVnode.text);
+		}
+	} else if (vnode.text.compare(oldVnode.text) != 0) {
+		setTextContent(vnode.elm, vnode.text);
+	}
+	// TODO: postpatch hook
+};
