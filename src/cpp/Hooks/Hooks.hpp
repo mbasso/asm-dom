@@ -3,7 +3,6 @@
 
 #include "../VNode/VNode.hpp"
 
-// all returns any
 typedef void (*PreHook)();
 typedef void (*InitHook)(VNode* vNode);
 typedef void (*CreateHook)(VNode* emptyVNode, VNode* vNode);
