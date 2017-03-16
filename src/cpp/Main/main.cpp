@@ -54,3 +54,20 @@ void addVnodes(
 		insertBefore(parentElm, createElm(vnodes[startIdx], insertedVnodeQueue), before);
 	}
 };
+
+void removeVnodes(
+	emscripten::val parentElm,
+	std::vector<VNode> vnodes,
+	std::vector<VNode>::size_type startIdx,
+	std::vector<VNode>::size_type endIdx
+) {
+	for (; startIdx <= endIdx; startIdx++) {
+		// TODO: remove callback
+		/* if (!vnode.sel.empty()) {
+			// TODO: destroy hook
+			removeChild(parentElm, vnode.elm);
+		} else {*/ 
+			removeChild(parentElm, vnodes[startIdx].elm);
+		// }
+	}
+};

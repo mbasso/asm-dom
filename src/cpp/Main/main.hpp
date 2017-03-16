@@ -10,9 +10,15 @@ void addVnodes(
 	emscripten::val parentElm,
 	emscripten::val before,
 	std::vector<VNode> vnodes,
-	int startIdx,
-	int endIdx,
+	std::vector<VNode>::size_type startIdx,
+	std::vector<VNode>::size_type endIdx,
 	std::vector<VNode> insertedVnodeQueue
+);
+void removeVnodes(
+	emscripten::val parentElm,
+	std::vector<VNode> vnodes,
+	std::vector<VNode>::size_type startIdx,
+	std::vector<VNode>::size_type endIdx
 );
 
 #endif
