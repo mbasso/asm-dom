@@ -3,6 +3,7 @@
 #include "../VNode/VNode.hpp"
 #include "../HtmlDOMApi/HtmlDOMApi.hpp"
 #include "../Utils/utils.hpp"
+#include <emscripten/bind.h>
 #include <algorithm>
 #include <vector>
 #include <map>
@@ -222,3 +223,8 @@ VNode patch_vnode(VNode oldVnode, VNode vnode) {
 VNode patch_element(emscripten::val oldVnode, VNode vnode) {
 	return patch_vnode(emptyNodeAt(oldVnode), vnode);
 };
+
+EMSCRIPTEN_BINDINGS(h_function) {
+	emscripten::function("_patch_vnode", &patch_vnode);
+	emscripten::function("_patch_element", &patch_element);
+}
