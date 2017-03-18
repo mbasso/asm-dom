@@ -2,9 +2,47 @@
 #include "../VNodeData/VNodeData.hpp"
 #include "../VNode/VNode.hpp"
 #include "../HtmlDOMApi/HtmlDOMApi.hpp"
+#include "../Utils/utils.hpp"
 #include <algorithm>
 #include <vector>
+#include <map>
 #include <string>
+
+bool sameVnode(VNode vnode1, VNode vnode2) {
+  return vnode1.key == vnode2.key && vnode1.sel == vnode2.sel;
+};
+
+VNode emptyNodeAt(emscripten::val elm) {
+  VNode vnode = VNode();
+  vnode.elm = elm;
+  std::string id;
+  if (isDefined(elm["id"])) {
+    id += '#';
+    id.append(elm["id"].as<std::string>());
+  }
+  std::string c;
+  if (isDefined(elm["className"])) {
+    c += '.';
+    c.append(elm["className"].as<std::string>());
+    std::replace(c.begin(), c.end(), ' ', '.');
+  }
+  vnode.sel.append(tagName(elm));
+  std::transform(vnode.sel.begin(), vnode.sel.end(), vnode.sel.begin(), ::tolower);
+  vnode.sel.append(id);
+  vnode.sel.append(c);
+  return vnode;
+};
+
+std::map<std::string, int> createKeyToOldIdx(std::vector<VNode> children, int beginIdx, int endIdx) {
+  std::size_t i = beginIdx;
+	std::map<std::string, int> map;
+  for (; i <= endIdx; i++) {
+    if (!children[i].key.empty()) {
+			map[children[i].key] = i;
+		}
+  }
+  return map;
+}
 
 emscripten::val createElm(VNode vnode, std::vector<VNode> insertedVnodeQueue) {
 	// TODO: init hook
@@ -72,6 +110,69 @@ void removeVnodes(
 	}
 };
 
+void updateChildren(
+	emscripten::val parentElm,
+	std::vector<VNode> oldCh,
+	std::vector<VNode> newCh,
+	std::vector<VNode> insertedVnodeQueue
+) {
+	std::size_t oldStartIdx = 0;
+	std::size_t newStartIdx = 0;
+	std::size_t oldEndIdx = oldCh.size() - 1;
+	std::size_t newEndIdx = newCh.size() - 1;
+	VNode oldStartVnode = oldCh[0];
+	VNode oldEndVnode = oldCh[oldEndIdx];
+	VNode newStartVnode = newCh[0];
+	VNode newEndVnode = newCh[newEndIdx];
+	std::map<std::string, int> oldKeyToIdx;
+	VNode elmToMove;
+
+	while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
+		if (sameVnode(oldStartVnode, newStartVnode)) {
+			patchVnode(oldStartVnode, newStartVnode, insertedVnodeQueue);
+			oldStartVnode = oldCh[++oldStartIdx];
+			newStartVnode = newCh[++newStartIdx];
+		} else if (sameVnode(oldEndVnode, newEndVnode)) {
+			patchVnode(oldEndVnode, newEndVnode, insertedVnodeQueue);
+			oldEndVnode = oldCh[--oldEndIdx];
+			newEndVnode = newCh[--newEndIdx];
+		} else if (sameVnode(oldStartVnode, newEndVnode)) {
+			patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue);
+			insertBefore(parentElm, oldStartVnode.elm, nextSibling(oldEndVnode.elm));
+			oldStartVnode = oldCh[++oldStartIdx];
+			newEndVnode = newCh[--newEndIdx];
+		} else if (sameVnode(oldEndVnode, newStartVnode)) {
+			patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue);
+			insertBefore(parentElm, oldEndVnode.elm, oldStartVnode.elm);
+			oldEndVnode = oldCh[--oldEndIdx];
+			newStartVnode = newCh[++newStartIdx];
+		} else {
+			if (oldKeyToIdx.empty()) {
+				oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx);
+			}
+			if (oldKeyToIdx.count(newStartVnode.key) == 0) {
+				insertBefore(parentElm, createElm(newStartVnode, insertedVnodeQueue), oldStartVnode.elm);
+				newStartVnode = newCh[++newStartIdx];
+			} else {
+				elmToMove = oldCh[oldKeyToIdx[newStartVnode.key]];
+				if (elmToMove.sel.compare(newStartVnode.sel) != 0) {
+					insertBefore(parentElm, createElm(newStartVnode, insertedVnodeQueue), oldStartVnode.elm);
+				} else {
+					patchVnode(elmToMove, newStartVnode, insertedVnodeQueue);
+					oldCh[oldKeyToIdx[newStartVnode.key]].key = std::string("");
+					insertBefore(parentElm, elmToMove.elm, oldStartVnode.elm);
+				}
+				newStartVnode = newCh[++newStartIdx];
+			}
+		}
+	}
+	if (oldStartIdx > oldEndIdx) {
+		addVnodes(parentElm, newCh[newEndIdx+1].elm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue);
+	} else if (newStartIdx > newEndIdx) {
+		removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx);
+	}
+};
+
 void patchVnode(
 	VNode oldVnode,
 	VNode vnode,
@@ -96,4 +197,28 @@ void patchVnode(
 		setTextContent(vnode.elm, vnode.text);
 	}
 	// TODO: postpatch hook
+};
+
+VNode patch_vnode(VNode oldVnode, VNode vnode) {
+	std::vector<VNode> insertedVnodeQueue;
+	// TODO: pre callback
+	if (sameVnode(oldVnode, vnode)) {
+		patchVnode(oldVnode, vnode, insertedVnodeQueue);
+	} else {
+		emscripten::val parent = parentNode(oldVnode.elm);
+		createElm(vnode, insertedVnodeQueue);
+		if (isDefined(parent)) {
+			insertBefore(parent, vnode.elm, nextSibling(oldVnode.elm));
+			std::vector<VNode> vnodes;
+			vnodes.push_back(oldVnode);
+			removeVnodes(parent, vnodes, 0, 0);
+		}
+	}
+	// TODO: insert hook
+	// TODO: post callback
+	return vnode;
+};
+
+VNode patch_element(emscripten::val oldVnode, VNode vnode) {
+	return patch_vnode(emptyNodeAt(oldVnode), vnode);
 };

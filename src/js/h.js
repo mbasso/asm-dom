@@ -1,6 +1,10 @@
 const getChildren = (lib, arr) => {
   const result = new lib.VNodeVector();
-  arr.forEach(x => result.push_back(x));
+  arr.forEach(x => {
+    if (x) {
+      result.push_back(x);
+    }
+  });
   return result;
 };
 

@@ -489,74 +489,6 @@ function __Z9isCommentN10emscripten3valE($0) {
  $8 = ($7|0)==(8);
  STACKTOP = sp;return ($8|0);
 }
-function __ZN5VNodeC2Ev($0) {
- $0 = $0|0;
- var $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
- sp = STACKTOP;
- STACKTOP = STACKTOP + 16|0;
- $1 = sp;
- $2 = ((($0)) + 36|0);
- ; store8($0,i64_const(0,0),4); store8($0+8|0,i64_const(0,0),4); store8($0+16|0,i64_const(0,0),4); store8($0+24|0,i64_const(0,0),4); store4($0+32|0,0,4);
- __ZN9VNodeDataC2Ev($2);
- $3 = load4(8496);
- __emval_incref(($3|0));
- $4 = load4(8496);
- store4($1,$4);
- $5 = (__emval_take_value((1024|0),($1|0))|0);
- $6 = ((($0)) + 128|0);
- store4($6,$5);
- $7 = ((($0)) + 132|0);
- store4($7,0);
- $8 = ((($0)) + 136|0);
- store4($8,0);
- $9 = ((($0)) + 140|0);
- store4($9,0);
- STACKTOP = sp;return;
-}
-function __ZN5VNodeD2Ev($0) {
- $0 = $0|0;
- var $$pre = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $1 = ((($0)) + 132|0);
- $2 = load4($1);
- $3 = ($2|0)==(0|0);
- if (!($3)) {
-  $4 = ((($0)) + 136|0);
-  $5 = load4($4);
-  $6 = ($5|0)==($2|0);
-  if ($6) {
-   $11 = $2;
-  } else {
-   $8 = $5;
-   while(1) {
-    $7 = ((($8)) + -144|0);
-    store4($4,$7);
-    __ZN5VNodeD2Ev($7);
-    $9 = load4($4);
-    $10 = ($9|0)==($2|0);
-    if ($10) {
-     break;
-    } else {
-     $8 = $9;
-    }
-   }
-   $$pre = load4($1);
-   $11 = $$pre;
-  }
-  __ZdlPv($11);
- }
- $12 = ((($0)) + 128|0);
- $13 = load4($12);
- __emval_decref(($13|0));
- $14 = ((($0)) + 36|0);
- __ZN9VNodeDataD2Ev($14);
- $15 = ((($0)) + 24|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($15);
- $16 = ((($0)) + 12|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($16);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($0);
- return;
-}
 function __Z5addNSR5VNode($0) {
  $0 = $0|0;
  var $$08 = 0, $$in = 0, $$sroa$speculated$i = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0;
@@ -567,7 +499,7 @@ function __Z5addNSR5VNode($0) {
  $1 = sp;
  $2 = ((($0)) + 104|0);
  ; store8($1,i64_const(0,0),4); store4($1+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($1,2479,26);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($1,2476,26);
  $3 = ((($2)) + 11|0);
  $4 = load1($3);
  $5 = ($4<<24>>24)<(0);
@@ -585,7 +517,7 @@ function __Z5addNSR5VNode($0) {
  ; store8($1,i64_const(0,0),4); store4($1+8|0,0,4);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($1);
  ; store8($1,i64_const(0,0),4); store4($1+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($1,2506,13);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($1,2503,13);
  $8 = ((($0)) + 11|0);
  $9 = load1($8);
  $10 = ($9<<24>>24)<(0);
@@ -729,6 +661,74 @@ function __Z3h_sNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE($
   }
  } while(0);
  __Z5addNSR5VNode($0);
+ return;
+}
+function __ZN5VNodeC2Ev($0) {
+ $0 = $0|0;
+ var $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0;
+ $1 = sp;
+ $2 = ((($0)) + 36|0);
+ ; store8($0,i64_const(0,0),4); store8($0+8|0,i64_const(0,0),4); store8($0+16|0,i64_const(0,0),4); store8($0+24|0,i64_const(0,0),4); store4($0+32|0,0,4);
+ __ZN9VNodeDataC2Ev($2);
+ $3 = load4(8496);
+ __emval_incref(($3|0));
+ $4 = load4(8496);
+ store4($1,$4);
+ $5 = (__emval_take_value((1024|0),($1|0))|0);
+ $6 = ((($0)) + 128|0);
+ store4($6,$5);
+ $7 = ((($0)) + 132|0);
+ store4($7,0);
+ $8 = ((($0)) + 136|0);
+ store4($8,0);
+ $9 = ((($0)) + 140|0);
+ store4($9,0);
+ STACKTOP = sp;return;
+}
+function __ZN5VNodeD2Ev($0) {
+ $0 = $0|0;
+ var $$pre = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ $1 = ((($0)) + 132|0);
+ $2 = load4($1);
+ $3 = ($2|0)==(0|0);
+ if (!($3)) {
+  $4 = ((($0)) + 136|0);
+  $5 = load4($4);
+  $6 = ($5|0)==($2|0);
+  if ($6) {
+   $11 = $2;
+  } else {
+   $8 = $5;
+   while(1) {
+    $7 = ((($8)) + -144|0);
+    store4($4,$7);
+    __ZN5VNodeD2Ev($7);
+    $9 = load4($4);
+    $10 = ($9|0)==($2|0);
+    if ($10) {
+     break;
+    } else {
+     $8 = $9;
+    }
+   }
+   $$pre = load4($1);
+   $11 = $$pre;
+  }
+  __ZdlPv($11);
+ }
+ $12 = ((($0)) + 128|0);
+ $13 = load4($12);
+ __emval_decref(($13|0));
+ $14 = ((($0)) + 36|0);
+ __ZN9VNodeDataD2Ev($14);
+ $15 = ((($0)) + 24|0);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($15);
+ $16 = ((($0)) + 12|0);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($16);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($0);
  return;
 }
 function __Z4h_tiNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEb($0,$1,$2) {
@@ -1827,16 +1827,16 @@ function __ZN39EmscriptenBindingInitializer_h_functionC2Ev($0) {
  $0 = $0|0;
  var label = 0, sp = 0;
  sp = STACKTOP;
- __embind_register_function((2520|0),2,(1868|0),(3056|0),(13|0),(2|0));
- __embind_register_function((2525|0),3,(1876|0),(3161|0),(10|0),(11|0));
- __embind_register_function((2531|0),3,(1888|0),(3161|0),(11|0),(12|0));
- __embind_register_function((2537|0),3,(1900|0),(3161|0),(12|0),(13|0));
- __embind_register_function((2543|0),3,(1912|0),(3161|0),(13|0),(14|0));
- __embind_register_function((2549|0),3,(1924|0),(3161|0),(14|0),(15|0));
- __embind_register_function((2555|0),4,(1936|0),(3810|0),(2|0),(7|0));
- __embind_register_function((2562|0),4,(1952|0),(3810|0),(3|0),(8|0));
- __embind_register_function((2569|0),4,(1968|0),(3810|0),(4|0),(9|0));
- __embind_register_function((2576|0),5,(1984|0),(3816|0),(1|0),(4|0));
+ __embind_register_function((2517|0),2,(1868|0),(3056|0),(13|0),(2|0));
+ __embind_register_function((2522|0),3,(1876|0),(3161|0),(10|0),(11|0));
+ __embind_register_function((2528|0),3,(1888|0),(3161|0),(11|0),(12|0));
+ __embind_register_function((2534|0),3,(1900|0),(3161|0),(12|0),(13|0));
+ __embind_register_function((2540|0),3,(1912|0),(3161|0),(13|0),(14|0));
+ __embind_register_function((2546|0),3,(1924|0),(3161|0),(14|0),(15|0));
+ __embind_register_function((2552|0),4,(1936|0),(3810|0),(2|0),(7|0));
+ __embind_register_function((2559|0),4,(1952|0),(3810|0),(3|0),(8|0));
+ __embind_register_function((2566|0),4,(1968|0),(3810|0),(4|0),(9|0));
+ __embind_register_function((2573|0),5,(1984|0),(3816|0),(1|0),(4|0));
  return;
 }
 function __Z8to_VNodeN10emscripten3valE($0,$1) {
@@ -1981,7 +1981,7 @@ function __Z8to_VNodeN10emscripten3valE($0,$1) {
  }
  ; store8($4,i64_const(0,0),4); store4($4+8|0,0,4);
  $25 = load4($1);
- $26 = (__emval_new_cstring((2476|0))|0);
+ $26 = (__emval_new_cstring((2581|0))|0);
  $27 = (__emval_get_property(($25|0),($26|0))|0);
  __emval_decref(($26|0));
  store4($6,$27);
@@ -2000,7 +2000,7 @@ function __Z8to_VNodeN10emscripten3valE($0,$1) {
  if (!($36)) {
   __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE9push_backEc($4,35);
   $37 = load4($1);
-  $38 = (__emval_new_cstring((2476|0))|0);
+  $38 = (__emval_new_cstring((2581|0))|0);
   $39 = (__emval_get_property(($37|0),($38|0))|0);
   __emval_decref(($38|0));
   store4($7,$39);
@@ -2193,7 +2193,7 @@ function __Z8to_VNodeN10emscripten3valE($0,$1) {
    __emval_decref(($165|0));
    __emval_decref(($162|0));
    ; store8($2,i64_const(0,0),4); store4($2+8|0,0,4);
-   __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($2,2476,2);
+   __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($2,2581,2);
    $166 = load1($142);
    $167 = ($166<<24>>24)<(0);
    $168 = load4($143);
@@ -2568,6 +2568,27 @@ function __Z8to_VNodeN10emscripten3valE($0,$1) {
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($8);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($4);
  STACKTOP = sp;return;
+}
+function __ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE9push_backERKS1_($0,$1) {
+ $0 = $0|0;
+ $1 = $1|0;
+ var $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ $2 = ((($0)) + 4|0);
+ $3 = load4($2);
+ $4 = ((($0)) + 8|0);
+ $5 = load4($4);
+ $6 = ($3|0)==($5|0);
+ if ($6) {
+  __ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE21__push_back_slow_pathIRKS1_EEvOT_($0,$1);
+  return;
+ } else {
+  __ZN5VNodeC2ERKS_($3,$1);
+  $7 = load4($2);
+  $8 = ((($7)) + 144|0);
+  store4($2,$8);
+  return;
+ }
 }
 function ___clang_call_terminate($0) {
  $0 = $0|0;
@@ -5009,6 +5030,141 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
  }
  return (0)|0;
 }
+function __ZN9VNodeDataC2EOS_($0,$1) {
+ $0 = $0|0;
+ $1 = $1|0;
+ var $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0;
+ var $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0, $43 = 0, $44 = 0, $45 = 0, $46 = 0;
+ var $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $54 = 0, $55 = 0, $56 = 0, $57 = 0, $58 = 0, $59 = 0, $6 = 0, $60 = 0, $61 = 0, $62 = 0, $63 = 0, $64 = 0;
+ var $65 = 0, $66 = 0, $67 = 0, $68 = 0, $69 = 0, $7 = 0, $70 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ $2 = load4($1);
+ store4($0,$2);
+ $3 = ((($0)) + 4|0);
+ $4 = ((($1)) + 4|0);
+ $5 = load4($4);
+ store4($3,$5);
+ $6 = ((($1)) + 8|0);
+ $7 = ((($0)) + 8|0);
+ $8 = load4($6);
+ store4($7,$8);
+ $9 = ($8|0)==(0);
+ $10 = ((($0)) + 4|0);
+ if ($9) {
+  store4($0,$10);
+ } else {
+  $11 = $5;
+  $12 = ((($11)) + 8|0);
+  store4($12,$10);
+  $13 = ((($1)) + 4|0);
+  store4($1,$13);
+  store4($13,0);
+  store4($6,0);
+ }
+ $14 = ((($0)) + 12|0);
+ $15 = ((($1)) + 12|0);
+ $16 = load4($15);
+ store4($14,$16);
+ $17 = ((($0)) + 16|0);
+ $18 = ((($1)) + 16|0);
+ $19 = load4($18);
+ store4($17,$19);
+ $20 = ((($1)) + 20|0);
+ $21 = ((($0)) + 20|0);
+ $22 = load4($20);
+ store4($21,$22);
+ $23 = ($22|0)==(0);
+ $24 = ((($0)) + 16|0);
+ if ($23) {
+  store4($14,$24);
+ } else {
+  $25 = $19;
+  $26 = ((($25)) + 8|0);
+  store4($26,$24);
+  $27 = ((($1)) + 16|0);
+  store4($15,$27);
+  store4($27,0);
+  store4($20,0);
+ }
+ $28 = ((($0)) + 24|0);
+ $29 = ((($1)) + 24|0);
+ $30 = load4($29);
+ store4($28,$30);
+ $31 = ((($0)) + 28|0);
+ $32 = ((($1)) + 28|0);
+ $33 = load4($32);
+ store4($31,$33);
+ $34 = ((($1)) + 32|0);
+ $35 = ((($0)) + 32|0);
+ $36 = load4($34);
+ store4($35,$36);
+ $37 = ($36|0)==(0);
+ $38 = ((($0)) + 28|0);
+ if ($37) {
+  store4($28,$38);
+ } else {
+  $39 = $33;
+  $40 = ((($39)) + 8|0);
+  store4($40,$38);
+  $41 = ((($1)) + 28|0);
+  store4($29,$41);
+  store4($41,0);
+  store4($34,0);
+ }
+ $42 = ((($0)) + 36|0);
+ $43 = ((($1)) + 36|0);
+ $44 = load4($43);
+ store4($42,$44);
+ store4($43,0);
+ $45 = ((($0)) + 40|0);
+ $46 = ((($1)) + 40|0);
+ $47 = load4($46);
+ store4($45,$47);
+ store4($46,0);
+ $48 = ((($0)) + 44|0);
+ $49 = ((($1)) + 44|0);
+ $50 = load4($49);
+ store4($48,$50);
+ store4($49,0);
+ $51 = ((($0)) + 48|0);
+ $52 = ((($1)) + 48|0);
+ $53 = load4($52);
+ store4($51,$53);
+ store4($52,0);
+ $54 = ((($0)) + 52|0);
+ $55 = ((($1)) + 52|0);
+ $56 = load4($55);
+ store4($54,$56);
+ store4($55,0);
+ $57 = ((($0)) + 56|0);
+ $58 = ((($1)) + 56|0);
+ ; store8($57,load8($58,4),4); store4($57+8 | 0,load4($58+8 | 0,4),4);
+ ; store8($58,i64_const(0,0),4); store4($58+8|0,0,4);
+ $59 = ((($0)) + 68|0);
+ $60 = ((($1)) + 68|0);
+ ; store8($59,load8($60,4),4); store4($59+8 | 0,load4($60+8 | 0,4),4);
+ ; store8($60,i64_const(0,0),4); store4($60+8|0,0,4);
+ $61 = ((($0)) + 80|0);
+ $62 = ((($1)) + 80|0);
+ store4($61,0);
+ $63 = ((($0)) + 84|0);
+ store4($63,0);
+ $64 = ((($0)) + 88|0);
+ store4($64,0);
+ $65 = load4($62);
+ store4($61,$65);
+ $66 = ((($1)) + 84|0);
+ $67 = load4($66);
+ store4($63,$67);
+ $68 = ((($1)) + 88|0);
+ $69 = load4($68);
+ $70 = ((($0)) + 88|0);
+ store4($70,$69);
+ store4($68,0);
+ store4($66,0);
+ store4($62,0);
+ return;
+}
 function __ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES6_NS_4lessIS6_EENS4_INS_4pairIKS6_S6_EEEEE4sizeEv($0) {
  $0 = $0|0;
  var $1 = 0, $2 = 0, label = 0, sp = 0;
@@ -6095,27 +6251,6 @@ function __ZN10emscripten8internal12MemberAccessI5VNodeNSt3__26vectorIS2_NS3_9al
  __ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE6assignIPS1_EENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIS1_NS_15iterator_traitsIS8_E9referenceEEE5valueEvE4typeES8_S8_($4,$6,$8);
  return;
 }
-function __ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE9push_backERKS1_($0,$1) {
- $0 = $0|0;
- $1 = $1|0;
- var $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $2 = ((($0)) + 4|0);
- $3 = load4($2);
- $4 = ((($0)) + 8|0);
- $5 = load4($4);
- $6 = ($3|0)==($5|0);
- if ($6) {
-  __ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE21__push_back_slow_pathIRKS1_EEvOT_($0,$1);
-  return;
- } else {
-  __ZN5VNodeC2ERKS_($3,$1);
-  $7 = load4($2);
-  $8 = ((($7)) + 144|0);
-  store4($2,$8);
-  return;
- }
-}
 function __ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE6resizeEjRKS1_($0,$1,$2) {
  $0 = $0|0;
  $1 = $1|0;
@@ -6224,113 +6359,6 @@ function __ZN10emscripten8internal12VectorAccessINSt3__26vectorI5VNodeNS2_9alloc
  $21 = load4($20);
  __ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE6assignIPS1_EENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIS1_NS_15iterator_traitsIS8_E9referenceEEE5valueEvE4typeES8_S8_($17,$19,$21);
  return 1;
-}
-function __ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE21__push_back_slow_pathIRKS1_EEvOT_($0,$1) {
- $0 = $0|0;
- $1 = $1|0;
- var $$0$i = 0, $$06$i$i = 0, $$pre$i = 0, $$pre40 = 0, $$sroa$7$0 = 0, $$sroa$speculated$i = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0;
- var $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0;
- var $41 = 0, $42 = 0, $43 = 0, $44 = 0, $45 = 0, $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $2 = ((($0)) + 4|0);
- $3 = load4($2);
- $4 = load4($0);
- $5 = (($3) - ($4))|0;
- $6 = (($5|0) / 144)&-1;
- $7 = (($6) + 1)|0;
- $8 = ($7>>>0)>(29826161);
- if ($8) {
-  __ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv($0);
-  // unreachable;
- }
- $9 = ((($0)) + 8|0);
- $10 = load4($9);
- $11 = (($10) - ($4))|0;
- $12 = (($11|0) / 144)&-1;
- $13 = ($12>>>0)<(14913080);
- $14 = $12 << 1;
- $15 = ($14>>>0)<($7>>>0);
- $$sroa$speculated$i = $15 ? $7 : $14;
- $$0$i = $13 ? $$sroa$speculated$i : 29826161;
- $16 = (($3) - ($4))|0;
- $17 = (($16|0) / 144)&-1;
- $18 = ($$0$i|0)==(0);
- do {
-  if ($18) {
-   $24 = 0;
-  } else {
-   $19 = ($$0$i>>>0)>(29826161);
-   if ($19) {
-    $20 = (___cxa_allocate_exception(4)|0);
-    __ZNSt9bad_allocC2Ev($20);
-    ___cxa_throw(($20|0),(1520|0),(6|0));
-    // unreachable;
-   } else {
-    $21 = ($$0$i*144)|0;
-    $22 = (__Znwj($21)|0);
-    $24 = $22;
-    break;
-   }
-  }
- } while(0);
- $23 = (($24) + (($17*144)|0)|0);
- $25 = $23;
- $26 = (($24) + (($$0$i*144)|0)|0);
- $27 = $26;
- __ZN5VNodeC2ERKS_($23,$1);
- $28 = ((($23)) + 144|0);
- $29 = $28;
- $30 = load4($0);
- $31 = load4($2);
- $32 = ($31|0)==($30|0);
- if ($32) {
-  $33 = $30;
-  $41 = $25;$43 = $33;$45 = $30;
- } else {
-  $$06$i$i = $31;$$sroa$7$0 = $25;$35 = $23;
-  while(1) {
-   $34 = ((($35)) + -144|0);
-   $36 = ((($$06$i$i)) + -144|0);
-   __ZN5VNodeC2ERKS_($34,$36);
-   $37 = $$sroa$7$0;
-   $38 = ((($37)) + -144|0);
-   $39 = $38;
-   $40 = ($36|0)==($30|0);
-   if ($40) {
-    break;
-   } else {
-    $$06$i$i = $36;$$sroa$7$0 = $39;$35 = $38;
-   }
-  }
-  $$pre$i = load4($0);
-  $$pre40 = load4($2);
-  $41 = $39;$43 = $$pre$i;$45 = $$pre40;
- }
- store4($0,$41);
- store4($2,$29);
- store4($9,$27);
- $42 = $43;
- $44 = ($45|0)==($42|0);
- if (!($44)) {
-  $47 = $45;
-  while(1) {
-   $46 = ((($47)) + -144|0);
-   __ZN5VNodeD2Ev($46);
-   $48 = ($46|0)==($42|0);
-   if ($48) {
-    break;
-   } else {
-    $47 = $46;
-   }
-  }
- }
- $49 = ($43|0)==(0);
- if ($49) {
-  return;
- }
- $50 = $43;
- __ZdlPv($50);
- return;
 }
 function __ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE8__appendEjRKS1_($0,$1,$2) {
  $0 = $0|0;
@@ -6890,141 +6918,6 @@ function __ZN10emscripten8internal18GenericBindingTypeI5VNodeE10toWireTypeEOS2_(
  store4($12,0);
  return ($1|0);
 }
-function __ZN9VNodeDataC2EOS_($0,$1) {
- $0 = $0|0;
- $1 = $1|0;
- var $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0;
- var $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0, $43 = 0, $44 = 0, $45 = 0, $46 = 0;
- var $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $54 = 0, $55 = 0, $56 = 0, $57 = 0, $58 = 0, $59 = 0, $6 = 0, $60 = 0, $61 = 0, $62 = 0, $63 = 0, $64 = 0;
- var $65 = 0, $66 = 0, $67 = 0, $68 = 0, $69 = 0, $7 = 0, $70 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $2 = load4($1);
- store4($0,$2);
- $3 = ((($0)) + 4|0);
- $4 = ((($1)) + 4|0);
- $5 = load4($4);
- store4($3,$5);
- $6 = ((($1)) + 8|0);
- $7 = ((($0)) + 8|0);
- $8 = load4($6);
- store4($7,$8);
- $9 = ($8|0)==(0);
- $10 = ((($0)) + 4|0);
- if ($9) {
-  store4($0,$10);
- } else {
-  $11 = $5;
-  $12 = ((($11)) + 8|0);
-  store4($12,$10);
-  $13 = ((($1)) + 4|0);
-  store4($1,$13);
-  store4($13,0);
-  store4($6,0);
- }
- $14 = ((($0)) + 12|0);
- $15 = ((($1)) + 12|0);
- $16 = load4($15);
- store4($14,$16);
- $17 = ((($0)) + 16|0);
- $18 = ((($1)) + 16|0);
- $19 = load4($18);
- store4($17,$19);
- $20 = ((($1)) + 20|0);
- $21 = ((($0)) + 20|0);
- $22 = load4($20);
- store4($21,$22);
- $23 = ($22|0)==(0);
- $24 = ((($0)) + 16|0);
- if ($23) {
-  store4($14,$24);
- } else {
-  $25 = $19;
-  $26 = ((($25)) + 8|0);
-  store4($26,$24);
-  $27 = ((($1)) + 16|0);
-  store4($15,$27);
-  store4($27,0);
-  store4($20,0);
- }
- $28 = ((($0)) + 24|0);
- $29 = ((($1)) + 24|0);
- $30 = load4($29);
- store4($28,$30);
- $31 = ((($0)) + 28|0);
- $32 = ((($1)) + 28|0);
- $33 = load4($32);
- store4($31,$33);
- $34 = ((($1)) + 32|0);
- $35 = ((($0)) + 32|0);
- $36 = load4($34);
- store4($35,$36);
- $37 = ($36|0)==(0);
- $38 = ((($0)) + 28|0);
- if ($37) {
-  store4($28,$38);
- } else {
-  $39 = $33;
-  $40 = ((($39)) + 8|0);
-  store4($40,$38);
-  $41 = ((($1)) + 28|0);
-  store4($29,$41);
-  store4($41,0);
-  store4($34,0);
- }
- $42 = ((($0)) + 36|0);
- $43 = ((($1)) + 36|0);
- $44 = load4($43);
- store4($42,$44);
- store4($43,0);
- $45 = ((($0)) + 40|0);
- $46 = ((($1)) + 40|0);
- $47 = load4($46);
- store4($45,$47);
- store4($46,0);
- $48 = ((($0)) + 44|0);
- $49 = ((($1)) + 44|0);
- $50 = load4($49);
- store4($48,$50);
- store4($49,0);
- $51 = ((($0)) + 48|0);
- $52 = ((($1)) + 48|0);
- $53 = load4($52);
- store4($51,$53);
- store4($52,0);
- $54 = ((($0)) + 52|0);
- $55 = ((($1)) + 52|0);
- $56 = load4($55);
- store4($54,$56);
- store4($55,0);
- $57 = ((($0)) + 56|0);
- $58 = ((($1)) + 56|0);
- ; store8($57,load8($58,4),4); store4($57+8 | 0,load4($58+8 | 0,4),4);
- ; store8($58,i64_const(0,0),4); store4($58+8|0,0,4);
- $59 = ((($0)) + 68|0);
- $60 = ((($1)) + 68|0);
- ; store8($59,load8($60,4),4); store4($59+8 | 0,load4($60+8 | 0,4),4);
- ; store8($60,i64_const(0,0),4); store4($60+8|0,0,4);
- $61 = ((($0)) + 80|0);
- $62 = ((($1)) + 80|0);
- store4($61,0);
- $63 = ((($0)) + 84|0);
- store4($63,0);
- $64 = ((($0)) + 88|0);
- store4($64,0);
- $65 = load4($62);
- store4($61,$65);
- $66 = ((($1)) + 84|0);
- $67 = load4($66);
- store4($63,$67);
- $68 = ((($1)) + 88|0);
- $69 = load4($68);
- $70 = ((($0)) + 88|0);
- store4($70,$69);
- store4($68,0);
- store4($66,0);
- store4($62,0);
- return;
-}
 function __ZN10emscripten8internal7InvokerI5VNodeJNSt3__212basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEEbEE6invokeEPFS2_S9_bEPNS0_11BindingTypeIS9_EUt_Eb($0,$1,$2) {
  $0 = $0|0;
  $1 = $1|0;
@@ -7537,6 +7430,113 @@ function __ZN10emscripten8internal7InvokerI5VNodeJNS_3valEEE6invokeEPFS2_S3_EPNS
  $5 = load4($3);
  __emval_decref(($5|0));
  STACKTOP = sp;return ($4|0);
+}
+function __ZNSt3__26vectorI5VNodeNS_9allocatorIS1_EEE21__push_back_slow_pathIRKS1_EEvOT_($0,$1) {
+ $0 = $0|0;
+ $1 = $1|0;
+ var $$0$i = 0, $$06$i$i = 0, $$pre$i = 0, $$pre40 = 0, $$sroa$7$0 = 0, $$sroa$speculated$i = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0;
+ var $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0;
+ var $41 = 0, $42 = 0, $43 = 0, $44 = 0, $45 = 0, $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ $2 = ((($0)) + 4|0);
+ $3 = load4($2);
+ $4 = load4($0);
+ $5 = (($3) - ($4))|0;
+ $6 = (($5|0) / 144)&-1;
+ $7 = (($6) + 1)|0;
+ $8 = ($7>>>0)>(29826161);
+ if ($8) {
+  __ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv($0);
+  // unreachable;
+ }
+ $9 = ((($0)) + 8|0);
+ $10 = load4($9);
+ $11 = (($10) - ($4))|0;
+ $12 = (($11|0) / 144)&-1;
+ $13 = ($12>>>0)<(14913080);
+ $14 = $12 << 1;
+ $15 = ($14>>>0)<($7>>>0);
+ $$sroa$speculated$i = $15 ? $7 : $14;
+ $$0$i = $13 ? $$sroa$speculated$i : 29826161;
+ $16 = (($3) - ($4))|0;
+ $17 = (($16|0) / 144)&-1;
+ $18 = ($$0$i|0)==(0);
+ do {
+  if ($18) {
+   $24 = 0;
+  } else {
+   $19 = ($$0$i>>>0)>(29826161);
+   if ($19) {
+    $20 = (___cxa_allocate_exception(4)|0);
+    __ZNSt9bad_allocC2Ev($20);
+    ___cxa_throw(($20|0),(1520|0),(6|0));
+    // unreachable;
+   } else {
+    $21 = ($$0$i*144)|0;
+    $22 = (__Znwj($21)|0);
+    $24 = $22;
+    break;
+   }
+  }
+ } while(0);
+ $23 = (($24) + (($17*144)|0)|0);
+ $25 = $23;
+ $26 = (($24) + (($$0$i*144)|0)|0);
+ $27 = $26;
+ __ZN5VNodeC2ERKS_($23,$1);
+ $28 = ((($23)) + 144|0);
+ $29 = $28;
+ $30 = load4($0);
+ $31 = load4($2);
+ $32 = ($31|0)==($30|0);
+ if ($32) {
+  $33 = $30;
+  $41 = $25;$43 = $33;$45 = $30;
+ } else {
+  $$06$i$i = $31;$$sroa$7$0 = $25;$35 = $23;
+  while(1) {
+   $34 = ((($35)) + -144|0);
+   $36 = ((($$06$i$i)) + -144|0);
+   __ZN5VNodeC2ERKS_($34,$36);
+   $37 = $$sroa$7$0;
+   $38 = ((($37)) + -144|0);
+   $39 = $38;
+   $40 = ($36|0)==($30|0);
+   if ($40) {
+    break;
+   } else {
+    $$06$i$i = $36;$$sroa$7$0 = $39;$35 = $38;
+   }
+  }
+  $$pre$i = load4($0);
+  $$pre40 = load4($2);
+  $41 = $39;$43 = $$pre$i;$45 = $$pre40;
+ }
+ store4($0,$41);
+ store4($2,$29);
+ store4($9,$27);
+ $42 = $43;
+ $44 = ($45|0)==($42|0);
+ if (!($44)) {
+  $47 = $45;
+  while(1) {
+   $46 = ((($47)) + -144|0);
+   __ZN5VNodeD2Ev($46);
+   $48 = ($46|0)==($42|0);
+   if ($48) {
+    break;
+   } else {
+    $47 = $46;
+   }
+  }
+ }
+ $49 = ($43|0)==(0);
+ if ($49) {
+  return;
+ }
+ $50 = $43;
+ __ZdlPv($50);
+ return;
 }
 function __GLOBAL__sub_I_app_cpp() {
  var label = 0, sp = 0;

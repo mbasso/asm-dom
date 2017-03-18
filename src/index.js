@@ -1,4 +1,5 @@
 import { getHFunction } from './js/h';
+import { getPatchFunction } from './js/patch';
 
 export default function load(config = {}) {
   let lib;
@@ -14,6 +15,7 @@ export default function load(config = {}) {
   }
 
   lib.h = getHFunction(lib);
+  lib.patch = getPatchFunction(lib);
 
   return lib;
 }

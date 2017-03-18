@@ -5,6 +5,8 @@
 #include <emscripten/val.h>
 #include <vector>
 
+VNode patch_vnode(VNode oldVnode, VNode vnode);
+VNode patch_element(emscripten::val oldVnode, VNode vnode);
 emscripten::val createElm(VNode vnode, std::vector<VNode> insertedVnodeQueue);
 void addVnodes(
 	emscripten::val parentElm,
