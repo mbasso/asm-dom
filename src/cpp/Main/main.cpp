@@ -10,7 +10,7 @@
 #include <string>
 
 bool sameVnode(VNode vnode1, VNode vnode2) {
-  return vnode1.key == vnode2.key && vnode1.sel == vnode2.sel;
+  return vnode1.key.compare(vnode2.key) == 0 && vnode1.sel.compare(vnode2.sel) == 0;
 };
 
 VNode emptyNodeAt(emscripten::val elm) {
@@ -34,7 +34,7 @@ VNode emptyNodeAt(emscripten::val elm) {
   return vnode;
 };
 
-std::map<std::string, int> createKeyToOldIdx(std::vector<VNode> children, int beginIdx, int endIdx) {
+std::map<std::string, int> createKeyToOldIdx(std::vector<VNode>& children, int beginIdx, int endIdx) {
   std::size_t i = beginIdx;
 	std::map<std::string, int> map;
   for (; i <= endIdx; i++) {
@@ -45,7 +45,7 @@ std::map<std::string, int> createKeyToOldIdx(std::vector<VNode> children, int be
   return map;
 }
 
-emscripten::val createElm(VNode vnode, std::vector<VNode> insertedVnodeQueue) {
+emscripten::val createElm(VNode& vnode, std::vector<VNode>& insertedVnodeQueue) {
 	// TODO: init hook
 	if (vnode.sel.compare(std::string("!")) == 0) {
 		vnode.elm = createComment(vnode.text);
@@ -84,10 +84,10 @@ emscripten::val createElm(VNode vnode, std::vector<VNode> insertedVnodeQueue) {
 void addVnodes(
 	emscripten::val parentElm,
 	emscripten::val before,
-	std::vector<VNode> vnodes,
+	std::vector<VNode>& vnodes,
 	std::vector<VNode>::size_type startIdx,
 	std::vector<VNode>::size_type endIdx,
-	std::vector<VNode> insertedVnodeQueue
+	std::vector<VNode>& insertedVnodeQueue
 ) {
 	for (; startIdx <= endIdx; startIdx++) {
 		insertBefore(parentElm, createElm(vnodes[startIdx], insertedVnodeQueue), before);
@@ -96,7 +96,7 @@ void addVnodes(
 
 void removeVnodes(
 	emscripten::val parentElm,
-	std::vector<VNode> vnodes,
+	std::vector<VNode>& vnodes,
 	std::vector<VNode>::size_type startIdx,
 	std::vector<VNode>::size_type endIdx
 ) {
@@ -113,9 +113,9 @@ void removeVnodes(
 
 void updateChildren(
 	emscripten::val parentElm,
-	std::vector<VNode> oldCh,
-	std::vector<VNode> newCh,
-	std::vector<VNode> insertedVnodeQueue
+	std::vector<VNode>& oldCh,
+	std::vector<VNode>& newCh,
+	std::vector<VNode>& insertedVnodeQueue
 ) {
 	std::size_t oldStartIdx = 0;
 	std::size_t newStartIdx = 0;
@@ -175,9 +175,9 @@ void updateChildren(
 };
 
 void patchVnode(
-	VNode oldVnode,
-	VNode vnode,
-	std::vector<VNode> insertedVnodeQueue
+	VNode& oldVnode,
+	VNode& vnode,
+	std::vector<VNode>& insertedVnodeQueue
 ) {
 	// TODO: prepatch hook
 	// if (oldVnode == vnode) return;
@@ -200,7 +200,7 @@ void patchVnode(
 	// TODO: postpatch hook
 };
 
-VNode patch_vnode(VNode oldVnode, VNode vnode) {
+VNode patch_vnode(VNode& oldVnode, VNode& vnode) {
 	std::vector<VNode> insertedVnodeQueue;
 	// TODO: pre callback
 	if (sameVnode(oldVnode, vnode)) {
@@ -220,11 +220,12 @@ VNode patch_vnode(VNode oldVnode, VNode vnode) {
 	return vnode;
 };
 
-VNode patch_element(emscripten::val oldVnode, VNode vnode) {
-	return patch_vnode(emptyNodeAt(oldVnode), vnode);
+VNode patch_element(emscripten::val element, VNode& vnode) {
+	VNode oldVnode = emptyNodeAt(element);
+	return patch_vnode(oldVnode, vnode);
 };
 
-EMSCRIPTEN_BINDINGS(h_function) {
+EMSCRIPTEN_BINDINGS(patch_function) {
 	emscripten::function("_patch_vnode", &patch_vnode);
 	emscripten::function("_patch_element", &patch_element);
 }
