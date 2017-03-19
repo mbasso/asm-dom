@@ -19,6 +19,32 @@ describe('patch', () => {
   clearDOM();
   afterEach(clearDOM);
 
+  it('should have a tag', () => {
+    const vnode = h('div');
+    const elm = patch(root, vnode).elm;
+    expect(elm.tagName).toEqual('DIV');
+    vnode.delete();
+  });
+
+  it('should have different tag and id', () => {
+    let elm = document.createElement('div');
+    root.appendChild(elm);
+    const vnode = h('span#id');
+    elm = patch(elm, vnode).elm;
+    expect(elm.tagName).toEqual('SPAN');
+    expect(elm.id).toEqual('id');
+    vnode.delete();
+  });
+
+  it('should have an id', () => {
+    const vnode = h('div', [h('div#unique')]);
+    const elm = patch(root, vnode).elm;
+    expect(elm.firstChild.id).toEqual('unique');
+    vnode.delete();
+  });
+
+  // Others
+
   it('should patch a node', () => {
     expect(document.body.children.length).toEqual(1);
     expect(document.body.firstChild).toEqual(root);

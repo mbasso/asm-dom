@@ -1,8 +1,6 @@
 #include "VNode.hpp"
 #include <emscripten/bind.h>
 
-// TODO : elm as property
-
 EMSCRIPTEN_BINDINGS(vnode) {
   emscripten::class_<VNode>("VNode")
     .constructor<>()
@@ -10,6 +8,7 @@ EMSCRIPTEN_BINDINGS(vnode) {
     .property("key", &VNode::key)
     .property("text", &VNode::text)
     .property("data", &VNode::data)
+    .property("elm", &VNode::elm)
     .property("children", &VNode::children);
   
   emscripten::register_vector<VNode>("VNodeVector");
