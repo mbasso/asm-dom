@@ -6,8 +6,8 @@
 
 void addNS(VNode& vnode) {
 	vnode.data.ns = std::string("http://www.w3.org/2000/svg");
-	if (vnode.sel.compare(std::string("foreignObject")) != 0 && !vnode.children.empty()) {
-		for(std::vector<VNode>::size_type i = 0; i != vnode.children.size(); i++) {
+	if (vnode.sel.compare("foreignObject") != 0 && !vnode.children.empty()) {
+		for(std::vector<VNode>::size_type i = vnode.children.size(); i--;) {
 			addNS(vnode.children[i]);
 		}
 	}

@@ -15,7 +15,7 @@ VNode to_VNode(const emscripten::val node) {
 		}
 		std::string c;
 		emscripten::val nodeClass = node.call<emscripten::val>("getAttribute", std::string("class"));
-		if (nodeClass.typeOf().as<std::string>().compare(std::string("string")) == 0) {
+		if (nodeClass.typeOf().as<std::string>().compare("string") == 0) {
 			c += '.';
 			c.append(nodeClass.as<std::string>());
 			std::replace(c.begin(), c.end(), ' ', '.');
@@ -26,7 +26,7 @@ VNode to_VNode(const emscripten::val node) {
 		emscripten::val attributes = node["attributes"];
 		for(int i = 0, n = attributes["length"].as<int>(); i < n; i++) {
 			std::string name = attributes[i]["nodeName"].as<std::string>();
-			if (name.compare(std::string("id")) != 0 && name.compare(std::string("class")) != 0) {
+			if (name.compare("id") != 0 && name.compare("class") != 0) {
 				vnode.data.attrs.insert(std::make_pair(name, attributes[i]["nodeValue"].as<std::string>()));
 			}
 		}

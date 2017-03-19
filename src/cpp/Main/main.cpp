@@ -15,21 +15,22 @@ bool sameVnode(VNode vnode1, VNode vnode2) {
 VNode emptyNodeAt(emscripten::val elm) {
   VNode vnode = VNode();
   vnode.elm = elm;
-  std::string id;
-  if (isDefined(elm["id"])) {
-    id += '#';
-    id.append(elm["id"].as<std::string>());
-  }
-  std::string c;
-  if (isDefined(elm["className"])) {
-    c += '.';
-    c.append(elm["className"].as<std::string>());
-    std::replace(c.begin(), c.end(), ' ', '.');
-  }
   vnode.sel.append(tagName(elm));
   std::transform(vnode.sel.begin(), vnode.sel.end(), vnode.sel.begin(), ::tolower);
-  vnode.sel.append(id);
-  vnode.sel.append(c);
+
+	// id
+  if (isDefined(elm["id"])) {
+    vnode.sel += '#';
+    vnode.sel.append(elm["id"].as<std::string>());
+  }
+
+  // class
+  if (isDefined(elm["className"])) {
+    vnode.sel += '.';
+    vnode.sel.append(elm["className"].as<std::string>());
+    std::replace(vnode.sel.begin(), vnode.sel.end(), ' ', '.');
+  }
+
   return vnode;
 };
 
@@ -46,7 +47,7 @@ std::map<std::string, int> createKeyToOldIdx(std::vector<VNode>& children, int b
 
 emscripten::val createElm(VNode& vnode, std::vector<VNode>& insertedVnodeQueue) {
 	// TODO: init hook
-	if (vnode.sel.compare(std::string("!")) == 0) {
+	if (vnode.sel.compare("!") == 0) {
 		vnode.elm = createComment(vnode.text);
 	} else if (vnode.sel.empty()) {
 		vnode.elm = createTextNode(vnode.text);
@@ -186,7 +187,7 @@ void patchVnode(
 			// if (vnode.children != oldVnode.children)
 			updateChildren(vnode.elm, oldVnode.children, vnode.children, insertedVnodeQueue);
 		} else if(!vnode.children.empty()) {
-			if (!oldVnode.text.empty()) setTextContent(vnode.elm, std::string(""));
+			if (!oldVnode.text.empty()) setTextContent(vnode.elm, std::string());
 			addVnodes(vnode.elm, emscripten::val::null(), vnode.children, 0, vnode.children.size() - 1, insertedVnodeQueue);
 		} else if(!oldVnode.children.empty()) {
 			removeVnodes(vnode.elm, oldVnode.children, 0, oldVnode.children.size() - 1);
@@ -209,8 +210,7 @@ VNode patch_vnode(VNode& oldVnode, VNode& vnode) {
 		createElm(vnode, insertedVnodeQueue);
 		if (isDefined(parent)) {
 			insertBefore(parent, vnode.elm, nextSibling(oldVnode.elm));
-			std::vector<VNode> vnodes;
-			vnodes.push_back(oldVnode);
+			std::vector<VNode> vnodes { oldVnode };
 			removeVnodes(parent, vnodes, 0, 0);
 		}
 	}
