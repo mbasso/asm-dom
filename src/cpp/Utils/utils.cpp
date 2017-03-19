@@ -1,9 +1,8 @@
 #include "utils.hpp"
-#include "../HtmlDOMApi/HtmlDOMApi.hpp"
 #include <emscripten/val.h>
-#include <algorithm>
 #include <string>
 
+/*
 bool isUndefined(emscripten::val obj) {
   return obj.typeOf().as<std::string>().compare(std::string("undefined")) == 0;
 };
@@ -11,6 +10,7 @@ bool isUndefined(emscripten::val obj) {
 bool isNull(emscripten::val obj) {
   return obj.typeOf().as<std::string>().compare(std::string("null")) == 0;
 };
+*/
 
 bool isDefined(emscripten::val obj) {
   std::string type = obj.typeOf().as<std::string>();

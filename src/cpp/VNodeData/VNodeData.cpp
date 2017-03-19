@@ -1,4 +1,5 @@
 #include "VNodeData.hpp"
+#include <emscripten/bind.h>
 
 EMSCRIPTEN_BINDINGS(vnodedata) {
   emscripten::register_map<std::string, std::string>("MapStringString");

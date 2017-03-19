@@ -10,7 +10,7 @@ describe('toVNode', () => {
     const vnode = toVNode(comment);
     expect(vnode.sel).toEqual('!');
     expect(vnode.text).toEqual('this is a comment');
-    vnode.delete();
+    // vnode.delete();
   });
 
   it('should convert a text node to VNode', () => {
@@ -18,14 +18,14 @@ describe('toVNode', () => {
     const vnode = toVNode(comment);
     expect(vnode.sel).toEqual('');
     expect(vnode.text).toEqual('this is a text');
-    vnode.delete();
+    // vnode.delete();
   });
 
   it('should convert a node to VNode', () => {
     const node = document.createElement('div');
     const vnode = toVNode(node);
     expect(vnode.sel.toLowerCase()).toEqual('div');
-    vnode.delete();
+    // vnode.delete();
   });
 
   it('should convert a node with attributes to VNode', () => {
@@ -37,7 +37,7 @@ describe('toVNode', () => {
     expect(vnode.data.attrs.get('id')).toBeFalsy();
     expect(vnode.data.attrs.get('foo')).toEqual('bar');
     expect(vnode.data.attrs.get('lorem')).toEqual('ipsum');
-    vnode.delete();
+    // vnode.delete();
   });
 
   it('should convert a node with id and class to VNode', () => {
@@ -48,7 +48,7 @@ describe('toVNode', () => {
     node.setAttribute('id', 'nodeId');
     const vnode = toVNode(node);
     expect(vnode.sel.toLowerCase()).toEqual('div#nodeid.nodeclass1.nodeclass2');
-    vnode.delete();
+    // vnode.delete();
   });
 
   it('should convert a node with children to VNode', () => {
@@ -61,6 +61,6 @@ describe('toVNode', () => {
     expect(vnode.children.size()).toEqual(2);
     expect(vnode.children.get(0).sel.toLowerCase()).toEqual('video');
     expect(vnode.children.get(1).sel.toLowerCase()).toEqual('span');
-    vnode.delete();
+    // vnode.delete();
   });
 });

@@ -29,7 +29,7 @@ export const getHFunction = (lib) => (a, b, c, d) => {
     } else if (b instanceof lib.VNodeData) {
 			// eslint-disable-next-line
 			result = lib._h_sd(a, b);
-    } else if (b instanceof lib.VNode) {
+    } else if (typeof b === 'object') {
 			// eslint-disable-next-line
 			result = lib._h_sn(a, b);
     }
@@ -40,7 +40,7 @@ export const getHFunction = (lib) => (a, b, c, d) => {
     } else if (Array.isArray(c)) {
 			// eslint-disable-next-line
 			result = lib._h_sdc(a, b, getChildren(lib, c));
-    } else if (c instanceof lib.VNode) {
+    } else if (typeof c === 'object') {
 			// eslint-disable-next-line
 			result = lib._h_sdn(a, b, c);
     }

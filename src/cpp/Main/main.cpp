@@ -1,5 +1,4 @@
 #include "main.hpp"
-#include "../VNodeData/VNodeData.hpp"
 #include "../VNode/VNode.hpp"
 #include "../HtmlDOMApi/HtmlDOMApi.hpp"
 #include "../Utils/utils.hpp"

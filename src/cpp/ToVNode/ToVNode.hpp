@@ -2,8 +2,8 @@
 #define ToVNode_hpp
 
 #include "../VNode/VNode.hpp"
-#include "../Val/Val.hpp"
+#include <emscripten/val.h>
 
-VNode to_VNode(const val node);
+VNode to_VNode(const emscripten::val node);
 
 #endif

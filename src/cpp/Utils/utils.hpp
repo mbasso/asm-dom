@@ -4,8 +4,10 @@
 #include "../VNode/VNode.hpp"
 #include <emscripten/val.h>
 
+/*
 bool isUndefined(emscripten::val obj);
 bool isNull(emscripten::val obj);
+*/
 bool isDefined(emscripten::val obj);
 
 #endif

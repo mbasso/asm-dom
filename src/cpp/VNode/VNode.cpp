@@ -2,14 +2,13 @@
 #include <emscripten/bind.h>
 
 EMSCRIPTEN_BINDINGS(vnode) {
-  emscripten::class_<VNode>("VNode")
-    .constructor<>()
-    .property("sel", &VNode::sel)
-    .property("key", &VNode::key)
-    .property("text", &VNode::text)
-    .property("data", &VNode::data)
-    .property("elm", &VNode::elm)
-    .property("children", &VNode::children);
+  emscripten::value_object<VNode>("VNode")
+    .field("sel", &VNode::sel)
+    .field("key", &VNode::key)
+    .field("text", &VNode::text)
+    .field("data", &VNode::data)
+    .field("elm", &VNode::elm)
+    .field("children", &VNode::children);
   
   emscripten::register_vector<VNode>("VNodeVector");
 }

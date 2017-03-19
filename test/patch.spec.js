@@ -23,7 +23,7 @@ describe('patch', () => {
     const vnode = h('div');
     const elm = patch(root, vnode).elm;
     expect(elm.tagName).toEqual('DIV');
-    vnode.delete();
+    // vnode.delete();
   });
 
   it('should have different tag and id', () => {
@@ -33,14 +33,14 @@ describe('patch', () => {
     elm = patch(elm, vnode).elm;
     expect(elm.tagName).toEqual('SPAN');
     expect(elm.id).toEqual('id');
-    vnode.delete();
+    // vnode.delete();
   });
 
   it('should have an id', () => {
     const vnode = h('div', [h('div#unique')]);
     const elm = patch(root, vnode).elm;
     expect(elm.firstChild.id).toEqual('unique');
-    vnode.delete();
+    // vnode.delete();
   });
 
   /*
@@ -62,19 +62,19 @@ describe('patch', () => {
     expect(elm.namespaceURI).toEqual(SVGNamespace);
     expect(elm.firstChild.namespaceURI).toEqual(SVGNamespace);
     expect(elm.firstChild.firstChild.namespaceURI).toEqual(XHTMLNamespace);
-    vnode.delete();
+    // vnode.delete();
 
     // verify that svg tag with extra selectors gets svg namespace
     vnode = h('svg#some-id');
     elm = patch(root, vnode).elm;
     expect(elm.namespaceURI, SVGNamespace);
-    vnode.delete();
+    // vnode.delete();
 
     // verify that non-svg tag beginning with 'svg' does NOT get namespace
     vnode = h('svg-custom-el');
     elm = patch(root, vnode).elm;
     expect(elm.namespaceURI).toNotEqual(SVGNamespace);
-    vnode.delete();
+    // vnode.delete();
   });
 
   it('should receive classes in selector', () => {
@@ -83,7 +83,7 @@ describe('patch', () => {
     expect(elm.firstChild.classList.contains('am')).toBeTruthy();
     expect(elm.firstChild.classList.contains('a')).toBeTruthy();
     expect(elm.firstChild.classList.contains('class')).toBeTruthy();
-    vnode.delete();
+    // vnode.delete();
   });
   */
 
@@ -94,7 +94,7 @@ describe('patch', () => {
     const vnode = h('div', ['I am a string']);
     const elm = patch(root, vnode).elm;
     expect(elm.innerHTML).toEqual('I am a string');
-    vnode.delete();
+    // vnode.delete();
   });
 
   it('should create elements with span and text content', () => {
@@ -102,7 +102,7 @@ describe('patch', () => {
     const elm = patch(root, vnode).elm;
     expect(elm.childNodes[0].tagName).toEqual('SPAN');
     expect(elm.childNodes[1].textContent).toEqual('I am a string');
-    vnode.delete();
+    // vnode.delete();
   });
 
   // TODO: should create elements with props
@@ -118,7 +118,7 @@ describe('patch', () => {
         patch(frame.contentDocument.body.querySelector('div'), vnode);
         expect(frame.contentDocument.body.querySelector('div').textContent).toEqual('Thing 2');
         frame.remove();
-        vnode.delete();
+        // vnode.delete();
         done();
       };
       document.body.appendChild(frame);
@@ -137,7 +137,7 @@ describe('patch', () => {
     expect(elm.tagName).toEqual('DIV');
     expect(elm.id).toEqual('id');
     expect(elm.className).toEqual('class');
-    vnode.delete();
+    // vnode.delete();
   });
   */
 
@@ -146,7 +146,7 @@ describe('patch', () => {
     const elm = patch(root, vnode).elm;
     expect(elm.nodeType).toEqual(document.COMMENT_NODE);
     expect(elm.textContent).toEqual('test');
-    vnode.delete();
+    // vnode.delete();
   });
 
   // Others
@@ -156,7 +156,7 @@ describe('patch', () => {
     expect(document.body.firstChild).toEqual(root);
     const span = h('span');
     patch(root, span);
-    span.delete();
+    // span.delete();
     expect(document.body.children.length).toEqual(1);
     expect(document.body.firstChild.nodeName).toEqual('SPAN');
     expect(document.body.firstChild.getAttribute('id')).toBeFalsy();
