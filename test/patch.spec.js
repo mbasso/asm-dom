@@ -1,27 +1,33 @@
-/*
 import expect from 'expect';
 import asmDom from '../src/';
 
-describe('load', () => {
+describe('patch', () => {
   const vdom = asmDom();
   const { h, patch } = vdom;
+  let root;
 
-  const div = document.createElement('div');
-  div.setAttribute('id', 'foo');
-  document.body.appendChild(div);
-  const root = document.getElementById('foo');
-
-  afterEach(() => {
-    while (root.firstChild) {
-      root.removeChild(root.firstChild);
+  const clearDOM = () => {
+    while (document.body.firstChild) {
+      document.body.removeChild(document.body.firstChild);
     }
-  });
+
+    root = document.createElement('div');
+    root.setAttribute('id', 'foo');
+    document.body.appendChild(root);
+  };
+
+  clearDOM();
+  afterEach(clearDOM);
 
   it('should patch a node', () => {
-    expect(root.children.length).toEqual(0);
-    patch(root, h('span'));
-    expect(root.children.length).toEqual(1);
-    expect(root.firstChild.nodeName).toEqual('SPAN');
+    expect(document.body.children.length).toEqual(1);
+    expect(document.body.firstChild).toEqual(root);
+    const span = h('span');
+    patch(root, span);
+    span.delete();
+    expect(document.body.children.length).toEqual(1);
+    expect(document.body.firstChild.nodeName).toEqual('SPAN');
+    expect(document.body.firstChild.getAttribute('id')).toBeFalsy();
+    expect(document.body.firstChild.className).toBeFalsy();
   });
 });
-*/

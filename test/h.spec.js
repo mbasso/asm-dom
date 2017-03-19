@@ -9,12 +9,14 @@ describe('h', () => {
     const vnode = h('div');
     expect(vnode.sel).toEqual('div');
     expect(vnode.text).toEqual('');
+    vnode.delete();
   });
 
   it('should create a vnode with text', () => {
     const vnode = h('this is a text', true);
     expect(vnode.sel).toEqual('');
     expect(vnode.text).toEqual('this is a text');
+    vnode.delete();
   });
 
   it('should create a vnode with children', () => {
@@ -29,6 +31,7 @@ describe('h', () => {
     expect(vnode.children).toBeA(vdom.VNodeVector);
     expect(vnode.children.size()).toEqual(3);
     expect(vnode.children.get(0).sel).toEqual('video');
+    vnode.delete();
   });
 
   it('should create an svg vnode', () => {
@@ -39,6 +42,7 @@ describe('h', () => {
     expect(vnode.data.ns).toEqual('http://www.w3.org/2000/svg');
     expect(vnode.children.get(0).sel).toEqual('video');
     expect(vnode.children.get(0).data.ns).toEqual('http://www.w3.org/2000/svg');
+    vnode.delete();
   });
 
   it('should create a vnode with a single child', () => {
@@ -47,6 +51,7 @@ describe('h', () => {
     expect(vnode.children).toBeA(vdom.VNodeVector);
     expect(vnode.children.size()).toEqual(1);
     expect(vnode.children.get(0).sel).toEqual('video');
+    vnode.delete();
   });
 
   it('should create a vnode with all params', () => {
@@ -57,5 +62,6 @@ describe('h', () => {
     expect(vnode.text).toEqual('this is a text');
     expect(vnode.data).toEqual(data);
     expect(vnode.children).toEqual(children);
+    vnode.delete();
   });
 });

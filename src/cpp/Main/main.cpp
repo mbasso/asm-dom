@@ -54,15 +54,15 @@ emscripten::val createElm(VNode& vnode, std::vector<VNode>& insertedVnodeQueue) 
 	} else {
 		std::size_t hashIdx = vnode.sel.find('#');
 		std::size_t dotIdx = vnode.sel.find('.', hashIdx);
-		int hash = hashIdx > 0 ? static_cast<int>(hashIdx) : vnode.sel.length();
-		int dot = dotIdx > 0 ? static_cast<int>(dotIdx) : vnode.sel.length();
-		std::string tag = hashIdx != -1 || dotIdx != -1 ? vnode.sel.substr(0, std::min(hash, dot)) : vnode.sel;
+		int hash = hashIdx != std::string::npos ? static_cast<int>(hashIdx) : vnode.sel.length();
+		int dot = dotIdx != std::string::npos ? static_cast<int>(dotIdx) : vnode.sel.length();
+		std::string tag = hashIdx != std::string::npos || dotIdx != std::string::npos ? vnode.sel.substr(0, std::min(hash, dot)) : vnode.sel;
 		vnode.elm = !vnode.data.ns.empty() ? createElementNS(vnode.data.ns, tag) : createElement(tag);
 
 		if (hash < dot) {
 			vnode.elm.set("id", emscripten::val(vnode.sel.substr(hash + 1, dot)));
 		}
-		if (dotIdx > 0) {
+		if (dotIdx != std::string::npos) {
 			std::string className = vnode.sel.substr(dot + 1);
 			std::replace(className.begin(), className.end(), '.', ' ');
 			vnode.elm.set("className", emscripten::val(className));

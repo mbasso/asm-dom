@@ -3140,7 +3140,7 @@ function __Z9createElmR5VNodeRNSt3__26vectorIS_NS1_9allocatorIS_EEEE($0,$1) {
  }
  $54 = (__ZNKSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE4findEcj($0,35,0)|0);
  $55 = (__ZNKSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE4findEcj($0,46,$54)|0);
- $56 = ($54|0)==(0);
+ $56 = ($54|0)==(-1);
  do {
   if ($56) {
    $57 = load1($11);
@@ -3158,7 +3158,7 @@ function __Z9createElmR5VNodeRNSt3__26vectorIS_NS1_9allocatorIS_EEEE($0,$1) {
    $70 = $54;
   }
  } while(0);
- $61 = ($55|0)!=(0);
+ $61 = ($55|0)!=(-1);
  do {
   if ($61) {
    $69 = $55;
