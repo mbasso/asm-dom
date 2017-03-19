@@ -5,6 +5,48 @@ describe('h', () => {
   const vdom = asmDom();
   const { h } = vdom;
 
+  it('should create a vnode with proper tag', () => {
+    const div = h('div');
+    const a = h('a');
+    expect(div.sel).toEqual('div');
+    expect(a.sel).toEqual('a');
+    div.delete();
+    a.delete();
+  });
+
+  it('should create a vnode with children', () => {
+    const vnode = h('div', [h('span#hello'), h('b.world')]);
+    expect(vnode.sel).toEqual('div');
+    expect(vnode.children.get(0).sel).toEqual('span#hello');
+    expect(vnode.children.get(1).sel).toEqual('b.world');
+    vnode.delete();
+  });
+
+  it('should create a vnode with one child', () => {
+    const vnode = h('div', h('span#hello'));
+    expect(vnode.sel).toEqual('div');
+    expect(vnode.children.get(0).sel).toEqual('span#hello');
+    vnode.delete();
+  });
+
+  // TODO: should create a vnode with props and one child
+
+  it('should create a vnode with text content', () => {
+    const vnode = h('div', ['I am a string']);
+    expect(vnode.children.get(0).text).toEqual('I am a string');
+    vnode.delete();
+  });
+
+  it('should create a vnode with text content in string', () => {
+    const vnode = h('div', 'I am a string');
+    expect(vnode.text).toEqual('I am a string');
+    vnode.delete();
+  });
+
+  // TODO: should create vnode with props and text content in string
+
+  // Others
+
   it('should create a vnode with a selector', () => {
     const vnode = h('div');
     expect(vnode.sel).toEqual('div');

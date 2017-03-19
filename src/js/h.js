@@ -1,7 +1,10 @@
 const getChildren = (lib, arr) => {
   const result = new lib.VNodeVector();
   arr.forEach(x => {
-    if (x) {
+    if (typeof x === 'string') {
+      // eslint-disable-next-line
+      result.push_back(lib._h_ti(x, true));
+    } else if (x) {
       result.push_back(x);
     }
   });
