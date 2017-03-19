@@ -43,6 +43,13 @@ describe('h', () => {
     vnode.delete();
   });
 
+  it('should create a vnode for comment', () => {
+    const vnode = h('!', 'test');
+    expect(vnode.sel).toEqual('!');
+    expect(vnode.text).toEqual('test');
+    vnode.delete();
+  });
+
   // TODO: should create vnode with props and text content in string
 
   // Others
