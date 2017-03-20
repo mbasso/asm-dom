@@ -2,20 +2,22 @@
 #include <emscripten/val.h>
 #include <string>
 
+static emscripten::val document = emscripten::val::global("document");
+
 emscripten::val createElement(std::string tagName) {
-  return emscripten::val::global("document").call<emscripten::val>("createElement", tagName);
+  return document.call<emscripten::val>("createElement", tagName);
 }
 
 emscripten::val createElementNS(std::string namespaceURI, std::string qualifiedName) {
-  return emscripten::val::global("document").call<emscripten::val>("createElementNS", namespaceURI, qualifiedName);
+  return document.call<emscripten::val>("createElementNS", namespaceURI, qualifiedName);
 }
 
 emscripten::val createTextNode(std::string text) {
-  return emscripten::val::global("document").call<emscripten::val>("createTextNode", text);
+  return document.call<emscripten::val>("createTextNode", text);
 }
 
 emscripten::val createComment(std::string text) {
-  return emscripten::val::global("document").call<emscripten::val>("createComment", text);
+  return document.call<emscripten::val>("createComment", text);
 }
 
 void insertBefore(emscripten::val parentNode, emscripten::val newNode, emscripten::val referenceNode) {
