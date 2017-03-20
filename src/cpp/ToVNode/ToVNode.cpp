@@ -8,29 +8,32 @@
 VNode to_VNode(const emscripten::val node) {
 	VNode vnode = VNode();
 	if (isElement(node)) {
-		std::string id;
+		vnode.sel.append(tagName(node));
+
 		if (!node["id"].as<std::string>().empty()) {
-			id += '#';
-			id.append(node["id"].as<std::string>());
+			vnode.sel += '#';
+			vnode.sel.append(node["id"].as<std::string>());
 		}
-		std::string c;
+
 		emscripten::val nodeClass = node.call<emscripten::val>("getAttribute", std::string("class"));
 		if (nodeClass.typeOf().as<std::string>().compare("string") == 0) {
-			c += '.';
-			c.append(nodeClass.as<std::string>());
-			std::replace(c.begin(), c.end(), ' ', '.');
+			vnode.sel += '.';
+			vnode.sel.append(nodeClass.as<std::string>());
+			std::replace(vnode.sel.begin(), vnode.sel.end(), ' ', '.');
 		}
-		vnode.sel.append(tagName(node));
-		vnode.sel.append(id);
-		vnode.sel.append(c);
-		emscripten::val attributes = node["attributes"];
-		for(int i = 0, n = attributes["length"].as<int>(); i < n; i++) {
-			std::string name = attributes[i]["nodeName"].as<std::string>();
+
+		int i = 0;
+		int n = node["attributes"]["length"].as<int>();
+		for(; i < n; i++) {
+			std::string name = node["attributes"][i]["nodeName"].as<std::string>();
 			if (name.compare("id") != 0 && name.compare("class") != 0) {
-				vnode.data.attrs.insert(std::make_pair(name, attributes[i]["nodeValue"].as<std::string>()));
+				vnode.data.attrs.insert(std::make_pair(name, node["attributes"][i]["nodeValue"].as<std::string>()));
 			}
 		}
-		for(int i = 0, n = node["childNodes"]["length"].as<int>(); i < n; i++) {
+
+		i = 0;
+		n = node["childNodes"]["length"].as<int>();
+		for(; i < n; i++) {
 			vnode.children.push_back(to_VNode(node["childNodes"][i]));
 		}
 		vnode.elm = node;
