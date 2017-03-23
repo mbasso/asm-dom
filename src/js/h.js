@@ -1,5 +1,5 @@
 const getChildren = (lib, arr) => {
-  const result = new lib.VNodeVector();
+  const result = new lib.VNodePtrVector();
   arr.forEach(x => {
     if (typeof x === 'string') {
       // eslint-disable-next-line
@@ -29,7 +29,7 @@ export const getHFunction = (lib) => (a, b, c, d) => {
     } else if (b instanceof lib.VNodeData) {
 			// eslint-disable-next-line
 			result = lib._h_sd(a, b);
-    } else if (typeof b === 'object') {
+    } else if (typeof b === 'number') {
 			// eslint-disable-next-line
 			result = lib._h_sn(a, b);
     }
@@ -40,7 +40,7 @@ export const getHFunction = (lib) => (a, b, c, d) => {
     } else if (Array.isArray(c)) {
 			// eslint-disable-next-line
 			result = lib._h_sdc(a, b, getChildren(lib, c));
-    } else if (typeof c === 'object') {
+    } else if (typeof c === 'number') {
 			// eslint-disable-next-line
 			result = lib._h_sdn(a, b, c);
     }

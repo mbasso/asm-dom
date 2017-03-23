@@ -1,3 +1,4 @@
+/*
 import expect from 'expect';
 import asmDom from '../src/';
 
@@ -43,7 +44,7 @@ describe('patch', () => {
     // vnode.delete();
   });
 
-  /*
+  // TODO
   it('should have correct namespace', () => {
     const SVGNamespace = 'http://www.w3.org/2000/svg';
     const XHTMLNamespace = 'http://www.w3.org/1999/xhtml';
@@ -77,6 +78,7 @@ describe('patch', () => {
     // vnode.delete();
   });
 
+  // TODO
   it('should receive classes in selector', () => {
     const vnode = h('div', [h('i.am.a.class')]);
     const elm = patch(root, vnode).elm;
@@ -85,7 +87,6 @@ describe('patch', () => {
     expect(elm.firstChild.classList.contains('class')).toBeTruthy();
     // vnode.delete();
   });
-  */
 
   // TODO: should receive classes in class property
   // TODO: handles classes from both selector and property
@@ -107,7 +108,7 @@ describe('patch', () => {
 
   // TODO: should create elements with props
 
-  /*
+  // TODO
   it('should create an element created inside an iframe', (done) => {
     // Only run if srcdoc is supported.
     const frame = document.createElement('iframe');
@@ -127,6 +128,7 @@ describe('patch', () => {
     }
   });
 
+  // TODO
   it('is a patch of the root element', () => {
     const elmWithIdAndClass = document.createElement('div');
     elmWithIdAndClass.id = 'id';
@@ -139,7 +141,6 @@ describe('patch', () => {
     expect(elm.className).toEqual('class');
     // vnode.delete();
   });
-  */
 
   it('should create comments', () => {
     const vnode = h('!', 'test');
@@ -163,3 +164,4 @@ describe('patch', () => {
     expect(document.body.firstChild.className).toBeFalsy();
   });
 });
+*/

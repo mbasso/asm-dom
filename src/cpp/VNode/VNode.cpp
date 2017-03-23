@@ -11,4 +11,5 @@ EMSCRIPTEN_BINDINGS(vnode) {
     .field("children", &VNode::children);
   
   emscripten::register_vector<VNode>("VNodeVector");
+  emscripten::register_vector<std::size_t>("VNodePtrVector");
 }
