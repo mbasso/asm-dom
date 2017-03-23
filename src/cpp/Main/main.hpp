@@ -5,8 +5,10 @@
 #include <emscripten/val.h>
 #include <vector>
 
-VNode patch_vnode(VNode& oldVnode, VNode& vnode);
-VNode patch_element(emscripten::val oldVnode, VNode& vnode);
+std::size_t patch_vnodePtr(std::size_t oldVnode, std::size_t vnode);
+std::size_t patch_elementPtr(emscripten::val element, std::size_t vnode);
+VNode* patch_vnode(VNode* oldVnode, VNode* vnode);
+VNode* patch_element(emscripten::val oldVnode, VNode* vnode);
 emscripten::val createElm(VNode& vnode, std::vector<VNode>& insertedVnodeQueue);
 void addVnodes(
 	emscripten::val parentElm,

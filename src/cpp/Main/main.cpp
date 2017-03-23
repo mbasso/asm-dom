@@ -12,23 +12,23 @@ bool sameVnode(VNode vnode1, VNode vnode2) {
   return vnode1.key.compare(vnode2.key) == 0 && vnode1.sel.compare(vnode2.sel) == 0;
 };
 
-VNode emptyNodeAt(emscripten::val elm) {
-  VNode vnode = VNode();
-  vnode.elm = elm;
-  vnode.sel.append(tagName(elm));
-  std::transform(vnode.sel.begin(), vnode.sel.end(), vnode.sel.begin(), ::tolower);
+VNode* emptyNodeAt(emscripten::val elm) {
+  VNode* vnode = new VNode();
+  vnode->elm = elm;
+  vnode->sel.append(tagName(elm));
+  std::transform(vnode->sel.begin(), vnode->sel.end(), vnode->sel.begin(), ::tolower);
 
 	// id
   if (isDefined(elm["id"])) {
-    vnode.sel += '#';
-    vnode.sel.append(elm["id"].as<std::string>());
+    vnode->sel += '#';
+    vnode->sel.append(elm["id"].as<std::string>());
   }
 
   // class
   if (isDefined(elm["className"])) {
-    vnode.sel += '.';
-    vnode.sel.append(elm["className"].as<std::string>());
-    std::replace(vnode.sel.begin(), vnode.sel.end(), ' ', '.');
+    vnode->sel += '.';
+    vnode->sel.append(elm["className"].as<std::string>());
+    std::replace(vnode->sel.begin(), vnode->sel.end(), ' ', '.');
   }
 
   return vnode;
@@ -200,17 +200,17 @@ void patchVnode(
 	// TODO: postpatch hook
 };
 
-VNode patch_vnode(VNode& oldVnode, VNode& vnode) {
+VNode* patch_vnode(VNode* oldVnode, VNode* vnode) {
 	std::vector<VNode> insertedVnodeQueue;
 	// TODO: pre callback
-	if (sameVnode(oldVnode, vnode)) {
-		patchVnode(oldVnode, vnode, insertedVnodeQueue);
+	if (sameVnode(*oldVnode, *vnode)) {
+		patchVnode(*oldVnode, *vnode, insertedVnodeQueue);
 	} else {
-		emscripten::val parent = parentNode(oldVnode.elm);
-		createElm(vnode, insertedVnodeQueue);
+		emscripten::val parent = parentNode(oldVnode->elm);
+		createElm(*vnode, insertedVnodeQueue);
 		if (isDefined(parent)) {
-			insertBefore(parent, vnode.elm, nextSibling(oldVnode.elm));
-			std::vector<VNode> vnodes { oldVnode };
+			insertBefore(parent, vnode->elm, nextSibling(oldVnode->elm));
+			std::vector<VNode> vnodes { *oldVnode };
 			removeVnodes(parent, vnodes, 0, 0);
 		}
 	}
@@ -219,12 +219,20 @@ VNode patch_vnode(VNode& oldVnode, VNode& vnode) {
 	return vnode;
 };
 
-VNode patch_element(emscripten::val element, VNode& vnode) {
-	VNode oldVnode = emptyNodeAt(element);
+VNode* patch_element(emscripten::val element, VNode* vnode) {
+	VNode* oldVnode = emptyNodeAt(element);
 	return patch_vnode(oldVnode, vnode);
 };
 
+std::size_t patch_vnodePtr(std::size_t oldVnode, std::size_t vnode) {
+	return reinterpret_cast<std::size_t>(patch_vnode(reinterpret_cast<VNode*>(oldVnode), reinterpret_cast<VNode*>(vnode)));
+};
+
+std::size_t patch_elementPtr(emscripten::val element, std::size_t vnode) {
+	return reinterpret_cast<std::size_t>(patch_element(element, reinterpret_cast<VNode*>(vnode)));
+};
+
 EMSCRIPTEN_BINDINGS(patch_function) {
-	emscripten::function("_patch_vnode", &patch_vnode);
-	emscripten::function("_patch_element", &patch_element);
+	emscripten::function("_patch_vnode", &patch_vnodePtr, emscripten::allow_raw_pointers());
+	emscripten::function("_patch_element", &patch_elementPtr, emscripten::allow_raw_pointers());
 }

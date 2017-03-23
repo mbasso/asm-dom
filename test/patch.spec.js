@@ -1,4 +1,3 @@
-/*
 import expect from 'expect';
 import asmDom from '../src/';
 
@@ -22,29 +21,30 @@ describe('patch', () => {
 
   it('should have a tag', () => {
     const vnode = h('div');
-    const elm = patch(root, vnode).elm;
+    let elm = patch(root, vnode);
+    elm = vdom.getVNode(elm).elm;
     expect(elm.tagName).toEqual('DIV');
-    // vnode.delete();
   });
 
   it('should have different tag and id', () => {
     let elm = document.createElement('div');
     root.appendChild(elm);
     const vnode = h('span#id');
-    elm = patch(elm, vnode).elm;
+    elm = patch(elm, vnode);
+    elm = vdom.getVNode(elm).elm;
     expect(elm.tagName).toEqual('SPAN');
     expect(elm.id).toEqual('id');
-    // vnode.delete();
   });
 
   it('should have an id', () => {
     const vnode = h('div', [h('div#unique')]);
-    const elm = patch(root, vnode).elm;
+    let elm = patch(root, vnode);
+    elm = vdom.getVNode(elm).elm;
     expect(elm.firstChild.id).toEqual('unique');
     // vnode.delete();
   });
 
-  // TODO
+  /*
   it('should have correct namespace', () => {
     const SVGNamespace = 'http://www.w3.org/2000/svg';
     const XHTMLNamespace = 'http://www.w3.org/1999/xhtml';
@@ -78,37 +78,37 @@ describe('patch', () => {
     // vnode.delete();
   });
 
-  // TODO
   it('should receive classes in selector', () => {
     const vnode = h('div', [h('i.am.a.class')]);
-    const elm = patch(root, vnode).elm;
+    let elm = patch(root, vnode).elm;
     expect(elm.firstChild.classList.contains('am')).toBeTruthy();
     expect(elm.firstChild.classList.contains('a')).toBeTruthy();
     expect(elm.firstChild.classList.contains('class')).toBeTruthy();
     // vnode.delete();
   });
+  */
 
   // TODO: should receive classes in class property
   // TODO: handles classes from both selector and property
 
   it('should create elements with text content', () => {
     const vnode = h('div', ['I am a string']);
-    const elm = patch(root, vnode).elm;
+    let elm = patch(root, vnode);
+    elm = vdom.getVNode(elm).elm;
     expect(elm.innerHTML).toEqual('I am a string');
-    // vnode.delete();
   });
 
   it('should create elements with span and text content', () => {
     const vnode = h('a', [h('span'), 'I am a string']);
-    const elm = patch(root, vnode).elm;
+    let elm = patch(root, vnode);
+    elm = vdom.getVNode(elm).elm;
     expect(elm.childNodes[0].tagName).toEqual('SPAN');
     expect(elm.childNodes[1].textContent).toEqual('I am a string');
-    // vnode.delete();
   });
 
   // TODO: should create elements with props
 
-  // TODO
+  /*
   it('should create an element created inside an iframe', (done) => {
     // Only run if srcdoc is supported.
     const frame = document.createElement('iframe');
@@ -128,26 +128,26 @@ describe('patch', () => {
     }
   });
 
-  // TODO
   it('is a patch of the root element', () => {
-    const elmWithIdAndClass = document.createElement('div');
+    let elmWithIdAndClass = document.createElement('div');
     elmWithIdAndClass.id = 'id';
     elmWithIdAndClass.className = 'class';
     const vnode = h('div#id.class', [h('span', 'Hi')]);
-    const elm = patch(elmWithIdAndClass, vnode).elm;
+    let elm = patch(elmWithIdAndClass, vnode).elm;
     expect(elm).toEqual(elmWithIdAndClass);
     expect(elm.tagName).toEqual('DIV');
     expect(elm.id).toEqual('id');
     expect(elm.className).toEqual('class');
     // vnode.delete();
   });
+  */
 
   it('should create comments', () => {
     const vnode = h('!', 'test');
-    const elm = patch(root, vnode).elm;
+    let elm = patch(root, vnode);
+    elm = vdom.getVNode(elm).elm;
     expect(elm.nodeType).toEqual(document.COMMENT_NODE);
     expect(elm.textContent).toEqual('test');
-    // vnode.delete();
   });
 
   // Others
@@ -157,11 +157,9 @@ describe('patch', () => {
     expect(document.body.firstChild).toEqual(root);
     const span = h('span');
     patch(root, span);
-    // span.delete();
     expect(document.body.children.length).toEqual(1);
     expect(document.body.firstChild.nodeName).toEqual('SPAN');
     expect(document.body.firstChild.getAttribute('id')).toBeFalsy();
     expect(document.body.firstChild.className).toBeFalsy();
   });
 });
-*/

@@ -4,6 +4,7 @@
 #include "../VNode/VNode.hpp"
 #include <emscripten/val.h>
 
-VNode to_VNode(const emscripten::val node);
+std::size_t toVNodePtr(const emscripten::val node);
+VNode* toVNode(const emscripten::val node);
 
 #endif

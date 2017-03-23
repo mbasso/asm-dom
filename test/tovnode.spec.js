@@ -1,4 +1,3 @@
-/*
 import expect from 'expect';
 import asmDom from '../src/';
 
@@ -8,21 +7,24 @@ describe('toVNode', () => {
 
   it('should convert a comment to VNode', () => {
     const comment = document.createComment('this is a comment');
-    const vnode = toVNode(comment);
+    let vnode = toVNode(comment);
+    vnode = vdom.getVNode(vnode);
     expect(vnode.sel).toEqual('!');
     expect(vnode.text).toEqual('this is a comment');
   });
 
   it('should convert a text node to VNode', () => {
     const comment = document.createTextNode('this is a text');
-    const vnode = toVNode(comment);
+    let vnode = toVNode(comment);
+    vnode = vdom.getVNode(vnode);
     expect(vnode.sel).toEqual('');
     expect(vnode.text).toEqual('this is a text');
   });
 
   it('should convert a node to VNode', () => {
     const node = document.createElement('div');
-    const vnode = toVNode(node);
+    let vnode = toVNode(node);
+    vnode = vdom.getVNode(vnode);
     expect(vnode.sel.toLowerCase()).toEqual('div');
   });
 
@@ -31,7 +33,8 @@ describe('toVNode', () => {
     node.setAttribute('id', 'nodeId');
     node.setAttribute('foo', 'bar');
     node.setAttribute('lorem', 'ipsum');
-    const vnode = toVNode(node);
+    let vnode = toVNode(node);
+    vnode = vdom.getVNode(vnode);
     expect(vnode.data.attrs.get('id')).toBeFalsy();
     expect(vnode.data.attrs.get('foo')).toEqual('bar');
     expect(vnode.data.attrs.get('lorem')).toEqual('ipsum');
@@ -43,7 +46,8 @@ describe('toVNode', () => {
     node.appendChild(document.createElement('span'));
     node.className = 'nodeClass1 nodeClass2';
     node.setAttribute('id', 'nodeId');
-    const vnode = toVNode(node);
+    let vnode = toVNode(node);
+    vnode = vdom.getVNode(vnode);
     expect(vnode.sel.toLowerCase()).toEqual('div#nodeid.nodeclass1.nodeclass2');
   });
 
@@ -51,7 +55,8 @@ describe('toVNode', () => {
     const node = document.createElement('div');
     node.appendChild(document.createElement('video'));
     node.appendChild(document.createElement('span'));
-    const vnode = toVNode(node);
+    let vnode = toVNode(node);
+    vnode = vdom.getVNode(vnode);
     expect(vnode.sel.toLowerCase()).toEqual('div');
     expect(vnode.children).toBeA(vdom.VNodeVector);
     expect(vnode.children.size()).toEqual(2);
@@ -59,4 +64,3 @@ describe('toVNode', () => {
     expect(vnode.children.get(1).sel.toLowerCase()).toEqual('span');
   });
 });
-*/
