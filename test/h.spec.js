@@ -5,6 +5,42 @@ describe('h', () => {
   const vdom = asmDom();
   const { h } = vdom;
 
+  it('should get a vnode', () => {
+    let div = h('div', [
+      h('span'),
+      h('div', [
+        h('video'),
+      ]),
+    ]);
+    div = vdom.getVNode(div);
+    expect(div).toMatch({
+      sel: 'div',
+      key: '',
+      text: '',
+      children: [
+        {
+          sel: 'span',
+          key: '',
+          text: '',
+          children: [],
+        },
+        {
+          sel: 'div',
+          key: '',
+          text: '',
+          children: [
+            {
+              sel: 'video',
+              key: '',
+              text: '',
+              children: [],
+            },
+          ],
+        },
+      ],
+    });
+  });
+
   it('should create a vnode with proper tag', () => {
     let div = h('div');
     let a = h('a');
@@ -18,15 +54,15 @@ describe('h', () => {
     let vnode = h('div', [h('span#hello'), h('b.world')]);
     vnode = vdom.getVNode(vnode);
     expect(vnode.sel).toEqual('div');
-    expect(vnode.children.get(0).sel).toEqual('span#hello');
-    expect(vnode.children.get(1).sel).toEqual('b.world');
+    expect(vnode.children[0].sel).toEqual('span#hello');
+    expect(vnode.children[1].sel).toEqual('b.world');
   });
 
   it('should create a vnode with one child', () => {
     let vnode = h('div', h('span#hello'));
     vnode = vdom.getVNode(vnode);
     expect(vnode.sel).toEqual('div');
-    expect(vnode.children.get(0).sel).toEqual('span#hello');
+    expect(vnode.children[0].sel).toEqual('span#hello');
   });
 
   // TODO: should create a vnode with props and one child
@@ -34,7 +70,7 @@ describe('h', () => {
   it('should create a vnode with text content', () => {
     let vnode = h('div', ['I am a string']);
     vnode = vdom.getVNode(vnode);
-    expect(vnode.children.get(0).text).toEqual('I am a string');
+    expect(vnode.children[0].text).toEqual('I am a string');
   });
 
   it('should create a vnode with text content in string', () => {
@@ -78,9 +114,8 @@ describe('h', () => {
     ]);
     vnode = vdom.getVNode(vnode);
     expect(vnode.sel).toEqual('div');
-    expect(vnode.children).toBeA(vdom.VNodeVector);
-    expect(vnode.children.size()).toEqual(3);
-    expect(vnode.children.get(0).sel).toEqual('video');
+    expect(vnode.children.length).toEqual(3);
+    expect(vnode.children[0].sel).toEqual('video');
   });
 
   it('should create an svg vnode', () => {
@@ -90,17 +125,16 @@ describe('h', () => {
     vnode = vdom.getVNode(vnode);
     expect(vnode.sel).toEqual('svg');
     expect(vnode.data.ns).toEqual('http://www.w3.org/2000/svg');
-    expect(vnode.children.get(0).sel).toEqual('video');
-    expect(vnode.children.get(0).data.ns).toEqual('http://www.w3.org/2000/svg');
+    expect(vnode.children[0].sel).toEqual('video');
+    expect(vnode.children[0].data.ns).toEqual('http://www.w3.org/2000/svg');
   });
 
   it('should create a vnode with a single child', () => {
     let vnode = h('div', h('video'));
     vnode = vdom.getVNode(vnode);
     expect(vnode.sel).toEqual('div');
-    expect(vnode.children).toBeA(vdom.VNodeVector);
-    expect(vnode.children.size()).toEqual(1);
-    expect(vnode.children.get(0).sel).toEqual('video');
+    expect(vnode.children.length).toEqual(1);
+    expect(vnode.children[0].sel).toEqual('video');
   });
 
   it('should create a vnode with all params', () => {
@@ -111,6 +145,6 @@ describe('h', () => {
     expect(vnode.sel).toEqual('div');
     expect(vnode.text).toEqual('this is a text');
     expect(vnode.data).toMatch(data);
-    expect(vnode.children.size()).toEqual(0);
+    expect(vnode.children.length).toEqual(0);
   });
 });

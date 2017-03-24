@@ -58,9 +58,8 @@ describe('toVNode', () => {
     let vnode = toVNode(node);
     vnode = vdom.getVNode(vnode);
     expect(vnode.sel.toLowerCase()).toEqual('div');
-    expect(vnode.children).toBeA(vdom.VNodeVector);
-    expect(vnode.children.size()).toEqual(2);
-    expect(vnode.children.get(0).sel.toLowerCase()).toEqual('video');
-    expect(vnode.children.get(1).sel.toLowerCase()).toEqual('span');
+    expect(vnode.children.length).toEqual(2);
+    expect(vnode.children[0].sel.toLowerCase()).toEqual('video');
+    expect(vnode.children[1].sel.toLowerCase()).toEqual('span');
   });
 });

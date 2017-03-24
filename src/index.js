@@ -1,5 +1,6 @@
 import { getHFunction } from './js/h';
 import { getPatchFunction } from './js/patch';
+import { getGetVNodeFunction } from './js/getVNode';
 
 export default function load(config = {}) {
   let lib;
@@ -16,6 +17,7 @@ export default function load(config = {}) {
 
   lib.h = getHFunction(lib);
   lib.patch = getPatchFunction(lib);
+  lib.getVNode = getGetVNodeFunction(lib);
 
   return lib;
 }
