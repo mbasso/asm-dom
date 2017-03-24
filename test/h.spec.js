@@ -41,6 +41,18 @@ describe('h', () => {
     });
   });
 
+  it('should delete a vnode', () => {
+    const div = h('div', [
+      h('span'),
+      h('div', [
+        h('video'),
+      ]),
+    ]);
+    expect(
+      () => vdom.deleteVNode(div)
+    ).toNotThrow();
+  });
+
   it('should create a vnode with proper tag', () => {
     let div = h('div');
     let a = h('a');

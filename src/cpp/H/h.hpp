@@ -19,5 +19,6 @@ std::size_t h_sdc(std::string sel, VNodeData data, std::vector<std::size_t> chil
 std::size_t h_stdc(std::string sel, std::string text, VNodeData data, std::vector<std::size_t> children);
 
 VNode getVNode(std::size_t vnode);
+void deleteVNode(std::size_t vnode);
 
 #endif
