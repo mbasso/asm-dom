@@ -34,7 +34,7 @@ VNode* toVNode(const emscripten::val node) {
 		i = 0;
 		n = node["childNodes"]["length"].as<int>();
 		for(; i < n; i++) {
-			vnode->children.push_back(*toVNode(node["childNodes"][i]));
+			vnode->children.push_back(toVNode(node["childNodes"][i]));
 		}
 		vnode->elm = node;
 	} else if (isText(node)) {

@@ -4,11 +4,11 @@
 #include <emscripten/bind.h>
 #include <string>
 
-void addNS(VNode& vnode) {
-	vnode.data.ns = std::string("http://www.w3.org/2000/svg");
-	if (vnode.sel.compare("foreignObject") != 0 && !vnode.children.empty()) {
-        for(std::vector<VNode>::size_type i = vnode.children.size(); i--;) {
-            addNS(vnode.children[i]);
+void addNS(VNode* vnode) {
+	vnode->data.ns = std::string("http://www.w3.org/2000/svg");
+	if (vnode->sel.compare("foreignObject") != 0 && !vnode->children.empty()) {
+        for(std::vector<VNode>::size_type i = vnode->children.size(); i--;) {
+            addNS(vnode->children[i]);
         }
 	}
 }
@@ -19,7 +19,7 @@ void adjustVNode(VNode* vnode) {
     vnode->sel.length() >= 3 && vnode->sel[0] == 's' && vnode->sel[1] == 'v' && vnode->sel[2] == 'g' &&
     (vnode->sel.length() == 3 || vnode->sel[3] == '.' || vnode->sel[3] == '#')
   ) {
-        addNS(*vnode);
+        addNS(vnode);
     }
 }
 
@@ -47,7 +47,7 @@ std::size_t h_ti(std::string text, bool isText) {
 
 std::size_t h_sn(std::string sel, std::size_t node) {
     VNode* vnode = _h_s(sel);
-    vnode->children.push_back(*(reinterpret_cast<VNode*>(node)));
+    vnode->children.push_back(reinterpret_cast<VNode*>(node));
     adjustVNode(vnode);
     return reinterpret_cast<std::size_t>(vnode);
 };
@@ -71,7 +71,7 @@ std::size_t h_sd(std::string sel, VNodeData data) {
 std::size_t h_sc(std::string sel, std::vector<std::size_t> children) {
     VNode* vnode = _h_s(sel);
     for(std::vector<std::size_t>::size_type i = 0; i < children.size(); i++) {
-        vnode->children.push_back(*(reinterpret_cast<VNode*>(children[i])));
+        vnode->children.push_back(reinterpret_cast<VNode*>(children[i]));
     }
     adjustVNode(vnode);
     return reinterpret_cast<std::size_t>(vnode);
@@ -79,7 +79,7 @@ std::size_t h_sc(std::string sel, std::vector<std::size_t> children) {
 
 std::size_t h_sdn(std::string sel, VNodeData data, std::size_t node) {
     VNode* vnode = _h_sd(sel, data);
-    vnode->children.push_back(*(reinterpret_cast<VNode*>(node)));
+    vnode->children.push_back(reinterpret_cast<VNode*>(node));
     adjustVNode(vnode);
     return reinterpret_cast<std::size_t>(vnode);
 };
@@ -93,16 +93,16 @@ std::size_t h_sdt(std::string sel, VNodeData data, std::string text) {
 std::size_t h_sdc(std::string sel, VNodeData data, std::vector<std::size_t> children) {
     VNode* vnode = _h_sd(sel, data);
     for(std::vector<std::size_t>::size_type i = 0; i < children.size(); i++) {
-        vnode->children.push_back(*(reinterpret_cast<VNode*>(children[i])));
+        vnode->children.push_back(reinterpret_cast<VNode*>(children[i]));
     }
     adjustVNode(vnode);
     return reinterpret_cast<std::size_t>(vnode);
 };
 
 std::size_t h_stdc(std::string sel, std::string text, VNodeData data, std::vector<std::size_t> children) {
-    std::vector<VNode> vnodes;
+    std::vector<VNode*> vnodes;
     for(std::vector<std::size_t>::size_type i = 0; i < children.size(); i++) {
-        vnodes.push_back(*(reinterpret_cast<VNode*>(children[i])));
+        vnodes.push_back(reinterpret_cast<VNode*>(children[i]));
     }
     VNode* vnode = new VNode(sel, text, data, vnodes);
     adjustVNode(vnode);
