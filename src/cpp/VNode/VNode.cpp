@@ -4,7 +4,7 @@
 std::vector<VNode> VNode::get_children() const {
   std::vector<VNode> vnodes;
   for(std::vector<VNode*>::size_type i = 0; i < children.size(); i++) {
-      vnodes.push_back(*children[i]);
+    vnodes.push_back(*children[i]);
   }
   return vnodes;
 }
