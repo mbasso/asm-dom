@@ -1,18 +1,20 @@
 import expect from 'expect';
 import asmDom from '../src/';
 
-describe('h', () => {
+describe('h', function test() {
+  this.timeout(5000);
+
   const vdom = asmDom();
   const { h } = vdom;
 
   it('should get a vnode', () => {
-    let div = h('div', [
+    const divPtr = h('div', [
       h('span'),
       h('div', [
         h('video'),
       ]),
     ]);
-    div = vdom.getVNode(div);
+    const div = vdom.getVNode(divPtr);
     expect(div).toMatch({
       sel: 'div',
       key: '',
@@ -39,6 +41,7 @@ describe('h', () => {
         },
       ],
     });
+    vdom.deleteVNode(divPtr);
   });
 
   it('should delete a vnode', () => {
@@ -54,48 +57,55 @@ describe('h', () => {
   });
 
   it('should create a vnode with proper tag', () => {
-    let div = h('div');
-    let a = h('a');
-    div = vdom.getVNode(div);
-    a = vdom.getVNode(a);
+    const divPtr = h('div');
+    const aPtr = h('a');
+    const div = vdom.getVNode(divPtr);
+    const a = vdom.getVNode(aPtr);
     expect(div.sel).toEqual('div');
     expect(a.sel).toEqual('a');
+    vdom.deleteVNode(divPtr);
+    vdom.deleteVNode(aPtr);
   });
 
   it('should create a vnode with children', () => {
-    let vnode = h('div', [h('span#hello'), h('b.world')]);
-    vnode = vdom.getVNode(vnode);
+    const vnodePtr = h('div', [h('span#hello'), h('b.world')]);
+    const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.sel).toEqual('div');
     expect(vnode.children[0].sel).toEqual('span#hello');
     expect(vnode.children[1].sel).toEqual('b.world');
+    vdom.deleteVNode(vnodePtr);
   });
 
   it('should create a vnode with one child', () => {
-    let vnode = h('div', h('span#hello'));
-    vnode = vdom.getVNode(vnode);
+    const vnodePtr = h('div', h('span#hello'));
+    const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.sel).toEqual('div');
     expect(vnode.children[0].sel).toEqual('span#hello');
+    vdom.deleteVNode(vnodePtr);
   });
 
   // TODO: should create a vnode with props and one child
 
   it('should create a vnode with text content', () => {
-    let vnode = h('div', ['I am a string']);
-    vnode = vdom.getVNode(vnode);
+    const vnodePtr = h('div', ['I am a string']);
+    const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.children[0].text).toEqual('I am a string');
+    vdom.deleteVNode(vnodePtr);
   });
 
   it('should create a vnode with text content in string', () => {
-    let vnode = h('div', 'I am a string');
-    vnode = vdom.getVNode(vnode);
+    const vnodePtr = h('div', 'I am a string');
+    const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.text).toEqual('I am a string');
+    vdom.deleteVNode(vnodePtr);
   });
 
   it('should create a vnode for comment', () => {
-    let vnode = h('!', 'test');
-    vnode = vdom.getVNode(vnode);
+    const vnodePtr = h('!', 'test');
+    const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.sel).toEqual('!');
     expect(vnode.text).toEqual('test');
+    vdom.deleteVNode(vnodePtr);
   });
 
   // TODO: should create vnode with props and text content in string
@@ -103,60 +113,66 @@ describe('h', () => {
   // Others
 
   it('should create a vnode with a selector', () => {
-    let vnode = h('div');
-    vnode = vdom.getVNode(vnode);
+    const vnodePtr = h('div');
+    const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.sel).toEqual('div');
     expect(vnode.text).toEqual('');
+    vdom.deleteVNode(vnodePtr);
   });
 
   it('should create a vnode with text', () => {
-    let vnode = h('this is a text', true);
-    vnode = vdom.getVNode(vnode);
+    const vnodePtr = h('this is a text', true);
+    const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.sel).toEqual('');
     expect(vnode.text).toEqual('this is a text');
+    vdom.deleteVNode(vnodePtr);
   });
 
   it('should create a vnode with children', () => {
-    let vnode = h('div', [
+    const vnodePtr = h('div', [
       h('video'),
       h('span'),
       h('div', [
         h('div'),
       ]),
     ]);
-    vnode = vdom.getVNode(vnode);
+    const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.sel).toEqual('div');
     expect(vnode.children.length).toEqual(3);
     expect(vnode.children[0].sel).toEqual('video');
+    vdom.deleteVNode(vnodePtr);
   });
 
   it('should create an svg vnode', () => {
-    let vnode = h('svg', [
+    const vnodePtr = h('svg', [
       h('video'),
     ]);
-    vnode = vdom.getVNode(vnode);
+    const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.sel).toEqual('svg');
     expect(vnode.data.ns).toEqual('http://www.w3.org/2000/svg');
     expect(vnode.children[0].sel).toEqual('video');
     expect(vnode.children[0].data.ns).toEqual('http://www.w3.org/2000/svg');
+    vdom.deleteVNode(vnodePtr);
   });
 
   it('should create a vnode with a single child', () => {
-    let vnode = h('div', h('video'));
-    vnode = vdom.getVNode(vnode);
+    const vnodePtr = h('div', h('video'));
+    const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.sel).toEqual('div');
     expect(vnode.children.length).toEqual(1);
     expect(vnode.children[0].sel).toEqual('video');
+    vdom.deleteVNode(vnodePtr);
   });
 
   it('should create a vnode with all params', () => {
     const data = new vdom.VNodeData();
     const children = new vdom.VNodePtrVector();
-    let vnode = h('div', 'this is a text', data, children);
-    vnode = vdom.getVNode(vnode);
+    const vnodePtr = h('div', 'this is a text', data, children);
+    const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.sel).toEqual('div');
     expect(vnode.text).toEqual('this is a text');
     expect(vnode.data).toMatch(data);
     expect(vnode.children.length).toEqual(0);
+    vdom.deleteVNode(vnodePtr);
   });
 });

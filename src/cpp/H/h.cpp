@@ -113,12 +113,17 @@ VNode getVNode(std::size_t vnode) {
 	return *(reinterpret_cast<VNode*>(vnode));
 }
 
-void deleteVNode(std::size_t vnodePtr) {
-  VNode* vnode = reinterpret_cast<VNode*>(vnodePtr);
+void deleteVNode(VNode* vnode) {
   for (std::vector<VNode*>::size_type i = vnode->children.size(); i--;) {
-    delete vnode->children[i];
+    deleteVNode(vnode->children[i]);
+    vnode->children[i] = NULL;
   }
+  vnode->children.clear();
   delete vnode;
+}
+
+void deleteVNodePtr(std::size_t vnodePtr) {
+  deleteVNode(reinterpret_cast<VNode*>(vnodePtr));
 };
 
 EMSCRIPTEN_BINDINGS(h_function) {
@@ -133,5 +138,5 @@ EMSCRIPTEN_BINDINGS(h_function) {
   emscripten::function("_h_sdc", &h_sdc, emscripten::allow_raw_pointers());
   emscripten::function("_h_stdc", &h_stdc, emscripten::allow_raw_pointers());
   emscripten::function("_getVNode", &getVNode, emscripten::allow_raw_pointer<emscripten::arg<0>>());
-  emscripten::function("deleteVNode", &deleteVNode, emscripten::allow_raw_pointer<emscripten::arg<0>>());
+  emscripten::function("deleteVNode", &deleteVNodePtr, emscripten::allow_raw_pointer<emscripten::arg<0>>());
 }

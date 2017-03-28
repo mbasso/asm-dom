@@ -21,8 +21,8 @@ class VNode {
     VNodeData data;
     emscripten::val elm;
     std::vector<VNode*> children;
+    // bindings
     std::vector<VNode> get_children() const;
-    // readonly
     void set_children(std::vector<VNode> nodeChildren);
 };
 

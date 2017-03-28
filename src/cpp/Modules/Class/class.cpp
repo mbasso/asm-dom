@@ -4,9 +4,9 @@
 #include <map>
 #include <iterator>
 
-void updateClass(VNode oldVnode, VNode vnode) {
-	std::map<std::string, bool> oldClass = oldVnode.data.classNames;
-	std::map<std::string, bool> klass = vnode.data.classNames;
+void updateClass(VNode* oldVnode, VNode* vnode) {
+	std::map<std::string, bool> oldClass = oldVnode->data.classNames;
+	std::map<std::string, bool> klass = vnode->data.classNames;
 
 	if (oldClass.empty() && klass.empty()) return;
 	if (oldClass == klass) return;
@@ -17,7 +17,7 @@ void updateClass(VNode oldVnode, VNode vnode) {
 	while (it != oldClass.end())
 	{
 		if (klass.count(it->first) == 0) {
-			vnode.elm["classList"].call<>("remove", it->first);
+			vnode->elm["classList"].call<>("remove", it->first);
 		}
 		it++;
 	}
@@ -28,11 +28,15 @@ void updateClass(VNode oldVnode, VNode vnode) {
 		cur = it->second;
 		if (oldClass.count(it->first) != 0) {
 			if (oldClass.at(it->first) != klass.at(it->first)) {
-				vnode.elm["classList"].call(klass.at(it->first) ? "add" : "remove", it->first);
+				vnode->elm["classList"].call(klass.at(it->first) ? "add" : "remove", it->first);
 			}
 		} else {
-			vnode.elm["classList"].call(klass.at(it->first) ? "add" : "remove", it->first);
+			vnode->elm["classList"].call(klass.at(it->first) ? "add" : "remove", it->first);
 		}
 		it++;
 	}
 };
+
+Hooks classHooks = new Hooks();
+classHooks->update = &updateClass;
+classHooks->create = &updateClass;

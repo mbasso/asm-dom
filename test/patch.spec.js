@@ -1,7 +1,9 @@
 import expect from 'expect';
 import asmDom from '../src/';
 
-describe('patch', () => {
+describe('patch', function test() {
+  this.timeout(5000);
+
   const vdom = asmDom();
   const { h, patch } = vdom;
   let root;
@@ -21,27 +23,29 @@ describe('patch', () => {
 
   it('should have a tag', () => {
     const vnode = h('div');
-    let elm = patch(root, vnode);
-    elm = vdom.getVNode(elm).elm;
+    const elmPtr = patch(root, vnode);
+    const { elm } = vdom.getVNode(elmPtr);
     expect(elm.tagName).toEqual('DIV');
+    vdom.deleteVNode(elmPtr);
   });
 
   it('should have different tag and id', () => {
-    let elm = document.createElement('div');
-    root.appendChild(elm);
+    const node = document.createElement('div');
+    root.appendChild(node);
     const vnode = h('span#id');
-    elm = patch(elm, vnode);
-    elm = vdom.getVNode(elm).elm;
+    const elmPtr = patch(node, vnode);
+    const { elm } = vdom.getVNode(elmPtr);
     expect(elm.tagName).toEqual('SPAN');
     expect(elm.id).toEqual('id');
+    vdom.deleteVNode(elmPtr);
   });
 
   it('should have an id', () => {
     const vnode = h('div', [h('div#unique')]);
-    let elm = patch(root, vnode);
-    elm = vdom.getVNode(elm).elm;
+    const elmPtr = patch(root, vnode);
+    const { elm } = vdom.getVNode(elmPtr);
     expect(elm.firstChild.id).toEqual('unique');
-    // vnode.delete();
+    vdom.deleteVNode(elmPtr);
   });
 
   /*
@@ -93,17 +97,19 @@ describe('patch', () => {
 
   it('should create elements with text content', () => {
     const vnode = h('div', ['I am a string']);
-    let elm = patch(root, vnode);
-    elm = vdom.getVNode(elm).elm;
+    const elmPtr = patch(root, vnode);
+    const { elm } = vdom.getVNode(elmPtr);
     expect(elm.innerHTML).toEqual('I am a string');
+    vdom.deleteVNode(elmPtr);
   });
 
   it('should create elements with span and text content', () => {
     const vnode = h('a', [h('span'), 'I am a string']);
-    let elm = patch(root, vnode);
-    elm = vdom.getVNode(elm).elm;
+    const elmPtr = patch(root, vnode);
+    const { elm } = vdom.getVNode(elmPtr);
     expect(elm.childNodes[0].tagName).toEqual('SPAN');
     expect(elm.childNodes[1].textContent).toEqual('I am a string');
+    vdom.deleteVNode(elmPtr);
   });
 
   // TODO: should create elements with props
@@ -144,10 +150,11 @@ describe('patch', () => {
 
   it('should create comments', () => {
     const vnode = h('!', 'test');
-    let elm = patch(root, vnode);
-    elm = vdom.getVNode(elm).elm;
+    const elmPtr = patch(root, vnode);
+    const { elm } = vdom.getVNode(elmPtr);
     expect(elm.nodeType).toEqual(document.COMMENT_NODE);
     expect(elm.textContent).toEqual('test');
+    vdom.deleteVNode(elmPtr);
   });
 
   // Others
@@ -156,10 +163,11 @@ describe('patch', () => {
     expect(document.body.children.length).toEqual(1);
     expect(document.body.firstChild).toEqual(root);
     const span = h('span');
-    patch(root, span);
+    const elm = patch(root, span);
     expect(document.body.children.length).toEqual(1);
     expect(document.body.firstChild.nodeName).toEqual('SPAN');
     expect(document.body.firstChild.getAttribute('id')).toBeFalsy();
     expect(document.body.firstChild.className).toBeFalsy();
+    vdom.deleteVNode(elm);
   });
 });

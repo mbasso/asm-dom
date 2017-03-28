@@ -1,4 +1,8 @@
 #include "main.hpp"
+/*
+#include "../Hooks/Hooks.hpp"
+#include "../Modules/Class/class.hpp"
+*/
 #include "../VNode/VNode.hpp"
 #include "../HtmlDOMApi/HtmlDOMApi.hpp"
 #include "../Utils/utils.hpp"
@@ -7,6 +11,14 @@
 #include <vector>
 #include <map>
 #include <string>
+
+/*
+VNode* emptyNode = new VNode();
+
+std::vector<Hooks> hooks = {
+	classHooks
+};
+*/
 
 bool sameVnode(VNode* vnode1, VNode* vnode2) {
   return vnode1->key.compare(vnode2->key) == 0 && vnode1->sel.compare(vnode2->sel) == 0;
@@ -67,7 +79,13 @@ emscripten::val createElm(VNode* vnode, std::vector<VNode*> insertedVnodeQueue) 
 			std::replace(className.begin(), className.end(), '.', ' ');
 			vnode->elm.set("className", emscripten::val(className));
 		}
-		// TODO: create callback
+		/*
+		for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
+			if (hooks[i].create != NULL) {
+				hooks[i].create(emptyNode, vnode);
+			}
+		}
+		*/
 		if (!vnode->children.empty()) {
 			for(std::vector<VNode*>::size_type i = 0; i != vnode->children.size(); i++) {
 				appendChild(vnode->elm, createElm(vnode->children[i], insertedVnodeQueue));
@@ -180,8 +198,17 @@ void patchVnode(
 	std::vector<VNode*> insertedVnodeQueue
 ) {
 	// TODO: prepatch hook
-	// if (oldVnode == vnode) return;
-	// TODO: update hook
+	/*
+	if (oldVnode == vnode) return;
+	if (vnode->data != NULL) {
+		for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
+			if (hooks[i].create != NULL) {
+				hooks[i].update(oldVnode, vnode);
+			}
+		}
+		// TODO: update hook
+	}
+	*/
 	if (vnode->text.empty()) {
 		if (!vnode->children.empty() && !oldVnode->children.empty()) {
 			// if (vnode->children != oldVnode->children)
@@ -202,7 +229,13 @@ void patchVnode(
 
 VNode* patch_vnode(VNode* oldVnode, VNode* vnode) {
 	std::vector<VNode*> insertedVnodeQueue;
-	// TODO: pre callback
+	/*
+	for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
+		if (hooks[i].create != NULL) {
+			hooks[i].pre();
+		}
+	}
+	*/
 	if (sameVnode(oldVnode, vnode)) {
 		patchVnode(oldVnode, vnode, insertedVnodeQueue);
 	} else {
@@ -215,7 +248,13 @@ VNode* patch_vnode(VNode* oldVnode, VNode* vnode) {
 		}
 	}
 	// TODO: insert hook
-	// TODO: post callback
+	/*
+	for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
+		if (hooks[i].create != NULL) {
+			hooks[i].post();
+		}
+	}
+	*/
 	return vnode;
 };
 

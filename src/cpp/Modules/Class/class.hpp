@@ -3,6 +3,7 @@
 
 #include "../../VNode/VNode.hpp"
 
-void updateClass(VNode oldVnode, VNode vnode);
+void updateClass(VNode* oldVnode, VNode* vnode);
+Hooks classHooks;
 
 #endif

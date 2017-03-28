@@ -1,7 +1,8 @@
 import expect from 'expect';
 import asmDom from '../src/';
 
-describe('load', () => {
+// eslint-disable-next-line
+describe('load', function test() {
   afterEach(() => {
     delete window.WebAssembly;
   });
