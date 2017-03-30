@@ -28,13 +28,11 @@ VNode* emptyNodeAt(emscripten::val elm) {
   vnode->sel.append(tagName(elm));
   std::transform(vnode->sel.begin(), vnode->sel.end(), vnode->sel.begin(), ::tolower);
 
-	// id
   if (isDefined(elm["id"])) {
     vnode->sel += '#';
     vnode->sel.append(elm["id"].as<std::string>());
   }
 
-  // class
   if (isDefined(elm["className"])) {
     vnode->sel += '.';
     vnode->sel.append(elm["className"].as<std::string>());
@@ -78,7 +76,7 @@ emscripten::val createElm(VNode* vnode, std::vector<VNode*> insertedVnodeQueue) 
 			vnode->elm.set("className", emscripten::val(className));
 		}
 		for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
-			if (hooks[i].create != NULL) {
+			if (hooks[i].create) {
 				hooks[i].create(emptyNode, vnode);
 			}
 		}
@@ -196,7 +194,7 @@ void patchVnode(
 	// TODO: prepatch hook
 	if (oldVnode == vnode) return;
 	for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
-		if (hooks[i].create != NULL) {
+		if (hooks[i].update) {
 			hooks[i].update(oldVnode, vnode);
 		}
 	}
@@ -222,7 +220,7 @@ void patchVnode(
 VNode* patch_vnode(VNode* oldVnode, VNode* vnode) {
 	std::vector<VNode*> insertedVnodeQueue;
 	for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
-		if (hooks[i].create != NULL) {
+		if (hooks[i].pre) {
 			hooks[i].pre();
 		}
 	}
@@ -239,7 +237,7 @@ VNode* patch_vnode(VNode* oldVnode, VNode* vnode) {
 	}
 	// TODO: insert hook
 	for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
-		if (hooks[i].create != NULL) {
+		if (hooks[i].post) {
 			hooks[i].post();
 		}
 	}
