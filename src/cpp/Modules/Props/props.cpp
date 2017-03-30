@@ -4,9 +4,9 @@
 #include <map>
 #include <iterator>
 
-void updateProps(VNode oldVnode, VNode vnode) {
-	std::map<std::string, std::string> oldProps = oldVnode.data.props;
-	std::map<std::string, std::string> props = vnode.data.props;
+void updateProps(VNode* oldVnode, VNode* vnode) {
+	std::map<std::string, std::string> oldProps = oldVnode->data.props;
+	std::map<std::string, std::string> props = vnode->data.props;
 
 	if (oldProps.empty() && props.empty()) return;
 	if (oldProps == props) return;
@@ -16,7 +16,7 @@ void updateProps(VNode oldVnode, VNode vnode) {
 	while (it != oldProps.end())
 	{
 		if (props.count(it->first) == 0) {
-			vnode.elm.set(it->first.c_str(), emscripten::val::undefined());
+			vnode->elm.set(it->first.c_str(), emscripten::val::undefined());
 		}
 		it++;
 	}
@@ -26,16 +26,20 @@ void updateProps(VNode oldVnode, VNode vnode) {
 	{
 		cur = it->second;
 		if (oldProps.count(it->first) != 0) {
-			emscripten::val currentProp = vnode.elm[it->first.c_str()];
+			emscripten::val currentProp = vnode->elm[it->first.c_str()];
 			if (
 				oldProps.at(it->first).compare(cur) != 0 &&
 				(it->first.compare("value") != 0 || isDefined(currentProp) && currentProp.as<std::string>().compare(cur) != 0)
 			) {
-				vnode.elm.set(it->first.c_str(), emscripten::val(it->second.c_str()));
+				vnode->elm.set(it->first.c_str(), emscripten::val(it->second.c_str()));
 			}
 		} else {
-			vnode.elm.set(it->first.c_str(), emscripten::val::undefined());
+			vnode->elm.set(it->first.c_str(), emscripten::val::undefined());
 		}
 		it++;
 	}
 };
+
+Hooks propsHooks = new Hooks();
+propsHooks->update = &updateProps;
+propsHooks->create = &updateProps;
