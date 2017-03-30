@@ -11,7 +11,7 @@ typedef void (*PrePatchHook)(VNode* oldVNode, VNode* vNode);
 typedef void (*UpdateHook)(VNode* oldVNode, VNode* vNode);
 typedef void (*PostPatchHook)(VNode* oldVNode, VNode* vNode);
 typedef void (*DestroyHook)(VNode* vNode);
-typedef void (*RemoveHook)(VNode* vNode, void (*removeCallback)());
+typedef void (*RemoveHook)(VNode* vNode, std::function<void()> removeCallback);
 typedef void (*PostHook)();
 
 struct Hooks {

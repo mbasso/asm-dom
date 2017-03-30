@@ -106,20 +106,49 @@ void addVnodes(
 	}
 };
 
+void invokeDestroyHook(VNode* vnode) {
+	// TODO: destroy callback
+	for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
+		if (hooks[i].destroy) {
+			hooks[i].destroy(vnode);
+		}
+	}
+	if (!vnode->children.empty()) {
+		for (std::vector<VNode*>::size_type j = 0; j < vnode->children.size(); j++) {
+			invokeDestroyHook(vnode->children[j]);
+		}
+	}
+}
+
 void removeVnodes(
 	emscripten::val parentElm,
 	std::vector<VNode*> vnodes,
 	std::vector<VNode*>::size_type startIdx,
 	std::vector<VNode*>::size_type endIdx
 ) {
+	std::function<void()> rm;
 	for (; startIdx <= endIdx; startIdx++) {
-		// TODO: remove callback
-		/* if (!vnode.sel.empty()) {
-			// TODO: destroy hook
-			removeChild(parentElm, vnode.elm);
-		} else {*/ 
+		VNode* vnode = vnodes[startIdx];
+		if (!vnode->sel.empty()) {
+			invokeDestroyHook(vnode);
+			int listeners = 1;
+			rm = [&listeners, &vnode]() -> void {
+				if (--listeners == 0) {
+					removeChild(parentNode(vnode->elm), vnode->elm);
+				}
+			};
+			// TODO: remove callback
+			for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
+				if (hooks[i].remove) {
+					listeners++;
+					hooks[i].remove(vnode, rm);
+				}
+			}
+			// TODO: remove callback
+			rm();
+		} else {
 			removeChild(parentElm, vnodes[startIdx]->elm);
-		// }
+		}
 	}
 };
 
