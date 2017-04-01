@@ -11,5 +11,6 @@ EMSCRIPTEN_BINDINGS(vnodedata) {
     .property("ns", &VNodeData::ns)
     .property("attrs", &VNodeData::attrs)
     .property("props", &VNodeData::props)
+    .property("dataset", &VNodeData::dataset)
     .property("classNames", &VNodeData::classNames);
 }

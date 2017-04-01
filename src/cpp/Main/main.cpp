@@ -2,6 +2,7 @@
 #include "../Hooks/Hooks.hpp"
 #include "../Modules/Class/class.hpp"
 #include "../Modules/Props/props.hpp"
+#include "../Modules/Dataset/dataset.hpp"
 #include "../VNode/VNode.hpp"
 #include "../HtmlDOMApi/HtmlDOMApi.hpp"
 #include "../Utils/utils.hpp"
@@ -15,7 +16,8 @@ VNode* emptyNode = new VNode();
 
 std::vector<Hooks> hooks = {
 	classHooks,
-	propsHooks
+	propsHooks,
+	datasetHooks
 };
 
 bool sameVnode(VNode* vnode1, VNode* vnode2) {

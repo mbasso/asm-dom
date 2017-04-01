@@ -4,6 +4,7 @@
 #include "cpp/Hooks/Hooks.hpp"
 #include "cpp/Modules/Class/class.hpp"
 #include "cpp/Modules/Props/props.hpp"
+#include "cpp/Modules/Dataset/dataset.hpp"
 #include "cpp/Utils/utils.cpp"
 #include "cpp/H/h.cpp"
 #include "cpp/ToVNode/ToVNode.cpp"

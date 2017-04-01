@@ -13,11 +13,11 @@ class VNodeData {
   public:
     VNodeData() {};
     std::map<std::string, std::string> props;
+    std::map<std::string, std::string> dataset;
     std::map<std::string, std::string> attrs;
     std::map<std::string, bool> classNames;
     /*
     emscripten::val style;
-    emscripten::val dataset;
     emscripten::val on;
     emscripten::val hero;
     emscripten::val attachData;

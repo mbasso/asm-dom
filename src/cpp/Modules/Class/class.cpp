@@ -11,8 +11,6 @@ void updateClass(VNode* oldVnode, VNode* vnode) {
 	if (oldClass.empty() && klass.empty()) return;
 	if (oldClass == klass) return;
 
-	std::string cur;
-	std::string old;
 	std::map<std::string, bool>::iterator it = oldClass.begin();
 	while (it != oldClass.end())
 	{
@@ -23,15 +21,13 @@ void updateClass(VNode* oldVnode, VNode* vnode) {
 	}
 
 	it = klass.begin();
-	while (it != klass.end())
-	{
-		cur = it->second;
+	while (it != klass.end()) {
 		if (oldClass.count(it->first) != 0) {
 			if (oldClass.at(it->first) != klass.at(it->first)) {
-				vnode->elm["classList"].call(klass.at(it->first) ? "add" : "remove", it->first);
+				vnode->elm["classList"].call(it->second ? "add" : "remove", it->first);
 			}
 		} else {
-			vnode->elm["classList"].call(klass.at(it->first) ? "add" : "remove", it->first);
+			vnode->elm["classList"].call(it->second ? "add" : "remove", it->first);
 		}
 		it++;
 	}
