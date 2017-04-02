@@ -1,7 +1,7 @@
 import expect from 'expect';
 import asmDom from '../src/';
 
-describe('patch', function test() {
+describe('patch', function testPatch() {
   this.timeout(5000);
 
   const vdom = asmDom();
@@ -18,8 +18,7 @@ describe('patch', function test() {
     document.body.appendChild(root);
   };
 
-  clearDOM();
-  afterEach(clearDOM);
+  beforeEach(clearDOM);
 
   it('should have a tag', () => {
     const vnode = h('div');

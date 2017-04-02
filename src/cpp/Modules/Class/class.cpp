@@ -1,4 +1,5 @@
 #include "class.hpp"
+#include "../../Hooks/Hooks.hpp"
 #include "../../VNode/VNode.hpp"
 #include "../../Utils/utils.hpp"
 #include <map>
@@ -15,7 +16,7 @@ void updateClass(VNode* oldVnode, VNode* vnode) {
 	while (it != oldClass.end())
 	{
 		if (klass.count(it->first) == 0) {
-			vnode->elm["classList"].call<>("remove", it->first);
+			vnode->elm["classList"].call<void>("remove", it->first);
 		}
 		it++;
 	}
@@ -24,15 +25,13 @@ void updateClass(VNode* oldVnode, VNode* vnode) {
 	while (it != klass.end()) {
 		if (oldClass.count(it->first) != 0) {
 			if (oldClass.at(it->first) != klass.at(it->first)) {
-				vnode->elm["classList"].call(it->second ? "add" : "remove", it->first);
+				vnode->elm["classList"].call<void>(it->second ? "add" : "remove", it->first);
 			}
 		} else {
-			vnode->elm["classList"].call(it->second ? "add" : "remove", it->first);
+			vnode->elm["classList"].call<void>(it->second ? "add" : "remove", it->first);
 		}
 		it++;
 	}
 };
 
-Hooks classHooks = new Hooks();
-classHooks->update = &updateClass;
-classHooks->create = &updateClass;
+Hooks classHooks(&updateClass, &updateClass);

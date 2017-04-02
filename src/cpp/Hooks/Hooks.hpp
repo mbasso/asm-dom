@@ -15,6 +15,11 @@ typedef void (*RemoveHook)(VNode* vNode, std::function<void()> removeCallback);
 typedef void (*PostHook)();
 
 struct Hooks {
+	Hooks(
+		CreateHook createHook,
+		UpdateHook updateHook
+	) : create(createHook), update(updateHook) {}
+
 	PreHook pre;
 	InitHook init;
 	CreateHook create;

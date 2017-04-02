@@ -175,4 +175,26 @@ describe('h', function test() {
     expect(vnode.children.length).toEqual(0);
     vdom.deleteVNode(vnodePtr);
   });
+
+  it('should create a vnode with dataset', () => {
+    const vnodePtr = h('i', {
+      dataset: {
+        empty: '',
+        dash: '-',
+        dashed: 'foo-bar',
+        camel: 'fooBar',
+        integer: 0,
+        float: 0.1,
+      },
+    });
+
+    const vnode = vdom.getVNode(vnodePtr);
+    expect(vnode.data.dataset.get('empty')).toEqual('');
+    expect(vnode.data.dataset.get('dash')).toEqual('-');
+    expect(vnode.data.dataset.get('dashed')).toEqual('foo-bar');
+    expect(vnode.data.dataset.get('camel')).toEqual('fooBar');
+    expect(vnode.data.dataset.get('integer')).toEqual('0');
+    expect(vnode.data.dataset.get('float')).toEqual('0.1');
+    vdom.deleteVNode(vnodePtr);
+  });
 });

@@ -1,4 +1,5 @@
 #include "dataset.hpp"
+#include "../../Hooks/Hooks.hpp"
 #include "../../VNode/VNode.hpp"
 #include "../../Utils/utils.hpp"
 #include <algorithm>
@@ -10,7 +11,7 @@ std::regex capsRegex("[A-Z]");
 
 std::string getDataSel(std::string key) {
 	std::string result("data-");
-	std::string dataAttr = std::regex_replace(key, capsRegex, std::regex_constants::match_any);
+	std::string dataAttr = std::regex_replace(key, capsRegex, "-$&", std::regex_constants::match_any);
 	std::transform(dataAttr.begin(), dataAttr.end(), dataAttr.begin(), ::tolower);
 	result.append(dataAttr);
 	return result;
@@ -64,6 +65,4 @@ void updateDataset(VNode* oldVnode, VNode* vnode) {
 	}
 };
 
-Hooks datasetHooks = new Hooks();
-datasetHooks->update = &updateClass;
-datasetHooks->create = &updateClass;
+Hooks datasetHooks(&updateDataset, &updateDataset);

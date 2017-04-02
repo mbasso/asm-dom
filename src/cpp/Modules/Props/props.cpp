@@ -1,4 +1,5 @@
 #include "props.hpp"
+#include "../../Hooks/Hooks.hpp"
 #include "../../VNode/VNode.hpp"
 #include "../../Utils/utils.hpp"
 #include <map>
@@ -28,7 +29,7 @@ void updateProps(VNode* oldVnode, VNode* vnode) {
 			emscripten::val currentProp = vnode->elm[it->first.c_str()];
 			if (
 				oldProps.at(it->first).compare(cur) != 0 &&
-				(it->first.compare("value") != 0 || isDefined(currentProp) && currentProp.as<std::string>().compare(cur) != 0)
+				(it->first.compare("value") != 0 || (isDefined(currentProp) && currentProp.as<std::string>().compare(cur) != 0))
 			) {
 				vnode->elm.set(it->first.c_str(), emscripten::val(it->second.c_str()));
 			}
@@ -39,6 +40,4 @@ void updateProps(VNode* oldVnode, VNode* vnode) {
 	}
 };
 
-Hooks propsHooks = new Hooks();
-propsHooks->update = &updateProps;
-propsHooks->create = &updateProps;
+Hooks propsHooks(&updateProps, &updateProps);
