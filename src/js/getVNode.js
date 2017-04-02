@@ -10,8 +10,7 @@ const childrenToArray = (vnode) => {
 };
 
 export const getGetVNodeFunction = (lib) => (memoryAddress) => {
-	// eslint-disable-next-line
-	const result = lib._getVNode(memoryAddress);
+  const result = lib._getVNode(memoryAddress);
   childrenToArray(result);
   return result;
 };

@@ -14,8 +14,8 @@ export const objToMap = (obj, map, type, constr) => {
 
 export const objToData = (obj, lib) => {
   const result = new lib.VNodeData();
-  if (typeof obj.key === 'string') result.key = obj.key;
-  if (typeof obj.ns === 'string') result.ns = obj.ns;
+  result.key = obj.key || '';
+  result.ns = obj.ns || '';
   stringAttrs.forEach(x => {
     if (obj[x]) {
       result[x] = objToMap(obj[x], result[x], 'string', String);

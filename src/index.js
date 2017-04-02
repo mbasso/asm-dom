@@ -19,5 +19,10 @@ export default function load(config = {}) {
   lib.patch = getPatchFunction(lib);
   lib.getVNode = getGetVNodeFunction(lib);
 
+  /* eslint-disable */
+  lib.patchElement = lib._patch_element;
+  lib.patchVNode = lib._patch_vnode;
+  /* eslint-enable */
+
   return lib;
 }
