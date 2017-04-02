@@ -34,7 +34,7 @@ export const getHFunction = (lib) => (a, b, c, d) => {
           result = lib._h_sd(a, objToData(b, lib));
           break;
         default:
-          break;
+          throw new Error('Invalid argument: ', b);
       }
     }
   } else if (d === undefined) {
@@ -49,7 +49,7 @@ export const getHFunction = (lib) => (a, b, c, d) => {
           result = lib._h_sdn(a, objToData(b, lib), c);
           break;
         default:
-          break;
+          throw new Error('Invalid argument: ', c);
       }
     }
   } else {

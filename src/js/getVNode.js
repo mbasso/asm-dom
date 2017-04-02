@@ -1,16 +1,15 @@
 const childrenToArray = (vnode) => {
   const children = [];
-  for (let i = 0, n = vnode.children.size(); i < n; i++) {
-    const child = vnode.children.get(i);
-    childrenToArray(child);
-    children.push(child);
+  for (let i = vnode.children.size(); i--;) {
+    children.unshift(
+      childrenToArray(vnode.children.get(i))
+    );
   }
   // eslint-disable-next-line
   vnode.children = children;
+  return vnode;
 };
 
-export const getGetVNodeFunction = (lib) => (memoryAddress) => {
-  const result = lib._getVNode(memoryAddress);
-  childrenToArray(result);
-  return result;
-};
+export const getGetVNodeFunction = (lib) => (memoryAddress) => (
+  childrenToArray(lib._getVNode(memoryAddress))
+);
