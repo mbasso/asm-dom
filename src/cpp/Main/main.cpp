@@ -12,7 +12,7 @@
 #include <map>
 #include <string>
 
-VNode* emptyNode = new VNode();
+VNode* const emptyNode = new VNode();
 
 std::vector<Hooks> hooks = {
 	classHooks,
@@ -20,11 +20,11 @@ std::vector<Hooks> hooks = {
 	datasetHooks
 };
 
-bool sameVnode(VNode* vnode1, VNode* vnode2) {
+bool sameVnode(const VNode* __restrict__ const vnode1, const VNode* __restrict__ const vnode2) {
   return vnode1->key.compare(vnode2->key) == 0 && vnode1->sel.compare(vnode2->sel) == 0;
 };
 
-VNode* emptyNodeAt(emscripten::val elm) {
+VNode* emptyNodeAt(const emscripten::val elm) {
   VNode* vnode = new VNode();
   vnode->elm = elm;
   vnode->sel.append(tagName(elm));
@@ -44,7 +44,7 @@ VNode* emptyNodeAt(emscripten::val elm) {
   return vnode;
 };
 
-std::map<std::string, int> createKeyToOldIdx(std::vector<VNode*> children, int beginIdx, int endIdx) {
+std::map<std::string, int> createKeyToOldIdx(const std::vector<VNode*> children, const int beginIdx, const int endIdx) {
   std::size_t i = beginIdx;
 	std::map<std::string, int> map;
   for (; i <= endIdx; i++) {
@@ -55,7 +55,7 @@ std::map<std::string, int> createKeyToOldIdx(std::vector<VNode*> children, int b
   return map;
 }
 
-emscripten::val createElm(VNode* vnode, std::vector<VNode*> insertedVnodeQueue) {
+emscripten::val createElm(VNode* const vnode, std::vector<VNode* const> insertedVnodeQueue) {
 	// TODO: init hook
 	if (vnode->sel.compare("!") == 0) {
 		vnode->elm = createComment(vnode->text);
@@ -100,15 +100,15 @@ void addVnodes(
 	emscripten::val before,
 	std::vector<VNode*> vnodes,
 	std::vector<VNode*>::size_type startIdx,
-	std::vector<VNode*>::size_type endIdx,
-	std::vector<VNode*> insertedVnodeQueue
+	const std::vector<VNode*>::size_type endIdx,
+	std::vector<VNode* const> insertedVnodeQueue
 ) {
 	for (; startIdx <= endIdx; startIdx++) {
 		insertBefore(parentElm, createElm(vnodes[startIdx], insertedVnodeQueue), before);
 	}
 };
 
-void invokeDestroyHook(VNode* vnode) {
+void invokeDestroyHook(VNode* const vnode) {
 	// TODO: destroy callback
 	for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
 		if (hooks[i].destroy) {
@@ -126,7 +126,7 @@ void removeVnodes(
 	emscripten::val parentElm,
 	std::vector<VNode*> vnodes,
 	std::vector<VNode*>::size_type startIdx,
-	std::vector<VNode*>::size_type endIdx
+	const std::vector<VNode*>::size_type endIdx
 ) {
 	std::function<void()> rm;
 	for (; startIdx <= endIdx; startIdx++) {
@@ -158,7 +158,7 @@ void updateChildren(
 	emscripten::val parentElm,
 	std::vector<VNode*> oldCh,
 	std::vector<VNode*> newCh,
-	std::vector<VNode*> insertedVnodeQueue
+	std::vector<VNode* const> insertedVnodeQueue
 ) {
 	std::size_t oldStartIdx = 0;
 	std::size_t newStartIdx = 0;
@@ -218,9 +218,9 @@ void updateChildren(
 };
 
 void patchVnode(
-	VNode* oldVnode,
-	VNode* vnode,
-	std::vector<VNode*> insertedVnodeQueue
+	VNode* __restrict__ const oldVnode,
+	VNode* __restrict__ const vnode,
+	std::vector<VNode* const> insertedVnodeQueue
 ) {
 	// TODO: prepatch hook
 	if (oldVnode == vnode) return;
@@ -248,8 +248,8 @@ void patchVnode(
 	// TODO: postpatch hook
 };
 
-VNode* patch_vnode(VNode* oldVnode, VNode* vnode) {
-	std::vector<VNode*> insertedVnodeQueue;
+VNode* patch_vnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+	std::vector<VNode* const> insertedVnodeQueue;
 	for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
 		if (hooks[i].pre) {
 			hooks[i].pre();
@@ -275,16 +275,16 @@ VNode* patch_vnode(VNode* oldVnode, VNode* vnode) {
 	return vnode;
 };
 
-VNode* patch_element(emscripten::val element, VNode* vnode) {
+VNode* patch_element(const emscripten::val element, VNode* const vnode) {
 	VNode* oldVnode = emptyNodeAt(element);
 	return patch_vnode(oldVnode, vnode);
 };
 
-std::size_t patch_vnodePtr(std::size_t oldVnode, std::size_t vnode) {
+std::size_t patch_vnodePtr(const std::size_t oldVnode, const std::size_t vnode) {
 	return reinterpret_cast<std::size_t>(patch_vnode(reinterpret_cast<VNode*>(oldVnode), reinterpret_cast<VNode*>(vnode)));
 };
 
-std::size_t patch_elementPtr(emscripten::val element, std::size_t vnode) {
+std::size_t patch_elementPtr(const emscripten::val element, const std::size_t vnode) {
 	return reinterpret_cast<std::size_t>(patch_element(element, reinterpret_cast<VNode*>(vnode)));
 };
 

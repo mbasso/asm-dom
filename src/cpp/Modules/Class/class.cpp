@@ -5,7 +5,7 @@
 #include <map>
 #include <iterator>
 
-void updateClass(VNode* oldVnode, VNode* vnode) {
+void updateClass(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 	std::map<std::string, bool> oldClass = oldVnode->data.classNames;
 	std::map<std::string, bool> klass = vnode->data.classNames;
 

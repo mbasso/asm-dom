@@ -10,10 +10,10 @@ class VNode {
   public:
     VNode(): elm(emscripten::val::undefined()) {};
     VNode(
-      std::string nodeSel,
-      std::string nodeText,
-      VNodeData nodeData,
-      std::vector<VNode*> nodeChildren
+      const std::string nodeSel,
+      const std::string nodeText,
+      const VNodeData nodeData,
+      const std::vector<VNode*> nodeChildren
     ): sel(nodeSel), text(nodeText), data(nodeData), elm(emscripten::val::undefined()), children(nodeChildren) {};
     std::string sel;
     std::string key;

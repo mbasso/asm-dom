@@ -4,7 +4,7 @@
 #include "../../Hooks/Hooks.hpp"
 #include "../../VNode/VNode.hpp"
 
-void updateDataset(VNode* oldVnode, VNode* vnode);
+void updateDataset(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode);
 extern Hooks datasetHooks;
 
 #endif

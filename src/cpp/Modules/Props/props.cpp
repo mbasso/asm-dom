@@ -5,7 +5,7 @@
 #include <map>
 #include <iterator>
 
-void updateProps(VNode* oldVnode, VNode* vnode) {
+void updateProps(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 	std::map<std::string, std::string> oldProps = oldVnode->data.props;
 	std::map<std::string, std::string> props = vnode->data.props;
 

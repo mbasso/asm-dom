@@ -29,7 +29,7 @@ void setValueInDataset(VNode* vnode, emscripten::val& nodeDataset, bool& isDatas
 	}
 };
 
-void updateDataset(VNode* oldVnode, VNode* vnode) {
+void updateDataset(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 	std::map<std::string, std::string> oldDataset = oldVnode->data.dataset;
 	std::map<std::string, std::string> dataset = vnode->data.dataset;
 

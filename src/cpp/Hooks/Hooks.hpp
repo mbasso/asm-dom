@@ -4,14 +4,14 @@
 #include "../VNode/VNode.hpp"
 
 typedef void (*PreHook)();
-typedef void (*InitHook)(VNode* vNode);
-typedef void (*CreateHook)(VNode* emptyVNode, VNode* vNode);
-typedef void (*InsertHook)(VNode* vNode);
-typedef void (*PrePatchHook)(VNode* oldVNode, VNode* vNode);
-typedef void (*UpdateHook)(VNode* oldVNode, VNode* vNode);
-typedef void (*PostPatchHook)(VNode* oldVNode, VNode* vNode);
-typedef void (*DestroyHook)(VNode* vNode);
-typedef void (*RemoveHook)(VNode* vNode, std::function<void()> removeCallback);
+typedef void (*InitHook)(VNode* const vnode);
+typedef void (*CreateHook)(VNode* __restrict__ const emptyVNode, VNode* __restrict__ const vnode);
+typedef void (*InsertHook)(VNode* const vnode);
+typedef void (*PrePatchHook)(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode);
+typedef void (*UpdateHook)(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode);
+typedef void (*PostPatchHook)(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode);
+typedef void (*DestroyHook)(VNode* const vnode);
+typedef void (*RemoveHook)(VNode* const vnode, const std::function<void()> removeCallback);
 typedef void (*PostHook)();
 
 struct Hooks {
