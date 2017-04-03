@@ -13,47 +13,41 @@ const getChildren = (lib, arr) => {
 };
 
 export const getHFunction = (lib) => (a, b, c, d) => {
-  let result;
   if (b === undefined) {
-    result = lib._h_s(a);
+    return lib._h_s(a);
   } else if (c === undefined) {
     if (Array.isArray(b)) {
-      result = lib._h_sc(a, getChildren(lib, b));
-    } else {
-      switch (typeof b) {
-        case 'boolean':
-          result = lib._h_ti(a, b);
-          break;
-        case 'string':
-          result = lib._h_st(a, b);
-          break;
-        case 'number':
-          result = lib._h_sn(a, b);
-          break;
-        case 'object':
-          result = lib._h_sd(a, objToData(b, lib));
-          break;
-        default:
-          throw new Error('Invalid argument: ', b);
-      }
+      const result = lib._h_sc(a, b = getChildren(lib, b));
+      b.delete();
+      return result;
+    }
+    switch (typeof b) {
+      case 'boolean':
+        return lib._h_ti(a, b);
+      case 'string':
+        return lib._h_st(a, b);
+      case 'number':
+        return lib._h_sn(a, b);
+      case 'object':
+        return lib._h_sd(a, objToData(b, lib));
+      default:
+        throw new Error('Invalid argument: ', b);
     }
   } else if (d === undefined) {
     if (Array.isArray(c)) {
-      result = lib._h_sdc(a, objToData(b, lib), getChildren(lib, c));
-    } else {
-      switch (typeof c) {
-        case 'string':
-          result = lib._h_sdt(a, objToData(b, lib), c);
-          break;
-        case 'number':
-          result = lib._h_sdn(a, objToData(b, lib), c);
-          break;
-        default:
-          throw new Error('Invalid argument: ', c);
-      }
+      const result = lib._h_sdc(a, objToData(b, lib), c = getChildren(lib, c));
+      c.delete();
+      return result;
+    }
+    switch (typeof c) {
+      case 'string':
+        return lib._h_sdt(a, objToData(b, lib), c);
+      case 'number':
+        return lib._h_sdn(a, objToData(b, lib), c);
+      default:
+        throw new Error('Invalid argument: ', c);
     }
   } else {
-    result = lib._h_stdc(a, b, c, d);
+    return lib._h_stdc(a, b, c, d);
   }
-  return result;
 };

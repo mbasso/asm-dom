@@ -9,6 +9,7 @@
   "parser": "babel-eslint",
   "rules": {
     "no-underscore-dangle": "off",
+    "no-param-reassign": "off",
     "valid-jsdoc": 2,
     "quotes": [2, "single"],
     "strict": [2, "never"]
