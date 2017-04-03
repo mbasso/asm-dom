@@ -9,7 +9,7 @@
 
 std::regex capsRegex("[A-Z]");
 
-std::string getDataSel(std::string key) {
+std::string getDataSel(const std::string& key) {
 	std::string result("data-");
 	std::string dataAttr = std::regex_replace(key, capsRegex, "-$&", std::regex_constants::match_any);
 	std::transform(dataAttr.begin(), dataAttr.end(), dataAttr.begin(), ::tolower);
@@ -17,7 +17,7 @@ std::string getDataSel(std::string key) {
 	return result;
 }
 
-void setValueInDataset(VNode* vnode, emscripten::val& nodeDataset, bool& isDatasetDefined, std::map<std::string, std::string>::iterator& it) {
+void setValueInDataset(VNode* const vnode, emscripten::val& nodeDataset, bool& isDatasetDefined, std::map<std::string, std::string>::iterator& it) {
 	if (isDatasetDefined) {
 		nodeDataset.set(it->first, emscripten::val(it->second));
 	} else {

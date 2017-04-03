@@ -12,7 +12,7 @@ bool isNull(emscripten::val obj) {
 };
 */
 
-bool isDefined(const emscripten::val obj) {
+bool isDefined(const emscripten::val& obj) {
   std::string type = obj.typeOf().as<std::string>();
   return type.compare("undefined") != 0 && type.compare("null") != 0;
 };

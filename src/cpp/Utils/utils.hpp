@@ -8,6 +8,6 @@
 bool isUndefined(emscripten::val obj);
 bool isNull(emscripten::val obj);
 */
-bool isDefined(const emscripten::val obj);
+bool isDefined(const emscripten::val& obj);
 
 #endif

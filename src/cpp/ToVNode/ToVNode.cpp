@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <string>
 
-VNode* toVNode(const emscripten::val node) {
+VNode* toVNode(const emscripten::val& node) {
 	VNode* vnode = new VNode();
 	if (isElement(node)) {
 		vnode->sel.append(tagName(node));
@@ -47,7 +47,7 @@ VNode* toVNode(const emscripten::val node) {
 	return vnode;
 };
 
-std::size_t toVNodePtr(const emscripten::val node) {
+std::size_t toVNodePtr(const emscripten::val& node) {
 	return reinterpret_cast<std::size_t>(toVNode(node));
 }
 

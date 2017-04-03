@@ -3,6 +3,8 @@ import asmDom from '../src/';
 
 // eslint-disable-next-line
 describe('load', function test() {
+  this.timeout(5000);
+
   afterEach(() => {
     delete window.WebAssembly;
   });

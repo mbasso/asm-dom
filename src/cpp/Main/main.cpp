@@ -136,7 +136,8 @@ void removeVnodes(
 			int listeners = 1;
 			rm = [&listeners, &vnode]() -> void {
 				if (--listeners == 0) {
-					removeChild(parentNode(vnode->elm), vnode->elm);
+					emscripten::val parent = parentNode(vnode->elm);
+					removeChild(parent, vnode->elm);
 				}
 			};
 			// TODO: remove callback
