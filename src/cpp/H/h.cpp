@@ -13,7 +13,7 @@ void addNS(VNode* const vnode) {
 	}
 }
 
-void adjustVNode(VNode* const vnode) {
+VNode* const adjustVNode(VNode* const vnode) {
   vnode->key = vnode->data.key;
   if (
     vnode->sel.length() >= 3 && vnode->sel[0] == 's' && vnode->sel[1] == 'v' && vnode->sel[2] == 'g' &&
@@ -21,82 +21,55 @@ void adjustVNode(VNode* const vnode) {
   ) {
     addNS(vnode);
   }
+  return vnode;
 }
 
-VNode* _h_s(const std::string& sel) {
-  VNode* vnode = new VNode();
-  vnode->sel = sel;
-  adjustVNode(vnode);
-  return vnode;
-};
-
 std::size_t h_s(const std::string& sel) {
-  return reinterpret_cast<std::size_t>(_h_s(sel));
+  return reinterpret_cast<std::size_t>(adjustVNode(new VNode(sel)));
 };
 
 std::size_t h_ti(const std::string& text, const bool& isText) {
-  VNode* vnode = new VNode();
   if (isText) {
-    vnode->text = text;
+    return reinterpret_cast<std::size_t>(adjustVNode(new VNode(text, true)));
   } else {
-    vnode->sel = text;
+    return reinterpret_cast<std::size_t>(adjustVNode(new VNode(text)));
   }
-  adjustVNode(vnode);
-  return reinterpret_cast<std::size_t>(vnode);
 };
 
 std::size_t h_sn(const std::string& sel, const std::size_t& node) {
-  VNode* vnode = _h_s(sel);
-  vnode->children.push_back(reinterpret_cast<VNode*>(node));
-  adjustVNode(vnode);
-  return reinterpret_cast<std::size_t>(vnode);
+  return reinterpret_cast<std::size_t>(adjustVNode(new VNode(sel, reinterpret_cast<VNode*>(node))));
 };
 
 std::size_t h_st(const std::string& sel, const std::string& text) {
-  VNode* vnode = _h_s(sel);
-  vnode->text = text;
-  return reinterpret_cast<std::size_t>(vnode);
-};
-
-VNode* _h_sd(const std::string& sel, const VNodeData& data) {
-  VNode* vnode = _h_s(sel);
-  vnode->data = data;
-  return vnode;
+  return reinterpret_cast<std::size_t>(adjustVNode(new VNode(sel, text)));
 };
 
 std::size_t h_sd(const std::string& sel, const VNodeData& data) {
-  return reinterpret_cast<std::size_t>(_h_sd(sel, data));
+  return reinterpret_cast<std::size_t>(adjustVNode(new VNode(sel, data)));
 };
 
 std::size_t h_sc(const std::string& sel, const std::vector<std::size_t>& children) {
-  VNode* vnode = _h_s(sel);
+  VNode* vnode = new VNode(sel);
   for(std::vector<std::size_t>::size_type i = 0; i < children.size(); i++) {
     vnode->children.push_back(reinterpret_cast<VNode*>(children[i]));
   }
-  adjustVNode(vnode);
-  return reinterpret_cast<std::size_t>(vnode);
+  return reinterpret_cast<std::size_t>(adjustVNode(vnode));
 };
 
 std::size_t h_sdn(const std::string& sel, const VNodeData& data, const std::size_t& node) {
-  VNode* vnode = _h_sd(sel, data);
-  vnode->children.push_back(reinterpret_cast<VNode*>(node));
-  adjustVNode(vnode);
-  return reinterpret_cast<std::size_t>(vnode);
+  return reinterpret_cast<std::size_t>(adjustVNode(new VNode(sel, data, reinterpret_cast<VNode*>(node))));
 };
 
 std::size_t h_sdt(const std::string& sel, const VNodeData& data, const std::string& text) {
-  VNode* vnode = _h_sd(sel, data);
-  vnode->text = text;
-  return reinterpret_cast<std::size_t>(vnode);
+  return reinterpret_cast<std::size_t>(new VNode(sel, data, text));
 };
 
 std::size_t h_sdc(const std::string& sel, const VNodeData& data, const std::vector<std::size_t>& children) {
-  VNode* vnode = _h_sd(sel, data);
+  VNode* vnode = new VNode(sel, data);
   for(std::vector<std::size_t>::size_type i = 0; i < children.size(); i++) {
     vnode->children.push_back(reinterpret_cast<VNode*>(children[i]));
   }
-  adjustVNode(vnode);
-  return reinterpret_cast<std::size_t>(vnode);
+  return reinterpret_cast<std::size_t>(adjustVNode(vnode));
 };
 
 std::size_t h_stdc(const std::string& sel, const std::string& text, const VNodeData& data, const std::vector<std::size_t>& children) {
@@ -104,9 +77,7 @@ std::size_t h_stdc(const std::string& sel, const std::string& text, const VNodeD
   for(std::vector<std::size_t>::size_type i = 0; i < children.size(); i++) {
     vnodes.push_back(reinterpret_cast<VNode*>(children[i]));
   }
-  VNode* vnode = new VNode(sel, text, data, vnodes);
-  adjustVNode(vnode);
-  return reinterpret_cast<std::size_t>(vnode);
+  return reinterpret_cast<std::size_t>(adjustVNode(new VNode(sel, text, data, vnodes)));
 };
 
 VNode getVNode(const std::size_t& vnode) {

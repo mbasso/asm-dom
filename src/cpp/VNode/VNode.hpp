@@ -10,6 +10,35 @@ class VNode {
   public:
     VNode(): elm(emscripten::val::undefined()) {};
     VNode(
+      const std::string nodeSel
+    ): sel(nodeSel), elm(emscripten::val::undefined()) {};
+    VNode(
+      const std::string nodeSel,
+      const std::string nodeText
+    ): sel(nodeSel), text(nodeText), elm(emscripten::val::undefined()) {};
+    VNode(
+      const std::string nodeText,
+      bool isText
+    ): text(nodeText), elm(emscripten::val::undefined()) {};
+    VNode(
+      const std::string nodeSel,
+      const VNodeData nodeData
+    ): sel(nodeSel), data(nodeData), elm(emscripten::val::undefined()) {};
+    VNode(
+      const std::string nodeSel,
+      VNode* child
+    ): sel(nodeSel), elm(emscripten::val::undefined()), children(std::vector<VNode*> { child }) {};
+    VNode(
+      const std::string nodeSel,
+      const VNodeData nodeData,
+      const std::string nodeText
+    ): sel(nodeSel), text(nodeText), data(nodeData), elm(emscripten::val::undefined()) {};
+    VNode(
+      const std::string nodeSel,
+      const VNodeData nodeData,
+      VNode* child
+    ): sel(nodeSel), data(nodeData), elm(emscripten::val::undefined()), children(std::vector<VNode*> { child }) {};
+    VNode(
       const std::string nodeSel,
       const std::string nodeText,
       const VNodeData nodeData,
