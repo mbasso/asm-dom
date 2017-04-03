@@ -49,7 +49,7 @@ void updateDataset(VNode* __restrict__ const oldVnode, VNode* __restrict__ const
 				vnode->elm.call<void>("removeAttribute", emscripten::val(getDataSel(it->first)));
 			}
 		}
-		it++;
+		++it;
 	}
 
 	it = dataset.begin();
@@ -61,7 +61,7 @@ void updateDataset(VNode* __restrict__ const oldVnode, VNode* __restrict__ const
 		} else {
 			setValueInDataset(vnode, nodeDataset, isDatasetDefined, it);
 		}
-		it++;
+		++it;
 	}
 };
 

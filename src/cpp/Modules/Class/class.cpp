@@ -18,7 +18,7 @@ void updateClass(VNode* __restrict__ const oldVnode, VNode* __restrict__ const v
 		if (klass.count(it->first) == 0) {
 			vnode->elm["classList"].call<void>("remove", it->first);
 		}
-		it++;
+		++it;
 	}
 
 	it = klass.begin();
@@ -30,7 +30,7 @@ void updateClass(VNode* __restrict__ const oldVnode, VNode* __restrict__ const v
 		} else {
 			vnode->elm["classList"].call<void>(it->second ? "add" : "remove", it->first);
 		}
-		it++;
+		++it;
 	}
 };
 

@@ -47,7 +47,7 @@ VNode* emptyNodeAt(const emscripten::val elm) {
 std::map<std::string, int> createKeyToOldIdx(const std::vector<VNode*> children, const int beginIdx, const int endIdx) {
   std::size_t i = beginIdx;
 	std::map<std::string, int> map;
-  for (; i <= endIdx; i++) {
+  for (; i <= endIdx; ++i) {
     if (!children[i]->key.empty()) {
 			map[children[i]->key] = i;
 		}
@@ -83,7 +83,7 @@ emscripten::val createElm(VNode* const vnode, std::vector<VNode* const> inserted
 			}
 		}
 		if (!vnode->children.empty()) {
-			for(std::vector<VNode*>::size_type i = 0; i != vnode->children.size(); i++) {
+			for(std::vector<VNode*>::size_type i = 0; i != vnode->children.size(); ++i) {
 				appendChild(vnode->elm, createElm(vnode->children[i], insertedVnodeQueue));
 			}
 		} else if (!vnode->text.empty()) {
@@ -103,7 +103,7 @@ void addVnodes(
 	const std::vector<VNode*>::size_type endIdx,
 	std::vector<VNode* const> insertedVnodeQueue
 ) {
-	for (; startIdx <= endIdx; startIdx++) {
+	for (; startIdx <= endIdx; ++startIdx) {
 		insertBefore(parentElm, createElm(vnodes[startIdx], insertedVnodeQueue), before);
 	}
 };
@@ -116,7 +116,7 @@ void invokeDestroyHook(VNode* const vnode) {
 		}
 	}
 	if (!vnode->children.empty()) {
-		for (std::vector<VNode*>::size_type j = 0; j < vnode->children.size(); j++) {
+		for (std::vector<VNode*>::size_type j = 0; j < vnode->children.size(); ++j) {
 			invokeDestroyHook(vnode->children[j]);
 		}
 	}
@@ -129,7 +129,7 @@ void removeVnodes(
 	const std::vector<VNode*>::size_type endIdx
 ) {
 	std::function<void()> rm;
-	for (; startIdx <= endIdx; startIdx++) {
+	for (; startIdx <= endIdx; ++startIdx) {
 		VNode* vnode = vnodes[startIdx];
 		if (!vnode->sel.empty()) {
 			invokeDestroyHook(vnode);
@@ -143,7 +143,7 @@ void removeVnodes(
 			// TODO: remove callback
 			for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
 				if (hooks[i].remove) {
-					listeners++;
+					++listeners;
 					hooks[i].remove(vnode, rm);
 				}
 			}

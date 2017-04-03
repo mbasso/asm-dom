@@ -50,7 +50,7 @@ std::size_t h_sd(const std::string& sel, const VNodeData& data) {
 
 std::size_t h_sc(const std::string& sel, const std::vector<std::size_t>& children) {
   VNode* vnode = new VNode(sel);
-  for(std::vector<std::size_t>::size_type i = 0; i < children.size(); i++) {
+  for(std::vector<std::size_t>::size_type i = 0; i < children.size(); ++i) {
     vnode->children.push_back(reinterpret_cast<VNode*>(children[i]));
   }
   return reinterpret_cast<std::size_t>(adjustVNode(vnode));
@@ -66,7 +66,7 @@ std::size_t h_sdt(const std::string& sel, const VNodeData& data, const std::stri
 
 std::size_t h_sdc(const std::string& sel, const VNodeData& data, const std::vector<std::size_t>& children) {
   VNode* vnode = new VNode(sel, data);
-  for(std::vector<std::size_t>::size_type i = 0; i < children.size(); i++) {
+  for(std::vector<std::size_t>::size_type i = 0; i < children.size(); ++i) {
     vnode->children.push_back(reinterpret_cast<VNode*>(children[i]));
   }
   return reinterpret_cast<std::size_t>(adjustVNode(vnode));
@@ -74,7 +74,7 @@ std::size_t h_sdc(const std::string& sel, const VNodeData& data, const std::vect
 
 std::size_t h_stdc(const std::string& sel, const std::string& text, const VNodeData& data, const std::vector<std::size_t>& children) {
   std::vector<VNode*> vnodes;
-  for(std::vector<std::size_t>::size_type i = 0; i < children.size(); i++) {
+  for(std::vector<std::size_t>::size_type i = 0; i < children.size(); ++i) {
     vnodes.push_back(reinterpret_cast<VNode*>(children[i]));
   }
   return reinterpret_cast<std::size_t>(adjustVNode(new VNode(sel, text, data, vnodes)));

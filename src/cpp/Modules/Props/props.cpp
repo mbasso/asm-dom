@@ -18,7 +18,7 @@ void updateProps(VNode* __restrict__ const oldVnode, VNode* __restrict__ const v
 		if (props.count(it->first) == 0) {
 			vnode->elm.set(it->first.c_str(), emscripten::val::undefined());
 		}
-		it++;
+		++it;
 	}
 
 	std::string cur;
@@ -36,7 +36,7 @@ void updateProps(VNode* __restrict__ const oldVnode, VNode* __restrict__ const v
 		} else {
 			vnode->elm.set(it->first.c_str(), emscripten::val::undefined());
 		}
-		it++;
+		++it;
 	}
 };
 
