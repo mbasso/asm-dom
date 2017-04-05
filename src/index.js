@@ -16,13 +16,11 @@ export default function load(config = {}) {
   }
 
   lib.h = getHFunction(lib);
-  lib.patch = getPatchFunction(lib);
   lib.getVNode = getGetVNodeFunction(lib);
 
-  /* eslint-disable */
   lib.patchElement = lib._patch_element;
   lib.patchVNode = lib._patch_vnode;
-  /* eslint-enable */
+  lib.patch = getPatchFunction(lib);
 
   return lib;
 }

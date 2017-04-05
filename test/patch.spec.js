@@ -20,6 +20,14 @@ describe('patch', function testPatch() {
 
   beforeEach(clearDOM);
 
+  it('should patch an element', () => {
+    const vnode = h('div');
+    const elmPtr = vdom.patchElement(root, vnode);
+    const { elm } = vdom.getVNode(elmPtr);
+    expect(elm.tagName).toEqual('DIV');
+    vdom.deleteVNode(elmPtr);
+  });
+
   it('should have a tag', () => {
     const vnode = h('div');
     const elmPtr = patch(root, vnode);
