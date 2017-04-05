@@ -5,12 +5,11 @@ EMSCRIPTEN_BINDINGS(vnodedata) {
   emscripten::register_map<std::string, std::string>("MapStringString");
   emscripten::register_map<std::string, bool>("MapStringBool");
 
-  emscripten::class_<VNodeData>("VNodeData")
-    .constructor<>()
-    .property("key", &VNodeData::key)
-    .property("ns", &VNodeData::ns)
-    .property("attrs", &VNodeData::attrs)
-    .property("props", &VNodeData::props)
-    .property("dataset", &VNodeData::dataset)
-    .property("classNames", &VNodeData::classNames);
+  emscripten::value_object<VNodeData>("VNodeData")
+    .field("key", &VNodeData::key)
+    .field("ns", &VNodeData::ns)
+    .field("attrs", &VNodeData::attrs)
+    .field("props", &VNodeData::props)
+    .field("dataset", &VNodeData::dataset)
+    .field("classNames", &VNodeData::classNames);
 }

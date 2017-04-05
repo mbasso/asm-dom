@@ -164,6 +164,7 @@ describe('h', function test() {
     vdom.deleteVNode(vnodePtr);
   });
 
+  /*
   it('should create a vnode with all params', () => {
     const data = new vdom.VNodeData();
     const children = new vdom.VNodePtrVector();
@@ -175,6 +176,7 @@ describe('h', function test() {
     expect(vnode.children.length).toEqual(0);
     vdom.deleteVNode(vnodePtr);
   });
+  */
 
   it('should create a vnode with dataset', () => {
     const vnodePtr = h('i', {

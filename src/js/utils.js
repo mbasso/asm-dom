@@ -1,30 +1,30 @@
-const stringAttrs = ['dataset', 'attributes', 'props'];
-const boolAttrs = ['classNames'];
+const stringAttrs = ['key', 'ns'];
+const stringMapAttrs = ['dataset', 'attrs', 'props'];
+const boolMapAttrs = ['classNames'];
 
-export const objToMap = (obj, map, type, constr) => {
-  Object.keys(obj).forEach(x => {
-    if (typeof obj[x] === type) {
-      map.set(x, obj[x]);
-    } else if (obj[x] !== undefined) {
-      map.set(x, constr(obj[x]));
-    }
+export const objToMap = (prop, type, ListConstr, elmConstr) => {
+  const map = new ListConstr();
+  Object.keys(prop).forEach(x => {
+    map.set(x, typeof prop[x] === type ? prop[x] : elmConstr(prop[x]));
   });
   return map;
 };
 
-export const objToData = (obj, lib) => {
-  const result = new lib.VNodeData();
-  result.key = obj.key || '';
-  result.ns = obj.ns || '';
+export const objToData = (data, lib) => {
   stringAttrs.forEach(x => {
-    if (obj[x]) {
-      result[x] = objToMap(obj[x], result[x], 'string', String);
+    if (typeof data[x] !== 'string') {
+      data[x] = '';
     }
   });
-  boolAttrs.forEach(x => {
-    if (obj[x]) {
-      result[x] = objToMap(obj[x], result[x], 'bool', Boolean);
-    }
+  stringMapAttrs.forEach(x => {
+    data[x] = data[x] ? (
+      objToMap(data[x], 'string', lib.MapStringString, String)
+    ) : new lib.MapStringString();
   });
-  return result;
+  boolMapAttrs.forEach(x => {
+    data[x] = data[x] ? (
+      objToMap(data[x], 'bool', lib.MapStringBool, Boolean)
+    ) : new lib.MapStringBool();
+  });
+  return data;
 };
