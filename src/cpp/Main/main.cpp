@@ -56,7 +56,7 @@ std::map<std::string, int> createKeyToOldIdx(const std::vector<VNode*> children,
   return map;
 }
 
-emscripten::val createElm(VNode* const vnode, std::vector<VNode* const> insertedVnodeQueue) {
+emscripten::val createElm(VNode* const vnode) {
 	if (vnode->sel.compare("!") == 0) {
 		vnode->elm = createComment(vnode->text);
 	} else if (vnode->sel.empty()) {
@@ -72,7 +72,7 @@ emscripten::val createElm(VNode* const vnode, std::vector<VNode* const> inserted
 
 		if (!vnode->children.empty()) {
 			for(std::vector<VNode*>::size_type i = 0; i != vnode->children.size(); ++i) {
-				appendChild(vnode->elm, createElm(vnode->children[i], insertedVnodeQueue));
+				appendChild(vnode->elm, createElm(vnode->children[i]));
 			}
 		} else if (!vnode->text.empty()) {
 			appendChild(vnode->elm, createTextNode(vnode->text));
@@ -86,11 +86,10 @@ void addVnodes(
 	emscripten::val before,
 	std::vector<VNode*> vnodes,
 	std::vector<VNode*>::size_type startIdx,
-	const std::vector<VNode*>::size_type endIdx,
-	std::vector<VNode* const> insertedVnodeQueue
+	const std::vector<VNode*>::size_type endIdx
 ) {
 	for (; startIdx <= endIdx; ++startIdx) {
-		insertBefore(parentElm, createElm(vnodes[startIdx], insertedVnodeQueue), before);
+		insertBefore(parentElm, createElm(vnodes[startIdx]), before);
 	}
 };
 
@@ -122,8 +121,7 @@ void removeVnodes(
 void updateChildren(
 	emscripten::val parentElm,
 	std::vector<VNode*> oldCh,
-	std::vector<VNode*> newCh,
-	std::vector<VNode* const> insertedVnodeQueue
+	std::vector<VNode*> newCh
 ) {
 	std::size_t oldStartIdx = 0;
 	std::size_t newStartIdx = 0;
@@ -138,20 +136,20 @@ void updateChildren(
 
 	while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
 		if (sameVnode(oldStartVnode, newStartVnode)) {
-			patchVnode(oldStartVnode, newStartVnode, insertedVnodeQueue);
+			patchVnode(oldStartVnode, newStartVnode);
 			oldStartVnode = oldCh[++oldStartIdx];
 			newStartVnode = newCh[++newStartIdx];
 		} else if (sameVnode(oldEndVnode, newEndVnode)) {
-			patchVnode(oldEndVnode, newEndVnode, insertedVnodeQueue);
+			patchVnode(oldEndVnode, newEndVnode);
 			oldEndVnode = oldCh[--oldEndIdx];
 			newEndVnode = newCh[--newEndIdx];
 		} else if (sameVnode(oldStartVnode, newEndVnode)) {
-			patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue);
+			patchVnode(oldStartVnode, newEndVnode);
 			insertBefore(parentElm, oldStartVnode->elm, nextSibling(oldEndVnode->elm));
 			oldStartVnode = oldCh[++oldStartIdx];
 			newEndVnode = newCh[--newEndIdx];
 		} else if (sameVnode(oldEndVnode, newStartVnode)) {
-			patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue);
+			patchVnode(oldEndVnode, newStartVnode);
 			insertBefore(parentElm, oldEndVnode->elm, oldStartVnode->elm);
 			oldEndVnode = oldCh[--oldEndIdx];
 			newStartVnode = newCh[++newStartIdx];
@@ -160,14 +158,14 @@ void updateChildren(
 				oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx);
 			}
 			if (oldKeyToIdx.count(newStartVnode->key) == 0) {
-				insertBefore(parentElm, createElm(newStartVnode, insertedVnodeQueue), oldStartVnode->elm);
+				insertBefore(parentElm, createElm(newStartVnode), oldStartVnode->elm);
 				newStartVnode = newCh[++newStartIdx];
 			} else {
 				elmToMove = oldCh[oldKeyToIdx[newStartVnode->key]];
 				if (elmToMove->sel.compare(newStartVnode->sel) != 0) {
-					insertBefore(parentElm, createElm(newStartVnode, insertedVnodeQueue), oldStartVnode->elm);
+					insertBefore(parentElm, createElm(newStartVnode), oldStartVnode->elm);
 				} else {
-					patchVnode(elmToMove, newStartVnode, insertedVnodeQueue);
+					patchVnode(elmToMove, newStartVnode);
 					oldCh[oldKeyToIdx[newStartVnode->key]]->key = std::string("");
 					insertBefore(parentElm, elmToMove->elm, oldStartVnode->elm);
 				}
@@ -176,7 +174,7 @@ void updateChildren(
 		}
 	}
 	if (oldStartIdx > oldEndIdx) {
-		addVnodes(parentElm, newCh[newEndIdx+1]->elm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue);
+		addVnodes(parentElm, newCh[newEndIdx+1]->elm, newCh, newStartIdx, newEndIdx);
 	} else if (newStartIdx > newEndIdx) {
 		removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx);
 	}
@@ -184,17 +182,16 @@ void updateChildren(
 
 void patchVnode(
 	VNode* __restrict__ const oldVnode,
-	VNode* __restrict__ const vnode,
-	std::vector<VNode* const> insertedVnodeQueue
+	VNode* __restrict__ const vnode
 ) {
 	diff(oldVnode, vnode);
 	if (vnode->text.empty()) {
 		if (!vnode->children.empty() && !oldVnode->children.empty()) {
 			// if (vnode->children != oldVnode->children)
-			updateChildren(vnode->elm, oldVnode->children, vnode->children, insertedVnodeQueue);
+			updateChildren(vnode->elm, oldVnode->children, vnode->children);
 		} else if(!vnode->children.empty()) {
 			if (!oldVnode->text.empty()) setTextContent(vnode->elm, std::string());
-			addVnodes(vnode->elm, emscripten::val::null(), vnode->children, 0, vnode->children.size() - 1, insertedVnodeQueue);
+			addVnodes(vnode->elm, emscripten::val::null(), vnode->children, 0, vnode->children.size() - 1);
 		} else if(!oldVnode->children.empty()) {
 			removeVnodes(vnode->elm, oldVnode->children, 0, oldVnode->children.size() - 1);
 		} else if (!oldVnode->text.empty()) {
@@ -206,12 +203,11 @@ void patchVnode(
 };
 
 VNode* patch_vnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
-	std::vector<VNode* const> insertedVnodeQueue;
 	if (sameVnode(oldVnode, vnode)) {
-		patchVnode(oldVnode, vnode, insertedVnodeQueue);
+		patchVnode(oldVnode, vnode);
 	} else {
 		emscripten::val parent = parentNode(oldVnode->elm);
-		createElm(vnode, insertedVnodeQueue);
+		createElm(vnode);
 		if (isDefined(parent)) {
 			insertBefore(parent, vnode->elm, nextSibling(oldVnode->elm));
 			std::vector<VNode*> vnodes { oldVnode };

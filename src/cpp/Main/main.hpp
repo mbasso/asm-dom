@@ -10,13 +10,11 @@ std::size_t patch_elementPtr(const emscripten::val element, const std::size_t vn
 void updateChildren(
 	emscripten::val parentElm,
 	std::vector<VNode*> oldCh,
-	std::vector<VNode*> newCh,
-	std::vector<VNode* const> insertedVnodeQueue
+	std::vector<VNode*> newCh
 );
 void patchVnode(
 	VNode* __restrict__ const oldVnode,
-	VNode* __restrict__ const vnode,
-	std::vector<VNode* const> insertedVnodeQueue
+	VNode* __restrict__ const vnode
 );
 
 #endif
