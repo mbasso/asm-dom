@@ -1,5 +1,4 @@
 #include "main.hpp"
-#include "../Hooks/Hooks.hpp"
 #include "../Diff/diff.hpp"
 #include "../VNode/VNode.hpp"
 #include "../HtmlDOMApi/HtmlDOMApi.hpp"
@@ -10,8 +9,6 @@
 #include <string>
 
 VNode* const emptyNode = new VNode();
-
-std::vector<Hooks> hooks = { diffHooks };
 
 bool isDefined(const emscripten::val& obj) {
   std::string type = obj.typeOf().as<std::string>();
@@ -60,7 +57,6 @@ std::map<std::string, int> createKeyToOldIdx(const std::vector<VNode*> children,
 }
 
 emscripten::val createElm(VNode* const vnode, std::vector<VNode* const> insertedVnodeQueue) {
-	// TODO: init hook
 	if (vnode->sel.compare("!") == 0) {
 		vnode->elm = createComment(vnode->text);
 	} else if (vnode->sel.empty()) {
@@ -72,11 +68,8 @@ emscripten::val createElm(VNode* const vnode, std::vector<VNode* const> inserted
 			vnode->elm = createElement(vnode->sel);
 		}
 
-		for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
-			if (hooks[i].create) {
-				hooks[i].create(emptyNode, vnode);
-			}
-		}
+		diff(emptyNode, vnode);
+
 		if (!vnode->children.empty()) {
 			for(std::vector<VNode*>::size_type i = 0; i != vnode->children.size(); ++i) {
 				appendChild(vnode->elm, createElm(vnode->children[i], insertedVnodeQueue));
@@ -84,8 +77,6 @@ emscripten::val createElm(VNode* const vnode, std::vector<VNode* const> inserted
 		} else if (!vnode->text.empty()) {
 			appendChild(vnode->elm, createTextNode(vnode->text));
 		}
-		// TODO: create hook
-		// TODO: insert hook
 	}
 	return vnode->elm;
 };
@@ -103,20 +94,6 @@ void addVnodes(
 	}
 };
 
-void invokeDestroyHook(VNode* const vnode) {
-	// TODO: destroy callback
-	for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
-		if (hooks[i].destroy) {
-			hooks[i].destroy(vnode);
-		}
-	}
-	if (!vnode->children.empty()) {
-		for (std::vector<VNode*>::size_type j = 0; j < vnode->children.size(); ++j) {
-			invokeDestroyHook(vnode->children[j]);
-		}
-	}
-}
-
 void removeVnodes(
 	emscripten::val parentElm,
 	std::vector<VNode*> vnodes,
@@ -127,7 +104,6 @@ void removeVnodes(
 	for (; startIdx <= endIdx; ++startIdx) {
 		VNode* vnode = vnodes[startIdx];
 		if (!vnode->sel.empty()) {
-			invokeDestroyHook(vnode);
 			int listeners = 1;
 			rm = [&listeners, &vnode]() -> void {
 				if (--listeners == 0) {
@@ -135,13 +111,6 @@ void removeVnodes(
 					removeChild(parent, vnode->elm);
 				}
 			};
-			// TODO: remove callback
-			for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
-				if (hooks[i].remove) {
-					++listeners;
-					hooks[i].remove(vnode, rm);
-				}
-			}
 			// TODO: remove callback
 			rm();
 		} else {
@@ -218,14 +187,7 @@ void patchVnode(
 	VNode* __restrict__ const vnode,
 	std::vector<VNode* const> insertedVnodeQueue
 ) {
-	// TODO: prepatch hook
-	if (oldVnode == vnode) return;
-	for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
-		if (hooks[i].update) {
-			hooks[i].update(oldVnode, vnode);
-		}
-	}
-	// TODO: update hook
+	diff(oldVnode, vnode);
 	if (vnode->text.empty()) {
 		if (!vnode->children.empty() && !oldVnode->children.empty()) {
 			// if (vnode->children != oldVnode->children)
@@ -241,16 +203,10 @@ void patchVnode(
 	} else if (vnode->text.compare(oldVnode->text) != 0) {
 		setTextContent(vnode->elm, vnode->text);
 	}
-	// TODO: postpatch hook
 };
 
 VNode* patch_vnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 	std::vector<VNode* const> insertedVnodeQueue;
-	for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
-		if (hooks[i].pre) {
-			hooks[i].pre();
-		}
-	}
 	if (sameVnode(oldVnode, vnode)) {
 		patchVnode(oldVnode, vnode, insertedVnodeQueue);
 	} else {
@@ -260,12 +216,6 @@ VNode* patch_vnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const
 			insertBefore(parent, vnode->elm, nextSibling(oldVnode->elm));
 			std::vector<VNode*> vnodes { oldVnode };
 			removeVnodes(parent, vnodes, 0, 0);
-		}
-	}
-	// TODO: insert hook
-	for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
-		if (hooks[i].post) {
-			hooks[i].post();
 		}
 	}
 	return vnode;

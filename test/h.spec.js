@@ -149,9 +149,9 @@ describe('h', function test() {
     ]);
     const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.sel).toEqual('svg');
-    // expect(vnode.props.get('ns')).toEqual('http://www.w3.org/2000/svg');
+    expect(vnode.props.get('ns')).toEqual('http://www.w3.org/2000/svg');
     expect(vnode.children[0].sel).toEqual('video');
-    // expect(vnode.children[0].props.get('ns')).toEqual('http://www.w3.org/2000/svg');
+    expect(vnode.children[0].props.get('ns')).toEqual('http://www.w3.org/2000/svg');
     vdom.deleteVNode(vnodePtr);
   });
 
@@ -188,7 +188,6 @@ describe('h', function test() {
       'data-float': '0.1',
     });
 
-    /*
     const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.props.get('data-empty')).toEqual('');
     expect(vnode.props.get('data-dash')).toEqual('-');
@@ -196,7 +195,6 @@ describe('h', function test() {
     expect(vnode.props.get('data-camel')).toEqual('fooBar');
     expect(vnode.props.get('data-integer')).toEqual('0');
     expect(vnode.props.get('data-float')).toEqual('0.1');
-    */
     vdom.deleteVNode(vnodePtr);
   });
 });

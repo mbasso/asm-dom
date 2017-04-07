@@ -1,5 +1,4 @@
 #include "diff.hpp"
-#include "../Hooks/Hooks.hpp"
 #include "../VNode/VNode.hpp"
 #include <iterator>
 #include <map>
@@ -32,5 +31,3 @@ void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		++it;
 	}
 };
-
-Hooks diffHooks(&diff, &diff);

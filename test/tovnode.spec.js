@@ -57,10 +57,8 @@ describe('toVNode', function test() {
     const vnodePtr = toVNode(node);
     const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.sel.toLowerCase()).toEqual('div');
-    /*
     expect(vnode.props.get('id')).toEqual('nodeId');
     expect(vnode.props.get('class')).toEqual('nodeClass1 nodeClass2');
-    */
     vdom.deleteVNode(vnodePtr);
   });
 
