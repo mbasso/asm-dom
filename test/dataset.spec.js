@@ -22,14 +22,12 @@ describe('dataset', function testDataset() {
 
   it('handles string conversions', () => {
     const vnode = h('i', {
-      dataset: {
-        empty: '',
-        dash: '-',
-        dashed: 'foo-bar',
-        camel: 'fooBar',
-        integer: 0,
-        float: 0.1,
-      },
+      'data-empty': '',
+      'data-dash': '-',
+      'data-dashed': 'foo-bar',
+      'data-camel': 'fooBar',
+      'data-integer': '0',
+      'data-float': '0.1',
     });
 
     const elmPtr = patch(root, vnode);

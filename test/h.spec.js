@@ -149,9 +149,9 @@ describe('h', function test() {
     ]);
     const vnode = vdom.getVNode(vnodePtr);
     expect(vnode.sel).toEqual('svg');
-    expect(vnode.data.ns).toEqual('http://www.w3.org/2000/svg');
+    // expect(vnode.props.get('ns')).toEqual('http://www.w3.org/2000/svg');
     expect(vnode.children[0].sel).toEqual('video');
-    expect(vnode.children[0].data.ns).toEqual('http://www.w3.org/2000/svg');
+    // expect(vnode.children[0].props.get('ns')).toEqual('http://www.w3.org/2000/svg');
     vdom.deleteVNode(vnodePtr);
   });
 
@@ -180,23 +180,23 @@ describe('h', function test() {
 
   it('should create a vnode with dataset', () => {
     const vnodePtr = h('i', {
-      dataset: {
-        empty: '',
-        dash: '-',
-        dashed: 'foo-bar',
-        camel: 'fooBar',
-        integer: 0,
-        float: 0.1,
-      },
+      'data-empty': '',
+      'data-dash': '-',
+      'data-dashed': 'foo-bar',
+      'data-camel': 'fooBar',
+      'data-integer': '0',
+      'data-float': '0.1',
     });
 
+    /*
     const vnode = vdom.getVNode(vnodePtr);
-    expect(vnode.data.dataset.get('empty')).toEqual('');
-    expect(vnode.data.dataset.get('dash')).toEqual('-');
-    expect(vnode.data.dataset.get('dashed')).toEqual('foo-bar');
-    expect(vnode.data.dataset.get('camel')).toEqual('fooBar');
-    expect(vnode.data.dataset.get('integer')).toEqual('0');
-    expect(vnode.data.dataset.get('float')).toEqual('0.1');
+    expect(vnode.props.get('data-empty')).toEqual('');
+    expect(vnode.props.get('data-dash')).toEqual('-');
+    expect(vnode.props.get('data-dashed')).toEqual('foo-bar');
+    expect(vnode.props.get('data-camel')).toEqual('fooBar');
+    expect(vnode.props.get('data-integer')).toEqual('0');
+    expect(vnode.props.get('data-float')).toEqual('0.1');
+    */
     vdom.deleteVNode(vnodePtr);
   });
 });

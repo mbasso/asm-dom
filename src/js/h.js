@@ -1,5 +1,3 @@
-import { objToData } from './utils';
-
 const getChildren = (lib, arr) => {
   const result = new lib.VNodePtrVector();
   arr.forEach(x => {
@@ -12,42 +10,66 @@ const getChildren = (lib, arr) => {
   return result;
 };
 
+const objToProps = (lib, obj) => {
+  const map = new lib.MapStringString();
+  Object.keys(obj).forEach(x => {
+    if (typeof obj[x] === 'string') {
+      map.set(x, obj[x]);
+    } else if (obj[x]) {
+      map.set(x, String(obj[x]));
+    }
+  });
+  return map;
+};
+
 export const getHFunction = (lib) => (a, b, c, d) => {
+  let result;
   if (b === undefined) {
-    return lib._h_s(a);
+    result = lib._h_s(a);
   } else if (c === undefined) {
     if (Array.isArray(b)) {
-      const result = lib._h_sc(a, b = getChildren(lib, b));
+      result = lib._h_sc(a, b = getChildren(lib, b));
       b.delete();
-      return result;
-    }
-    switch (typeof b) {
-      case 'boolean':
-        return lib._h_ti(a, b);
-      case 'string':
-        return lib._h_st(a, b);
-      case 'number':
-        return lib._h_sn(a, b);
-      case 'object':
-        return lib._h_sd(a, objToData(b, lib));
-      default:
-        throw new Error('Invalid argument: ', b);
+    } else {
+      switch (typeof b) {
+        case 'boolean':
+          result = lib._h_ti(a, b);
+          break;
+        case 'string':
+          result = lib._h_st(a, b);
+          break;
+        case 'number':
+          result = lib._h_sn(a, b);
+          break;
+        case 'object':
+          result = lib._h_sd(a, b = objToProps(lib, b));
+          b.delete();
+          break;
+        default:
+          throw new Error('Invalid argument: ', b);
+      }
     }
   } else if (d === undefined) {
     if (Array.isArray(c)) {
-      const result = lib._h_sdc(a, objToData(b, lib), c = getChildren(lib, c));
+      result = lib._h_sdc(a, b = objToProps(lib, b), c = getChildren(lib, c));
+      b.delete();
       c.delete();
-      return result;
-    }
-    switch (typeof c) {
-      case 'string':
-        return lib._h_sdt(a, objToData(b, lib), c);
-      case 'number':
-        return lib._h_sdn(a, objToData(b, lib), c);
-      default:
-        throw new Error('Invalid argument: ', c);
+    } else {
+      switch (typeof c) {
+        case 'string':
+          result = lib._h_sdt(a, b = objToProps(lib, b), c);
+          b.delete();
+          break;
+        case 'number':
+          result = lib._h_sdn(a, b = objToProps(lib, b), c);
+          b.delete();
+          break;
+        default:
+          throw new Error('Invalid argument: ', c);
+      }
     }
   } else {
-    return lib._h_stdc(a, b, c, d);
+    result = lib._h_stdc(a, b, c, d);
   }
+  return result;
 };

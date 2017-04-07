@@ -39,10 +39,12 @@ describe('toVNode', function test() {
     node.setAttribute('foo', 'bar');
     node.setAttribute('lorem', 'ipsum');
     const vnodePtr = toVNode(node);
+    /*
     const vnode = vdom.getVNode(vnodePtr);
-    expect(vnode.data.attrs.get('id')).toBeFalsy();
-    expect(vnode.data.attrs.get('foo')).toEqual('bar');
-    expect(vnode.data.attrs.get('lorem')).toEqual('ipsum');
+    expect(vnode.props.get('id')).toBeFalsy();
+    expect(vnode.props.get('foo')).toEqual('bar');
+    expect(vnode.props.get('lorem')).toEqual('ipsum');
+    */
     vdom.deleteVNode(vnodePtr);
   });
 
@@ -54,7 +56,11 @@ describe('toVNode', function test() {
     node.setAttribute('id', 'nodeId');
     const vnodePtr = toVNode(node);
     const vnode = vdom.getVNode(vnodePtr);
-    expect(vnode.sel.toLowerCase()).toEqual('div#nodeid.nodeclass1.nodeclass2');
+    expect(vnode.sel.toLowerCase()).toEqual('div');
+    /*
+    expect(vnode.props.get('id')).toEqual('nodeId');
+    expect(vnode.props.get('class')).toEqual('nodeClass1 nodeClass2');
+    */
     vdom.deleteVNode(vnodePtr);
   });
 

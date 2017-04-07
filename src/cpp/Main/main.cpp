@@ -1,11 +1,8 @@
 #include "main.hpp"
 #include "../Hooks/Hooks.hpp"
-#include "../Modules/Class/class.hpp"
-#include "../Modules/Props/props.hpp"
-#include "../Modules/Dataset/dataset.hpp"
+#include "../Diff/diff.hpp"
 #include "../VNode/VNode.hpp"
 #include "../HtmlDOMApi/HtmlDOMApi.hpp"
-#include "../Utils/utils.hpp"
 #include <emscripten/bind.h>
 #include <algorithm>
 #include <vector>
@@ -14,31 +11,38 @@
 
 VNode* const emptyNode = new VNode();
 
-std::vector<Hooks> hooks = {
-	classHooks,
-	propsHooks,
-	datasetHooks
+std::vector<Hooks> hooks = { diffHooks };
+
+bool isDefined(const emscripten::val& obj) {
+  std::string type = obj.typeOf().as<std::string>();
+  return type.compare("undefined") != 0 && type.compare("null") != 0;
 };
 
 bool sameVnode(const VNode* __restrict__ const vnode1, const VNode* __restrict__ const vnode2) {
-  return vnode1->key.compare(vnode2->key) == 0 && vnode1->sel.compare(vnode2->sel) == 0;
+  return !vnode1->key.empty() && vnode1->key.compare(vnode2->key) == 0 && vnode1->sel.compare(vnode2->sel) == 0;
 };
 
 VNode* emptyNodeAt(const emscripten::val elm) {
-  VNode* vnode = new VNode();
+  VNode* vnode = new VNode(tagName(elm));
   vnode->elm = elm;
-  vnode->sel.append(tagName(elm));
   std::transform(vnode->sel.begin(), vnode->sel.end(), vnode->sel.begin(), ::tolower);
 
   if (isDefined(elm["id"])) {
-    vnode->sel += '#';
-    vnode->sel.append(elm["id"].as<std::string>());
+		vnode->props.insert(
+			std::make_pair(
+				std::string("id"),
+				elm["id"].as<std::string>()
+			)
+		);
   }
 
   if (isDefined(elm["className"])) {
-    vnode->sel += '.';
-    vnode->sel.append(elm["className"].as<std::string>());
-    std::replace(vnode->sel.begin(), vnode->sel.end(), ' ', '.');
+		vnode->props.insert(
+			std::make_pair(
+				std::string("class"),
+				elm["className"].as<std::string>()
+			)
+		);
   }
 
   return vnode;
@@ -62,21 +66,12 @@ emscripten::val createElm(VNode* const vnode, std::vector<VNode* const> inserted
 	} else if (vnode->sel.empty()) {
 		vnode->elm = createTextNode(vnode->text);
 	} else {
-		std::size_t hashIdx = vnode->sel.find('#');
-		std::size_t dotIdx = vnode->sel.find('.', hashIdx);
-		int hash = hashIdx != std::string::npos ? static_cast<int>(hashIdx) : vnode->sel.length();
-		int dot = dotIdx != std::string::npos ? static_cast<int>(dotIdx) : vnode->sel.length();
-		std::string tag = hashIdx != std::string::npos || dotIdx != std::string::npos ? vnode->sel.substr(0, std::min(hash, dot)) : vnode->sel;
-		vnode->elm = !vnode->data.ns.empty() ? createElementNS(vnode->data.ns, tag) : createElement(tag);
+		if (vnode->props.count(std::string("ns")) != 0) {
+			vnode->elm = createElementNS(vnode->props.at(std::string("ns")), vnode->sel);
+		} else {
+			vnode->elm = createElement(vnode->sel);
+		}
 
-		if (hash < dot) {
-			vnode->elm.set("id", emscripten::val(vnode->sel.substr(hash + 1, dot)));
-		}
-		if (dotIdx != std::string::npos) {
-			std::string className = vnode->sel.substr(dot + 1);
-			std::replace(className.begin(), className.end(), '.', ' ');
-			vnode->elm.set("className", emscripten::val(className));
-		}
 		for (std::vector<Hooks>::size_type i = hooks.size(); i--;) {
 			if (hooks[i].create) {
 				hooks[i].create(emptyNode, vnode);
@@ -277,8 +272,7 @@ VNode* patch_vnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const
 };
 
 VNode* patch_element(const emscripten::val element, VNode* const vnode) {
-	VNode* oldVnode = emptyNodeAt(element);
-	return patch_vnode(oldVnode, vnode);
+	return patch_vnode(emptyNodeAt(element), vnode);
 };
 
 std::size_t patch_vnodePtr(const std::size_t oldVnode, const std::size_t vnode) {

@@ -36,6 +36,7 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(elmPtr);
   });
 
+  /*
   it('should have different tag and id', () => {
     const node = document.createElement('div');
     root.appendChild(node);
@@ -55,7 +56,6 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(elmPtr);
   });
 
-  /*
   it('should have correct namespace', () => {
     const SVGNamespace = 'http://www.w3.org/2000/svg';
     const XHTMLNamespace = 'http://www.w3.org/1999/xhtml';
