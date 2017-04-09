@@ -1,7 +1,7 @@
 #include "main.hpp"
 #include "../Diff/diff.hpp"
 #include "../VNode/VNode.hpp"
-#include "../HtmlDOMApi/HtmlDOMApi.hpp"
+#include <emscripten.h>
 #include <emscripten/bind.h>
 #include <algorithm>
 #include <vector>
@@ -20,18 +20,20 @@ bool sameVnode(const VNode* __restrict__ const vnode1, const VNode* __restrict__
 };
 
 VNode* emptyNodeAt(const emscripten::val elm) {
-  VNode* vnode = new VNode(tagName(elm));
-  vnode->elm = elm;
+  VNode* vnode = new VNode(elm["tagName"].as<std::string>());
+  vnode->elm = EM_ASM_INT({
+		return window['asmDomHelpers']['domApi']['addNode'](
+			window['asmDomHelpers']['Pointer_stringify']($0)
+		);
+	}, elm["id"].as<std::string>().c_str());
   std::transform(vnode->sel.begin(), vnode->sel.end(), vnode->sel.begin(), ::tolower);
 
-  if (isDefined(elm["id"])) {
-		vnode->props.insert(
-			std::make_pair(
-				std::string("id"),
-				elm["id"].as<std::string>()
-			)
-		);
-  }
+  vnode->props.insert(
+		std::make_pair(
+			std::string("id"),
+			elm["id"].as<std::string>()
+		)
+	);
 
   if (isDefined(elm["className"])) {
 		vnode->props.insert(
@@ -56,70 +58,94 @@ std::map<std::string, int> createKeyToOldIdx(const std::vector<VNode*> children,
   return map;
 }
 
-emscripten::val createElm(VNode* const vnode) {
+int createElm(VNode* const vnode) {
 	if (vnode->sel.compare("!") == 0) {
-		vnode->elm = createComment(vnode->text);
+		vnode->elm = EM_ASM_INT({
+			return window['asmDomHelpers']['domApi']['createComment'](
+				window['asmDomHelpers']['Pointer_stringify']($0)
+			);
+		}, vnode->text.c_str());
 	} else if (vnode->sel.empty()) {
-		vnode->elm = createTextNode(vnode->text);
+		vnode->elm = EM_ASM_INT({
+			return window['asmDomHelpers']['domApi']['createComment'](
+				window['asmDomHelpers']['Pointer_stringify']($0)
+			);
+		}, vnode->text.c_str());
 	} else {
 		if (vnode->props.count(std::string("ns")) != 0) {
-			vnode->elm = createElementNS(vnode->props.at(std::string("ns")), vnode->sel);
+			vnode->elm = EM_ASM_INT({
+				return window['asmDomHelpers']['domApi']['createElementNS'](
+					window['asmDomHelpers']['Pointer_stringify']($0),
+					window['asmDomHelpers']['Pointer_stringify']($1)
+				);
+			}, vnode->props.at(std::string("ns")).c_str(), vnode->sel.c_str());
 		} else {
-			vnode->elm = createElement(vnode->sel);
+			vnode->elm = EM_ASM_INT({
+				return window['asmDomHelpers']['domApi']['createElement'](
+					window['asmDomHelpers']['Pointer_stringify']($0)
+				);
+			}, vnode->sel.c_str());
 		}
 
 		diff(emptyNode, vnode);
 
 		if (!vnode->children.empty()) {
 			for(std::vector<VNode*>::size_type i = 0; i != vnode->children.size(); ++i) {
-				appendChild(vnode->elm, createElm(vnode->children[i]));
+				EM_ASM_({
+					window['asmDomHelpers']['domApi']['appendChild']($0, $1);
+				}, vnode->elm, createElm(vnode->children[i]));
 			}
 		} else if (!vnode->text.empty()) {
-			appendChild(vnode->elm, createTextNode(vnode->text));
+			EM_ASM_({
+				window['asmDomHelpers']['domApi']['appendChild'](
+					$0,
+					window['asmDomHelpers']['domApi']['createTextNode']($1)
+				);
+			}, vnode->elm, vnode->text.c_str());
 		}
 	}
 	return vnode->elm;
 };
 
 void addVnodes(
-	emscripten::val parentElm,
-	emscripten::val before,
+	int parentElm,
+	int before,
 	std::vector<VNode*> vnodes,
 	std::vector<VNode*>::size_type startIdx,
 	const std::vector<VNode*>::size_type endIdx
 ) {
 	for (; startIdx <= endIdx; ++startIdx) {
-		insertBefore(parentElm, createElm(vnodes[startIdx]), before);
+		EM_ASM_({
+			window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2 || null)
+		}, parentElm, createElm(vnodes[startIdx]), before);
 	}
 };
 
 void removeVnodes(
-	emscripten::val parentElm,
+	int parentElm,
 	std::vector<VNode*> vnodes,
 	std::vector<VNode*>::size_type startIdx,
 	const std::vector<VNode*>::size_type endIdx
 ) {
-	std::function<void()> rm;
 	for (; startIdx <= endIdx; ++startIdx) {
 		VNode* vnode = vnodes[startIdx];
 		if (!vnode->sel.empty()) {
-			int listeners = 1;
-			rm = [&listeners, &vnode]() -> void {
-				if (--listeners == 0) {
-					emscripten::val parent = parentNode(vnode->elm);
-					removeChild(parent, vnode->elm);
-				}
-			};
-			// TODO: remove callback
-			rm();
+			EM_ASM_({
+				window['asmDomHelpers']['domApi']['removeChild'](
+					window['asmDomHelpers']['domApi']['parentNode']($0),
+					$0
+				);
+			}, vnode->elm);
 		} else {
-			removeChild(parentElm, vnodes[startIdx]->elm);
+			EM_ASM_({
+				window['asmDomHelpers']['domApi']['removeChild']($0, $1);
+			}, parentElm, vnodes[startIdx]->elm);
 		}
 	}
 };
 
 void updateChildren(
-	emscripten::val parentElm,
+	int parentElm,
 	std::vector<VNode*> oldCh,
 	std::vector<VNode*> newCh
 ) {
@@ -145,12 +171,22 @@ void updateChildren(
 			newEndVnode = newCh[--newEndIdx];
 		} else if (sameVnode(oldStartVnode, newEndVnode)) {
 			patchVnode(oldStartVnode, newEndVnode);
-			insertBefore(parentElm, oldStartVnode->elm, nextSibling(oldEndVnode->elm));
+
+			EM_ASM_({
+				window['asmDomHelpers']['domApi']['insertBefore'](
+					$0,
+					$1,
+					window['asmDomHelpers']['domApi']['nextSibling']($2)
+				);
+			}, parentElm, oldStartVnode->elm, oldEndVnode->elm);
 			oldStartVnode = oldCh[++oldStartIdx];
 			newEndVnode = newCh[--newEndIdx];
 		} else if (sameVnode(oldEndVnode, newStartVnode)) {
 			patchVnode(oldEndVnode, newStartVnode);
-			insertBefore(parentElm, oldEndVnode->elm, oldStartVnode->elm);
+
+			EM_ASM_({
+				window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
+			}, parentElm, oldEndVnode->elm, oldStartVnode->elm);
 			oldEndVnode = oldCh[--oldEndIdx];
 			newStartVnode = newCh[++newStartIdx];
 		} else {
@@ -158,16 +194,22 @@ void updateChildren(
 				oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx);
 			}
 			if (oldKeyToIdx.count(newStartVnode->key) == 0) {
-				insertBefore(parentElm, createElm(newStartVnode), oldStartVnode->elm);
+				EM_ASM_({
+					window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
+				}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
 				newStartVnode = newCh[++newStartIdx];
 			} else {
 				elmToMove = oldCh[oldKeyToIdx[newStartVnode->key]];
 				if (elmToMove->sel.compare(newStartVnode->sel) != 0) {
-					insertBefore(parentElm, createElm(newStartVnode), oldStartVnode->elm);
+					EM_ASM_({
+						window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
+					}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
 				} else {
 					patchVnode(elmToMove, newStartVnode);
 					oldCh[oldKeyToIdx[newStartVnode->key]]->key = std::string("");
-					insertBefore(parentElm, elmToMove->elm, oldStartVnode->elm);
+					EM_ASM_({
+						window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
+					}, parentElm, elmToMove->elm, oldStartVnode->elm);
 				}
 				newStartVnode = newCh[++newStartIdx];
 			}
@@ -190,15 +232,29 @@ void patchVnode(
 			// if (vnode->children != oldVnode->children)
 			updateChildren(vnode->elm, oldVnode->children, vnode->children);
 		} else if(!vnode->children.empty()) {
-			if (!oldVnode->text.empty()) setTextContent(vnode->elm, std::string());
-			addVnodes(vnode->elm, emscripten::val::null(), vnode->children, 0, vnode->children.size() - 1);
+			if (!oldVnode->text.empty()) {
+				EM_ASM_({
+					window['asmDomHelpers']['domApi']['setTextContent']($0, "");
+				}, vnode->elm);
+			};
+			addVnodes(vnode->elm, 0, vnode->children, 0, vnode->children.size() - 1);
 		} else if(!oldVnode->children.empty()) {
 			removeVnodes(vnode->elm, oldVnode->children, 0, oldVnode->children.size() - 1);
 		} else if (!oldVnode->text.empty()) {
-			setTextContent(vnode->elm, oldVnode->text);
+			EM_ASM_({
+				window['asmDomHelpers']['domApi']['setTextContent'](
+					$0,
+					window['asmDomHelpers']['Pointer_stringify']($1)
+				);
+			}, vnode->elm, oldVnode->text.c_str());
 		}
 	} else if (vnode->text.compare(oldVnode->text) != 0) {
-		setTextContent(vnode->elm, vnode->text);
+		EM_ASM_({
+			window['asmDomHelpers']['domApi']['setTextContent'](
+				$0,
+				window['asmDomHelpers']['Pointer_stringify']($1)
+			);
+		}, vnode->elm, vnode->text.c_str());
 	}
 };
 
@@ -206,10 +262,18 @@ VNode* patch_vnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const
 	if (sameVnode(oldVnode, vnode)) {
 		patchVnode(oldVnode, vnode);
 	} else {
-		emscripten::val parent = parentNode(oldVnode->elm);
+		int parent = EM_ASM_INT({
+			return window['asmDomHelpers']['domApi']['parentNode']($0);
+		}, oldVnode->elm);
 		createElm(vnode);
-		if (isDefined(parent)) {
-			insertBefore(parent, vnode->elm, nextSibling(oldVnode->elm));
+		if (parent) {
+			EM_ASM_({
+				window['asmDomHelpers']['domApi']['insertBefore'](
+					$0,
+					$1,
+					window['asmDomHelpers']['domApi']['nextSibling']($2)
+				);
+			}, parent, vnode->elm, oldVnode->elm);
 			std::vector<VNode*> vnodes { oldVnode };
 			removeVnodes(parent, vnodes, 0, 0);
 		}

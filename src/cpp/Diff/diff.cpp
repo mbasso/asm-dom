@@ -1,5 +1,6 @@
 #include "diff.hpp"
 #include "../VNode/VNode.hpp"
+#include <emscripten.h>
 #include <iterator>
 #include <map>
 
@@ -10,23 +11,28 @@ void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 	while (it != oldVnode->props.end())
 	{
 		if (vnode->props.count(it->first) == 0) {
-			vnode->elm.call<void>("removeAttribute", emscripten::val(it->first));
+			EM_ASM_({
+				window['asmDomHelpers']['domApi']['removeAttribute'](
+					$0,
+					window['asmDomHelpers']['Pointer_stringify']($1)
+				);
+			}, vnode->elm, it->first.c_str());
 		}
 		++it;
 	}
 
 	it = vnode->props.begin();
-	bool isAttrDefined = false;
+	bool isAttrDefined;
 	while (it != vnode->props.end()) {
 		isAttrDefined = oldVnode->props.count(it->first) != 0;
 		if (!isAttrDefined || (isAttrDefined && oldVnode->props.at(it->first).compare(it->second) != 0)) {
-			vnode->elm.call<void>(
-				"setAttribute",
-				emscripten::val(it->first),
-				emscripten::val(it->second)
-			);
-		} else if (!isAttrDefined) {
-			vnode->elm.call<void>("removeAttribute", emscripten::val(it->first));
+			EM_ASM_({
+				window['asmDomHelpers']['domApi']['setAttribute'](
+					$0,
+					window['asmDomHelpers']['Pointer_stringify']($1),
+					window['asmDomHelpers']['Pointer_stringify']($2)
+				);
+			}, vnode->elm, it->first.c_str(), it->second.c_str());
 		}
 		++it;
 	}

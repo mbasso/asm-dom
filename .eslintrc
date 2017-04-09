@@ -8,6 +8,7 @@
   },
   "parser": "babel-eslint",
   "rules": {
+    "quote-props": "off",
     "no-underscore-dangle": "off",
     "no-param-reassign": "off",
     "valid-jsdoc": 2,

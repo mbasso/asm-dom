@@ -9,7 +9,7 @@ var config = {
       {
         test: /\.js$/,
         loaders: ['babel-loader'],
-        exclude: [/node_modules/, /src\/helpers/],
+        exclude: [/node_modules/, /src\/helpers/, /asm\.js$/],
       },
       {
         test: /\.wasm$/,
