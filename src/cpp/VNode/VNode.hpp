@@ -1,7 +1,6 @@
 #ifndef VNode_hpp
 #define VNode_hpp
 
-#include <emscripten/val.h>
 #include <vector>
 #include <string>
 #include <map>
@@ -50,9 +49,6 @@ class VNode {
     std::map<std::string, std::string> props;
     int elm;
     std::vector<VNode*> children;
-    // bindings
-    std::vector<VNode> get_children() const;
-    void set_children(std::vector<VNode> nodeChildren);
 };
 
 #endif

@@ -17,7 +17,6 @@ std::size_t h_sdc(const std::string& sel, const std::map<std::string, std::strin
 
 std::size_t h_stdc(const std::string& sel, const std::string& text, const std::map<std::string, std::string>& nodeProps, const std::vector<std::size_t>& children);
 
-VNode getVNode(const std::size_t& vnode);
 void deleteVNodePtr(const std::size_t& vnode);
 
 #endif

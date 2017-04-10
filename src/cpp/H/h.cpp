@@ -5,26 +5,9 @@
 #include <string>
 #include <map>
 
-std::string svgNS("http://www.w3.org/2000/svg");
-
-void addNS(VNode* const vnode) {
-	vnode->props.insert(std::make_pair(std::string("ns"), svgNS));
-	if (vnode->sel.compare("foreignObject") != 0 && !vnode->children.empty()) {
-    for(std::vector<VNode>::size_type i = vnode->children.size(); i--;) {
-      addNS(vnode->children[i]);
-    }
-	}
-}
-
 VNode* const adjustVNode(VNode* const vnode) {
   if (vnode->props.count(std::string("key")) != 0) {
     vnode->key = vnode->props.at(std::string("key"));
-  }
-  if (
-    vnode->sel.length() >= 3 && vnode->sel[0] == 's' && vnode->sel[1] == 'v' && vnode->sel[2] == 'g' &&
-    (vnode->sel.length() == 3 || vnode->sel[3] == '.' || vnode->sel[3] == '#')
-  ) {
-    addNS(vnode);
   }
   return vnode;
 }
@@ -85,10 +68,6 @@ std::size_t h_stdc(const std::string& sel, const std::string& text, const std::m
   return reinterpret_cast<std::size_t>(adjustVNode(new VNode(sel, text, nodeProps, vnodes)));
 };
 
-VNode getVNode(const std::size_t& vnode) {
-	return *(reinterpret_cast<VNode*>(vnode));
-}
-
 void deleteVNode(VNode* const vnode) {
   for (std::vector<VNode*>::size_type i = vnode->children.size(); i--;) {
     deleteVNode(vnode->children[i]);
@@ -113,6 +92,5 @@ EMSCRIPTEN_BINDINGS(h_function) {
   emscripten::function("_h_sdt", &h_sdt, emscripten::allow_raw_pointers());
   emscripten::function("_h_sdc", &h_sdc, emscripten::allow_raw_pointers());
   emscripten::function("_h_stdc", &h_stdc, emscripten::allow_raw_pointers());
-  emscripten::function("_getVNode", &getVNode, emscripten::allow_raw_pointer<emscripten::arg<0>>());
   emscripten::function("deleteVNode", &deleteVNodePtr, emscripten::allow_raw_pointer<emscripten::arg<0>>());
 }

@@ -1,3 +1,4 @@
+/*
 import expect from 'expect';
 import asmDom from '../src/';
 
@@ -176,7 +177,7 @@ describe('h', function test() {
     expect(vnode.children.length).toEqual(0);
     vdom.deleteVNode(vnodePtr);
   });
-  */
+  *//*
 
   it('should create a vnode with dataset', () => {
     const vnodePtr = h('i', {
@@ -198,3 +199,4 @@ describe('h', function test() {
     vdom.deleteVNode(vnodePtr);
   });
 });
+*/

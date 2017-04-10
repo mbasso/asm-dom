@@ -1,6 +1,5 @@
 import { getHFunction } from './js/h';
 import { getPatchFunction } from './js/patch';
-import { getGetVNodeFunction } from './js/getVNode';
 import domApi from './js/domApi';
 
 export default function load(config = {}) {
@@ -17,35 +16,13 @@ export default function load(config = {}) {
   }
 
   lib.h = getHFunction(lib);
-  lib.getVNode = getGetVNodeFunction(lib);
-
-  lib.patchElement = lib._patch_element;
-  lib.patchVNode = lib._patch_vnode;
   lib.patch = getPatchFunction(lib);
 
-  let api;
-  switch (typeof config.domApi) {
-    case 'function':
-      api = config.domApi(lib);
-      break;
-    case 'object':
-      api = config.domApi;
-      break;
-    default:
-      api = domApi;
-      break;
-  }
-
-  const asmDomHelpers = {
-    'Pointer_stringify': lib.Pointer_stringify,
-    'domApi': api,
-  };
   /* eslint-disable */
-  if (window) window['asmDomHelpers'] = asmDomHelpers;
-  if (global) {
-    if (!global.window) global.window = {};
-    global.window['asmDomHelpers'] = asmDomHelpers;
-  }
+  window['asmDomHelpers'] = {
+    'Pointer_stringify': lib.Pointer_stringify,
+    'domApi': domApi,
+  };
   /* eslint-enable */
 
   return lib;

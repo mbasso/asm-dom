@@ -294,6 +294,6 @@ std::size_t patch_elementPtr(const emscripten::val element, const std::size_t vn
 };
 
 EMSCRIPTEN_BINDINGS(patch_function) {
-	emscripten::function("_patch_vnode", &patch_vnodePtr, emscripten::allow_raw_pointers());
-	emscripten::function("_patch_element", &patch_elementPtr, emscripten::allow_raw_pointers());
+	emscripten::function("patchVNode", &patch_vnodePtr, emscripten::allow_raw_pointers());
+	emscripten::function("patchElement", &patch_elementPtr, emscripten::allow_raw_pointers());
 }
