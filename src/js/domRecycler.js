@@ -1,14 +1,14 @@
 const recycler = {
   collect(node) {
     recycler.clean(node);
-    const name = `${node.nodeName}${node.namespaceURI}`;
+    const name = `${node.nodeName}${node.asmDomNS ? node.namespaceURI : ''}`;
     const list = recycler.nodes[name];
     if (list) list.push(node);
     else recycler.nodes[name] = [node];
   },
   create(nodeName, ns = '') {
     const name = nodeName.toUpperCase();
-    const list = recycler.nodes[`${name}${ns}`];
+    const list = recycler.nodes[name + ns];
     return (
       list && list.pop() ||
       ns && document.createElementNS(ns, name) ||

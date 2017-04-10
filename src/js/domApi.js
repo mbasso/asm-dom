@@ -5,8 +5,11 @@ const nodes = {
 };
 let ptr = 0;
 
-const addPtr = node => {
-  if (node) node.asmDomPtr = ptr;
+const addPtr = (node, ns) => {
+  if (node) {
+    node.asmDomPtr = ptr;
+    node.asmDomNS = ns;
+  }
   return node;
 };
 
@@ -23,7 +26,7 @@ export default {
   },
   'createElementNS'(namespaceURI, qualifiedName) {
     const node = recycler.create(namespaceURI, qualifiedName);
-    return node.asmDomPtr || (nodes[++ptr] = addPtr(node)) && ptr;
+    return node.asmDomPtr || (nodes[++ptr] = addPtr(node, namespaceURI)) && ptr;
   },
   'createTextNode'(text) {
     const node = recycler.createText(text);
