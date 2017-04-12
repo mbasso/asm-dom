@@ -15,7 +15,7 @@ const objToProps = (lib, obj) => {
   Object.keys(obj).forEach(x => {
     if (typeof obj[x] === 'string') {
       map.set(x, obj[x]);
-    } else if (obj[x]) {
+    } else if (obj[x] !== false) {
       map.set(x, String(obj[x]));
     }
   });
