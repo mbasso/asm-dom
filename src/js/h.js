@@ -1,29 +1,30 @@
 const getChildren = (lib, arr) => {
   const result = new lib.VNodePtrVector();
-  arr.forEach(x => {
-    if (typeof x === 'string') {
-      result.push_back(lib._h_ti(x, true));
-    } else if (x) {
-      result.push_back(x);
+  for (let i = 0; i < arr.length; i++) {
+    if (typeof arr[i] === 'string') {
+      result.push_back(lib._h_ti(arr[i], true));
+    } else if (arr[i]) {
+      result.push_back(arr[i]);
     }
-  });
+  }
   return result;
 };
 
 const objToProps = (lib, obj) => {
   const map = new lib.MapStringString();
-  Object.keys(obj).forEach(x => {
+  for (const x in obj) {
     if (typeof obj[x] === 'string') {
       map.set(x, obj[x]);
-    } else if (obj[x] !== false) {
+    } else if (obj[x] !== false && x !== 'events') {
       map.set(x, String(obj[x]));
     }
-  });
+  }
   return map;
 };
 
 export const getHFunction = (lib) => (a, b, c, d) => {
   let result;
+  const events = b && b.events;
   if (b === undefined) {
     result = lib._h_s(a);
   } else if (c === undefined) {
@@ -71,5 +72,6 @@ export const getHFunction = (lib) => (a, b, c, d) => {
   } else {
     result = lib._h_stdc(a, b, c, d);
   }
+  if (events) window.asmDomHelpers.vnodesData[result] = { events };
   return result;
 };

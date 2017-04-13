@@ -1,6 +1,6 @@
 import recycler from './domRecycler';
 
-const nodes = {
+export const nodes = {
   0: null,
 };
 let ptr = 0;

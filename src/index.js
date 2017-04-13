@@ -1,5 +1,6 @@
 import { getHFunction } from './js/h';
 import { getPatchFunction } from './js/patch';
+import diff from './js/diff';
 import domApi from './js/domApi';
 
 export default function load(config = {}) {
@@ -22,6 +23,8 @@ export default function load(config = {}) {
   window['asmDomHelpers'] = {
     'Pointer_stringify': lib.Pointer_stringify,
     'domApi': domApi,
+    'vnodesData': {},
+    'diff': diff,
   };
   /* eslint-enable */
 

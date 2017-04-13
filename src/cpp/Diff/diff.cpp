@@ -5,6 +5,10 @@
 #include <map>
 
 void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+	EM_ASM_({
+		window['asmDomHelpers']['diff']($0, $1, $2);
+	}, reinterpret_cast<std::size_t>(oldVnode), reinterpret_cast<std::size_t>(vnode), vnode->elm);
+
 	if (oldVnode->props.empty() && vnode->props.empty()) return;
 
 	std::map<std::string, std::string>::iterator it = oldVnode->props.begin();
