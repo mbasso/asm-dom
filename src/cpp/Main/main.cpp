@@ -125,25 +125,14 @@ void addVnodes(
 };
 
 void removeVnodes(
-	int parentElm,
 	std::vector<VNode*> vnodes,
 	std::vector<VNode*>::size_type startIdx,
 	const std::vector<VNode*>::size_type endIdx
 ) {
 	for (; startIdx <= endIdx; ++startIdx) {
-		VNode* vnode = vnodes[startIdx];
-		if (!vnode->sel.empty()) {
-			EM_ASM_({
-				window['asmDomHelpers']['domApi']['removeChild'](
-					window['asmDomHelpers']['domApi']['parentNode']($0),
-					$0
-				);
-			}, vnode->elm);
-		} else {
-			EM_ASM_({
-				window['asmDomHelpers']['domApi']['removeChild']($0, $1);
-			}, parentElm, vnode->elm);
-		}
+		EM_ASM_({
+			window['asmDomHelpers']['domApi']['removeChild']($0);
+		}, vnodes[startIdx]->elm);
 	}
 };
 
@@ -227,7 +216,7 @@ void updateChildren(
 			addVnodes(parentElm, 0, newCh, newStartIdx, newEndIdx);
 		}
 	} else if (newStartIdx > newEndIdx) {
-		removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx);
+		removeVnodes(oldCh, oldStartIdx, oldEndIdx);
 	}
 	delete oldKeyToIdx;
 };
@@ -246,7 +235,7 @@ void patchVnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vn
 			};
 			addVnodes(vnode->elm, 0, vnode->children, 0, vnode->children.size() - 1);
 		} else if(!oldVnode->children.empty()) {
-			removeVnodes(vnode->elm, oldVnode->children, 0, oldVnode->children.size() - 1);
+			removeVnodes(oldVnode->children, 0, oldVnode->children.size() - 1);
 		} else if (!oldVnode->text.empty()) {
 			EM_ASM_({
 				window['asmDomHelpers']['domApi']['setTextContent']($0, "");
@@ -279,7 +268,7 @@ VNode* patch_vnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const
 				);
 			}, parent, vnode->elm, oldVnode->elm);
 			std::vector<VNode*> vnodes { oldVnode };
-			removeVnodes(parent, vnodes, 0, 0);
+			removeVnodes(vnodes, 0, 0);
 		}
 	}
 	return vnode;
