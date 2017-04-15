@@ -16,7 +16,8 @@ const objToProps = (lib, obj) => {
     if (typeof obj[x] === 'string') {
       map.set(x, obj[x]);
     } else if (obj[x] !== false && x !== 'events') {
-      map.set(x, String(obj[x]));
+      // eslint-disable-next-line
+      map.set(x, '' + obj[x]);
     }
   }
   return map;
