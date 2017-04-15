@@ -1,11 +1,13 @@
-export default (oldVnode, vnode) => {
+export default (oldVnode, vnode, options) => {
   let result;
   if (typeof oldVnode === 'number') {
     result = window.asmDom.patchVNode(oldVnode, vnode);
-    setTimeout(() => {
-      window.asmDomHelpers.vnodesData[oldVnode] = undefined;
-      window.asmDom.deleteVNode(oldVnode);
-    });
+    options = options || {};
+    if (options.clearMemory === undefined || options.clearMemory) {
+      setTimeout(() => {
+        window.asmDom.deleteVNode(oldVnode);
+      });
+    }
   } else {
     result = window.asmDom.patchElement(oldVnode, vnode);
   }

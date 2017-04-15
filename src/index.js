@@ -21,6 +21,10 @@ export default (config) => {
 
   lib.h = h;
   lib.patch = patch;
+  lib.deleteVNode = (oldVnode) => {
+    window.asmDomHelpers.vnodesData[oldVnode] = undefined;
+    lib._deleteVNode(oldVnode);
+  };
 
   /* eslint-disable */
   window['asmDomHelpers'] = {

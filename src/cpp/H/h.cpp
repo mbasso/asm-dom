@@ -92,5 +92,5 @@ EMSCRIPTEN_BINDINGS(h_function) {
   emscripten::function("_h_sdt", &h_sdt, emscripten::allow_raw_pointers());
   emscripten::function("_h_sdc", &h_sdc, emscripten::allow_raw_pointers());
   emscripten::function("_h_stdc", &h_stdc, emscripten::allow_raw_pointers());
-  emscripten::function("deleteVNode", &deleteVNodePtr, emscripten::allow_raw_pointer<emscripten::arg<0>>());
+  emscripten::function("_deleteVNode", &deleteVNodePtr, emscripten::allow_raw_pointer<emscripten::arg<0>>());
 }
