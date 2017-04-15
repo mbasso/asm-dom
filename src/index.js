@@ -3,7 +3,8 @@ import patch from './js/patch';
 import diff from './js/diff';
 import domApi from './js/domApi';
 
-export default function load(config = {}) {
+export default (config) => {
+  config = config || {};
   let lib;
   if ((config.useWasm || 'WebAssembly' in window) && !config.useAsmJS) {
     /* eslint-disable */
@@ -23,7 +24,6 @@ export default function load(config = {}) {
 
   /* eslint-disable */
   window['asmDomHelpers'] = {
-    'Pointer_stringify': lib.Pointer_stringify,
     'domApi': domApi,
     'vnodesData': {},
     'diff': diff,
@@ -31,4 +31,4 @@ export default function load(config = {}) {
   /* eslint-enable */
 
   return lib;
-}
+};

@@ -26,7 +26,7 @@ VNode* emptyNodeAt(const emscripten::val elm) {
 
   vnode->elm = EM_ASM_INT({
 		return window['asmDomHelpers']['domApi']['addNode'](
-			window['asmDomHelpers']['Pointer_stringify']($0)
+			window['asmDom']['Pointer_stringify']($0)
 		);
 	}, id.c_str());
   std::transform(vnode->sel.begin(), vnode->sel.end(), vnode->sel.begin(), ::tolower);
@@ -65,27 +65,27 @@ int createElm(VNode* const vnode) {
 	if (vnode->sel.compare("!") == 0) {
 		vnode->elm = EM_ASM_INT({
 			return window['asmDomHelpers']['domApi']['createComment'](
-				window['asmDomHelpers']['Pointer_stringify']($0)
+				window['asmDom']['Pointer_stringify']($0)
 			);
 		}, vnode->text.c_str());
 	} else if (vnode->sel.empty()) {
 		vnode->elm = EM_ASM_INT({
 			return window['asmDomHelpers']['domApi']['createTextNode'](
-				window['asmDomHelpers']['Pointer_stringify']($0)
+				window['asmDom']['Pointer_stringify']($0)
 			);
 		}, vnode->text.c_str());
 	} else {
 		if (vnode->props.count(std::string("ns")) != 0) {
 			vnode->elm = EM_ASM_INT({
 				return window['asmDomHelpers']['domApi']['createElementNS'](
-					window['asmDomHelpers']['Pointer_stringify']($0),
-					window['asmDomHelpers']['Pointer_stringify']($1)
+					window['asmDom']['Pointer_stringify']($0),
+					window['asmDom']['Pointer_stringify']($1)
 				);
 			}, vnode->props.at(std::string("ns")).c_str(), vnode->sel.c_str());
 		} else {
 			vnode->elm = EM_ASM_INT({
 				return window['asmDomHelpers']['domApi']['createElement'](
-					window['asmDomHelpers']['Pointer_stringify']($0)
+					window['asmDom']['Pointer_stringify']($0)
 				);
 			}, vnode->sel.c_str());
 		}
@@ -245,7 +245,7 @@ void patchVnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vn
 		EM_ASM_({
 			window['asmDomHelpers']['domApi']['setTextContent'](
 				$0,
-				window['asmDomHelpers']['Pointer_stringify']($1)
+				window['asmDom']['Pointer_stringify']($1)
 			);
 		}, vnode->elm, vnode->text.c_str());
 	}
