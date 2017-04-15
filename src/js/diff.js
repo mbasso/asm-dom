@@ -1,8 +1,8 @@
 import { nodes } from './domApi';
 
 export default (oldVnodePtr, vnodePtr, elmPtr) => {
-  let oldListeners = (window.asmDomHelpers.vnodesData[oldVnodePtr] || {}).events;
-  let newListeners = (window.asmDomHelpers.vnodesData[vnodePtr] || {}).events;
+  let oldListeners = (window.asmDomHelpers.vnodesData[oldVnodePtr] || {}).raw;
+  let newListeners = (window.asmDomHelpers.vnodesData[vnodePtr] || {}).raw;
 
   if (!oldListeners && !newListeners || oldListeners === newListeners) return;
   oldListeners = oldListeners || {};

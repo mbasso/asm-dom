@@ -15,7 +15,7 @@ const objToProps = (obj) => {
   for (const x in obj) {
     if (typeof obj[x] === 'string') {
       map.set(x, obj[x]);
-    } else if (obj[x] !== false && x !== 'events') {
+    } else if (obj[x] !== false && x !== 'raw') {
       // eslint-disable-next-line
       map.set(x, '' + obj[x]);
     }
@@ -25,7 +25,7 @@ const objToProps = (obj) => {
 
 export default (a, b, c, d) => {
   let result;
-  const events = b && b.events;
+  const raw = b && b.raw;
   if (b === undefined) {
     result = window.asmDom._h_s(a);
   } else if (c === undefined) {
@@ -73,6 +73,6 @@ export default (a, b, c, d) => {
   } else {
     result = window.asmDom._h_stdc(a, b, c, d);
   }
-  if (events) window.asmDomHelpers.vnodesData[result] = { events };
+  if (raw) window.asmDomHelpers.vnodesData[result] = { raw };
   return result;
 };
