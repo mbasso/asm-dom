@@ -1,13 +1,13 @@
-export const getPatchFunction = (lib) => (oldVnode, vnode) => {
+export default (oldVnode, vnode) => {
   let result;
   if (typeof oldVnode === 'number') {
-    result = lib.patchVNode(oldVnode, vnode);
+    result = window.asmDom.patchVNode(oldVnode, vnode);
     setTimeout(() => {
       window.asmDomHelpers.vnodesData[oldVnode] = undefined;
-      lib.deleteVNode(oldVnode);
+      window.asmDom.deleteVNode(oldVnode);
     });
   } else {
-    result = lib.patchElement(oldVnode, vnode);
+    result = window.asmDom.patchElement(oldVnode, vnode);
   }
   return result;
 };

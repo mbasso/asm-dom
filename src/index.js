@@ -1,5 +1,5 @@
-import { getHFunction } from './js/h';
-import { getPatchFunction } from './js/patch';
+import h from './js/h';
+import patch from './js/patch';
 import diff from './js/diff';
 import domApi from './js/domApi';
 
@@ -16,8 +16,10 @@ export default function load(config = {}) {
     lib = require('../compiled/asmjs/asm-dom.asm.js')(config);
   }
 
-  lib.h = getHFunction(lib);
-  lib.patch = getPatchFunction(lib);
+  window['asmDom'] = lib;
+
+  lib.h = h;
+  lib.patch = patch;
 
   /* eslint-disable */
   window['asmDomHelpers'] = {

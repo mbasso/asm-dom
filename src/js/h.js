@@ -1,8 +1,8 @@
-const getChildren = (lib, arr) => {
-  const result = new lib.VNodePtrVector();
+const getChildren = (arr) => {
+  const result = new window.asmDom.VNodePtrVector();
   for (let i = 0; i < arr.length; i++) {
     if (typeof arr[i] === 'string') {
-      result.push_back(lib._h_ti(arr[i], true));
+      result.push_back(window.asmDom._h_ti(arr[i], true));
     } else if (arr[i]) {
       result.push_back(arr[i]);
     }
@@ -10,8 +10,8 @@ const getChildren = (lib, arr) => {
   return result;
 };
 
-const objToProps = (lib, obj) => {
-  const map = new lib.MapStringString();
+const objToProps = (obj) => {
+  const map = new window.asmDom.MapStringString();
   for (const x in obj) {
     if (typeof obj[x] === 'string') {
       map.set(x, obj[x]);
@@ -23,28 +23,28 @@ const objToProps = (lib, obj) => {
   return map;
 };
 
-export const getHFunction = (lib) => (a, b, c, d) => {
+export default (a, b, c, d) => {
   let result;
   const events = b && b.events;
   if (b === undefined) {
-    result = lib._h_s(a);
+    result = window.asmDom._h_s(a);
   } else if (c === undefined) {
     if (Array.isArray(b)) {
-      result = lib._h_sc(a, b = getChildren(lib, b));
+      result = window.asmDom._h_sc(a, b = getChildren(b));
       b.delete();
     } else {
       switch (typeof b) {
         case 'boolean':
-          result = lib._h_ti(a, b);
+          result = window.asmDom._h_ti(a, b);
           break;
         case 'string':
-          result = lib._h_st(a, b);
+          result = window.asmDom._h_st(a, b);
           break;
         case 'number':
-          result = lib._h_sn(a, b);
+          result = window.asmDom._h_sn(a, b);
           break;
         case 'object':
-          result = lib._h_sd(a, b = objToProps(lib, b));
+          result = window.asmDom._h_sd(a, b = objToProps(b));
           b.delete();
           break;
         default:
@@ -53,17 +53,17 @@ export const getHFunction = (lib) => (a, b, c, d) => {
     }
   } else if (d === undefined) {
     if (Array.isArray(c)) {
-      result = lib._h_sdc(a, b = objToProps(lib, b), c = getChildren(lib, c));
+      result = window.asmDom._h_sdc(a, b = objToProps(b), c = getChildren(c));
       b.delete();
       c.delete();
     } else {
       switch (typeof c) {
         case 'string':
-          result = lib._h_sdt(a, b = objToProps(lib, b), c);
+          result = window.asmDom._h_sdt(a, b = objToProps(b), c);
           b.delete();
           break;
         case 'number':
-          result = lib._h_sdn(a, b = objToProps(lib, b), c);
+          result = window.asmDom._h_sdn(a, b = objToProps(b), c);
           b.delete();
           break;
         default:
@@ -71,7 +71,7 @@ export const getHFunction = (lib) => (a, b, c, d) => {
       }
     }
   } else {
-    result = lib._h_stdc(a, b, c, d);
+    result = window.asmDom._h_stdc(a, b, c, d);
   }
   if (events) window.asmDomHelpers.vnodesData[result] = { events };
   return result;
