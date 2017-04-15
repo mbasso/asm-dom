@@ -1,26 +1,26 @@
 import { nodes } from './domApi';
 
 export default (oldVnodePtr, vnodePtr, elmPtr) => {
-  let oldListeners = (window.asmDomHelpers.vnodesData[oldVnodePtr] || {}).raw;
-  let newListeners = (window.asmDomHelpers.vnodesData[vnodePtr] || {}).raw;
+  let oldRaws = (window.asmDomHelpers.vnodesData[oldVnodePtr] || {}).raw;
+  let newRaws = (window.asmDomHelpers.vnodesData[vnodePtr] || {}).raw;
 
-  if (!oldListeners && !newListeners || oldListeners === newListeners) return;
-  oldListeners = oldListeners || {};
-  newListeners = newListeners || {};
+  if (!oldRaws && !newRaws || oldRaws === newRaws) return;
+  oldRaws = oldRaws || {};
+  newRaws = newRaws || {};
 
   const elm = nodes[elmPtr];
 
-  for (const key in oldListeners) {
-    if (!newListeners[key]) {
+  for (const key in oldRaws) {
+    if (!newRaws[key]) {
       elm[key] = undefined;
     }
   }
 
-  for (const key in newListeners) {
-    if (oldListeners[key] !== newListeners[key]) {
-      elm[key] = newListeners[key];
+  for (const key in newRaws) {
+    if (oldRaws[key] !== newRaws[key]) {
+      elm[key] = newRaws[key];
     }
   }
 
-  elm.asmDomListeners = Object.keys(newListeners);
+  elm.asmDomRaws = Object.keys(newRaws);
 };

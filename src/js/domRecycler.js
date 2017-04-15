@@ -32,9 +32,9 @@ const recycler = {
     node.remove();
     let i = node.attributes && node.attributes.length;
     while (i--) node.removeAttribute(node.attributes[i].name);
-    if (node.asmDomListeners) {
-      for (i = node.asmDomListeners.length; i--;) node[node.asmDomListeners[i]] = undefined;
-      node.asmDomListeners = undefined;
+    if (node.asmDomRaws) {
+      for (i = node.asmDomRaws.length; i--;) node[node.asmDomRaws[i]] = undefined;
+      node.asmDomRaws = undefined;
     }
     const keys = Object.keys(node);
     for (i = keys.length; i--;) {
