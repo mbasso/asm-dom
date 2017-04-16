@@ -1,3 +1,6 @@
+// eslint-disable-next-line
+Array.prototype.instanceofArray = true;
+
 const getChildren = (arr) => {
   const result = new window.asmDom.VNodePtrVector();
   for (let i = 0; i < arr.length; i++) {
@@ -29,7 +32,7 @@ export default (a, b, c, d) => {
   if (b === undefined) {
     result = window.asmDom._h_s(a);
   } else if (c === undefined) {
-    if (Array.isArray(b)) {
+    if (b && b.instanceofArray) {
       result = window.asmDom._h_sc(a, b = getChildren(b));
       b.delete();
     } else {
@@ -52,7 +55,7 @@ export default (a, b, c, d) => {
       }
     }
   } else if (d === undefined) {
-    if (Array.isArray(c)) {
+    if (c && c.instanceofArray) {
       result = window.asmDom._h_sdc(a, b = objToProps(b), c = getChildren(c));
       b.delete();
       c.delete();
