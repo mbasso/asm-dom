@@ -102,7 +102,9 @@ int createElm(VNode* const vnode) {
 			EM_ASM_({
 				window['asmDomHelpers']['domApi']['appendChild'](
 					$0,
-					window['asmDomHelpers']['domApi']['createTextNode']($1)
+					window['asmDomHelpers']['domApi']['createTextNode'](
+						window['asmDom']['Pointer_stringify']($1)
+					)
 				);
 			}, vnode->elm, vnode->text.c_str());
 		}

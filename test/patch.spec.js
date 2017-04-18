@@ -1,4 +1,3 @@
-/*
 import expect from 'expect';
 import asmDom from '../src/';
 
@@ -21,18 +20,10 @@ describe('patch', function testPatch() {
 
   beforeEach(clearDOM);
 
-  it('should patch an element', () => {
-    const vnode = h('div');
-    const elmPtr = vdom.patchElement(root, vnode);
-    const elm = document.getElementById('root').firstChild;
-    expect(elm.tagName).toEqual('DIV');
-    vdom.deleteVNode(elmPtr);
-  });
-
   it('should have a tag', () => {
     const vnode = h('div');
     const elmPtr = patch(root, vnode);
-    const elm = document.getElementById('root').firstChild;
+    const elm = document.body.firstChild;
     expect(elm.tagName).toEqual('DIV');
     vdom.deleteVNode(elmPtr);
   });
@@ -98,7 +89,7 @@ describe('patch', function testPatch() {
     expect(elm.firstChild.classList.contains('class')).toBeTruthy();
     // vnode.delete();
   });
-  *//*
+  */
 
   // TODO: should receive classes in class property
   // TODO: handles classes from both selector and property
@@ -106,23 +97,25 @@ describe('patch', function testPatch() {
   it('should create elements with text content', () => {
     const vnode = h('div', ['I am a string']);
     const elmPtr = patch(root, vnode);
-    const elm = document.getElementById('root').firstChild;
+    const elm = document.body.firstChild;
     expect(elm.innerHTML).toEqual('I am a string');
     vdom.deleteVNode(elmPtr);
   });
 
+  /*
   it('should create elements with span and text content', () => {
     const vnode = h('a', [h('span'), 'I am a string']);
     const elmPtr = patch(root, vnode);
-    const elm = document.getElementById('root').firstChild;
+    const elm = document.body.firstChild;
     expect(elm.childNodes[0].tagName).toEqual('SPAN');
     expect(elm.childNodes[1].textContent).toEqual('I am a string');
     vdom.deleteVNode(elmPtr);
   });
+  */
 
   // TODO: should create elements with props
 
-  *//*
+  /*
   it('should create an element created inside an iframe', (done) => {
     // Only run if srcdoc is supported.
     const frame = document.createElement('iframe');
@@ -154,16 +147,18 @@ describe('patch', function testPatch() {
     expect(elm.className).toEqual('class');
     // vnode.delete();
   });
-  *//*
+  */
 
+  /*
   it('should create comments', () => {
     const vnode = h('!', 'test');
     const elmPtr = patch(root, vnode);
-    const elm = document.getElementById('root').firstChild;
+    const elm = document.body.firstChild;
     expect(elm.nodeType).toEqual(document.COMMENT_NODE);
     expect(elm.textContent).toEqual('test');
     vdom.deleteVNode(elmPtr);
   });
+  */
 
   // Others
 
@@ -179,4 +174,3 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(elm);
   });
 });
-*/

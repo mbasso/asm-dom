@@ -9,7 +9,6 @@ describe('load', function test() {
     delete window.WebAssembly;
   });
 
-  /*
   it('should load asm-dom using asm.js', () => {
     const vdom = asmDom();
     expect(vdom.h).toExist();
@@ -23,7 +22,6 @@ describe('load', function test() {
     expect(vdom.h).toExist();
     expect(vdom.usingWasm).toBeFalsy();
   });
-  */
 
   it('should load asm-dom using wasm', () => {
     window.WebAssembly = {};
