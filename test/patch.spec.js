@@ -8,7 +8,7 @@ describe('patch', function testPatch() {
   const { h, patch } = vdom;
   let root;
 
-  const clearDOM = () => {
+  beforeEach(() => {
     while (document.body.firstChild) {
       document.body.removeChild(document.body.firstChild);
     }
@@ -16,9 +16,7 @@ describe('patch', function testPatch() {
     root = document.createElement('div');
     root.setAttribute('id', 'root');
     document.body.appendChild(root);
-  };
-
-  beforeEach(clearDOM);
+  });
 
   it('should have a tag', () => {
     const vnode = h('div');
@@ -27,72 +25,6 @@ describe('patch', function testPatch() {
     expect(elm.tagName).toEqual('DIV');
     vdom.deleteVNode(elmPtr);
   });
-
-  /*
-  it('should have different tag and id', () => {
-    const node = document.createElement('div');
-    root.appendChild(node);
-    const vnode = h('span#id');
-    const elmPtr = patch(node, vnode);
-    const elm = document.getElementById('root').firstChild;
-    expect(elm.tagName).toEqual('SPAN');
-    expect(elm.id).toEqual('id');
-    vdom.deleteVNode(elmPtr);
-  });
-
-  it('should have an id', () => {
-    const vnode = h('div', [h('div#unique')]);
-    const elmPtr = patch(root, vnode);
-    const elm = document.getElementById('root').firstChild;
-    expect(elm.firstChild.id).toEqual('unique');
-    vdom.deleteVNode(elmPtr);
-  });
-
-  it('should have correct namespace', () => {
-    const SVGNamespace = 'http://www.w3.org/2000/svg';
-    const XHTMLNamespace = 'http://www.w3.org/1999/xhtml';
-    let vnode;
-    let elm;
-
-    // TODO: ns in data
-
-    // verify that svg tag automatically gets svg namespace
-    vnode = h('svg', [
-      h('foreignObject', [
-        h('div', ['I am HTML embedded in SVG']),
-      ]),
-    ]);
-    elm = patch(root, vnode).elm;
-    expect(elm.namespaceURI).toEqual(SVGNamespace);
-    expect(elm.firstChild.namespaceURI).toEqual(SVGNamespace);
-    expect(elm.firstChild.firstChild.namespaceURI).toEqual(XHTMLNamespace);
-    // vnode.delete();
-
-    // verify that svg tag with extra selectors gets svg namespace
-    vnode = h('svg#some-id');
-    elm = patch(root, vnode).elm;
-    expect(elm.namespaceURI, SVGNamespace);
-    // vnode.delete();
-
-    // verify that non-svg tag beginning with 'svg' does NOT get namespace
-    vnode = h('svg-custom-el');
-    elm = patch(root, vnode).elm;
-    expect(elm.namespaceURI).toNotEqual(SVGNamespace);
-    // vnode.delete();
-  });
-
-  it('should receive classes in selector', () => {
-    const vnode = h('div', [h('i.am.a.class')]);
-    let elm = patch(root, vnode).elm;
-    expect(elm.firstChild.classList.contains('am')).toBeTruthy();
-    expect(elm.firstChild.classList.contains('a')).toBeTruthy();
-    expect(elm.firstChild.classList.contains('class')).toBeTruthy();
-    // vnode.delete();
-  });
-  */
-
-  // TODO: should receive classes in class property
-  // TODO: handles classes from both selector and property
 
   it('should create elements with text content', () => {
     const vnode = h('div', ['I am a string']);
@@ -111,6 +43,31 @@ describe('patch', function testPatch() {
     expect(elm.childNodes[1].textContent).toEqual('I am a string');
     vdom.deleteVNode(elmPtr);
   });
+
+  it('should create comments', () => {
+    const vnode = h('!', 'test');
+    const elmPtr = patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.nodeType).toEqual(document.COMMENT_NODE);
+    expect(elm.textContent).toEqual('test');
+    vdom.deleteVNode(elmPtr);
+  });
+
+  it('should create elements with class', () => {
+    const vnode = h('div', { 'class': 'foo' });
+    const elmPtr = patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.getAttribute('class')).toEqual('foo');
+    vdom.deleteVNode(elmPtr);
+  });
+
+  it('should create elements with className', () => {
+    const vnode = h('div', { className: 'foo' });
+    const elmPtr = patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.getAttribute('class')).toEqual('foo');
+    vdom.deleteVNode(elmPtr);
+  });
   */
 
   // TODO: should create elements with props
@@ -126,7 +83,7 @@ describe('patch', function testPatch() {
         patch(frame.contentDocument.body.querySelector('div'), vnode);
         expect(frame.contentDocument.body.querySelector('div').textContent).toEqual('Thing 2');
         frame.remove();
-        // vnode.delete();
+        vdom.deleteVNode(vnode);
         done();
       };
       document.body.appendChild(frame);
@@ -146,17 +103,6 @@ describe('patch', function testPatch() {
     expect(elm.id).toEqual('id');
     expect(elm.className).toEqual('class');
     // vnode.delete();
-  });
-  */
-
-  /*
-  it('should create comments', () => {
-    const vnode = h('!', 'test');
-    const elmPtr = patch(root, vnode);
-    const elm = document.body.firstChild;
-    expect(elm.nodeType).toEqual(document.COMMENT_NODE);
-    expect(elm.textContent).toEqual('test');
-    vdom.deleteVNode(elmPtr);
   });
   */
 

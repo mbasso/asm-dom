@@ -15,7 +15,9 @@ const getChildren = (arr) => {
 
 const objToProps = (obj) => {
   const map = new window.asmDom.MapStringString();
+  if (typeof obj.className === 'string') map.set('class', obj.className);
   for (const x in obj) {
+    if (x === 'className') continue;
     if (typeof obj[x] === 'string') {
       map.set(x, obj[x]);
     } else if (obj[x] !== false && x !== 'raw') {
@@ -74,7 +76,7 @@ export default (a, b, c, d) => {
       }
     }
   } else {
-    result = window.asmDom._h_stdc(a, b, c, d);
+    throw new Error('Invalid arguments provided to h function');
   }
   if (raw) window.asmDomHelpers.vnodesData[result] = { raw };
   return result;
