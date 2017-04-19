@@ -86,14 +86,24 @@ const asmDom = init();
 
 ### h
 
-You can create vnodes using `h` function. `h` accepts a tag/selector as a string, an optional data object and an optional string or array of children. This returns the memory address of your virtual node.
+You can create vnodes using `h` function. `h` accepts a tag/selector as a string, an optional data object and an optional string or array of children. The data object contains all attributes and a special `raw` prop that can contains callbacks and raw values applied to the DOM element with the dot notation. This returns the memory address of your virtual node.
 
 ```js
 const { h } = asmDom;
-const vnode = h('div', {style: 'color: #000'}, [
+const vnode = h('div', { style: 'color: #000' }, [
   h('h1', 'Headline'),
   h('p', 'A paragraph'),
 ]);
+
+const vnode2 = h('div', {
+  id: 'an-id', // node.setAttribute('id', 'an-id')
+  className: 'foo', // className is a special attribute evaluated as 'class'
+  'data-foo': 'bar', // a dataset attribute
+  raw: {
+    onclick: (e) => console.log('clicked: ', e.target),
+    foo: 'bar', // raw value: node.foo = 'bar'
+  },
+});
 ```
 
 ### patch
