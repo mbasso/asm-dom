@@ -96,7 +96,7 @@ const vnode = h('div', {style: 'color: #000'}, [
 ]);
 ```
 
-## patch
+### patch
 
 The `patch` takes two arguments, the first is a DOM element or a vnode representing the current view. The second is a vnode representing the new, updated view.
 
