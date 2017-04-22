@@ -40,6 +40,7 @@ Last but not least, this project aims to be an example for those who want to try
 import init from 'asm-dom';
 
 const asmDom = await init();
+// or init().then(asmDom => { ... });
 const { h, patch } = asmDom;
 
 const root = document.getElementById('root');
