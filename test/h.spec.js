@@ -1,11 +1,19 @@
 import expect from 'expect';
-import asmDom from '../src/';
+import init from '../src/';
 
 describe('h', function test() {
-  this.timeout(5000);
+  this.timeout(10000);
 
-  const vdom = asmDom();
-  const { h } = vdom;
+  let vdom;
+  let h;
+
+  before((done) => {
+    init().then((asmDom) => {
+      vdom = asmDom;
+      h = vdom.h;
+      done();
+    });
+  });
 
   it('should delete a vnode', () => {
     const div = h('div', [
@@ -15,7 +23,7 @@ describe('h', function test() {
       ]),
     ]);
     expect(
-      () => vdom.deleteVNode(div)
+      () => vdom.deleteVNode(div),
     ).toNotThrow();
   });
 

@@ -3,36 +3,43 @@ import patch from './js/patch';
 import diff from './js/diff';
 import domApi from './js/domApi';
 
+// import() is compiled to require.ensure, this is a polyfill for nodejs
+// an alternative solution is needed
+if (typeof require.ensure !== 'function') require.ensure = (d, c) => { c(require); };
+
 export default (config) => {
   config = config || {};
-  let lib;
+  let result;
   if ((config.useWasm || 'WebAssembly' in window) && !config.useAsmJS) {
-    /* eslint-disable */
-    config.memoryInitializerPrefixURL = '';
-    config.wasmBinary = new Uint8Array(require('../compiled/wasm/asm-dom.wasm'));
-    lib = require('../compiled/wasm/asm-dom.js')(config);
-    /* eslint-enable */
+    result = import('../compiled/wasm/asm-dom.wasm')
+                  .then((wasm) => {
+                    config.wasmBinary = new Uint8Array(wasm);
+                  })
+                  .then(() => import('../compiled/wasm/asm-dom.js'));
   } else {
-    // eslint-disable-next-line
-    lib = require('../compiled/asmjs/asm-dom.asm.js')(config);
+    result = import('../compiled/asmjs/asm-dom.asm.js');
   }
 
-  window['asmDom'] = lib;
+  return result
+    .then(lib => lib(config))
+    .then((lib) => {
+      if (!window && global) global.window = {};
 
-  lib.h = h;
-  lib.patch = patch;
-  lib.deleteVNode = (oldVnode) => {
-    window.asmDomHelpers.vnodesData[oldVnode] = undefined;
-    lib._deleteVNode(oldVnode);
-  };
+      window.asmDom = lib;
 
-  /* eslint-disable */
-  window['asmDomHelpers'] = {
-    'domApi': domApi,
-    'vnodesData': {},
-    'diff': diff,
-  };
-  /* eslint-enable */
+      lib.h = h;
+      lib.patch = patch;
+      lib.deleteVNode = (oldVnode) => {
+        window.asmDomHelpers.vnodesData[oldVnode] = undefined;
+        lib._deleteVNode(oldVnode);
+      };
 
-  return lib;
+      window.asmDomHelpers = {
+        domApi,
+        vnodesData: {},
+        diff,
+      };
+
+      return lib;
+    });
 };

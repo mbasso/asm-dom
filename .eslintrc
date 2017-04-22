@@ -8,6 +8,10 @@
   },
   "parser": "babel-eslint",
   "rules": {
+    "object-shorthand": "off",
+    "no-mixed-operators": "off",
+    "no-plusplus": "off",
+    "no-continue": "off",
     "dot-notation": "off",
     "no-restricted-syntax": "off",
     "quote-props": "off",

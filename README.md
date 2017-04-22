@@ -32,13 +32,14 @@ npm install --save asm-dom
 
 ## Motivation
 asm-dom is a minimal WebAssembly virtual DOM focused on performance. It is born from the idea to test the powerful of WebAssembly in a common use case that is not gaming, VR, AR or Image / video editing. Unfortunately, at the moment, [GC / DOM / Web API Integration](http://webassembly.org/docs/gc/) is a future feature 🦄, so, asm-dom isn't totally developed in wasm. All interactions with the DOM are written in Javascript. This is a big disadvantage because of the overhead of the binding between JS and WASM, in the future asm-dom will be even more powerful, anyway results are satisfying.
+Last but not least, this project aims to be an example for those who want to try WebAssembly and emscripten!
 
 ## Example
 
 ```js
 import init from 'asm-dom';
 
-const asmDom = init();
+const asmDom = await init();
 const { h, patch } = asmDom;
 
 const root = document.getElementById('root');
@@ -80,8 +81,10 @@ Please note that **this function have to be called only one time in your applica
 ```js
 import init from 'asm-dom';
 
-const asmDom = init();
-// const asmDom = init({ useAsmJS: true });
+// init returns a Promise
+const asmDom = await init();
+// const asmDom = await init({ useAsmJS: true });
+// init().then(asmDom => { ... });
 ```
 
 ### h

@@ -1,12 +1,22 @@
 import expect from 'expect';
-import asmDom from '../src/';
+import init from '../src/';
 
 describe('patch', function testPatch() {
-  this.timeout(5000);
+  this.timeout(10000);
 
-  const vdom = asmDom();
-  const { h, patch } = vdom;
   let root;
+  let vdom;
+  let h;
+  let patch;
+
+  before((done) => {
+    init().then((asmDom) => {
+      vdom = asmDom;
+      h = vdom.h;
+      patch = vdom.patch;
+      done();
+    });
+  });
 
   beforeEach(() => {
     while (document.body.firstChild) {
