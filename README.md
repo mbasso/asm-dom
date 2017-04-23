@@ -5,7 +5,7 @@
 
 ---
 
-:warning: **Attention - This project isn't completed yet.** :warning:
+:warning: **Attention - This project isn't completed yet. Feel free to contribute, see [TODO](#todo) to get started** :warning:
 ---
 
 ---
@@ -16,6 +16,7 @@
 - [Motivation](#motivation)
 - [Example](#example)
 - [Documentation](#documentation)
+- [TODO](#todo)
 - [Benchmarks](#benchmarks)
 - [Roadmap](#installation)
 - [Change Log](#change-log)
@@ -28,6 +29,21 @@ You can install asm-dom using [npm](https://www.npmjs.com/package/asm-dom):
 
 ```bash
 npm install --save asm-dom
+```
+
+If you are using this library with webpack you also need to install `arraybuffer-loader`:
+
+```bash
+npm install --save-dev arraybuffer-loader
+```
+
+and add this object to your loaders:
+
+```js
+{
+  test: /\.wasm$/,
+  loaders: ['arraybuffer-loader'],
+}
 ```
 
 ## Motivation
@@ -127,6 +143,14 @@ const newVnode = h('span', 'new node');
 patch(document.getElementById('root'), vnode);
 patch(vnode, newVnode);
 ```
+
+## TODO
+
+Here is a list of things that have to be done to complete this project:
+
+- test
+- use requestAnimationFrame? (there is a branch with this name)
+- use the closure compiler (cause problems with wasm, need to update emscripten)
 
 ## Benchmarks
 

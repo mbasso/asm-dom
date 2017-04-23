@@ -82,6 +82,9 @@
     "rimraf": "2.6.1",
     "webpack": "2.4.1"
   },
+  "peerDependencies": {
+    "arraybuffer-loader": "0.2.2"
+  },
   "npmName": "asm-dom",
   "npmFileMap": [
     {
