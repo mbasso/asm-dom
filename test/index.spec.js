@@ -2,7 +2,7 @@ import expect from 'expect';
 import init from '../src/';
 
 describe('load', function test() {
-  this.timeout(10000);
+  this.timeout(30000);
 
   afterEach(() => {
     delete window.WebAssembly;

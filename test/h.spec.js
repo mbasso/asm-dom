@@ -2,7 +2,7 @@ import expect from 'expect';
 import init from '../src/';
 
 describe('h', function test() {
-  this.timeout(10000);
+  this.timeout(30000);
 
   let vdom;
   let h;

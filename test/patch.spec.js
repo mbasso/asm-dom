@@ -2,7 +2,7 @@ import expect from 'expect';
 import init from '../src/';
 
 describe('patch', function testPatch() {
-  this.timeout(10000);
+  this.timeout(30000);
 
   let root;
   let vdom;
