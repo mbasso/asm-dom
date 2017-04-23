@@ -14,7 +14,7 @@
   "scripts": {
     "clean": "rimraf lib dist es .nyc_output compiled",
     "compile": "mkdir -p compiled && npm run compile:cpp && npm run compile:asmjs && npm run compile:wasm",
-    "compile:cpp": "emcc -O3 -Wall -Werror --bind src/app.cpp -o compiled/asm-dom.bc",
+    "compile:cpp": "emcc -O3 -Wall -Werror --bind src/app.cpp -o compiled/asm-dom.bc && emcc -O3 -Wall -Werror --bind src/app.cpp -o compiled/asm-dom.o",
     "compile:asmjs": "mkdir -p compiled/asmjs && emcc -O3 --bind --memory-init-file 0 --llvm-lto 3 --closure 1 --pre-js src/helpers/prefix.js --post-js src/helpers/postfix.js -s \"EXPORTED_RUNTIME_METHODS=['Pointer_stringify']\" -s AGGRESSIVE_VARIABLE_ELIMINATION=1 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s ABORTING_MALLOC=1 -s NO_EXIT_RUNTIME=1 -s NO_FILESYSTEM=1 -s DISABLE_EXCEPTION_CATCHING=2 compiled/asm-dom.bc -o compiled/asmjs/asm-dom.asm.js",
     "compile:wasm": "mkdir -p compiled/wasm && emcc -O3 --bind --memory-init-file 0 --llvm-lto 3 --pre-js src/helpers/prefix.js --post-js src/helpers/postfix.js -s ALLOW_MEMORY_GROWTH=1 -s \"EXPORTED_RUNTIME_METHODS=['Pointer_stringify']\" -s AGGRESSIVE_VARIABLE_ELIMINATION=1 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s ABORTING_MALLOC=1 -s NO_EXIT_RUNTIME=1 -s NO_FILESYSTEM=1 -s DISABLE_EXCEPTION_CATCHING=2 -s BINARYEN=1 -s \"BINARYEN_TRAP_MODE='allow'\" compiled/asm-dom.bc -o compiled/wasm/asm-dom.js",
     "test": "npm run test:js",
