@@ -4,7 +4,9 @@ node_js:
   - "5"
   - "6"
   - "7"
+install: true
 script:
+  - npm install --ignore-scripts
   - npm run lint
   - npm run test:js
   - npm run build
