@@ -44,7 +44,6 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(elmPtr);
   });
 
-  /*
   it('should create elements with span and text content', () => {
     const vnode = h('a', [h('span'), 'I am a string']);
     const elmPtr = patch(root, vnode);
@@ -78,7 +77,6 @@ describe('patch', function testPatch() {
     expect(elm.getAttribute('class')).toEqual('foo');
     vdom.deleteVNode(elmPtr);
   });
-  */
 
   // TODO: should create elements with props
 
@@ -102,17 +100,21 @@ describe('patch', function testPatch() {
     }
   });
 
-  it('is a patch of the root element', () => {
-    let elmWithIdAndClass = document.createElement('div');
+  it('should be a patch of the root element', () => {
+    const elmWithIdAndClass = document.createElement('div');
     elmWithIdAndClass.id = 'id';
     elmWithIdAndClass.className = 'class';
-    const vnode = h('div#id.class', [h('span', 'Hi')]);
-    let elm = patch(elmWithIdAndClass, vnode).elm;
+    const vnode = h('div', {
+      id: 'id',
+      class: 'class',
+    }, [h('span', 'Hi')]);
+    patch(elmWithIdAndClass, vnode);
+    const elm = document.body.firstChild;
     expect(elm).toEqual(elmWithIdAndClass);
     expect(elm.tagName).toEqual('DIV');
     expect(elm.id).toEqual('id');
     expect(elm.className).toEqual('class');
-    // vnode.delete();
+    vdom.deleteVNode(vnode);
   });
   */
 

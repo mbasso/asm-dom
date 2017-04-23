@@ -104,4 +104,16 @@ describe('h', function test() {
     });
     vdom.deleteVNode(vnodePtr);
   });
+
+  it('should throw if invalid arguments are provided', () => {
+    expect(() => {
+      h('', '', '', '');
+    }).toThrow();
+    expect(() => {
+      h('', () => {});
+    }).toThrow();
+    expect(() => {
+      h('', '', {});
+    }).toThrow();
+  });
 });
