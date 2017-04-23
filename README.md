@@ -1,5 +1,9 @@
 # :rage4: asm-dom :rage4:
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+[![Build Status](https://travis-ci.org/mbasso/asm-dom.svg?branch=master)](https://travis-ci.org/mbasso/asm-dom)
+[![npm version](https://img.shields.io/npm/v/asm-dom.svg)](https://www.npmjs.com/package/asm-dom)
+[![npm downloads](https://img.shields.io/npm/dm/asm-dom.svg?maxAge=2592000)](https://www.npmjs.com/package/asm-dom)
+[![Coverage Status](https://coveralls.io/repos/github/mbasso/asm-dom/badge.svg?branch=master)](https://coveralls.io/github/mbasso/asm-dom?branch=master)
 
 > A minimal WebAssembly virtual DOM focused on performance
 
