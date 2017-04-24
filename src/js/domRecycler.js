@@ -36,6 +36,7 @@ const recycler = {
       for (i = node.asmDomRaws.length; i--;) node[node.asmDomRaws[i]] = undefined;
       node.asmDomRaws = undefined;
     }
+    if (node.textContent) node.textContent = undefined;
     const keys = Object.keys(node);
     for (i = keys.length; i--;) {
       if (

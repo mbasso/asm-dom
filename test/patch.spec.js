@@ -34,9 +34,9 @@ describe('patch', function testPatch() {
   const inner = prop('innerHTML');
 
   before((done) => {
-    init({
+    init(/* {
       TOTAL_MEMORY: 16777216 * 5,
-    }).then((asmDom) => {
+    } */).then((asmDom) => {
       vdom = asmDom;
       h = vdom.h;
       patch = vdom.patch;
@@ -237,7 +237,6 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(vnode2);
   });
 
-  /*
   it('should update one child with same key but different sel', () => {
     const vnode = h('span', { key: 'span' }, [1, 2, 3].map(spanNum));
     const vnode2 = h('span', { key: 'span' }, [spanNum(1), h('i', { key: 2 }, '2'), spanNum(3)]);
@@ -251,7 +250,6 @@ describe('patch', function testPatch() {
     expect(elm.children[1].tagName).toEqual('I');
     vdom.deleteVNode(vnode2);
   });
-  */
 
   it('should remove elements from the beginning', () => {
     const vnode = h('span', [1, 2, 3, 4, 5].map(spanNum));
@@ -265,7 +263,6 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(vnode2);
   });
 
-  /*
   it('should remove elements from the end', () => {
     const vnode = h('span', [1, 2, 3, 4, 5].map(spanNum));
     const vnode2 = h('span', [1, 2, 3].map(spanNum));
@@ -297,7 +294,6 @@ describe('patch', function testPatch() {
     expect(elm.children[3].innerHTML).toEqual('5');
     vdom.deleteVNode(vnode2);
   });
-  */
 
   it('should move element forward', () => {
     const vnode1 = h('span', [1, 2, 3, 4].map(spanNum));
@@ -486,7 +482,6 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(vnode2);
   });
 
-  /*
   it('should support all null/undefined children', () => {
     const vnode1 = h('i', [0, 1, 2, 3, 4, 5].map(spanNum));
     const vnode2 = h('i', [null, null, undefined, null, null, undefined]);
@@ -501,6 +496,7 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(vnode3);
   });
 
+  /*
   it('should handle random shuffles with null/undefined children', () => {
     let i;
     let j;
@@ -653,7 +649,6 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(vnode2);
   });
 
-  /*
   it('should remove a single text node when children are updated', () => {
     const vnode1 = h('div', 'One');
     const vnode2 = h('div', [h('div', 'Two'), h('span', 'Three')]);
@@ -722,5 +717,4 @@ describe('patch', function testPatch() {
     expect(map(inner, elm.children)).toEqual(['2', '1']);
     vdom.deleteVNode(vnode3);
   });
-  */
 });
