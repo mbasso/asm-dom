@@ -28,11 +28,47 @@ describe('patch', function testPatch() {
     document.body.appendChild(root);
   });
 
+  it('should patch a node', () => {
+    expect(document.body.children.length).toEqual(1);
+    expect(document.body.firstChild).toEqual(root);
+    const span = h('span');
+    const elm = patch(root, span);
+    expect(document.body.children.length).toEqual(1);
+    expect(document.body.firstChild.nodeName).toEqual('SPAN');
+    expect(document.body.firstChild.getAttribute('id')).toBeFalsy();
+    expect(document.body.firstChild.className).toBeFalsy();
+    vdom.deleteVNode(elm);
+  });
+
   it('should have a tag', () => {
     const vnode = h('div');
     const elmPtr = patch(root, vnode);
     const elm = document.body.firstChild;
     expect(elm.tagName).toEqual('DIV');
+    vdom.deleteVNode(elmPtr);
+  });
+
+  it('should have the correct namespace', () => {
+    const svgNamespace = 'http://www.w3.org/2000/svg';
+
+    patch(root, h('div', [h('div', { ns: svgNamespace })]));
+    const elm = document.body.firstChild;
+    expect(elm.firstChild.namespaceURI).toEqual(svgNamespace);
+  });
+
+  it('should create elements with class', () => {
+    const vnode = h('div', { 'class': 'foo' });
+    const elmPtr = patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.getAttribute('class')).toEqual('foo');
+    vdom.deleteVNode(elmPtr);
+  });
+
+  it('should create elements with className', () => {
+    const vnode = h('div', { className: 'foo' });
+    const elmPtr = patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.getAttribute('class')).toEqual('foo');
     vdom.deleteVNode(elmPtr);
   });
 
@@ -62,24 +98,6 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(elmPtr);
   });
 
-  it('should create elements with class', () => {
-    const vnode = h('div', { 'class': 'foo' });
-    const elmPtr = patch(root, vnode);
-    const elm = document.body.firstChild;
-    expect(elm.getAttribute('class')).toEqual('foo');
-    vdom.deleteVNode(elmPtr);
-  });
-
-  it('should create elements with className', () => {
-    const vnode = h('div', { className: 'foo' });
-    const elmPtr = patch(root, vnode);
-    const elm = document.body.firstChild;
-    expect(elm.getAttribute('class')).toEqual('foo');
-    vdom.deleteVNode(elmPtr);
-  });
-
-  // TODO: should create elements with props
-
   /*
   it('should create an element created inside an iframe', (done) => {
     // Only run if srcdoc is supported.
@@ -99,36 +117,7 @@ describe('patch', function testPatch() {
       done();
     }
   });
-
-  it('should be a patch of the root element', () => {
-    const elmWithIdAndClass = document.createElement('div');
-    elmWithIdAndClass.id = 'id';
-    elmWithIdAndClass.className = 'class';
-    const vnode = h('div', {
-      id: 'id',
-      class: 'class',
-    }, [h('span', 'Hi')]);
-    patch(elmWithIdAndClass, vnode);
-    const elm = document.body.firstChild;
-    expect(elm).toEqual(elmWithIdAndClass);
-    expect(elm.tagName).toEqual('DIV');
-    expect(elm.id).toEqual('id');
-    expect(elm.className).toEqual('class');
-    vdom.deleteVNode(vnode);
-  });
   */
 
-  // Others
 
-  it('should patch a node', () => {
-    expect(document.body.children.length).toEqual(1);
-    expect(document.body.firstChild).toEqual(root);
-    const span = h('span');
-    const elm = patch(root, span);
-    expect(document.body.children.length).toEqual(1);
-    expect(document.body.firstChild.nodeName).toEqual('SPAN');
-    expect(document.body.firstChild.getAttribute('id')).toBeFalsy();
-    expect(document.body.firstChild.className).toBeFalsy();
-    vdom.deleteVNode(elm);
-  });
 });

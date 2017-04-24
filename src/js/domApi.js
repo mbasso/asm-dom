@@ -23,7 +23,7 @@ export default {
     return node.asmDomPtr || (nodes[++ptr] = addPtr(node)) && ptr;
   },
   'createElementNS'(namespaceURI, qualifiedName) {
-    const node = recycler.create(namespaceURI, qualifiedName);
+    const node = recycler.create(qualifiedName, namespaceURI);
     return node.asmDomPtr || (nodes[++ptr] = addPtr(node, namespaceURI)) && ptr;
   },
   'createTextNode'(text) {
