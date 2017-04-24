@@ -32,7 +32,9 @@
     "lint": "eslint src test build",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
   },
-  "pre-commit": [ "check:src" ],
+  "pre-commit": [
+    "check:src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mbasso/asm-dom.git"
@@ -78,6 +80,7 @@
     "istanbul": "0.4.5",
     "jison": "0.4.17",
     "jsdom": "9.12.0",
+    "knuth-shuffle": "1.0.1",
     "mocha": "3.2.0",
     "ncp": "2.0.0",
     "nyc": "10.2.0",
