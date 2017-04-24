@@ -47,7 +47,19 @@ export default {
     nodes[nodePtr].removeAttribute(attr);
   },
   'setAttribute'(nodePtr, attr, value) {
-    nodes[nodePtr].setAttribute(attr, value);
+    // xChar = 120
+    // colonChar = 58
+    if (attr.charCodeAt(0) !== 120) {
+      nodes[nodePtr].setAttribute(attr, value);
+    } else if (attr.charCodeAt(3) === 58) {
+      // Assume xml namespace
+      nodes[nodePtr].setAttributeNS('http://www.w3.org/XML/1998/namespace', attr, value);
+    } else if (attr.charCodeAt(5) === 58) {
+      // Assume xlink namespace
+      nodes[nodePtr].setAttributeNS('http://www.w3.org/1999/xlink', attr, value);
+    } else {
+      nodes[nodePtr].setAttribute(attr, value);
+    }
   },
   'parentNode': nodePtr => nodes[nodePtr].parentNode.asmDomPtr,
   'nextSibling': nodePtr => (
