@@ -15,6 +15,12 @@ describe('h', function test() {
     });
   });
 
+  it('should get a vnode', () => {
+    const vnode = h('div');
+    expect(vdom.getNode(vnode)).toEqual(null);
+    vdom.deleteVNode(vnode);
+  });
+
   it('should delete a vnode', () => {
     const div = h('div', [
       h('span'),
@@ -25,6 +31,17 @@ describe('h', function test() {
     expect(
       () => vdom.deleteVNode(div),
     ).toNotThrow();
+  });
+
+  it('should create vnode with tag, props and elm', () => {
+    expect(() => {
+      const props = new window.asmDom.MapStringString();
+      props.set('id', 'foo');
+      props.set('class', 'bar');
+      const vnode = vdom._h_elm('div', props, 1);
+      vdom.deleteVNode(vnode);
+      props.delete();
+    }).toNotThrow();
   });
 
   it('should create a vnode with proper tag', () => {

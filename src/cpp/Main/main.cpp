@@ -2,7 +2,7 @@
 #include "../H/h.hpp"
 #include "../Diff/diff.hpp"
 #include "../VNode/VNode.hpp"
-#include <emscripten.h>
+#include <emscripten/val.h>
 #include <emscripten/bind.h>
 #include <algorithm>
 #include <vector>
@@ -18,36 +18,6 @@ bool isDefined(const emscripten::val& obj) {
 
 bool sameVnode(const VNode* __restrict__ const vnode1, const VNode* __restrict__ const vnode2) {
   return vnode1->key.compare(vnode2->key) == 0 && vnode1->sel.compare(vnode2->sel) == 0;
-};
-
-VNode* emptyNodeAt(const emscripten::val& elm) {
-  VNode* vnode = new VNode(elm["tagName"].as<std::string>());
-	std::string id = elm["id"].as<std::string>();
-
-  vnode->elm = EM_ASM_INT({
-		return window['asmDomHelpers']['domApi']['addNode'](
-			window['asmDom']['Pointer_stringify']($0)
-		);
-	}, id.c_str());
-  std::transform(vnode->sel.begin(), vnode->sel.end(), vnode->sel.begin(), ::tolower);
-
-  vnode->props.insert(
-		std::make_pair(
-			std::string("id"),
-			id
-		)
-	);
-
-  if (isDefined(elm["className"])) {
-		vnode->props.insert(
-			std::make_pair(
-				std::string("class"),
-				elm["className"].as<std::string>()
-			)
-		);
-  }
-
-  return vnode;
 };
 
 std::map<std::string, int>* createKeyToOldIdx(const std::vector<VNode*>& children, const int beginIdx, const int endIdx) {
@@ -280,11 +250,6 @@ std::size_t patch_vnodePtr(const std::size_t oldVnode, const std::size_t vnode) 
 	return reinterpret_cast<std::size_t>(patch_vnode(reinterpret_cast<VNode*>(oldVnode), reinterpret_cast<VNode*>(vnode)));
 };
 
-std::size_t patch_elementPtr(const emscripten::val element, const std::size_t vnode) {
-	return reinterpret_cast<std::size_t>(patch_vnode(emptyNodeAt(element), reinterpret_cast<VNode*>(vnode)));
-};
-
 EMSCRIPTEN_BINDINGS(patch_function) {
 	emscripten::function("patchVNode", &patch_vnodePtr, emscripten::allow_raw_pointers());
-	emscripten::function("patchElement", &patch_elementPtr, emscripten::allow_raw_pointers());
 }

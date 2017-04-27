@@ -1,15 +1,16 @@
 import expect from 'expect';
-// import { knuthShuffle } from 'knuth-shuffle';
+import { knuthShuffle } from 'knuth-shuffle';
 import init from '../src/';
 
 describe('patch', function testPatch() {
   this.timeout(30000);
 
-  // const shuffle = knuthShuffle;
+  const shuffle = knuthShuffle;
   let root;
   let vdom;
   let h;
   let patch;
+  let getNode;
 
   const spanNum = (n) => {
     let result = n;
@@ -40,6 +41,7 @@ describe('patch', function testPatch() {
       vdom = asmDom;
       h = vdom.h;
       patch = vdom.patch;
+      getNode = vdom.getNode;
       done();
     });
   });
@@ -116,21 +118,22 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(elmPtr);
   });
 
-  /*
   it('is a patch of the root element', () => {
     const elmWithIdAndClass = document.createElement('div');
     elmWithIdAndClass.id = 'id';
     elmWithIdAndClass.className = 'class';
-    const vnode = h('div#id.class', [h('span', 'Hi')]);
+    const vnode = h('div', {
+      id: 'id',
+      className: 'class',
+    }, [h('span', 'Hi')]);
     patch(elmWithIdAndClass, vnode);
-    const elm = document.body.firstChild;
+    const elm = getNode(vnode);
     expect(elm).toEqual(elmWithIdAndClass);
     expect(elm.tagName).toEqual('DIV');
     expect(elm.id).toEqual('id');
     expect(elm.className).toEqual('class');
     vdom.deleteVNode(vnode);
   });
-  */
 
   it('should create comments', () => {
     const vnode = h('!', 'test');
@@ -440,7 +443,6 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(vnode2);
   });
 
-  /*
   it('should handle random shuffles', () => {
     let n;
     let i;
@@ -454,21 +456,22 @@ describe('patch', function testPatch() {
     for (n = 0; n < samples; ++n) {
       const vnode1 = h('span', arr.map(z => spanNumWithOpacity(z, '1')));
       const shufArr = shuffle(arr.slice(0));
-      const elm = document.createElement('div');
+      let elm = document.createElement('div');
       patch(elm, vnode1);
+      elm = getNode(vnode1);
       for (i = 0; i < elms; ++i) {
         expect(elm.children[i].innerHTML, i.toString());
         opacities[i] = Math.random().toFixed(5).toString();
       }
       const vnode2 = h('span', arr.map(z => spanNumWithOpacity(shufArr[z], opacities[z])));
       patch(vnode1, vnode2);
+      elm = getNode(vnode2);
       for (i = 0; i < elms; ++i) {
         expect(elm.children[i].innerHTML, shufArr[i].toString());
         expect(opacities[i].indexOf(elm.children[i].style.opacity), 0);
       }
     }
   });
-  */
 
   it('should support null/undefined children', () => {
     const vnode1 = h('i', [0, 1, 2, 3, 4, 5].map(spanNum));
@@ -496,7 +499,6 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(vnode3);
   });
 
-  /*
   it('should handle random shuffles with null/undefined children', () => {
     let i;
     let j;
@@ -521,10 +523,9 @@ describe('patch', function testPatch() {
       patch(vnode1, vnode2);
       const elm = document.body.firstChild;
       expect(map(inner, elm.children), arr.filter(x => x !== null && x !== undefined));
-      vdom.deleteVNode(vnode2);
     }
+    vdom.deleteVNode(vnode2);
   });
-  */
 
   it('should append elements', () => {
     const vnode1 = h('div', [h('span', 'Hello')]);

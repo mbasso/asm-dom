@@ -1,7 +1,7 @@
 import h from './js/h';
 import patch from './js/patch';
 import diff from './js/diff';
-import domApi from './js/domApi';
+import domApi, { nodes } from './js/domApi';
 
 // import() is compiled to require.ensure, this is a polyfill for nodejs
 // an alternative solution is needed
@@ -29,6 +29,7 @@ export default (config) => {
 
       lib.h = h;
       lib.patch = patch;
+      lib.getNode = vnode => nodes[lib._getNode(vnode)];
       lib.deleteVNode = (oldVnode) => {
         window.asmDomHelpers.vnodesData[oldVnode] = undefined;
         lib._deleteVNode(oldVnode);

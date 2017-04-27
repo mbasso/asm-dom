@@ -12,8 +12,7 @@ const addPtr = (node, ns) => {
 };
 
 export default {
-  'addNode'(id) {
-    const node = document.getElementById(id);
+  'addNode'(node) {
     nodes[++ptr] = addPtr(node.parentNode);
     nodes[++ptr] = addPtr(node.nextSibling);
     return (nodes[++ptr] = addPtr(node)) && ptr;
@@ -61,7 +60,10 @@ export default {
       nodes[nodePtr].setAttribute(attr, value);
     }
   },
-  'parentNode': nodePtr => nodes[nodePtr].parentNode.asmDomPtr,
+  'parentNode': nodePtr => (
+    nodes[nodePtr] && nodes[nodePtr].parentNode && nodes[nodePtr].parentNode.asmDomPtr ||
+    0
+  ),
   'nextSibling': nodePtr => (
     nodes[nodePtr] && nodes[nodePtr].nextSibling && nodes[nodePtr].nextSibling.asmDomPtr ||
     0
