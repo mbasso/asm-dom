@@ -158,6 +158,7 @@ Here is a list of things that have to be done to complete this project:
 ## Benchmarks
 
 At the moment we haven't Benchmarks to show, but they'll come soon!
+Consider that benchmarking this library is not easy, we have to reproduce real world situations with big vnodes trees and frequent updates. Run a single patch or a sequence of patch in a for-loop might produce results that are not attributable to a real application.
 
 ## Roadmap
 
