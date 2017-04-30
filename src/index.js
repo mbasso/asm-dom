@@ -11,11 +11,7 @@ export default (config) => {
   config = config || {};
   let result;
   if ((config.useWasm || 'WebAssembly' in window) && !config.useAsmJS) {
-    result = import('../compiled/wasm/asm-dom.wasm')
-                  .then((wasm) => {
-                    config.wasmBinary = new Uint8Array(wasm);
-                  })
-                  .then(() => import('../compiled/wasm/asm-dom.js'));
+    result = import('./js/loadWasm').then(x => x.default(config));
   } else {
     result = import('../compiled/asmjs/asm-dom.asm.js');
   }

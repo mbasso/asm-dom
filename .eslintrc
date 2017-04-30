@@ -8,6 +8,7 @@
   },
   "parser": "babel-eslint",
   "rules": {
+    "global-require": "off",
     "object-shorthand": "off",
     "no-mixed-operators": "off",
     "no-plusplus": "off",
