@@ -21,9 +21,8 @@ bool sameVnode(const VNode* __restrict__ const vnode1, const VNode* __restrict__
 };
 
 std::map<std::string, int>* createKeyToOldIdx(const std::vector<VNode*>& children, const int beginIdx, const int endIdx) {
-  std::size_t i = beginIdx;
 	std::map<std::string, int>* map = new std::map<std::string, int>();
-  for (; i <= endIdx; ++i) {
+  for (int i = beginIdx; i <= endIdx; ++i) {
     if (!children[i]->key.empty()) {
 			map->insert(std::make_pair(children[i]->key, i));
 		}
@@ -113,10 +112,10 @@ void updateChildren(
 	std::vector<VNode*>& oldCh,
 	std::vector<VNode*>& newCh
 ) {
-	std::size_t oldStartIdx = 0;
-	std::size_t newStartIdx = 0;
-	std::size_t oldEndIdx = oldCh.size() - 1;
-	std::size_t newEndIdx = newCh.size() - 1;
+	int oldStartIdx = 0;
+	int newStartIdx = 0;
+	int oldEndIdx = oldCh.size() - 1;
+	int newEndIdx = newCh.size() - 1;
 	VNode* oldStartVnode = oldCh[0];
 	VNode* oldEndVnode = oldCh[oldEndIdx];
 	VNode* newStartVnode = newCh[0];
@@ -170,8 +169,6 @@ void updateChildren(
 					}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
 				} else {
 					patchVnode(elmToMove, newStartVnode);
-					deleteVNode(elmToMove);
-					elmToMove = NULL;
 					oldKeyToIdx->erase(newStartVnode->key);
 					EM_ASM_({
 						window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
@@ -191,6 +188,7 @@ void updateChildren(
 		removeVnodes(oldCh, oldStartIdx, oldEndIdx);
 	}
 	delete oldKeyToIdx;
+	oldKeyToIdx = NULL;
 };
 
 void patchVnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {

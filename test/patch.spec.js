@@ -611,7 +611,6 @@ describe('patch', function testPatch() {
     vdom.deleteVNode(vnode2);
   });
 
-  /*
   it('should prepend element of different tag type', () => {
     const vnode1 = h('div', [h('span', 'World')]);
     const vnode2 = h('div', [h('div', 'Hello'), h('span', 'World')]);
@@ -624,7 +623,6 @@ describe('patch', function testPatch() {
     expect(map(inner, elm.children)).toEqual(['Hello', 'World']);
     vdom.deleteVNode(vnode2);
   });
-  */
 
   it('should remove elements', () => {
     const vnode1 = h('div', [h('span', 'One'), h('span', 'Two'), h('span', 'Three')]);
