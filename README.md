@@ -151,7 +151,8 @@ patch(vnode, newVnode);
 
 Here is a list of things that have to be done to complete this project:
 
-- test
+- examples
+- sometimes tests fail in a non-deterministic way with error `err.uncaught = true;` 
 - use requestAnimationFrame? (there is a branch with this name)
 - use the closure compiler (cause problems with wasm, need to update emscripten)
 
