@@ -35,9 +35,9 @@ describe('patch', function testPatch() {
   const inner = prop('innerHTML');
 
   before((done) => {
-    init(/* {
-      TOTAL_MEMORY: 16777216 * 5,
-    } */).then((asmDom) => {
+    init({
+      hardReload: true,
+    }).then((asmDom) => {
       vdom = asmDom;
       h = vdom.h;
       patch = vdom.patch;

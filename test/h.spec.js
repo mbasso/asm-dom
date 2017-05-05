@@ -8,7 +8,9 @@ describe('h', function test() {
   let h;
 
   before((done) => {
-    init().then((asmDom) => {
+    init({
+      hardReload: true,
+    }).then((asmDom) => {
       vdom = asmDom;
       h = vdom.h;
       done();

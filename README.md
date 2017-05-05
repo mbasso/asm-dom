@@ -49,6 +49,14 @@ and add this object to your loaders:
 }
 ```
 
+also, if you have some problems with fs, you can add this to your webpack config:
+
+```js
+node: {
+  fs: 'empty',
+},
+```
+
 ## Motivation
 asm-dom is a minimal WebAssembly virtual DOM focused on performance. It is born from the idea to test the powerful of WebAssembly in a common use case that is not gaming, VR, AR or Image / video editing. Unfortunately, at the moment, [GC / DOM / Web API Integration](http://webassembly.org/docs/gc/) is a future feature 🦄, so, asm-dom isn't totally developed in wasm. All interactions with the DOM are written in Javascript. This is a big disadvantage because of the overhead of the binding between JS and WASM, in the future asm-dom will be even more powerful, anyway results are satisfying.
 Last but not least, this project aims to be an example for those who want to try WebAssembly and emscripten!
@@ -96,7 +104,7 @@ By default asm-dom returns an `init` function that takes an optional configurati
 
 By default asm-dom uses WebAssembly if supported, otherwise asm.js
 
-Please note that **this function have to be called only one time in your application**.
+Please note that **this function creates the module only the first time that is called, the next times returns a Promise that resolve with the same, cached object**.
 
 ```js
 import init from 'asm-dom';
@@ -152,8 +160,7 @@ patch(vnode, newVnode);
 Here is a list of things that have to be done to complete this project:
 
 - examples
-- sometimes tests fail in a non-deterministic way with error `err.uncaught = true;` 
-- use requestAnimationFrame? (there is a branch with this name)
+- sometimes tests fail in a non-deterministic way with error `err.uncaught = true;`
 - use the closure compiler (cause problems with wasm, need to update emscripten)
 
 ## Benchmarks

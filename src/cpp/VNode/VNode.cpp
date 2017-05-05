@@ -6,5 +6,5 @@
 
 EMSCRIPTEN_BINDINGS(vnode) {
   emscripten::register_map<std::string, std::string>("MapStringString");
-  emscripten::register_vector<std::size_t>("VNodePtrVector");
+  emscripten::register_vector<int>("VNodePtrVector");
 }

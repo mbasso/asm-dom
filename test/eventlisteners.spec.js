@@ -10,7 +10,9 @@ describe('eventlisteners', function testEventlisteners() {
   let patch;
 
   before((done) => {
-    init().then((asmDom) => {
+    init({
+      hardReload: true,
+    }).then((asmDom) => {
       vdom = asmDom;
       h = vdom.h;
       patch = vdom.patch;

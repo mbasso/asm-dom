@@ -244,8 +244,8 @@ VNode* patch_vnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const
 	return vnode;
 };
 
-std::size_t patch_vnodePtr(const std::size_t oldVnode, const std::size_t vnode) {
-	return reinterpret_cast<std::size_t>(patch_vnode(reinterpret_cast<VNode*>(oldVnode), reinterpret_cast<VNode*>(vnode)));
+int patch_vnodePtr(const int oldVnode, const int vnode) {
+	return reinterpret_cast<int>(patch_vnode(reinterpret_cast<VNode*>(oldVnode), reinterpret_cast<VNode*>(vnode)));
 };
 
 EMSCRIPTEN_BINDINGS(patch_function) {

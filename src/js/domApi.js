@@ -34,18 +34,22 @@ export default {
     return node.asmDomPtr || (nodes[++ptr] = addPtr(node)) && ptr;
   },
   'insertBefore'(parentNodePtr, newNodePtr, referenceNodePtr) {
+    // if (!nodes[parentNodePtr].appendChild) return;
     nodes[parentNodePtr].insertBefore(nodes[newNodePtr], nodes[referenceNodePtr]);
   },
   'removeChild'(childPtr) {
     recycler.collect(nodes[childPtr]);
   },
   'appendChild'(parentPtr, childPtr) {
+    // if (!nodes[parentPtr].appendChild) return;
     nodes[parentPtr].appendChild(nodes[childPtr]);
   },
   'removeAttribute'(nodePtr, attr) {
+    // if (!nodes[nodePtr].removeAttribute) return;
     nodes[nodePtr].removeAttribute(attr);
   },
   'setAttribute'(nodePtr, attr, value) {
+    // if (!nodes[nodePtr].setAttribute) return;
     // xChar = 120
     // colonChar = 58
     if (attr.charCodeAt(0) !== 120) {

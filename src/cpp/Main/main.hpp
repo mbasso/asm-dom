@@ -5,7 +5,7 @@
 #include <emscripten/val.h>
 #include <vector>
 
-std::size_t patch_vnodePtr(const std::size_t oldVnode, const std::size_t vnode);
+int patch_vnodePtr(const int oldVnode, const int vnode);
 void updateChildren(
 	emscripten::val parentElm,
 	std::vector<VNode*>& oldCh,

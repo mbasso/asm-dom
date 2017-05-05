@@ -9,7 +9,9 @@ describe('load', function test() {
   });
 
   it('should load asm-dom using asm.js', (done) => {
-    init().then((vdom) => {
+    init({
+      hardReload: true,
+    }).then((vdom) => {
       expect(vdom.h).toExist();
       expect(vdom.usingWasm).toBeFalsy();
       done();
@@ -19,6 +21,7 @@ describe('load', function test() {
   it('should load asm-dom using asm.js (by config)', (done) => {
     init({
       useAsmJS: true,
+      hardReload: true,
     }).then((vdom) => {
       expect(vdom.h).toExist();
       expect(vdom.usingWasm).toBeFalsy();
@@ -29,7 +32,9 @@ describe('load', function test() {
   it('should load asm-dom using wasm', (done) => {
     window.WebAssembly = {};
     // .wasm file throw a SyntaxError on node
-    init().catch((ex) => {
+    init({
+      hardReload: true,
+    }).catch((ex) => {
       expect(ex).toBeA(SyntaxError);
       done();
     });
@@ -39,6 +44,7 @@ describe('load', function test() {
     // .wasm file throw a SyntaxError on node
     init({
       useWasm: true,
+      hardReload: true,
     }).catch((ex) => {
       expect(ex).toBeA(SyntaxError);
       done();

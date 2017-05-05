@@ -31,6 +31,7 @@ const recycler = {
   clean(node) {
     node.remove();
     let i = node.attributes && node.attributes.length;
+    while (node.firstChild) recycler.collect(node.firstChild);
     while (i--) node.removeAttribute(node.attributes[i].name);
     if (node.asmDomRaws) {
       for (i = node.asmDomRaws.length; i--;) node[node.asmDomRaws[i]] = undefined;

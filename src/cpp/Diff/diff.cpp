@@ -7,7 +7,7 @@
 void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 	EM_ASM_({
 		window['asmDomHelpers']['diff']($0, $1, $2);
-	}, reinterpret_cast<std::size_t>(oldVnode), reinterpret_cast<std::size_t>(vnode), vnode->elm);
+	}, reinterpret_cast<int>(oldVnode), reinterpret_cast<int>(vnode), vnode->elm);
 
 	if (oldVnode->props.empty() && vnode->props.empty()) return;
 

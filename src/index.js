@@ -3,13 +3,24 @@ import patch from './js/patch';
 import diff from './js/diff';
 import domApi, { nodes } from './js/domApi';
 
+const cache = {};
+
 // import() is compiled to require.ensure, this is a polyfill for nodejs
 // an alternative solution is needed
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => { c(require); };
 
 export default (config) => {
   config = config || {};
+
+  if (cache.lib && !config.hardReload) {
+    return Promise.resolve(cache.lib);
+  }
+
+  config = config || {};
   let result;
+  const readyPromise = new Promise((resolve) => {
+    config['_main'] = () => resolve(cache);
+  });
   if ((config.useWasm || 'WebAssembly' in window) && !config.useAsmJS) {
     result = import('./js/loadWasm').then(x => x.default(config));
   } else {
@@ -19,9 +30,15 @@ export default (config) => {
   return result
     .then(lib => lib(config))
     .then((lib) => {
-      if (!window && global) global.window = {};
+      cache.lib = lib;
 
+      if (!window && global) global.window = {};
       window.asmDom = lib;
+      window.asmDomHelpers = {
+        domApi,
+        vnodesData: {},
+        diff,
+      };
 
       lib.h = h;
       lib.patch = patch;
@@ -31,12 +48,7 @@ export default (config) => {
         lib._deleteVNode(oldVnode);
       };
 
-      window.asmDomHelpers = {
-        domApi,
-        vnodesData: {},
-        diff,
-      };
-
-      return lib;
-    });
+      return readyPromise;
+    })
+    .then(x => x.lib);
 };
