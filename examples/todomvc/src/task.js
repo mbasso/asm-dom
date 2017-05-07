@@ -26,7 +26,9 @@ function view(h, task, handler, remove) {
     className: classnames({ completed: !!task.done && !task.editing, editing: task.editing }),
     key: task.id,
   }, [
-    h('div.view', [
+    h('div', {
+      className: 'view',
+    }, [
       h('input', {
         checked: !!task.done,
         type: 'checkbox',
@@ -40,7 +42,7 @@ function view(h, task, handler, remove) {
           ondblclick: bind(handler, Action.StartEdit()),
         },
       }, task.title),
-      h('button.destroy', {
+      h('button', {
         className: 'destroy',
         raw: {
           onclick: bind(remove, task.id),

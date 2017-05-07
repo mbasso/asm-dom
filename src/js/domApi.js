@@ -34,7 +34,7 @@ export default {
     return node.asmDomPtr || (nodes[++ptr] = addPtr(node)) && ptr;
   },
   'insertBefore'(parentNodePtr, newNodePtr, referenceNodePtr) {
-    // if (!nodes[parentNodePtr].appendChild) return;
+    // if (!nodes[parentNodePtr].insertBefore) return;
     nodes[parentNodePtr].insertBefore(nodes[newNodePtr], nodes[referenceNodePtr]);
   },
   'removeChild'(childPtr) {

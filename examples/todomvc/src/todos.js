@@ -56,8 +56,10 @@ function view(h, model, handler) {
         id: 'new-todo',
         className: 'new-todo',
         placeholder: 'What needs to be done?',
-        value: model.editingTitle,
-        raw: { onkeydown: bind(onInput, handler) },
+        raw: {
+          value: model.editingTitle,
+          onkeydown: bind(onInput, handler),
+        },
       }),
     ]),
     h('section', {
@@ -89,7 +91,7 @@ function view(h, model, handler) {
       h('span', {
         className: 'todo-count',
       }, [
-        h('strong', remaining),
+        h('strong', String(remaining)),
         ` item${remaining === 1 ? '' : 's'} left`,
       ]),
       h('ul', {
@@ -101,6 +103,7 @@ function view(h, model, handler) {
       ]),
       h('button', {
         className: 'clear-completed',
+        style: `display: ${model.tasks.length !== remaining ? 'block' : 'none'}`,
         raw: { onclick: bind(handler, Action.Archive()) },
       }, 'Clear completed'),
     ]),
