@@ -117,7 +117,7 @@ const asmDom = await init();
 
 ### h
 
-You can create vnodes using `h` function. `h` accepts a tag/selector as a string, an optional data object and an optional string or array of children. The data object contains all attributes and a special `raw` prop that can contains callbacks and raw values applied to the DOM element with the dot notation. This returns the memory address of your virtual node.
+You can create vnodes using `h` function. `h` accepts a tag/selector as a string, an optional data object and an optional **string** or array of children. The data object contains all attributes and a special `raw` prop that can contains **callbacks** and raw values applied to the DOM element with the dot notation. You should also put in `raw` the property `value`. This returns the memory address of your virtual node.
 
 ```js
 const { h } = asmDom;
@@ -153,6 +153,26 @@ const newVnode = h('span', 'new node');
 
 patch(document.getElementById('root'), vnode);
 patch(vnode, newVnode);
+```
+
+### deleteVNode
+
+As we said before the `h` returns a memory address. This means that this memory have to be deleted manually, as we have to do in C++ for example. By default asm-dom automatically delete the old vnode from memory when `patch` is called. However, if you want to create a vnode that is not patched, you have to delete it manually. For this reason we have developed a function that allows you to delete a given vnode and all its children recursively:
+
+```js
+const vnode1 = h('div');
+const vnode2 = h('div', [
+  h('span',)
+]);
+patch(vnode1, vnode2); // vnode1 automatically deleted
+
+const child1 = h('span', 'child 1');
+const child2 = h('span', 'child 2');
+const vnode = h('span', [
+  child1,
+  child2,
+]);
+deleteVNode(vnode); // manually delete vnode, child1 and child2 from memory
 ```
 
 ## TODO
