@@ -74,16 +74,8 @@ int h_elm(const std::string& sel, const std::map<std::string, std::string>& node
   return reinterpret_cast<int>(vnode);
 };
 
-void deleteVNode(VNode* const vnode) {
-  for (std::vector<VNode*>::size_type i = vnode->children.size(); i--;) {
-    deleteVNode(vnode->children[i]);
-  }
-  vnode->children.clear();
-  delete vnode;
-}
-
 void deleteVNodePtr(const int& vnodePtr) {
-  deleteVNode(reinterpret_cast<VNode*>(vnodePtr));
+  delete reinterpret_cast<VNode*>(vnodePtr);
 };
 
 int getNode(const int& vnodePtr) {

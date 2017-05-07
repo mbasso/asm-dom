@@ -53,7 +53,7 @@ describe('dataset', function testDataset() {
     patch(vnode, vnode2);
     expect(elm.getAttribute('data-baz')).toEqual('baz');
     expect(elm.getAttribute('data-foo')).toEqual(undefined);
-    vdom.deleteVNode(vnode);
+    vdom.deleteVNode(vnode2);
   });
 
   it('can be memoized', () => {

@@ -180,7 +180,6 @@ deleteVNode(vnode); // manually delete vnode, child1 and child2 from memory
 Here is a list of things that have to be done to complete this project:
 
 - examples
-- sometimes tests fail in a non-deterministic way with error `err.uncaught = true;`
 - use the closure compiler (cause problems with wasm, need to update emscripten)
 
 ## Benchmarks

@@ -19,7 +19,6 @@ int h_stdc(const std::string& sel, const std::string& text, const std::map<std::
 
 int h_elm(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const int elm);
 
-void deleteVNode(VNode* const vnode);
 void deleteVNodePtr(const int& vnode);
 
 #endif

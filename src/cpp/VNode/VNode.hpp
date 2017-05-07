@@ -43,6 +43,12 @@ class VNode {
       const std::map<std::string, std::string> nodeProps,
       const std::vector<VNode*> nodeChildren
     ): sel(nodeSel), text(nodeText), props(nodeProps), children(nodeChildren) {};
+    ~VNode() {
+      for (std::vector<VNode*>::size_type i = children.size(); i--;) {
+        delete children[i];
+      }
+      children.clear();
+    }
     std::string sel; 
     std::string key;
     std::string text;
