@@ -10,7 +10,13 @@ export default (oldVnode, vnode) => {
     );
     props.delete();
   }
-  const result = window.asmDom.patchVNode(oldVnode, vnode);
-  setTimeout(window.asmDom.deleteVNode.bind(null, oldVnode));
-  return result;
+  if (window.asmDom.clearMemory === true) {
+    if (window.asmDomHelpers.vnodeToClear !== undefined) {
+      setTimeout(
+        window.asmDom.deleteVNode.bind(null, window.asmDomHelpers.vnodeToClear),
+      );
+    }
+    window.asmDomHelpers.vnodeToClear = oldVnode;
+  }
+  return window.asmDom.patchVNode(oldVnode, vnode);
 };

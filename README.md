@@ -98,9 +98,10 @@ patch(vnode, newVnode); // asm-dom efficiently updates the old view to the new s
 
 ### init
 
-By default asm-dom returns an `init` function that takes an optional configuration object. This represents the [Module](https://kripken.github.io/emscripten-site/docs/api_reference/module.html) object passed to emscripten with 2 additional props:
+By default asm-dom returns an `init` function that takes an optional configuration object. This represents the [Module](https://kripken.github.io/emscripten-site/docs/api_reference/module.html) object passed to emscripten with 3 additional props:
 - `useWasm`: `true` if you want to force the usage of WebAssembly
 - `useAsmJS`: `true` if you want to force the usage of asm.js
+- `clearMemory`: `true` by default, set it to `false` if you want to free memory manually, for more information see [deleteVNode](#deletevnode).
 
 By default asm-dom uses WebAssembly if supported, otherwise asm.js
 
@@ -157,7 +158,7 @@ patch(vnode, newVnode);
 
 ### deleteVNode
 
-As we said before the `h` returns a memory address. This means that this memory have to be deleted manually, as we have to do in C++ for example. By default asm-dom automatically delete the old vnode from memory when `patch` is called. However, if you want to create a vnode that is not patched, you have to delete it manually. For this reason we have developed a function that allows you to delete a given vnode and all its children recursively:
+As we said before the `h` returns a memory address. This means that this memory have to be deleted manually, as we have to do in C++ for example. By default asm-dom automatically delete the old vnode from memory when `patch` is called. However, if you want to create a vnode that is not patched, or if you want to manually manage this aspect setting `clearMemory: false` in the `init` function, you have to delete it manually. For this reason we have developed a function that allows you to delete a given vnode and all its children recursively:
 
 ```js
 const vnode1 = h('div');

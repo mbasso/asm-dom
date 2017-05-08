@@ -4,6 +4,18 @@ import init from '../src/';
 describe('load', function test() {
   this.timeout(30000);
 
+  let root;
+
+  beforeEach(() => {
+    while (document.body.firstChild) {
+      document.body.removeChild(document.body.firstChild);
+    }
+
+    root = document.createElement('div');
+    root.setAttribute('id', 'root');
+    document.body.appendChild(root);
+  });
+
   afterEach(() => {
     delete window.WebAssembly;
   });
@@ -48,6 +60,80 @@ describe('load', function test() {
     }).catch((ex) => {
       expect(ex).toBeA(SyntaxError);
       done();
+    });
+  });
+
+  it('should automatically clear memory', (done) => {
+    init({
+      useAsmJS: true,
+      hardReload: true,
+    }).then((vdom) => {
+      expect(vdom.clearMemory).toEqual(true);
+      const { h, patch } = vdom;
+      const spy = expect.spyOn(vdom, 'deleteVNode');
+      const vnode = h('div');
+      const vnode1 = h('div');
+      const vnode2 = h('div');
+      patch(root, vnode);
+      patch(vnode, vnode1);
+      patch(vnode1, vnode2);
+      setTimeout(() => {
+        expect(spy.calls.length).toEqual(2);
+        expect(spy.calls[1].arguments).toEqual([vnode]);
+        vdom.deleteVNode(vnode1);
+        vdom.deleteVNode(vnode2);
+        done();
+      }, 500);
+    });
+  });
+
+  it('should automatically clear memory (by config)', (done) => {
+    init({
+      useAsmJS: true,
+      hardReload: true,
+      clearMemory: true,
+    }).then((vdom) => {
+      expect(vdom.clearMemory).toEqual(true);
+      const { h, patch } = vdom;
+      const spy = expect.spyOn(vdom, 'deleteVNode');
+      const vnode = h('div');
+      const vnode1 = h('div');
+      const vnode2 = h('div');
+      patch(root, vnode);
+      patch(vnode, vnode1);
+      patch(vnode1, vnode2);
+      setTimeout(() => {
+        expect(spy.calls.length).toEqual(2);
+        expect(spy.calls[1].arguments).toEqual([vnode]);
+        vdom.deleteVNode(vnode1);
+        vdom.deleteVNode(vnode2);
+        done();
+      }, 500);
+    });
+  });
+
+  it('should not automatically clear memory (by config)', (done) => {
+    init({
+      useAsmJS: true,
+      hardReload: true,
+      clearMemory: false,
+    }).then((vdom) => {
+      expect(vdom.clearMemory).toEqual(false);
+      const { h, patch } = vdom;
+      const spy = expect.spyOn(vdom, 'deleteVNode');
+      const vnode = h('div');
+      const vnode1 = h('div');
+      const vnode2 = h('div');
+      patch(root, vnode);
+      patch(vnode, vnode1);
+      patch(vnode1, vnode2);
+      setTimeout(() => {
+        expect(spy.calls.length).toEqual(0);
+        vdom.deleteVNode(vnode);
+        vdom.deleteVNode(vnode1);
+        vdom.deleteVNode(vnode2);
+        done();
+      }, 500);
     });
   });
 });

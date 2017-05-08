@@ -11,6 +11,7 @@ if (typeof require.ensure !== 'function') require.ensure = (d, c) => { c(require
 
 export default (config) => {
   config = config || {};
+  if (config.clearMemory === undefined) config.clearMemory = true;
 
   if (cache.lib && !config.hardReload) {
     return Promise.resolve(cache.lib);
@@ -35,6 +36,7 @@ export default (config) => {
       if (!window && global) global.window = {};
       window.asmDom = lib;
       window.asmDomHelpers = {
+        vnodeToClear: undefined,
         domApi,
         vnodesData: {},
         diff,

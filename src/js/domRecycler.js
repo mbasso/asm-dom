@@ -1,5 +1,6 @@
 const recycler = {
   collect(node) {
+    if (!node) return;
     recycler.clean(node);
     const name = `${node.nodeName}${node.asmDomNS ? node.namespaceURI : ''}`;
     const list = recycler.nodes[name];
