@@ -60,14 +60,6 @@ int h_sdc(const std::string& sel, const std::map<std::string, std::string>& node
   return reinterpret_cast<int>(adjustVNode(vnode));
 };
 
-int h_stdc(const std::string& sel, const std::string& text, const std::map<std::string, std::string>& nodeProps, const std::vector<int>& children) {
-  std::vector<VNode*> vnodes;
-  for(std::vector<int>::size_type i = 0; i < children.size(); ++i) {
-    vnodes.push_back(reinterpret_cast<VNode*>(children[i]));
-  }
-  return reinterpret_cast<int>(adjustVNode(new VNode(sel, text, nodeProps, vnodes)));
-};
-
 int h_elm(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const int elm) {
   VNode* vnode = adjustVNode(new VNode(sel, nodeProps));
   vnode->elm = elm;
@@ -92,7 +84,6 @@ EMSCRIPTEN_BINDINGS(h_function) {
   emscripten::function("_h_sdn", &h_sdn, emscripten::allow_raw_pointers());
   emscripten::function("_h_sdt", &h_sdt, emscripten::allow_raw_pointers());
   emscripten::function("_h_sdc", &h_sdc, emscripten::allow_raw_pointers());
-  emscripten::function("_h_stdc", &h_stdc, emscripten::allow_raw_pointers());
   emscripten::function("_h_elm", &h_elm, emscripten::allow_raw_pointers());
   emscripten::function("_deleteVNode", &deleteVNodePtr, emscripten::allow_raw_pointer<emscripten::arg<0>>());
   emscripten::function("_getNode", &getNode, emscripten::allow_raw_pointer<emscripten::arg<0>>());

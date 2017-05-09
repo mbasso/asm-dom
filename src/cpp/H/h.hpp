@@ -15,8 +15,6 @@ int h_sdn(const std::string& sel, const std::map<std::string, std::string>& node
 int h_sdt(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const std::string& text);
 int h_sdc(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const std::vector<int>& children);
 
-int h_stdc(const std::string& sel, const std::string& text, const std::map<std::string, std::string>& nodeProps, const std::vector<int>& children);
-
 int h_elm(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const int elm);
 
 void deleteVNodePtr(const int& vnode);
