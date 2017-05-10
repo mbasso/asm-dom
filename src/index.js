@@ -10,19 +10,18 @@ const cache = {};
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => { c(require); };
 
 export default (config) => {
-  config = config || {};
+  if (config === undefined) config = {};
   if (config.clearMemory === undefined) config.clearMemory = true;
 
-  if (cache.lib && !config.hardReload) {
+  if (cache.lib !== undefined && config.hardReload !== true) {
     return Promise.resolve(cache.lib);
   }
 
-  config = config || {};
   let result;
   const readyPromise = new Promise((resolve) => {
     config['_main'] = () => resolve(cache);
   });
-  if ((config.useWasm || 'WebAssembly' in window) && !config.useAsmJS) {
+  if ((config.useWasm === true || 'WebAssembly' in window) && config.useAsmJS !== true) {
     result = import('./js/loadWasm').then(x => x.default(config));
   } else {
     result = import('../compiled/asmjs/asm-dom.asm.js');
@@ -33,7 +32,7 @@ export default (config) => {
     .then((lib) => {
       cache.lib = lib;
 
-      if (!window && global) global.window = {};
+      if (window === undefined && global !== undefined) global.window = {};
       window.asmDom = lib;
       window.asmDomHelpers = {
         vnodeToClear: undefined,

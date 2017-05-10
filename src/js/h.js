@@ -6,7 +6,7 @@ const getChildren = (arr) => {
   for (let i = 0; i < arr.length; i++) {
     if (typeof arr[i] === 'string') {
       result.push_back(window.asmDom._h_ti(arr[i], true));
-    } else if (arr[i]) {
+    } else if (arr[i] !== false && arr[i] !== null && arr[i] !== undefined) {
       result.push_back(arr[i]);
     }
   }
@@ -30,11 +30,11 @@ const objToProps = (obj) => {
 
 export default (a, b, c, d) => {
   let result;
-  const raw = b && b.raw;
+  const raw = b !== undefined && b.raw !== undefined ? b.raw : undefined;
   if (b === undefined) {
     result = window.asmDom._h_s(a);
   } else if (c === undefined) {
-    if (b && b.instanceofArray) {
+    if (b.instanceofArray === true) {
       result = window.asmDom._h_sc(a, b = getChildren(b));
       b.delete();
     } else {
@@ -57,7 +57,7 @@ export default (a, b, c, d) => {
       }
     }
   } else if (d === undefined) {
-    if (c && c.instanceofArray) {
+    if (c.instanceofArray === true) {
       result = window.asmDom._h_sdc(a, b = objToProps(b), c = getChildren(c));
       b.delete();
       c.delete();
@@ -78,6 +78,6 @@ export default (a, b, c, d) => {
   } else {
     throw new Error('Invalid arguments provided to h function');
   }
-  if (raw) window.asmDomHelpers.vnodesData[result] = { raw };
+  if (raw !== undefined) window.asmDomHelpers.vnodesData[result] = { raw };
   return result;
 };

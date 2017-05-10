@@ -1,15 +1,15 @@
 const recycler = {
   collect(node) {
-    if (!node) return;
+    if (node === null || node === undefined) return;
     recycler.clean(node);
-    const name = `${node.nodeName}${node.asmDomNS ? node.namespaceURI : ''}`;
+    const name = `${node.nodeName}${node.asmDomNS !== undefined ? node.namespaceURI : ''}`;
     const list = recycler.nodes[name];
     if (list) list.push(node);
     else recycler.nodes[name] = [node];
   },
   create(name, ns) {
     name = name.toUpperCase();
-    ns = ns || '';
+    if (ns === undefined) ns = '';
     const list = recycler.nodes[name + ns];
     return (
       list && list.pop() ||
@@ -20,25 +20,29 @@ const recycler = {
   createText(text) {
     const list = recycler.nodes['#text'];
     const node = list && list.pop() || document.createTextNode(text);
-    node.textContent = text;
+    node.nodeValue = text;
     return node;
   },
   createComment(comment) {
     const list = recycler.nodes['#comment'];
     const node = list && list.pop() || document.createComment(comment);
-    node.textContent = comment;
+    node.nodeValue = comment;
     return node;
   },
   clean(node) {
     node.remove();
-    let i = node.attributes && node.attributes.length;
+    let i;
+    if (node.attributes !== undefined) i = node.attributes.length;
     while (node.firstChild) recycler.collect(node.firstChild);
     while (i--) node.removeAttribute(node.attributes[i].name);
-    if (node.asmDomRaws) {
+    if (node.asmDomRaws !== undefined) {
       for (i = node.asmDomRaws.length; i--;) node[node.asmDomRaws[i]] = undefined;
       node.asmDomRaws = undefined;
     }
-    if (node.textContent) node.textContent = undefined;
+    if (node.textContent !== '') node.textContent = '';
+    if (node.nodeValue !== null && node.nodeValue !== undefined && node.nodeValue !== '') {
+      node.nodeValue = '';
+    }
     const keys = Object.keys(node);
     for (i = keys.length; i--;) {
       if (
