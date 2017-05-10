@@ -3,9 +3,10 @@
 
 #include "../VNode/VNode.hpp"
 #include <emscripten/val.h>
+#include <cstdint>
 #include <vector>
 
-int patch_vnodePtr(const int oldVnode, const int vnode);
+std::uintptr_t patch_vnodePtr(const std::uintptr_t oldVnode, const std::uintptr_t vnode);
 void updateChildren(
 	emscripten::val parentElm,
 	std::vector<VNode*>& oldCh,

@@ -2,6 +2,7 @@
 #include "../VNode/VNode.hpp"
 #include <emscripten/bind.h>
 #include <emscripten/val.h>
+#include <cstdint>
 #include <string>
 #include <map>
 
@@ -12,65 +13,65 @@ VNode* const adjustVNode(VNode* const vnode) {
   return vnode;
 }
 
-int h_s(const std::string& sel) {
-  return reinterpret_cast<int>(adjustVNode(new VNode(sel)));
+std::uintptr_t h_s(const std::string& sel) {
+  return reinterpret_cast<std::uintptr_t>(adjustVNode(new VNode(sel)));
 };
 
-int h_ti(const std::string& text, const bool& isText) {
+std::uintptr_t h_ti(const std::string& text, const bool& isText) {
   if (isText) {
-    return reinterpret_cast<int>(adjustVNode(new VNode(text, true)));
+    return reinterpret_cast<std::uintptr_t>(adjustVNode(new VNode(text, true)));
   } else {
-    return reinterpret_cast<int>(adjustVNode(new VNode(text)));
+    return reinterpret_cast<std::uintptr_t>(adjustVNode(new VNode(text)));
   }
 };
 
-int h_sn(const std::string& sel, const int& node) {
-  return reinterpret_cast<int>(adjustVNode(new VNode(sel, reinterpret_cast<VNode*>(node))));
+std::uintptr_t h_sn(const std::string& sel, const int& node) {
+  return reinterpret_cast<std::uintptr_t>(adjustVNode(new VNode(sel, reinterpret_cast<VNode*>(node))));
 };
 
-int h_st(const std::string& sel, const std::string& text) {
-  return reinterpret_cast<int>(adjustVNode(new VNode(sel, text)));
+std::uintptr_t h_st(const std::string& sel, const std::string& text) {
+  return reinterpret_cast<std::uintptr_t>(adjustVNode(new VNode(sel, text)));
 };
 
-int h_sd(const std::string& sel, const std::map<std::string, std::string>& nodeProps) {
-  return reinterpret_cast<int>(adjustVNode(new VNode(sel, nodeProps)));
+std::uintptr_t h_sd(const std::string& sel, const std::map<std::string, std::string>& nodeProps) {
+  return reinterpret_cast<std::uintptr_t>(adjustVNode(new VNode(sel, nodeProps)));
 };
 
-int h_sc(const std::string& sel, const std::vector<int>& children) {
+std::uintptr_t h_sc(const std::string& sel, const std::vector<std::uintptr_t>& children) {
   VNode* vnode = new VNode(sel);
   for(std::vector<int>::size_type i = 0; i < children.size(); ++i) {
     vnode->children.push_back(reinterpret_cast<VNode*>(children[i]));
   }
-  return reinterpret_cast<int>(adjustVNode(vnode));
+  return reinterpret_cast<std::uintptr_t>(adjustVNode(vnode));
 };
 
-int h_sdn(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const int& node) {
-  return reinterpret_cast<int>(adjustVNode(new VNode(sel, nodeProps, reinterpret_cast<VNode*>(node))));
+std::uintptr_t h_sdn(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const int& node) {
+  return reinterpret_cast<std::uintptr_t>(adjustVNode(new VNode(sel, nodeProps, reinterpret_cast<VNode*>(node))));
 };
 
-int h_sdt(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const std::string& text) {
-  return reinterpret_cast<int>(new VNode(sel, nodeProps, text));
+std::uintptr_t h_sdt(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const std::string& text) {
+  return reinterpret_cast<std::uintptr_t>(new VNode(sel, nodeProps, text));
 };
 
-int h_sdc(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const std::vector<int>& children) {
+std::uintptr_t h_sdc(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const std::vector<std::uintptr_t>& children) {
   VNode* vnode = new VNode(sel, nodeProps);
   for(std::vector<int>::size_type i = 0; i < children.size(); ++i) {
     vnode->children.push_back(reinterpret_cast<VNode*>(children[i]));
   }
-  return reinterpret_cast<int>(adjustVNode(vnode));
+  return reinterpret_cast<std::uintptr_t>(adjustVNode(vnode));
 };
 
-int h_elm(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const int elm) {
+std::uintptr_t h_elm(const std::string& sel, const std::map<std::string, std::string>& nodeProps, const int elm) {
   VNode* vnode = adjustVNode(new VNode(sel, nodeProps));
   vnode->elm = elm;
-  return reinterpret_cast<int>(vnode);
+  return reinterpret_cast<std::uintptr_t>(vnode);
 };
 
-void deleteVNodePtr(const int& vnodePtr) {
+void deleteVNodePtr(const std::uintptr_t& vnodePtr) {
   delete reinterpret_cast<VNode*>(vnodePtr);
 };
 
-int getNode(const int& vnodePtr) {
+int getNode(const std::uintptr_t& vnodePtr) {
   return reinterpret_cast<VNode*>(vnodePtr)->elm;
 }
 

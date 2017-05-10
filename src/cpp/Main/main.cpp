@@ -3,6 +3,7 @@
 #include "../Diff/diff.hpp"
 #include "../VNode/VNode.hpp"
 #include <emscripten/val.h>
+#include <cstdint>
 #include <emscripten/bind.h>
 #include <algorithm>
 #include <vector>
@@ -244,8 +245,8 @@ VNode* patch_vnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const
 	return vnode;
 };
 
-int patch_vnodePtr(const int oldVnode, const int vnode) {
-	return reinterpret_cast<int>(patch_vnode(reinterpret_cast<VNode*>(oldVnode), reinterpret_cast<VNode*>(vnode)));
+std::uintptr_t patch_vnodePtr(const std::uintptr_t oldVnode, const std::uintptr_t vnode) {
+	return reinterpret_cast<std::uintptr_t>(patch_vnode(reinterpret_cast<VNode*>(oldVnode), reinterpret_cast<VNode*>(vnode)));
 };
 
 EMSCRIPTEN_BINDINGS(patch_function) {

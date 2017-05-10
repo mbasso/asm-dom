@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <emscripten/val.h>
 
 class VNode {
   public:
@@ -37,12 +38,6 @@ class VNode {
       const std::map<std::string, std::string> nodeProps,
       VNode* child
     ): sel(nodeSel), props(nodeProps), children(std::vector<VNode*> { child }) {};
-    VNode(
-      const std::string nodeSel,
-      const std::string nodeText,
-      const std::map<std::string, std::string> nodeProps,
-      const std::vector<VNode*> nodeChildren
-    ): sel(nodeSel), text(nodeText), props(nodeProps), children(nodeChildren) {};
     ~VNode() {
       for (std::vector<VNode*>::size_type i = children.size(); i--;) {
         delete children[i];
