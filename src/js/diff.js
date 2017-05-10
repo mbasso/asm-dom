@@ -3,12 +3,12 @@ import { nodes } from './domApi';
 export default (oldVnodePtr, vnodePtr, elmPtr) => {
   let oldRaws = window.asmDomHelpers.vnodesData[oldVnodePtr];
   let newRaws = window.asmDomHelpers.vnodesData[vnodePtr];
-  oldRaws = oldRaws !== undefined && oldRaws !== null ? oldRaws.raw : undefined;
-  newRaws = newRaws !== undefined && newRaws !== null ? newRaws.raw : undefined;
+  if (oldRaws !== undefined) oldRaws = oldRaws.raw;
+  if (newRaws !== undefined) newRaws = newRaws.raw;
 
   if (oldRaws === undefined && newRaws === undefined || oldRaws === newRaws) return;
-  oldRaws = oldRaws !== undefined && oldRaws !== null ? oldRaws : {};
-  newRaws = newRaws !== undefined && newRaws !== null ? newRaws : {};
+  if (oldRaws === undefined) oldRaws = {};
+  if (newRaws === undefined) newRaws = {};
 
   const elm = nodes[elmPtr];
 
