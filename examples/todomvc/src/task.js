@@ -16,7 +16,7 @@ const targetChecked = e => e.target.checked;
 // const targetValue = e => e.target.value;
 
 function onInput(handler, e) {
-  if (e.keyCode === KEY_ENTER) {
+  if (e.keyCode === KEY_ENTER && e.target.value !== '') {
     handler(Action.CommitEdit(e.target.value));
   }
 }

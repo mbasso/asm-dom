@@ -18,7 +18,7 @@ const targetChecked = e => e.target.checked;
 // const targetValue = e => e.target.value;
 
 function onInput(handler, e) {
-  if (e.keyCode === KEY_ENTER) {
+  if (e.keyCode === KEY_ENTER && e.target.value !== '') {
     handler(Action.Add(e.target.value));
   }
 }
@@ -69,8 +69,8 @@ function view(h, model, handler) {
       h('input', {
         className: 'toggle-all',
         type: 'checkbox',
-        checked: remaining === 0,
         raw: {
+          checked: remaining === 0,
           onclick: sequence(targetChecked, Action.ToggleAll, handler),
         },
       }),

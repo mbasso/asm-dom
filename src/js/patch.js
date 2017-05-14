@@ -1,4 +1,9 @@
 export default (oldVnode, vnode) => {
+  if (
+    window.asmDomHelpers.currentNode !== oldVnode &&
+    window.asmDomHelpers.currentNode !== undefined
+  ) return;
+  window.asmDomHelpers.currentNode = vnode;
   if (typeof oldVnode !== 'number') {
     const props = new window.asmDom.MapStringString();
     if (oldVnode.id !== '') props.set('id', oldVnode.id);
@@ -10,13 +15,10 @@ export default (oldVnode, vnode) => {
     );
     props.delete();
   }
+  const result = window.asmDom.patchVNode(oldVnode, vnode);
   if (window.asmDom.clearMemory === true) {
-    if (window.asmDomHelpers.vnodeToClear !== undefined) {
-      setTimeout(
-        window.asmDom.deleteVNode.bind(null, window.asmDomHelpers.vnodeToClear),
-      );
-    }
-    window.asmDomHelpers.vnodeToClear = oldVnode;
+    setTimeout(window.asmDom.deleteVNode.bind(null, oldVnode));
   }
-  return window.asmDom.patchVNode(oldVnode, vnode);
+  // eslint-disable-next-line
+  return result;
 };

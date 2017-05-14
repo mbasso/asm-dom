@@ -78,8 +78,9 @@ describe('load', function test() {
       patch(vnode, vnode1);
       patch(vnode1, vnode2);
       setTimeout(() => {
-        expect(spy.calls.length).toEqual(2);
+        expect(spy.calls.length).toEqual(3);
         expect(spy.calls[1].arguments).toEqual([vnode]);
+        expect(spy.calls[2].arguments).toEqual([vnode1]);
         vdom.deleteVNode(vnode1);
         vdom.deleteVNode(vnode2);
         done();
@@ -103,8 +104,9 @@ describe('load', function test() {
       patch(vnode, vnode1);
       patch(vnode1, vnode2);
       setTimeout(() => {
-        expect(spy.calls.length).toEqual(2);
+        expect(spy.calls.length).toEqual(3);
         expect(spy.calls[1].arguments).toEqual([vnode]);
+        expect(spy.calls[2].arguments).toEqual([vnode1]);
         vdom.deleteVNode(vnode1);
         vdom.deleteVNode(vnode2);
         done();

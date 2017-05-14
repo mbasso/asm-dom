@@ -47,6 +47,8 @@ describe('patch', function testPatch() {
   });
 
   beforeEach(() => {
+    vdom.reset();
+
     while (document.body.firstChild) {
       document.body.removeChild(document.body.firstChild);
     }
@@ -470,6 +472,8 @@ describe('patch', function testPatch() {
         expect(elm.children[i].innerHTML, shufArr[i].toString());
         expect(opacities[i].indexOf(elm.children[i].style.opacity), 0);
       }
+
+      vdom.reset();
     }
   });
 

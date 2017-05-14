@@ -2,12 +2,13 @@
 #include "../VNode/VNode.hpp"
 #include <emscripten.h>
 #include <iterator>
+#include <cstdint>
 #include <map>
 
 void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 	EM_ASM_({
 		window['asmDomHelpers']['diff']($0, $1, $2);
-	}, reinterpret_cast<int>(oldVnode), reinterpret_cast<int>(vnode), vnode->elm);
+	}, reinterpret_cast<std::uintptr_t>(oldVnode), reinterpret_cast<std::uintptr_t>(vnode), vnode->elm);
 
 	if (oldVnode->props.empty() && vnode->props.empty()) return;
 

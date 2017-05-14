@@ -34,12 +34,6 @@ export default (config) => {
 
       if (window === undefined && global !== undefined) global.window = {};
       window.asmDom = lib;
-      window.asmDomHelpers = {
-        vnodeToClear: undefined,
-        domApi,
-        vnodesData: {},
-        diff,
-      };
 
       lib.h = h;
       lib.patch = patch;
@@ -48,6 +42,16 @@ export default (config) => {
         window.asmDomHelpers.vnodesData[oldVnode] = undefined;
         lib._deleteVNode(oldVnode);
       };
+      lib.reset = () => {
+        window.asmDomHelpers = {
+          currentNode: undefined,
+          domApi,
+          vnodesData: {},
+          diff,
+        };
+      };
+
+      lib.reset();
 
       return readyPromise;
     })

@@ -21,6 +21,8 @@ describe('attributes', function testAttributes() {
   });
 
   beforeEach(() => {
+    vdom.reset();
+
     while (document.body.firstChild) {
       document.body.removeChild(document.body.firstChild);
     }
