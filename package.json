@@ -1,7 +1,7 @@
 {
   "name": "asm-dom",
   "version": "0.1.0",
-  "description": "A virtual dom in web assembly",
+  "description": "A minimal WebAssembly virtual DOM focused on performance",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
   "files": [

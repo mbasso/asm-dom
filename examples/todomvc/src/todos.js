@@ -14,7 +14,7 @@ const Action = Type({
   Modify: [Number, task.Action],
 });
 
-const targetChecked = e => e.target.checked;
+const targetChecked = e => Boolean(e.target.checked);
 // const targetValue = e => e.target.value;
 
 function onInput(handler, e) {

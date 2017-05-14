@@ -12,7 +12,7 @@ const Action = Type({
   CancelEdit: [],
 });
 
-const targetChecked = e => e.target.checked;
+const targetChecked = e => Boolean(e.target.checked);
 // const targetValue = e => e.target.value;
 
 function onInput(handler, e) {
@@ -30,10 +30,10 @@ function view(h, task, handler, remove) {
       className: 'view',
     }, [
       h('input', {
-        checked: !!task.done,
         type: 'checkbox',
         className: 'toggle',
         raw: {
+          checked: !!task.done,
           onclick: sequence(targetChecked, Action.Toggle, handler),
         },
       }),
