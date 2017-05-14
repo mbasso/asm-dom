@@ -7,18 +7,12 @@
 
 > A minimal WebAssembly virtual DOM focused on performance
 
----
-
-:warning: **Attention - This project isn't completed yet. Feel free to contribute, see [TODO](#todo) to get started** :warning:
----
-
----
-
 ## Table of Contents
 
 - [Installation](#installation)
 - [Motivation](#motivation)
-- [Example](#example)
+- [Inline Example](#inline-example)
+- [Examples](#examples)
 - [Documentation](#documentation)
 - [TODO](#todo)
 - [Benchmarks](#benchmarks)
@@ -62,7 +56,7 @@ node: {
 asm-dom is a minimal WebAssembly virtual DOM focused on performance. It is born from the idea to test the powerful of WebAssembly in a common use case that is not gaming, VR, AR or Image / video editing. Unfortunately, at the moment, [GC / DOM / Web API Integration](http://webassembly.org/docs/gc/) is a future feature 🦄, so, asm-dom isn't totally developed in wasm. All interactions with the DOM are written in Javascript. This is a big disadvantage because of the overhead of the binding between JS and WASM, in the future asm-dom will be even more powerful, anyway results are satisfying.
 Last but not least, this project aims to be an example for those who want to try WebAssembly and emscripten!
 
-## Example
+## Inline Example
 
 ```js
 import init from 'asm-dom';
@@ -95,6 +89,14 @@ const newVnode = h('div', {
 patch(vnode, newVnode); // asm-dom efficiently updates the old view to the new state
 ```
 
+## Examples
+
+Examples are available in the [examples folder](https://github.com/mbasso/asm-dom/tree/master/examples).
+
+Also, here is the list of the online Demos:
+
+- [TODO MVC](https://mbasso.github.io/asm-dom/examples/todomvc/)
+
 ## Documentation
 
 ### init
@@ -119,7 +121,7 @@ const asmDom = await init();
 
 ### h
 
-You can create vnodes using `h` function. `h` accepts a tag/selector as a string, an optional data object and an optional **string** or array of children. The data object contains all attributes and a special `raw` prop that can contains **callbacks** and raw values applied to the DOM element with the dot notation. You should also put in `raw` the property `value`. This returns the memory address of your virtual node.
+You can create vnodes using `h` function. `h` accepts a tag/selector as a string, an optional data object and an optional **string** or array of children. The data object contains all attributes and a special `raw` prop that can contains **callbacks** and raw values applied to the DOM element with the dot notation. You should also put in `raw` properties like `value` or  `checked`. This returns the memory address of your virtual node.
 
 ```js
 const { h } = asmDom;
@@ -143,23 +145,23 @@ const vnode2 = h('div', {
 
 The `patch` takes two arguments, the first is a DOM element or a vnode representing the current view. The second is a vnode representing the new, updated view.
 
-If a DOM element is passed, newVnode will be turned into a DOM node, and the passed element will be replaced by the created DOM node. If an old vnode is passed, asm-dom will efficiently modify it to match the description in the new vnode.
+If a DOM element is passed, `newVnode` will be turned into a DOM node, and the passed element will be replaced by the created DOM node. If an `oldVnode` is passed, asm-dom will efficiently modify it to match the description in the new vnode.
 
-Any old vnode passed must be the resulting vnode from the previous call to patch.
+**Any old vnode passed must be the resulting vnode from the previous call to patch. Otherwise, no operation is performed.**
 
 ```js
 const { h, patch } = asmDom;
 
-const vnode = h('span', 'old node');
+const oldVnode = h('span', 'old node');
 const newVnode = h('span', 'new node');
 
-patch(document.getElementById('root'), vnode);
-patch(vnode, newVnode);
+patch(document.getElementById('root'), oldVnode);
+patch(oldVnode, newVnode);
 ```
 
 ### deleteVNode
 
-As we said before the `h` returns a memory address. This means that this memory have to be deleted manually, as we have to do in C++ for example. By default asm-dom automatically delete the old vnode from memory when `patch` is called. However, if you want to create a vnode that is not patched, or if you want to manually manage this aspect setting `clearMemory: false` in the `init` function, you have to delete it manually. For this reason we have developed a function that allows you to delete a given vnode and all its children recursively:
+As we said before the `h` returns a memory address. This means that this memory have to be deleted manually, as we have to do in C++ for example. By default asm-dom automatically delete the old vnode from memory when `patch` is called. However, if you want to create a vnode that is not patched, or if you want to manually manage this aspect (setting `clearMemory: false` in the `init` function), you have to delete it manually. For this reason we have developed a function that allows you to delete a given vnode and all its children recursively:
 
 ```js
 const vnode1 = h('div');
@@ -181,7 +183,6 @@ deleteVNode(vnode); // manually delete vnode, child1 and child2 from memory
 
 Here is a list of things that have to be done to complete this project:
 
-- examples
 - use the closure compiler (cause problems with wasm, need to update emscripten)
 
 ## Benchmarks
@@ -191,7 +192,7 @@ Consider that benchmarking this library is not easy, we have to reproduce real w
 
 ## Roadmap
 
-asm-dom aims to be even more powerful with [GC / DOM / Web API Integration](http://webassembly.org/docs/gc/). Unfortunately this is a future feature 🦄, so, we have to be patient and wait a little.
+asm-dom aims to be even more powerful with [GC / DOM / Web API Integration](http://webassembly.org/docs/gc/). Unfortunately this is a future feature 🦄, so, we have to be patient and wait a bit.
 
 ## Change Log
 
