@@ -143,11 +143,11 @@ const vnode2 = h('div', {
 
 ### patch
 
-The `patch` takes two arguments, the first is a DOM element or a vnode representing the current view. The second is a vnode representing the new, updated view.
+The `patch` takes two arguments, the first is a DOM element or a vnode representing the current view. The second is a vnode representing the new, updated view. If `patch` succedeed, the new vnode (the second parameter) is returned.
 
 If a DOM element is passed, `newVnode` will be turned into a DOM node, and the passed element will be replaced by the created DOM node. If an `oldVnode` is passed, asm-dom will efficiently modify it to match the description in the new vnode.
 
-**Any old vnode passed must be the resulting vnode from the previous call to patch. Otherwise, no operation is performed.**
+**Any old vnode passed must be the resulting vnode from the previous call to patch. Otherwise, no operation is performed and undefined is returned.**
 
 ```js
 const { h, patch } = asmDom;

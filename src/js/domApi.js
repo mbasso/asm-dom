@@ -35,7 +35,10 @@ export default {
   },
   'insertBefore'(parentNodePtr, newNodePtr, referenceNodePtr) {
     // if (!nodes[parentNodePtr].insertBefore) return;
-    nodes[parentNodePtr].insertBefore(nodes[newNodePtr], nodes[referenceNodePtr]);
+    nodes[parentNodePtr].insertBefore(
+      nodes[newNodePtr],
+      nodes[referenceNodePtr] !== undefined ? nodes[referenceNodePtr] : null,
+    );
   },
   'removeChild'(childPtr) {
     recycler.collect(nodes[childPtr]);

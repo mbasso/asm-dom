@@ -50,9 +50,9 @@ function view(h, task, handler, remove) {
       }),
     ]),
     h('input', {
-      value: task.title,
       className: 'edit',
       raw: {
+        value: task.title,
         onblur: bind(handler, Action.CancelEdit()),
         onkeydown: bind(onInput, handler),
       },

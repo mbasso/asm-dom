@@ -40,8 +40,6 @@ function view(h, model, handler) {
   const remaining = remainingTodos(model.tasks);
   const filtered = filteredTodos(model.tasks, model.filter);
 
-  window.onhashchange = () => handler(Action.Filter(window.location.hash.substr(2) || 'all'));
-
   return h('section', {
     className: 'todoapp',
     raw: {
@@ -144,7 +142,7 @@ function archiveTodos(model) {
   return {
     ...model,
     // eslint-disable-next-line
-    tasks : model.tasks.filter( taskModel => !taskModel.done),
+    tasks : model.tasks.filter(taskModel => !taskModel.done),
   };
 }
 

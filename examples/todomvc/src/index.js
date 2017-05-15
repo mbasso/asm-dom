@@ -7,11 +7,14 @@ init().then((asmDom) => {
   const { h, patch } = asmDom;
 
   function main(initState, oldVnode, { view, update }) {
-    const newVnode = view(h, initState, (e) => {
+    let handler;
+    const newVnode = view(h, initState, handler = (e) => {
       const newState = update(initState, e);
       main(newState, newVnode, { view, update });
     });
-    patch(oldVnode, newVnode);
+    if (patch(oldVnode, newVnode) !== undefined) {
+      window.onhashchange = () => handler(todos.Action.Filter(window.location.hash.substr(2) || 'all'));
+    }
   }
 
   const state = todos.init();
