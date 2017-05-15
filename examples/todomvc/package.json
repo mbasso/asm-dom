@@ -1,7 +1,7 @@
 {
-  "name": "reorder-animation",
+  "name": "asm-dom-todomvc",
   "version": "0.0.1",
-  "description": "A simple asm-dom example",
+  "description": "todomvc using asm-dom",
   "scripts": {
     "start": "webpack-dev-server --env.dev",
     "build": "cross-env BABEL_ENV=commonjs webpack --env.prod src/index.js",
