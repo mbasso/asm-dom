@@ -30,13 +30,14 @@ const recycler = {
     return node;
   },
   clean(node) {
+    while (node.firstChild) recycler.collect(node.firstChild);
     node.remove();
     let i;
     if (node.attributes !== undefined) i = node.attributes.length;
-    while (node.firstChild) recycler.collect(node.firstChild);
     while (i--) node.removeAttribute(node.attributes[i].name);
     if (node.asmDomRaws !== undefined) {
-      for (i = node.asmDomRaws.length; i--;) node[node.asmDomRaws[i]] = undefined;
+      i = node.asmDomRaws.length;
+      while (i--) node[node.asmDomRaws[i]] = undefined;
       node.asmDomRaws = undefined;
     }
     if (node.textContent !== '') node.textContent = '';
@@ -44,7 +45,8 @@ const recycler = {
       node.nodeValue = '';
     }
     const keys = Object.keys(node);
-    for (i = keys.length; i--;) {
+    i = keys.length;
+    while (i--) {
       if (
         keys[i][0] !== 'a' || keys[i][1] !== 's' || keys[i][2] !== 'm' ||
         keys[i][3] !== 'D' || keys[i][4] !== 'o' || keys[i][5] !== 'm'

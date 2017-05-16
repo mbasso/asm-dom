@@ -3,6 +3,8 @@ export default (oldVnode, vnode) => {
     window.asmDomHelpers.currentNode !== oldVnode &&
     window.asmDomHelpers.currentNode !== undefined
   ) return;
+  // eslint-disable-next-line
+  if (oldVnode === vnode) return vnode;
   window.asmDomHelpers.currentNode = vnode;
   if (typeof oldVnode !== 'number') {
     const props = new window.asmDom.MapStringString();
@@ -15,10 +17,10 @@ export default (oldVnode, vnode) => {
     );
     props.delete();
   }
-  const result = window.asmDom.patchVNode(oldVnode, vnode);
+  window.asmDom.patchVNode(oldVnode, vnode);
   if (window.asmDom.clearMemory === true) {
     setTimeout(window.asmDom.deleteVNode.bind(null, oldVnode));
   }
   // eslint-disable-next-line
-  return result;
+  return vnode;
 };

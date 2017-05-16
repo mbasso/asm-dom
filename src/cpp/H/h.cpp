@@ -76,16 +76,16 @@ int getNode(const std::uintptr_t& vnodePtr) {
 }
 
 EMSCRIPTEN_BINDINGS(h_function) {
-  emscripten::function("_h_s", &h_s, emscripten::allow_raw_pointers());
-  emscripten::function("_h_ti", &h_ti, emscripten::allow_raw_pointers());
-  emscripten::function("_h_sn", &h_sn, emscripten::allow_raw_pointers());
-  emscripten::function("_h_st", &h_st, emscripten::allow_raw_pointers());
-  emscripten::function("_h_sd", &h_sd, emscripten::allow_raw_pointers());
-  emscripten::function("_h_sc", &h_sc, emscripten::allow_raw_pointers());
-  emscripten::function("_h_sdn", &h_sdn, emscripten::allow_raw_pointers());
-  emscripten::function("_h_sdt", &h_sdt, emscripten::allow_raw_pointers());
-  emscripten::function("_h_sdc", &h_sdc, emscripten::allow_raw_pointers());
-  emscripten::function("_h_elm", &h_elm, emscripten::allow_raw_pointers());
-  emscripten::function("_deleteVNode", &deleteVNodePtr, emscripten::allow_raw_pointer<emscripten::arg<0>>());
-  emscripten::function("_getNode", &getNode, emscripten::allow_raw_pointer<emscripten::arg<0>>());
+  emscripten::function("_h_s", &h_s);
+  emscripten::function("_h_ti", &h_ti);
+  emscripten::function("_h_sn", &h_sn);
+  emscripten::function("_h_st", &h_st);
+  emscripten::function("_h_sd", &h_sd);
+  emscripten::function("_h_sc", &h_sc);
+  emscripten::function("_h_sdn", &h_sdn);
+  emscripten::function("_h_sdt", &h_sdt);
+  emscripten::function("_h_sdc", &h_sdc);
+  emscripten::function("_h_elm", &h_elm);
+  emscripten::function("_deleteVNode", &deleteVNodePtr);
+  emscripten::function("_getNode", &getNode);
 }

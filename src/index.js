@@ -11,11 +11,12 @@ if (typeof require.ensure !== 'function') require.ensure = (d, c) => { c(require
 
 export default (config) => {
   if (config === undefined) config = {};
-  if (config.clearMemory === undefined) config.clearMemory = true;
 
   if (cache.lib !== undefined && config.hardReload !== true) {
     return Promise.resolve(cache.lib);
   }
+
+  if (config.clearMemory === undefined) config.clearMemory = true;
 
   let result;
   const readyPromise = new Promise((resolve) => {

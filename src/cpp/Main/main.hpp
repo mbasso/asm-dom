@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <vector>
 
-std::uintptr_t patch_vnodePtr(const std::uintptr_t oldVnode, const std::uintptr_t vnode);
+void patch_vnodePtr(const std::uintptr_t oldVnode, const std::uintptr_t vnode);
 void updateChildren(
 	emscripten::val parentElm,
 	std::vector<VNode*>& oldCh,

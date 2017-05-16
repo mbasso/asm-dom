@@ -39,10 +39,8 @@ class VNode {
       VNode* child
     ): sel(nodeSel), props(nodeProps), children(std::vector<VNode*> { child }) {};
     ~VNode() {
-      for (std::vector<VNode*>::size_type i = children.size(); i--;) {
-        delete children[i];
-      }
-      children.clear();
+      std::vector<VNode*>::size_type i = children.size();
+      while (i--) delete children[i];
     }
     std::string sel; 
     std::string key;

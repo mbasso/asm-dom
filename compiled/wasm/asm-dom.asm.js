@@ -1508,9 +1508,8 @@ function __Z14deleteVNodePtrRKj($vnodePtr) {
 }
 function __ZN5VNodeD2Ev($this) {
  $this = $this|0;
- var $$cast = 0, $$lcssa = 0, $$pre = 0, $$pre13 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $3 = 0, $4 = 0;
- var $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__end_$i = 0, $__first_$i$i$i$i$i$i = 0, $__new_last3$i$i$i = 0, $arrayidx$i = 0, $children = 0, $cmp$i = 0, $cmp1$i$i$i = 0, $cmp1$i$i$i5 = 0, $dec11 = 0, $dec11$in = 0, $isnull = 0, $key = 0, $scevgep$i$i$i = 0, $scevgep$i$i$i6 = 0, $scevgep5$i$i$i = 0;
- var $scevgep5$i$i$i7 = 0, $sub$ptr$div$i = 0, $sub$ptr$sub$i = 0, $text = 0, $tobool = 0, $tobool10 = 0, label = 0, sp = 0;
+ var $$cast = 0, $$lcssa = 0, $$pre = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__end_$i = 0, $__first_$i$i$i$i$i$i = 0, $arrayidx$i = 0, $children = 0, $cmp$i = 0;
+ var $cmp1$i$i$i = 0, $dec6 = 0, $dec6$in = 0, $isnull = 0, $key = 0, $scevgep$i$i$i = 0, $scevgep5$i$i$i = 0, $sub$ptr$div$i = 0, $sub$ptr$sub$i = 0, $text = 0, $tobool = 0, $tobool5 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $children = ((($this)) + 52|0);
  $__end_$i = ((($this)) + 56|0);
@@ -1518,68 +1517,53 @@ function __ZN5VNodeD2Ev($this) {
  $1 = load4($children);
  $sub$ptr$sub$i = (($0) - ($1))|0;
  $sub$ptr$div$i = $sub$ptr$sub$i >> 2;
- $tobool10 = ($sub$ptr$div$i|0)==(0);
+ $tobool5 = ($sub$ptr$div$i|0)==(0);
  $$cast = $1;
- $2 = $0;
- if ($tobool10) {
-  $$lcssa = $$cast;$3 = $2;$8 = $$cast;
+ if ($tobool5) {
+  $$lcssa = $$cast;
  } else {
-  $16 = $$cast;$18 = $$cast;$dec11$in = $sub$ptr$div$i;
+  $2 = $$cast;$dec6$in = $sub$ptr$div$i;
   while(1) {
-   $dec11 = (($dec11$in) + -1)|0;
-   $arrayidx$i = (($16) + ($dec11<<2)|0);
-   $17 = load4($arrayidx$i);
-   $isnull = ($17|0)==(0|0);
+   $dec6 = (($dec6$in) + -1)|0;
+   $arrayidx$i = (($2) + ($dec6<<2)|0);
+   $3 = load4($arrayidx$i);
+   $isnull = ($3|0)==(0|0);
    if ($isnull) {
-    $19 = $18;$20 = $16;
+    $11 = $2;
    } else {
-    __ZN5VNodeD2Ev($17);
-    __ZdlPv($17);
+    __ZN5VNodeD2Ev($3);
+    __ZdlPv($3);
     $$pre = load4($children);
-    $19 = $$pre;$20 = $$pre;
+    $11 = $$pre;
    }
-   $tobool = ($dec11|0)==(0);
+   $tobool = ($dec6|0)==(0);
    if ($tobool) {
+    $$lcssa = $11;
     break;
    } else {
-    $16 = $20;$18 = $19;$dec11$in = $dec11;
+    $2 = $11;$dec6$in = $dec6;
    }
   }
-  $$pre13 = load4($__end_$i);
-  $$lcssa = $20;$3 = $$pre13;$8 = $19;
  }
- $cmp1$i$i$i = ($3|0)==($$lcssa|0);
- $scevgep$i$i$i = ((($3)) + -4|0);
- $4 = $scevgep$i$i$i;
- $__new_last3$i$i$i = $$lcssa;
- $5 = (($4) - ($__new_last3$i$i$i))|0;
- $6 = $5 >>> 2;
- $7 = $6 ^ -1;
- $scevgep5$i$i$i = (($3) + ($7<<2)|0);
- if ($cmp1$i$i$i) {
-  $9 = $3;
- } else {
-  store4($__end_$i,$scevgep5$i$i$i);
-  $9 = $scevgep5$i$i$i;
- }
- $cmp$i = ($8|0)==(0|0);
+ $cmp$i = ($$lcssa|0)==(0|0);
  if (!($cmp$i)) {
-  $cmp1$i$i$i5 = ($9|0)==($8|0);
-  if (!($cmp1$i$i$i5)) {
-   $scevgep$i$i$i6 = ((($9)) + -4|0);
-   $10 = $scevgep$i$i$i6;
-   $11 = $8;
-   $12 = (($10) - ($11))|0;
-   $13 = $12 >>> 2;
-   $14 = $13 ^ -1;
-   $scevgep5$i$i$i7 = (($9) + ($14<<2)|0);
-   store4($__end_$i,$scevgep5$i$i$i7);
+  $4 = load4($__end_$i);
+  $cmp1$i$i$i = ($4|0)==($$lcssa|0);
+  if (!($cmp1$i$i$i)) {
+   $scevgep$i$i$i = ((($4)) + -4|0);
+   $5 = $scevgep$i$i$i;
+   $6 = $$lcssa;
+   $7 = (($5) - ($6))|0;
+   $8 = $7 >>> 2;
+   $9 = $8 ^ -1;
+   $scevgep5$i$i$i = (($4) + ($9<<2)|0);
+   store4($__end_$i,$scevgep5$i$i$i);
   }
-  __ZdlPv($8);
+  __ZdlPv($$lcssa);
  }
  $__first_$i$i$i$i$i$i = ((($this)) + 40|0);
- $15 = load4($__first_$i$i$i$i$i$i);
- __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($15);
+ $10 = load4($__first_$i$i$i$i$i$i);
+ __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($10);
  $text = ((($this)) + 24|0);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($text);
  $key = ((($this)) + 12|0);
@@ -1702,24 +1686,34 @@ function __Z9sameVnodePK5VNodeS1_($vnode1,$vnode2) {
 function __Z9createElmP5VNode($vnode) {
  $vnode = $vnode|0;
  var $$pre = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0;
- var $26 = 0, $27 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__end_$i41 = 0, $__parent$i = 0, $__size_$i$i$i = 0, $__size_$i$i$i$i = 0, $__size_$i$i$i$i44 = 0, $__size_$i$i$i22 = 0, $__size_$i3$i$i = 0, $__size_$i3$i$i24 = 0, $arrayidx$i = 0, $call = 0, $call$i$i = 0;
- var $call$i81 = 0, $call2 = 0, $call23 = 0, $call28 = 0, $call38 = 0, $call39 = 0, $call47 = 0, $call8 = 0, $children = 0, $cmp = 0, $cmp$i = 0, $cmp$i29 = 0, $cmp$i42 = 0, $cmp$i79 = 0, $cmp12 = 0, $cmp34 = 0, $cond$i$i = 0, $cond$i$i$i = 0, $cond$i$i$i38 = 0, $cond$i$i$i50 = 0;
+ var $26 = 0, $27 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__end_$i41 = 0, $__parent$i = 0, $__size_$i$i$i = 0, $__size_$i$i$i$i = 0, $__size_$i$i$i$i44 = 0, $__size_$i$i$i22 = 0, $__size_$i3$i$i = 0, $__size_$i3$i$i24 = 0, $arrayidx$i = 0, $call$i$i = 0, $call$i81 = 0;
+ var $call2 = 0, $call23 = 0, $call28 = 0, $call38 = 0, $call39 = 0, $call4 = 0, $call47 = 0, $call8 = 0, $children = 0, $cmp = 0, $cmp$i = 0, $cmp$i29 = 0, $cmp$i42 = 0, $cmp$i79 = 0, $cmp12 = 0, $cmp34 = 0, $cond$i$i = 0, $cond$i$i$i = 0, $cond$i$i$i38 = 0, $cond$i$i$i50 = 0;
  var $cond$i$i$i59 = 0, $cond$i$i$i68 = 0, $cond$i$i$i77 = 0, $cond$i$i28 = 0, $conv$i$i$i = 0, $conv$i$i$i26 = 0, $elm = 0, $elm24 = 0, $elm29 = 0, $elm35 = 0, $elm52$pre$phiZ2D = 0, $elm9 = 0, $exception$i = 0, $i$086 = 0, $inc = 0, $props = 0, $ref$tmp15 = 0, $second$i = 0, $sub$ptr$div$i = 0, $sub$ptr$sub$i = 0;
  var $text = 0, $text41 = 0, $text6 = 0, $tobool$i$i$i = 0, $tobool$i$i$i$i = 0, $tobool$i$i$i$i45 = 0, $tobool$i$i$i$i54 = 0, $tobool$i$i$i$i63 = 0, $tobool$i$i$i$i72 = 0, $tobool$i$i$i23 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 32|0;
  $__parent$i = sp + 12|0;
  $ref$tmp15 = sp;
- $call = (__ZNKSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE7compareEPKc($vnode)|0);
- $cmp = ($call|0)==(0);
- if ($cmp) {
+ $__size_$i$i$i = ((($vnode)) + 11|0);
+ $0 = load1($__size_$i$i$i);
+ $tobool$i$i$i = ($0<<24>>24)<(0);
+ if ($tobool$i$i$i) {
+  $__size_$i3$i$i = ((($vnode)) + 4|0);
+  $1 = load4($__size_$i3$i$i);
+  $cond$i$i = $1;
+ } else {
+  $conv$i$i$i = $0&255;
+  $cond$i$i = $conv$i$i$i;
+ }
+ $cmp$i = ($cond$i$i|0)==(0);
+ if ($cmp$i) {
   $text = ((($vnode)) + 24|0);
   $__size_$i$i$i$i = ((($text)) + 11|0);
-  $0 = load1($__size_$i$i$i$i);
-  $tobool$i$i$i$i = ($0<<24>>24)<(0);
+  $2 = load1($__size_$i$i$i$i);
+  $tobool$i$i$i$i = ($2<<24>>24)<(0);
   if ($tobool$i$i$i$i) {
-   $1 = load4($text);
-   $cond$i$i$i = $1;
+   $3 = load4($text);
+   $cond$i$i$i = $3;
   } else {
    $cond$i$i$i = $text;
   }
@@ -1730,19 +1724,9 @@ function __Z9createElmP5VNode($vnode) {
   $27 = load4($elm52$pre$phiZ2D);
   STACKTOP = sp;return ($27|0);
  }
- $__size_$i$i$i = ((($vnode)) + 11|0);
- $2 = load1($__size_$i$i$i);
- $tobool$i$i$i = ($2<<24>>24)<(0);
- if ($tobool$i$i$i) {
-  $__size_$i3$i$i = ((($vnode)) + 4|0);
-  $3 = load4($__size_$i3$i$i);
-  $cond$i$i = $3;
- } else {
-  $conv$i$i$i = $2&255;
-  $cond$i$i = $conv$i$i$i;
- }
- $cmp$i = ($cond$i$i|0)==(0);
- if ($cmp$i) {
+ $call4 = (__ZNKSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE7compareEPKc($vnode)|0);
+ $cmp = ($call4|0)==(0);
+ if ($cmp) {
   $text6 = ((($vnode)) + 24|0);
   $__size_$i$i$i$i44 = ((($text6)) + 11|0);
   $4 = load1($__size_$i$i$i$i44);
@@ -3502,14 +3486,14 @@ function __Z10patchVnodeP5VNodeS0_($oldVnode,$vnode) {
 function __Z14patch_vnodePtrjj($oldVnode,$vnode) {
  $oldVnode = $oldVnode|0;
  $vnode = $vnode|0;
- var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $call$i = 0, $call1$i = 0, $call1$i15$i = 0, $call6$i = 0, $elm$i = 0, $elm4$i = 0, $tobool$i = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $call$i = 0, $call1$i = 0, $call6$i = 0, $call8$i = 0, $elm$i = 0, $elm4$i = 0, $tobool$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $0 = $oldVnode;
  $1 = $vnode;
  $call$i = (__Z9sameVnodePK5VNodeS1_($0,$1)|0);
  if ($call$i) {
   __Z10patchVnodeP5VNodeS0_($0,$1);
-  return ($vnode|0);
+  return;
  }
  $elm$i = ((($0)) + 48|0);
  $2 = load4($elm$i);
@@ -3517,15 +3501,15 @@ function __Z14patch_vnodePtrjj($oldVnode,$vnode) {
  (__Z9createElmP5VNode($1)|0);
  $tobool$i = ($call1$i|0)==(0);
  if ($tobool$i) {
-  return ($vnode|0);
+  return;
  }
  $elm4$i = ((($1)) + 48|0);
  $3 = load4($elm4$i);
  $4 = load4($elm$i);
  $call6$i = _emscripten_asm_const_iiii(9, ($call1$i|0), ($3|0), ($4|0))|0;
  $5 = load4($elm$i);
- $call1$i15$i = _emscripten_asm_const_ii(12, ($5|0))|0;
- return ($vnode|0);
+ $call8$i = _emscripten_asm_const_ii(12, ($5|0))|0;
+ return;
 }
 function ___clang_call_terminate($0) {
  $0 = $0|0;
@@ -4538,7 +4522,7 @@ function __ZN10emscripten8internal15FunctionInvokerIPFvRNSt3__23mapINS2_12basic_
  $2 = load4($args1);
  ; store8($ref$tmp3,i64_const(0,0),4); store4($ref$tmp3+8|0,0,4);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($ref$tmp3,$arraydecay$i1,$2);
- FUNCTION_TABLE_viii[$0 & 3]($wireThis,$ref$tmp,$ref$tmp3);
+ FUNCTION_TABLE_viii[$0 & 7]($wireThis,$ref$tmp,$ref$tmp3);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp3);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
  STACKTOP = sp;return;
@@ -4898,7 +4882,7 @@ function __ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocato
   $3 = $memptr$virtualfn;
  }
  store4($ref$tmp,$args1);
- FUNCTION_TABLE_viii[$3 & 3]($0,$args,$ref$tmp);
+ FUNCTION_TABLE_viii[$3 & 7]($0,$args,$ref$tmp);
  STACKTOP = sp;return;
 }
 function __ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEKFjvEjPKS6_JEE6invokeERKS8_SA_($method,$wireThis) {
@@ -5479,14 +5463,14 @@ function __ZN10emscripten8internal7InvokerIiJRKjEE6invokeEPFiS3_Ej($fn,$args) {
  $call2 = (FUNCTION_TABLE_ii[$fn & 15]($ref$tmp1)|0);
  STACKTOP = sp;return ($call2|0);
 }
-function __ZN10emscripten8internal7InvokerIjJjjEE6invokeEPFjjjEjj($fn,$args,$args1) {
+function __ZN10emscripten8internal7InvokerIvJjjEE6invokeEPFvjjEjj($fn,$args,$args1) {
  $fn = $fn|0;
  $args = $args|0;
  $args1 = $args1|0;
- var $call4 = 0, label = 0, sp = 0;
+ var label = 0, sp = 0;
  sp = STACKTOP;
- $call4 = (FUNCTION_TABLE_iii[$fn & 15]($args,$args1)|0);
- return ($call4|0);
+ FUNCTION_TABLE_vii[$fn & 3]($args,$args1);
+ return;
 }
 function __GLOBAL__sub_I_app_cpp() {
  var $$repack4$i$i$i = 0, $$repack4$i$i$i3 = 0, $$repack4$i$i29$i = 0, $$repack4$i$i37$i = 0, $__begin_$i$i$i$i = 0, $__end_$i$i$i$i = 0, $__end_cap_$i$i$i$i = 0, $__first_$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i$i$i = 0, $call$i = 0, $call$i$i$i = 0, $call$i$i$i1 = 0, $call$i$i2$i = 0, $call$i$i27$i = 0, $call$i$i3$i = 0, $call$i$i35$i = 0, $call$i$i38$i = 0, $call$i$i39$i = 0, $props$i$i = 0, label = 0;
@@ -5555,7 +5539,7 @@ function __GLOBAL__sub_I_app_cpp() {
  $__end_cap_$i$i$i$i = ((($call$i)) + 60|0);
  store4($__end_cap_$i$i$i$i,0);
  store4(9448,$call$i);
- __embind_register_function((3933|0),3,(1880|0),(4437|0),(18|0),(12|0));
+ __embind_register_function((3933|0),3,(1880|0),(4657|0),(4|0),(3|0));
  return;
 }
 function __GLOBAL__sub_I_bind_cpp() {
@@ -14064,7 +14048,7 @@ function dynCall_ii(index,a1) {
 function dynCall_viii(index,a1,a2,a3) {
   index = index|0;
   a1=a1|0; a2=a2|0; a3=a3|0;
-  FUNCTION_TABLE_viii[index&3](a1|0,a2|0,a3|0);
+  FUNCTION_TABLE_viii[index&7](a1|0,a2|0,a3|0);
 }
 
 
@@ -14140,19 +14124,19 @@ function b11(p0,p1,p2,p3) {
 }
 
 // EMSCRIPTEN_END_FUNCS
-var FUNCTION_TABLE_iiii = [b0,___stdio_write,___stdio_seek,__ZNK10__cxxabiv117__class_type_info9can_catchEPKNS_16__shim_type_infoERPv,__ZNK10__cxxabiv123__fundamental_type_info9can_catchEPKNS_16__shim_type_infoERPv,__ZNK10__cxxabiv119__pointer_type_info9can_catchEPKNS_16__shim_type_infoERPv,__ZN10emscripten8internal15FunctionInvokerIPFNS_3valERKNSt3__23mapINS3_12basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEESA_NS3_4lessISA_EENS8_INS3_4pairIKSA_SA_EEEEEERSE_ES2_SJ_JSK_EE6invokeEPSM_PSH_PNS0_11BindingTypeISA_EUt_E,__ZN10emscripten8internal15FunctionInvokerIPFNS_3valERKNSt3__26vectorIjNS3_9allocatorIjEEEEjES2_S9_JjEE6invokeEPSB_PS7_j,__ZN10emscripten8internal12VectorAccessINSt3__26vectorIjNS2_9allocatorIjEEEEE3setERS6_jRKj,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKbEE6invokeEPFjSA_SC_EPNS0_11BindingTypeIS8_EUt_Eb,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKiEE6invokeEPFjSA_SC_EPNS0_11BindingTypeIS8_EUt_Ei,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_EE6invokeEPFjSA_SA_EPNS0_11BindingTypeIS8_EUt_ESH_,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS2_3mapIS8_S8_NS2_4lessIS8_EENS6_INS2_4pairIS9_S8_EEEEEEEE6invokeEPFjSA_SJ_EPNS0_11BindingTypeIS8_EUt_EPSH_,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS2_6vectorIjNS6_IjEEEEEE6invokeEPFjSA_SF_EPNS0_11BindingTypeIS8_EUt_EPSD_,__Z5h_sdnRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_3mapIS5_S5_NS_4lessIS5_EENS3_INS_4pairIS6_S5_EEEEEERKi,__Z5h_sdtRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_3mapIS5_S5_NS_4lessIS5_EENS3_INS_4pairIS6_S5_EEEEEES7_,__Z5h_sdcRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_3mapIS5_S5_NS_4lessIS5_EENS3_INS_4pairIS6_S5_EEEEEERKNS_6vectorIjNS3_IjEEEE,__Z5h_elmRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_3mapIS5_S5_NS_4lessIS5_EENS3_INS_4pairIS6_S5_EEEEEEi,__ZN10emscripten8internal7InvokerIjJjjEE6invokeEPFjjjEjj,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0
+var FUNCTION_TABLE_iiii = [b0,___stdio_write,___stdio_seek,__ZNK10__cxxabiv117__class_type_info9can_catchEPKNS_16__shim_type_infoERPv,__ZNK10__cxxabiv123__fundamental_type_info9can_catchEPKNS_16__shim_type_infoERPv,__ZNK10__cxxabiv119__pointer_type_info9can_catchEPKNS_16__shim_type_infoERPv,__ZN10emscripten8internal15FunctionInvokerIPFNS_3valERKNSt3__23mapINS3_12basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEESA_NS3_4lessISA_EENS8_INS3_4pairIKSA_SA_EEEEEERSE_ES2_SJ_JSK_EE6invokeEPSM_PSH_PNS0_11BindingTypeISA_EUt_E,__ZN10emscripten8internal15FunctionInvokerIPFNS_3valERKNSt3__26vectorIjNS3_9allocatorIjEEEEjES2_S9_JjEE6invokeEPSB_PS7_j,__ZN10emscripten8internal12VectorAccessINSt3__26vectorIjNS2_9allocatorIjEEEEE3setERS6_jRKj,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKbEE6invokeEPFjSA_SC_EPNS0_11BindingTypeIS8_EUt_Eb,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKiEE6invokeEPFjSA_SC_EPNS0_11BindingTypeIS8_EUt_Ei,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_EE6invokeEPFjSA_SA_EPNS0_11BindingTypeIS8_EUt_ESH_,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS2_3mapIS8_S8_NS2_4lessIS8_EENS6_INS2_4pairIS9_S8_EEEEEEEE6invokeEPFjSA_SJ_EPNS0_11BindingTypeIS8_EUt_EPSH_,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS2_6vectorIjNS6_IjEEEEEE6invokeEPFjSA_SF_EPNS0_11BindingTypeIS8_EUt_EPSD_,__Z5h_sdnRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_3mapIS5_S5_NS_4lessIS5_EENS3_INS_4pairIS6_S5_EEEEEERKi,__Z5h_sdtRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_3mapIS5_S5_NS_4lessIS5_EENS3_INS_4pairIS6_S5_EEEEEES7_,__Z5h_sdcRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_3mapIS5_S5_NS_4lessIS5_EENS3_INS_4pairIS6_S5_EEEEEERKNS_6vectorIjNS3_IjEEEE,__Z5h_elmRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_3mapIS5_S5_NS_4lessIS5_EENS3_INS_4pairIS6_S5_EEEEEEi,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0
 ,b0,b0,b0];
 var FUNCTION_TABLE_viiiii = [b1,__ZNK10__cxxabiv117__class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib,__ZNK10__cxxabiv120__si_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib,__ZNK10__cxxabiv121__vmi_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib];
 var FUNCTION_TABLE_i = [b2,__ZN10emscripten8internal12operator_newINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEJEEEPT_DpOT0_,__ZN10emscripten8internal12operator_newINSt3__26vectorIjNS2_9allocatorIjEEEEJEEEPT_DpOT0_,b2];
 var FUNCTION_TABLE_vi = [b3,__ZN10__cxxabiv116__shim_type_infoD2Ev,__ZN10__cxxabiv117__class_type_infoD0Ev,__ZNK10__cxxabiv116__shim_type_info5noop1Ev,__ZNK10__cxxabiv116__shim_type_info5noop2Ev,__ZN10__cxxabiv120__si_class_type_infoD0Ev,__ZNSt9bad_allocD2Ev,__ZNSt9bad_allocD0Ev,__ZNSt11logic_errorD2Ev,__ZNSt11logic_errorD0Ev,__ZNSt12out_of_rangeD0Ev,__ZN10__cxxabiv123__fundamental_type_infoD0Ev,__ZN10__cxxabiv119__pointer_type_infoD0Ev,__ZN10__cxxabiv121__vmi_class_type_infoD0Ev,__ZN10emscripten8internal14raw_destructorINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEEEvPT_,__ZN10emscripten8internal14raw_destructorINSt3__26vectorIjNS2_9allocatorIjEEEEEEvPT_,__Z14deleteVNodePtrRKj,__ZN10__cxxabiv112_GLOBAL__N_19destruct_EPv,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3
 ,b3,b3,b3];
-var FUNCTION_TABLE_vii = [b4,__ZNSt3__26vectorIjNS_9allocatorIjEEE9push_backERKj,__ZN10emscripten8internal7InvokerIvJRKjEE6invokeEPFvS3_Ej,b4];
+var FUNCTION_TABLE_vii = [b4,__ZNSt3__26vectorIjNS_9allocatorIjEEE9push_backERKj,__ZN10emscripten8internal7InvokerIvJRKjEE6invokeEPFvS3_Ej,__Z14patch_vnodePtrjj];
 var FUNCTION_TABLE_ii = [b5,___stdio_close,__ZNKSt9bad_alloc4whatEv,__ZNKSt11logic_error4whatEv,__ZN10emscripten8internal13getActualTypeINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEEEPKvPT_,__ZN10emscripten8internal7InvokerIPNSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEJEE6invokeEPFSH_vE,__ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES6_NS_4lessIS6_EENS4_INS_4pairIKS6_S6_EEEEE4sizeEv,__ZN10emscripten8internal13getActualTypeINSt3__26vectorIjNS2_9allocatorIjEEEEEEPKvPT_,__ZN10emscripten8internal7InvokerIPNSt3__26vectorIjNS2_9allocatorIjEEEEJEE6invokeEPFS7_vE,__ZNKSt3__26vectorIjNS_9allocatorIjEEE4sizeEv,__Z3h_sRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE,__Z7getNodeRKj,b5,b5,b5,b5];
-var FUNCTION_TABLE_viii = [b6,__ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEE3setERSG_RSD_SJ_,__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEFvRKjEvPS6_JS8_EE6invokeERKSA_SB_j,__ZNSt3__26vectorIjNS_9allocatorIjEEE6resizeEjRKj];
+var FUNCTION_TABLE_viii = [b6,__ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEE3setERSG_RSD_SJ_,__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEFvRKjEvPS6_JS8_EE6invokeERKSA_SB_j,__ZNSt3__26vectorIjNS_9allocatorIjEEE6resizeEjRKj,__ZN10emscripten8internal7InvokerIvJjjEE6invokeEPFvjjEjj,b6,b6,b6];
 var FUNCTION_TABLE_v = [b7,__ZL25default_terminate_handlerv,__ZN10__cxxabiv112_GLOBAL__N_110construct_Ev,b7];
 var FUNCTION_TABLE_iiiii = [b8,__ZN10emscripten8internal15FunctionInvokerIPFbRNSt3__26vectorIjNS2_9allocatorIjEEEEjRKjEbS7_JjS9_EE6invokeEPSB_PS6_jj,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS2_3mapIS8_S8_NS2_4lessIS8_EENS6_INS2_4pairIS9_S8_EEEEEERKiEE6invokeEPFjSA_SJ_SL_EPNS0_11BindingTypeIS8_EUt_EPSH_i,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS2_3mapIS8_S8_NS2_4lessIS8_EENS6_INS2_4pairIS9_S8_EEEEEESA_EE6invokeEPFjSA_SJ_SA_EPNS0_11BindingTypeIS8_EUt_EPSH_SQ_,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS2_3mapIS8_S8_NS2_4lessIS8_EENS6_INS2_4pairIS9_S8_EEEEEERKNS2_6vectorIjNS6_IjEEEEEE6invokeEPFjSA_SJ_SO_EPNS0_11BindingTypeIS8_EUt_EPSH_PSM_,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS2_3mapIS8_S8_NS2_4lessIS8_EENS6_INS2_4pairIS9_S8_EEEEEEiEE6invokeEPFjSA_SJ_iEPNS0_11BindingTypeIS8_EUt_EPSH_i,b8,b8];
 var FUNCTION_TABLE_viiiiii = [b9,__ZNK10__cxxabiv117__class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib,__ZNK10__cxxabiv120__si_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib,__ZNK10__cxxabiv121__vmi_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib];
-var FUNCTION_TABLE_iii = [b10,__ZN10emscripten8internal13MethodInvokerIMNSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEKFjvEjPKSG_JEE6invokeERKSI_SK_,__ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEE3getERKSG_RSD_,__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEKFjvEjPKS6_JEE6invokeERKS8_SA_,__ZN10emscripten8internal12VectorAccessINSt3__26vectorIjNS2_9allocatorIjEEEEE3getERKS6_j,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEEE6invokeEPFjSA_EPNS0_11BindingTypeIS8_EUt_E,__Z4h_tiRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKb,__Z4h_snRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKi,__Z4h_stRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_,__Z4h_sdRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_3mapIS5_S5_NS_4lessIS5_EENS3_INS_4pairIS6_S5_EEEEEE,__Z4h_scRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_6vectorIjNS3_IjEEEE,__ZN10emscripten8internal7InvokerIiJRKjEE6invokeEPFiS3_Ej,__Z14patch_vnodePtrjj,b10,b10,b10];
+var FUNCTION_TABLE_iii = [b10,__ZN10emscripten8internal13MethodInvokerIMNSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEKFjvEjPKSG_JEE6invokeERKSI_SK_,__ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEE3getERKSG_RSD_,__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEKFjvEjPKS6_JEE6invokeERKS8_SA_,__ZN10emscripten8internal12VectorAccessINSt3__26vectorIjNS2_9allocatorIjEEEEE3getERKS6_j,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEEE6invokeEPFjSA_EPNS0_11BindingTypeIS8_EUt_E,__Z4h_tiRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKb,__Z4h_snRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKi,__Z4h_stRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_,__Z4h_sdRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_3mapIS5_S5_NS_4lessIS5_EENS3_INS_4pairIS6_S5_EEEEEE,__Z4h_scRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_6vectorIjNS3_IjEEEE,__ZN10emscripten8internal7InvokerIiJRKjEE6invokeEPFiS3_Ej,b10,b10,b10,b10];
 var FUNCTION_TABLE_viiii = [b11,__ZNK10__cxxabiv117__class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZNK10__cxxabiv120__si_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZNK10__cxxabiv121__vmi_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZN10emscripten8internal15FunctionInvokerIPFvRNSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEERSD_SI_EvSH_JSI_SI_EE6invokeEPSK_PSG_PNS0_11BindingTypeIS9_EUt_ESR_,__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEFvjRKjEvPS6_JjS8_EE6invokeERKSA_SB_jj,b11,b11];
 
   return { _sbrk: _sbrk, ___cxa_can_catch: ___cxa_can_catch, _free: _free, ___cxa_is_pointer_type: ___cxa_is_pointer_type, _memmove: _memmove, _memset: _memset, _malloc: _malloc, _emscripten_get_global_libc: _emscripten_get_global_libc, _memcpy: _memcpy, ___getTypeName: ___getTypeName, _llvm_bswap_i32: _llvm_bswap_i32, __GLOBAL__sub_I_app_cpp: __GLOBAL__sub_I_app_cpp, __GLOBAL__sub_I_bind_cpp: __GLOBAL__sub_I_bind_cpp, runPostSets: runPostSets, _emscripten_replace_memory: _emscripten_replace_memory, stackAlloc: stackAlloc, stackSave: stackSave, stackRestore: stackRestore, establishStackSpace: establishStackSpace, setTempRet0: setTempRet0, getTempRet0: getTempRet0, setThrew: setThrew, stackAlloc: stackAlloc, stackSave: stackSave, stackRestore: stackRestore, establishStackSpace: establishStackSpace, setThrew: setThrew, setTempRet0: setTempRet0, getTempRet0: getTempRet0, dynCall_iiii: dynCall_iiii, dynCall_viiiii: dynCall_viiiii, dynCall_i: dynCall_i, dynCall_vi: dynCall_vi, dynCall_vii: dynCall_vii, dynCall_ii: dynCall_ii, dynCall_viii: dynCall_viii, dynCall_v: dynCall_v, dynCall_iiiii: dynCall_iiiii, dynCall_viiiiii: dynCall_viiiiii, dynCall_iii: dynCall_iii, dynCall_viiii: dynCall_viiii };

@@ -12,11 +12,6 @@
 
 VNode* const emptyNode = new VNode();
 
-bool isDefined(const emscripten::val& obj) {
-  std::string type = obj.typeOf().as<std::string>();
-  return type.compare("undefined") != 0 && type.compare("null") != 0;
-};
-
 bool sameVnode(const VNode* __restrict__ const vnode1, const VNode* __restrict__ const vnode2) {
   return vnode1->key.compare(vnode2->key) == 0 && vnode1->sel.compare(vnode2->sel) == 0;
 };
@@ -32,15 +27,15 @@ std::map<std::string, int>* createKeyToOldIdx(const std::vector<VNode*>& childre
 }
 
 int createElm(VNode* const vnode) {
-	if (vnode->sel.compare("!") == 0) {
+	if (vnode->sel.empty()) {
 		vnode->elm = EM_ASM_INT({
-			return window['asmDomHelpers']['domApi']['createComment'](
+			return window['asmDomHelpers']['domApi']['createTextNode'](
 				window['asmDom']['Pointer_stringify']($0)
 			);
 		}, vnode->text.c_str());
-	} else if (vnode->sel.empty()) {
+	} else if (vnode->sel.compare("!") == 0) {
 		vnode->elm = EM_ASM_INT({
-			return window['asmDomHelpers']['domApi']['createTextNode'](
+			return window['asmDomHelpers']['domApi']['createComment'](
 				window['asmDom']['Pointer_stringify']($0)
 			);
 		}, vnode->text.c_str());
@@ -222,7 +217,7 @@ void patchVnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vn
 	}
 };
 
-VNode* patch_vnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+void patch_vnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 	if (sameVnode(oldVnode, vnode)) {
 		patchVnode(oldVnode, vnode);
 	} else {
@@ -238,17 +233,17 @@ VNode* patch_vnode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const
 					window['asmDomHelpers']['domApi']['nextSibling']($2)
 				);
 			}, parent, vnode->elm, oldVnode->elm);
-			std::vector<VNode*> vnodes { oldVnode };
-			removeVnodes(vnodes, 0, 0);
+			EM_ASM_({
+				window['asmDomHelpers']['domApi']['removeChild']($0);
+			}, oldVnode->elm);
 		}
 	}
-	return vnode;
 };
 
-std::uintptr_t patch_vnodePtr(const std::uintptr_t oldVnode, const std::uintptr_t vnode) {
-	return reinterpret_cast<std::uintptr_t>(patch_vnode(reinterpret_cast<VNode*>(oldVnode), reinterpret_cast<VNode*>(vnode)));
+void patch_vnodePtr(const std::uintptr_t oldVnode, const std::uintptr_t vnode) {
+	patch_vnode(reinterpret_cast<VNode*>(oldVnode), reinterpret_cast<VNode*>(vnode));
 };
 
 EMSCRIPTEN_BINDINGS(patch_function) {
-	emscripten::function("patchVNode", &patch_vnodePtr, emscripten::allow_raw_pointers());
+	emscripten::function("patchVNode", &patch_vnodePtr);
 }
