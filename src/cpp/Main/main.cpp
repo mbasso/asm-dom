@@ -120,7 +120,15 @@ void updateChildren(
 	VNode* elmToMove;
 
 	while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
-		if (sameVnode(oldStartVnode, newStartVnode)) {
+		if (oldStartVnode == NULL) {
+			oldStartVnode = oldCh[++oldStartIdx];
+		} else if (oldEndVnode == NULL) {
+			oldEndVnode = oldCh[--oldEndIdx];
+		} else if (newStartVnode == NULL) {
+			newStartVnode = newCh[++newStartIdx];
+		} else if (newEndVnode == NULL) {
+			newEndVnode = newCh[--newEndIdx];
+		} else if (sameVnode(oldStartVnode, newStartVnode)) {
 			patchVnode(oldStartVnode, newStartVnode);
 			oldStartVnode = oldCh[++oldStartIdx];
 			newStartVnode = newCh[++newStartIdx];
@@ -165,7 +173,7 @@ void updateChildren(
 					}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
 				} else {
 					patchVnode(elmToMove, newStartVnode);
-					oldKeyToIdx->erase(newStartVnode->key);
+					oldCh[oldKeyToIdx->at(newStartVnode->key)] = NULL;
 					EM_ASM_({
 						window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
 					}, parentElm, elmToMove->elm, oldStartVnode->elm);
