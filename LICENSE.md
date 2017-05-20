@@ -1,3 +1,5 @@
+Copyright for portions of project asm-dom are held by Simon Friis Vindum, 2015 as part of project snabbdom. All other copyright for project asm-dom are held by Matteo Basso.
+
 The MIT License (MIT)
 
 Copyright (c) 2016 Matteo Basso
