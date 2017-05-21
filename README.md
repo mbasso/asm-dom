@@ -205,6 +205,8 @@ Every release, along with the migration instructions, is documented on the Githu
 - [@teo_basso](https://twitter.com/teo_basso)
 
 ## Copyright and License
+Copyright for portions of project asm-dom are held by Simon Friis Vindum, 2015 as part of project snabbdom. All other copyright for project asm-dom are held by Matteo Basso.
+
 Copyright (c) 2016, Matteo Basso.
 
 asm-dom source code is licensed under the [MIT License](https://github.com/mbasso/asm-dom/blob/master/LICENSE.md).
