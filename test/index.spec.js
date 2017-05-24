@@ -138,4 +138,57 @@ describe('load', function test() {
       }, 500);
     });
   });
+
+  it('should use safe patch', () => {
+    init({
+      useAsmJS: true,
+      hardReload: true,
+    }).then((vdom) => {
+      expect(vdom.unsafePatch).toEqual(false);
+      const { h, patch } = vdom;
+      const vnode = h('div');
+      const vnode1 = h('div');
+      const vnode2 = h('div');
+      expect(patch(root, vnode)).toEqual(vnode);
+      expect(patch(vnode1, vnode2)).toEqual(undefined);
+      vdom.deleteVNode(vnode);
+      vdom.deleteVNode(vnode2);
+    });
+  });
+
+  it('should use safe patch (by config)', () => {
+    init({
+      useAsmJS: true,
+      hardReload: true,
+      unsafePatch: false,
+    }).then((vdom) => {
+      expect(vdom.unsafePatch).toEqual(false);
+      const { h, patch } = vdom;
+      const vnode = h('div');
+      const vnode1 = h('div');
+      const vnode2 = h('div');
+      expect(patch(root, vnode)).toEqual(vnode);
+      expect(patch(vnode1, vnode2)).toEqual(undefined);
+      vdom.deleteVNode(vnode);
+      vdom.deleteVNode(vnode2);
+    });
+  });
+
+  it('should not use safe patch (by config)', () => {
+    init({
+      useAsmJS: true,
+      hardReload: true,
+      unsafePatch: true,
+    }).then((vdom) => {
+      expect(vdom.unsafePatch).toEqual(true);
+      const { h, patch } = vdom;
+      const vnode = h('div');
+      const vnode1 = h('div');
+      const vnode2 = h('div');
+      expect(patch(root, vnode)).toEqual(vnode);
+      expect(patch(vnode1, vnode2)).toEqual(vnode2);
+      vdom.deleteVNode(vnode);
+      vdom.deleteVNode(vnode2);
+    });
+  });
 });

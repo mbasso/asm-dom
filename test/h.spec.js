@@ -4,8 +4,10 @@ import init from '../src/';
 describe('h', function test() {
   this.timeout(30000);
 
+  let root;
   let vdom;
   let h;
+  let patch;
 
   before((done) => {
     init({
@@ -13,8 +15,21 @@ describe('h', function test() {
     }).then((asmDom) => {
       vdom = asmDom;
       h = vdom.h;
+      patch = vdom.patch;
       done();
     });
+  });
+
+  beforeEach(() => {
+    vdom.reset();
+
+    while (document.body.firstChild) {
+      document.body.removeChild(document.body.firstChild);
+    }
+
+    root = document.createElement('div');
+    root.setAttribute('id', 'root');
+    document.body.appendChild(root);
   });
 
   it('should get a vnode', () => {
@@ -33,6 +48,42 @@ describe('h', function test() {
     expect(
       () => vdom.deleteVNode(div),
     ).toNotThrow();
+  });
+
+  it('should remove a child', () => {
+    const child = h('span');
+    const parent = h('div', [
+      h('video'),
+      child,
+      h('img'),
+    ]);
+    vdom.removeChild(parent, child);
+    patch(root, parent);
+    const elm = document.body.firstChild;
+    expect(elm.childNodes.length).toEqual(2);
+    expect(elm.childNodes[0].tagName).toEqual('VIDEO');
+    expect(elm.childNodes[1].tagName).toEqual('IMG');
+    vdom.deleteVNode(child);
+    vdom.deleteVNode(parent);
+  });
+
+  it('should replace a child', () => {
+    const oldChild = h('span');
+    const newChild = h('div');
+    const parent = h('div', [
+      h('video'),
+      oldChild,
+      h('img'),
+    ]);
+    vdom.replaceChild(parent, oldChild, newChild);
+    patch(root, parent);
+    const elm = document.body.firstChild;
+    expect(elm.childNodes.length).toEqual(3);
+    expect(elm.childNodes[0].tagName).toEqual('VIDEO');
+    expect(elm.childNodes[1].tagName).toEqual('DIV');
+    expect(elm.childNodes[2].tagName).toEqual('IMG');
+    vdom.deleteVNode(oldChild);
+    vdom.deleteVNode(parent);
   });
 
   it('should create vnode with tag, props and elm', () => {

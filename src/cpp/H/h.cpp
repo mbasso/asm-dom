@@ -2,6 +2,7 @@
 #include "../VNode/VNode.hpp"
 #include <emscripten/bind.h>
 #include <emscripten/val.h>
+#include <algorithm>
 #include <cstdint>
 #include <string>
 #include <map>
@@ -71,6 +72,16 @@ void deleteVNodePtr(const std::uintptr_t& vnodePtr) {
   delete reinterpret_cast<VNode*>(vnodePtr);
 };
 
+void removeChild(const std::uintptr_t& parentPtr, const std::uintptr_t& childPtr) {
+  std::vector<VNode*>& children = reinterpret_cast<VNode*>(parentPtr)->children;
+  children.erase(std::remove(children.begin(), children.end(), reinterpret_cast<VNode*>(childPtr)), children.end());
+}
+
+void replaceChild(const std::uintptr_t& parentPtr, const std::uintptr_t& oldChildPtr, const std::uintptr_t& newChildPtr) {
+  std::vector<VNode*>& children = reinterpret_cast<VNode*>(parentPtr)->children;
+  std::replace(children.begin(), children.end(), reinterpret_cast<VNode*>(oldChildPtr), reinterpret_cast<VNode*>(newChildPtr));
+}
+
 int getNode(const std::uintptr_t& vnodePtr) {
   return reinterpret_cast<VNode*>(vnodePtr)->elm;
 }
@@ -87,5 +98,7 @@ EMSCRIPTEN_BINDINGS(h_function) {
   emscripten::function("_h_sdc", &h_sdc);
   emscripten::function("_h_elm", &h_elm);
   emscripten::function("_deleteVNode", &deleteVNodePtr);
+  emscripten::function("removeChild", &removeChild);
+  emscripten::function("replaceChild", &replaceChild);
   emscripten::function("_getNode", &getNode);
 }

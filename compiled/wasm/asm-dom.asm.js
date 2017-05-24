@@ -449,7 +449,7 @@ function __Z4diffP5VNodeS0_($oldVnode,$vnode) {
  if ((label|0) == 18) {
   $exception$i = (___cxa_allocate_exception(8)|0);
   __ZNSt11logic_errorC2EPKc($exception$i);
-  store4($exception$i,(2148));
+  store4($exception$i,(2176));
   ___cxa_throw(($exception$i|0),(1432|0),(8|0));
   // unreachable;
  }
@@ -466,7 +466,7 @@ function __Z11adjustVNodeP5VNode($vnode) {
  $ref$tmp2 = sp;
  $props = ((($vnode)) + 36|0);
  ; store8($__parent$i,i64_const(0,0),4); store4($__parent$i+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($__parent$i,2590,3);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($__parent$i,2618,3);
  $call$i4 = (__ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE14__count_uniqueIS7_EEjRKT_($props,$__parent$i)|0);
  $cmp = ($call$i4|0)==(0);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($__parent$i);
@@ -474,14 +474,14 @@ function __Z11adjustVNodeP5VNode($vnode) {
   STACKTOP = sp;return ($vnode|0);
  }
  ; store8($ref$tmp2,i64_const(0,0),4); store4($ref$tmp2+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($ref$tmp2,2590,3);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($ref$tmp2,2618,3);
  $call$i$i6 = (__ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES6_NS_4lessIS6_EENS4_INS_4pairIKS6_S6_EEEEE16__find_equal_keyERPNS_16__tree_node_baseIPvEERSA_($props,$__parent$i,$ref$tmp2)|0);
  $0 = load4($call$i$i6);
  $cmp$i = ($0|0)==(0|0);
  if ($cmp$i) {
   $exception$i = (___cxa_allocate_exception(8)|0);
   __ZNSt11logic_errorC2EPKc($exception$i);
-  store4($exception$i,(2148));
+  store4($exception$i,(2176));
   ___cxa_throw(($exception$i|0),(1432|0),(8|0));
   // unreachable;
  }
@@ -1571,6 +1571,126 @@ function __ZN5VNodeD2Ev($this) {
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($this);
  return;
 }
+function __Z11removeChildRKjS0_($parentPtr,$childPtr) {
+ $parentPtr = $parentPtr|0;
+ $childPtr = $childPtr|0;
+ var $$in = 0, $$in$i = 0, $$pre = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0;
+ var $__begin_$i = 0, $__end_$i14 = 0, $__new_last3$i$i$i = 0, $cmp$i = 0, $cmp$i$i = 0, $incdec$ptr$i$i$i = 0, $incdec$ptr$i19$i = 0, $incdec$ptr$i9$i = 0, $incdec$ptr$i920$i = 0, $lnot$i$i = 0, $lnot$i$i$i = 0, $lnot$i$i13 = 0, $lnot$i12$i = 0, $lnot$i2$i$i = 0, $lnot$i21$i = 0, $retval$sroa$0$0$copyload$i = 0, $retval$sroa$0$0$copyload23$i = 0, $retval$sroa$0$0$copyload24$i = 0, $scevgep$i$i$i = 0, $scevgep5$i$i$i = 0;
+ var label = 0, sp = 0;
+ sp = STACKTOP;
+ $0 = load4($parentPtr);
+ $__begin_$i = ((($0)) + 52|0);
+ $1 = load4($__begin_$i);
+ $__end_$i14 = ((($0)) + 56|0);
+ $2 = load4($__end_$i14);
+ $3 = load4($childPtr);
+ $lnot$i2$i$i = ($1|0)==($2|0);
+ L1: do {
+  if ($lnot$i2$i$i) {
+   $7 = $1;
+  } else {
+   $4 = $3;
+   $6 = $1;
+   while(1) {
+    $5 = load4($6);
+    $cmp$i$i = ($5|0)==($4|0);
+    if ($cmp$i$i) {
+     $7 = $6;
+     break L1;
+    }
+    $incdec$ptr$i$i$i = ((($6)) + 4|0);
+    $lnot$i$i$i = ($incdec$ptr$i$i$i|0)==($2|0);
+    if ($lnot$i$i$i) {
+     break;
+    } else {
+     $6 = $incdec$ptr$i$i$i;
+    }
+   }
+   return;
+  }
+ } while(0);
+ $lnot$i12$i = ($7|0)==($2|0);
+ if ($lnot$i12$i) {
+  return;
+ }
+ $incdec$ptr$i920$i = ((($7)) + 4|0);
+ $lnot$i21$i = ($incdec$ptr$i920$i|0)==($2|0);
+ if ($lnot$i21$i) {
+  $$in = $2;$retval$sroa$0$0$copyload$i = $7;
+ } else {
+  $8 = $3;
+  $$in$i = $incdec$ptr$i920$i;$11 = $7;$retval$sroa$0$0$copyload24$i = $7;
+  while(1) {
+   $9 = load4($$in$i);
+   $cmp$i = ($9|0)==($8|0);
+   if ($cmp$i) {
+    $16 = $11;$retval$sroa$0$0$copyload23$i = $retval$sroa$0$0$copyload24$i;
+   } else {
+    $10 = $9;
+    store4($11,$10);
+    $incdec$ptr$i19$i = ((($11)) + 4|0);
+    $16 = $incdec$ptr$i19$i;$retval$sroa$0$0$copyload23$i = $incdec$ptr$i19$i;
+   }
+   $incdec$ptr$i9$i = ((($$in$i)) + 4|0);
+   $lnot$i$i13 = ($incdec$ptr$i9$i|0)==($2|0);
+   if ($lnot$i$i13) {
+    break;
+   } else {
+    $$in$i = $incdec$ptr$i9$i;$11 = $16;$retval$sroa$0$0$copyload24$i = $retval$sroa$0$0$copyload23$i;
+   }
+  }
+  $$pre = load4($__end_$i14);
+  $$in = $$pre;$retval$sroa$0$0$copyload$i = $retval$sroa$0$0$copyload23$i;
+ }
+ $lnot$i$i = ($retval$sroa$0$0$copyload$i|0)==($$in|0);
+ if ($lnot$i$i) {
+  return;
+ }
+ $scevgep$i$i$i = ((($$in)) + -4|0);
+ $12 = $scevgep$i$i$i;
+ $__new_last3$i$i$i = $retval$sroa$0$0$copyload$i;
+ $13 = (($12) - ($__new_last3$i$i$i))|0;
+ $14 = $13 >>> 2;
+ $15 = $14 ^ -1;
+ $scevgep5$i$i$i = (($$in) + ($15<<2)|0);
+ store4($__end_$i14,$scevgep5$i$i$i);
+ return;
+}
+function __Z12replaceChildRKjS0_S0_($parentPtr,$oldChildPtr,$newChildPtr) {
+ $parentPtr = $parentPtr|0;
+ $oldChildPtr = $oldChildPtr|0;
+ $newChildPtr = $newChildPtr|0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $__begin_$i = 0, $__end_$i = 0, $cmp$i = 0, $incdec$ptr$i$i = 0, $lnot$i$i = 0, $lnot$i3$i = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ $0 = load4($parentPtr);
+ $__begin_$i = ((($0)) + 52|0);
+ $1 = load4($__begin_$i);
+ $__end_$i = ((($0)) + 56|0);
+ $2 = load4($__end_$i);
+ $3 = load4($oldChildPtr);
+ $4 = load4($newChildPtr);
+ $lnot$i3$i = ($1|0)==($2|0);
+ if ($lnot$i3$i) {
+  return;
+ } else {
+  $6 = $1;
+ }
+ while(1) {
+  $5 = load4($6);
+  $cmp$i = ($5|0)==($3|0);
+  if ($cmp$i) {
+   store4($6,$4);
+  }
+  $incdec$ptr$i$i = ((($6)) + 4|0);
+  $lnot$i$i = ($incdec$ptr$i$i|0)==($2|0);
+  if ($lnot$i$i) {
+   break;
+  } else {
+   $6 = $incdec$ptr$i$i;
+  }
+ }
+ return;
+}
 function __Z7getNodeRKj($vnodePtr) {
  $vnodePtr = $vnodePtr|0;
  var $0 = 0, $1 = 0, $elm = 0, label = 0, sp = 0;
@@ -1746,7 +1866,7 @@ function __Z9createElmP5VNode($vnode) {
  }
  $props = ((($vnode)) + 36|0);
  ; store8($__parent$i,i64_const(0,0),4); store4($__parent$i+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($__parent$i,2896,2);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($__parent$i,2949,2);
  $call$i81 = (__ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE14__count_uniqueIS7_EEjRKT_($props,$__parent$i)|0);
  $cmp12 = ($call$i81|0)==(0);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($__parent$i);
@@ -1764,14 +1884,14 @@ function __Z9createElmP5VNode($vnode) {
   store4($elm29,$call28);
  } else {
   ; store8($ref$tmp15,i64_const(0,0),4); store4($ref$tmp15+8|0,0,4);
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($ref$tmp15,2896,2);
+  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($ref$tmp15,2949,2);
   $call$i$i = (__ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES6_NS_4lessIS6_EENS4_INS_4pairIKS6_S6_EEEEE16__find_equal_keyERPNS_16__tree_node_baseIPvEERSA_($props,$__parent$i,$ref$tmp15)|0);
   $6 = load4($call$i$i);
   $cmp$i79 = ($6|0)==(0|0);
   if ($cmp$i79) {
    $exception$i = (___cxa_allocate_exception(8)|0);
    __ZNSt11logic_errorC2EPKc($exception$i);
-   store4($exception$i,(2148));
+   store4($exception$i,(2176));
    ___cxa_throw(($exception$i|0),(1432|0),(8|0));
    // unreachable;
   }
@@ -1798,7 +1918,7 @@ function __Z9createElmP5VNode($vnode) {
   store4($elm24,$call23);
   __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp15);
  }
- $14 = load4(9448);
+ $14 = load4(9496);
  __Z4diffP5VNodeS0_($14,$vnode);
  $children = ((($vnode)) + 52|0);
  $15 = load4($children);
@@ -2656,14 +2776,14 @@ function __Z10patchVnodeP5VNodeS0_($oldVnode,$vnode) {
    if ((label|0) == 71) {
     $exception$i$i = (___cxa_allocate_exception(8)|0);
     __ZNSt11logic_errorC2EPKc($exception$i$i);
-    store4($exception$i$i,(2148));
+    store4($exception$i$i,(2176));
     ___cxa_throw(($exception$i$i|0),(1432|0),(8|0));
     // unreachable;
    }
    else if ((label|0) == 83) {
     $exception$i175$i = (___cxa_allocate_exception(8)|0);
     __ZNSt11logic_errorC2EPKc($exception$i175$i);
-    store4($exception$i175$i,(2148));
+    store4($exception$i175$i,(2176));
     ___cxa_throw(($exception$i175$i|0),(1432|0),(8|0));
     // unreachable;
    }
@@ -4145,7 +4265,7 @@ function __ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocato
   $3 = $memptr$virtualfn;
  }
  store4($ref$tmp,$args);
- FUNCTION_TABLE_vii[$3 & 3]($0,$ref$tmp);
+ FUNCTION_TABLE_vii[$3 & 7]($0,$ref$tmp);
  STACKTOP = sp;return;
 }
 function __ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEFvjRKjEvPS6_JjS8_EE6invokeERKSA_SB_jj($method,$wireThis,$args,$args1) {
@@ -4744,6 +4864,37 @@ function __ZN10emscripten8internal7InvokerIvJRKjEE6invokeEPFvS3_Ej($fn,$args) {
  FUNCTION_TABLE_vi[$fn & 31]($ref$tmp);
  STACKTOP = sp;return;
 }
+function __ZN10emscripten8internal7InvokerIvJRKjS3_EE6invokeEPFvS3_S3_Ejj($fn,$args,$args1) {
+ $fn = $fn|0;
+ $args = $args|0;
+ $args1 = $args1|0;
+ var $ref$tmp = 0, $ref$tmp3 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0;
+ $ref$tmp = sp + 4|0;
+ $ref$tmp3 = sp;
+ store4($ref$tmp,$args);
+ store4($ref$tmp3,$args1);
+ FUNCTION_TABLE_vii[$fn & 7]($ref$tmp,$ref$tmp3);
+ STACKTOP = sp;return;
+}
+function __ZN10emscripten8internal7InvokerIvJRKjS3_S3_EE6invokeEPFvS3_S3_S3_Ejjj($fn,$args,$args1,$args3) {
+ $fn = $fn|0;
+ $args = $args|0;
+ $args1 = $args1|0;
+ $args3 = $args3|0;
+ var $ref$tmp = 0, $ref$tmp5 = 0, $ref$tmp7 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0;
+ $ref$tmp = sp + 8|0;
+ $ref$tmp5 = sp + 4|0;
+ $ref$tmp7 = sp;
+ store4($ref$tmp,$args);
+ store4($ref$tmp5,$args1);
+ store4($ref$tmp7,$args3);
+ FUNCTION_TABLE_viii[$fn & 7]($ref$tmp,$ref$tmp5,$ref$tmp7);
+ STACKTOP = sp;return;
+}
 function __ZN10emscripten8internal7InvokerIiJRKjEE6invokeEPFiS3_Ej($fn,$args) {
  $fn = $fn|0;
  $args = $args|0;
@@ -4895,61 +5046,63 @@ function __ZN10emscripten8internal7InvokerIvJjjEE6invokeEPFvjjEjj($fn,$args,$arg
  $args1 = $args1|0;
  var label = 0, sp = 0;
  sp = STACKTOP;
- FUNCTION_TABLE_vii[$fn & 3]($args,$args1);
+ FUNCTION_TABLE_vii[$fn & 7]($args,$args1);
  return;
 }
 function __GLOBAL__sub_I_app_cpp() {
  var $$repack4$i$i$i = 0, $$repack4$i$i$i3 = 0, $$repack4$i$i29$i = 0, $$repack4$i$i37$i = 0, $__begin_$i$i$i$i = 0, $__end_$i$i$i$i = 0, $__end_cap_$i$i$i$i = 0, $__first_$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i$i$i = 0, $call$i = 0, $call$i$i$i = 0, $call$i$i$i1 = 0, $call$i$i2$i = 0, $call$i$i27$i = 0, $call$i$i3$i = 0, $call$i$i35$i = 0, $call$i$i38$i = 0, $call$i$i39$i = 0, $props$i$i = 0, label = 0;
  var sp = 0;
  sp = STACKTOP;
- __embind_register_class((1024|0),(1032|0),(1048|0),(0|0),(4305|0),(4|0),(4308|0),(0|0),(4308|0),(0|0),(2256|0),(4310|0),(14|0));
- __embind_register_class_constructor((1024|0),1,(1624|0),(4305|0),(5|0),(1|0));
+ __embind_register_class((1024|0),(1032|0),(1048|0),(0|0),(4358|0),(4|0),(4361|0),(0|0),(4361|0),(0|0),(2284|0),(4363|0),(14|0));
+ __embind_register_class_constructor((1024|0),1,(1624|0),(4358|0),(5|0),(1|0));
  $call$i$i$i = (__Znwj(8)|0);
  store4($call$i$i$i,(6));
  $$repack4$i$i$i = ((($call$i$i$i)) + 4|0);
  store4($$repack4$i$i$i,0);
- __embind_register_class_function((1024|0),(3944|0),2,(1628|0),(4313|0),(1|0),($call$i$i$i|0),0);
+ __embind_register_class_function((1024|0),(3997|0),2,(1628|0),(4366|0),(1|0),($call$i$i$i|0),0);
  $call$i$i2$i = (__Znwj(4)|0);
  store4($call$i$i2$i,(2));
- __embind_register_class_function((1024|0),(3949|0),3,(1636|0),(4437|0),(6|0),($call$i$i2$i|0),0);
+ __embind_register_class_function((1024|0),(4002|0),3,(1636|0),(4490|0),(6|0),($call$i$i2$i|0),0);
  $call$i$i3$i = (__Znwj(4)|0);
  store4($call$i$i3$i,(1));
- __embind_register_class_function((1024|0),(3953|0),4,(1648|0),(4442|0),(4|0),($call$i$i3$i|0),0);
- __embind_register_class((1136|0),(1160|0),(1176|0),(0|0),(4305|0),(7|0),(4308|0),(0|0),(4308|0),(0|0),(2272|0),(4310|0),(15|0));
- __embind_register_class_constructor((1136|0),1,(1664|0),(4305|0),(8|0),(2|0));
+ __embind_register_class_function((1024|0),(4006|0),4,(1648|0),(4495|0),(4|0),($call$i$i3$i|0),0);
+ __embind_register_class((1136|0),(1160|0),(1176|0),(0|0),(4358|0),(7|0),(4361|0),(0|0),(4361|0),(0|0),(2300|0),(4363|0),(15|0));
+ __embind_register_class_constructor((1136|0),1,(1664|0),(4358|0),(8|0),(2|0));
  $call$i$i$i1 = (__Znwj(8)|0);
  store4($call$i$i$i1,(1));
  $$repack4$i$i$i3 = ((($call$i$i$i1)) + 4|0);
  store4($$repack4$i$i$i3,0);
- __embind_register_class_function((1136|0),(4448|0),3,(1668|0),(4657|0),(2|0),($call$i$i$i1|0),0);
+ __embind_register_class_function((1136|0),(4501|0),3,(1668|0),(4710|0),(2|0),($call$i$i$i1|0),0);
  $call$i$i27$i = (__Znwj(8)|0);
  store4($call$i$i27$i,(3));
  $$repack4$i$i29$i = ((($call$i$i27$i)) + 4|0);
  store4($$repack4$i$i29$i,0);
- __embind_register_class_function((1136|0),(4458|0),4,(1680|0),(4442|0),(5|0),($call$i$i27$i|0),0);
+ __embind_register_class_function((1136|0),(4511|0),4,(1680|0),(4495|0),(5|0),($call$i$i27$i|0),0);
  $call$i$i35$i = (__Znwj(8)|0);
  store4($call$i$i35$i,(9));
  $$repack4$i$i37$i = ((($call$i$i35$i)) + 4|0);
  store4($$repack4$i$i37$i,0);
- __embind_register_class_function((1136|0),(3944|0),2,(1696|0),(4313|0),(3|0),($call$i$i35$i|0),0);
+ __embind_register_class_function((1136|0),(3997|0),2,(1696|0),(4366|0),(3|0),($call$i$i35$i|0),0);
  $call$i$i38$i = (__Znwj(4)|0);
  store4($call$i$i38$i,(4));
- __embind_register_class_function((1136|0),(3949|0),3,(1704|0),(4437|0),(7|0),($call$i$i38$i|0),0);
+ __embind_register_class_function((1136|0),(4002|0),3,(1704|0),(4490|0),(7|0),($call$i$i38$i|0),0);
  $call$i$i39$i = (__Znwj(4)|0);
  store4($call$i$i39$i,(8));
- __embind_register_class_function((1136|0),(3953|0),4,(1716|0),(4662|0),(1|0),($call$i$i39$i|0),0);
- __embind_register_function((2594|0),2,(1732|0),(4313|0),(5|0),(10|0));
- __embind_register_function((2599|0),3,(1740|0),(4437|0),(9|0),(6|0));
- __embind_register_function((2605|0),3,(1752|0),(4437|0),(10|0),(7|0));
- __embind_register_function((2611|0),3,(1764|0),(4437|0),(11|0),(8|0));
- __embind_register_function((2617|0),3,(1776|0),(4437|0),(12|0),(9|0));
- __embind_register_function((2623|0),3,(1788|0),(4437|0),(13|0),(10|0));
- __embind_register_function((2629|0),4,(1800|0),(4662|0),(2|0),(14|0));
- __embind_register_function((2636|0),4,(1816|0),(4662|0),(3|0),(15|0));
- __embind_register_function((2643|0),4,(1832|0),(4662|0),(4|0),(16|0));
- __embind_register_function((2650|0),4,(1848|0),(4662|0),(5|0),(17|0));
- __embind_register_function((2657|0),2,(1864|0),(4692|0),(2|0),(16|0));
- __embind_register_function((2670|0),2,(1872|0),(4313|0),(11|0),(11|0));
+ __embind_register_class_function((1136|0),(4006|0),4,(1716|0),(4715|0),(1|0),($call$i$i39$i|0),0);
+ __embind_register_function((2622|0),2,(1732|0),(4366|0),(5|0),(10|0));
+ __embind_register_function((2627|0),3,(1740|0),(4490|0),(9|0),(6|0));
+ __embind_register_function((2633|0),3,(1752|0),(4490|0),(10|0),(7|0));
+ __embind_register_function((2639|0),3,(1764|0),(4490|0),(11|0),(8|0));
+ __embind_register_function((2645|0),3,(1776|0),(4490|0),(12|0),(9|0));
+ __embind_register_function((2651|0),3,(1788|0),(4490|0),(13|0),(10|0));
+ __embind_register_function((2657|0),4,(1800|0),(4715|0),(2|0),(14|0));
+ __embind_register_function((2664|0),4,(1816|0),(4715|0),(3|0),(15|0));
+ __embind_register_function((2671|0),4,(1832|0),(4715|0),(4|0),(16|0));
+ __embind_register_function((2678|0),4,(1848|0),(4715|0),(5|0),(17|0));
+ __embind_register_function((2685|0),2,(1864|0),(4745|0),(2|0),(16|0));
+ __embind_register_function((2698|0),3,(1872|0),(4710|0),(4|0),(3|0));
+ __embind_register_function((2710|0),4,(1884|0),(4495|0),(6|0),(5|0));
+ __embind_register_function((2723|0),2,(1900|0),(4366|0),(11|0),(11|0));
  $call$i = (__Znwj(64)|0);
  $props$i$i = ((($call$i)) + 36|0);
  $__left_$i$i$i$i$i$i$i = ((($call$i)) + 40|0);
@@ -4964,48 +5117,48 @@ function __GLOBAL__sub_I_app_cpp() {
  store4($__end_$i$i$i$i,0);
  $__end_cap_$i$i$i$i = ((($call$i)) + 60|0);
  store4($__end_cap_$i$i$i$i,0);
- store4(9448,$call$i);
- __embind_register_function((3933|0),3,(1880|0),(4657|0),(4|0),(3|0));
+ store4(9496,$call$i);
+ __embind_register_function((3986|0),3,(1908|0),(4710|0),(6|0),(4|0));
  return;
 }
 function __GLOBAL__sub_I_bind_cpp() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- __embind_register_void((1496|0),(9382|0));
- __embind_register_bool((1512|0),(9387|0),1,1,0);
- __embind_register_integer((1520|0),(9330|0),1,-128,127);
- __embind_register_integer((1536|0),(9335|0),1,-128,127);
- __embind_register_integer((1528|0),(9347|0),1,0,255);
- __embind_register_integer((1544|0),(9361|0),2,-32768,32767);
- __embind_register_integer((1552|0),(9367|0),2,0,65535);
- __embind_register_integer((1560|0),(9392|0),4,-2147483648,2147483647);
- __embind_register_integer((1568|0),(9396|0),4,0,-1);
- __embind_register_integer((1576|0),(9409|0),4,-2147483648,2147483647);
- __embind_register_integer((1584|0),(9414|0),4,0,-1);
- __embind_register_float((1592|0),(9428|0),4);
- __embind_register_float((1600|0),(9434|0),8);
- __embind_register_std_string((1080|0),(9318|0));
- __embind_register_std_string((1192|0),(4696|0));
- __embind_register_std_wstring((1216|0),4,(4729|0));
- __embind_register_emval((1064|0),(4742|0));
- __embind_register_memory_view((1240|0),0,(4758|0));
- __embind_register_memory_view((1248|0),0,(4788|0));
- __embind_register_memory_view((1256|0),1,(4825|0));
- __embind_register_memory_view((1264|0),2,(4864|0));
- __embind_register_memory_view((1272|0),3,(4895|0));
- __embind_register_memory_view((1280|0),4,(4935|0));
- __embind_register_memory_view((1288|0),5,(4964|0));
- __embind_register_memory_view((1296|0),4,(5002|0));
- __embind_register_memory_view((1304|0),5,(5032|0));
- __embind_register_memory_view((1248|0),0,(5071|0));
- __embind_register_memory_view((1256|0),1,(5103|0));
- __embind_register_memory_view((1264|0),2,(5136|0));
- __embind_register_memory_view((1272|0),3,(5169|0));
- __embind_register_memory_view((1280|0),4,(5203|0));
- __embind_register_memory_view((1288|0),5,(5236|0));
- __embind_register_memory_view((1312|0),6,(5270|0));
- __embind_register_memory_view((1320|0),7,(5301|0));
- __embind_register_memory_view((1328|0),7,(5333|0));
+ __embind_register_void((1496|0),(9435|0));
+ __embind_register_bool((1512|0),(9440|0),1,1,0);
+ __embind_register_integer((1520|0),(9383|0),1,-128,127);
+ __embind_register_integer((1536|0),(9388|0),1,-128,127);
+ __embind_register_integer((1528|0),(9400|0),1,0,255);
+ __embind_register_integer((1544|0),(9414|0),2,-32768,32767);
+ __embind_register_integer((1552|0),(9420|0),2,0,65535);
+ __embind_register_integer((1560|0),(9445|0),4,-2147483648,2147483647);
+ __embind_register_integer((1568|0),(9449|0),4,0,-1);
+ __embind_register_integer((1576|0),(9462|0),4,-2147483648,2147483647);
+ __embind_register_integer((1584|0),(9467|0),4,0,-1);
+ __embind_register_float((1592|0),(9481|0),4);
+ __embind_register_float((1600|0),(9487|0),8);
+ __embind_register_std_string((1080|0),(9371|0));
+ __embind_register_std_string((1192|0),(4749|0));
+ __embind_register_std_wstring((1216|0),4,(4782|0));
+ __embind_register_emval((1064|0),(4795|0));
+ __embind_register_memory_view((1240|0),0,(4811|0));
+ __embind_register_memory_view((1248|0),0,(4841|0));
+ __embind_register_memory_view((1256|0),1,(4878|0));
+ __embind_register_memory_view((1264|0),2,(4917|0));
+ __embind_register_memory_view((1272|0),3,(4948|0));
+ __embind_register_memory_view((1280|0),4,(4988|0));
+ __embind_register_memory_view((1288|0),5,(5017|0));
+ __embind_register_memory_view((1296|0),4,(5055|0));
+ __embind_register_memory_view((1304|0),5,(5085|0));
+ __embind_register_memory_view((1248|0),0,(5124|0));
+ __embind_register_memory_view((1256|0),1,(5156|0));
+ __embind_register_memory_view((1264|0),2,(5189|0));
+ __embind_register_memory_view((1272|0),3,(5222|0));
+ __embind_register_memory_view((1280|0),4,(5256|0));
+ __embind_register_memory_view((1288|0),5,(5289|0));
+ __embind_register_memory_view((1312|0),6,(5323|0));
+ __embind_register_memory_view((1320|0),7,(5354|0));
+ __embind_register_memory_view((1328|0),7,(5386|0));
  return;
 }
 function ___getTypeName($ti) {
@@ -5020,7 +5173,7 @@ function ___getTypeName($ti) {
 function _emscripten_get_global_libc() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (9452|0);
+ return (9500|0);
 }
 function ___stdio_close($f) {
  $f = $f|0;
@@ -5189,7 +5342,7 @@ function ___syscall_ret($r) {
  $cmp = ($r>>>0)>(4294963200);
  if ($cmp) {
   $sub = (0 - ($r))|0;
-  store4(10024,$sub);
+  store4(10072,$sub);
   $retval$0 = -1;
  } else {
   $retval$0 = $r;
@@ -5294,42 +5447,42 @@ function _vfprintf($fmt,$ap) {
  $cmp = ($call|0)<(0);
  if ($cmp) {
  } else {
-  $0 = load4((1968));
-  $1 = load4(1892);
+  $0 = load4((1996));
+  $1 = load4(1920);
   $and = $1 & 32;
-  $2 = load1((1966));
+  $2 = load1((1994));
   $cmp7 = ($2<<24>>24)<(1);
   if ($cmp7) {
    $and11 = $1 & -33;
-   store4(1892,$and11);
+   store4(1920,$and11);
   }
-  $3 = load4((1940));
+  $3 = load4((1968));
   $tobool = ($3|0)==(0);
   if ($tobool) {
-   $4 = load4((1936));
-   store4((1936),$internal_buf);
-   store4((1920),$internal_buf);
-   store4((1912),$internal_buf);
-   store4((1940),80);
+   $4 = load4((1964));
+   store4((1964),$internal_buf);
+   store4((1948),$internal_buf);
+   store4((1940),$internal_buf);
+   store4((1968),80);
    $add$ptr = ((($internal_buf)) + 80|0);
-   store4((1908),$add$ptr);
-   (_printf_core(1892,$fmt,$ap2,$nl_arg,$nl_type)|0);
+   store4((1936),$add$ptr);
+   (_printf_core(1920,$fmt,$ap2,$nl_arg,$nl_type)|0);
    $tobool22 = ($4|0)==(0|0);
    if (!($tobool22)) {
-    $5 = load4((1928));
-    (FUNCTION_TABLE_iiii[$5 & 31](1892,0,0)|0);
-    store4((1936),$4);
+    $5 = load4((1956));
+    (FUNCTION_TABLE_iiii[$5 & 31](1920,0,0)|0);
+    store4((1964),$4);
+    store4((1968),0);
+    store4((1936),0);
+    store4((1948),0);
     store4((1940),0);
-    store4((1908),0);
-    store4((1920),0);
-    store4((1912),0);
    }
   } else {
-   (_printf_core(1892,$fmt,$ap2,$nl_arg,$nl_type)|0);
+   (_printf_core(1920,$fmt,$ap2,$nl_arg,$nl_type)|0);
   }
-  $6 = load4(1892);
+  $6 = load4(1920);
   $or = $6 | $and;
-  store4(1892,$or);
+  store4(1920,$or);
  }
  STACKTOP = sp;return;
 }
@@ -5379,7 +5532,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     $sub = (2147483647 - ($cnt$0))|0;
     $cmp1 = ($l$0|0)>($sub|0);
     if ($cmp1) {
-     store4(10024,75);
+     store4(10072,75);
      $cnt$1 = -1;
      break;
     } else {
@@ -5665,7 +5818,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
    $36 = load1($35);
    $conv172 = $36 << 24 >> 24;
    $sub173 = (($conv172) + -65)|0;
-   $arrayidx174 = ((5868 + (($st$0*58)|0)|0) + ($sub173)|0);
+   $arrayidx174 = ((5921 + (($st$0*58)|0)|0) + ($sub173)|0);
    $37 = load1($arrayidx174);
    $conv175 = $37&255;
    $sub176 = (($conv175) + -1)|0;
@@ -5816,7 +5969,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     $add270 = (($sub$ptr$sub269) + 1)|0;
     $50 = $tobool265 | $cmp271;
     $p$0$p$0$add270 = $50 ? $p$0 : $add270;
-    $54 = $49;$a$0 = $call263;$fl$4 = $fl$1$and220;$p$2 = $p$0$p$0$add270;$pl$1 = 0;$prefix$1 = 6332;
+    $54 = $49;$a$0 = $call263;$fl$4 = $fl$1$and220;$p$2 = $p$0$p$0$add270;$pl$1 = 0;$prefix$1 = 6385;
     label = 67;
     break;
    }
@@ -5826,7 +5979,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     if ($cmp283) {
      $sub287 = i64_sub(i64_const(0,0),$51);
      store8($arg,$sub287);
-     $53 = $sub287;$pl$0 = 1;$prefix$0 = 6332;
+     $53 = $sub287;$pl$0 = 1;$prefix$0 = 6385;
      label = 66;
      break L71;
     } else {
@@ -5834,8 +5987,8 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
      $tobool291 = ($and290|0)==(0);
      $and295 = $fl$1$and220 & 1;
      $tobool296 = ($and295|0)==(0);
-     $$ = $tobool296 ? 6332 : (6334);
-     $$$ = $tobool291 ? $$ : (6333);
+     $$ = $tobool296 ? 6385 : (6387);
+     $$$ = $tobool291 ? $$ : (6386);
      $52 = $fl$1$and220 & 2049;
      $narrow = ($52|0)!=(0);
      $$194$ = $narrow&1;
@@ -5847,7 +6000,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
    }
    case 117:  {
     $$pre250 = load8($arg);
-    $53 = $$pre250;$pl$0 = 0;$prefix$0 = 6332;
+    $53 = $$pre250;$pl$0 = 0;$prefix$0 = 6385;
     label = 66;
     break;
    }
@@ -5855,11 +6008,11 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     $55 = load8($arg);
     $conv340 = i64_trunc($55)&255;
     store1($add$ptr341,$conv340);
-    $a$2 = $add$ptr341;$fl$6 = $and220;$p$5 = 1;$pl$2 = 0;$prefix$2 = 6332;$z$2 = $add$ptr206;
+    $a$2 = $add$ptr341;$fl$6 = $and220;$p$5 = 1;$pl$2 = 0;$prefix$2 = 6385;$z$2 = $add$ptr206;
     break;
    }
    case 109:  {
-    $56 = load4(10024);
+    $56 = load4(10072);
     $call346 = (_strerror($56)|0);
     $a$1 = $call346;
     label = 71;
@@ -5868,7 +6021,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
    case 115:  {
     $57 = load4($arg);
     $tobool350 = ($57|0)!=(0|0);
-    $cond355 = $tobool350 ? $57 : 8285;
+    $cond355 = $tobool350 ? $57 : 8338;
     $a$1 = $cond355;
     label = 71;
     break;
@@ -5904,7 +6057,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     break;
    }
    default: {
-    $a$2 = $1;$fl$6 = $fl$1$and220;$p$5 = $p$0;$pl$2 = 0;$prefix$2 = 6332;$z$2 = $add$ptr206;
+    $a$2 = $1;$fl$6 = $fl$1$and220;$p$5 = $p$0;$pl$2 = 0;$prefix$2 = 6385;$z$2 = $add$ptr206;
    }
    }
   } while(0);
@@ -5919,8 +6072,8 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     $tobool256 = ($and255|0)==(0);
     $or$cond193 = $tobool256 | $tobool253;
     $shr = $t$1 >> 4;
-    $add$ptr258 = (6332 + ($shr)|0);
-    $$add$ptr258 = $or$cond193 ? 6332 : $add$ptr258;
+    $add$ptr258 = (6385 + ($shr)|0);
+    $$add$ptr258 = $or$cond193 ? 6385 : $add$ptr258;
     $$197 = $or$cond193 ? 0 : 2;
     $54 = $48;$a$0 = $call251;$fl$4 = $fl$3;$p$2 = $p$1;$pl$1 = $$197;$prefix$1 = $$add$ptr258;
     label = 67;
@@ -5941,7 +6094,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     $add$ptr360 = (($a$1) + ($p$0)|0);
     $p$3 = $tobool358 ? $p$0 : $sub$ptr$sub364;
     $z$1 = $tobool358 ? $add$ptr360 : $call357;
-    $a$2 = $a$1;$fl$6 = $and220;$p$5 = $p$3;$pl$2 = 0;$prefix$2 = 6332;$z$2 = $z$1;
+    $a$2 = $a$1;$fl$6 = $and220;$p$5 = $p$3;$pl$2 = 0;$prefix$2 = 6385;$z$2 = $z$1;
    }
    else if ((label|0) == 75) {
     label = 0;
@@ -6410,7 +6563,7 @@ function _fmt_x($x,$s,$lower) {
   while(1) {
    $0 = i64_trunc($x$addr$07);
    $idxprom = $0 & 15;
-   $arrayidx = (6373 + ($idxprom)|0);
+   $arrayidx = (6426 + ($idxprom)|0);
    $1 = load1($arrayidx);
    $conv4 = $1&255;
    $or = $conv4 | $lower;
@@ -6513,7 +6666,7 @@ function _strerror($e) {
  $e = $e|0;
  var $call1 = 0, label = 0, sp = 0;
  sp = STACKTOP;
- $call1 = (___strerror_l($e,(9492))|0);
+ $call1 = (___strerror_l($e,(9540))|0);
  return ($call1|0);
 }
 function _memchr($src,$n) {
@@ -6734,14 +6887,14 @@ function _fmt_fp($f,$y,$w,$p,$fl,$t) {
  $tobool5 = i64_slt($call2,i64_const(0,0));
  if ($tobool5) {
   $sub = -$y;
-  $pl$0 = 1;$prefix$0 = 6342;$y$addr$0 = $sub;
+  $pl$0 = 1;$prefix$0 = 6395;$y$addr$0 = $sub;
  } else {
   $and = $fl & 2048;
   $tobool9 = ($and|0)==(0);
   $and12 = $fl & 1;
   $tobool13 = ($and12|0)==(0);
-  $$ = $tobool13 ? (6343) : (6348);
-  $$$ = $tobool9 ? $$ : (6345);
+  $$ = $tobool13 ? (6396) : (6401);
+  $$$ = $tobool9 ? $$ : (6398);
   $0 = $fl & 2049;
   $narrow = ($0|0)!=(0);
   $$394$ = $narrow&1;
@@ -6834,7 +6987,7 @@ function _fmt_fp($f,$y,$w,$p,$fl,$t) {
     $s$0 = $buf;$y$addr$2 = $y$addr$1;
     while(1) {
      $conv116 = (~~(($y$addr$2)));
-     $arrayidx117 = (6373 + ($conv116)|0);
+     $arrayidx117 = (6426 + ($conv116)|0);
      $8 = load1($arrayidx117);
      $conv118393 = $8&255;
      $or120 = $conv118393 | $and62;
@@ -7441,7 +7594,7 @@ function _fmt_fp($f,$y,$w,$p,$fl,$t) {
     }
     $41 = ($33|0)==(0);
     if (!($41)) {
-     _out($f,9316,1);
+     _out($f,9369,1);
     }
     $cmp707414 = ($incdec$ptr698>>>0)<($z$7>>>0);
     $cmp710415 = ($p$addr$3|0)>(0);
@@ -7524,7 +7677,7 @@ function _fmt_fp($f,$y,$w,$p,$fl,$t) {
          $s753$2 = $incdec$ptr776;
          break;
         }
-        _out($f,9316,1);
+        _out($f,9369,1);
         $s753$2 = $incdec$ptr776;
        } else {
         $cmp770423 = ($s753$0>>>0)>($buf>>>0);
@@ -7581,9 +7734,9 @@ function _fmt_fp($f,$y,$w,$p,$fl,$t) {
   } else {
    $and36 = $t & 32;
    $tobool37 = ($and36|0)!=(0);
-   $cond = $tobool37 ? 6361 : 6365;
+   $cond = $tobool37 ? 6414 : 6418;
    $cmp38 = ($y$addr$0 != $y$addr$0) | (0.0 != 0.0);
-   $cond43 = $tobool37 ? 8281 : 6369;
+   $cond43 = $tobool37 ? 8334 : 6422;
    $s35$0 = $cmp38 ? $cond43 : $cond;
    $add = (($pl$0) + 3)|0;
    $and45 = $fl & -65537;
@@ -7675,7 +7828,7 @@ function _wcrtomb($s,$wc) {
     $retval$0 = 1;
     break;
    }
-   $0 = load4((9492));
+   $0 = load4((9540));
    $not$tobool2 = ($0|0)==(0|0);
    if ($not$tobool2) {
     $1 = $wc & -128;
@@ -7686,7 +7839,7 @@ function _wcrtomb($s,$wc) {
      $retval$0 = 1;
      break;
     } else {
-     store4(10024,84);
+     store4(10072,84);
      $retval$0 = -1;
      break;
     }
@@ -7755,7 +7908,7 @@ function _wcrtomb($s,$wc) {
     $retval$0 = 4;
     break;
    } else {
-    store4(10024,84);
+    store4(10072,84);
     $retval$0 = -1;
     break;
    }
@@ -7771,7 +7924,7 @@ function ___strerror_l($e,$loc) {
  sp = STACKTOP;
  $i$012 = 0;
  while(1) {
-  $arrayidx = (6389 + ($i$012)|0);
+  $arrayidx = (6442 + ($i$012)|0);
   $0 = load1($arrayidx);
   $conv = $0&255;
   $cmp = ($conv|0)==($e|0);
@@ -7782,7 +7935,7 @@ function ___strerror_l($e,$loc) {
   $inc = (($i$012) + 1)|0;
   $tobool = ($inc|0)==(87);
   if ($tobool) {
-   $i$111 = 87;$s$010 = 6477;
+   $i$111 = 87;$s$010 = 6530;
    label = 5;
    break;
   } else {
@@ -7792,9 +7945,9 @@ function ___strerror_l($e,$loc) {
  if ((label|0) == 2) {
   $tobool59 = ($i$012|0)==(0);
   if ($tobool59) {
-   $s$0$lcssa = 6477;
+   $s$0$lcssa = 6530;
   } else {
-   $i$111 = $i$012;$s$010 = 6477;
+   $i$111 = $i$012;$s$010 = 6530;
    label = 5;
   }
  }
@@ -8201,13 +8354,13 @@ function ___overflow() {
  STACKTOP = STACKTOP + 16|0;
  $c = sp;
  store1($c,10);
- $0 = load4((1908));
+ $0 = load4((1936));
  $tobool = ($0|0)==(0|0);
  if ($tobool) {
-  $call = (___towrite(1892)|0);
+  $call = (___towrite(1920)|0);
   $tobool1 = ($call|0)==(0);
   if ($tobool1) {
-   $$pre = load4((1908));
+   $$pre = load4((1936));
    $2 = $$pre;
    label = 4;
   } else {
@@ -8219,20 +8372,20 @@ function ___overflow() {
  }
  do {
   if ((label|0) == 4) {
-   $1 = load4((1912));
+   $1 = load4((1940));
    $cmp = ($1>>>0)>=($2>>>0);
-   $3 = load1((1967));
+   $3 = load1((1995));
    $cmp7 = ($3<<24>>24)==(10);
    $or$cond = $cmp | $cmp7;
    if (!($or$cond)) {
     $incdec$ptr = ((($1)) + 1|0);
-    store4((1912),$incdec$ptr);
+    store4((1940),$incdec$ptr);
     store1($1,10);
     $retval$0 = 10;
     break;
    }
-   $4 = load4((1928));
-   $call13 = (FUNCTION_TABLE_iiii[$4 & 31](1892,$c,1)|0);
+   $4 = load4((1956));
+   $call13 = (FUNCTION_TABLE_iiii[$4 & 31](1920,$c,1)|0);
    $cmp14 = ($call13|0)==(1);
    if ($cmp14) {
     $5 = load1($c);
@@ -8248,19 +8401,19 @@ function ___overflow() {
 function _fputc() {
  var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $cmp = 0, $cmp20 = 0, $cmp3 = 0, $cmp5 = 0, $incdec$ptr = 0, $incdec$ptr25 = 0, label = 0, sp = 0;
  sp = STACKTOP;
- $0 = load4((1968));
+ $0 = load4((1996));
  $cmp = ($0|0)<(0);
- $1 = load1((1967));
+ $1 = load1((1995));
  $cmp3 = ($1<<24>>24)==(10);
  do {
   if ($cmp) {
    if (!($cmp3)) {
-    $2 = load4((1912));
-    $3 = load4((1908));
+    $2 = load4((1940));
+    $3 = load4((1936));
     $cmp5 = ($2>>>0)<($3>>>0);
     if ($cmp5) {
      $incdec$ptr = ((($2)) + 1|0);
-     store4((1912),$incdec$ptr);
+     store4((1940),$incdec$ptr);
      store1($2,10);
      break;
     }
@@ -8268,12 +8421,12 @@ function _fputc() {
    (___overflow()|0);
   } else {
    if (!($cmp3)) {
-    $4 = load4((1912));
-    $5 = load4((1908));
+    $4 = load4((1940));
+    $5 = load4((1936));
     $cmp20 = ($4>>>0)<($5>>>0);
     if ($cmp20) {
      $incdec$ptr25 = ((($4)) + 1|0);
-     store4((1912),$incdec$ptr25);
+     store4((1940),$incdec$ptr25);
      store1($4,10);
      break;
     }
@@ -8355,7 +8508,7 @@ function _malloc($bytes) {
    $and = $add2 & -8;
    $cond = $cmp1 ? 16 : $and;
    $shr = $cond >>> 3;
-   $0 = load4(9516);
+   $0 = load4(9564);
    $shr3 = $0 >>> $shr;
    $and4 = $shr3 & 3;
    $cmp5 = ($and4|0)==(0);
@@ -8364,7 +8517,7 @@ function _malloc($bytes) {
     $and7 = $neg ^ 1;
     $add8 = (($and7) + ($shr))|0;
     $shl = $add8 << 1;
-    $arrayidx = (9556 + ($shl<<2)|0);
+    $arrayidx = (9604 + ($shl<<2)|0);
     $1 = ((($arrayidx)) + 8|0);
     $2 = load4($1);
     $fd9 = ((($2)) + 8|0);
@@ -8375,9 +8528,9 @@ function _malloc($bytes) {
       $shl12 = 1 << $add8;
       $neg13 = $shl12 ^ -1;
       $and14 = $0 & $neg13;
-      store4(9516,$and14);
+      store4(9564,$and14);
      } else {
-      $4 = load4((9532));
+      $4 = load4((9580));
       $cmp15 = ($3>>>0)<($4>>>0);
       if ($cmp15) {
        _abort();
@@ -8408,7 +8561,7 @@ function _malloc($bytes) {
     $retval$0 = $fd9;
     STACKTOP = sp;return ($retval$0|0);
    }
-   $7 = load4((9524));
+   $7 = load4((9572));
    $cmp29 = ($cond>>>0)>($7>>>0);
    if ($cmp29) {
     $cmp31 = ($shr3|0)==(0);
@@ -8442,7 +8595,7 @@ function _malloc($bytes) {
      $shr63 = $shr59 >>> $and61;
      $add64 = (($add62) + ($shr63))|0;
      $shl65 = $add64 << 1;
-     $arrayidx66 = (9556 + ($shl65<<2)|0);
+     $arrayidx66 = (9604 + ($shl65<<2)|0);
      $8 = ((($arrayidx66)) + 8|0);
      $9 = load4($8);
      $fd69 = ((($9)) + 8|0);
@@ -8453,10 +8606,10 @@ function _malloc($bytes) {
        $shl72 = 1 << $add64;
        $neg73 = $shl72 ^ -1;
        $and74 = $0 & $neg73;
-       store4(9516,$and74);
+       store4(9564,$and74);
        $14 = $and74;
       } else {
-       $11 = load4((9532));
+       $11 = load4((9580));
        $cmp76 = ($10>>>0)<($11>>>0);
        if ($cmp76) {
         _abort();
@@ -8489,22 +8642,22 @@ function _malloc($bytes) {
      store4($add$ptr98,$sub91);
      $cmp99 = ($7|0)==(0);
      if (!($cmp99)) {
-      $13 = load4((9536));
+      $13 = load4((9584));
       $shr101 = $7 >>> 3;
       $shl102 = $shr101 << 1;
-      $arrayidx103 = (9556 + ($shl102<<2)|0);
+      $arrayidx103 = (9604 + ($shl102<<2)|0);
       $shl105 = 1 << $shr101;
       $and106 = $14 & $shl105;
       $tobool107 = ($and106|0)==(0);
       if ($tobool107) {
        $or110 = $14 | $shl105;
-       store4(9516,$or110);
+       store4(9564,$or110);
        $$pre = ((($arrayidx103)) + 8|0);
        $$pre$phiZ2D = $$pre;$F104$0 = $arrayidx103;
       } else {
        $15 = ((($arrayidx103)) + 8|0);
        $16 = load4($15);
-       $17 = load4((9532));
+       $17 = load4((9580));
        $cmp113 = ($16>>>0)<($17>>>0);
        if ($cmp113) {
         _abort();
@@ -8521,12 +8674,12 @@ function _malloc($bytes) {
       $bk124 = ((($13)) + 12|0);
       store4($bk124,$arrayidx103);
      }
-     store4((9524),$sub91);
-     store4((9536),$add$ptr95);
+     store4((9572),$sub91);
+     store4((9584),$add$ptr95);
      $retval$0 = $fd69;
      STACKTOP = sp;return ($retval$0|0);
     }
-    $18 = load4((9520));
+    $18 = load4((9568));
     $cmp128 = ($18|0)==(0);
     if ($cmp128) {
      $nb$0 = $cond;
@@ -8554,7 +8707,7 @@ function _malloc($bytes) {
      $add18$i = $add14$i | $and17$i;
      $shr19$i = $shr15$i >>> $and17$i;
      $add20$i = (($add18$i) + ($shr19$i))|0;
-     $arrayidx$i = (9820 + ($add20$i<<2)|0);
+     $arrayidx$i = (9868 + ($add20$i<<2)|0);
      $19 = load4($arrayidx$i);
      $head$i = ((($19)) + 4|0);
      $20 = load4($head$i);
@@ -8594,7 +8747,7 @@ function _malloc($bytes) {
        }
       }
      }
-     $27 = load4((9532));
+     $27 = load4((9580));
      $cmp33$i = ($v$0$lcssa$i>>>0)<($27>>>0);
      if ($cmp33$i) {
       _abort();
@@ -8689,7 +8842,7 @@ function _malloc($bytes) {
       if (!($cmp90$i)) {
        $index$i = ((($v$0$lcssa$i)) + 28|0);
        $37 = load4($index$i);
-       $arrayidx94$i = (9820 + ($37<<2)|0);
+       $arrayidx94$i = (9868 + ($37<<2)|0);
        $38 = load4($arrayidx94$i);
        $cmp95$i = ($v$0$lcssa$i|0)==($38|0);
        $cond$i = ($R$3$i|0)==(0|0);
@@ -8700,11 +8853,11 @@ function _malloc($bytes) {
           $shl$i = 1 << $37;
           $neg$i = $shl$i ^ -1;
           $and103$i = $18 & $neg$i;
-          store4((9520),$and103$i);
+          store4((9568),$and103$i);
           break L73;
          }
         } else {
-         $39 = load4((9532));
+         $39 = load4((9580));
          $cmp107$i = ($28>>>0)<($39>>>0);
          if ($cmp107$i) {
           _abort();
@@ -8724,7 +8877,7 @@ function _malloc($bytes) {
          }
         }
        } while(0);
-       $41 = load4((9532));
+       $41 = load4((9580));
        $cmp130$i = ($R$3$i>>>0)<($41>>>0);
        if ($cmp130$i) {
         _abort();
@@ -8754,7 +8907,7 @@ function _malloc($bytes) {
        $43 = load4($arrayidx154$i);
        $cmp155$i = ($43|0)==(0|0);
        if (!($cmp155$i)) {
-        $44 = load4((9532));
+        $44 = load4((9580));
         $cmp159$i = ($43>>>0)<($44>>>0);
         if ($cmp159$i) {
          _abort();
@@ -8791,22 +8944,22 @@ function _malloc($bytes) {
       store4($add$ptr190$i,$rsize$0$lcssa$i);
       $cmp191$i = ($7|0)==(0);
       if (!($cmp191$i)) {
-       $46 = load4((9536));
+       $46 = load4((9584));
        $shr194$i = $7 >>> 3;
        $shl195$i = $shr194$i << 1;
-       $arrayidx196$i = (9556 + ($shl195$i<<2)|0);
+       $arrayidx196$i = (9604 + ($shl195$i<<2)|0);
        $shl198$i = 1 << $shr194$i;
        $and199$i = $shl198$i & $0;
        $tobool200$i = ($and199$i|0)==(0);
        if ($tobool200$i) {
         $or204$i = $shl198$i | $0;
-        store4(9516,$or204$i);
+        store4(9564,$or204$i);
         $$pre$i = ((($arrayidx196$i)) + 8|0);
         $$pre$phi$iZ2D = $$pre$i;$F197$0$i = $arrayidx196$i;
        } else {
         $47 = ((($arrayidx196$i)) + 8|0);
         $48 = load4($47);
-        $49 = load4((9532));
+        $49 = load4((9580));
         $cmp208$i = ($48>>>0)<($49>>>0);
         if ($cmp208$i) {
          _abort();
@@ -8823,8 +8976,8 @@ function _malloc($bytes) {
        $bk220$i = ((($46)) + 12|0);
        store4($bk220$i,$arrayidx196$i);
       }
-      store4((9524),$rsize$0$lcssa$i);
-      store4((9536),$add$ptr$i);
+      store4((9572),$rsize$0$lcssa$i);
+      store4((9584),$add$ptr$i);
      }
      $add$ptr225$i = ((($v$0$lcssa$i)) + 8|0);
      $retval$0 = $add$ptr225$i;
@@ -8840,7 +8993,7 @@ function _malloc($bytes) {
    } else {
     $add144 = (($bytes) + 11)|0;
     $and145 = $add144 & -8;
-    $50 = load4((9520));
+    $50 = load4((9568));
     $cmp146 = ($50|0)==(0);
     if ($cmp146) {
      $nb$0 = $and145;
@@ -8880,7 +9033,7 @@ function _malloc($bytes) {
        $idx$0$i = $add22$i;
       }
      }
-     $arrayidx$i149 = (9820 + ($idx$0$i<<2)|0);
+     $arrayidx$i149 = (9868 + ($idx$0$i<<2)|0);
      $51 = load4($arrayidx$i149);
      $cmp24$i = ($51|0)==(0|0);
      L117: do {
@@ -8972,7 +9125,7 @@ function _malloc($bytes) {
        $add90$i = $add86$i | $and89$i;
        $shr91$i = $shr87$i >>> $and89$i;
        $add92$i = (($add90$i) + ($shr91$i))|0;
-       $arrayidx94$i153 = (9820 + ($add92$i<<2)|0);
+       $arrayidx94$i153 = (9868 + ($add92$i<<2)|0);
        $55 = load4($arrayidx94$i153);
        $t$4$ph$i = $55;$v$4$ph$i = 0;
       } else {
@@ -9016,11 +9169,11 @@ function _malloc($bytes) {
      if ($cmp116$i) {
       $nb$0 = $and145;
      } else {
-      $59 = load4((9524));
+      $59 = load4((9572));
       $sub118$i = (($59) - ($and145))|0;
       $cmp119$i = ($rsize$4$lcssa$i>>>0)<($sub118$i>>>0);
       if ($cmp119$i) {
-       $60 = load4((9532));
+       $60 = load4((9580));
        $cmp121$i = ($v$4$lcssa$i>>>0)<($60>>>0);
        if ($cmp121$i) {
         _abort();
@@ -9117,7 +9270,7 @@ function _malloc($bytes) {
         } else {
          $index$i169 = ((($v$4$lcssa$i)) + 28|0);
          $70 = load4($index$i169);
-         $arrayidx184$i = (9820 + ($70<<2)|0);
+         $arrayidx184$i = (9868 + ($70<<2)|0);
          $71 = load4($arrayidx184$i);
          $cmp185$i = ($v$4$lcssa$i|0)==($71|0);
          $cond3$i = ($R$3$i168|0)==(0|0);
@@ -9128,12 +9281,12 @@ function _malloc($bytes) {
             $shl192$i = 1 << $70;
             $neg$i170 = $shl192$i ^ -1;
             $and194$i = $50 & $neg$i170;
-            store4((9520),$and194$i);
+            store4((9568),$and194$i);
             $83 = $and194$i;
             break L164;
            }
           } else {
-           $72 = load4((9532));
+           $72 = load4((9580));
            $cmp198$i = ($61>>>0)<($72>>>0);
            if ($cmp198$i) {
             _abort();
@@ -9154,7 +9307,7 @@ function _malloc($bytes) {
            }
           }
          } while(0);
-         $74 = load4((9532));
+         $74 = load4((9580));
          $cmp221$i = ($R$3$i168>>>0)<($74>>>0);
          if ($cmp221$i) {
           _abort();
@@ -9186,7 +9339,7 @@ function _malloc($bytes) {
          if ($cmp246$i) {
           $83 = $50;
          } else {
-          $77 = load4((9532));
+          $77 = load4((9580));
           $cmp250$i = ($76>>>0)<($77>>>0);
           if ($cmp250$i) {
            _abort();
@@ -9227,20 +9380,20 @@ function _malloc($bytes) {
          $cmp284$i = ($rsize$4$lcssa$i>>>0)<(256);
          if ($cmp284$i) {
           $shl288$i = $shr283$i << 1;
-          $arrayidx289$i = (9556 + ($shl288$i<<2)|0);
-          $79 = load4(9516);
+          $arrayidx289$i = (9604 + ($shl288$i<<2)|0);
+          $79 = load4(9564);
           $shl291$i = 1 << $shr283$i;
           $and292$i = $79 & $shl291$i;
           $tobool293$i = ($and292$i|0)==(0);
           if ($tobool293$i) {
            $or297$i = $79 | $shl291$i;
-           store4(9516,$or297$i);
+           store4(9564,$or297$i);
            $$pre$i175 = ((($arrayidx289$i)) + 8|0);
            $$pre$phi$i176Z2D = $$pre$i175;$F290$0$i = $arrayidx289$i;
           } else {
            $80 = ((($arrayidx289$i)) + 8|0);
            $81 = load4($80);
-           $82 = load4((9532));
+           $82 = load4((9580));
            $cmp301$i = ($81>>>0)<($82>>>0);
            if ($cmp301$i) {
             _abort();
@@ -9292,7 +9445,7 @@ function _malloc($bytes) {
            $I316$0$i = $add351$i;
           }
          }
-         $arrayidx355$i = (9820 + ($I316$0$i<<2)|0);
+         $arrayidx355$i = (9868 + ($I316$0$i<<2)|0);
          $index356$i = ((($add$ptr$i158)) + 28|0);
          store4($index356$i,$I316$0$i);
          $child357$i = ((($add$ptr$i158)) + 16|0);
@@ -9304,7 +9457,7 @@ function _malloc($bytes) {
          $tobool364$i = ($and363$i|0)==(0);
          if ($tobool364$i) {
           $or368$i = $shl362$i | $83;
-          store4((9520),$or368$i);
+          store4((9568),$or368$i);
           store4($arrayidx355$i,$add$ptr$i158);
           $parent369$i = ((($add$ptr$i158)) + 24|0);
           store4($parent369$i,$arrayidx355$i);
@@ -9343,7 +9496,7 @@ function _malloc($bytes) {
           }
          }
          if ((label|0) == 136) {
-          $87 = load4((9532));
+          $87 = load4((9580));
           $cmp401$i = ($arrayidx394$i>>>0)<($87>>>0);
           if ($cmp401$i) {
            _abort();
@@ -9362,7 +9515,7 @@ function _malloc($bytes) {
          else if ((label|0) == 139) {
           $fd416$i = ((($T$0$i)) + 8|0);
           $88 = load4($fd416$i);
-          $89 = load4((9532));
+          $89 = load4((9580));
           $cmp422$i = ($88>>>0)>=($89>>>0);
           $not$cmp418$i = ($T$0$i>>>0)>=($89>>>0);
           $90 = $cmp422$i & $not$cmp418$i;
@@ -9395,16 +9548,16 @@ function _malloc($bytes) {
    }
   }
  } while(0);
- $91 = load4((9524));
+ $91 = load4((9572));
  $cmp156 = ($91>>>0)<($nb$0>>>0);
  if (!($cmp156)) {
   $sub160 = (($91) - ($nb$0))|0;
-  $92 = load4((9536));
+  $92 = load4((9584));
   $cmp162 = ($sub160>>>0)>(15);
   if ($cmp162) {
    $add$ptr166 = (($92) + ($nb$0)|0);
-   store4((9536),$add$ptr166);
-   store4((9524),$sub160);
+   store4((9584),$add$ptr166);
+   store4((9572),$sub160);
    $or167 = $sub160 | 1;
    $head168 = ((($add$ptr166)) + 4|0);
    store4($head168,$or167);
@@ -9414,8 +9567,8 @@ function _malloc($bytes) {
    $head173 = ((($92)) + 4|0);
    store4($head173,$or172);
   } else {
-   store4((9524),0);
-   store4((9536),0);
+   store4((9572),0);
+   store4((9584),0);
    $or176 = $91 | 3;
    $head177 = ((($92)) + 4|0);
    store4($head177,$or176);
@@ -9429,14 +9582,14 @@ function _malloc($bytes) {
   $retval$0 = $add$ptr182;
   STACKTOP = sp;return ($retval$0|0);
  }
- $94 = load4((9528));
+ $94 = load4((9576));
  $cmp186 = ($94>>>0)>($nb$0>>>0);
  if ($cmp186) {
   $sub190 = (($94) - ($nb$0))|0;
-  store4((9528),$sub190);
-  $95 = load4((9540));
+  store4((9576),$sub190);
+  $95 = load4((9588));
   $add$ptr193 = (($95) + ($nb$0)|0);
-  store4((9540),$add$ptr193);
+  store4((9588),$add$ptr193);
   $or194 = $sub190 | 1;
   $head195 = ((($add$ptr193)) + 4|0);
   store4($head195,$or194);
@@ -9447,23 +9600,23 @@ function _malloc($bytes) {
   $retval$0 = $add$ptr199;
   STACKTOP = sp;return ($retval$0|0);
  }
- $96 = load4(9988);
+ $96 = load4(10036);
  $cmp$i177 = ($96|0)==(0);
  if ($cmp$i177) {
-  store4((9996),4096);
-  store4((9992),4096);
-  store4((10000),-1);
-  store4((10004),-1);
+  store4((10044),4096);
+  store4((10040),4096);
+  store4((10048),-1);
+  store4((10052),-1);
+  store4((10056),0);
   store4((10008),0);
-  store4((9960),0);
   $97 = $magic$i$i;
   $xor$i$i = $97 & -16;
   $and6$i$i = $xor$i$i ^ 1431655768;
   store4($magic$i$i,$and6$i$i);
-  store4(9988,$and6$i$i);
+  store4(10036,$and6$i$i);
   $98 = 4096;
  } else {
-  $$pre$i178 = load4((9996));
+  $$pre$i178 = load4((10044));
   $98 = $$pre$i178;
  }
  $add$i179 = (($nb$0) + 48)|0;
@@ -9476,10 +9629,10 @@ function _malloc($bytes) {
   $retval$0 = 0;
   STACKTOP = sp;return ($retval$0|0);
  }
- $99 = load4((9956));
+ $99 = load4((10004));
  $cmp15$i = ($99|0)==(0);
  if (!($cmp15$i)) {
-  $100 = load4((9948));
+  $100 = load4((9996));
   $add17$i182 = (($100) + ($and11$i))|0;
   $cmp19$i = ($add17$i182>>>0)<=($100>>>0);
   $cmp21$i = ($add17$i182>>>0)>($99>>>0);
@@ -9489,18 +9642,18 @@ function _malloc($bytes) {
    STACKTOP = sp;return ($retval$0|0);
   }
  }
- $101 = load4((9960));
+ $101 = load4((10008));
  $and29$i = $101 & 4;
  $tobool30$i = ($and29$i|0)==(0);
  L244: do {
   if ($tobool30$i) {
-   $102 = load4((9540));
+   $102 = load4((9588));
    $cmp32$i184 = ($102|0)==(0|0);
    L246: do {
     if ($cmp32$i184) {
      label = 163;
     } else {
-     $sp$0$i$i = (9964);
+     $sp$0$i$i = (10012);
      while(1) {
       $103 = load4($sp$0$i$i);
       $cmp$i11$i = ($103>>>0)>($102>>>0);
@@ -9558,7 +9711,7 @@ function _malloc($bytes) {
       $tsize$2657583$i = 0;
      } else {
       $106 = $call37$i;
-      $107 = load4((9992));
+      $107 = load4((10040));
       $sub41$i = (($107) + -1)|0;
       $and42$i = $sub41$i & $106;
       $cmp43$i = ($and42$i|0)==(0);
@@ -9568,13 +9721,13 @@ function _malloc($bytes) {
       $sub50$i = (($and49$i) - ($106))|0;
       $add51$i = $cmp43$i ? 0 : $sub50$i;
       $and11$add51$i = (($add51$i) + ($and11$i))|0;
-      $108 = load4((9948));
+      $108 = load4((9996));
       $add54$i = (($and11$add51$i) + ($108))|0;
       $cmp55$i185 = ($and11$add51$i>>>0)>($nb$0>>>0);
       $cmp57$i186 = ($and11$add51$i>>>0)<(2147483647);
       $or$cond$i187 = $cmp55$i185 & $cmp57$i186;
       if ($or$cond$i187) {
-       $109 = load4((9956));
+       $109 = load4((10004));
        $cmp60$i = ($109|0)==(0);
        if (!($cmp60$i)) {
         $cmp63$i = ($add54$i>>>0)<=($108>>>0);
@@ -9620,7 +9773,7 @@ function _malloc($bytes) {
        break L244;
       }
      }
-     $112 = load4((9996));
+     $112 = load4((10044));
      $sub99$i = (($sub$i180) - ($ssize$2$ph$i))|0;
      $add101$i = (($sub99$i) + ($112))|0;
      $neg103$i = (0 - ($112))|0;
@@ -9645,9 +9798,9 @@ function _malloc($bytes) {
      }
     }
    } while(0);
-   $113 = load4((9960));
+   $113 = load4((10008));
    $or$i194 = $113 | 4;
-   store4((9960),$or$i194);
+   store4((10008),$or$i194);
    $tsize$4$i = $tsize$2657583$i;
    label = 178;
   } else {
@@ -9683,35 +9836,35 @@ function _malloc($bytes) {
   }
  }
  if ((label|0) == 180) {
-  $114 = load4((9948));
+  $114 = load4((9996));
   $add150$i = (($114) + ($tsize$795$i))|0;
-  store4((9948),$add150$i);
-  $115 = load4((9952));
+  store4((9996),$add150$i);
+  $115 = load4((10000));
   $cmp151$i = ($add150$i>>>0)>($115>>>0);
   if ($cmp151$i) {
-   store4((9952),$add150$i);
+   store4((10000),$add150$i);
   }
-  $116 = load4((9540));
+  $116 = load4((9588));
   $cmp157$i = ($116|0)==(0|0);
   do {
    if ($cmp157$i) {
-    $117 = load4((9532));
+    $117 = load4((9580));
     $cmp159$i198 = ($117|0)==(0|0);
     $cmp162$i199 = ($tbase$796$i>>>0)<($117>>>0);
     $or$cond8$i = $cmp159$i198 | $cmp162$i199;
     if ($or$cond8$i) {
-     store4((9532),$tbase$796$i);
+     store4((9580),$tbase$796$i);
     }
-    store4((9964),$tbase$796$i);
-    store4((9968),$tsize$795$i);
-    store4((9976),0);
-    $118 = load4(9988);
-    store4((9552),$118);
-    store4((9548),-1);
+    store4((10012),$tbase$796$i);
+    store4((10016),$tsize$795$i);
+    store4((10024),0);
+    $118 = load4(10036);
+    store4((9600),$118);
+    store4((9596),-1);
     $i$01$i$i = 0;
     while(1) {
      $shl$i13$i = $i$01$i$i << 1;
-     $arrayidx$i14$i = (9556 + ($shl$i13$i<<2)|0);
+     $arrayidx$i14$i = (9604 + ($shl$i13$i<<2)|0);
      $119 = ((($arrayidx$i14$i)) + 12|0);
      store4($119,$arrayidx$i14$i);
      $120 = ((($arrayidx$i14$i)) + 8|0);
@@ -9734,18 +9887,18 @@ function _malloc($bytes) {
     $cond$i19$i = $cmp$i18$i ? 0 : $and3$i$i;
     $add$ptr4$i$i = (($tbase$796$i) + ($cond$i19$i)|0);
     $sub5$i$i = (($sub172$i) - ($cond$i19$i))|0;
-    store4((9540),$add$ptr4$i$i);
-    store4((9528),$sub5$i$i);
+    store4((9588),$add$ptr4$i$i);
+    store4((9576),$sub5$i$i);
     $or$i$i = $sub5$i$i | 1;
     $head$i20$i = ((($add$ptr4$i$i)) + 4|0);
     store4($head$i20$i,$or$i$i);
     $add$ptr6$i$i = (($add$ptr4$i$i) + ($sub5$i$i)|0);
     $head7$i$i = ((($add$ptr6$i$i)) + 4|0);
     store4($head7$i$i,40);
-    $123 = load4((10004));
-    store4((9544),$123);
+    $123 = load4((10052));
+    store4((9592),$123);
    } else {
-    $sp$0108$i = (9964);
+    $sp$0108$i = (10012);
     while(1) {
      $124 = load4($sp$0108$i);
      $size188$i = ((($sp$0108$i)) + 4|0);
@@ -9777,7 +9930,7 @@ function _malloc($bytes) {
       if ($or$cond98$i) {
        $add212$i = (($125) + ($tsize$795$i))|0;
        store4($size188$i,$add212$i);
-       $128 = load4((9528));
+       $128 = load4((9576));
        $add$ptr$i49$i = ((($116)) + 8|0);
        $129 = $add$ptr$i49$i;
        $and$i50$i = $129 & 7;
@@ -9788,30 +9941,30 @@ function _malloc($bytes) {
        $add$ptr4$i54$i = (($116) + ($cond$i53$i)|0);
        $add215$i = (($tsize$795$i) - ($cond$i53$i))|0;
        $sub5$i55$i = (($128) + ($add215$i))|0;
-       store4((9540),$add$ptr4$i54$i);
-       store4((9528),$sub5$i55$i);
+       store4((9588),$add$ptr4$i54$i);
+       store4((9576),$sub5$i55$i);
        $or$i56$i = $sub5$i55$i | 1;
        $head$i57$i = ((($add$ptr4$i54$i)) + 4|0);
        store4($head$i57$i,$or$i56$i);
        $add$ptr6$i58$i = (($add$ptr4$i54$i) + ($sub5$i55$i)|0);
        $head7$i59$i = ((($add$ptr6$i58$i)) + 4|0);
        store4($head7$i59$i,40);
-       $131 = load4((10004));
-       store4((9544),$131);
+       $131 = load4((10052));
+       store4((9592),$131);
        break;
       }
      }
     }
-    $132 = load4((9532));
+    $132 = load4((9580));
     $cmp218$i = ($tbase$796$i>>>0)<($132>>>0);
     if ($cmp218$i) {
-     store4((9532),$tbase$796$i);
+     store4((9580),$tbase$796$i);
      $147 = $tbase$796$i;
     } else {
      $147 = $132;
     }
     $add$ptr227$i = (($tbase$796$i) + ($tsize$795$i)|0);
-    $sp$1107$i = (9964);
+    $sp$1107$i = (10012);
     while(1) {
      $133 = load4($sp$1107$i);
      $cmp228$i = ($133|0)==($add$ptr227$i|0);
@@ -9866,21 +10019,21 @@ function _malloc($bytes) {
       $cmp20$i$i = ($add$ptr16$i$i|0)==($116|0);
       do {
        if ($cmp20$i$i) {
-        $141 = load4((9528));
+        $141 = load4((9576));
         $add$i$i = (($141) + ($sub18$i$i))|0;
-        store4((9528),$add$i$i);
-        store4((9540),$add$ptr17$i$i);
+        store4((9576),$add$i$i);
+        store4((9588),$add$ptr17$i$i);
         $or22$i$i = $add$i$i | 1;
         $head23$i$i = ((($add$ptr17$i$i)) + 4|0);
         store4($head23$i$i,$or22$i$i);
        } else {
-        $142 = load4((9536));
+        $142 = load4((9584));
         $cmp24$i$i = ($add$ptr16$i$i|0)==($142|0);
         if ($cmp24$i$i) {
-         $143 = load4((9524));
+         $143 = load4((9572));
          $add26$i$i = (($143) + ($sub18$i$i))|0;
-         store4((9524),$add26$i$i);
-         store4((9536),$add$ptr17$i$i);
+         store4((9572),$add26$i$i);
+         store4((9584),$add$ptr17$i$i);
          $or28$i$i = $add26$i$i | 1;
          $head29$i$i = ((($add$ptr17$i$i)) + 4|0);
          store4($head29$i$i,$or28$i$i);
@@ -9903,7 +10056,7 @@ function _malloc($bytes) {
            $bk$i35$i = ((($add$ptr16$i$i)) + 12|0);
            $146 = load4($bk$i35$i);
            $shl$i36$i = $shr$i34$i << 1;
-           $arrayidx$i37$i = (9556 + ($shl$i36$i<<2)|0);
+           $arrayidx$i37$i = (9604 + ($shl$i36$i<<2)|0);
            $cmp41$i$i = ($145|0)==($arrayidx$i37$i|0);
            do {
             if (!($cmp41$i$i)) {
@@ -9926,9 +10079,9 @@ function _malloc($bytes) {
            if ($cmp46$i38$i) {
             $shl48$i$i = 1 << $shr$i34$i;
             $neg$i$i = $shl48$i$i ^ -1;
-            $149 = load4(9516);
+            $149 = load4(9564);
             $and49$i$i = $149 & $neg$i$i;
-            store4(9516,$and49$i$i);
+            store4(9564,$and49$i$i);
             break;
            }
            $cmp54$i$i = ($146|0)==($arrayidx$i37$i|0);
@@ -10041,7 +10194,7 @@ function _malloc($bytes) {
            }
            $index$i43$i = ((($add$ptr16$i$i)) + 28|0);
            $160 = load4($index$i43$i);
-           $arrayidx123$i$i = (9820 + ($160<<2)|0);
+           $arrayidx123$i$i = (9868 + ($160<<2)|0);
            $161 = load4($arrayidx123$i$i);
            $cmp124$i$i = ($add$ptr16$i$i|0)==($161|0);
            $cond2$i$i = ($R$3$i$i|0)==(0|0);
@@ -10053,12 +10206,12 @@ function _malloc($bytes) {
              }
              $shl131$i$i = 1 << $160;
              $neg132$i$i = $shl131$i$i ^ -1;
-             $162 = load4((9520));
+             $162 = load4((9568));
              $and133$i$i = $162 & $neg132$i$i;
-             store4((9520),$and133$i$i);
+             store4((9568),$and133$i$i);
              break L314;
             } else {
-             $163 = load4((9532));
+             $163 = load4((9580));
              $cmp137$i$i = ($151>>>0)<($163>>>0);
              if ($cmp137$i$i) {
               _abort();
@@ -10078,7 +10231,7 @@ function _malloc($bytes) {
              }
             }
            } while(0);
-           $165 = load4((9532));
+           $165 = load4((9580));
            $cmp160$i$i = ($R$3$i$i>>>0)<($165>>>0);
            if ($cmp160$i$i) {
             _abort();
@@ -10110,7 +10263,7 @@ function _malloc($bytes) {
            if ($cmp185$i$i) {
             break;
            }
-           $168 = load4((9532));
+           $168 = load4((9580));
            $cmp189$i$i = ($167>>>0)<($168>>>0);
            if ($cmp189$i$i) {
             _abort();
@@ -10143,21 +10296,21 @@ function _malloc($bytes) {
         $cmp215$i$i = ($qsize$0$i$i>>>0)<(256);
         if ($cmp215$i$i) {
          $shl222$i$i = $shr214$i$i << 1;
-         $arrayidx223$i$i = (9556 + ($shl222$i$i<<2)|0);
-         $170 = load4(9516);
+         $arrayidx223$i$i = (9604 + ($shl222$i$i<<2)|0);
+         $170 = load4(9564);
          $shl226$i$i = 1 << $shr214$i$i;
          $and227$i$i = $170 & $shl226$i$i;
          $tobool228$i$i = ($and227$i$i|0)==(0);
          do {
           if ($tobool228$i$i) {
            $or232$i$i = $170 | $shl226$i$i;
-           store4(9516,$or232$i$i);
+           store4(9564,$or232$i$i);
            $$pre$i45$i = ((($arrayidx223$i$i)) + 8|0);
            $$pre$phi$i46$iZ2D = $$pre$i45$i;$F224$0$i$i = $arrayidx223$i$i;
           } else {
            $171 = ((($arrayidx223$i$i)) + 8|0);
            $172 = load4($171);
-           $173 = load4((9532));
+           $173 = load4((9580));
            $cmp236$i$i = ($172>>>0)<($173>>>0);
            if (!($cmp236$i$i)) {
             $$pre$phi$i46$iZ2D = $171;$F224$0$i$i = $172;
@@ -10212,20 +10365,20 @@ function _malloc($bytes) {
           $I252$0$i$i = $add283$i$i;
          }
         } while(0);
-        $arrayidx287$i$i = (9820 + ($I252$0$i$i<<2)|0);
+        $arrayidx287$i$i = (9868 + ($I252$0$i$i<<2)|0);
         $index288$i$i = ((($add$ptr17$i$i)) + 28|0);
         store4($index288$i$i,$I252$0$i$i);
         $child289$i$i = ((($add$ptr17$i$i)) + 16|0);
         $arrayidx290$i$i = ((($child289$i$i)) + 4|0);
         store4($arrayidx290$i$i,0);
         store4($child289$i$i,0);
-        $174 = load4((9520));
+        $174 = load4((9568));
         $shl294$i$i = 1 << $I252$0$i$i;
         $and295$i$i = $174 & $shl294$i$i;
         $tobool296$i$i = ($and295$i$i|0)==(0);
         if ($tobool296$i$i) {
          $or300$i$i = $174 | $shl294$i$i;
-         store4((9520),$or300$i$i);
+         store4((9568),$or300$i$i);
          store4($arrayidx287$i$i,$add$ptr17$i$i);
          $parent301$i$i = ((($add$ptr17$i$i)) + 24|0);
          store4($parent301$i$i,$arrayidx287$i$i);
@@ -10264,7 +10417,7 @@ function _malloc($bytes) {
          }
         }
         if ((label|0) == 262) {
-         $178 = load4((9532));
+         $178 = load4((9580));
          $cmp332$i$i = ($arrayidx325$i$i>>>0)<($178>>>0);
          if ($cmp332$i$i) {
           _abort();
@@ -10283,7 +10436,7 @@ function _malloc($bytes) {
         else if ((label|0) == 265) {
          $fd344$i$i = ((($T$0$i47$i)) + 8|0);
          $179 = load4($fd344$i$i);
-         $180 = load4((9532));
+         $180 = load4((9580));
          $cmp350$i$i = ($179>>>0)>=($180>>>0);
          $not$cmp346$i$i = ($T$0$i47$i>>>0)>=($180>>>0);
          $181 = $cmp350$i$i & $not$cmp346$i$i;
@@ -10310,7 +10463,7 @@ function _malloc($bytes) {
       STACKTOP = sp;return ($retval$0|0);
      }
     }
-    $sp$0$i$i$i = (9964);
+    $sp$0$i$i$i = (10012);
     while(1) {
      $182 = load4($sp$0$i$i$i);
      $cmp$i$i$i = ($182>>>0)>($116>>>0);
@@ -10351,23 +10504,23 @@ function _malloc($bytes) {
     $cond$i$i$i = $cmp$i3$i$i ? 0 : $and3$i$i$i;
     $add$ptr4$i$i$i = (($tbase$796$i) + ($cond$i$i$i)|0);
     $sub5$i$i$i = (($sub16$i$i) - ($cond$i$i$i))|0;
-    store4((9540),$add$ptr4$i$i$i);
-    store4((9528),$sub5$i$i$i);
+    store4((9588),$add$ptr4$i$i$i);
+    store4((9576),$sub5$i$i$i);
     $or$i$i$i = $sub5$i$i$i | 1;
     $head$i$i$i = ((($add$ptr4$i$i$i)) + 4|0);
     store4($head$i$i$i,$or$i$i$i);
     $add$ptr6$i$i$i = (($add$ptr4$i$i$i) + ($sub5$i$i$i)|0);
     $head7$i$i$i = ((($add$ptr6$i$i$i)) + 4|0);
     store4($head7$i$i$i,40);
-    $189 = load4((10004));
-    store4((9544),$189);
+    $189 = load4((10052));
+    store4((9592),$189);
     $head$i$i = ((($cond13$i$i)) + 4|0);
     store4($head$i$i,27);
-    ; store8($add$ptr14$i$i,load8((9964),4),4); store8($add$ptr14$i$i+8 | 0,load8((9964)+8 | 0,4),4);
-    store4((9964),$tbase$796$i);
-    store4((9968),$tsize$795$i);
-    store4((9976),0);
-    store4((9972),$add$ptr14$i$i);
+    ; store8($add$ptr14$i$i,load8((10012),4),4); store8($add$ptr14$i$i+8 | 0,load8((10012)+8 | 0,4),4);
+    store4((10012),$tbase$796$i);
+    store4((10016),$tsize$795$i);
+    store4((10024),0);
+    store4((10020),$add$ptr14$i$i);
     $190 = $add$ptr15$i$i;
     while(1) {
      $add$ptr24$i$i = ((($190)) + 4|0);
@@ -10396,20 +10549,20 @@ function _malloc($bytes) {
      $cmp36$i$i = ($sub$ptr$sub$i$i>>>0)<(256);
      if ($cmp36$i$i) {
       $shl$i$i = $shr$i$i << 1;
-      $arrayidx$i$i = (9556 + ($shl$i$i<<2)|0);
-      $192 = load4(9516);
+      $arrayidx$i$i = (9604 + ($shl$i$i<<2)|0);
+      $192 = load4(9564);
       $shl39$i$i = 1 << $shr$i$i;
       $and40$i$i = $192 & $shl39$i$i;
       $tobool$i$i = ($and40$i$i|0)==(0);
       if ($tobool$i$i) {
        $or44$i$i = $192 | $shl39$i$i;
-       store4(9516,$or44$i$i);
+       store4(9564,$or44$i$i);
        $$pre$i$i = ((($arrayidx$i$i)) + 8|0);
        $$pre$phi$i$iZ2D = $$pre$i$i;$F$0$i$i = $arrayidx$i$i;
       } else {
        $193 = ((($arrayidx$i$i)) + 8|0);
        $194 = load4($193);
-       $195 = load4((9532));
+       $195 = load4((9580));
        $cmp46$i$i = ($194>>>0)<($195>>>0);
        if ($cmp46$i$i) {
         _abort();
@@ -10461,19 +10614,19 @@ function _malloc($bytes) {
        $I57$0$i$i = $add88$i$i;
       }
      }
-     $arrayidx91$i$i = (9820 + ($I57$0$i$i<<2)|0);
+     $arrayidx91$i$i = (9868 + ($I57$0$i$i<<2)|0);
      $index$i$i = ((($116)) + 28|0);
      store4($index$i$i,$I57$0$i$i);
      $arrayidx92$i$i = ((($116)) + 20|0);
      store4($arrayidx92$i$i,0);
      store4($add$ptr81$i$i,0);
-     $196 = load4((9520));
+     $196 = load4((9568));
      $shl95$i$i = 1 << $I57$0$i$i;
      $and96$i$i = $196 & $shl95$i$i;
      $tobool97$i$i = ($and96$i$i|0)==(0);
      if ($tobool97$i$i) {
       $or101$i$i = $196 | $shl95$i$i;
-      store4((9520),$or101$i$i);
+      store4((9568),$or101$i$i);
       store4($arrayidx91$i$i,$116);
       $parent$i$i = ((($116)) + 24|0);
       store4($parent$i$i,$arrayidx91$i$i);
@@ -10512,7 +10665,7 @@ function _malloc($bytes) {
       }
      }
      if ((label|0) == 289) {
-      $200 = load4((9532));
+      $200 = load4((9580));
       $cmp133$i$i = ($arrayidx126$i$i>>>0)<($200>>>0);
       if ($cmp133$i$i) {
        _abort();
@@ -10531,7 +10684,7 @@ function _malloc($bytes) {
      else if ((label|0) == 292) {
       $fd148$i$i = ((($T$0$i$i)) + 8|0);
       $201 = load4($fd148$i$i);
-      $202 = load4((9532));
+      $202 = load4((9580));
       $cmp153$i$i = ($201>>>0)>=($202>>>0);
       $not$cmp150$i$i = ($T$0$i$i>>>0)>=($202>>>0);
       $203 = $cmp153$i$i & $not$cmp150$i$i;
@@ -10554,14 +10707,14 @@ function _malloc($bytes) {
     }
    }
   } while(0);
-  $204 = load4((9528));
+  $204 = load4((9576));
   $cmp257$i = ($204>>>0)>($nb$0>>>0);
   if ($cmp257$i) {
    $sub260$i = (($204) - ($nb$0))|0;
-   store4((9528),$sub260$i);
-   $205 = load4((9540));
+   store4((9576),$sub260$i);
+   $205 = load4((9588));
    $add$ptr262$i = (($205) + ($nb$0)|0);
-   store4((9540),$add$ptr262$i);
+   store4((9588),$add$ptr262$i);
    $or264$i = $sub260$i | 1;
    $head265$i = ((($add$ptr262$i)) + 4|0);
    store4($head265$i,$or264$i);
@@ -10573,7 +10726,7 @@ function _malloc($bytes) {
    STACKTOP = sp;return ($retval$0|0);
   }
  }
- store4(10024,12);
+ store4(10072,12);
  $retval$0 = 0;
  STACKTOP = sp;return ($retval$0|0);
 }
@@ -10603,7 +10756,7 @@ function _free($mem) {
   return;
  }
  $add$ptr = ((($mem)) + -8|0);
- $0 = load4((9532));
+ $0 = load4((9580));
  $cmp1 = ($add$ptr>>>0)<($0>>>0);
  if ($cmp1) {
   _abort();
@@ -10636,7 +10789,7 @@ function _free($mem) {
     _abort();
     // unreachable;
    }
-   $3 = load4((9536));
+   $3 = load4((9584));
    $cmp22 = ($add$ptr16|0)==($3|0);
    if ($cmp22) {
     $head209 = ((($add$ptr6)) + 4|0);
@@ -10651,7 +10804,7 @@ function _free($mem) {
     $head216 = ((($add$ptr16)) + 4|0);
     $or = $add17 | 1;
     $and215 = $27 & -2;
-    store4((9524),$add17);
+    store4((9572),$add17);
     store4($head209,$and215);
     store4($head216,$or);
     store4($add$ptr217,$add17);
@@ -10665,7 +10818,7 @@ function _free($mem) {
     $bk = ((($add$ptr16)) + 12|0);
     $5 = load4($bk);
     $shl = $shr << 1;
-    $arrayidx = (9556 + ($shl<<2)|0);
+    $arrayidx = (9604 + ($shl<<2)|0);
     $cmp29 = ($4|0)==($arrayidx|0);
     if (!($cmp29)) {
      $cmp31 = ($4>>>0)<($0>>>0);
@@ -10685,9 +10838,9 @@ function _free($mem) {
     if ($cmp42) {
      $shl45 = 1 << $shr;
      $neg = $shl45 ^ -1;
-     $7 = load4(9516);
+     $7 = load4(9564);
      $and46 = $7 & $neg;
-     store4(9516,$and46);
+     store4(9564,$and46);
      $28 = $add$ptr16;$p$1 = $add$ptr16;$psize$1 = $add17;
      break;
     }
@@ -10801,7 +10954,7 @@ function _free($mem) {
    } else {
     $index = ((($add$ptr16)) + 28|0);
     $18 = load4($index);
-    $arrayidx130 = (9820 + ($18<<2)|0);
+    $arrayidx130 = (9868 + ($18<<2)|0);
     $19 = load4($arrayidx130);
     $cmp131 = ($add$ptr16|0)==($19|0);
     $cond292 = ($R$3|0)==(0|0);
@@ -10811,14 +10964,14 @@ function _free($mem) {
       if ($cond292) {
        $shl138 = 1 << $18;
        $neg139 = $shl138 ^ -1;
-       $20 = load4((9520));
+       $20 = load4((9568));
        $and140 = $20 & $neg139;
-       store4((9520),$and140);
+       store4((9568),$and140);
        $28 = $add$ptr16;$p$1 = $add$ptr16;$psize$1 = $add17;
        break L10;
       }
      } else {
-      $21 = load4((9532));
+      $21 = load4((9580));
       $cmp143 = ($9>>>0)<($21>>>0);
       if ($cmp143) {
        _abort();
@@ -10839,7 +10992,7 @@ function _free($mem) {
       }
      }
     } while(0);
-    $23 = load4((9532));
+    $23 = load4((9580));
     $cmp165 = ($R$3>>>0)<($23>>>0);
     if ($cmp165) {
      _abort();
@@ -10871,7 +11024,7 @@ function _free($mem) {
     if ($cmp189) {
      $28 = $add$ptr16;$p$1 = $add$ptr16;$psize$1 = $add17;
     } else {
-     $26 = load4((9532));
+     $26 = load4((9580));
      $cmp192 = ($25>>>0)<($26>>>0);
      if ($cmp192) {
       _abort();
@@ -10906,14 +11059,14 @@ function _free($mem) {
  $and240 = $29 & 2;
  $tobool241 = ($and240|0)==(0);
  if ($tobool241) {
-  $30 = load4((9540));
+  $30 = load4((9588));
   $cmp243 = ($add$ptr6|0)==($30|0);
-  $31 = load4((9536));
+  $31 = load4((9584));
   if ($cmp243) {
-   $32 = load4((9528));
+   $32 = load4((9576));
    $add246 = (($32) + ($psize$1))|0;
-   store4((9528),$add246);
-   store4((9540),$p$1);
+   store4((9576),$add246);
+   store4((9588),$p$1);
    $or247 = $add246 | 1;
    $head248 = ((($p$1)) + 4|0);
    store4($head248,$or247);
@@ -10921,16 +11074,16 @@ function _free($mem) {
    if (!($cmp249)) {
     return;
    }
-   store4((9536),0);
-   store4((9524),0);
+   store4((9584),0);
+   store4((9572),0);
    return;
   }
   $cmp255 = ($add$ptr6|0)==($31|0);
   if ($cmp255) {
-   $33 = load4((9524));
+   $33 = load4((9572));
    $add258 = (($33) + ($psize$1))|0;
-   store4((9524),$add258);
-   store4((9536),$28);
+   store4((9572),$add258);
+   store4((9584),$28);
    $or259 = $add258 | 1;
    $head260 = ((($p$1)) + 4|0);
    store4($head260,$or259);
@@ -10949,10 +11102,10 @@ function _free($mem) {
     $bk275 = ((($add$ptr6)) + 12|0);
     $35 = load4($bk275);
     $shl278 = $shr268 << 1;
-    $arrayidx279 = (9556 + ($shl278<<2)|0);
+    $arrayidx279 = (9604 + ($shl278<<2)|0);
     $cmp280 = ($34|0)==($arrayidx279|0);
     if (!($cmp280)) {
-     $36 = load4((9532));
+     $36 = load4((9580));
      $cmp283 = ($34>>>0)<($36>>>0);
      if ($cmp283) {
       _abort();
@@ -10970,9 +11123,9 @@ function _free($mem) {
     if ($cmp296) {
      $shl299 = 1 << $shr268;
      $neg300 = $shl299 ^ -1;
-     $38 = load4(9516);
+     $38 = load4(9564);
      $and301 = $38 & $neg300;
-     store4(9516,$and301);
+     store4(9564,$and301);
      break;
     }
     $cmp305 = ($35|0)==($arrayidx279|0);
@@ -10980,7 +11133,7 @@ function _free($mem) {
      $$pre308 = ((($35)) + 8|0);
      $fd322$pre$phiZ2D = $$pre308;
     } else {
-     $39 = load4((9532));
+     $39 = load4((9580));
      $cmp308 = ($35>>>0)<($39>>>0);
      if ($cmp308) {
       _abort();
@@ -11040,7 +11193,7 @@ function _free($mem) {
         $R332$1 = $50;$RP360$1 = $arrayidx379;
        }
       }
-      $51 = load4((9532));
+      $51 = load4((9580));
       $cmp386 = ($RP360$1>>>0)<($51>>>0);
       if ($cmp386) {
        _abort();
@@ -11053,7 +11206,7 @@ function _free($mem) {
      } else {
       $fd338 = ((($add$ptr6)) + 8|0);
       $43 = load4($fd338);
-      $44 = load4((9532));
+      $44 = load4((9580));
       $cmp340 = ($43>>>0)<($44>>>0);
       if ($cmp340) {
        _abort();
@@ -11084,7 +11237,7 @@ function _free($mem) {
     if (!($cmp395)) {
      $index399 = ((($add$ptr6)) + 28|0);
      $52 = load4($index399);
-     $arrayidx400 = (9820 + ($52<<2)|0);
+     $arrayidx400 = (9868 + ($52<<2)|0);
      $53 = load4($arrayidx400);
      $cmp401 = ($add$ptr6|0)==($53|0);
      $cond293 = ($R332$3|0)==(0|0);
@@ -11094,13 +11247,13 @@ function _free($mem) {
        if ($cond293) {
         $shl408 = 1 << $52;
         $neg409 = $shl408 ^ -1;
-        $54 = load4((9520));
+        $54 = load4((9568));
         $and410 = $54 & $neg409;
-        store4((9520),$and410);
+        store4((9568),$and410);
         break L108;
        }
       } else {
-       $55 = load4((9532));
+       $55 = load4((9580));
        $cmp413 = ($41>>>0)<($55>>>0);
        if ($cmp413) {
         _abort();
@@ -11120,7 +11273,7 @@ function _free($mem) {
        }
       }
      } while(0);
-     $57 = load4((9532));
+     $57 = load4((9580));
      $cmp435 = ($R332$3>>>0)<($57>>>0);
      if ($cmp435) {
       _abort();
@@ -11150,7 +11303,7 @@ function _free($mem) {
      $59 = load4($arrayidx460);
      $cmp461 = ($59|0)==(0|0);
      if (!($cmp461)) {
-      $60 = load4((9532));
+      $60 = load4((9580));
       $cmp464 = ($59>>>0)<($60>>>0);
       if ($cmp464) {
        _abort();
@@ -11171,10 +11324,10 @@ function _free($mem) {
   store4($head481,$or480);
   $add$ptr482 = (($28) + ($add267)|0);
   store4($add$ptr482,$add267);
-  $61 = load4((9536));
+  $61 = load4((9584));
   $cmp484 = ($p$1|0)==($61|0);
   if ($cmp484) {
-   store4((9524),$add267);
+   store4((9572),$add267);
    return;
   } else {
    $psize$2 = $add267;
@@ -11193,20 +11346,20 @@ function _free($mem) {
  $cmp502 = ($psize$2>>>0)<(256);
  if ($cmp502) {
   $shl508 = $shr501 << 1;
-  $arrayidx509 = (9556 + ($shl508<<2)|0);
-  $62 = load4(9516);
+  $arrayidx509 = (9604 + ($shl508<<2)|0);
+  $62 = load4(9564);
   $shl511 = 1 << $shr501;
   $and512 = $62 & $shl511;
   $tobool513 = ($and512|0)==(0);
   if ($tobool513) {
    $or516 = $62 | $shl511;
-   store4(9516,$or516);
+   store4(9564,$or516);
    $$pre = ((($arrayidx509)) + 8|0);
    $$pre$phiZ2D = $$pre;$F510$0 = $arrayidx509;
   } else {
    $63 = ((($arrayidx509)) + 8|0);
    $64 = load4($63);
-   $65 = load4((9532));
+   $65 = load4((9580));
    $cmp519 = ($64>>>0)<($65>>>0);
    if ($cmp519) {
     _abort();
@@ -11258,21 +11411,21 @@ function _free($mem) {
    $I534$0 = $add564;
   }
  }
- $arrayidx567 = (9820 + ($I534$0<<2)|0);
+ $arrayidx567 = (9868 + ($I534$0<<2)|0);
  $index568 = ((($p$1)) + 28|0);
  store4($index568,$I534$0);
  $child569 = ((($p$1)) + 16|0);
  $arrayidx570 = ((($p$1)) + 20|0);
  store4($arrayidx570,0);
  store4($child569,0);
- $66 = load4((9520));
+ $66 = load4((9568));
  $shl573 = 1 << $I534$0;
  $and574 = $66 & $shl573;
  $tobool575 = ($and574|0)==(0);
  do {
   if ($tobool575) {
    $or578 = $66 | $shl573;
-   store4((9520),$or578);
+   store4((9568),$or578);
    store4($arrayidx567,$p$1);
    $parent579 = ((($p$1)) + 24|0);
    store4($parent579,$arrayidx567);
@@ -11310,7 +11463,7 @@ function _free($mem) {
     }
    }
    if ((label|0) == 121) {
-    $70 = load4((9532));
+    $70 = load4((9580));
     $cmp605 = ($arrayidx599>>>0)<($70>>>0);
     if ($cmp605) {
      _abort();
@@ -11329,7 +11482,7 @@ function _free($mem) {
    else if ((label|0) == 124) {
     $fd620 = ((($T$0)) + 8|0);
     $71 = load4($fd620);
-    $72 = load4((9532));
+    $72 = load4((9580));
     $cmp624 = ($71>>>0)>=($72>>>0);
     $not$cmp621 = ($T$0>>>0)>=($72>>>0);
     $73 = $cmp624 & $not$cmp621;
@@ -11351,12 +11504,12 @@ function _free($mem) {
    }
   }
  } while(0);
- $74 = load4((9548));
+ $74 = load4((9596));
  $dec = (($74) + -1)|0;
- store4((9548),$dec);
+ store4((9596),$dec);
  $cmp640 = ($dec|0)==(0);
  if ($cmp640) {
-  $sp$0$in$i = (9972);
+  $sp$0$in$i = (10020);
  } else {
   return;
  }
@@ -11370,7 +11523,7 @@ function _free($mem) {
    $sp$0$in$i = $next4$i;
   }
  }
- store4((9548),-1);
+ store4((9596),-1);
  return;
 }
 function __ZNSt3__211char_traitsIcE6assignERcRKc($__c1,$__c2$val) {
@@ -11389,7 +11542,7 @@ function __ZNSt3__211char_traitsIcE6lengthEPKc() {
 function __ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- ___assert_fail((8292|0),(8315|0),304,(8538|0));
+ ___assert_fail((8345|0),(8368|0),304,(8591|0));
  // unreachable;
 }
 function __ZNSt3__211char_traitsIcE7compareEPKcS3_j($__s1,$__n) {
@@ -11401,7 +11554,7 @@ function __ZNSt3__211char_traitsIcE7compareEPKcS3_j($__s1,$__n) {
  if ($cmp) {
   $cond = 0;
  } else {
-  $call = (_memcmp($__s1,9314,$__n)|0);
+  $call = (_memcmp($__s1,9367,$__n)|0);
   $cond = $call;
  }
  return ($cond|0);
@@ -11455,7 +11608,7 @@ function __ZNSt3__218__libcpp_refstringC2EPKc($this) {
  $count = ((($call3)) + 8|0);
  store4($count,0);
  $call5 = (__ZNSt3__218__libcpp_refstring13data_from_repEPNS0_9_Rep_baseE($call3)|0);
- ; store8($call5,load8(4668,1),1); store8($call5+8 | 0,load8(4668+8 | 0,1),1); store8($call5+16 | 0,load8(4668+16 | 0,1),1);
+ ; store8($call5,load8(4721,1),1); store8($call5+8 | 0,load8(4721+8 | 0,1),1); store8($call5+16 | 0,load8(4721+16 | 0,1),1);
  store4($this,$call5);
  return;
 }
@@ -11470,7 +11623,7 @@ function __ZNSt11logic_errorC2EPKc($this) {
  $this = $this|0;
  var $__imp_ = 0, label = 0, sp = 0;
  sp = STACKTOP;
- store4($this,(2128));
+ store4($this,(2156));
  $__imp_ = ((($this)) + 4|0);
  __ZNSt3__218__libcpp_refstringC2EPKc($__imp_);
  return;
@@ -11478,13 +11631,13 @@ function __ZNSt11logic_errorC2EPKc($this) {
 function __ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- ___assert_fail((8412|0),(8441|0),1183,(8538|0));
+ ___assert_fail((8465|0),(8494|0),1183,(8591|0));
  // unreachable;
 }
 function __ZNKSt3__221__basic_string_commonILb1EE20__throw_out_of_rangeEv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- ___assert_fail((8559|0),(8441|0),1194,(8588|0));
+ ___assert_fail((8612|0),(8494|0),1194,(8641|0));
  // unreachable;
 }
 function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($this,$__str) {
@@ -11791,8 +11944,8 @@ function __ZL25default_terminate_handlerv() {
    $and = i64_and($1,i64_const(4294967040,4294967295));
    $cmp = i64_eq($and,i64_const(1126902528,1129074247));
    if (!($cmp)) {
-    store4($vararg_buffer7,8745);
-    _abort_message(8695,$vararg_buffer7);
+    store4($vararg_buffer7,8798);
+    _abort_message(8748,$vararg_buffer7);
     // unreachable;
    }
    $cmp7 = i64_eq($1,i64_const(1126902529,1129074247));
@@ -11814,23 +11967,23 @@ function __ZL25default_terminate_handlerv() {
     $vfn13 = ((($vtable12)) + 8|0);
     $6 = load4($vfn13);
     $call14 = (FUNCTION_TABLE_ii[$6 & 15]($5)|0);
-    store4($vararg_buffer,8745);
+    store4($vararg_buffer,8798);
     $vararg_ptr1 = ((($vararg_buffer)) + 4|0);
     store4($vararg_ptr1,$4);
     $vararg_ptr2 = ((($vararg_buffer)) + 8|0);
     store4($vararg_ptr2,$call14);
-    _abort_message(8609,$vararg_buffer);
+    _abort_message(8662,$vararg_buffer);
     // unreachable;
    } else {
-    store4($vararg_buffer3,8745);
+    store4($vararg_buffer3,8798);
     $vararg_ptr6 = ((($vararg_buffer3)) + 4|0);
     store4($vararg_ptr6,$4);
-    _abort_message(8654,$vararg_buffer3);
+    _abort_message(8707,$vararg_buffer3);
     // unreachable;
    }
   }
  }
- _abort_message(8733,$vararg_buffer10);
+ _abort_message(8786,$vararg_buffer10);
  // unreachable;
 }
 function ___cxa_get_globals_fast() {
@@ -11838,14 +11991,14 @@ function ___cxa_get_globals_fast() {
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $vararg_buffer = sp;
- $call = (_pthread_once((10012|0),(2|0))|0);
+ $call = (_pthread_once((10060|0),(2|0))|0);
  $cmp = ($call|0)==(0);
  if ($cmp) {
-  $0 = load4(10016);
+  $0 = load4(10064);
   $call1 = (_pthread_getspecific(($0|0))|0);
   STACKTOP = sp;return ($call1|0);
  } else {
-  _abort_message(8884,$vararg_buffer);
+  _abort_message(8937,$vararg_buffer);
   // unreachable;
  }
  return (0)|0;
@@ -12417,12 +12570,12 @@ function __ZN10__cxxabiv112_GLOBAL__N_110construct_Ev() {
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $vararg_buffer = sp;
- $call = (_pthread_key_create((10016|0),(17|0))|0);
+ $call = (_pthread_key_create((10064|0),(17|0))|0);
  $cmp = ($call|0)==(0);
  if ($cmp) {
   STACKTOP = sp;return;
  } else {
-  _abort_message(8933,$vararg_buffer);
+  _abort_message(8986,$vararg_buffer);
   // unreachable;
  }
 }
@@ -12433,13 +12586,13 @@ function __ZN10__cxxabiv112_GLOBAL__N_19destruct_EPv($p) {
  STACKTOP = STACKTOP + 16|0;
  $vararg_buffer = sp;
  _free($p);
- $0 = load4(10016);
+ $0 = load4(10064);
  $call = (_pthread_setspecific(($0|0),(0|0))|0);
  $cmp = ($call|0)==(0);
  if ($cmp) {
   STACKTOP = sp;return;
  } else {
-  _abort_message(8983,$vararg_buffer);
+  _abort_message(9036,$vararg_buffer);
   // unreachable;
  }
 }
@@ -12475,15 +12628,15 @@ function __ZSt11__terminatePFvvE($func) {
  STACKTOP = STACKTOP + 16|0;
  $vararg_buffer = sp;
  FUNCTION_TABLE_v[$func & 3]();
- _abort_message(9036,$vararg_buffer);
+ _abort_message(9089,$vararg_buffer);
  // unreachable;
 }
 function __ZSt13get_terminatev() {
  var $0 = 0, $1 = 0, $2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
- $0 = load4(2016);
+ $0 = load4(2044);
  $1 = (($0) + 0)|0;
- store4(2016,$1);
+ store4(2044,$1);
  $2 = $0;
  return ($2|0);
 }
@@ -12504,13 +12657,13 @@ function __ZNKSt9bad_alloc4whatEv($this) {
  $this = $this|0;
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (9076|0);
+ return (9129|0);
 }
 function __ZNSt11logic_errorD2Ev($this) {
  $this = $this|0;
  var $__imp_ = 0, label = 0, sp = 0;
  sp = STACKTOP;
- store4($this,(2128));
+ store4($this,(2156));
  $__imp_ = ((($this)) + 4|0);
  __ZN12_GLOBAL__N_114__libcpp_nmstrD2Ev($__imp_);
  return;
@@ -13206,15 +13359,15 @@ function __ZNSt9bad_allocC2Ev($this) {
  $this = $this|0;
  var label = 0, sp = 0;
  sp = STACKTOP;
- store4($this,(2108));
+ store4($this,(2136));
  return;
 }
 function __ZSt15get_new_handlerv() {
  var $0 = 0, $1 = 0, $2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
- $0 = load4(10020);
+ $0 = load4(10068);
  $1 = (($0) + 0)|0;
- store4(10020,$1);
+ store4(10068,$1);
  $2 = $0;
  return ($2|0);
 }
@@ -13460,7 +13613,7 @@ function dynCall_vi(index,a1) {
 function dynCall_vii(index,a1,a2) {
   index = index|0;
   a1=a1|0; a2=a2|0;
-  FUNCTION_TABLE_vii[index&3](a1|0,a2|0);
+  FUNCTION_TABLE_vii[index&7](a1|0,a2|0);
 }
 
 
@@ -13556,14 +13709,14 @@ var FUNCTION_TABLE_viiiii = [b1,__ZNK10__cxxabiv117__class_type_info16search_bel
 var FUNCTION_TABLE_i = [b2,__ZN10emscripten8internal12operator_newINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEJEEEPT_DpOT0_,__ZN10emscripten8internal12operator_newINSt3__26vectorIjNS2_9allocatorIjEEEEJEEEPT_DpOT0_,b2];
 var FUNCTION_TABLE_vi = [b3,__ZN10__cxxabiv116__shim_type_infoD2Ev,__ZN10__cxxabiv117__class_type_infoD0Ev,__ZNK10__cxxabiv116__shim_type_info5noop1Ev,__ZNK10__cxxabiv116__shim_type_info5noop2Ev,__ZN10__cxxabiv120__si_class_type_infoD0Ev,__ZNSt9bad_allocD2Ev,__ZNSt9bad_allocD0Ev,__ZNSt11logic_errorD2Ev,__ZNSt11logic_errorD0Ev,__ZNSt12out_of_rangeD0Ev,__ZN10__cxxabiv123__fundamental_type_infoD0Ev,__ZN10__cxxabiv119__pointer_type_infoD0Ev,__ZN10__cxxabiv121__vmi_class_type_infoD0Ev,__ZN10emscripten8internal14raw_destructorINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEEEvPT_,__ZN10emscripten8internal14raw_destructorINSt3__26vectorIjNS2_9allocatorIjEEEEEEvPT_,__Z14deleteVNodePtrRKj,__ZN10__cxxabiv112_GLOBAL__N_19destruct_EPv,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3
 ,b3,b3,b3];
-var FUNCTION_TABLE_vii = [b4,__ZNSt3__26vectorIjNS_9allocatorIjEEE9push_backERKj,__ZN10emscripten8internal7InvokerIvJRKjEE6invokeEPFvS3_Ej,__Z14patch_vnodePtrjj];
+var FUNCTION_TABLE_vii = [b4,__ZNSt3__26vectorIjNS_9allocatorIjEEE9push_backERKj,__ZN10emscripten8internal7InvokerIvJRKjEE6invokeEPFvS3_Ej,__Z11removeChildRKjS0_,__Z14patch_vnodePtrjj,b4,b4,b4];
 var FUNCTION_TABLE_ii = [b5,___stdio_close,__ZNKSt9bad_alloc4whatEv,__ZNKSt11logic_error4whatEv,__ZN10emscripten8internal13getActualTypeINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEEEPKvPT_,__ZN10emscripten8internal7InvokerIPNSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEJEE6invokeEPFSH_vE,__ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES6_NS_4lessIS6_EENS4_INS_4pairIKS6_S6_EEEEE4sizeEv,__ZN10emscripten8internal13getActualTypeINSt3__26vectorIjNS2_9allocatorIjEEEEEEPKvPT_,__ZN10emscripten8internal7InvokerIPNSt3__26vectorIjNS2_9allocatorIjEEEEJEE6invokeEPFS7_vE,__ZNKSt3__26vectorIjNS_9allocatorIjEEE4sizeEv,__Z3h_sRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE,__Z7getNodeRKj,b5,b5,b5,b5];
-var FUNCTION_TABLE_viii = [b6,__ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEE3setERSG_RSD_SJ_,__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEFvRKjEvPS6_JS8_EE6invokeERKSA_SB_j,__ZNSt3__26vectorIjNS_9allocatorIjEEE6resizeEjRKj,__ZN10emscripten8internal7InvokerIvJjjEE6invokeEPFvjjEjj,b6,b6,b6];
+var FUNCTION_TABLE_viii = [b6,__ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEE3setERSG_RSD_SJ_,__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEFvRKjEvPS6_JS8_EE6invokeERKSA_SB_j,__ZNSt3__26vectorIjNS_9allocatorIjEEE6resizeEjRKj,__ZN10emscripten8internal7InvokerIvJRKjS3_EE6invokeEPFvS3_S3_Ejj,__Z12replaceChildRKjS0_S0_,__ZN10emscripten8internal7InvokerIvJjjEE6invokeEPFvjjEjj,b6];
 var FUNCTION_TABLE_v = [b7,__ZL25default_terminate_handlerv,__ZN10__cxxabiv112_GLOBAL__N_110construct_Ev,b7];
 var FUNCTION_TABLE_iiiii = [b8,__ZN10emscripten8internal15FunctionInvokerIPFbRNSt3__26vectorIjNS2_9allocatorIjEEEEjRKjEbS7_JjS9_EE6invokeEPSB_PS6_jj,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS2_3mapIS8_S8_NS2_4lessIS8_EENS6_INS2_4pairIS9_S8_EEEEEERKiEE6invokeEPFjSA_SJ_SL_EPNS0_11BindingTypeIS8_EUt_EPSH_i,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS2_3mapIS8_S8_NS2_4lessIS8_EENS6_INS2_4pairIS9_S8_EEEEEESA_EE6invokeEPFjSA_SJ_SA_EPNS0_11BindingTypeIS8_EUt_EPSH_SQ_,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS2_3mapIS8_S8_NS2_4lessIS8_EENS6_INS2_4pairIS9_S8_EEEEEERKNS2_6vectorIjNS6_IjEEEEEE6invokeEPFjSA_SJ_SO_EPNS0_11BindingTypeIS8_EUt_EPSH_PSM_,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKNS2_3mapIS8_S8_NS2_4lessIS8_EENS6_INS2_4pairIS9_S8_EEEEEEiEE6invokeEPFjSA_SJ_iEPNS0_11BindingTypeIS8_EUt_EPSH_i,b8,b8];
 var FUNCTION_TABLE_viiiiii = [b9,__ZNK10__cxxabiv117__class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib,__ZNK10__cxxabiv120__si_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib,__ZNK10__cxxabiv121__vmi_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib];
 var FUNCTION_TABLE_iii = [b10,__ZN10emscripten8internal13MethodInvokerIMNSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEKFjvEjPKSG_JEE6invokeERKSI_SK_,__ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEE3getERKSG_RSD_,__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEKFjvEjPKS6_JEE6invokeERKS8_SA_,__ZN10emscripten8internal12VectorAccessINSt3__26vectorIjNS2_9allocatorIjEEEEE3getERKS6_j,__ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEEE6invokeEPFjSA_EPNS0_11BindingTypeIS8_EUt_E,__Z4h_tiRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKb,__Z4h_snRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKi,__Z4h_stRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_,__Z4h_sdRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_3mapIS5_S5_NS_4lessIS5_EENS3_INS_4pairIS6_S5_EEEEEE,__Z4h_scRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKNS_6vectorIjNS3_IjEEEE,__ZN10emscripten8internal7InvokerIiJRKjEE6invokeEPFiS3_Ej,b10,b10,b10,b10];
-var FUNCTION_TABLE_viiii = [b11,__ZNK10__cxxabiv117__class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZNK10__cxxabiv120__si_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZNK10__cxxabiv121__vmi_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZN10emscripten8internal15FunctionInvokerIPFvRNSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEERSD_SI_EvSH_JSI_SI_EE6invokeEPSK_PSG_PNS0_11BindingTypeIS9_EUt_ESR_,__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEFvjRKjEvPS6_JjS8_EE6invokeERKSA_SB_jj,b11,b11];
+var FUNCTION_TABLE_viiii = [b11,__ZNK10__cxxabiv117__class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZNK10__cxxabiv120__si_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZNK10__cxxabiv121__vmi_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZN10emscripten8internal15FunctionInvokerIPFvRNSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEERSD_SI_EvSH_JSI_SI_EE6invokeEPSK_PSG_PNS0_11BindingTypeIS9_EUt_ESR_,__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEFvjRKjEvPS6_JjS8_EE6invokeERKSA_SB_jj,__ZN10emscripten8internal7InvokerIvJRKjS3_S3_EE6invokeEPFvS3_S3_S3_Ejjj,b11];
 
   return { _sbrk: _sbrk, ___cxa_can_catch: ___cxa_can_catch, _free: _free, ___cxa_is_pointer_type: ___cxa_is_pointer_type, _memmove: _memmove, _memset: _memset, _malloc: _malloc, _emscripten_get_global_libc: _emscripten_get_global_libc, _memcpy: _memcpy, ___getTypeName: ___getTypeName, _llvm_bswap_i32: _llvm_bswap_i32, __GLOBAL__sub_I_app_cpp: __GLOBAL__sub_I_app_cpp, __GLOBAL__sub_I_bind_cpp: __GLOBAL__sub_I_bind_cpp, runPostSets: runPostSets, _emscripten_replace_memory: _emscripten_replace_memory, stackAlloc: stackAlloc, stackSave: stackSave, stackRestore: stackRestore, establishStackSpace: establishStackSpace, setTempRet0: setTempRet0, getTempRet0: getTempRet0, setThrew: setThrew, stackAlloc: stackAlloc, stackSave: stackSave, stackRestore: stackRestore, establishStackSpace: establishStackSpace, setThrew: setThrew, setTempRet0: setTempRet0, getTempRet0: getTempRet0, dynCall_iiii: dynCall_iiii, dynCall_viiiii: dynCall_viiiii, dynCall_i: dynCall_i, dynCall_vi: dynCall_vi, dynCall_vii: dynCall_vii, dynCall_ii: dynCall_ii, dynCall_viii: dynCall_viii, dynCall_v: dynCall_v, dynCall_iiiii: dynCall_iiiii, dynCall_viiiiii: dynCall_viiiiii, dynCall_iii: dynCall_iii, dynCall_viiii: dynCall_viiii };
 })

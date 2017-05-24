@@ -17,6 +17,7 @@ export default (config) => {
   }
 
   if (config.clearMemory === undefined) config.clearMemory = true;
+  if (config.unsafePatch === undefined) config.unsafePatch = false;
 
   let result;
   const readyPromise = new Promise((resolve) => {

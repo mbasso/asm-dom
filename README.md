@@ -105,6 +105,7 @@ By default asm-dom returns an `init` function that takes an optional configurati
 - `useWasm`: `true` if you want to force the usage of WebAssembly
 - `useAsmJS`: `true` if you want to force the usage of asm.js
 - `clearMemory`: `true` by default, set it to `false` if you want to free memory manually, for more information see [deleteVNode](#deletevnode).
+- `unsafePatch`: `false` by default, set it to `true` if you haven't a single `patch` in your application. This allows you to call patch with an `oldVnode` that hasn't been used previously. For example, you have to enable this option if you want to patch a subtree of your vdom and then use `replaceChild`, for more information see [patch](#patch).
 
 By default asm-dom uses WebAssembly if supported, otherwise asm.js
 
@@ -147,7 +148,7 @@ The `patch` takes two arguments, the first is a DOM element or a vnode represent
 
 If a DOM element is passed, `newVnode` will be turned into a DOM node, and the passed element will be replaced by the created DOM node. If an `oldVnode` is passed, asm-dom will efficiently modify it to match the description in the new vnode.
 
-**Any old vnode passed must be the resulting vnode from the previous call to patch. Otherwise, no operation is performed and undefined is returned.**
+**If `unsafePatch` in `init` is equal to false, any old vnode passed must be the resulting vnode from the previous call to patch. Otherwise, no operation is performed and undefined is returned.**
 
 ```js
 const { h, patch } = asmDom;
@@ -157,6 +158,29 @@ const newVnode = h('span', 'new node');
 
 patch(document.getElementById('root'), oldVnode);
 patch(oldVnode, newVnode);
+
+// with unsafePatch = false
+const vnode = h('div');
+patch(oldVnode, vnode); // returns undefined, found oldVnode, expected newVnode
+```
+
+With `unsafePatch = true` you can implement some interesting mechanisms, for example you can do something like this:
+
+```js
+const oldVnode = h('span', 'old text');
+const vnode = h('div', [
+  h('span', 'this is a text'),
+  oldVnode
+]);
+
+patch(document.getElementById('root'), vnode);
+
+const newVnode = h('span', 'new text');
+// patch only the child
+patch(oldVnode, newVnode);
+
+// update the tree
+replaceChild(vnode, oldVnode, newVnode);
 ```
 
 ### deleteVNode
@@ -177,6 +201,35 @@ const vnode = h('span', [
   child2,
 ]);
 deleteVNode(vnode); // manually delete vnode, child1 and child2 from memory
+```
+
+### removeChild
+
+Remove the given child from the given parent:
+
+```js
+const child = h('div');
+const parent = h('span', [
+  h('video'),
+  child,
+]);
+removeChild(parent, child); // parent =  h('span', [h('video')]);
+deleteVNode(child);
+```
+
+### replaceChild
+
+Replace a child with another in the given parent:
+
+```js
+const oldChild = h('div');
+const newChild = h('span');
+const parent = h('span', [
+  h('video'),
+  oldChild,
+]);
+replaceChild(parent, oldChild, newChild); // parent =  h('span', [h('video'), h('span')]);
+deleteVNode(oldChild);
 ```
 
 ## TODO

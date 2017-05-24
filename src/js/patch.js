@@ -1,5 +1,6 @@
 export default (oldVnode, vnode) => {
   if (
+    window.asmDom.unsafePatch === false &&
     window.asmDomHelpers.currentNode !== oldVnode &&
     window.asmDomHelpers.currentNode !== undefined
   ) return;
