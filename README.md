@@ -188,6 +188,7 @@ Consider that benchmarking this library is not easy, we have to reproduce real w
 - [ ] asm-dom aims to be even more powerful with [GC / DOM / Web API Integration](http://webassembly.org/docs/gc/). Unfortunately this is a future feature 🦄, so, we have to be patient and wait a bit.
 - [ ] use the closure compiler (cause problems with wasm, need to update emscripten)
 - [ ] allow vdom tree modification (Eg. replace a child). This is useful if you want to patch only a subtree (in a library to build components for example)
+- [ ] use directly in C++
 
 ## Change Log
 
