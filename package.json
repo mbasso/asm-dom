@@ -29,12 +29,8 @@
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd",
     "build:compile": "npm run compile && npm run build",
     "prepublish": "npm run check:src && npm run build",
-    "lint": "eslint src test build",
-    "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
+    "lint": "eslint src test build"
   },
-  "pre-commit": [
-    "check:src"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mbasso/asm-dom.git"
@@ -82,7 +78,6 @@
     "knuth-shuffle": "1.0.1",
     "mocha": "3.2.0",
     "nyc": "10.2.0",
-    "pre-commit": "1.2.2",
     "raw-loader": "0.5.1",
     "rimraf": "2.6.1",
     "webpack": "2.4.1"
