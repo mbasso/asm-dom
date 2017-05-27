@@ -1,5 +1,8 @@
 language: node_js
 node_js:
+  - "4"
+  - "5"
+  - "6"
   - "7"
 install: true
 script:
@@ -9,7 +12,8 @@ script:
   - npm run build
 branches:
   only:
-    - master
+    - masterg
+    - develop
 cache:
   directories:
   - $HOME/.npm
