@@ -12,7 +12,7 @@ script:
   - npm run build
 branches:
   only:
-    - masterg
+    - master
     - develop
 cache:
   directories:
