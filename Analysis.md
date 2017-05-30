@@ -15,11 +15,12 @@
 - [Perfomance analysis](#perfomance-analysis)
 	- [Why not BenchmarkJS](#why-not-benchmarkjs)
 	- [Garbage Collector](#garbage-collector)
+	- [Bindings](#bindings)
 	- [Performance](#performance)
 - [Summary](#summary)
 
 ## Introduction
-This paper aims to collect a series of data and motivations that describes this project, here you can find some interesting material that can be used as a starting point to others experiments. We will see a performane analysis and the problems that we have figured out, for example how to limit cost of JS to wasm interop. We think that this text will simplify the study of common problems during the development of a JS + WebAssembly library, so, we are pleased to share our experience and we hope that this will motivate you to learn and code something.
+This paper aims to collect a series of data and motivations that describes this project, here you can find some interesting material that can be used as a starting point to others experiments. We will see a performane analysis and the problems that we have faced up, for example how to limit cost of JS to wasm interop. All the explainations here are purely conceptual, there will be no code inside this document, fot that one, you can simply navigate the source code in the repository. We think that this text will simplify the study of common problems during the development of a JS + WebAssembly library, so, we are pleased to share our experience and we hope that this will motivate you to learn and code something.
 
 ## Implementation details
 In this section you will find some implementation details of asm-dom, the motivations that get us choose some techniques rather than others, what and why we coded in JS and not in C++. How we tried to solve the problem of the overhead beetwen the two languages and other stuff like that.
@@ -65,13 +66,18 @@ const dataStructure = getVNode(memoryAddress);
 In asm-dom we have all these types of optimizations, anyway the overhead seems to be very relevant, mainly because of the translation, for examples, from JS arrays to vectors (this is used for children) or from JS Object to std::map (used for props). We are doing this to have a set of public APIs that is pretty good to use.
 
 ### JS side vs WASM side
-What should I write in Javascript? What should I write in WebAssembly?
+Which pieces of my library should I write in Javascript? And Which in WebAssembly?
+We think that you should write in Javascript only the code that is strictly needed, for example DOM interactions (since there aren't DOM APIs in WebAssembly yet) and others public APIs (for a library) that can act as a bridge with the WebAssembly environment.
+We think that you should write in WebAssembly complex functions (like the diffing algorithm of a virtual dom), so you can get advantage of the speed of this language. Consider also that when you want to do this, you have to pay attention of the cost of bindings. For example, in our diffing algorithm functions are compared in the JS side, in fact, pass them to WebAssembly would have been too much expansive. This is the meaning of the `raw` prop. It defines what will be compared in Javascript rather than WebAssembly. So our diffing algorithm is composed by two parts: A [js function](https://github.com/mbasso/asm-dom/blob/master/src/js/diff.js) and a [WebAssembly function](https://github.com/mbasso/asm-dom/blob/master/src/cpp/Diff/diff.cpp).
 
 ## Perfomance analysis
+In this section you will find an analysis of performances, we will start with an explaination of the causes that motivate us to make these tests without a particular library, then you will see some considerations about WebAssembly and finally some data.
 
 ### Why not BenchmarkJS
 
 ### Garbage Collector
+
+### Bindings
 
 ### Performance
 
