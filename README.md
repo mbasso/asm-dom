@@ -233,7 +233,8 @@ deleteVNode(oldChild);
 
 ## Implementation and performance
 
-[Here](Analysis.md) you can find a paper that explain how we've written asm-dom (if you want to experiment something with WebAssembly, this might be a good starting point) and some considerations about performances. Please note that this section is not completed yet.
+[Here](Analysis.md) you can find a paper that explain how we've written asm-dom (if you want to experiment something with WebAssembly, this might be a good starting point) and some considerations about performances.
+**Please note that this section is not completed yet.**
 Consider that benchmarking this library is not easy, we have to reproduce real world situations with big vnodes trees and frequent updates. Run a single patch or a sequence of patch in a for-loop might produce results that are not attributable to a real application.
 We think that this is better than show only numbers, we can help other people to learn something and, maybe, we can get some advice to make asm-dom even better.
 
