@@ -13,7 +13,6 @@
 	- [JS Bindings](#js-bindings)
 	- [JS side vs WASM side](#js-side-vs-wasm-side)
 - [Perfomance analysis](#perfomance-analysis)
-	- [Why not BenchmarkJS](#why-not-benchmarkjs)
 	- [Garbage Collector](#garbage-collector)
 	- [Bindings](#bindings)
 	- [Performance](#performance)
@@ -70,10 +69,13 @@ Which pieces of my library should I write in Javascript? And Which in WebAssembl
 We think that you should write in Javascript only the code that is strictly needed, for example DOM interactions (since there aren't DOM APIs in WebAssembly yet) and others public APIs (for a library) that can act as a bridge with the WebAssembly environment.
 We think that you should write in WebAssembly complex functions (like the diffing algorithm of a virtual dom), so you can get advantage of the speed of this language. Consider also that, when you want to do this, you have to pay attention to the cost of bindings. For example, in our diffing algorithm functions are compared in the JS side, in fact, pass them to WebAssembly would have been too much expansive. This is the meaning of the `raw` prop. It defines what will be compared in Javascript rather than WebAssembly. So our diffing algorithm is composed by two parts: A [js function](https://github.com/mbasso/asm-dom/blob/master/src/js/diff.js) and a [WebAssembly function](https://github.com/mbasso/asm-dom/blob/master/src/cpp/Diff/diff.cpp).
 
-## Perfomance analysis
-In this section you will find an analysis of performances, we will start with an explaination of the causes that motivate us to make these tests without a particular library, then you will see some considerations about WebAssembly and finally some data.
+---
 
-### Why not BenchmarkJS
+Coming soon
+
+---
+
+## Perfomance analysis
 
 ### Garbage Collector
 
