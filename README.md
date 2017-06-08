@@ -235,14 +235,16 @@ deleteVNode(oldChild);
 
 [Here](Analysis.md) you can find a paper that explain how we've written asm-dom (if you want to experiment something with WebAssembly, this might be a good starting point) and some considerations about performances.
 **Please note that this section is not completed yet.**
-Consider that benchmarking this library is not easy, we have to reproduce real world situations with big vnodes trees and frequent updates. Run a single patch or a sequence of patch in a for-loop might produce results that are not attributable to a real application.
+Before writing the analysis of the performance, we've decided to develop the first point of the roadmap (make asm-dom usable directly from C++ to develop the frontend).
+In this way we can evaluate in a better way the cost of JS bindings and make this analysis better.
+Consider also that benchmarking this library is not easy, we have to reproduce real world situations with big vnodes trees and frequent updates. Run a single patch or a sequence of patch in a for-loop might produce results that are not attributable to a real application.
 We think that this is better than show only numbers, we can help other people to learn something and, maybe, we can get some advice to make asm-dom even better.
 
 ## Roadmap
 
+- [ ] make asm-dom usable directly from C++ to develop the frontend (allow to write entire apps in webassembly)
 - [ ] asm-dom aims to be even more powerful with [GC / DOM / Web API Integration](http://webassembly.org/docs/gc/). Unfortunately this is a future feature 🦄, so, we have to be patient and wait a bit.
 - [ ] use the closure compiler (cause problems with wasm, need to update emscripten)
-- [ ] use directly in C++
 
 ## Change Log
 
