@@ -10,32 +10,41 @@ class VNode {
   public:
     VNode() {};
     VNode(
-      const std::string nodeSel
+      std::string nodeSel
     ): sel(nodeSel) {};
     VNode(
-      const std::string nodeSel,
-      const std::string nodeText
+      std::string nodeSel,
+      std::string nodeText
     ): sel(nodeSel), text(nodeText) {};
     VNode(
-      const std::string nodeText,
+      std::string nodeText,
       bool isText
     ): text(nodeText) {};
     VNode(
-      const std::string nodeSel,
-      const std::map<std::string, std::string> nodeProps
+      std::string nodeSel,
+      std::map<std::string, std::string> nodeProps
     ): sel(nodeSel), props(nodeProps) {};
     VNode(
-      const std::string nodeSel,
+      std::string nodeSel,
+      std::vector<VNode*> nodeChildren
+    ): sel(nodeSel), children(nodeChildren) {};
+    VNode(
+      std::string nodeSel,
       VNode* child
     ): sel(nodeSel), children(std::vector<VNode*> { child }) {};
     VNode(
-      const std::string nodeSel,
-      const std::map<std::string, std::string> nodeProps,
-      const std::string nodeText
+      std::string nodeSel,
+      std::map<std::string, std::string> nodeProps,
+      std::string nodeText
     ): sel(nodeSel), text(nodeText), props(nodeProps) {};
     VNode(
-      const std::string nodeSel,
-      const std::map<std::string, std::string> nodeProps,
+      std::string nodeSel,
+      std::map<std::string, std::string> nodeProps,
+      std::vector<VNode*> nodeChildren
+    ): sel(nodeSel), props(nodeProps), children(nodeChildren) {};
+    VNode(
+      std::string nodeSel,
+      std::map<std::string, std::string> nodeProps,
       VNode* child
     ): sel(nodeSel), props(nodeProps), children(std::vector<VNode*> { child }) {};
     ~VNode() {
