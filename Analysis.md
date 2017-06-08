@@ -73,6 +73,8 @@ We think that you should write in WebAssembly complex functions (like the diffin
 
 Coming soon
 
+Before writing this section, we've decided to develop the first point of the roadmap (make asm-dom usable directly from C++ to develop the frontend).
+In this way we can evaluate in a better way the cost of JS bindings and make this analysis better.
 ---
 
 ## Perfomance analysis
