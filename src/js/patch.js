@@ -18,7 +18,7 @@ export default (oldVnode, vnode) => {
     );
     props.delete();
   }
-  window.asmDom.patchVNode(oldVnode, vnode);
+  window.asmDom._patch(oldVnode, vnode);
   if (window.asmDom.clearMemory === true) {
     setTimeout(window.asmDom.deleteVNode.bind(null, oldVnode));
   }
