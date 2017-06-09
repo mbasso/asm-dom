@@ -1,8 +1,8 @@
 import expect from 'expect';
 import { knuthShuffle } from 'knuth-shuffle';
-import init from '../src/';
+import init from '../../src/';
 
-describe('patch', function testPatch() {
+describe('patch (js)', function testPatch() {
   this.timeout(30000);
 
   const shuffle = knuthShuffle;

@@ -1,7 +1,7 @@
 import expect from 'expect';
-import init from '../src/';
+import init from '../../src/';
 
-describe('attributes', function testAttributes() {
+describe('attributes (js)', function testAttributes() {
   this.timeout(30000);
 
   let root;

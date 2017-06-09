@@ -1,7 +1,7 @@
 import expect from 'expect';
-import init from '../src/';
+import init from '../../src/';
 
-describe('props', function testProps() {
+describe('props (js)', function testProps() {
   this.timeout(30000);
 
   let root;

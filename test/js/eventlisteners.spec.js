@@ -1,7 +1,7 @@
 import expect from 'expect';
-import init from '../src/';
+import init from '../../src/';
 
-describe('eventlisteners', function testEventlisteners() {
+describe('eventlisteners (js)', function testEventlisteners() {
   this.timeout(30000);
 
   let root;

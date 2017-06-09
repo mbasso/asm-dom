@@ -1,7 +1,7 @@
 import expect from 'expect';
-import init from '../src/';
+import init from '../../src/';
 
-describe('h', function test() {
+describe('h (js)', function test() {
   this.timeout(30000);
 
   let root;
@@ -103,12 +103,12 @@ describe('h', function test() {
   });
 
   it('should create a vnode with children', () => {
-    const vnodePtr = h('div', [h('span#hello'), h('b.world')]);
+    const vnodePtr = h('div', [h('span'), h('b')]);
     vdom.deleteVNode(vnodePtr);
   });
 
   it('should create a vnode with one child', () => {
-    const vnodePtr = h('div', h('span#hello'));
+    const vnodePtr = h('div', h('span'));
     vdom.deleteVNode(vnodePtr);
   });
 

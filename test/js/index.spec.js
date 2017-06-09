@@ -1,7 +1,7 @@
 import expect from 'expect';
-import init from '../src/';
+import init from '../../src/';
 
-describe('load', function test() {
+describe('load (js)', function test() {
   this.timeout(30000);
 
   let root;
