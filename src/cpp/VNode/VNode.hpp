@@ -59,4 +59,6 @@ class VNode {
     std::vector<VNode*> children;
 };
 
+typedef std::vector<VNode*> VNodeChildren;
+
 #endif
