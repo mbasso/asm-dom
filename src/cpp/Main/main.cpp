@@ -40,13 +40,13 @@ int createElm(VNode* const vnode) {
 			);
 		}, vnode->text.c_str());
 	} else {
-		if (vnode->props.count(std::string("ns")) != 0) {
+		if (vnode->data != NULL && vnode->data->attrs.count(std::string("ns")) != 0) {
 			vnode->elm = EM_ASM_INT({
 				return window['asmDomHelpers']['domApi']['createElementNS'](
 					window['asmDom']['Pointer_stringify']($0),
 					window['asmDom']['Pointer_stringify']($1)
 				);
-			}, vnode->props.at(std::string("ns")).c_str(), vnode->sel.c_str());
+			}, vnode->data->attrs.at(std::string("ns")).c_str(), vnode->sel.c_str());
 		} else {
 			vnode->elm = EM_ASM_INT({
 				return window['asmDomHelpers']['domApi']['createElement'](
@@ -97,17 +97,21 @@ void removeVNodes(
 	const std::vector<VNode*>::size_type endIdx
 ) {
 	for (; startIdx <= endIdx; ++startIdx) {
-		EM_ASM_({
-			window['asmDomHelpers']['domApi']['removeChild']($0);
-		}, vnodes[startIdx]->elm);
+		if (vnodes.at(startIdx)) { // TODO : check to remove this line
+			EM_ASM_({
+				window['asmDomHelpers']['domApi']['removeChild']($0);
+			}, vnodes[startIdx]->elm);	
+		}
 	}
 };
 
 void updateChildren(
 	int parentElm,
-	std::vector<VNode*>& oldCh,
-	std::vector<VNode*>& newCh
+	std::vector<VNode*>& oldChildren,
+	std::vector<VNode*>& newChildren
 ) {
+	std::vector<VNode*> oldCh(oldChildren);
+	std::vector<VNode*> newCh(newChildren);
 	int oldStartIdx = 0;
 	int newStartIdx = 0;
 	int oldEndIdx = oldCh.size() - 1;
@@ -248,7 +252,7 @@ void patch(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) 
 	}
 };
 
-void patchPtr(const std::uintptr_t oldVnode, const std::uintptr_t vnode) {
+void patchPtr(const std::uintptr_t& oldVnode, const std::uintptr_t& vnode) {
 	patch(reinterpret_cast<VNode*>(oldVnode), reinterpret_cast<VNode*>(vnode));
 };
 

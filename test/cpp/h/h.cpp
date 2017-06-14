@@ -2,42 +2,42 @@
 #include <emscripten/bind.h>
 
 void shouldCreateAVNodeWithAProperTag() {
-	VNode* vnode = h("div");
+	VNode* vnode = new VNode("div");
 	deleteVNode(vnode);
 };
 
 void shouldDeleteAVNode() {
-	VNode* vnode = h("div", VNodeChildren {
-		h("span"),
-		h("div", VNodeChildren {
-			h("video"),
+	VNode* vnode = new VNode("div", VNodeChildren {
+		new VNode("span"),
+		new VNode("div", VNodeChildren {
+			new VNode("video"),
 		}),
 	});
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithChildren() {
-	VNode* vnode = h("div", VNodeChildren {h("span"), h("b")});
+	VNode* vnode = new VNode("div", VNodeChildren {new VNode("span"), new VNode("b")});
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithOneChild() {
-	VNode* vnode = h("div", h("span"));
+	VNode* vnode = new VNode("div", new VNode("span"));
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithTextContentInString() {
-	VNode* vnode = h("div", "I am a string");
+	VNode* vnode = new VNode("div", "I am a string");
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeForComment() {
-	VNode* vnode = h("!", "test");
+	VNode* vnode = new VNode("!", "test");
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithText() {
-	VNode* vnode = h("this is a text", true);
+	VNode* vnode = new VNode("this is a text", true);
 	deleteVNode(vnode);
 };
 

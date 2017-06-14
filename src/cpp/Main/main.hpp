@@ -7,8 +7,8 @@
 
 void updateChildren(
 	emscripten::val parentElm,
-	std::vector<VNode*>& oldCh,
-	std::vector<VNode*>& newCh
+	std::vector<VNode*>& oldChildren,
+	std::vector<VNode*>& newChildren
 );
 void patchVNode(
 	VNode* __restrict__ const oldVnode,
