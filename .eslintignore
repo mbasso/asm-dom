@@ -1,3 +1,5 @@
 **/dist/**
 **/node_modules/**
 **/src/helpers/**
+**/compiled/**
+**/test/**/*.asm.js

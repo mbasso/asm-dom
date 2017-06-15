@@ -2,7 +2,6 @@
 #define Main_hpp
 
 #include "../VNode/VNode.hpp"
-#include <emscripten/val.h>
 #include <vector>
 
 void updateChildren(

@@ -1,7 +1,7 @@
 import h from './js/h';
 import patch from './js/patch';
 import diff from './js/diff';
-import domApi, { nodes } from './js/domApi';
+import domApi, { nodes } from './shared/domApi';
 
 const cache = {};
 

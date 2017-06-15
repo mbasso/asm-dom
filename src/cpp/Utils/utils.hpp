@@ -1,5 +1,5 @@
-#ifndef H_hpp
-#define H_hpp
+#ifndef Utils_hpp
+#define Utils_hpp
 
 #include "../VNode/VNode.hpp"
 

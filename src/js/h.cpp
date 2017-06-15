@@ -1,33 +1,7 @@
-#include "h.hpp"
-#include "../VNode/VNode.hpp"
+#include "../asm-dom.hpp"
 #include <emscripten/bind.h>
-#include <emscripten/val.h>
-#include <algorithm>
 #include <cstdint>
 #include <string>
-#include <map>
-
-// cpp
-
-void deleteVNode(VNode* vnode) {
-  delete vnode->data;
-  vnode->data = NULL;
-  std::vector<VNode*>::size_type i = vnode->children.size();
-  while (i--) delete vnode->children[i];
-  delete vnode;
-};
-
-void removeChild(VNode* parent, VNode* child) {
-  VNodeChildren& children = parent->children;
-  children.erase(std::remove(children.begin(), children.end(), child), children.end());
-};
-
-void replaceChild(VNode* parent, VNode* oldChild, VNode* newChild) {
-  VNodeChildren& children = parent->children;
-  std::replace(children.begin(), children.end(), oldChild, newChild);
-};
-
-// js
 
 std::uintptr_t h_s(const std::string& sel) {
   return reinterpret_cast<std::uintptr_t>(new VNode(sel));
@@ -80,23 +54,6 @@ std::uintptr_t h_elm(const std::string& sel, const VNodeAttrs& nodeAttrs, const 
   return reinterpret_cast<std::uintptr_t>(vnode);
 };
 
-void deleteVNodePtr(const std::uintptr_t& vnodePtr) {
-  deleteVNode(reinterpret_cast<VNode*>(vnodePtr));
-};
-
-void removeChildPtr(const std::uintptr_t& parent, const std::uintptr_t& child) {
-  removeChild(reinterpret_cast<VNode*>(parent), reinterpret_cast<VNode*>(child));
-};
-
-void replaceChildPtr(const std::uintptr_t& parent, const std::uintptr_t& oldChild, const std::uintptr_t& newChild) {
-  replaceChild(reinterpret_cast<VNode*>(parent), reinterpret_cast<VNode*>(oldChild), reinterpret_cast<VNode*>(newChild));
-};
-
-// TODO : make it callable from C++
-int getNode(const std::uintptr_t& vnodePtr) {
-  return reinterpret_cast<VNode*>(vnodePtr)->elm;
-};
-
 EMSCRIPTEN_BINDINGS(h_function) {
   emscripten::function("_h_s", &h_s);
   emscripten::function("_h_ti", &h_ti);
@@ -108,8 +65,4 @@ EMSCRIPTEN_BINDINGS(h_function) {
   emscripten::function("_h_sdt", &h_sdt);
   emscripten::function("_h_sdc", &h_sdc);
   emscripten::function("_h_elm", &h_elm);
-  emscripten::function("_deleteVNode", &deleteVNodePtr);
-  emscripten::function("removeChild", &removeChildPtr);
-  emscripten::function("replaceChild", &replaceChildPtr);
-  emscripten::function("_getNode", &getNode);
 };

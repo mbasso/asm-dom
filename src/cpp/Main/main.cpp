@@ -1,14 +1,12 @@
 #include "main.hpp"
-#include "../H/h.hpp"
 #include "../Diff/diff.hpp"
 #include "../VNode/VNode.hpp"
 #include <emscripten/val.h>
-#include <cstdint>
-#include <emscripten/bind.h>
 #include <algorithm>
+#include <cstdint>
 #include <vector>
-#include <map>
 #include <string>
+#include <map>
 
 VNode* const emptyNode = new VNode();
 
@@ -251,11 +249,3 @@ void patch(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) 
 		}
 	}
 };
-
-void patchPtr(const std::uintptr_t& oldVnode, const std::uintptr_t& vnode) {
-	patch(reinterpret_cast<VNode*>(oldVnode), reinterpret_cast<VNode*>(vnode));
-};
-
-EMSCRIPTEN_BINDINGS(patch_function) {
-	emscripten::function("_patch", &patchPtr);
-}
