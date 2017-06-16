@@ -8,11 +8,11 @@ void deleteVNodePtr(const std::uintptr_t& vnodePtr) {
 };
 
 void removeChildPtr(const std::uintptr_t& parent, const std::uintptr_t& child) {
-  removeChild(reinterpret_cast<VNode*>(parent), reinterpret_cast<VNode*>(child));
+  reinterpret_cast<VNode*>(parent)->removeChild(reinterpret_cast<VNode*>(child));
 };
 
 void replaceChildPtr(const std::uintptr_t& parent, const std::uintptr_t& oldChild, const std::uintptr_t& newChild) {
-  replaceChild(reinterpret_cast<VNode*>(parent), reinterpret_cast<VNode*>(oldChild), reinterpret_cast<VNode*>(newChild));
+  reinterpret_cast<VNode*>(parent)->replaceChild(reinterpret_cast<VNode*>(oldChild), reinterpret_cast<VNode*>(newChild));
 };
 
 // TODO : make it callable from C++

@@ -22,12 +22,7 @@ class VNodeData {
 };
 
 class VNode {
-  void adjustVNode() {
-    // TODO : inject ns for svgs
-    if (data != NULL && data->attrs.count(std::string("key")) != 0) {
-      key = data->attrs.at(std::string("key"));
-    }
-  }
+  void adjustVNode();
   public:
     VNode(): data(NULL) {};
     VNode(
@@ -74,6 +69,10 @@ class VNode {
       VNodeData* nodeData,
       VNode* child
     ): sel(nodeSel), data(nodeData), children{ child } { adjustVNode(); };
+
+    void removeChild(VNode* child);
+    void replaceChild(VNode* oldChild, VNode* newChild);
+
     std::string sel; 
     std::string key;
     std::string text;

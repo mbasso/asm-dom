@@ -11,13 +11,3 @@ void deleteVNode(VNode* vnode) {
   while (i--) deleteVNode(vnode->children[i]);
   delete vnode;
 };
-
-void removeChild(VNode* parent, VNode* child) {
-  VNodeChildren& children = parent->children;
-  children.erase(std::remove(children.begin(), children.end(), child), children.end());
-};
-
-void replaceChild(VNode* parent, VNode* oldChild, VNode* newChild) {
-  VNodeChildren& children = parent->children;
-  std::replace(children.begin(), children.end(), oldChild, newChild);
-};
