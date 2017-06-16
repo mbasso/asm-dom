@@ -23,7 +23,7 @@ describe('h (cpp)', function test() {
 
   // TODO : should remove a child
   // TODO : should replace a child
-  // TODO : should create vnode with tag, props and elm
+  // TODO : should create vnode with tag, attrs and elm
 
   it('should create a vnode with a proper tag', () => {
     expect(() => {
@@ -43,7 +43,7 @@ describe('h (cpp)', function test() {
     }).toNotThrow();
   });
 
-  // TODO : should create a vnode with props and one child
+  // TODO : should create a vnode with attrs and one child
 
   // js only:
   // should create a vnode with text content
@@ -60,8 +60,13 @@ describe('h (cpp)', function test() {
     }).toNotThrow();
   });
 
-  // TODO : should create a vnode with props and text content in string
-  // TODO : should create a vnode with props and children
+  // TODO : should create a vnode with attrs and text content in string
+
+  it('should create a vnode with attrs and children', () => {
+    expect(() => {
+      app.shouldCreateAVNodeWithAttrsAndChildren();
+    }).toNotThrow();
+  });
 
   it('should create a vnode with text', () => {
     expect(() => {

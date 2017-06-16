@@ -36,6 +36,16 @@ void shouldCreateAVNodeForComment() {
 	deleteVNode(vnode);
 };
 
+void shouldCreateAVNodeWithAttrsAndChildren() {
+	VNode* vnode = new VNode("div", 
+		new VNodeData(VNodeAttrs {
+			{"foo", "bar"}
+		}),
+		VNodeChildren {new VNode("span"), new VNode("i")}
+	);
+	deleteVNode(vnode);
+};
+
 void shouldCreateAVNodeWithText() {
 	VNode* vnode = new VNode("this is a text", true);
 	deleteVNode(vnode);
@@ -48,5 +58,6 @@ EMSCRIPTEN_BINDINGS(h_function_tests) {
   emscripten::function("shouldCreateAVNodeWithOneChild", &shouldCreateAVNodeWithOneChild);
   emscripten::function("shouldCreateAVNodeWithTextContentInString", &shouldCreateAVNodeWithTextContentInString);
   emscripten::function("shouldCreateAVNodeForComment", &shouldCreateAVNodeForComment);
+  emscripten::function("shouldCreateAVNodeWithAttrsAndChildren", &shouldCreateAVNodeWithAttrsAndChildren);
   emscripten::function("shouldCreateAVNodeWithText", &shouldCreateAVNodeWithText);
 };

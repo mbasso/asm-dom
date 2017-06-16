@@ -86,14 +86,14 @@ describe('h (js)', function test() {
     vdom.deleteVNode(parent);
   });
 
-  it('should create vnode with tag, props and elm', () => {
+  it('should create vnode with tag, attrs and elm', () => {
     expect(() => {
-      const props = new window.asmDom.MapStringString();
-      props.set('id', 'foo');
-      props.set('class', 'bar');
-      const vnode = vdom._h_elm('div', props, 1);
+      const attrs = new window.asmDom.MapStringString();
+      attrs.set('id', 'foo');
+      attrs.set('class', 'bar');
+      const vnode = vdom._h_elm('div', attrs, 1);
       vdom.deleteVNode(vnode);
-      props.delete();
+      attrs.delete();
     }).toNotThrow();
   });
 
@@ -112,7 +112,7 @@ describe('h (js)', function test() {
     vdom.deleteVNode(vnodePtr);
   });
 
-  it('should create a vnode with props and one child', () => {
+  it('should create a vnode with attrs and one child', () => {
     const vnodePtr = h('div', {
       foo: 'bar',
     }, h('span'));
@@ -134,14 +134,14 @@ describe('h (js)', function test() {
     vdom.deleteVNode(vnodePtr);
   });
 
-  it('should create a vnode with props and text content in string', () => {
+  it('should create a vnode with attrs and text content in string', () => {
     const vnodePtr = h('div', {
       foo: 'bar',
     }, 'I am a string');
     vdom.deleteVNode(vnodePtr);
   });
 
-  it('should create a vnode with props and children', () => {
+  it('should create a vnode with attrs and children', () => {
     const vnodePtr = h('div', {
       foo: 'bar',
     }, [h('span'), h('i')]);
