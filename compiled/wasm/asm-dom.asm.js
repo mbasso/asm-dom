@@ -239,7 +239,7 @@ function __GLOBAL__sub_I_asm_dom_cpp() {
  store4(9504,$call$i);
  return;
 }
-function __ZN5VNode11adjustVNodeEv($this) {
+function __ZN6asmdom5VNode11adjustVNodeEv($this) {
  $this = $this|0;
  var $0 = 0, $1 = 0, $2 = 0, $__parent$i = 0, $call$i$i3 = 0, $call$i1 = 0, $cmp = 0, $cmp$i = 0, $cmp4 = 0, $data = 0, $exception$i = 0, $key = 0, $ref$tmp16 = 0, $second$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
@@ -529,7 +529,7 @@ function __ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcE
  }
  return (0)|0;
 }
-function __Z4diffP5VNodeS0_($oldVnode,$vnode) {
+function __ZN6asmdom4diffEPNS_5VNodeES1_($oldVnode,$vnode) {
  $oldVnode = $oldVnode|0;
  $vnode = $vnode|0;
  var $$ph = 0, $$pr = 0, $$pre = 0, $$pre111 = 0, $$sroa$speculated$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0;
@@ -910,7 +910,7 @@ function __Z4diffP5VNodeS0_($oldVnode,$vnode) {
   STACKTOP = sp;return;
  }
 }
-function __Z11deleteVNodeP5VNode($vnode) {
+function __ZN6asmdom11deleteVNodeEPNS_5VNodeE($vnode) {
  $vnode = $vnode|0;
  var $$pre = 0, $$pre9 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__begin_$i$i$phi$trans$insert = 0, $__end_$i = 0, $__first_$i$i$i$i$i$i$i = 0;
  var $__first_$i$i$i$i$i$i2$i = 0, $arrayidx$i = 0, $arrayidx$i12 = 0, $children = 0, $cmp$i$i = 0, $cmp1$i$i$i$i = 0, $data = 0, $dec8 = 0, $dec811 = 0, $dec814 = 0, $isnull = 0, $key$i = 0, $scevgep$i$i$i$i = 0, $scevgep5$i$i$i$i = 0, $sub$ptr$div$i = 0, $sub$ptr$sub$i = 0, $text$i = 0, $tobool = 0, $tobool13 = 0, $tobool7 = 0;
@@ -943,7 +943,7 @@ function __Z11deleteVNodeP5VNode($vnode) {
   $dec811 = (($sub$ptr$div$i) + -1)|0;
   $arrayidx$i12 = (($5) + ($dec811<<2)|0);
   $6 = load4($arrayidx$i12);
-  __Z11deleteVNodeP5VNode($6);
+  __ZN6asmdom11deleteVNodeEPNS_5VNodeE($6);
   $tobool13 = ($dec811|0)==(0);
   if (!($tobool13)) {
    $dec814 = $dec811;
@@ -952,7 +952,7 @@ function __Z11deleteVNodeP5VNode($vnode) {
     $dec8 = (($dec814) + -1)|0;
     $arrayidx$i = (($$pre) + ($dec8<<2)|0);
     $7 = load4($arrayidx$i);
-    __Z11deleteVNodeP5VNode($7);
+    __ZN6asmdom11deleteVNodeEPNS_5VNodeE($7);
     $tobool = ($dec8|0)==(0);
     if ($tobool) {
      break;
@@ -1046,7 +1046,7 @@ function ___clang_call_terminate($0) {
  __ZSt9terminatev();
  // unreachable;
 }
-function __Z9sameVNodePK5VNodeS1_($vnode1,$vnode2) {
+function __ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($vnode1,$vnode2) {
  $vnode1 = $vnode1|0;
  $vnode2 = $vnode2|0;
  var $$$$i37 = 0, $$$i36 = 0, $$sroa$speculated$i = 0, $$sroa$speculated$i26 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__size_$i$i$i = 0, $__size_$i$i$i6 = 0, $__size_$i$i5$i = 0;
@@ -1349,7 +1349,7 @@ function __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT
   return;
  }
 }
-function __Z9createElmP5VNode($vnode) {
+function __ZN6asmdom9createElmEPNS_5VNodeE($vnode) {
  $vnode = $vnode|0;
  var $$pre = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0;
  var $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__end_$i42 = 0, $__parent$i = 0, $__size_$i$i$i = 0, $__size_$i$i$i$i = 0, $__size_$i$i$i$i45 = 0, $__size_$i$i$i23 = 0, $__size_$i3$i$i = 0, $__size_$i3$i$i25 = 0, $arrayidx$i = 0;
@@ -1475,7 +1475,7 @@ function __Z9createElmP5VNode($vnode) {
   store4($elm42,$call41);
  }
  $16 = load4(9504);
- __Z4diffP5VNodeS0_($16,$vnode);
+ __ZN6asmdom4diffEPNS_5VNodeES1_($16,$vnode);
  $children = ((($vnode)) + 44|0);
  $17 = load4($children);
  $__end_$i42 = ((($vnode)) + 48|0);
@@ -1488,7 +1488,7 @@ function __Z9createElmP5VNode($vnode) {
    $19 = load4($elm48);
    $arrayidx$i = (($20) + ($i$087<<2)|0);
    $21 = load4($arrayidx$i);
-   $call51 = (__Z9createElmP5VNode($21)|0);
+   $call51 = (__ZN6asmdom9createElmEPNS_5VNodeE($21)|0);
    $call52 = _emscripten_asm_const_iii(7, ($19|0), ($call51|0))|0;
    $inc = (($i$087) + 1)|0;
    $22 = load4($__end_$i42);
@@ -1538,7 +1538,7 @@ function __Z9createElmP5VNode($vnode) {
  $29 = load4($elm65$pre$phiZ2D);
  STACKTOP = sp;return ($29|0);
 }
-function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
+function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
  $oldVnode = $oldVnode|0;
  $vnode = $vnode|0;
  var $$pre = 0, $$pre$i$i$i$i$i$i$i$i = 0, $$pre83 = 0, $$pre84 = 0, $$pre85 = 0, $$pre86 = 0, $$sink$be$i$i = 0, $$sink$i$i$i = 0, $$sroa$speculated$i = 0, $$sroa$speculated$i$i = 0, $$sroa$speculated$i$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i22$i$i = 0, $$sroa$speculated$i$i$i$i30$i$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $100 = 0, $101 = 0, $102 = 0;
@@ -1574,7 +1574,7 @@ function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
  $0 = load4($elm);
  $elm1 = ((($vnode)) + 40|0);
  store4($elm1,$0);
- __Z4diffP5VNodeS0_($oldVnode,$vnode);
+ __ZN6asmdom4diffEPNS_5VNodeES1_($oldVnode,$vnode);
  $text = ((($vnode)) + 24|0);
  $__size_$i$i$i = ((($text)) + 11|0);
  $1 = load1($__size_$i$i$i);
@@ -1747,7 +1747,7 @@ function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
   $sub$ptr$div$i = $sub$ptr$sub$i >> 2;
   $sub = (($sub$ptr$div$i) + -1)|0;
   $117 = load4($118);
-  $call1$i93 = (__Z9createElmP5VNode($117)|0);
+  $call1$i93 = (__ZN6asmdom9createElmEPNS_5VNodeE($117)|0);
   $call2$i94 = _emscripten_asm_const_iiii(11, ($114|0), ($call1$i93|0), 0)|0;
   $cmp$i3995 = ($sub|0)==(0);
   if ($cmp$i3995) {
@@ -1759,7 +1759,7 @@ function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
    $$pre84 = load4($children);
    $arrayidx$i$i = (($$pre84) + ($inc$i96<<2)|0);
    $119 = load4($arrayidx$i$i);
-   $call1$i = (__Z9createElmP5VNode($119)|0);
+   $call1$i = (__ZN6asmdom9createElmEPNS_5VNodeE($119)|0);
    $call2$i = _emscripten_asm_const_iiii(11, ($114|0), ($call1$i|0), 0)|0;
    $inc$i = (($inc$i96) + 1)|0;
    $cmp$i39 = ($inc$i>>>0)>($sub>>>0);
@@ -1888,9 +1888,9 @@ function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
        $137 = $135;$138 = $88;$139 = $136;$newEndIdx$0$be$i = $dec33$i;$newEndVnode$0$be$i = $31;$newStartIdx$0$be$i = $newStartIdx$0254$i;$newStartVnode$0$be$i = $newStartVnode$0259$i;$oldEndIdx$0$be$i = $oldEndIdx$0255$i;$oldEndVnode$0$be$i = $oldEndVnode$0258$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0262$i;$oldStartIdx$0$be$i = $oldStartIdx$0253$i;$oldStartVnode$0$be$i = $oldStartVnode$0257$i;
        break;
       }
-      $call38$i = (__Z9sameVNodePK5VNodeS1_($oldStartVnode$0257$i,$newStartVnode$0259$i)|0);
+      $call38$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldStartVnode$0257$i,$newStartVnode$0259$i)|0);
       if ($call38$i) {
-       __Z10patchVNodeP5VNodeS0_($oldStartVnode$0257$i,$newStartVnode$0259$i);
+       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldStartVnode$0257$i,$newStartVnode$0259$i);
        $inc41$i = (($oldStartIdx$0253$i) + 1)|0;
        $arrayidx$i129$i = (($22) + ($inc41$i<<2)|0);
        $32 = load4($arrayidx$i129$i);
@@ -1900,9 +1900,9 @@ function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
        $137 = $newCh$i$sroa$0$0;$138 = $33;$139 = $136;$newEndIdx$0$be$i = $newEndIdx$0256$i;$newEndVnode$0$be$i = $newEndVnode$0261$i;$newStartIdx$0$be$i = $inc44$i;$newStartVnode$0$be$i = $33;$oldEndIdx$0$be$i = $oldEndIdx$0255$i;$oldEndVnode$0$be$i = $oldEndVnode$0258$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0262$i;$oldStartIdx$0$be$i = $inc41$i;$oldStartVnode$0$be$i = $32;
        break;
       }
-      $call49$i = (__Z9sameVNodePK5VNodeS1_($oldEndVnode$0258$i,$newEndVnode$0261$i)|0);
+      $call49$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldEndVnode$0258$i,$newEndVnode$0261$i)|0);
       if ($call49$i) {
-       __Z10patchVNodeP5VNodeS0_($oldEndVnode$0258$i,$newEndVnode$0261$i);
+       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldEndVnode$0258$i,$newEndVnode$0261$i);
        $dec52$i = (($oldEndIdx$0255$i) + -1)|0;
        $arrayidx$i143$i = (($22) + ($dec52$i<<2)|0);
        $34 = load4($arrayidx$i143$i);
@@ -1912,9 +1912,9 @@ function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
        $137 = $newCh$i$sroa$0$0;$138 = $88;$139 = $136;$newEndIdx$0$be$i = $dec55$i;$newEndVnode$0$be$i = $35;$newStartIdx$0$be$i = $newStartIdx$0254$i;$newStartVnode$0$be$i = $newStartVnode$0259$i;$oldEndIdx$0$be$i = $dec52$i;$oldEndVnode$0$be$i = $34;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0262$i;$oldStartIdx$0$be$i = $oldStartIdx$0253$i;$oldStartVnode$0$be$i = $oldStartVnode$0257$i;
        break;
       }
-      $call60$i = (__Z9sameVNodePK5VNodeS1_($oldStartVnode$0257$i,$newEndVnode$0261$i)|0);
+      $call60$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldStartVnode$0257$i,$newEndVnode$0261$i)|0);
       if ($call60$i) {
-       __Z10patchVNodeP5VNodeS0_($oldStartVnode$0257$i,$newEndVnode$0261$i);
+       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldStartVnode$0257$i,$newEndVnode$0261$i);
        $elm$i8 = ((($oldStartVnode$0257$i)) + 40|0);
        $36 = load4($elm$i8);
        $elm63$i = ((($oldEndVnode$0258$i)) + 40|0);
@@ -1929,9 +1929,9 @@ function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
        $137 = $newCh$i$sroa$0$0;$138 = $88;$139 = $136;$newEndIdx$0$be$i = $dec69$i;$newEndVnode$0$be$i = $39;$newStartIdx$0$be$i = $newStartIdx$0254$i;$newStartVnode$0$be$i = $newStartVnode$0259$i;$oldEndIdx$0$be$i = $oldEndIdx$0255$i;$oldEndVnode$0$be$i = $oldEndVnode$0258$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0262$i;$oldStartIdx$0$be$i = $inc66$i;$oldStartVnode$0$be$i = $38;
        break;
       }
-      $call74$i = (__Z9sameVNodePK5VNodeS1_($oldEndVnode$0258$i,$newStartVnode$0259$i)|0);
+      $call74$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldEndVnode$0258$i,$newStartVnode$0259$i)|0);
       if ($call74$i) {
-       __Z10patchVNodeP5VNodeS0_($oldEndVnode$0258$i,$newStartVnode$0259$i);
+       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldEndVnode$0258$i,$newStartVnode$0259$i);
        $elm77$i = ((($oldEndVnode$0258$i)) + 40|0);
        $40 = load4($elm77$i);
        $elm78$i = ((($oldStartVnode$0257$i)) + 40|0);
@@ -2324,7 +2324,7 @@ function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
            label = 91;
            break;
           }
-          __Z10patchVNodeP5VNodeS0_($85,$newStartVnode$0259$i);
+          __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($85,$newStartVnode$0259$i);
           $call$i$i180$i = (__ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiNS_4lessIS6_EENS4_INS_4pairIKS6_iEEEEE16__find_equal_keyERPNS_16__tree_node_baseIPvEERSA_($oldKeyToIdx$1$i,$__parent$i$i$i$i$i$i$i$sroa$0,$key$i)|0);
           $94 = load4($call$i$i180$i);
           $cmp$i181$i = ($94|0)==(0|0);
@@ -2345,7 +2345,7 @@ function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
         } while(0);
         if ((label|0) == 91) {
          label = 0;
-         $call114$i = (__Z9createElmP5VNode($newStartVnode$0259$i)|0);
+         $call114$i = (__ZN6asmdom9createElmEPNS_5VNodeE($newStartVnode$0259$i)|0);
          $elm115$i = ((($oldStartVnode$0257$i)) + 40|0);
          $93 = load4($elm115$i);
          $call117$i = _emscripten_asm_const_iiii(10, ($11|0), ($call114$i|0), ($93|0))|0;
@@ -2357,7 +2357,7 @@ function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
         break L84;
        }
       } while(0);
-      $call96$i = (__Z9createElmP5VNode($newStartVnode$0259$i)|0);
+      $call96$i = (__ZN6asmdom9createElmEPNS_5VNodeE($newStartVnode$0259$i)|0);
       $elm97$i = ((($oldStartVnode$0257$i)) + 40|0);
       $81 = load4($elm97$i);
       $call99$i = _emscripten_asm_const_iiii(10, ($11|0), ($call96$i|0), ($81|0))|0;
@@ -2410,7 +2410,7 @@ function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
     while(1) {
      $arrayidx$i$i172$i = (($23) + ($startIdx$addr$04$i$i<<2)|0);
      $103 = load4($arrayidx$i$i172$i);
-     $call1$i176$i = (__Z9createElmP5VNode($103)|0);
+     $call1$i176$i = (__ZN6asmdom9createElmEPNS_5VNodeE($103)|0);
      $call2$i178$i = _emscripten_asm_const_iiii(11, ($11|0), ($call1$i176$i|0), 0)|0;
      $inc$i173$i = (($startIdx$addr$04$i$i) + 1)|0;
      $cmp$i174$i = ($inc$i173$i>>>0)>($newEndIdx$0$lcssa$i>>>0);
@@ -2433,7 +2433,7 @@ function __Z10patchVNodeP5VNodeS0_($oldVnode,$vnode) {
     while(1) {
      $arrayidx$i$i205$i = (($23) + ($startIdx$addr$04$i204$i<<2)|0);
      $102 = load4($arrayidx$i$i205$i);
-     $call1$i210$i = (__Z9createElmP5VNode($102)|0);
+     $call1$i210$i = (__ZN6asmdom9createElmEPNS_5VNodeE($102)|0);
      $call2$i212$i = _emscripten_asm_const_iiii(11, ($11|0), ($call1$i210$i|0), ($101|0))|0;
      $inc$i206$i = (($startIdx$addr$04$i204$i) + 1)|0;
      $cmp$i207$i = ($inc$i206$i>>>0)>($newEndIdx$0$lcssa$i>>>0);
@@ -2721,7 +2721,7 @@ function __Z14deleteVNodePtrRKj($vnodePtr) {
  var $0 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $0 = load4($vnodePtr);
- __Z11deleteVNodeP5VNode($0);
+ __ZN6asmdom11deleteVNodeEPNS_5VNodeE($0);
  return;
 }
 function __ZN10emscripten8internal7InvokerIvJRKjS3_EE6invokeEPFvS3_S3_Ejj($fn,$args,$args1) {
@@ -2899,15 +2899,15 @@ function __Z8patchPtrRKjS0_($oldVnode,$vnode) {
  sp = STACKTOP;
  $0 = load4($oldVnode);
  $1 = load4($vnode);
- $call$i = (__Z9sameVNodePK5VNodeS1_($0,$1)|0);
+ $call$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($0,$1)|0);
  if ($call$i) {
-  __Z10patchVNodeP5VNodeS0_($0,$1);
+  __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($0,$1);
   return;
  }
  $elm$i = ((($0)) + 40|0);
  $2 = load4($elm$i);
  $call1$i = _emscripten_asm_const_ii(15, ($2|0))|0;
- (__Z9createElmP5VNode($1)|0);
+ (__ZN6asmdom9createElmEPNS_5VNodeE($1)|0);
  $tobool$i = ($call1$i|0)==(0);
  if ($tobool$i) {
   return;
@@ -4099,7 +4099,7 @@ function __Z4h_sdRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE
   store4($__first_$i$i$i$i$i3,0);
   store4($__first_$i$i$i$i2,0);
  }
- __ZN5VNodeC2ENSt3__212basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEP9VNodeData($call,$agg$tmp,$call3);
+ __ZN6asmdom5VNodeC2ENSt3__212basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEPNS_9VNodeDataE($call,$agg$tmp,$call3);
  $16 = $call;
  $17 = load4($__first_$i$i$i$i$i3);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($17);
@@ -4161,7 +4161,7 @@ function __Z4h_scRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE
     $incdec$ptr$i = ((($14)) + 4|0);
     store4($__end_$i$i,$incdec$ptr$i);
    } else {
-    __ZNSt3__26vectorIP5VNodeNS_9allocatorIS2_EEE21__push_back_slow_pathIS2_EEvOT_($children,$ref$tmp);
+    __ZNSt3__26vectorIPN6asmdom5VNodeENS_9allocatorIS3_EEE21__push_back_slow_pathIS3_EEvOT_($children,$ref$tmp);
    }
    $inc = (($i$047) + 1)|0;
    $16 = load4($__end_$i);
@@ -4397,7 +4397,7 @@ function __Z5h_sdnRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEE
  store4($__end_cap_$i$i$i,$add$ptr$i9$i$i);
  store4($call$i$i$i$i11$i$i,$16);
  store4($__end_$i$i$i,$add$ptr$i9$i$i);
- __ZN5VNode11adjustVNodeEv($call);
+ __ZN6asmdom5VNode11adjustVNodeEv($call);
  $17 = $call;
  $18 = load4($__first_$i$i$i$i$i3);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($18);
@@ -4561,7 +4561,7 @@ function __Z5h_sdtRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEE
  store4($__end_$i$i$i,0);
  $__end_cap_$i$i$i = ((($call)) + 52|0);
  store4($__end_cap_$i$i$i,0);
- __ZN5VNode11adjustVNodeEv($call);
+ __ZN6asmdom5VNode11adjustVNodeEv($call);
  $16 = $call;
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($agg$tmp10);
  $17 = load4($__first_$i$i$i$i$i3);
@@ -4629,7 +4629,7 @@ function __Z5h_sdcRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEE
      $incdec$ptr$i = ((($6)) + 4|0);
      store4($__end_$i$i,$incdec$ptr$i);
     } else {
-     __ZNSt3__26vectorIP5VNodeNS_9allocatorIS2_EEE21__push_back_slow_pathIS2_EEvOT_($children,$ref$tmp);
+     __ZNSt3__26vectorIPN6asmdom5VNodeENS_9allocatorIS3_EEE21__push_back_slow_pathIS3_EEvOT_($children,$ref$tmp);
     }
     $inc = (($i$057) + 1)|0;
     $8 = load4($__end_$i);
@@ -4792,7 +4792,7 @@ function __Z5h_sdcRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEE
  store4($children$i,$agg$tmp17$sroa$0$0);
  store4($__end_$i$i$i,$agg$tmp17$sroa$6$0);
  store4($__end_cap_$i9$i$i,$agg$tmp17$sroa$15$0);
- __ZN5VNode11adjustVNodeEv($call5);
+ __ZN6asmdom5VNode11adjustVNodeEv($call5);
  $32 = $call5;
  $$pre14 = load4($__first_$i$i$i$i$i16);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($$pre14);
@@ -4950,7 +4950,7 @@ function __Z5h_elmRKNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEE
   store4($__first_$i$i$i$i$i5,0);
   store4($__first_$i$i$i$i4,0);
  }
- __ZN5VNodeC2ENSt3__212basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEP9VNodeData($call,$agg$tmp,$call3);
+ __ZN6asmdom5VNodeC2ENSt3__212basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEPNS_9VNodeDataE($call,$agg$tmp,$call3);
  $16 = load4($__first_$i$i$i$i$i5);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($16);
  $17 = load4($__first_$i$i$i$i$i);
@@ -5283,7 +5283,7 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
  store4($__first_$i$i$i$i6,$inc$i);
  STACKTOP = sp;return;
 }
-function __ZN5VNodeC2ENSt3__212basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEP9VNodeData($this,$nodeSel,$nodeData) {
+function __ZN6asmdom5VNodeC2ENSt3__212basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEPNS_9VNodeDataE($this,$nodeSel,$nodeData) {
  $this = $this|0;
  $nodeSel = $nodeSel|0;
  $nodeData = $nodeData|0;
@@ -5300,10 +5300,10 @@ function __ZN5VNodeC2ENSt3__212basic_stringIcNS0_11char_traitsIcEENS0_9allocator
  store4($__end_$i$i,0);
  $__end_cap_$i$i = ((($this)) + 52|0);
  store4($__end_cap_$i$i,0);
- __ZN5VNode11adjustVNodeEv($this);
+ __ZN6asmdom5VNode11adjustVNodeEv($this);
  return;
 }
-function __ZNSt3__26vectorIP5VNodeNS_9allocatorIS2_EEE21__push_back_slow_pathIS2_EEvOT_($this,$__x) {
+function __ZNSt3__26vectorIPN6asmdom5VNodeENS_9allocatorIS3_EEE21__push_back_slow_pathIS3_EEvOT_($this,$__x) {
  $this = $this|0;
  $__x = $__x|0;
  var $$sroa$speculated$$i = 0, $$sroa$speculated$i = 0, $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $__end_$i = 0, $__first_$i$i$i$i$i$i = 0, $add = 0, $add$ptr$i = 0, $add$ptr$i$i = 0, $add$ptr5$i = 0, $call$i$i$i$i = 0, $cmp$i = 0, $cmp$i$i = 0;

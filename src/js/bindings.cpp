@@ -3,6 +3,8 @@
 #include <cstdint>
 #include <string>
 
+using namespace asmdom;
+
 void deleteVNodePtr(const std::uintptr_t& vnodePtr) {
   deleteVNode(reinterpret_cast<VNode*>(vnodePtr));
 };

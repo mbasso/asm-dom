@@ -1,6 +1,8 @@
 #include "../../../src/asm-dom.hpp"
 #include <emscripten/bind.h>
 
+using namespace asmdom;
+
 void shouldCreateAVNodeWithAProperTag() {
 	VNode* vnode = new VNode("div");
 	deleteVNode(vnode);

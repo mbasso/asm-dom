@@ -3,6 +3,8 @@
 #include <cstdint>
 #include <string>
 
+using namespace asmdom;
+
 std::uintptr_t h_s(const std::string& sel) {
   return reinterpret_cast<std::uintptr_t>(new VNode(sel));
 };

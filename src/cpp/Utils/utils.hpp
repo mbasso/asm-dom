@@ -3,6 +3,10 @@
 
 #include "../VNode/VNode.hpp"
 
-void deleteVNode(VNode* vnode);
+namespace asmdom {
+
+	void deleteVNode(VNode* vnode);
+
+}
 
 #endif

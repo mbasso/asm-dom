@@ -3,6 +3,10 @@
 
 #include "../VNode/VNode.hpp"
 
-void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode);
+namespace asmdom {
+
+	void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode);
+
+}
 
 #endif
