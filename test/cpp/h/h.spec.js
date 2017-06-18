@@ -43,7 +43,11 @@ describe('h (cpp)', function test() {
     }).toNotThrow();
   });
 
-  // TODO : should create a vnode with attrs and one child
+  it('should create a vnode with attrs and one child', () => {
+    expect(() => {
+      app.shouldCreateAVNodeWithAttrsAndOneChild();
+    }).toNotThrow();
+  });
 
   // js only:
   // should create a vnode with text content
@@ -60,7 +64,11 @@ describe('h (cpp)', function test() {
     }).toNotThrow();
   });
 
-  // TODO : should create a vnode with attrs and text content in string
+  it('should create a vnode with attrs and text content in string', () => {
+    expect(() => {
+      app.shouldCreateAVNodeWithAttrsAndTextContentInString();
+    }).toNotThrow();
+  });
 
   it('should create a vnode with attrs and children', () => {
     expect(() => {
@@ -74,7 +82,47 @@ describe('h (cpp)', function test() {
     }).toNotThrow();
   });
 
-  // TODO : should create a vnode with attrs
+  it('should create a vnode with attrs', () => {
+    expect(() => {
+      app.shouldCreateAVNodeWithAttrs();
+    }).toNotThrow();
+  });
+
+  it('should create a vnode with props', () => {
+    expect(() => {
+      app.shouldCreateAVNodeWithProps();
+    }).toNotThrow();
+  });
+
+  it('should create a vnode with callbacks', () => {
+    expect(() => {
+      app.shouldCreateAVNodeWithCallbacks();
+    }).toNotThrow();
+  });
+
+  it('should create a vnode with attrs and props', () => {
+    expect(() => {
+      app.shouldCreateAVNodeWithAttrsAndProps();
+    }).toNotThrow();
+  });
+
+  it('should create a vnode with attrs and callbacks', () => {
+    expect(() => {
+      app.shouldCreateAVNodeWithAttrsAndCallbacks();
+    }).toNotThrow();
+  });
+
+  it('should create a vnode with props and callbacks', () => {
+    expect(() => {
+      app.shouldCreateAVNodeWithPropsAndCallbacks();
+    }).toNotThrow();
+  });
+
+  it('should create a vnode with attrs, props and callbacks', () => {
+    expect(() => {
+      app.shouldCreateAVNodeWithAttrsPropsAndCallbacks();
+    }).toNotThrow();
+  });
 
   // js only:
   // should create a vnode with raw

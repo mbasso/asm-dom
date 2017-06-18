@@ -186,4 +186,12 @@ describe('h (js)', function test() {
       h('', '', {});
     }).toThrow();
   });
+
+  // cpp only:
+  // should create a vnode with props
+  // should create a vnode with callbacks
+  // should create a vnode with attrs and props
+  // should create a vnode with attrs and callbacks
+  // should create a vnode with props and callbacks
+  // should create a vnode with attrs, props and callbacks
 });

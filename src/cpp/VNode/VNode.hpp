@@ -9,18 +9,34 @@
 
 namespace asmdom {
 
+  typedef emscripten::val (*VNodeCallback)(emscripten::val);
+
   typedef std::map<std::string, std::string> VNodeAttrs;
   typedef std::map<std::string, emscripten::val> VNodeProps;
+  typedef std::map<std::string, VNodeCallback> VNodeCallbacks;
 
   class VNodeData {
     public:
+      VNodeData() {};
       VNodeData(
-        VNodeAttrs dataAttrs = VNodeAttrs(),
-        VNodeProps dataProps = VNodeProps()
-      ): attrs{std::move(dataAttrs)}, props{std::move(dataProps)} {};
+        VNodeAttrs dataAttrs,
+        VNodeProps dataProps = VNodeProps(),
+        VNodeCallbacks dataCallbacks = VNodeCallbacks()
+      ): attrs{std::move(dataAttrs)}, props{std::move(dataProps)}, callbacks{std::move(dataCallbacks)} {};
+      VNodeData(
+        VNodeAttrs dataAttrs,
+        VNodeCallbacks dataCallbacks
+      ): attrs{std::move(dataAttrs)}, callbacks{std::move(dataCallbacks)} {};
+      VNodeData(
+        VNodeProps dataProps,
+        VNodeCallbacks dataCallbacks = VNodeCallbacks()
+      ): props{std::move(dataProps)}, callbacks{std::move(dataCallbacks)} {};
+      VNodeData(
+        VNodeCallbacks dataCallbacks
+      ): callbacks{std::move(dataCallbacks)} {};
       VNodeAttrs attrs;
       VNodeProps props;
-      // std::map<std::string, void*> callbacks;
+      VNodeCallbacks callbacks;
   };
 
   class VNode {
