@@ -1,15 +1,12 @@
 #include "../../../src/asm-dom.hpp"
+#include "../utils.hpp"
 #include <emscripten/bind.h>
+#include <emscripten/val.h>
 
 using namespace asmdom;
 
 emscripten::val onClick(emscripten::val event) {
 	return emscripten::val::undefined();
-};
-
-void shouldCreateAVNodeWithAProperTag() {
-	VNode* vnode = new VNode("div");
-	deleteVNode(vnode);
 };
 
 void shouldDeleteAVNode() {
@@ -19,6 +16,57 @@ void shouldDeleteAVNode() {
 			new VNode("video"),
 		}),
 	});
+	deleteVNode(vnode);
+};
+
+void shouldRemoveAChild() {
+	VNode* child = new VNode("span");
+	VNode* parent = new VNode("div",
+		VNodeChildren {
+			new VNode("video"),
+			child,
+			new VNode("img")
+		}
+	);
+	parent->removeChild(child);
+	patch(getRoot(), parent);
+
+	emscripten::val elm = getBodyFirstChild();
+
+	assertEquals(elm["childNodes"]["length"], emscripten::val(2));
+	assertEquals(elm["childNodes"]["0"]["tagName"], emscripten::val("VIDEO"));
+	assertEquals(elm["childNodes"]["1"]["tagName"], emscripten::val("IMG"));
+
+	deleteVNode(child);
+	deleteVNode(parent);
+};
+
+void shouldReplaceAChild() {
+	VNode* oldChild = new VNode("span");
+	VNode* newChild = new VNode("div");
+	VNode* parent = new VNode("div",
+		VNodeChildren {
+			new VNode("video"),
+			oldChild,
+			new VNode("img")
+		}
+	);
+	parent->replaceChild(oldChild, newChild);
+	patch(getRoot(), parent);
+
+	emscripten::val elm = getBodyFirstChild();
+
+	assertEquals(elm["childNodes"]["length"], emscripten::val(3));
+	assertEquals(elm["childNodes"]["0"]["tagName"], emscripten::val("VIDEO"));
+	assertEquals(elm["childNodes"]["1"]["tagName"], emscripten::val("DIV"));
+	assertEquals(elm["childNodes"]["2"]["tagName"], emscripten::val("IMG"));
+
+	deleteVNode(oldChild);
+	deleteVNode(parent);
+};
+
+void shouldCreateAVNodeWithAProperTag() {
+	VNode* vnode = new VNode("div");
 	deleteVNode(vnode);
 };
 
@@ -209,8 +257,10 @@ void shouldCreateAVNodeWithAttrsPropsAndCallbacks() {
 };
 
 EMSCRIPTEN_BINDINGS(h_function_tests) {
-  emscripten::function("shouldCreateAVNodeWithAProperTag", &shouldCreateAVNodeWithAProperTag);
   emscripten::function("shouldDeleteAVNode", &shouldDeleteAVNode);
+  emscripten::function("shouldRemoveAChild", &shouldRemoveAChild);
+  emscripten::function("shouldReplaceAChild", &shouldReplaceAChild);
+  emscripten::function("shouldCreateAVNodeWithAProperTag", &shouldCreateAVNodeWithAProperTag);
   emscripten::function("shouldCreateAVNodeWithChildren", &shouldCreateAVNodeWithChildren);
   emscripten::function("shouldCreateAVNodeWithOneChild", &shouldCreateAVNodeWithOneChild);
   emscripten::function("shouldCreateAVNodeWithTextContentInString", &shouldCreateAVNodeWithTextContentInString);

@@ -1,8 +1,8 @@
-#ifndef asmDom_hpp
-#define asmDom_hpp
+#ifndef asmdom_asmDom_hpp
+#define asmdom_asmDom_hpp
 
 #include "cpp/VNode/VNode.hpp"
-#include "cpp/Utils/utils.hpp"
-#include "cpp/Main/main.hpp"
+#include "cpp/Patch/patch.hpp"
+#include "cpp/Init/init.hpp"
 
 #endif

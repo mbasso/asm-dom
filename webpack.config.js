@@ -8,7 +8,7 @@ module.exports = (env) => {
   var ifProd = plugin => addPlugin(env.prod, plugin);
   var removeEmpty = array => array.filter(i => !!i);
   return {
-    entry: './index.js',
+    entry: env.cpp ? './cpp/index.js' : './index.js',
     target: 'node',
     output: {
       library: 'asmDom',
@@ -21,7 +21,7 @@ module.exports = (env) => {
       loaders: [{
         test: /\.js$/,
         loaders: ['babel-loader'],
-        exclude: [/node_modules/, /src\/helpers/, /\.asm\.js$/],
+        exclude: [/node_modules/, /src\/helpers/, /\.asm\.js$/, /prefix\.js$/, /postfix\.js$/],
       },
       {
         test: /\.wasm$/,

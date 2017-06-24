@@ -8,3 +8,4 @@ coverage
 _book
 .nyc_output
 .vscode
+test/cpp/app.asm.js

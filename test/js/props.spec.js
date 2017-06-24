@@ -11,6 +11,7 @@ describe('props (js)', function testProps() {
 
   before((done) => {
     init({
+      useAsmJS: true,
       hardReload: true,
     }).then((asmDom) => {
       vdom = asmDom;

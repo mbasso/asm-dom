@@ -36,6 +36,7 @@ describe('patch (js)', function testPatch() {
 
   before((done) => {
     init({
+      useAsmJS: true,
       hardReload: true,
     }).then((asmDom) => {
       vdom = asmDom;

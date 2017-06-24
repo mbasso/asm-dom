@@ -20,16 +20,6 @@ describe('load (js)', function test() {
     delete window.WebAssembly;
   });
 
-  it('should load asm-dom using asm.js', (done) => {
-    init({
-      hardReload: true,
-    }).then((vdom) => {
-      expect(vdom.h).toExist();
-      expect(vdom.usingWasm).toBeFalsy();
-      done();
-    });
-  });
-
   it('should load asm-dom using asm.js (by config)', (done) => {
     init({
       useAsmJS: true,

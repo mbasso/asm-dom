@@ -3,3 +3,5 @@
 **/src/helpers/**
 **/compiled/**
 **/test/**/*.asm.js
+**/src/js/prefix.js
+**/src/js/postfix.js

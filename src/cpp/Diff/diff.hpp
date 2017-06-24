@@ -1,5 +1,5 @@
-#ifndef diff_hpp
-#define diff_hpp
+#ifndef asmdom_diff_hpp
+#define asmdom_diff_hpp
 
 #include "../VNode/VNode.hpp"
 

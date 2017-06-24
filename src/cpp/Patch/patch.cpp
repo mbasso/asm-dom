@@ -1,6 +1,7 @@
-#include "main.hpp"
+#include "patch.hpp"
 #include "../Diff/diff.hpp"
 #include "../VNode/VNode.hpp"
+#include "../VDOMConfig/VDOMConfig.hpp"
 #include <emscripten/val.h>
 #include <algorithm>
 #include <cstdint>
@@ -10,7 +11,18 @@
 
 namespace asmdom {
 
+	void updateChildren(
+		emscripten::val parentElm,
+		std::vector<VNode*>& oldChildren,
+		std::vector<VNode*>& newChildren
+	);
+	void patchVNode(
+		VNode* __restrict__ const oldVnode,
+		VNode* __restrict__ const vnode
+	);
+
 	VNode* const emptyNode = new VNode();
+	VNode* currentNode = NULL;
 
 	bool sameVNode(const VNode* __restrict__ const vnode1, const VNode* __restrict__ const vnode2) {
 		return vnode1->key.compare(vnode2->key) == 0 && vnode1->sel.compare(vnode2->sel) == 0;
@@ -97,11 +109,9 @@ namespace asmdom {
 		const std::vector<VNode*>::size_type endIdx
 	) {
 		for (; startIdx <= endIdx; ++startIdx) {
-			if (vnodes.at(startIdx)) { // TODO : check to remove this line
-				EM_ASM_({
-					window['asmDomHelpers']['domApi']['removeChild']($0);
-				}, vnodes[startIdx]->elm);	
-			}
+			EM_ASM_({
+				window['asmDomHelpers']['domApi']['removeChild']($0);
+			}, vnodes[startIdx]->elm);	
 		}
 	};
 
@@ -229,7 +239,31 @@ namespace asmdom {
 		}
 	};
 
-	void patch(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+	VNode* patch(emscripten::val element, VNode* vnode) {
+		std::string sel = element["tagName"].as<std::string>();
+		std::transform(sel.begin(), sel.end(), sel.begin(), ::tolower);
+
+		VNode* oldVnode = new VNode(sel,
+			new VNodeData(
+				VNodeAttrs {
+					{"id", element["id"].as<std::string>()},
+					{"class", element["className"].as<std::string>()}
+				}
+			)
+		);
+		oldVnode->elm = emscripten::val::global("window")["asmDomHelpers"]["domApi"].call<int>("addNode", element);
+		return patch(oldVnode, vnode);
+	}
+
+	VNode* patch(VNode* oldVnode, VNode* vnode) {
+		VDOMConfig& config = VDOMConfig::getConfig();
+		bool useConfig = config.getCppSide();
+		if (
+			useConfig && config.getUnsafePatch() &&
+			currentNode != oldVnode && currentNode != NULL
+		) return NULL;
+		if (oldVnode == vnode) return vnode;
+		currentNode = vnode;
 		if (sameVNode(oldVnode, vnode)) {
 			patchVNode(oldVnode, vnode);
 		} else {
@@ -250,6 +284,10 @@ namespace asmdom {
 				}, oldVnode->elm);
 			}
 		}
+		if (useConfig && config.getClearMemory()) {
+			deleteVNode(oldVnode);
+		}
+		return vnode;
 	};
 
 }

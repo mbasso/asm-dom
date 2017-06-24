@@ -11,6 +11,7 @@ describe('attributes (js)', function testAttributes() {
 
   before((done) => {
     init({
+      useAsmJS: true,
       hardReload: true,
     }).then((asmDom) => {
       vdom = asmDom;

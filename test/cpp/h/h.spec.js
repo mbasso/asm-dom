@@ -1,4 +1,3 @@
-import expect from 'expect';
 import init from '../';
 
 describe('h (cpp)', function test() {
@@ -13,115 +12,98 @@ describe('h (cpp)', function test() {
     });
   });
 
+  beforeEach(() => {
+    while (document.body.firstChild) {
+      document.body.removeChild(document.body.firstChild);
+    }
+
+    const root = document.createElement('div');
+    root.setAttribute('id', 'root');
+    document.body.appendChild(root);
+  });
+
   // TODO : should get a vnode
 
   it('should delete a vnode', () => {
-    expect(
-      () => app.shouldDeleteAVNode(),
-    ).toNotThrow();
+    app.shouldDeleteAVNode();
   });
 
-  // TODO : should remove a child
-  // TODO : should replace a child
-  // TODO : should create vnode with tag, attrs and elm
+  it('should remove a child', () => {
+    app.shouldRemoveAChild();
+  });
+
+  it('should replace a child', () => {
+    app.shouldReplaceAChild();
+  });
+
+  // js only:
+  // should create vnode with tag, attrs and elm
 
   it('should create a vnode with a proper tag', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithAProperTag();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithAProperTag();
   });
 
   it('should create a vnode with children', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithChildren();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithChildren();
   });
 
   it('should create a vnode with one child', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithOneChild();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithOneChild();
   });
 
   it('should create a vnode with attrs and one child', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithAttrsAndOneChild();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithAttrsAndOneChild();
   });
 
   // js only:
   // should create a vnode with text content
 
   it('should create a vnode with text content in string', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithTextContentInString();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithTextContentInString();
   });
 
   it('should create a vnode for comment', () => {
-    expect(() => {
-      app.shouldCreateAVNodeForComment();
-    }).toNotThrow();
+    app.shouldCreateAVNodeForComment();
   });
 
   it('should create a vnode with attrs and text content in string', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithAttrsAndTextContentInString();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithAttrsAndTextContentInString();
   });
 
   it('should create a vnode with attrs and children', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithAttrsAndChildren();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithAttrsAndChildren();
   });
 
   it('should create a vnode with text', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithText();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithText();
   });
 
   it('should create a vnode with attrs', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithAttrs();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithAttrs();
   });
 
   it('should create a vnode with props', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithProps();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithProps();
   });
 
   it('should create a vnode with callbacks', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithCallbacks();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithCallbacks();
   });
 
   it('should create a vnode with attrs and props', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithAttrsAndProps();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithAttrsAndProps();
   });
 
   it('should create a vnode with attrs and callbacks', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithAttrsAndCallbacks();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithAttrsAndCallbacks();
   });
 
   it('should create a vnode with props and callbacks', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithPropsAndCallbacks();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithPropsAndCallbacks();
   });
 
   it('should create a vnode with attrs, props and callbacks', () => {
-    expect(() => {
-      app.shouldCreateAVNodeWithAttrsPropsAndCallbacks();
-    }).toNotThrow();
+    app.shouldCreateAVNodeWithAttrsPropsAndCallbacks();
   });
 
   // js only:

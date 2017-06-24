@@ -11,6 +11,7 @@ describe('h (js)', function test() {
 
   before((done) => {
     init({
+      useAsmJS: true,
       hardReload: true,
     }).then((asmDom) => {
       vdom = asmDom;

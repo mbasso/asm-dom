@@ -7,13 +7,7 @@
 
 namespace asmdom {
 
-	void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
-		EM_ASM_({
-			window['asmDomHelpers']['diff']($0, $1, $2);
-		}, reinterpret_cast<std::uintptr_t>(oldVnode), reinterpret_cast<std::uintptr_t>(vnode), vnode->elm);
-
-		if (oldVnode->data == NULL && vnode->data == NULL) return;
-
+	void diffAttrs(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		if (oldVnode->data != NULL) {
 			VNodeAttrs::iterator it = oldVnode->data->attrs.begin();
 			bool areDataDefined = vnode->data != NULL;
@@ -49,6 +43,34 @@ namespace asmdom {
 				++it;
 			}
 		}
+	};
+
+	void diffProps(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+		// TODO
+	};
+
+	void diffCallbacks(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+		// TODO
+	};
+
+
+	void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+		bool cppSide = VDOMConfig::getConfig().getCppSide();
+		if (!cppSide) {
+			EM_ASM_({
+				window['asmDomHelpers']['diff']($0, $1, $2);
+			}, reinterpret_cast<std::uintptr_t>(oldVnode), reinterpret_cast<std::uintptr_t>(vnode), vnode->elm);
+		}
+
+		if (oldVnode->data == NULL && vnode->data == NULL) return;
+
+		diffAttrs(oldVnode, vnode);
+
+		if (cppSide) {
+			diffProps(oldVnode, vnode);
+			diffCallbacks(oldVnode, vnode);
+		}
+		
 	};
 
 }

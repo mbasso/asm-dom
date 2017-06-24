@@ -1,5 +1,5 @@
-#ifndef VNode_hpp
-#define VNode_hpp
+#ifndef asmdom_VNode_hpp
+#define asmdom_VNode_hpp
 
 #include <utility>
 #include <vector>
@@ -100,6 +100,8 @@ namespace asmdom {
   };
 
   typedef std::vector<VNode*> VNodeChildren;
+
+	void deleteVNode(VNode* vnode);
 
 }
 
