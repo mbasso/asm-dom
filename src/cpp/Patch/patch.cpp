@@ -259,7 +259,7 @@ namespace asmdom {
 		VDOMConfig& config = VDOMConfig::getConfig();
 		bool useConfig = config.getCppSide();
 		if (
-			useConfig && config.getUnsafePatch() &&
+			useConfig && !config.getUnsafePatch() &&
 			currentNode != oldVnode && currentNode != NULL
 		) return NULL;
 		if (oldVnode == vnode) return vnode;
