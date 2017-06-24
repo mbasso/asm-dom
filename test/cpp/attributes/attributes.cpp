@@ -33,7 +33,7 @@ void shouldHaveTheirProvidedValues() {
 	deleteVNode(vnode);
 };
 
-void canBeMemoized() {
+void attributesCanBeMemoized() {
 	VNodeData* data = new VNodeData(
 		VNodeAttrs {
 			{"href", "/foo"},
@@ -130,7 +130,7 @@ void shouldBeSetCorrectlyWhenNamespaced() {
 
 EMSCRIPTEN_BINDINGS(attributes_tests) {
   emscripten::function("shouldHaveTheirProvidedValues", &shouldHaveTheirProvidedValues);
-  emscripten::function("canBeMemoized", &canBeMemoized);
+  emscripten::function("attributesCanBeMemoized", &attributesCanBeMemoized);
   emscripten::function("shouldBeOmittedWhenFalsyValuesAreProvided", &shouldBeOmittedWhenFalsyValuesAreProvided);
   emscripten::function("shouldBeSetCorrectlyWhenNamespaced", &shouldBeSetCorrectlyWhenNamespaced);
 };

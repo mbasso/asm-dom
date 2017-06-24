@@ -2,6 +2,7 @@
 #include "utils.cpp"
 #include "h/h.cpp"
 #include "attributes/attributes.cpp"
+#include "dataset/dataset.cpp"
 
 int main() {
 	asmdomConfig config = asmdomConfig();

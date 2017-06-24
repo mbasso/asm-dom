@@ -1,6 +1,6 @@
 import init from '../';
 
-describe('attributes (cpp)', function testAttributes() {
+describe('dataset (cpp)', function testAttributes() {
   this.timeout(30000);
 
   let app;
@@ -22,19 +22,18 @@ describe('attributes (cpp)', function testAttributes() {
     document.body.appendChild(root);
   });
 
-  it('should have their provided values', () => {
-    app.shouldHaveTheirProvidedValues();
+  it('should set on initial element creation', () => {
+    app.shouldSetOnInitialElementCreation();
+  });
+
+  it('should update dataset', () => {
+    app.shouldUpdateDataset();
   });
 
   /* it('can be memoized', () => {
-    app.attributesCanBeMemoized();
-  });
-
-  it('should be omitted when falsy values are provided', () => {
-    app.shouldBeOmittedWhenFalsyValuesAreProvided();
+    app.datasetCanBeMemoized();
   }); */
 
-  it('should be set correctly when namespaced', () => {
-    app.shouldBeSetCorrectlyWhenNamespaced();
-  });
+  // js only:
+  // should handles string conversions
 });

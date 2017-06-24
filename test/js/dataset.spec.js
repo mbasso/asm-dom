@@ -55,7 +55,7 @@ describe('dataset (js)', function testDataset() {
     expect(elm.getAttribute('data-bar')).toEqual('bar');
     patch(vnode, vnode2);
     expect(elm.getAttribute('data-baz')).toEqual('baz');
-    expect(elm.getAttribute('data-foo')).toEqual(undefined);
+    expect(elm.getAttribute('data-foo')).toEqual(null);
     vdom.deleteVNode(vnode2);
   });
 
