@@ -3,6 +3,7 @@
 #include "h/h.cpp"
 #include "attributes/attributes.cpp"
 #include "dataset/dataset.cpp"
+#include "props/props.cpp"
 
 int main() {
 	asmdomConfig config = asmdomConfig();

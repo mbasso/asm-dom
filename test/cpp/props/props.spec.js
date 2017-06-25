@@ -1,6 +1,6 @@
 import init from '../';
 
-describe('attributes (cpp)', function testAttributes() {
+describe('props (cpp)', function testAttributes() {
   this.timeout(30000);
 
   let app;
@@ -22,20 +22,20 @@ describe('attributes (cpp)', function testAttributes() {
     document.body.appendChild(root);
   });
 
-  it('should have their provided values', () => {
-    app.shouldHaveTheirProvidedValues();
+  it('should create element with props', () => {
+    app.shouldCreateElementWithProps();
+  });
+
+  it('changes an elements props', () => {
+    app.changesAnElementsProps();
   });
 
   // TODO
-  /* it('can be memoized', () => {
-    app.attributesCanBeMemoized();
-  });
-
-  it('should be omitted when falsy values are provided', () => {
-    app.shouldBeOmittedWhenFalsyValuesAreProvided();
+  /* it('preserves memoized props', () => {
+    app.preservesMemoizedProps();
   }); */
 
-  it('should be set correctly when namespaced', () => {
-    app.shouldBeSetCorrectlyWhenNamespaced();
+  it('removes an elements props', () => {
+    app.removesAnElementsProps();
   });
 });

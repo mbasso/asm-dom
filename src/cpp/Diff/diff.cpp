@@ -1,6 +1,7 @@
 #include "diff.hpp"
 #include "../VNode/VNode.hpp"
 #include <emscripten.h>
+#include <emscripten/val.h>
 #include <iterator>
 #include <cstdint>
 #include <map>
@@ -11,8 +12,7 @@ namespace asmdom {
 		if (oldVnode->data != NULL) {
 			VNodeAttrs::iterator it = oldVnode->data->attrs.begin();
 			bool areDataDefined = vnode->data != NULL;
-			while (it != oldVnode->data->attrs.end())
-			{
+			while (it != oldVnode->data->attrs.end()) {
 				if (!areDataDefined || (areDataDefined && vnode->data->attrs.count(it->first) == 0)) {
 					EM_ASM_({
 						window['asmDomHelpers']['domApi']['removeAttribute'](
@@ -46,7 +46,33 @@ namespace asmdom {
 	};
 
 	void diffProps(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
-		// TODO
+		emscripten::val elm = emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm];
+
+		if (oldVnode->data != NULL) {
+			VNodeProps::iterator it = oldVnode->data->props.begin();
+			bool areDataDefined = vnode->data != NULL;
+			while (it != oldVnode->data->props.end()) {
+				if (!areDataDefined || (areDataDefined && vnode->data->props.count(it->first) == 0)) {
+					elm.set(it->first.c_str(), emscripten::val::undefined());
+				}
+				++it;
+			}
+		}
+
+		if (vnode->data != NULL) {
+			VNodeProps::iterator it = vnode->data->props.begin();
+			bool areDataDefined = oldVnode->data != NULL;
+			while (it != vnode->data->props.end()) {
+				if (
+					(oldVnode->data->props.count(it->first) == 0) ||
+					(areDataDefined && !it->second.strictlyEquals(oldVnode->data->props.at(it->first))) ||
+					(it->first.compare("value") == 0 && !it->second.strictlyEquals(elm[it->first.c_str()]))
+				) {
+					elm.set(it->first.c_str(), it->second);
+				}
+				++it;
+			}
+		}
 	};
 
 	void diffCallbacks(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
