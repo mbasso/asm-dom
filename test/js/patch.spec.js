@@ -200,7 +200,6 @@ describe('patch (js)', function testPatch() {
     patch(root, vnode);
     let elm = document.body.firstChild;
     expect(elm.children.length).toEqual(4);
-    expect(elm.children.length).toEqual(4);
     patch(vnode, vnode2);
     elm = document.body.firstChild;
     expect(map(inner, elm.children)).toEqual(['1', '2', '3', '4', '5']);
@@ -293,7 +292,6 @@ describe('patch (js)', function testPatch() {
     patch(vnode, vnode2);
     elm = document.body.firstChild;
     expect(elm.children.length).toEqual(4);
-    expect(elm.children[0].innerHTML).toEqual('1');
     expect(elm.children[0].innerHTML).toEqual('1');
     expect(elm.children[1].innerHTML).toEqual('2');
     expect(elm.children[2].innerHTML).toEqual('4');

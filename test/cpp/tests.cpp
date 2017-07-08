@@ -4,6 +4,7 @@
 #include "attributes/attributes.cpp"
 #include "dataset/dataset.cpp"
 #include "props/props.cpp"
+#include "patch/patch.cpp"
 
 int main() {
 	asmdomConfig config = asmdomConfig();
