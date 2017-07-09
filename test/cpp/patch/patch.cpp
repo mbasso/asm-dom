@@ -844,15 +844,14 @@ void shouldAppendElements2() {
 	deleteVNode(vnode2);
 };
 
-// TODO
 void shouldHandleUnmovedTextNodes() {
-	/* VNode* vnode1 = new VNode("span",
+	VNode* vnode1 = new VNode("div",
 		VNodeChildren {
 			new VNode("Text", true),
 			new VNode(std::string("span"), std::string("Span"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
+	VNode* vnode2 = new VNode("div",
 		VNodeChildren {
 			new VNode("Text", true),
 			new VNode(std::string("span"), std::string("Span"))
@@ -860,22 +859,21 @@ void shouldHandleUnmovedTextNodes() {
 	);
 	patch(getRoot(), vnode1);
 	emscripten::val elm = getBodyFirstChild();
-	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("Text"));
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Text"));
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
-	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("Text"));
-	deleteVNode(vnode2); */
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Text"));
+	deleteVNode(vnode2);
 };
 
-// TODO
 void shouldHandleChangingTextChildren() {
-	/* VNode* vnode1 = new VNode("span",
+	VNode* vnode1 = new VNode("div",
 		VNodeChildren {
 			new VNode("Text", true),
 			new VNode(std::string("span"), std::string("Span"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
+	VNode* vnode2 = new VNode("div",
 		VNodeChildren {
 			new VNode("Text2", true),
 			new VNode(std::string("span"), std::string("Span"))
@@ -883,22 +881,21 @@ void shouldHandleChangingTextChildren() {
 	);
 	patch(getRoot(), vnode1);
 	emscripten::val elm = getBodyFirstChild();
-	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("Text"));
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Text"));
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
-	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("Text2"));
-	deleteVNode(vnode2); */
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Text2"));
+	deleteVNode(vnode2);
 };
 
-// TODO
 void shouldHandleUnmovedCommentNodes() {
-	/* VNode* vnode1 = new VNode("span",
+	VNode* vnode1 = new VNode("div",
 		VNodeChildren {
 			new VNode(std::string("!"), std::string("Text")),
 			new VNode(std::string("span"), std::string("Span"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
+	VNode* vnode2 = new VNode("div",
 		VNodeChildren {
 			new VNode(std::string("!"), std::string("Text")),
 			new VNode(std::string("span"), std::string("Span"))
@@ -906,22 +903,21 @@ void shouldHandleUnmovedCommentNodes() {
 	);
 	patch(getRoot(), vnode1);
 	emscripten::val elm = getBodyFirstChild();
-	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("Text"));
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Text"));
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
-	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("Text"));
-	deleteVNode(vnode2); */
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Text"));
+	deleteVNode(vnode2);
 };
 
-// TODO
 void shouldHandleChangingCommentText() {
-	/* VNode* vnode1 = new VNode("span",
+	VNode* vnode1 = new VNode("div",
 		VNodeChildren {
 			new VNode(std::string("!"), std::string("Text")),
 			new VNode(std::string("span"), std::string("Span"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
+	VNode* vnode2 = new VNode("div",
 		VNodeChildren {
 			new VNode(std::string("!"), std::string("Text2")),
 			new VNode(std::string("span"), std::string("Span"))
@@ -929,22 +925,21 @@ void shouldHandleChangingCommentText() {
 	);
 	patch(getRoot(), vnode1);
 	emscripten::val elm = getBodyFirstChild();
-	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("Text"));
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Text"));
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
-	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("Text2"));
-	deleteVNode(vnode2); */
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Text2"));
+	deleteVNode(vnode2);
 };
 
-// TODO
 void shouldHandleChangingEmptyComment() {
-	/* VNode* vnode1 = new VNode("span",
+	VNode* vnode1 = new VNode("div",
 		VNodeChildren {
 			new VNode("!"),
 			new VNode(std::string("span"), std::string("Span"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
+	VNode* vnode2 = new VNode("div",
 		VNodeChildren {
 			new VNode(std::string("!"), std::string("Test")),
 			new VNode(std::string("span"), std::string("Span"))
@@ -952,11 +947,11 @@ void shouldHandleChangingEmptyComment() {
 	);
 	patch(getRoot(), vnode1);
 	emscripten::val elm = getBodyFirstChild();
-	assertEquals(elm["children"]["0"]["textContent"], emscripten::val(""));
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val(""));
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
-	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("Test"));
-	deleteVNode(vnode2); */
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Test"));
+	deleteVNode(vnode2);
 };
 
 void shouldPrependElements2() {
@@ -1047,9 +1042,47 @@ void shouldRemoveASingleTextNode() {
 	deleteVNode(vnode2);
 };
 
-// TODO
-void shouldRemoveASingleTextNodeWhenChildrenAreUpdated() {};
-void shouldRemoveATextNodeAmongOtherElements() {};
+void shouldRemoveASingleTextNodeWhenChildrenAreUpdated() {
+	VNode* vnode1 = new VNode(std::string("div"), std::string("One"));
+	VNode* vnode2 = new VNode("div",
+		VNodeChildren {
+			new VNode(std::string("div"), std::string("Two")),
+			new VNode(std::string("span"), std::string("Three"))
+		}
+	);
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["textContent"], emscripten::val("One"));
+	patch(vnode1, vnode2);
+	elm = getBodyFirstChild();
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Two"));
+	assertEquals(elm["childNodes"]["1"]["textContent"], emscripten::val("Three"));
+	deleteVNode(vnode2);
+};
+
+void shouldRemoveATextNodeAmongOtherElements() {
+	VNode* vnode1 = new VNode("div",
+		VNodeChildren {
+			new VNode(std::string("One"), true),
+			new VNode(std::string("span"), std::string("Two"))
+		}
+	);
+	VNode* vnode2 = new VNode("div",
+		VNodeChildren {
+			new VNode(std::string("div"), std::string("Three"))
+		}
+	);
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("One"));
+	assertEquals(elm["childNodes"]["1"]["textContent"], emscripten::val("Two"));
+	patch(vnode1, vnode2);
+	elm = getBodyFirstChild();
+	assertEquals(elm["childNodes"]["length"], emscripten::val(1));
+	assertEquals(elm["childNodes"]["0"]["tagName"], emscripten::val("DIV"));
+	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Three"));
+	deleteVNode(vnode2);
+};
 
 void shouldReorderElements() {
 	VNode* vnode1 = new VNode("span",
