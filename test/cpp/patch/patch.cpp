@@ -85,8 +85,30 @@ void shouldCreateElementsWithSpanAndTextContent() {
 	deleteVNode(elmPtr);
 };
 
-// TODO
-void isAPatchOfTheRootElement() {};
+void isAPatchOfTheRootElement() {
+	emscripten::val elmWithIdAndClass = emscripten::val::global("document").call<emscripten::val>("createElement", emscripten::val("div"));
+	elmWithIdAndClass.set("id", emscripten::val("id"));
+	elmWithIdAndClass.set("className", emscripten::val("class"));
+	VNode* vnode = new VNode("div",
+		new VNodeData (
+			VNodeAttrs {
+				{"id", "id"},
+				{"class", "class"}
+			}
+		),
+		VNodeChildren {
+			new VNode(std::string("span"), std::string("Hi"))
+		}
+	);
+
+	patch(elmWithIdAndClass, vnode);
+	emscripten::val elm = getNode(vnode);
+	assertEquals(elm, elmWithIdAndClass);
+	assertEquals(elm["tagName"], emscripten::val("DIV"));
+	assertEquals(elm["id"], emscripten::val("id"));
+	assertEquals(elm["className"], emscripten::val("class"));
+	deleteVNode(vnode);
+};
 
 void shouldCreateComments() {
 	VNode* vnode = new VNode(std::string("!"), std::string("test"));

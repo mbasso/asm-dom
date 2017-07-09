@@ -17,7 +17,6 @@ void replaceChildPtr(const std::uintptr_t& parent, const std::uintptr_t& oldChil
   reinterpret_cast<VNode*>(parent)->replaceChild(reinterpret_cast<VNode*>(oldChild), reinterpret_cast<VNode*>(newChild));
 };
 
-// TODO : make it callable from C++
 int getNode(const std::uintptr_t& vnodePtr) {
   return reinterpret_cast<VNode*>(vnodePtr)->elm;
 };

@@ -49,7 +49,6 @@ std::uintptr_t h_sdc(const std::string& sel, const VNodeAttrs& nodeAttrs, const 
   return reinterpret_cast<std::uintptr_t>(new VNode(sel, new VNodeData(nodeAttrs), children));
 };
 
-// TODO : make it callable from C++
 std::uintptr_t h_elm(const std::string& sel, const VNodeAttrs& nodeAttrs, const int elm) {
   VNode* vnode = new VNode(sel, new VNodeData(nodeAttrs));
   vnode->elm = elm;

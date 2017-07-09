@@ -22,7 +22,8 @@ describe('h (cpp)', function test() {
     document.body.appendChild(root);
   });
 
-  // TODO : should get a vnode
+  // test only:
+  // should get a vnode
 
   it('should delete a vnode', () => {
     app.shouldDeleteAVNode();
