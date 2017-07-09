@@ -728,9 +728,8 @@ void shouldReverseElementsWith0() {
 // TODO
 void shouldHandleRandomShuffles() {};
 
-// TODO
 void shouldSupportNullChildren() {
-	/* VNode* vnode1 = new VNode("span",
+	VNode* vnode1 = new VNode("span",
 		VNodeChildren {
 			new VNode(std::string("span"), std::string("0")),
 			new VNode(std::string("span"), std::string("1")),
@@ -768,11 +767,57 @@ void shouldSupportNullChildren() {
 	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("5"));
 	assertEquals(elm["children"]["4"]["innerHTML"], emscripten::val("4"));
 	assertEquals(elm["children"]["5"]["innerHTML"], emscripten::val("3"));
-	deleteVNode(vnode2); */
+	deleteVNode(vnode2);
+};
+
+void shouldSupportAllNullChildren() {
+	VNode* vnode1 = new VNode("span",
+		VNodeChildren {
+			new VNode(std::string("span"), std::string("0")),
+			new VNode(std::string("span"), std::string("1")),
+			new VNode(std::string("span"), std::string("2")),
+			new VNode(std::string("span"), std::string("3")),
+			new VNode(std::string("span"), std::string("4")),
+			new VNode(std::string("span"), std::string("5"))
+		}
+	);
+	VNode* vnode2 = new VNode("span",
+		VNodeChildren {
+			NULL,
+			NULL,
+			NULL,
+			NULL,
+			NULL,
+			NULL
+		}
+	);
+	VNode* vnode3 = new VNode("span",
+		VNodeChildren {
+			new VNode(std::string("span"), std::string("5")),
+			new VNode(std::string("span"), std::string("4")),
+			new VNode(std::string("span"), std::string("3")),
+			new VNode(std::string("span"), std::string("2")),
+			new VNode(std::string("span"), std::string("1")),
+			new VNode(std::string("span"), std::string("0"))
+		}
+	);
+	patch(getRoot(), vnode1);
+	patch(vnode1, vnode2);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["children"]["length"], emscripten::val(0));
+	patch(vnode2, vnode3);
+	elm = getBodyFirstChild();
+	assertEquals(elm["children"]["length"], emscripten::val(6));
+	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("5"));
+	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("4"));
+	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("3"));
+	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("2"));
+	assertEquals(elm["children"]["4"]["innerHTML"], emscripten::val("1"));
+	assertEquals(elm["children"]["5"]["innerHTML"], emscripten::val("0"));
+	deleteVNode(vnode3);
 };
 
 // TODO
-void shouldSupportAllNullChildren() {};
 void shouldHandleRandomShufflesWithNullChildren() {};
 
 void shouldAppendElements2() {
@@ -1039,12 +1084,55 @@ void shouldReorderElements() {
 	deleteVNode(vnode2);
 };
 
-// TODO
-void shouldSupportNullChildren2() {};
+void shouldSupportNullChildren2() {
+	VNode* vnode1 = new VNode("i",
+		VNodeChildren {
+			NULL,
+			new VNode(std::string("i"), std::string("1")),
+			new VNode(std::string("i"), std::string("2")),
+			NULL
+		}
+	);
+	VNode* vnode2 = new VNode("i",
+		VNodeChildren {
+			new VNode(std::string("i"), std::string("2")),
+			NULL,
+			NULL,
+			new VNode(std::string("i"), std::string("1")),
+			NULL
+		}
+	);
+	VNode* vnode3 = new VNode("i",
+		VNodeChildren {
+			NULL,
+			new VNode(std::string("i"), std::string("1")),
+			NULL,
+			NULL,
+			new VNode(std::string("i"), std::string("2")),
+			NULL,
+			NULL
+		}
+	);
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["children"]["length"], emscripten::val(2));
+	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("1"));
+	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("2"));
+	patch(vnode1, vnode2);
+	elm = getBodyFirstChild();
+	assertEquals(elm["children"]["length"], emscripten::val(2));
+	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("2"));
+	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("1"));
+	patch(vnode2, vnode3);
+	elm = getBodyFirstChild();
+	assertEquals(elm["children"]["length"], emscripten::val(2));
+	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("1"));
+	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("2"));
+	deleteVNode(vnode3);
+};
 
-// TODO
 void shouldSupportAllNullChildren2() {
-	/* VNode* vnode1 = new VNode("i",
+	VNode* vnode1 = new VNode("i",
 		VNodeChildren {
 			new VNode(std::string("i"), std::string("1")),
 			new VNode(std::string("i"), std::string("2"))
@@ -1070,7 +1158,7 @@ void shouldSupportAllNullChildren2() {
 	elm = getBodyFirstChild();
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("1"));
-	deleteVNode(vnode3); */
+	deleteVNode(vnode3);
 };
 
 EMSCRIPTEN_BINDINGS(patch_tests) {

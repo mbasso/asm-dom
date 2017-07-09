@@ -8,6 +8,8 @@ namespace asmdom {
 		if (data != NULL && data->attrs.count(std::string("key")) != 0) {
 			key = data->attrs.at(std::string("key"));
 		}
+
+		children.erase(std::remove(children.begin(), children.end(), (VNode*)NULL), children.end());
 	};
 
 	void VNode::removeChild(VNode* child) {

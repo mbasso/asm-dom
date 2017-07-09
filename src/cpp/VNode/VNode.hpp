@@ -67,7 +67,7 @@ namespace asmdom {
       VNode(
         std::string nodeSel,
         std::vector<VNode*> nodeChildren
-      ): sel(nodeSel), data(NULL), children{std::move(nodeChildren)} {};
+      ): sel(nodeSel), data(NULL), children{std::move(nodeChildren)} { adjustVNode(); };
       VNode(
         std::string nodeSel,
         VNode* child
