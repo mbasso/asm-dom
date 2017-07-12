@@ -34,6 +34,10 @@ describe('patch (cpp)', function test() {
     app.shouldHaveTheCorrectNamespace();
   });
 
+  it('should inject svg namespace', () => {
+    app.shouldInjectSvgNamespace();
+  });
+
   it('should create elements with class', () => {
     app.shouldCreateElementsWithClass();
   });

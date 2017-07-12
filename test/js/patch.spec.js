@@ -88,6 +88,24 @@ describe('patch (js)', function testPatch() {
     expect(elm.firstChild.namespaceURI).toEqual(svgNamespace);
   });
 
+  it('should inject svg namespace', () => {
+    const svgNamespace = 'http://www.w3.org/2000/svg';
+    const XHTMLNamespace = 'http://www.w3.org/1999/xhtml';
+
+    const vnode = h('svg', [
+      h('foreignObject', [
+        h('div', ['I am HTML embedded in SVG']),
+      ]),
+    ]);
+
+    patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.namespaceURI).toEqual(svgNamespace);
+    expect(elm.firstChild.namespaceURI).toEqual(svgNamespace);
+    expect(elm.firstChild.firstChild.namespaceURI).toEqual(XHTMLNamespace);
+    vdom.deleteVNode(vnode);
+  });
+
   it('should create elements with class', () => {
     const vnode = h('div', { 'class': 'foo' });
     const elmPtr = patch(root, vnode);

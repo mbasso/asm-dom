@@ -44,6 +44,31 @@ void shouldHaveTheCorrectNamespace() {
 	deleteVNode(vnode);
 };
 
+void shouldInjectSvgNamespace() {
+	std::string svgNamespace = "http://www.w3.org/2000/svg";
+	std::string XHTMLNamespace = "http://www.w3.org/1999/xhtml";
+	VNode* vnode = new VNode("svg",
+		VNodeChildren {
+			new VNode("foreignObject",
+				VNodeChildren {
+					new VNode("div",
+						VNodeChildren {
+							new VNode("I am HTML embedded in SVG", true)
+						}
+					)
+				}
+			)
+		}
+	);
+
+	patch(getRoot(), vnode);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["namespaceURI"], emscripten::val(svgNamespace));
+	assertEquals(elm["firstChild"]["namespaceURI"], emscripten::val(svgNamespace));
+	assertEquals(elm["firstChild"]["firstChild"]["namespaceURI"], emscripten::val(XHTMLNamespace));
+	deleteVNode(vnode);
+};
+
 void shouldCreateElementsWithClass() {
 	VNode* vnode = new VNode("div",
 		new VNodeData(
@@ -1297,6 +1322,7 @@ EMSCRIPTEN_BINDINGS(patch_tests) {
   emscripten::function("shouldPatchANode", &shouldPatchANode);
 	emscripten::function("shouldHaveATag", &shouldHaveATag);
 	emscripten::function("shouldHaveTheCorrectNamespace", &shouldHaveTheCorrectNamespace);
+	emscripten::function("shouldInjectSvgNamespace", &shouldInjectSvgNamespace);
 	emscripten::function("shouldCreateElementsWithClass", &shouldCreateElementsWithClass);
 	emscripten::function("shouldCreateElementsWithTextContent", &shouldCreateElementsWithTextContent);
 	emscripten::function("shouldCreateElementsWithSpanAndTextContent", &shouldCreateElementsWithSpanAndTextContent);
