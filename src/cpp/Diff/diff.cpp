@@ -32,13 +32,22 @@ namespace asmdom {
 			while (it != vnode->data->attrs.end()) {
 				isAttrDefined = areDataDefined && oldVnode->data->attrs.count(it->first) != 0;
 				if (!isAttrDefined || (isAttrDefined && oldVnode->data->attrs.at(it->first).compare(it->second) != 0)) {
-					EM_ASM_({
-						window['asmDomHelpers']['domApi']['setAttribute'](
-							$0,
-							window['asmDom']['Pointer_stringify']($1),
-							window['asmDom']['Pointer_stringify']($2)
-						);
-					}, vnode->elm, it->first.c_str(), it->second.c_str());
+					if (VDOMConfig::getConfig().getCppSide() && it->second.compare("false") == 0) {
+						EM_ASM_({
+							window['asmDomHelpers']['domApi']['removeAttribute'](
+								$0,
+								window['asmDom']['Pointer_stringify']($1)
+							);
+						}, vnode->elm, it->first.c_str());
+					} else {
+						EM_ASM_({
+							window['asmDomHelpers']['domApi']['setAttribute'](
+								$0,
+								window['asmDom']['Pointer_stringify']($1),
+								window['asmDom']['Pointer_stringify']($2)
+							);
+						}, vnode->elm, it->first.c_str(), it->second.c_str());
+					}
 				}
 				++it;
 			}

@@ -31,10 +31,9 @@ describe('attributes (cpp)', function testAttributes() {
     app.attributesCanBeMemoized();
   }); */
 
-  // TODO
-  /* it('should be omitted when falsy values are provided', () => {
+  it('should be omitted when falsy values are provided', () => {
     app.shouldBeOmittedWhenFalsyValuesAreProvided();
-  }); */
+  });
 
   it('should be set correctly when namespaced', () => {
     app.shouldBeSetCorrectlyWhenNamespaced();
