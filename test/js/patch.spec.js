@@ -468,8 +468,8 @@ describe('patch (js)', function testPatch() {
       patch(vnode1, vnode2);
       elm = getNode(vnode2);
       for (i = 0; i < elms; ++i) {
-        expect(elm.children[i].innerHTML, shufArr[i].toString());
-        expect(opacities[i].indexOf(elm.children[i].style.opacity), 0);
+        expect(elm.children[i].innerHTML).toEqual(shufArr[i].toString());
+        expect(opacities[i].indexOf(elm.children[i].style.opacity)).toEqual(0);
       }
 
       vdom.reset();

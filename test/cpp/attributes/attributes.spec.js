@@ -26,12 +26,13 @@ describe('attributes (cpp)', function testAttributes() {
     app.shouldHaveTheirProvidedValues();
   });
 
-  // TODO
+  // avoid the usage of deleteVNode and do it manually
   /* it('can be memoized', () => {
     app.attributesCanBeMemoized();
-  });
+  }); */
 
-  it('should be omitted when falsy values are provided', () => {
+  // TODO
+  /* it('should be omitted when falsy values are provided', () => {
     app.shouldBeOmittedWhenFalsyValuesAreProvided();
   }); */
 

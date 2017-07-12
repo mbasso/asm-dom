@@ -30,7 +30,7 @@ describe('dataset (cpp)', function testAttributes() {
     app.shouldUpdateDataset();
   });
 
-  // TODO
+  // avoid the usage of deleteVNode and do it manually
   /* it('can be memoized', () => {
     app.datasetCanBeMemoized();
   }); */

@@ -1,5 +1,7 @@
 #include "../../../src/asm-dom.hpp"
 #include "../utils.hpp"
+#include <stdlib.h>
+#include <algorithm>
 #include <emscripten/bind.h>
 #include <emscripten/val.h>
 
@@ -747,8 +749,83 @@ void shouldReverseElementsWith0() {
 	deleteVNode(vnode2);
 };
 
+VNode* spanNumWithOpacity(int z, std::string o) {
+	std::string zString = std::to_string(z);
+	std::string opacity = std::string("opacity: ");
+	opacity.append(o);
+	return new VNode("span",
+		new VNodeData(
+			VNodeAttrs {
+				{"key", zString},
+				{"style", opacity}
+			}
+		),
+		zString
+	);
+};
+
+std::vector<int> shuffle(std::vector<int>& arr, int elms) {
+	std::vector<int> newArr;
+	newArr.reserve(elms);
+	for (int n = 0; n < elms; ++n) {
+		newArr[n] = arr[n];
+	}
+	for (int n = 0; n < elms; ++n) {
+		int i = rand() % elms;
+		
+		int temp = newArr[n];
+		newArr[n] = newArr[i];
+		newArr[i] = temp;
+	}
+	return newArr;
+};
+
 // TODO
-void shouldHandleRandomShuffles() {};
+void shouldHandleRandomShuffles() {
+	/* int n;
+	int i;
+	std::vector<int> arr;
+	std::vector<std::string> opacities;
+	int elms = 14;
+	int samples = 5;
+	
+	arr.reserve(elms);
+	opacities.reserve(elms);
+	for (n = 0; n < elms; ++n) {
+		arr[n] = n;
+	}
+	for (n = 0; n < samples; ++n) {
+		VNodeChildren children;
+		for (i = 0; i < elms; ++i) {
+			children.push_back(spanNumWithOpacity(arr[i], std::string("1")));
+		}
+		VNode* vnode1 = new VNode("span", children);
+
+		std::vector<int> shufArr = shuffle(arr, elms);
+
+		emscripten::val elm = emscripten::val::global("document").call<emscripten::val>("createElement", emscripten::val("div"));
+		patch(elm, vnode1);
+		elm = getNode(vnode1);
+		for (i = 0; i < elms; ++i) {
+			assertEquals(elm["children"][std::to_string(i)]["innerHTML"], emscripten::val(std::to_string(i)));
+			opacities[i] = std::string("0.");
+			opacities[i].append(std::to_string(rand() % 99999));
+		}
+		VNodeChildren opacityChildren;
+		for (i = 0; i < elms; ++i) {
+			opacityChildren.push_back(spanNumWithOpacity(shufArr[i], opacities[i]));
+		}
+		VNode* vnode2 = new VNode("span", opacityChildren);
+
+		patch(vnode1, vnode2);
+		elm = getNode(vnode2);
+		for (i = 0; i < elms; ++i) {
+			assertEquals(elm["children"][std::to_string(i)]["innerHTML"], emscripten::val(std::to_string(shufArr[i])));
+			assertEquals(emscripten::val(opacities[i]).call<emscripten::val>("indexOf", elm["children"][std::to_string(i)]["style"]["opacity"]), emscripten::val(0));
+		}
+		deleteVNode(vnode2);
+	} */
+};
 
 void shouldSupportNullChildren() {
 	VNode* vnode1 = new VNode("span",
