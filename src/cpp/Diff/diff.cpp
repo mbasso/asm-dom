@@ -85,9 +85,36 @@ namespace asmdom {
 	};
 
 	void diffCallbacks(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
-		// TODO
-	};
+		emscripten::val elm = emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm];
 
+		if (oldVnode->data != NULL) {
+			VNodeCallbacks::iterator it = oldVnode->data->callbacks.begin();
+			bool areDataDefined = vnode->data != NULL;
+			while (it != oldVnode->data->callbacks.end()) {
+				if (!areDataDefined || (areDataDefined && vnode->data->callbacks.count(it->first) == 0)) {
+					elm.set(it->first.c_str(), emscripten::val::undefined());
+				}
+				++it;
+			}
+		}
+
+		if (vnode->data != NULL) {
+			VNodeCallbacks::iterator it = vnode->data->callbacks.begin();
+			bool areDataDefined = oldVnode->data != NULL;
+			while (it != vnode->data->callbacks.end()) {
+				if (
+					(oldVnode->data->callbacks.count(it->first) == 0) ||
+					(areDataDefined && it->second != oldVnode->data->callbacks.at(it->first))
+				) {
+					elm.set(
+						it->first.c_str(),
+						emscripten::val::global("window")["asmDomHelpers"].call<emscripten::val>("functionCallback", reinterpret_cast<std::uintptr_t>(it->second))
+					);
+				}
+				++it;
+			}
+		}
+	};
 
 	void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		bool cppSide = VDOMConfig::getConfig().getCppSide();

@@ -942,7 +942,45 @@ void shouldSupportAllNullChildren() {
 };
 
 // TODO
-void shouldHandleRandomShufflesWithNullChildren() {};
+void shouldHandleRandomShufflesWithNullChildren() {
+	/* int i;
+	int j;
+	int r;
+	int len;
+	std::vector<int> arr;
+	int maxArrLen = 15;
+	int samples = 5;
+	VNode* vnode1 = patch(getRoot(), new VNode("div"));
+	VNode* vnode2;
+	for (i = 0; i < samples; ++i) {
+		len = rand() % (maxArrLen + 1);
+		arr = std::vector<int>();
+		arr.reserve(len);
+		for (j = 0; j < len; ++j) {
+			r = rand() % 100;
+			if (r < 50) arr[j] = j;
+			else arr[j] = NULL;
+		}
+		std::vector<int> shufArr = shuffle(arr, len);
+		VNodeChildren children = VNodeChildren();
+		for (j = 0; j < len; ++j) {
+			children[j] = shufArr[j] == NULL ? NULL : new VNode(std::string("span"), std::to_string(shufArr[j]));
+		}
+		vnode2 = new VNode("div", children);
+		patch(vnode1, vnode2);
+		emscripten::val elm = getBodyFirstChild();
+		r = 0;
+		for (j = 0; j < len; ++j) {
+			if (shufArr[j] != NULL) {
+				assertEquals(elm["children"][std::to_string(r)]["innerHTML"], emscripten::val(std::to_string(shufArr[j])));
+				++r;
+			}
+		}
+		assertEquals(elm["children"]["length"], emscripten::val(r));
+		vnode1 = vnode2;
+	}
+	deleteVNode(vnode2); */
+};
 
 void shouldAppendElements2() {
 	VNode* vnode1 = new VNode("span",

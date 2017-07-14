@@ -1,4 +1,5 @@
 #include "VNode.hpp"
+#include <emscripten/bind.h>
 #include <string>
 
 namespace asmdom {
@@ -43,5 +44,13 @@ namespace asmdom {
     while (i--) deleteVNode(vnode->children[i]);
     delete vnode;
   };
+
+	emscripten::val functionCallback(const std::uintptr_t& callback, emscripten::val event) {
+		return emscripten::val(reinterpret_cast<VNodeCallback>(callback)(event));
+	};
+
+	EMSCRIPTEN_BINDINGS(function_callback) {
+		emscripten::function("functionCallback", &functionCallback);
+	};
 
 }

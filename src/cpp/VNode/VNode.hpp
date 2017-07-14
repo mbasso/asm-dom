@@ -9,7 +9,7 @@
 
 namespace asmdom {
 
-  typedef emscripten::val (*VNodeCallback)(emscripten::val);
+  typedef bool (*VNodeCallback)(emscripten::val);
 
   typedef std::map<std::string, std::string> VNodeAttrs;
   typedef std::map<std::string, emscripten::val> VNodeProps;

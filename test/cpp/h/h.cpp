@@ -5,8 +5,8 @@
 
 using namespace asmdom;
 
-emscripten::val onClick(emscripten::val event) {
-	return emscripten::val::undefined();
+bool onClick(emscripten::val event) {
+	return true;
 };
 
 void shouldDeleteAVNode() {
