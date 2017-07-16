@@ -50,7 +50,7 @@ namespace asmdom {
 	};
 
 	EMSCRIPTEN_BINDINGS(function_callback) {
-		emscripten::function("functionCallback", &functionCallback);
+		emscripten::function("functionCallback", &functionCallback, emscripten::allow_raw_pointers());
 	};
 
 }

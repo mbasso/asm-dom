@@ -1,50 +1,66 @@
+/* eslint-disable */
+
 var webpack = require('webpack');
 var resolve = require('path').resolve;
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CompressionPlugin = require('compression-webpack-plugin');
 
-module.exports = (env) => {
-  env = env || {};
+module.exports = env => {
   var addPlugin = (add, plugin) => add ? plugin : undefined;
   var ifProd = plugin => addPlugin(env.prod, plugin);
   var removeEmpty = array => array.filter(i => !!i);
+  var plugin = {
+    'process.env': {
+      NODE_ENV: JSON.stringify(ifProd('production') || 'development'),
+    },
+  };
   return {
-    entry: env.cpp ? './cpp/init.js' : './index.js',
-    target: 'node',
+    entry: ['babel-polyfill', './index.js'],
     output: {
-      library: 'asmDom',
-      libraryTarget: 'umd',
+      filename: 'bundle.js',
+      path: resolve(__dirname, 'dist'),
+      pathinfo: !env.prod,
     },
     context: resolve(__dirname, 'src'),
     devtool: env.prod ? 'source-map' : 'eval',
     bail: env.prod,
+    node: {
+      fs: 'empty',
+    },
+    devServer: {
+      contentBase: resolve(__dirname, 'dist'),
+      historyApiFallback: true,
+      compress: true,
+      port: 9000,
+    },
     module: {
       loaders: [{
         test: /\.js$/,
         loaders: ['babel-loader'],
-        exclude: [/node_modules/, /src\/helpers/, /\.asm\.js$/, /prefix\.js$/, /postfix\.js$/],
+        exclude: [/node_modules/, /compiled/],
       },
       {
         test: /\.wasm$/,
         loaders: ['arraybuffer-loader'],
+      }, {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       }],
     },
     plugins: removeEmpty([
-      new webpack.optimize.OccurrenceOrderPlugin(),
+      new CopyWebpackPlugin([
+        { from: '../index.html', to: '../dist/index.html' }
+      ]),
       ifProd(new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false,
         quiet: true,
       })),
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(ifProd('production') || 'development'),
-      }),
+      new webpack.DefinePlugin(plugin),
       ifProd(new webpack.optimize.UglifyJsPlugin({
         compress: {
-          pure_getters: true,
-          unsafe: true,
-          unsafe_comps: true,
+          screw_ie8: true, // eslint-disable-line
           warnings: false,
-          screw_ie8: true,
         },
       })),
       ifProd(new CompressionPlugin({

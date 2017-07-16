@@ -1,5 +1,8 @@
+/* eslint-disable */
+
 var webpack = require('webpack');
 var resolve = require('path').resolve;
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = env => {
@@ -34,7 +37,7 @@ module.exports = env => {
       loaders: [{
         test: /\.js$/,
         loaders: ['babel-loader'],
-        exclude: [/node_modules/],
+        exclude: [/node_modules/, /compiled/, /\.asm\.js$/, /prefix\.js$/, /postfix\.js$/],
       },
       {
         test: /\.wasm$/,
@@ -45,6 +48,9 @@ module.exports = env => {
       }],
     },
     plugins: removeEmpty([
+      new CopyWebpackPlugin([
+        { from: '../index.html', to: '../dist/index.html' }
+      ]),
       ifProd(new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false,

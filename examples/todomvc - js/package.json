@@ -1,5 +1,5 @@
 {
-  "name": "asm-dom-todomvc",
+  "name": "asm-dom-todomvc-js",
   "version": "0.0.1",
   "description": "todomvc using asm-dom",
   "scripts": {
@@ -13,7 +13,6 @@
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
     "babel-loader": "7.0.0",
-    "babel-plugin-dynamic-import-webpack": "1.0.1",
     "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
     "babel-plugin-transform-es3-member-expression-literals": "6.22.0",
     "babel-plugin-transform-es3-property-literals": "6.22.0",
@@ -22,6 +21,7 @@
     "babel-preset-stage-0": "6.24.1",
     "babel-register": "6.24.1",
     "compression-webpack-plugin": "0.4.0",
+    "copy-webpack-plugin": "4.0.1",
     "cross-env": "4.0.0",
     "css-loader": "0.28.1",
     "eslint": "3.19.0",
@@ -34,7 +34,7 @@
     "webpack-dev-server": "2.4.5"
   },
   "dependencies": {
-    "asm-dom": "0.1.1",
+    "asm-dom": "file:../..",
     "babel-polyfill": "6.23.0",
     "todomvc-app-css": "2.0.1",
     "todomvc-common": "1.0.2",
