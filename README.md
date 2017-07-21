@@ -242,9 +242,7 @@ We think that this is better than show only numbers, we can help other people to
 
 ## Roadmap
 
-- [ ] make asm-dom usable directly from C++ to develop the frontend (allow to write entire apps in webassembly)
 - [ ] asm-dom aims to be even more powerful with [GC / DOM / Web API Integration](http://webassembly.org/docs/gc/). Unfortunately this is a future feature 🦄, so, we have to be patient and wait a bit.
-- [ ] use the closure compiler (cause problems with wasm, need to update emscripten)
 
 ## Change Log
 
