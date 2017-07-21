@@ -805,9 +805,8 @@ std::vector<int> shuffle(std::vector<int>& arr, int elms) {
 	return newArr;
 };
 
-// TODO
 void shouldHandleRandomShuffles() {
-	/* int n;
+	int n;
 	int i;
 	std::vector<int> arr;
 	std::vector<std::string> opacities;
@@ -849,7 +848,7 @@ void shouldHandleRandomShuffles() {
 			assertEquals(emscripten::val(opacities[i]).call<emscripten::val>("indexOf", elm["children"][std::to_string(i)]["style"]["opacity"]), emscripten::val(0));
 		}
 		deleteVNode(vnode2);
-	} */
+	}
 };
 
 void shouldSupportNullChildren() {
@@ -941,9 +940,8 @@ void shouldSupportAllNullChildren() {
 	deleteVNode(vnode3);
 };
 
-// TODO
 void shouldHandleRandomShufflesWithNullChildren() {
-	/* int i;
+	int i;
 	int j;
 	int r;
 	int len;
@@ -964,7 +962,7 @@ void shouldHandleRandomShufflesWithNullChildren() {
 		std::vector<int> shufArr = shuffle(arr, len);
 		VNodeChildren children = VNodeChildren();
 		for (j = 0; j < len; ++j) {
-			children[j] = shufArr[j] == NULL ? NULL : new VNode(std::string("span"), std::to_string(shufArr[j]));
+			children.push_back(shufArr[j] == NULL ? NULL : new VNode(std::string("span"), std::to_string(shufArr[j])));
 		}
 		vnode2 = new VNode("div", children);
 		patch(vnode1, vnode2);
@@ -979,7 +977,7 @@ void shouldHandleRandomShufflesWithNullChildren() {
 		assertEquals(elm["children"]["length"], emscripten::val(r));
 		vnode1 = vnode2;
 	}
-	deleteVNode(vnode2); */
+	deleteVNode(vnode2);
 };
 
 void shouldAppendElements2() {
