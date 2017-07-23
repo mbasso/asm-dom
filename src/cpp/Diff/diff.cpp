@@ -100,17 +100,11 @@ namespace asmdom {
 
 		if (vnode->data != NULL) {
 			VNodeCallbacks::iterator it = vnode->data->callbacks.begin();
-			bool areDataDefined = oldVnode->data != NULL;
 			while (it != vnode->data->callbacks.end()) {
-				if (
-					(oldVnode->data->callbacks.count(it->first) == 0) ||
-					(areDataDefined && it->second != oldVnode->data->callbacks.at(it->first))
-				) {
-					elm.set(
-						it->first.c_str(),
-						emscripten::val::global("window")["asmDomHelpers"].call<emscripten::val>("functionCallback", reinterpret_cast<std::uintptr_t>(it->second))
-					);
-				}
+				elm.set(
+					it->first.c_str(),
+					emscripten::val::global("window")["asmDomHelpers"].call<emscripten::val>("functionCallback", reinterpret_cast<std::uintptr_t>(vnode), emscripten::val(it->first))
+				);
 				++it;
 			}
 		}

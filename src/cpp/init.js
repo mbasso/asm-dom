@@ -10,8 +10,8 @@ export default function init() {
 
     window.asmDomReady = () => resolve((app) => {
       window.asmDom = { 'Pointer_stringify': app.Pointer_stringify };
-      window.asmDomHelpers.functionCallback = callback =>
-        event => app.functionCallback(callback, event);
+      window.asmDomHelpers.functionCallback = (vnode, callback) =>
+        event => app.functionCallback(vnode, callback, event);
       return Promise.resolve(app);
     });
   });

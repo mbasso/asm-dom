@@ -1,6 +1,7 @@
 #ifndef asmdom_VNode_hpp
 #define asmdom_VNode_hpp
 
+#include <functional>
 #include <utility>
 #include <vector>
 #include <string>
@@ -9,7 +10,7 @@
 
 namespace asmdom {
 
-  typedef bool (*VNodeCallback)(emscripten::val);
+  typedef std::function<bool(emscripten::val)> VNodeCallback;
 
   typedef std::map<std::string, std::string> VNodeAttrs;
   typedef std::map<std::string, emscripten::val> VNodeProps;

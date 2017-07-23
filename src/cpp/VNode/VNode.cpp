@@ -45,8 +45,8 @@ namespace asmdom {
     delete vnode;
   };
 
-	emscripten::val functionCallback(const std::uintptr_t& callback, emscripten::val event) {
-		return emscripten::val(reinterpret_cast<VNodeCallback>(callback)(event));
+	emscripten::val functionCallback(const std::uintptr_t& vnode, const std::string& callback, emscripten::val event) {
+		return emscripten::val(reinterpret_cast<VNode*>(vnode)->data->callbacks.at(callback)(event));
 	};
 
 	EMSCRIPTEN_BINDINGS(function_callback) {

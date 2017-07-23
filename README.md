@@ -5,7 +5,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/asm-dom.svg?maxAge=2592000)](https://www.npmjs.com/package/asm-dom)
 [![Join the chat at https://gitter.im/mbasso/asm-dom](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mbasso/asm-dom?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-> A minimal WebAssembly virtual DOM focused on performance
+> A minimal WebAssembly virtual DOM with C++ and JS APIs
 
 ## Table of Contents
 
@@ -52,7 +52,7 @@ node: {
 ```
 
 ## Motivation
-asm-dom is a minimal WebAssembly virtual DOM focused on performance. It is born from the idea to test the powerful of WebAssembly in a common use case that is not gaming, VR, AR or Image / video editing. Unfortunately, at the moment, [GC / DOM / Web API Integration](http://webassembly.org/docs/gc/) is a future feature 🦄, so, asm-dom isn't totally developed in wasm. All interactions with the DOM are written in Javascript. This is a big disadvantage because of the overhead of the binding between JS and WASM, in the future asm-dom will be even more powerful, anyway results are satisfying.
+asm-dom is a minimal WebAssembly virtual DOM with C++ and JS APIs. It is born from the idea to test the powerful of WebAssembly in a common use case that is not gaming, VR, AR or Image / video editing. Unfortunately, at the moment, [GC / DOM / Web API Integration](http://webassembly.org/docs/gc/) is a future feature 🦄, so, asm-dom isn't totally developed in wasm. All interactions with the DOM are written in Javascript. This is a big disadvantage because of the overhead of the binding between JS and WASM, in the future asm-dom will be even more powerful, anyway results are satisfying.
 Last but not least, this project aims to be an example for those who want to try WebAssembly and emscripten!
 
 ## Inline Example
