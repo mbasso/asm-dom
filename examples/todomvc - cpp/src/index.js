@@ -23,7 +23,12 @@ import init from '../../../src/cpp/init';
     .then(lib => lib(config))
     .then(lib =>
       asmDomReady.then(prepareAsmDom => prepareAsmDom(lib))
-                 .then(() => lib.start()),
+                 .then(() => {
+                   window.todomvc = {
+                     onhashchange: lib.onhashchange,
+                   };
+                   lib.start();
+                 }),
     );
 })();
 
