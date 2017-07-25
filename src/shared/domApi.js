@@ -15,22 +15,27 @@ export default {
   'addNode'(node) {
     nodes[++ptr] = addPtr(node.parentNode);
     nodes[++ptr] = addPtr(node.nextSibling);
+    // eslint-disable-next-line
     return (nodes[++ptr] = addPtr(node)) && ptr;
   },
   'createElement'(tagName) {
     const node = recycler.create(tagName);
+    // eslint-disable-next-line
     return node.asmDomPtr || (nodes[++ptr] = addPtr(node)) && ptr;
   },
   'createElementNS'(namespaceURI, qualifiedName) {
     const node = recycler.create(qualifiedName, namespaceURI);
+    // eslint-disable-next-line
     return node.asmDomPtr || (nodes[++ptr] = addPtr(node, namespaceURI)) && ptr;
   },
   'createTextNode'(text) {
     const node = recycler.createText(text);
+    // eslint-disable-next-line
     return node.asmDomPtr || (nodes[++ptr] = addPtr(node)) && ptr;
   },
   'createComment'(text) {
     const node = recycler.createComment(text);
+    // eslint-disable-next-line
     return node.asmDomPtr || (nodes[++ptr] = addPtr(node)) && ptr;
   },
   'insertBefore'(parentNodePtr, newNodePtr, referenceNodePtr) {
