@@ -119,8 +119,35 @@ void shouldShareHandlersInParentAndChildNodes() {
 	deleteVNode(vnode);
 };
 
+void shouldHandleLambdaWithCapture() {
+	beforeEach();
+	int count = 1;
+
+	VNode* vnode = new VNode("div",
+		new VNodeData(
+			VNodeCallbacks {
+				{"onclick", [&count](emscripten::val e) -> bool {
+					++count;
+					return false;
+				}}
+			}
+		)
+	);
+	patch(getRoot(), vnode);
+	
+	emscripten::val elm = getBodyFirstChild();
+	elm.call<void>("click");
+	// assert
+	if (count != 2) {
+		throw 20;
+	}
+
+	deleteVNode(vnode);
+};
+
 EMSCRIPTEN_BINDINGS(eventlisteners_tests) {
   emscripten::function("shouldAttachAClickEventHandlerToElement", &shouldAttachAClickEventHandlerToElement);
   emscripten::function("shouldDetachAttachedClickEventHandlerToElement", &shouldDetachAttachedClickEventHandlerToElement);
   emscripten::function("shouldShareHandlersInParentAndChildNodes", &shouldShareHandlersInParentAndChildNodes);
+  emscripten::function("shouldHandleLambdaWithCapture", &shouldHandleLambdaWithCapture);
 };

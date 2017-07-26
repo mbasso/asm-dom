@@ -33,4 +33,8 @@ describe('eventlisteners (cpp)', function testEventlisteners() {
   it('should share handlers in parent and child nodes', () => {
     app.shouldShareHandlersInParentAndChildNodes();
   });
+
+  it('should handle lambda with capture', () => {
+    app.shouldHandleLambdaWithCapture();
+  });
 });
