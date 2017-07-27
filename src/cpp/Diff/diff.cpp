@@ -32,14 +32,17 @@ namespace asmdom {
 			while (it != vnode->data->attrs.end()) {
 				isAttrDefined = areDataDefined && oldVnode->data->attrs.count(it->first) != 0;
 				if (!isAttrDefined || (isAttrDefined && oldVnode->data->attrs.at(it->first).compare(it->second) != 0)) {
-					if (VDOMConfig::getConfig().getCppSide() && it->second.compare("false") == 0) {
-						EM_ASM_({
-							window['asmDomHelpers']['domApi']['removeAttribute'](
-								$0,
-								window['asmDom']['Pointer_stringify']($1)
-							);
-						}, vnode->elm, it->first.c_str());
-					} else {
+					#ifndef ASMDOM_JS_SIDE
+						if (it->second.compare("false") == 0) {
+							EM_ASM_({
+								window['asmDomHelpers']['domApi']['removeAttribute'](
+									$0,
+									window['asmDom']['Pointer_stringify']($1)
+								);
+							}, vnode->elm, it->first.c_str());
+						} else {
+					#endif
+					
 						EM_ASM_({
 							window['asmDomHelpers']['domApi']['setAttribute'](
 								$0,
@@ -47,7 +50,10 @@ namespace asmdom {
 								window['asmDom']['Pointer_stringify']($2)
 							);
 						}, vnode->elm, it->first.c_str(), it->second.c_str());
+					
+					#ifndef ASMDOM_JS_SIDE
 					}
+					#endif
 				}
 				++it;
 			}
@@ -111,21 +117,20 @@ namespace asmdom {
 	};
 
 	void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
-		bool cppSide = VDOMConfig::getConfig().getCppSide();
-		if (!cppSide) {
+		#ifdef ASMDOM_JS_SIDE
 			EM_ASM_({
 				window['asmDomHelpers']['diff']($0, $1, $2);
 			}, reinterpret_cast<std::uintptr_t>(oldVnode), reinterpret_cast<std::uintptr_t>(vnode), vnode->elm);
-		}
+		#endif
 
 		if (oldVnode->data == NULL && vnode->data == NULL) return;
 
 		diffAttrs(oldVnode, vnode);
 
-		if (cppSide) {
+		#ifndef ASMDOM_JS_SIDE
 			diffProps(oldVnode, vnode);
 			diffCallbacks(oldVnode, vnode);
-		}
+		#endif
 		
 	};
 

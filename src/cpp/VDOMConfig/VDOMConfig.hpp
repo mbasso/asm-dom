@@ -12,18 +12,15 @@ namespace asmdom {
 
 			bool getClearMemory();
 			bool getUnsafePatch();
-			bool getCppSide();
 
 			void setClearMemory(bool clear);
 			void setUnsafePatch(bool unsafe);
-			void setCppSide(bool cpp);
 
 		private:
 			VDOMConfig() {};
 
 			bool clearMemory = true;
 			bool unsafePatch = false;
-			bool cppSide = false;
 	};
 
 }

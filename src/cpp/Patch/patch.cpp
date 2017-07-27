@@ -256,12 +256,14 @@ namespace asmdom {
 	}
 
 	VNode* patch(VNode* oldVnode, VNode* vnode) {
-		VDOMConfig& config = VDOMConfig::getConfig();
-		bool useConfig = config.getCppSide();
-		if (
-			useConfig && !config.getUnsafePatch() &&
-			currentNode != oldVnode && currentNode != NULL
-		) return NULL;
+		#ifndef ASMDOM_JS_SIDE
+			VDOMConfig& config = VDOMConfig::getConfig();
+			if (
+				!config.getUnsafePatch() &&
+				currentNode != oldVnode && currentNode != NULL
+			) return NULL;
+		#endif
+
 		if (oldVnode == vnode) return vnode;
 		currentNode = vnode;
 		if (sameVNode(oldVnode, vnode)) {
@@ -284,9 +286,13 @@ namespace asmdom {
 				}, oldVnode->elm);
 			}
 		}
-		if (useConfig && config.getClearMemory()) {
-			deleteVNode(oldVnode);
-		}
+
+		#ifndef ASMDOM_JS_SIDE
+			if (config.getClearMemory()) {
+				deleteVNode(oldVnode);
+			}
+		#endif
+
 		return vnode;
 	};
 
