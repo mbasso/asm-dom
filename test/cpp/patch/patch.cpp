@@ -2,6 +2,8 @@
 #include "../utils.hpp"
 #include <stdlib.h>
 #include <algorithm>
+#include <codecvt>
+#include <locale>
 #include <emscripten/bind.h>
 #include <emscripten/val.h>
 
@@ -97,6 +99,9 @@ void shouldCreateElementsWithTextContent() {
 	assertEquals(elm["innerHTML"], emscripten::val("I am a string"));
 	deleteVNode(elmPtr);
 };
+
+// TODO : how can we test this?
+void shouldCreateElementsWithTextContentInUtf8() {};
 
 void shouldCreateElementsWithSpanAndTextContent() {
 	VNode* vnode = new VNode("a",
@@ -1361,6 +1366,7 @@ EMSCRIPTEN_BINDINGS(patch_tests) {
 	emscripten::function("shouldInjectSvgNamespace", &shouldInjectSvgNamespace);
 	emscripten::function("shouldCreateElementsWithClass", &shouldCreateElementsWithClass);
 	emscripten::function("shouldCreateElementsWithTextContent", &shouldCreateElementsWithTextContent);
+	emscripten::function("shouldCreateElementsWithTextContentInUtf8", &shouldCreateElementsWithTextContentInUtf8);
 	emscripten::function("shouldCreateElementsWithSpanAndTextContent", &shouldCreateElementsWithSpanAndTextContent);
 	emscripten::function("isAPatchOfTheRootElement", &isAPatchOfTheRootElement);
 	emscripten::function("shouldCreateComments", &shouldCreateComments);

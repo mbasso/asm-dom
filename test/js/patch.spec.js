@@ -130,6 +130,14 @@ describe('patch (js)', function testPatch() {
     vdom.deleteVNode(elmPtr);
   });
 
+  it('should create elements with text content in utf8', () => {
+    const vnode = h('div', ['I am a string, àèò漢字']);
+    const elmPtr = patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.innerHTML).toEqual('I am a string, àèò漢字');
+    vdom.deleteVNode(elmPtr);
+  });
+
   it('should create elements with span and text content', () => {
     const vnode = h('a', [h('span'), 'I am a string']);
     const elmPtr = patch(root, vnode);

@@ -1,4 +1,5 @@
 #include "../../../src/asm-dom.hpp"
+#include "./task.hpp"
 #include "./helpers.hpp"
 #include <emscripten/val.h>
 #include <functional>
@@ -126,7 +127,7 @@ namespace todomvc {
 									return true;
 								}},
 								{"onkeydown", [handler](emscripten::val e) -> bool {
-									std::string value = e["target"]["value"].as<std::string>();
+									std::string value = wstring_to_utf8(e["target"]["value"].as<std::wstring>());
 									if (e["keyCode"].as<int>() == KEY_ENTER && !value.empty()) {
 										handler(Action::CommitEdit(value));
 									}

@@ -49,6 +49,10 @@ describe('patch (cpp)', function test() {
     app.shouldCreateElementsWithTextContent();
   });
 
+  it('should create elements with text content in utf8', () => {
+    app.shouldCreateElementsWithTextContentInUtf8();
+  });
+
   it('should create elements with span and text content', () => {
     app.shouldCreateElementsWithSpanAndTextContent();
   });
