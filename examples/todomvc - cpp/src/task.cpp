@@ -22,7 +22,7 @@ namespace todomvc {
 			action StartEdit() {
 				return [](Task model) -> Task {
 					model.editing = true;
-					model.editingValue = model.title;
+					model.editingValue = utf8_to_wstring(model.title);
 					return model;
 				};
 			};
@@ -31,7 +31,7 @@ namespace todomvc {
 				return [title](Task model) -> Task {
 					model.title = title;
 					model.editing = false;
-					model.editingValue = "";
+					model.editingValue = L"";
 					return model;
 				};
 			};
@@ -39,7 +39,7 @@ namespace todomvc {
 			action CancelEdit() {
 				return [](Task model) -> Task {
 					model.editing = false;
-					model.editingValue = "";
+					model.editingValue = L"";
 					return model;
 				};
 			};
@@ -119,7 +119,7 @@ namespace todomvc {
 								{"class", "edit"},
 							},
 							VNodeProps {
-								{"value", emscripten::val(task.title)}
+								{"value", emscripten::val(task.editingValue)}
 							},
 							VNodeCallbacks {
 								{"onblur", [handler](emscripten::val e) -> bool {
@@ -145,7 +145,7 @@ namespace todomvc {
 				.title = title,
 				.done = false,
 				.editing = false,
-				.editingValue = std::string("")
+				.editingValue = L""
 			};
 		};
 

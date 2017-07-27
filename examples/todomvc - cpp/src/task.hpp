@@ -14,7 +14,7 @@ namespace todomvc {
 			std::string title;
 			bool done;
 			bool editing;
-			std::string editingValue;
+			std::wstring editingValue;
 		};
 
 		typedef std::function<Task(Task)> action;
