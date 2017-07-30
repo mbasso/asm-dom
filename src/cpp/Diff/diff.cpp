@@ -8,7 +8,7 @@
 
 namespace asmdom {
 
-	void diffAttrs(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+	void diffAttrs(const VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		if (oldVnode->data != NULL) {
 			VNodeAttrs::iterator it = oldVnode->data->attrs.begin();
 			bool areDataDefined = vnode->data != NULL;
@@ -60,7 +60,7 @@ namespace asmdom {
 		}
 	};
 
-	void diffProps(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+	void diffProps(const VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		emscripten::val elm = emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm];
 
 		if (oldVnode->data != NULL) {
@@ -90,7 +90,7 @@ namespace asmdom {
 		}
 	};
 
-	void diffCallbacks(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+	void diffCallbacks(const VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		emscripten::val elm = emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm];
 
 		if (oldVnode->data != NULL) {
@@ -116,7 +116,7 @@ namespace asmdom {
 		}
 	};
 
-	void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+	void diff(const VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		#ifdef ASMDOM_JS_SIDE
 			EM_ASM_({
 				window['asmDomHelpers']['diff']($0, $1, $2);

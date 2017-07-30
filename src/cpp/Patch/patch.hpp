@@ -7,7 +7,7 @@
 namespace asmdom {
 
 	VNode* patch(
-		emscripten::val element,
+		const emscripten::val& element,
 		VNode* vnode
 	);
 	VNode* patch(

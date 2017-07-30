@@ -1471,7 +1471,7 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
   return;
  }
 }
-function __ZN6asmdom9diffAttrsEPNS_5VNodeES1_($oldVnode$0$3$val,$vnode) {
+function __ZN6asmdom9diffAttrsEPKNS_5VNodeEPS0_($oldVnode$0$3$val,$vnode) {
  $oldVnode$0$3$val = $oldVnode$0$3$val|0;
  $vnode = $vnode|0;
  var $$pre = 0, $$pre105 = 0, $$pre106 = 0, $$sroa$speculated$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0;
@@ -2076,7 +2076,7 @@ function __ZN6asmdom9createElmEPNS_5VNodeE($vnode) {
   label = 30;
  }
  if ((label|0) == 30) {
-  __ZN6asmdom9diffAttrsEPNS_5VNodeES1_($20,$vnode);
+  __ZN6asmdom9diffAttrsEPKNS_5VNodeEPS0_($20,$vnode);
  }
  $children = ((($vnode)) + 44|0);
  $22 = load4($children);
@@ -2138,7 +2138,7 @@ function __ZN6asmdom9createElmEPNS_5VNodeE($vnode) {
  $34 = load4($elm65$pre$phiZ2D);
  STACKTOP = sp;return ($34|0);
 }
-function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
+function __ZN6asmdom10patchVNodeEPKNS_5VNodeEPS0_($oldVnode,$vnode) {
  $oldVnode = $oldVnode|0;
  $vnode = $vnode|0;
  var $$pre = 0, $$pre$i$i$i$i$i$i$i$i = 0, $$pre86 = 0, $$pre87 = 0, $$pre88 = 0, $$sink$be$i$i = 0, $$sink$i$i$i = 0, $$sroa$speculated$i = 0, $$sroa$speculated$i$i = 0, $$sroa$speculated$i$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i22$i$i = 0, $$sroa$speculated$i$i$i$i30$i$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $100 = 0, $101 = 0, $102 = 0, $103 = 0;
@@ -2192,7 +2192,7 @@ function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
   label = 3;
  }
  if ((label|0) == 3) {
-  __ZN6asmdom9diffAttrsEPNS_5VNodeES1_($3,$vnode);
+  __ZN6asmdom9diffAttrsEPKNS_5VNodeEPS0_($3,$vnode);
  }
  $text = ((($vnode)) + 24|0);
  $__size_$i$i$i = ((($text)) + 11|0);
@@ -2501,7 +2501,7 @@ function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
       }
       $call38$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldStartVnode$0255$i,$newStartVnode$0257$i)|0);
       if ($call38$i) {
-       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldStartVnode$0255$i,$newStartVnode$0257$i);
+       __ZN6asmdom10patchVNodeEPKNS_5VNodeEPS0_($oldStartVnode$0255$i,$newStartVnode$0257$i);
        $inc41$i = (($oldStartIdx$0251$i) + 1)|0;
        $arrayidx$i129$i = (($27) + ($inc41$i<<2)|0);
        $37 = load4($arrayidx$i129$i);
@@ -2513,7 +2513,7 @@ function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
       }
       $call49$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldEndVnode$0256$i,$newEndVnode$0259$i)|0);
       if ($call49$i) {
-       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldEndVnode$0256$i,$newEndVnode$0259$i);
+       __ZN6asmdom10patchVNodeEPKNS_5VNodeEPS0_($oldEndVnode$0256$i,$newEndVnode$0259$i);
        $dec52$i = (($oldEndIdx$0253$i) + -1)|0;
        $arrayidx$i143$i = (($27) + ($dec52$i<<2)|0);
        $39 = load4($arrayidx$i143$i);
@@ -2525,7 +2525,7 @@ function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
       }
       $call60$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldStartVnode$0255$i,$newEndVnode$0259$i)|0);
       if ($call60$i) {
-       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldStartVnode$0255$i,$newEndVnode$0259$i);
+       __ZN6asmdom10patchVNodeEPKNS_5VNodeEPS0_($oldStartVnode$0255$i,$newEndVnode$0259$i);
        $elm$i = ((($oldStartVnode$0255$i)) + 40|0);
        $41 = load4($elm$i);
        $elm63$i = ((($oldEndVnode$0256$i)) + 40|0);
@@ -2542,7 +2542,7 @@ function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
       }
       $call74$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldEndVnode$0256$i,$newStartVnode$0257$i)|0);
       if ($call74$i) {
-       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldEndVnode$0256$i,$newStartVnode$0257$i);
+       __ZN6asmdom10patchVNodeEPKNS_5VNodeEPS0_($oldEndVnode$0256$i,$newStartVnode$0257$i);
        $elm77$i = ((($oldEndVnode$0256$i)) + 40|0);
        $45 = load4($elm77$i);
        $elm78$i = ((($oldStartVnode$0255$i)) + 40|0);
@@ -2935,7 +2935,7 @@ function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
            label = 94;
            break;
           }
-          __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($90,$newStartVnode$0257$i);
+          __ZN6asmdom10patchVNodeEPKNS_5VNodeEPS0_($90,$newStartVnode$0257$i);
           $call$i$i178$i = (__ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiNS_4lessIS6_EENS4_INS_4pairIKS6_iEEEEE16__find_equal_keyERPNS_16__tree_node_baseIPvEERSA_($oldKeyToIdx$1$i,$__parent$i$i$i$i$i$i$i$sroa$0,$key$i)|0);
           $99 = load4($call$i$i178$i);
           $cmp$i179$i = ($99|0)==(0|0);
@@ -3984,7 +3984,7 @@ function __Z8patchPtrRKjS0_($oldVnode,$vnode) {
  store4(10696,$1);
  $call$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($0,$1)|0);
  if ($call$i) {
-  __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($0,$1);
+  __ZN6asmdom10patchVNodeEPKNS_5VNodeEPS0_($0,$1);
   return;
  }
  $elm$i = ((($0)) + 40|0);

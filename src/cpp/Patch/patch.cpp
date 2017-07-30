@@ -12,12 +12,12 @@
 namespace asmdom {
 
 	void updateChildren(
-		emscripten::val parentElm,
+		const emscripten::val& parentElm,
 		std::vector<VNode*>& oldChildren,
 		std::vector<VNode*>& newChildren
 	);
 	void patchVNode(
-		VNode* __restrict__ const oldVnode,
+		const VNode* __restrict__ const oldVnode,
 		VNode* __restrict__ const vnode
 	);
 
@@ -108,7 +108,7 @@ namespace asmdom {
 	};
 
 	void removeVNodes(
-		std::vector<VNode*>& vnodes,
+		const std::vector<VNode*>& vnodes,
 		std::vector<VNode*>::size_type startIdx,
 		const std::vector<VNode*>::size_type endIdx
 	) {
@@ -121,7 +121,7 @@ namespace asmdom {
 
 	void updateChildren(
 		int parentElm,
-		std::vector<VNode*>& oldChildren,
+		const std::vector<VNode*>& oldChildren,
 		std::vector<VNode*>& newChildren
 	) {
 		std::vector<VNode*> oldCh(oldChildren);
@@ -213,7 +213,7 @@ namespace asmdom {
 		oldKeyToIdx = NULL;
 	};
 
-	void patchVNode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+	void patchVNode(const VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		vnode->elm = oldVnode->elm;
 		diff(oldVnode, vnode);
 		if (vnode->text.empty()) {
@@ -243,7 +243,7 @@ namespace asmdom {
 		}
 	};
 
-	VNode* patch(emscripten::val element, VNode* vnode) {
+	VNode* patch(const emscripten::val& element, VNode* vnode) {
 		std::string sel = element["tagName"].as<std::string>();
 		std::transform(sel.begin(), sel.end(), sel.begin(), ::tolower);
 
