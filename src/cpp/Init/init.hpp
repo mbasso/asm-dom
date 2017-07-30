@@ -8,7 +8,7 @@ namespace asmdom {
 		bool unsafePatch = false;
 	};
 
-	void init(asmdomConfig config);
+	void init(asmdomConfig& config);
 
 }
 

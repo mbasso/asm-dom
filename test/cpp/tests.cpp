@@ -1,5 +1,6 @@
 #include "../../src/asm-dom.hpp"
 #include "utils.cpp"
+#include "index/index.cpp"
 #include "h/h.cpp"
 #include "attributes/attributes.cpp"
 #include "eventlisteners/eventlisteners.cpp"

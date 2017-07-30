@@ -24,6 +24,10 @@ namespace asmdom {
 	VNode* const emptyNode = new VNode();
 	VNode* currentNode = NULL;
 
+	void reset() {
+		currentNode = NULL;
+	};
+
 	bool sameVNode(const VNode* __restrict__ const vnode1, const VNode* __restrict__ const vnode2) {
 		return vnode1->key.compare(vnode2->key) == 0 && vnode1->sel.compare(vnode2->sel) == 0;
 	};

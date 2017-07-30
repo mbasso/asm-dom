@@ -15,6 +15,8 @@ namespace asmdom {
 		VNode* vnode
 	);
 
+	void reset();
+
 }
 
 #endif
