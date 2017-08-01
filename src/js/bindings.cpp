@@ -1,4 +1,4 @@
-#include "../asm-dom.hpp"
+#include "../cpp/asm-dom.hpp"
 #include <emscripten/bind.h>
 #include <cstdint>
 #include <string>

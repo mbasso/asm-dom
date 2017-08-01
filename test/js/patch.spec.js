@@ -1,6 +1,6 @@
 import expect from 'expect';
 import { knuthShuffle } from 'knuth-shuffle';
-import init from '../../src/';
+import init from '../../src/js/';
 
 describe('patch (js)', function testPatch() {
   this.timeout(30000);

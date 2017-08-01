@@ -1,7 +1,7 @@
-import h from './js/h';
-import patch from './js/patch';
-import diff from './js/diff';
-import domApi, { nodes } from './shared/domApi';
+import h from './h';
+import patch from './patch';
+import diff from './diff';
+import domApi, { nodes } from '../cpp/domApi';
 
 const cache = {};
 
@@ -24,9 +24,9 @@ export default (config) => {
     config['_main'] = () => resolve(cache);
   });
   if ((config.useWasm === true || 'WebAssembly' in window) && config.useAsmJS !== true) {
-    result = import('./js/loadWasm').then(x => x.default(config));
+    result = import('./loadWasm').then(x => x.default(config));
   } else {
-    result = import('../compiled/asmjs/asm-dom.asm.js');
+    result = import('../../compiled/asmjs/asm-dom.asm.js');
   }
 
   return result

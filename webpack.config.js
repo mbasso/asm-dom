@@ -8,7 +8,7 @@ module.exports = (env) => {
   var ifProd = plugin => addPlugin(env.prod, plugin);
   var removeEmpty = array => array.filter(i => !!i);
   return {
-    entry: env.cpp ? './cpp/index.js' : './index.js',
+    entry: env.cpp ? './cpp/index.js' : './js/index.js',
     target: 'node',
     output: {
       library: 'asmDom',

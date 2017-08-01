@@ -1,5 +1,0 @@
-#include "cpp/VDOMConfig/VDOMConfig.cpp"
-#include "cpp/VNode/VNode.cpp"
-#include "cpp/Diff/diff.cpp"
-#include "cpp/Patch/patch.cpp"
-#include "cpp/Init/init.cpp"

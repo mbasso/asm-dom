@@ -1,5 +1,5 @@
 #include "utils.hpp"
-#include "../../src/asm-dom.hpp"
+#include "../../src/cpp/asm-dom.hpp"
 #include <emscripten/val.h>
 
 using namespace asmdom;

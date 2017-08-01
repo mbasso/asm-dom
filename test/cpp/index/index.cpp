@@ -1,4 +1,4 @@
-#include "../../../src/asm-dom.hpp"
+#include "../../../src/cpp/asm-dom.hpp"
 #include "../utils.hpp"
 #include <emscripten/bind.h>
 

@@ -1,5 +1,5 @@
 import expect from 'expect';
-import init from '../../src/';
+import init from '../../src/js/';
 
 describe('attributes (js)', function testAttributes() {
   this.timeout(30000);

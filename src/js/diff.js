@@ -1,4 +1,4 @@
-import { nodes } from '../shared/domApi';
+import { nodes } from '../cpp/domApi';
 
 export default (oldVnodePtr, vnodePtr, elmPtr) => {
   let oldRaws = window.asmDomHelpers.vnodesData[oldVnodePtr];
