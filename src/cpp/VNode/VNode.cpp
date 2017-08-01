@@ -1,5 +1,7 @@
 #include "VNode.hpp"
+#include <emscripten/val.h>
 #include <emscripten/bind.h>
+#include <cstdint>
 #include <string>
 
 namespace asmdom {
@@ -45,6 +47,8 @@ namespace asmdom {
     delete vnode;
   };
 
+	#ifndef ASMDOM_JS_SIDE
+
 	emscripten::val functionCallback(const std::uintptr_t& vnode, const std::string& callback, emscripten::val event) {
 		return emscripten::val(reinterpret_cast<VNode*>(vnode)->data->callbacks.at(callback)(event));
 	};
@@ -52,5 +56,7 @@ namespace asmdom {
 	EMSCRIPTEN_BINDINGS(function_callback) {
 		emscripten::function("functionCallback", &functionCallback, emscripten::allow_raw_pointers());
 	};
+
+	#endif
 
 }

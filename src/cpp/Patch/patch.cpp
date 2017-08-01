@@ -46,27 +46,27 @@ namespace asmdom {
 		if (vnode->sel.empty()) {
 			vnode->elm = EM_ASM_INT({
 				return window['asmDomHelpers']['domApi']['createTextNode'](
-					window['asmDom']['Pointer_stringify']($0)
+					Module['Pointer_stringify']($0)
 				);
 			}, vnode->text.c_str());
 		} else if (vnode->sel.compare("!") == 0) {
 			vnode->elm = EM_ASM_INT({
 				return window['asmDomHelpers']['domApi']['createComment'](
-					window['asmDom']['Pointer_stringify']($0)
+					Module['Pointer_stringify']($0)
 				);
 			}, vnode->text.c_str());
 		} else {
 			if (vnode->data != NULL && vnode->data->attrs.count(std::string("ns")) != 0) {
 				vnode->elm = EM_ASM_INT({
 					return window['asmDomHelpers']['domApi']['createElementNS'](
-						window['asmDom']['Pointer_stringify']($0),
-						window['asmDom']['Pointer_stringify']($1)
+						Module['Pointer_stringify']($0),
+						Module['Pointer_stringify']($1)
 					);
 				}, vnode->data->attrs.at(std::string("ns")).c_str(), vnode->sel.c_str());
 			} else {
 				vnode->elm = EM_ASM_INT({
 					return window['asmDomHelpers']['domApi']['createElement'](
-						window['asmDom']['Pointer_stringify']($0)
+						Module['Pointer_stringify']($0)
 					);
 				}, vnode->sel.c_str());
 			}
@@ -84,7 +84,7 @@ namespace asmdom {
 					window['asmDomHelpers']['domApi']['appendChild'](
 						$0,
 						window['asmDomHelpers']['domApi']['createTextNode'](
-							window['asmDom']['Pointer_stringify']($1)
+							Module['Pointer_stringify']($1)
 						)
 					);
 				}, vnode->elm, vnode->text.c_str());
@@ -237,7 +237,7 @@ namespace asmdom {
 			EM_ASM_({
 				window['asmDomHelpers']['domApi']['setTextContent'](
 					$0,
-					window['asmDom']['Pointer_stringify']($1)
+					Module['Pointer_stringify']($1)
 				);
 			}, vnode->elm, vnode->text.c_str());
 		}

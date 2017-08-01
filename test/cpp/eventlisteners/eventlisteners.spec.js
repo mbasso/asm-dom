@@ -6,10 +6,7 @@ describe('eventlisteners (cpp)', function testEventlisteners() {
   let app;
 
   before((done) => {
-    init().then((asmApp) => {
-      app = asmApp;
-      done();
-    });
+    app = init(done);
   });
 
   beforeEach(() => {

@@ -17,7 +17,7 @@ namespace asmdom {
 					EM_ASM_({
 						window['asmDomHelpers']['domApi']['removeAttribute'](
 							$0,
-							window['asmDom']['Pointer_stringify']($1)
+							Module['Pointer_stringify']($1)
 						);
 					}, vnode->elm, it->first.c_str());
 				}
@@ -37,7 +37,7 @@ namespace asmdom {
 							EM_ASM_({
 								window['asmDomHelpers']['domApi']['removeAttribute'](
 									$0,
-									window['asmDom']['Pointer_stringify']($1)
+									Module['Pointer_stringify']($1)
 								);
 							}, vnode->elm, it->first.c_str());
 						} else {
@@ -46,8 +46,8 @@ namespace asmdom {
 						EM_ASM_({
 							window['asmDomHelpers']['domApi']['setAttribute'](
 								$0,
-								window['asmDom']['Pointer_stringify']($1),
-								window['asmDom']['Pointer_stringify']($2)
+								Module['Pointer_stringify']($1),
+								Module['Pointer_stringify']($2)
 							);
 						}, vnode->elm, it->first.c_str(), it->second.c_str());
 					
@@ -59,6 +59,8 @@ namespace asmdom {
 			}
 		}
 	};
+
+	#ifndef ASMDOM_JS_SIDE
 
 	void diffProps(const VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		emscripten::val elm = emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm];
@@ -115,6 +117,8 @@ namespace asmdom {
 			}
 		}
 	};
+
+	#endif
 
 	void diff(const VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		#ifdef ASMDOM_JS_SIDE

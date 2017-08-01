@@ -6,10 +6,7 @@ describe('attributes (cpp)', function testAttributes() {
   let app;
 
   before((done) => {
-    init().then((asmApp) => {
-      app = asmApp;
-      done();
-    });
+    app = init(done);
   });
 
   beforeEach(() => {

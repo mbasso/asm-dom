@@ -6,10 +6,7 @@ describe('load (cpp)', function test() {
   let app;
 
   before((done) => {
-    init().then((asmApp) => {
-      app = asmApp;
-      done();
-    });
+    app = init(done);
   });
 
   beforeEach(() => {

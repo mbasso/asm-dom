@@ -6,14 +6,7 @@
 using namespace asmdom;
 using namespace todomvc::todos;
 
-int main() {
-	asmdomConfig config = asmdomConfig();
-
-	init(config);
-	return 0;
-};
-
-std::function<void(std::function<Todos(Todos)>)> handler;
+std::function<void(todomvc::todos::action)> handler;
 
 void onhashchange(std::string filter) {
 	TodoFilter todoFilter = all;
@@ -60,7 +53,16 @@ void render(Todos initState, emscripten::val oldVnode) {
 	afterPatch(result);
 };
 
-void start() {
+int main() {
+	asmdomConfig config = asmdomConfig();
+	init(config);
+
+	EM_ASM(
+		window['todomvc'] = {
+			'onhashchange': Module['onhashchange'],
+		};
+	);
+
 	render(
 		todomvc::todos::init(),
 		emscripten::val::global("document").call<emscripten::val>(
@@ -68,9 +70,9 @@ void start() {
 			std::string(".todoapp")
 		)
 	);
+	return 0;
 };
 
 EMSCRIPTEN_BINDINGS(app) {
-  emscripten::function("start", &start);
   emscripten::function("onhashchange", &onhashchange);
 };

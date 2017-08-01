@@ -8,7 +8,18 @@ namespace asmdom {
 		VDOMConfig& vdomconfig = VDOMConfig::getConfig();
 		vdomconfig.setClearMemory(config.clearMemory);
 		vdomconfig.setUnsafePatch(config.unsafePatch);
-		EM_ASM(window['asmDomReady']());
+
+		#ifndef ASMDOM_JS_SIDE
+
+		EM_ASM(
+			window['asmDomHelpers']['functionCallback'] = function(vnode, callback) {
+        return function(event) {
+					return Module['functionCallback'](vnode, callback, event);
+				};
+			};
+		);
+
+		#endif
 	};
 
 }
