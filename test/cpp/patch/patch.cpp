@@ -12,7 +12,7 @@ using namespace asmdom;
 void shouldPatchANode() {
 	assertEquals(emscripten::val::global("document")["body"]["children"]["length"], emscripten::val(1));
 	assertEquals(emscripten::val::global("document")["body"]["firstChild"], emscripten::val(getRoot()));
-	VNode* vnode = new VNode("span");
+	VNode* vnode = h("span");
 	patch(getRoot(), vnode);
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(emscripten::val::global("document")["body"]["children"]["length"], emscripten::val(1));
@@ -22,7 +22,7 @@ void shouldPatchANode() {
 };
 
 void shouldHaveATag() {
-	VNode* vnode = new VNode("div");
+	VNode* vnode = h("div");
 	VNode* elmPtr = patch(getRoot(), vnode);
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["tagName"], emscripten::val("DIV"));
@@ -31,10 +31,10 @@ void shouldHaveATag() {
 
 void shouldHaveTheCorrectNamespace() {
 	std::string svgNamespace = "http://www.w3.org/2000/svg";
-	VNode* vnode = new VNode("div",
-		new VNode("div", 
-			new VNodeData(
-				VNodeAttrs {
+	VNode* vnode = h("div",
+		h("div", 
+			Data(
+				Attrs {
 					{"ns", svgNamespace}
 				}
 			)
@@ -49,13 +49,13 @@ void shouldHaveTheCorrectNamespace() {
 void shouldInjectSvgNamespace() {
 	std::string svgNamespace = "http://www.w3.org/2000/svg";
 	std::string XHTMLNamespace = "http://www.w3.org/1999/xhtml";
-	VNode* vnode = new VNode("svg",
-		VNodeChildren {
-			new VNode("foreignObject",
-				VNodeChildren {
-					new VNode("div",
-						VNodeChildren {
-							new VNode("I am HTML embedded in SVG", true)
+	VNode* vnode = h("svg",
+		Children {
+			h("foreignObject",
+				Children {
+					h("div",
+						Children {
+							h("I am HTML embedded in SVG", true)
 						}
 					)
 				}
@@ -72,9 +72,9 @@ void shouldInjectSvgNamespace() {
 };
 
 void shouldCreateElementsWithClass() {
-	VNode* vnode = new VNode("div",
-		new VNodeData(
-			VNodeAttrs {
+	VNode* vnode = h("div",
+		Data(
+			Attrs {
 				{"class", "foo"}
 			}
 		)
@@ -89,9 +89,9 @@ void shouldCreateElementsWithClass() {
 };
 
 void shouldCreateElementsWithTextContent() {
-	VNode* vnode = new VNode("div",
-		VNodeChildren {
-			new VNode("I am a string", true)
+	VNode* vnode = h("div",
+		Children {
+			h("I am a string", true)
 		}
 	);
 	VNode* elmPtr = patch(getRoot(), vnode);
@@ -104,10 +104,10 @@ void shouldCreateElementsWithTextContent() {
 void shouldCreateElementsWithTextContentInUtf8() {};
 
 void shouldCreateElementsWithSpanAndTextContent() {
-	VNode* vnode = new VNode("a",
-		VNodeChildren {
-			new VNode("span"),
-			new VNode("I am a string", true)
+	VNode* vnode = h("a",
+		Children {
+			h("span"),
+			h("I am a string", true)
 		}
 	);
 	VNode* elmPtr = patch(getRoot(), vnode);
@@ -121,15 +121,15 @@ void isAPatchOfTheRootElement() {
 	emscripten::val elmWithIdAndClass = emscripten::val::global("document").call<emscripten::val>("createElement", emscripten::val("div"));
 	elmWithIdAndClass.set("id", emscripten::val("id"));
 	elmWithIdAndClass.set("className", emscripten::val("class"));
-	VNode* vnode = new VNode("div",
-		new VNodeData (
-			VNodeAttrs {
+	VNode* vnode = h("div",
+		Data (
+			Attrs {
 				{"id", "id"},
 				{"class", "class"}
 			}
 		),
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("Hi"))
+		Children {
+			h(std::string("span"), std::string("Hi"))
 		}
 	);
 
@@ -143,7 +143,7 @@ void isAPatchOfTheRootElement() {
 };
 
 void shouldCreateComments() {
-	VNode* vnode = new VNode(std::string("!"), std::string("test"));
+	VNode* vnode = h(std::string("!"), std::string("test"));
 	VNode* elmPtr = patch(getRoot(), vnode);
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["nodeType"], emscripten::val::global("document")["COMMENT_NODE"]);
@@ -152,16 +152,16 @@ void shouldCreateComments() {
 };
 
 void shouldAppendElements() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -176,19 +176,19 @@ void shouldAppendElements() {
 };
 
 void shouldPrependElements() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -206,21 +206,21 @@ void shouldPrependElements() {
 };
 
 void shouldAddElementsInTheMiddle() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -238,20 +238,20 @@ void shouldAddElementsInTheMiddle() {
 };
 
 void shouldAddElementsAtBeginAndEnd() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -269,23 +269,23 @@ void shouldAddElementsAtBeginAndEnd() {
 };
 
 void shouldAddChildrenToParentWithNoChildren() {
-	VNode* vnode1 = new VNode("span",
-		new VNodeData (
-			VNodeAttrs {
+	VNode* vnode1 = h("span",
+		Data (
+			Attrs {
 				{"key", "span"}
 			}
 		)
 	);
-	VNode* vnode2 = new VNode("span",
-		new VNodeData (
-			VNodeAttrs {
+	VNode* vnode2 = h("span",
+		Data (
+			Attrs {
 				{"key", "span"}
 			}
 		),
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3"))
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -301,21 +301,21 @@ void shouldAddChildrenToParentWithNoChildren() {
 };
 
 void shouldRemoveAllChildrenFromParent() {
-	VNode* vnode1 = new VNode("span",
-		new VNodeData (
-			VNodeAttrs {
+	VNode* vnode1 = h("span",
+		Data (
+			Attrs {
 				{"key", "span"}
 			}
 		),
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3"))
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		new VNodeData (
-			VNodeAttrs {
+	VNode* vnode2 = h("span",
+		Data (
+			Attrs {
 				{"key", "span"}
 			}
 		)
@@ -333,35 +333,35 @@ void shouldRemoveAllChildrenFromParent() {
 };
 
 void shouldUpdateOneChildWithSameKeyButDifferentSel() {
-	VNode* vnode1 = new VNode("span",
-		new VNodeData (
-			VNodeAttrs {
+	VNode* vnode1 = h("span",
+		Data (
+			Attrs {
 				{"key", "span"}
 			}
 		),
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3"))
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		new VNodeData (
-			VNodeAttrs {
+	VNode* vnode2 = h("span",
+		Data (
+			Attrs {
 				{"key", "span"}
 			}
 		),
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode("i",
-				new VNodeData (
-					VNodeAttrs {
+		Children {
+			h(std::string("span"), std::string("1")),
+			h("i",
+				Data (
+					Attrs {
 						{"key", "2"}
 					}
 				),
 				std::string("2")
 			),
-			new VNode(std::string("span"), std::string("3"))
+			h(std::string("span"), std::string("3"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -381,20 +381,20 @@ void shouldUpdateOneChildWithSameKeyButDifferentSel() {
 };
 
 void shouldRemoveElementsFromTheBeginning() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -410,20 +410,20 @@ void shouldRemoveElementsFromTheBeginning() {
 };
 
 void shouldRemoveElementsFromTheEnd() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -439,21 +439,21 @@ void shouldRemoveElementsFromTheEnd() {
 };
 
 void shouldRemoveElementsFromTheMiddle() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -470,20 +470,20 @@ void shouldRemoveElementsFromTheMiddle() {
 };
 
 void shouldMoveElementForward() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("4"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("4"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -500,18 +500,18 @@ void shouldMoveElementForward() {
 };
 
 void shouldMoveElementToEnd() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("1"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("1"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -527,20 +527,20 @@ void shouldMoveElementToEnd() {
 };
 
 void shouldMoveElementBackwards() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -557,20 +557,20 @@ void shouldMoveElementBackwards() {
 };
 
 void shouldSwapFirstAndLast() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("1"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("1"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -587,22 +587,22 @@ void shouldSwapFirstAndLast() {
 };
 
 void shouldMoveToLeftAndReplace() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("6"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("6"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -620,17 +620,17 @@ void shouldMoveToLeftAndReplace() {
 };
 
 void shouldMoveToLeftAndLeavesHole() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("6"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("6"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -645,18 +645,18 @@ void shouldMoveToLeftAndLeavesHole() {
 };
 
 void shouldHandleMovedAndSetToUndefinedElementEndingAtEnd() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5")),
-			new VNode(std::string("span"), std::string("3"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5")),
+			h(std::string("span"), std::string("3"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -672,22 +672,22 @@ void shouldHandleMovedAndSetToUndefinedElementEndingAtEnd() {
 };
 
 void shouldMoveAKeyInNonKeyedNodesWithASizeUp() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("a")),
-			new VNode(std::string("span"), std::string("b")),
-			new VNode(std::string("span"), std::string("c"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("a")),
+			h(std::string("span"), std::string("b")),
+			h(std::string("span"), std::string("c"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("d")),
-			new VNode(std::string("span"), std::string("a")),
-			new VNode(std::string("span"), std::string("b")),
-			new VNode(std::string("span"), std::string("c")),
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("e"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("d")),
+			h(std::string("span"), std::string("a")),
+			h(std::string("span"), std::string("b")),
+			h(std::string("span"), std::string("c")),
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("e"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -702,28 +702,28 @@ void shouldMoveAKeyInNonKeyedNodesWithASizeUp() {
 };
 
 void shouldReverseElements() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5")),
-			new VNode(std::string("span"), std::string("6")),
-			new VNode(std::string("span"), std::string("7")),
-			new VNode(std::string("span"), std::string("8"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5")),
+			h(std::string("span"), std::string("6")),
+			h(std::string("span"), std::string("7")),
+			h(std::string("span"), std::string("8"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("8")),
-			new VNode(std::string("span"), std::string("7")),
-			new VNode(std::string("span"), std::string("6")),
-			new VNode(std::string("span"), std::string("5")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("1"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("8")),
+			h(std::string("span"), std::string("7")),
+			h(std::string("span"), std::string("6")),
+			h(std::string("span"), std::string("5")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("1"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -744,24 +744,24 @@ void shouldReverseElements() {
 };
 
 void shouldReverseElementsWith0() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("0")),
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("0")),
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("5")),
-			new VNode(std::string("span"), std::string("0"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("5")),
+			h(std::string("span"), std::string("0"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -783,9 +783,9 @@ VNode* spanNumWithOpacity(int z, std::string o) {
 	std::string zString = std::to_string(z);
 	std::string opacity = std::string("opacity: ");
 	opacity.append(o);
-	return new VNode("span",
-		new VNodeData(
-			VNodeAttrs {
+	return h("span",
+		Data(
+			Attrs {
 				{"key", zString},
 				{"style", opacity}
 			}
@@ -824,11 +824,11 @@ void shouldHandleRandomShuffles() {
 		arr[n] = n;
 	}
 	for (n = 0; n < samples; ++n) {
-		VNodeChildren children;
+		Children children;
 		for (i = 0; i < elms; ++i) {
 			children.push_back(spanNumWithOpacity(arr[i], std::string("1")));
 		}
-		VNode* vnode1 = new VNode("span", children);
+		VNode* vnode1 = h("span", children);
 
 		std::vector<int> shufArr = shuffle(arr, elms);
 
@@ -840,11 +840,11 @@ void shouldHandleRandomShuffles() {
 			opacities[i] = std::string("0.");
 			opacities[i].append(std::to_string(rand() % 99999));
 		}
-		VNodeChildren opacityChildren;
+		Children opacityChildren;
 		for (i = 0; i < elms; ++i) {
 			opacityChildren.push_back(spanNumWithOpacity(shufArr[i], opacities[i]));
 		}
-		VNode* vnode2 = new VNode("span", opacityChildren);
+		VNode* vnode2 = h("span", opacityChildren);
 
 		patch(vnode1, vnode2);
 		elm = getNode(vnode2);
@@ -857,29 +857,29 @@ void shouldHandleRandomShuffles() {
 };
 
 void shouldSupportNullChildren() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("0")),
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("0")),
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
+	VNode* vnode2 = h("span",
+		Children {
 			NULL,
-			new VNode(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("2")),
 			NULL,
 			NULL,
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("0")),
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("0")),
 			NULL,
-			new VNode(std::string("span"), std::string("5")),
-			new VNode(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5")),
+			h(std::string("span"), std::string("4")),
 			NULL,
-			new VNode(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("3")),
 			NULL
 		}
 	);
@@ -899,18 +899,18 @@ void shouldSupportNullChildren() {
 };
 
 void shouldSupportAllNullChildren() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("0")),
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("5"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("0")),
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("5"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
+	VNode* vnode2 = h("span",
+		Children {
 			NULL,
 			NULL,
 			NULL,
@@ -919,14 +919,14 @@ void shouldSupportAllNullChildren() {
 			NULL
 		}
 	);
-	VNode* vnode3 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("5")),
-			new VNode(std::string("span"), std::string("4")),
-			new VNode(std::string("span"), std::string("3")),
-			new VNode(std::string("span"), std::string("2")),
-			new VNode(std::string("span"), std::string("1")),
-			new VNode(std::string("span"), std::string("0"))
+	VNode* vnode3 = h("span",
+		Children {
+			h(std::string("span"), std::string("5")),
+			h(std::string("span"), std::string("4")),
+			h(std::string("span"), std::string("3")),
+			h(std::string("span"), std::string("2")),
+			h(std::string("span"), std::string("1")),
+			h(std::string("span"), std::string("0"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -953,7 +953,7 @@ void shouldHandleRandomShufflesWithNullChildren() {
 	std::vector<int> arr;
 	int maxArrLen = 15;
 	int samples = 5;
-	VNode* vnode1 = patch(getRoot(), new VNode("div"));
+	VNode* vnode1 = patch(getRoot(), h("div"));
 	VNode* vnode2;
 	for (i = 0; i < samples; ++i) {
 		len = rand() % (maxArrLen + 1);
@@ -965,11 +965,11 @@ void shouldHandleRandomShufflesWithNullChildren() {
 			else arr[j] = NULL;
 		}
 		std::vector<int> shufArr = shuffle(arr, len);
-		VNodeChildren children = VNodeChildren();
+		Children children = Children();
 		for (j = 0; j < len; ++j) {
-			children.push_back(shufArr[j] == NULL ? NULL : new VNode(std::string("span"), std::to_string(shufArr[j])));
+			children.push_back(shufArr[j] == NULL ? NULL : h(std::string("span"), std::to_string(shufArr[j])));
 		}
-		vnode2 = new VNode("div", children);
+		vnode2 = h("div", children);
 		patch(vnode1, vnode2);
 		emscripten::val elm = getBodyFirstChild();
 		r = 0;
@@ -986,15 +986,15 @@ void shouldHandleRandomShufflesWithNullChildren() {
 };
 
 void shouldAppendElements2() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("Hello"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("Hello"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("Hello")),
-			new VNode(std::string("span"), std::string("World"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("Hello")),
+			h(std::string("span"), std::string("World"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -1010,16 +1010,16 @@ void shouldAppendElements2() {
 };
 
 void shouldHandleUnmovedTextNodes() {
-	VNode* vnode1 = new VNode("div",
-		VNodeChildren {
-			new VNode("Text", true),
-			new VNode(std::string("span"), std::string("Span"))
+	VNode* vnode1 = h("div",
+		Children {
+			h("Text", true),
+			h(std::string("span"), std::string("Span"))
 		}
 	);
-	VNode* vnode2 = new VNode("div",
-		VNodeChildren {
-			new VNode("Text", true),
-			new VNode(std::string("span"), std::string("Span"))
+	VNode* vnode2 = h("div",
+		Children {
+			h("Text", true),
+			h(std::string("span"), std::string("Span"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -1032,16 +1032,16 @@ void shouldHandleUnmovedTextNodes() {
 };
 
 void shouldHandleChangingTextChildren() {
-	VNode* vnode1 = new VNode("div",
-		VNodeChildren {
-			new VNode("Text", true),
-			new VNode(std::string("span"), std::string("Span"))
+	VNode* vnode1 = h("div",
+		Children {
+			h("Text", true),
+			h(std::string("span"), std::string("Span"))
 		}
 	);
-	VNode* vnode2 = new VNode("div",
-		VNodeChildren {
-			new VNode("Text2", true),
-			new VNode(std::string("span"), std::string("Span"))
+	VNode* vnode2 = h("div",
+		Children {
+			h("Text2", true),
+			h(std::string("span"), std::string("Span"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -1054,16 +1054,16 @@ void shouldHandleChangingTextChildren() {
 };
 
 void shouldHandleUnmovedCommentNodes() {
-	VNode* vnode1 = new VNode("div",
-		VNodeChildren {
-			new VNode(std::string("!"), std::string("Text")),
-			new VNode(std::string("span"), std::string("Span"))
+	VNode* vnode1 = h("div",
+		Children {
+			h(std::string("!"), std::string("Text")),
+			h(std::string("span"), std::string("Span"))
 		}
 	);
-	VNode* vnode2 = new VNode("div",
-		VNodeChildren {
-			new VNode(std::string("!"), std::string("Text")),
-			new VNode(std::string("span"), std::string("Span"))
+	VNode* vnode2 = h("div",
+		Children {
+			h(std::string("!"), std::string("Text")),
+			h(std::string("span"), std::string("Span"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -1076,16 +1076,16 @@ void shouldHandleUnmovedCommentNodes() {
 };
 
 void shouldHandleChangingCommentText() {
-	VNode* vnode1 = new VNode("div",
-		VNodeChildren {
-			new VNode(std::string("!"), std::string("Text")),
-			new VNode(std::string("span"), std::string("Span"))
+	VNode* vnode1 = h("div",
+		Children {
+			h(std::string("!"), std::string("Text")),
+			h(std::string("span"), std::string("Span"))
 		}
 	);
-	VNode* vnode2 = new VNode("div",
-		VNodeChildren {
-			new VNode(std::string("!"), std::string("Text2")),
-			new VNode(std::string("span"), std::string("Span"))
+	VNode* vnode2 = h("div",
+		Children {
+			h(std::string("!"), std::string("Text2")),
+			h(std::string("span"), std::string("Span"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -1098,16 +1098,16 @@ void shouldHandleChangingCommentText() {
 };
 
 void shouldHandleChangingEmptyComment() {
-	VNode* vnode1 = new VNode("div",
-		VNodeChildren {
-			new VNode("!"),
-			new VNode(std::string("span"), std::string("Span"))
+	VNode* vnode1 = h("div",
+		Children {
+			h("!"),
+			h(std::string("span"), std::string("Span"))
 		}
 	);
-	VNode* vnode2 = new VNode("div",
-		VNodeChildren {
-			new VNode(std::string("!"), std::string("Test")),
-			new VNode(std::string("span"), std::string("Span"))
+	VNode* vnode2 = h("div",
+		Children {
+			h(std::string("!"), std::string("Test")),
+			h(std::string("span"), std::string("Span"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -1120,15 +1120,15 @@ void shouldHandleChangingEmptyComment() {
 };
 
 void shouldPrependElements2() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("World"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("World"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("Hello")),
-			new VNode(std::string("span"), std::string("World"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("span"), std::string("Hello")),
+			h(std::string("span"), std::string("World"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -1144,15 +1144,15 @@ void shouldPrependElements2() {
 };
 
 void shouldPrependElementOfDifferentTagType() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("World"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("World"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("div"), std::string("Hello")),
-			new VNode(std::string("span"), std::string("World"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("div"), std::string("Hello")),
+			h(std::string("span"), std::string("World"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -1170,17 +1170,17 @@ void shouldPrependElementOfDifferentTagType() {
 };
 
 void shouldRemoveElements() {
-	VNode* vnode1 = new VNode("div",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("One")),
-			new VNode(std::string("span"), std::string("Two")),
-			new VNode(std::string("span"), std::string("Three"))
+	VNode* vnode1 = h("div",
+		Children {
+			h(std::string("span"), std::string("One")),
+			h(std::string("span"), std::string("Two")),
+			h(std::string("span"), std::string("Three"))
 		}
 	);
-	VNode* vnode2 = new VNode("div",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("One")),
-			new VNode(std::string("span"), std::string("Three"))
+	VNode* vnode2 = h("div",
+		Children {
+			h(std::string("span"), std::string("One")),
+			h(std::string("span"), std::string("Three"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -1196,8 +1196,8 @@ void shouldRemoveElements() {
 };
 
 void shouldRemoveASingleTextNode() {
-	VNode* vnode1 = new VNode(std::string("div"), std::string("One"));
-	VNode* vnode2 = new VNode("div");
+	VNode* vnode1 = h(std::string("div"), std::string("One"));
+	VNode* vnode2 = h("div");
 	patch(getRoot(), vnode1);
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["textContent"], emscripten::val("One"));
@@ -1208,11 +1208,11 @@ void shouldRemoveASingleTextNode() {
 };
 
 void shouldRemoveASingleTextNodeWhenChildrenAreUpdated() {
-	VNode* vnode1 = new VNode(std::string("div"), std::string("One"));
-	VNode* vnode2 = new VNode("div",
-		VNodeChildren {
-			new VNode(std::string("div"), std::string("Two")),
-			new VNode(std::string("span"), std::string("Three"))
+	VNode* vnode1 = h(std::string("div"), std::string("One"));
+	VNode* vnode2 = h("div",
+		Children {
+			h(std::string("div"), std::string("Two")),
+			h(std::string("span"), std::string("Three"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -1226,15 +1226,15 @@ void shouldRemoveASingleTextNodeWhenChildrenAreUpdated() {
 };
 
 void shouldRemoveATextNodeAmongOtherElements() {
-	VNode* vnode1 = new VNode("div",
-		VNodeChildren {
-			new VNode(std::string("One"), true),
-			new VNode(std::string("span"), std::string("Two"))
+	VNode* vnode1 = h("div",
+		Children {
+			h(std::string("One"), true),
+			h(std::string("span"), std::string("Two"))
 		}
 	);
-	VNode* vnode2 = new VNode("div",
-		VNodeChildren {
-			new VNode(std::string("div"), std::string("Three"))
+	VNode* vnode2 = h("div",
+		Children {
+			h(std::string("div"), std::string("Three"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -1250,18 +1250,18 @@ void shouldRemoveATextNodeAmongOtherElements() {
 };
 
 void shouldReorderElements() {
-	VNode* vnode1 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("span"), std::string("One")),
-			new VNode(std::string("div"), std::string("Two")),
-			new VNode(std::string("b"), std::string("Three"))
+	VNode* vnode1 = h("span",
+		Children {
+			h(std::string("span"), std::string("One")),
+			h(std::string("div"), std::string("Two")),
+			h(std::string("b"), std::string("Three"))
 		}
 	);
-	VNode* vnode2 = new VNode("span",
-		VNodeChildren {
-			new VNode(std::string("b"), std::string("Three")),
-			new VNode(std::string("span"), std::string("One")),
-			new VNode(std::string("div"), std::string("Two"))
+	VNode* vnode2 = h("span",
+		Children {
+			h(std::string("b"), std::string("Three")),
+			h(std::string("span"), std::string("One")),
+			h(std::string("div"), std::string("Two"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -1283,30 +1283,30 @@ void shouldReorderElements() {
 };
 
 void shouldSupportNullChildren2() {
-	VNode* vnode1 = new VNode("i",
-		VNodeChildren {
+	VNode* vnode1 = h("i",
+		Children {
 			NULL,
-			new VNode(std::string("i"), std::string("1")),
-			new VNode(std::string("i"), std::string("2")),
+			h(std::string("i"), std::string("1")),
+			h(std::string("i"), std::string("2")),
 			NULL
 		}
 	);
-	VNode* vnode2 = new VNode("i",
-		VNodeChildren {
-			new VNode(std::string("i"), std::string("2")),
+	VNode* vnode2 = h("i",
+		Children {
+			h(std::string("i"), std::string("2")),
 			NULL,
 			NULL,
-			new VNode(std::string("i"), std::string("1")),
+			h(std::string("i"), std::string("1")),
 			NULL
 		}
 	);
-	VNode* vnode3 = new VNode("i",
-		VNodeChildren {
+	VNode* vnode3 = h("i",
+		Children {
 			NULL,
-			new VNode(std::string("i"), std::string("1")),
+			h(std::string("i"), std::string("1")),
 			NULL,
 			NULL,
-			new VNode(std::string("i"), std::string("2")),
+			h(std::string("i"), std::string("2")),
 			NULL,
 			NULL
 		}
@@ -1330,22 +1330,22 @@ void shouldSupportNullChildren2() {
 };
 
 void shouldSupportAllNullChildren2() {
-	VNode* vnode1 = new VNode("i",
-		VNodeChildren {
-			new VNode(std::string("i"), std::string("1")),
-			new VNode(std::string("i"), std::string("2"))
+	VNode* vnode1 = h("i",
+		Children {
+			h(std::string("i"), std::string("1")),
+			h(std::string("i"), std::string("2"))
 		}
 	);
-	VNode* vnode2 = new VNode("i",
-		VNodeChildren {
+	VNode* vnode2 = h("i",
+		Children {
 			NULL,
 			NULL
 		}
 	);
-	VNode* vnode3 = new VNode("i",
-		VNodeChildren {
-			new VNode(std::string("i"), std::string("2")),
-			new VNode(std::string("i"), std::string("1"))
+	VNode* vnode3 = h("i",
+		Children {
+			h(std::string("i"), std::string("2")),
+			h(std::string("i"), std::string("1"))
 		}
 	);
 	patch(getRoot(), vnode1);

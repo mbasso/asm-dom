@@ -6,9 +6,9 @@
 using namespace asmdom;
 
 void shouldCreateElementWithProps() {
-  VNode* vnode = new VNode("div",
-    new VNodeData(
-      VNodeProps {
+  VNode* vnode = h("div",
+    Data(
+      Props {
         {"src", emscripten::val("http://localhost/")}
       }
     )
@@ -21,16 +21,16 @@ void shouldCreateElementWithProps() {
 };
 
 void changesAnElementsProps() {
-  VNode* vnode = new VNode("a",
-  new VNodeData(
-      VNodeProps {
+  VNode* vnode = h("a",
+  Data(
+      Props {
         {"src", emscripten::val("http://other/")}
       }
     )
   );
-  VNode* vnode2 = new VNode("a",
-  new VNodeData(
-      VNodeProps {
+  VNode* vnode2 = h("a",
+  Data(
+      Props {
         {"src", emscripten::val("http://localhost/")}
       }
     )
@@ -44,13 +44,13 @@ void changesAnElementsProps() {
 };
 
 void preservesMemoizedProps() {
-  VNodeData* data = new VNodeData(
-    VNodeProps {
+  Data data = Data(
+    Props {
       {"src", emscripten::val("http://other/")}
     }
   );
-  VNode* vnode = new VNode("a", data);
-  VNode* vnode2 = new VNode("a", data);
+  VNode* vnode = h("a", data);
+  VNode* vnode2 = h("a", data);
   patch(getRoot(), vnode);
 
   emscripten::val elm = getBodyFirstChild();
@@ -64,14 +64,14 @@ void preservesMemoizedProps() {
 };
 
 void removesAnElementsProps() {
-  VNode* vnode = new VNode("a",
-    new VNodeData(
-      VNodeProps {
+  VNode* vnode = h("a",
+    Data(
+      Props {
         {"src", emscripten::val("http://other/")}
       }
     )
   );
-  VNode* vnode2 = new VNode("a");
+  VNode* vnode2 = h("a");
   patch(getRoot(), vnode);
   patch(vnode, vnode2);
 

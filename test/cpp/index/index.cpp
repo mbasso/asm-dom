@@ -6,12 +6,12 @@ using namespace asmdom;
 
 void shouldAutomaticallyClearMemory() {
 	reset();
-	asmdomConfig config = asmdomConfig();
+	Config config = Config();
 	init(config);
 
-	VNode* vnode = new VNode("div");
-	VNode* vnode1 = new VNode("div");
-	VNode* vnode2 = new VNode("div");
+	VNode* vnode = h("div");
+	VNode* vnode1 = h("div");
+	VNode* vnode2 = h("div");
 
 	VNode obj = *vnode;
 
@@ -29,13 +29,13 @@ void shouldAutomaticallyClearMemory() {
 
 void shouldAutomaticallyClearMemoryByConfig() {
 	reset();
-	asmdomConfig config = asmdomConfig();
+	Config config = Config();
 	config.clearMemory = true;
 	init(config);
 
-	VNode* vnode = new VNode("div");
-	VNode* vnode1 = new VNode("div");
-	VNode* vnode2 = new VNode("div");
+	VNode* vnode = h("div");
+	VNode* vnode1 = h("div");
+	VNode* vnode2 = h("div");
 
 	VNode obj = *vnode;
 
@@ -53,13 +53,13 @@ void shouldAutomaticallyClearMemoryByConfig() {
 
 void shouldNotAutomaticallyClearMemoryByConfig() {
 	reset();
-	asmdomConfig config = asmdomConfig();
+	Config config = Config();
 	config.clearMemory = false;
 	init(config);
 
-	VNode* vnode = new VNode("div");
-	VNode* vnode1 = new VNode("div");
-	VNode* vnode2 = new VNode("div");
+	VNode* vnode = h("div");
+	VNode* vnode1 = h("div");
+	VNode* vnode2 = h("div");
 
 	VNode obj = *vnode;
 
@@ -77,12 +77,12 @@ void shouldNotAutomaticallyClearMemoryByConfig() {
 
 void shouldUseSafePatch() {
 	reset();
-	asmdomConfig config = asmdomConfig();
+	Config config = Config();
 	init(config);
 
-	VNode* vnode = new VNode("div");
-	VNode* vnode1 = new VNode("div");
-	VNode* vnode2 = new VNode("div");
+	VNode* vnode = h("div");
+	VNode* vnode1 = h("div");
+	VNode* vnode2 = h("div");
 
 	if (patch(getRoot(), vnode) != vnode) {
 		throw 20;
@@ -97,13 +97,13 @@ void shouldUseSafePatch() {
 
 void shouldUseSafePatchByConfig() {
 	reset();
-	asmdomConfig config = asmdomConfig();
+	Config config = Config();
 	config.unsafePatch = false;
 	init(config);
 
-	VNode* vnode = new VNode("div");
-	VNode* vnode1 = new VNode("div");
-	VNode* vnode2 = new VNode("div");
+	VNode* vnode = h("div");
+	VNode* vnode1 = h("div");
+	VNode* vnode2 = h("div");
 
 	if (patch(getRoot(), vnode) != vnode) {
 		throw 20;
@@ -118,13 +118,13 @@ void shouldUseSafePatchByConfig() {
 
 void shouldNotUseSafePatchByConfig() {
 	reset();
-	asmdomConfig config = asmdomConfig();
+	Config config = Config();
 	config.unsafePatch = true;
 	init(config);
 
-	VNode* vnode = new VNode("div");
-	VNode* vnode1 = new VNode("div");
-	VNode* vnode2 = new VNode("div");
+	VNode* vnode = h("div");
+	VNode* vnode1 = h("div");
+	VNode* vnode2 = h("div");
 
 	if (patch(getRoot(), vnode) != vnode) {
 		throw 20;

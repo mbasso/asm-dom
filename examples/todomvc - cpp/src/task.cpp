@@ -52,9 +52,9 @@ namespace todomvc {
 		const int KEY_ENTER = 13;
 
 		VNode* view(Task task, std::function<void(action)> handler, std::function<void(int)> remove) {
-			return new VNode("li", 
-				new VNodeData(
-					VNodeAttrs {
+			return h("li", 
+				Data(
+					Attrs {
 						{"class", classnames({
 							{"completed", task.done && !task.editing},
 							{"editing", task.editing}
@@ -62,24 +62,24 @@ namespace todomvc {
 						{"key", std::to_string(task.id)}
 					}
 				),
-				VNodeChildren {
-					new VNode("div",
-						new VNodeData(
-							VNodeAttrs {
+				Children {
+					h("div",
+						Data(
+							Attrs {
 								{"class", "view"}
 							}
 						),
-						VNodeChildren {
-							new VNode("input",
-								new VNodeData(
-									VNodeAttrs {
+						Children {
+							h("input",
+								Data(
+									Attrs {
 										{"type", "checkbox"},
 										{"class", "toggle"},
 									},
-									VNodeProps {
+									Props {
 										{"checked", emscripten::val(task.done)}
 									},
-									VNodeCallbacks {
+									Callbacks {
 										{"onclick", [handler](emscripten::val e) -> bool {
 											handler(Action::Toggle(targetChecked(e)));
 											return true;
@@ -87,9 +87,9 @@ namespace todomvc {
 									}
 								)
 							),
-							new VNode("label",
-								new VNodeData(
-									VNodeCallbacks {
+							h("label",
+								Data(
+									Callbacks {
 										{"ondblclick", [handler](emscripten::val e) -> bool {
 											handler(Action::StartEdit());
 											return true;
@@ -98,12 +98,12 @@ namespace todomvc {
 								),
 								task.title
 							),
-							new VNode("button",
-								new VNodeData(
-									VNodeAttrs {
+							h("button",
+								Data(
+									Attrs {
 										{"class", "destroy"},
 									},
-									VNodeCallbacks {
+									Callbacks {
 										{"onclick", [remove, task](emscripten::val e) {
 											remove(task.id);
 											return true;
@@ -113,15 +113,15 @@ namespace todomvc {
 							)
 						}
 					),
-					new VNode("input",
-						new VNodeData(
-							VNodeAttrs {
+					h("input",
+						Data(
+							Attrs {
 								{"class", "edit"},
 							},
-							VNodeProps {
+							Props {
 								{"value", emscripten::val(task.editingValue)}
 							},
-							VNodeCallbacks {
+							Callbacks {
 								{"onblur", [handler](emscripten::val e) -> bool {
 									handler(Action::CancelEdit());
 									return true;

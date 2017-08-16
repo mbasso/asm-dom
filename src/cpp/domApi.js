@@ -1,42 +1,38 @@
-import recycler from './domRecycler';
-
 export const nodes = { 0: null };
-let ptr = 0;
+let lastPtr = 0;
+const freePtrs = [];
 
-const addPtr = (node, ns) => {
-  if (node !== null) {
-    node.asmDomPtr = ptr;
-    node.asmDomNS = ns;
-  }
-  return node;
+const addPtr = (node) => {
+  const ptr = freePtrs.length !== 0 ? freePtrs.pop() : ++lastPtr;
+  nodes[ptr] = node;
+  if (node !== null && node !== undefined) node.asmDomPtr = ptr;
+  return ptr;
+};
+
+const remove = (node) => {
+  while (node.firstChild) remove(node.firstChild);
+  freePtrs.push(node.asmDomPtr);
+  node.remove();
 };
 
 export default {
   'addNode'(node) {
-    nodes[++ptr] = addPtr(node.parentNode);
-    nodes[++ptr] = addPtr(node.nextSibling);
-    // eslint-disable-next-line
-    return (nodes[++ptr] = addPtr(node)) && ptr;
+    addPtr(node.parentNode);
+    addPtr(node.nextSibling);
+    const ptr = addPtr(node);
+    return nodes[ptr] !== null ? ptr : null;
   },
   'createElement'(tagName) {
-    const node = recycler.create(tagName);
-    // eslint-disable-next-line
-    return node.asmDomPtr || (nodes[++ptr] = addPtr(node)) && ptr;
+    return addPtr(document.createElement(tagName));
   },
   'createElementNS'(namespaceURI, qualifiedName) {
-    const node = recycler.create(qualifiedName, namespaceURI);
-    // eslint-disable-next-line
-    return node.asmDomPtr || (nodes[++ptr] = addPtr(node, namespaceURI)) && ptr;
+    return addPtr(document.createElementNS(namespaceURI, qualifiedName));
   },
   'createTextNode'(text) {
-    const node = recycler.createText(text);
-    // eslint-disable-next-line
-    return node.asmDomPtr || (nodes[++ptr] = addPtr(node)) && ptr;
+    return addPtr(document.createTextNode(text));
   },
   'createComment'(text) {
-    const node = recycler.createComment(text);
-    // eslint-disable-next-line
-    return node.asmDomPtr || (nodes[++ptr] = addPtr(node)) && ptr;
+    return addPtr(document.createComment(text));
   },
   'insertBefore'(parentNodePtr, newNodePtr, referenceNodePtr) {
     nodes[parentNodePtr].insertBefore(
@@ -45,7 +41,8 @@ export default {
     );
   },
   'removeChild'(childPtr) {
-    recycler.collect(nodes[childPtr]);
+    if (nodes[childPtr] === null || nodes[childPtr] === undefined) return;
+    remove(nodes[childPtr]);
   },
   'appendChild'(parentPtr, childPtr) {
     nodes[parentPtr].appendChild(nodes[childPtr]);
@@ -68,14 +65,20 @@ export default {
       nodes[nodePtr].setAttribute(attr, value);
     }
   },
-  'parentNode': nodePtr => (
-    nodes[nodePtr] && nodes[nodePtr].parentNode && nodes[nodePtr].parentNode.asmDomPtr ||
-    0
-  ),
-  'nextSibling': nodePtr => (
-    nodes[nodePtr] && nodes[nodePtr].nextSibling && nodes[nodePtr].nextSibling.asmDomPtr ||
-    0
-  ),
+  'parentNode': (nodePtr) => {
+    if (
+      nodes[nodePtr] !== null && nodes[nodePtr] !== undefined &&
+      nodes[nodePtr].parentNode !== null
+    ) return nodes[nodePtr].parentNode.asmDomPtr;
+    return 0;
+  },
+  'nextSibling': (nodePtr) => {
+    if (
+      nodes[nodePtr] !== null && nodes[nodePtr] !== undefined &&
+      nodes[nodePtr].nextSibling !== null
+    ) return nodes[nodePtr].nextSibling.asmDomPtr;
+    return 0;
+  },
   'setTextContent': (nodePtr, text) => {
     nodes[nodePtr].textContent = text;
   },

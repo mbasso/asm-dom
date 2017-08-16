@@ -8,14 +8,16 @@ namespace asmdom {
 
 	VNode* patch(
 		const emscripten::val& element,
-		VNode* vnode
+		VNode* const vnode
 	);
 	VNode* patch(
-		VNode* oldVnode,
-		VNode* vnode
+		VNode* const oldVnode,
+		VNode* const vnode
 	);
 
-	void reset();
+	#ifndef ASMDOM_JS_SIDE
+		void reset();
+	#endif
 
 }
 

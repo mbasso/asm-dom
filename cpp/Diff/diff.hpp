@@ -5,7 +5,7 @@
 
 namespace asmdom {
 
-	void diff(const VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode);
+	void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode);
 
 }
 

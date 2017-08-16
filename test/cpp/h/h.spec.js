@@ -26,14 +26,6 @@ describe('h (cpp)', function test() {
     app.shouldDeleteAVNode();
   });
 
-  it('should remove a child', () => {
-    app.shouldRemoveAChild();
-  });
-
-  it('should replace a child', () => {
-    app.shouldReplaceAChild();
-  });
-
   // js only:
   // should create vnode with tag, attrs and elm
 

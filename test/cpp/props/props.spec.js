@@ -27,10 +27,9 @@ describe('props (cpp)', function testAttributes() {
     app.changesAnElementsProps();
   });
 
-  // avoid the usage of deleteVNode and do it manually
-  /* it('preserves memoized props', () => {
+  it('preserves memoized props', () => {
     app.preservesMemoizedProps();
-  }); */
+  });
 
   it('removes an elements props', () => {
     app.removesAnElementsProps();

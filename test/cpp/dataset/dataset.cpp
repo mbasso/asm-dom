@@ -6,8 +6,8 @@
 using namespace asmdom;
 
 void shouldSetOnInitialElementCreation() {
-	VNode* vnode = new VNode("div", new VNodeData(
-		VNodeAttrs {
+	VNode* vnode = h("div", Data(
+		Attrs {
 			{"data-foo", "foo"}
 		}
 	));
@@ -24,14 +24,14 @@ void shouldSetOnInitialElementCreation() {
 };
 
 void datasetCanBeMemoized() {
-	VNodeData* data = new VNodeData(
-		VNodeAttrs {
+	Data data = Data(
+		Attrs {
 			{"data-foo", "foo"},
 			{"data-bar", "bar"}
 		}
 	);
-	VNode* vnode = new VNode("i", data);
-	VNode* vnode2 = new VNode("i", data);
+	VNode* vnode = h("i", data);
+	VNode* vnode2 = h("i", data);
 	patch(getRoot(), vnode);
 	
 	emscripten::val elm = getBodyFirstChild();
@@ -61,14 +61,14 @@ void datasetCanBeMemoized() {
 };
 
 void shouldUpdateDataset() {
-	VNode* vnode = new VNode("div", new VNodeData(
-		VNodeAttrs {
+	VNode* vnode = h("div", Data(
+		Attrs {
 			{"data-foo", "foo"},
 			{"data-bar", "bar"}
 		}
 	));
-	VNode* vnode2 = new VNode("div", new VNodeData(
-		VNodeAttrs {
+	VNode* vnode2 = h("div", Data(
+		Attrs {
 			{"data-baz", "baz"}
 		}
 	));

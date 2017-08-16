@@ -6,8 +6,8 @@
 using namespace asmdom;
 
 void shouldHaveTheirProvidedValues() {
-	VNode* vnode = new VNode("div", new VNodeData(
-		VNodeAttrs {
+	VNode* vnode = h("div", Data(
+		Attrs {
 			{"href", "/foo"},
 			{"minlength", "1"},
 			{"value", "true"}
@@ -34,15 +34,15 @@ void shouldHaveTheirProvidedValues() {
 };
 
 void attributesCanBeMemoized() {
-	VNodeData* data = new VNodeData(
-		VNodeAttrs {
+	Data data = Data(
+		Attrs {
 			{"href", "/foo"},
 			{"minlength", "1"},
 			{"value", "true"}
 		}
 	);
-	VNode* vnode = new VNode("div", data);
-	VNode* vnode2 = new VNode("div", data);
+	VNode* vnode = h("div", data);
+	VNode* vnode2 = h("div", data);
 	patch(getRoot(), vnode);
 	
 	emscripten::val elm = getBodyFirstChild();
@@ -80,8 +80,8 @@ void attributesCanBeMemoized() {
 };
 
 void shouldBeOmittedWhenFalsyValuesAreProvided() {
-	VNode* vnode = new VNode("div", new VNodeData(
-		VNodeAttrs {
+	VNode* vnode = h("div", Data(
+		Attrs {
 			{"href", "null"},
 			{"minlength", "0"},
 			{"value", "false"}
@@ -108,8 +108,8 @@ void shouldBeOmittedWhenFalsyValuesAreProvided() {
 };
 
 void shouldBeSetCorrectlyWhenNamespaced() {
-	VNode* vnode = new VNode("div", new VNodeData(
-		VNodeAttrs {
+	VNode* vnode = h("div", Data(
+		Attrs {
 			{"xlink:href", "#foo"}
 		}
 	));

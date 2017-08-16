@@ -10,99 +10,53 @@ bool onClick(emscripten::val event) {
 };
 
 void shouldDeleteAVNode() {
-	VNode* vnode = new VNode("div", VNodeChildren {
-		new VNode("span"),
-		new VNode("div", VNodeChildren {
-			new VNode("video"),
+	VNode* vnode = h("div", Children {
+		h("span"),
+		h("div", Children {
+			h("video"),
 		}),
 	});
 	deleteVNode(vnode);
 };
 
-void shouldRemoveAChild() {
-	VNode* child = new VNode("span");
-	VNode* parent = new VNode("div",
-		VNodeChildren {
-			new VNode("video"),
-			child,
-			new VNode("img")
-		}
-	);
-	parent->removeChild(child);
-	patch(getRoot(), parent);
-
-	emscripten::val elm = getBodyFirstChild();
-
-	assertEquals(elm["childNodes"]["length"], emscripten::val(2));
-	assertEquals(elm["childNodes"]["0"]["tagName"], emscripten::val("VIDEO"));
-	assertEquals(elm["childNodes"]["1"]["tagName"], emscripten::val("IMG"));
-
-	deleteVNode(child);
-	deleteVNode(parent);
-};
-
-void shouldReplaceAChild() {
-	VNode* oldChild = new VNode("span");
-	VNode* newChild = new VNode("div");
-	VNode* parent = new VNode("div",
-		VNodeChildren {
-			new VNode("video"),
-			oldChild,
-			new VNode("img")
-		}
-	);
-	parent->replaceChild(oldChild, newChild);
-	patch(getRoot(), parent);
-
-	emscripten::val elm = getBodyFirstChild();
-
-	assertEquals(elm["childNodes"]["length"], emscripten::val(3));
-	assertEquals(elm["childNodes"]["0"]["tagName"], emscripten::val("VIDEO"));
-	assertEquals(elm["childNodes"]["1"]["tagName"], emscripten::val("DIV"));
-	assertEquals(elm["childNodes"]["2"]["tagName"], emscripten::val("IMG"));
-
-	deleteVNode(oldChild);
-	deleteVNode(parent);
-};
-
 void shouldCreateAVNodeWithAProperTag() {
-	VNode* vnode = new VNode("div");
+	VNode* vnode = h("div");
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithChildren() {
-	VNode* vnode = new VNode("div", VNodeChildren {new VNode("span"), new VNode("b")});
+	VNode* vnode = h("div", Children {h("span"), h("b")});
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithOneChild() {
-	VNode* vnode = new VNode("div", new VNode("span"));
+	VNode* vnode = h("div", h("span"));
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithTextContentInString() {
-	VNode* vnode = new VNode("div", "I am a string");
+	VNode* vnode = h("div", "I am a string");
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeForComment() {
-	VNode* vnode = new VNode("!", "test");
+	VNode* vnode = h("!", "test");
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithAttrsAndOneChild() {
-	VNode* vnode = new VNode("div",
-		new VNodeData(VNodeAttrs {
+	VNode* vnode = h("div",
+		Data(Attrs {
 			{"foo", "bar"}
 		}),
-		new VNode("span")
+		h("span")
 	);
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithAttrsAndTextContentInString() {
-	VNode* vnode = new VNode("div",
-		new VNodeData(VNodeAttrs {
+	VNode* vnode = h("div",
+		Data(Attrs {
 			{"foo", "bar"}
 		}),
 		"I am a string"
@@ -111,24 +65,24 @@ void shouldCreateAVNodeWithAttrsAndTextContentInString() {
 };
 
 void shouldCreateAVNodeWithAttrsAndChildren() {
-	VNode* vnode = new VNode("div", 
-		new VNodeData(VNodeAttrs {
+	VNode* vnode = h("div", 
+		Data(Attrs {
 			{"foo", "bar"}
 		}),
-		VNodeChildren {new VNode("span"), new VNode("i")}
+		Children {h("span"), h("i")}
 	);
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithText() {
-	VNode* vnode = new VNode("this is a text", true);
+	VNode* vnode = h("this is a text", true);
 	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithAttrs() {
-	VNode* vnode = new VNode("i",
-		new VNodeData (
-			VNodeAttrs {
+	VNode* vnode = h("i",
+		Data (
+			Attrs {
 				{"data-empty", ""},
 				{"data-dash", "-"},
 				{"data-dashed", "foo-bar"},
@@ -142,9 +96,9 @@ void shouldCreateAVNodeWithAttrs() {
 };
 
 void shouldCreateAVNodeWithProps() {
-	VNode* vnode = new VNode("i",
-	new VNodeData (
-		VNodeProps {
+	VNode* vnode = h("i",
+	Data (
+		Props {
 			{"data-empty", emscripten::val("")},
 			{"data-dash", emscripten::val("")},
 			{"data-dashed", emscripten::val("foo-bar")},
@@ -157,9 +111,9 @@ void shouldCreateAVNodeWithProps() {
 };
 
 void shouldCreateAVNodeWithCallbacks() {
-	VNode* vnode = new VNode("i",
-		new VNodeData (
-			VNodeCallbacks {
+	VNode* vnode = h("i",
+		Data (
+			Callbacks {
 				{"onclick", onClick},
 			}
 		)
@@ -168,9 +122,9 @@ void shouldCreateAVNodeWithCallbacks() {
 };
 
 void shouldCreateAVNodeWithAttrsAndProps() {
-	VNode* vnode = new VNode("i",
-		new VNodeData (
-			VNodeAttrs {
+	VNode* vnode = h("i",
+		Data (
+			Attrs {
 				{"data-empty", ""},
 				{"data-dash", "-"},
 				{"data-dashed", "foo-bar"},
@@ -178,7 +132,7 @@ void shouldCreateAVNodeWithAttrsAndProps() {
 				{"data-integer", "0"},
 				{"data-float", "0.1"}
 			},
-			VNodeProps {
+			Props {
 				{"data-empty", emscripten::val("")},
 				{"data-dash", emscripten::val("")},
 				{"data-dashed", emscripten::val("foo-bar")},
@@ -192,9 +146,9 @@ void shouldCreateAVNodeWithAttrsAndProps() {
 };
 
 void shouldCreateAVNodeWithAttrsAndCallbacks() {
-	VNode* vnode = new VNode("i",
-		new VNodeData (
-			VNodeAttrs {
+	VNode* vnode = h("i",
+		Data (
+			Attrs {
 				{"data-empty", ""},
 				{"data-dash", "-"},
 				{"data-dashed", "foo-bar"},
@@ -202,7 +156,7 @@ void shouldCreateAVNodeWithAttrsAndCallbacks() {
 				{"data-integer", "0"},
 				{"data-float", "0.1"}
 			},
-			VNodeCallbacks {
+			Callbacks {
 				{"onclick", onClick},
 			}
 		)
@@ -211,9 +165,9 @@ void shouldCreateAVNodeWithAttrsAndCallbacks() {
 };
 
 void shouldCreateAVNodeWithPropsAndCallbacks() {
-	VNode* vnode = new VNode("i",
-		new VNodeData (
-			VNodeProps {
+	VNode* vnode = h("i",
+		Data (
+			Props {
 				{"data-empty", emscripten::val("")},
 				{"data-dash", emscripten::val("")},
 				{"data-dashed", emscripten::val("foo-bar")},
@@ -221,7 +175,7 @@ void shouldCreateAVNodeWithPropsAndCallbacks() {
 				{"data-integer", emscripten::val(0)},
 				{"data-float", emscripten::val(0.1)}
 			},
-			VNodeCallbacks {
+			Callbacks {
 				{"onclick", onClick},
 			}
 		)
@@ -230,9 +184,9 @@ void shouldCreateAVNodeWithPropsAndCallbacks() {
 };
 
 void shouldCreateAVNodeWithAttrsPropsAndCallbacks() {
-	VNode* vnode = new VNode("i",
-		new VNodeData (
-			VNodeAttrs {
+	VNode* vnode = h("i",
+		Data (
+			Attrs {
 				{"data-empty", ""},
 				{"data-dash", "-"},
 				{"data-dashed", "foo-bar"},
@@ -240,7 +194,7 @@ void shouldCreateAVNodeWithAttrsPropsAndCallbacks() {
 				{"data-integer", "0"},
 				{"data-float", "0.1"}
 			},
-			VNodeProps {
+			Props {
 				{"data-empty", emscripten::val("")},
 				{"data-dash", emscripten::val("")},
 				{"data-dashed", emscripten::val("foo-bar")},
@@ -248,7 +202,7 @@ void shouldCreateAVNodeWithAttrsPropsAndCallbacks() {
 				{"data-integer", emscripten::val(0)},
 				{"data-float", emscripten::val(0.1)}
 			},
-			VNodeCallbacks {
+			Callbacks {
 				{"onclick", onClick},
 			}
 		)
@@ -258,8 +212,6 @@ void shouldCreateAVNodeWithAttrsPropsAndCallbacks() {
 
 EMSCRIPTEN_BINDINGS(h_function_tests) {
   emscripten::function("shouldDeleteAVNode", &shouldDeleteAVNode);
-  emscripten::function("shouldRemoveAChild", &shouldRemoveAChild);
-  emscripten::function("shouldReplaceAChild", &shouldReplaceAChild);
   emscripten::function("shouldCreateAVNodeWithAProperTag", &shouldCreateAVNodeWithAProperTag);
   emscripten::function("shouldCreateAVNodeWithChildren", &shouldCreateAVNodeWithChildren);
   emscripten::function("shouldCreateAVNodeWithOneChild", &shouldCreateAVNodeWithOneChild);

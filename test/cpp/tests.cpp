@@ -9,7 +9,7 @@
 #include "patch/patch.cpp"
 
 int main() {
-	asmdomConfig config = asmdomConfig();
+	Config config = Config();
 	config.unsafePatch = true;
 
 	init(config);

@@ -24,14 +24,14 @@ bool callback(emscripten::val event) {
 
 void shouldAttachAClickEventHandlerToElement() {
 	beforeEach();
-	VNode* vnode = new VNode("div",
-		new VNodeData(
-			VNodeCallbacks {
+	VNode* vnode = h("div",
+		Data(
+			Callbacks {
 				{"onclick", callback}
 			}
 		), 
-		VNodeChildren {
-			new VNode(std::string("a"), std::string("Click my parent"))
+		Children {
+			h(std::string("a"), std::string("Click my parent"))
 		}
 	);
 	patch(getRoot(), vnode);
@@ -49,14 +49,14 @@ void shouldAttachAClickEventHandlerToElement() {
 
 void shouldDetachAttachedClickEventHandlerToElement() {
 	beforeEach();
-	VNode* vnode1 = new VNode("div",
-		new VNodeData(
-			VNodeCallbacks {
+	VNode* vnode1 = h("div",
+		Data(
+			Callbacks {
 				{"onclick", callback}
 			}
 		), 
-		VNodeChildren {
-			new VNode(std::string("a"), std::string("Click my parent"))
+		Children {
+			h(std::string("a"), std::string("Click my parent"))
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -67,9 +67,9 @@ void shouldDetachAttachedClickEventHandlerToElement() {
 		throw 20;
 	}
 
-	VNode* vnode2 = new VNode("div",
-		VNodeChildren {
-			new VNode(std::string("a"), std::string("Click my parent"))
+	VNode* vnode2 = h("div",
+		Children {
+			h(std::string("a"), std::string("Click my parent"))
 		}
 	);
 	patch(vnode1, vnode2);
@@ -84,16 +84,16 @@ void shouldDetachAttachedClickEventHandlerToElement() {
 
 void shouldShareHandlersInParentAndChildNodes() {
 	beforeEach();
-	VNode* vnode = new VNode("div",
-		new VNodeData(
-			VNodeCallbacks {
+	VNode* vnode = h("div",
+		Data(
+			Callbacks {
 				{"onclick", callback}
 			}
 		), 
-		VNodeChildren {
-			new VNode("a",
-				new VNodeData(
-					VNodeCallbacks {
+		Children {
+			h("a",
+				Data(
+					Callbacks {
 						{"onclick", callback}
 					}
 				),
@@ -123,9 +123,9 @@ void shouldHandleLambdaWithCapture() {
 	beforeEach();
 	int count = 1;
 
-	VNode* vnode = new VNode("div",
-		new VNodeData(
-			VNodeCallbacks {
+	VNode* vnode = h("div",
+		Data(
+			Callbacks {
 				{"onclick", [&count](emscripten::val e) -> bool {
 					++count;
 					return false;

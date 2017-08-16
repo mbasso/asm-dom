@@ -27,10 +27,9 @@ describe('dataset (cpp)', function testAttributes() {
     app.shouldUpdateDataset();
   });
 
-  // avoid the usage of deleteVNode and do it manually
-  /* it('can be memoized', () => {
+  it('can be memoized', () => {
     app.datasetCanBeMemoized();
-  }); */
+  });
 
   // js only:
   // should handles string conversions

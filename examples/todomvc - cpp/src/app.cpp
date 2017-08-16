@@ -54,7 +54,7 @@ void render(Todos initState, emscripten::val oldVnode) {
 };
 
 int main() {
-	asmdomConfig config = asmdomConfig();
+	Config config = Config();
 	init(config);
 
 	EM_ASM(

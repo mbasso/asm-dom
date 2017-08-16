@@ -3,12 +3,12 @@
 
 namespace asmdom {
 
-	struct asmdomConfig { 
+	struct Config { 
 		bool clearMemory = true;
 		bool unsafePatch = false;
 	};
 
-	void init(asmdomConfig& config);
+	void init(Config& config);
 
 }
 

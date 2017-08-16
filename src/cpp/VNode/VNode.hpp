@@ -1,60 +1,64 @@
 #ifndef asmdom_VNode_hpp
 #define asmdom_VNode_hpp
 
+#include <emscripten/val.h>
 #include <functional>
 #include <utility>
 #include <vector>
 #include <string>
 #include <map>
-#include <emscripten/val.h>
 
 namespace asmdom {
 
-  typedef std::function<bool(emscripten::val)> VNodeCallback;
+  typedef std::function<bool(emscripten::val)> Callback;
 
-  typedef std::map<std::string, std::string> VNodeAttrs;
-  typedef std::map<std::string, emscripten::val> VNodeProps;
-  typedef std::map<std::string, VNodeCallback> VNodeCallbacks;
+  typedef std::map<std::string, std::string> Attrs;
+  typedef std::map<std::string, emscripten::val> Props;
+  typedef std::map<std::string, Callback> Callbacks;
 
-  class VNodeData {
-    public:
-      VNodeData() {};
-      VNodeData(
-        VNodeAttrs dataAttrs,
-        VNodeProps dataProps = VNodeProps(),
-        VNodeCallbacks dataCallbacks = VNodeCallbacks()
-      ): attrs{std::move(dataAttrs)}, props{std::move(dataProps)}, callbacks{std::move(dataCallbacks)} {};
-      VNodeData(
-        VNodeAttrs dataAttrs,
-        VNodeCallbacks dataCallbacks
-      ): attrs{std::move(dataAttrs)}, callbacks{std::move(dataCallbacks)} {};
-      VNodeData(
-        VNodeProps dataProps,
-        VNodeCallbacks dataCallbacks = VNodeCallbacks()
-      ): props{std::move(dataProps)}, callbacks{std::move(dataCallbacks)} {};
-      VNodeData(
-        VNodeCallbacks dataCallbacks
-      ): callbacks{std::move(dataCallbacks)} {};
-      VNodeAttrs attrs;
-      VNodeProps props;
-      VNodeCallbacks callbacks;
+  struct Data {
+    Data() {};
+    Data(
+      const Data& data
+    ): attrs(data.attrs), props(data.props), callbacks(data.callbacks) {};
+    Data(
+      const Attrs& dataAttrs,
+      const Props& dataProps = Props(),
+      const Callbacks& dataCallbacks = Callbacks()
+    ): attrs(dataAttrs), props(dataProps), callbacks(dataCallbacks) {};
+    Data(
+      const Attrs& dataAttrs,
+      const Callbacks& dataCallbacks
+    ): attrs(dataAttrs), callbacks(dataCallbacks) {};
+    Data(
+      const Props& dataProps,
+      const Callbacks& dataCallbacks = Callbacks()
+    ): props(dataProps), callbacks(dataCallbacks) {};
+    Data(
+      const Callbacks& dataCallbacks
+    ): callbacks(dataCallbacks) {};
+
+    Attrs attrs;
+    Props props;
+    Callbacks callbacks;
   };
 
-  class VNode {
-    void adjustVNode();
+  struct VNode {
+    private:
+      void adjustVNode();
     public:
-      VNode(): data(NULL) {};
+      VNode() {};
       VNode(
-        std::string nodeSel
-      ): sel(nodeSel), data(NULL) {};
+        const std::string& nodeSel
+      ): sel(nodeSel) {};
       VNode(
-        std::string nodeSel,
-        std::string nodeText
-      ): sel(nodeSel), text(nodeText), data(NULL) {};
+        const std::string& nodeSel,
+        const std::string& nodeText
+      ): sel(nodeSel), text(nodeText) {};
       VNode(
-        std::string nodeText,
+        const std::string& nodeText,
         bool isText
-      ): data(NULL) {
+      ) {
         if (isText) {
           text = nodeText;
         } else {
@@ -62,45 +66,42 @@ namespace asmdom {
         }
       };
       VNode(
-        std::string nodeSel,
-        VNodeData* nodeData
+        const std::string& nodeSel,
+        const Data& nodeData
       ): sel(nodeSel), data(nodeData) { adjustVNode(); };
       VNode(
-        std::string nodeSel,
-        std::vector<VNode*> nodeChildren
-      ): sel(nodeSel), data(NULL), children{std::move(nodeChildren)} { adjustVNode(); };
+        const std::string& nodeSel,
+        const std::vector<VNode*>& nodeChildren
+      ): sel(nodeSel), children(nodeChildren) { adjustVNode(); };
       VNode(
-        std::string nodeSel,
+        const std::string& nodeSel,
         VNode* child
-      ): sel(nodeSel), data(NULL), children{ child } {};
+      ): sel(nodeSel), children{ child } {};
       VNode(
-        std::string nodeSel,
-        VNodeData* nodeData,
-        std::string nodeText
+        const std::string& nodeSel,
+        const Data& nodeData,
+        const std::string& nodeText
       ): sel(nodeSel), text(nodeText), data(nodeData) { adjustVNode(); };
       VNode(
-        std::string nodeSel,
-        VNodeData* nodeData,
-        std::vector<VNode*> nodeChildren
-      ): sel(nodeSel), data(nodeData), children{std::move(nodeChildren)} { adjustVNode(); };
+        const std::string& nodeSel,
+        const Data& nodeData,
+        const std::vector<VNode*>& nodeChildren
+      ): sel(nodeSel), data(nodeData), children(nodeChildren) { adjustVNode(); };
       VNode(
-        std::string nodeSel,
-        VNodeData* nodeData,
+        const std::string& nodeSel,
+        const Data& nodeData,
         VNode* child
       ): sel(nodeSel), data(nodeData), children{ child } { adjustVNode(); };
-
-      void removeChild(VNode* child);
-      void replaceChild(VNode* oldChild, VNode* newChild);
 
       std::string sel; 
       std::string key;
       std::string text;
-      VNodeData* data;
+      Data data;
       int elm;
       std::vector<VNode*> children;
   };
 
-  typedef std::vector<VNode*> VNodeChildren;
+  typedef std::vector<VNode*> Children;
 
 	void deleteVNode(VNode* vnode);
 

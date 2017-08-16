@@ -120,7 +120,7 @@ namespace todomvc {
 			int remaining = remainingTodos(model.tasks);
 			std::vector<Task> filtered = filteredTodos(model.tasks, model.filter);
 
-			VNodeChildren tasksViews = VNodeChildren();
+			Children tasksViews = Children();
 			for(std::vector<Task>::size_type i = 0; i < filtered.size(); ++i) {
 				Task todo = filtered[i];
 				tasksViews.push_back(
@@ -136,35 +136,35 @@ namespace todomvc {
 				);
 			}
 
-			return new VNode("section",
-				new VNodeData(
-					VNodeAttrs {
+			return h("section",
+				Data(
+					Attrs {
 						{"class", "todoapp"}
 					},
-					VNodeCallbacks {
+					Callbacks {
 						{"onclick", onClick}
 					}
 				),
-				VNodeChildren {
-					new VNode("header",
-						new VNodeData(
-							VNodeAttrs {
+				Children {
+					h("header",
+						Data(
+							Attrs {
 								{"class", "header"}
 							}
 						),
-						VNodeChildren {
-							new VNode(std::string("h1"), std::string("todos")),
-							new VNode("input",
-								new VNodeData(
-									VNodeAttrs {
+						Children {
+							h(std::string("h1"), std::string("todos")),
+							h("input",
+								Data(
+									Attrs {
 										{"id", "new-todo"},
 										{"class", "new-todo"},
 										{"placeholder", "What needs to be done?"}
 									},
-									VNodeProps {
+									Props {
 										{"value", emscripten::val(model.editingTitle)}
 									},
-									VNodeCallbacks {
+									Callbacks {
 										{"onkeydown", [handler](emscripten::val e) -> bool {
 											std::string value = wstring_to_utf8(e["target"]["value"].as<std::wstring>());
 											if (e["keyCode"].as<int>() == KEY_ENTER && !value.empty()) {
@@ -177,24 +177,24 @@ namespace todomvc {
 							)
 						}
 					),
-					new VNode("section",
-						new VNodeData(
-							VNodeAttrs {
+					h("section",
+						Data(
+							Attrs {
 								{"class", "main"},
 								{"style", "display: " + std::string(model.tasks.size() > 0 ? "block" : "none")}
 							}
 						),
-						VNodeChildren {
-							new VNode("input",
-								new VNodeData(
-									VNodeAttrs {
+						Children {
+							h("input",
+								Data(
+									Attrs {
 										{"class", "toggle-all"},
 										{"type", "checkbox"}
 									},
-									VNodeProps {
+									Props {
 										{"checked", emscripten::val(remaining == 0)}
 									},
-									VNodeCallbacks {
+									Callbacks {
 										{"onclick", [handler](emscripten::val e) -> bool {
 											handler(Action::ToggleAll(targetChecked(e)));
 											return true;
@@ -202,9 +202,9 @@ namespace todomvc {
 									}
 								)
 							),
-							new VNode("ul",
-								new VNodeData(
-									VNodeAttrs {
+							h("ul",
+								Data(
+									Attrs {
 										{"class", "todo-list"}
 									}
 								),
@@ -212,36 +212,36 @@ namespace todomvc {
 							)
 						}
 					),
-					new VNode("footer",
-						new VNodeData(
-							VNodeAttrs {
+					h("footer",
+						Data(
+							Attrs {
 								{"class", "footer"},
 								{"style", "display: " + std::string(model.tasks.size() > 0 ? "block" : "none")}
 							}
 						),
-						VNodeChildren {
-							new VNode("span",
-								new VNodeData(
-									VNodeAttrs {
+						Children {
+							h("span",
+								Data(
+									Attrs {
 										{"class", "todo-count"}
 									}
 								),
-								VNodeChildren {
-									new VNode(std::string("strong"), std::to_string(remaining)),
-									new VNode(std::string(" item" + std::string(remaining == 1 ? "" : "s") + " left"), true)
+								Children {
+									h(std::string("strong"), std::to_string(remaining)),
+									h(std::string(" item" + std::string(remaining == 1 ? "" : "s") + " left"), true)
 								}
 							),
-							new VNode("ul",
-								new VNodeData(
-									VNodeAttrs {
+							h("ul",
+								Data(
+									Attrs {
 										{"class", "filters"}
 									}
 								),
-								VNodeChildren {
-									new VNode("li",
-										new VNode("a",
-											new VNodeData(
-												VNodeAttrs {
+								Children {
+									h("li",
+										h("a",
+											Data(
+												Attrs {
 													{"class", model.filter == all ? "selected" : ""},
 													{"href", "#/"}
 												}
@@ -249,10 +249,10 @@ namespace todomvc {
 											std::string("All")
 										)
 									),
-									new VNode("li",
-										new VNode("a",
-											new VNodeData(
-												VNodeAttrs {
+									h("li",
+										h("a",
+											Data(
+												Attrs {
 													{"class", model.filter == active ? "selected" : ""},
 													{"href", "#/active"}
 												}
@@ -260,10 +260,10 @@ namespace todomvc {
 											std::string("Active")
 										)
 									),
-									new VNode("li",
-										new VNode("a",
-											new VNodeData(
-												VNodeAttrs {
+									h("li",
+										h("a",
+											Data(
+												Attrs {
 													{"class", model.filter == completed ? "selected" : ""},
 													{"href", "#/completed"}
 												}
@@ -273,13 +273,13 @@ namespace todomvc {
 									)
 								}
 							),
-							new VNode("button",
-								new VNodeData(
-									VNodeAttrs {
+							h("button",
+								Data(
+									Attrs {
 										{"class", "clear-completed"},
 										{"style", "display: " + std::string(model.tasks.size() > 0 ? "block" : "none")}
 									},
-									VNodeCallbacks {
+									Callbacks {
 										{"onclick", [handler](emscripten::val e) -> bool {
 											handler(Action::Archive());
 											return true;
