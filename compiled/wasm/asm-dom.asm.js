@@ -77,7 +77,6 @@ Module["asm"] =  (function(global, env, buffer) {
   var throwInternalError=env.throwInternalError;
   var get_first_emval=env.get_first_emval;
   var getLiveInheritedInstances=env.getLiveInheritedInstances;
-  var ___assert_fail=env.___assert_fail;
   var __ZSt18uncaught_exceptionv=env.__ZSt18uncaught_exceptionv;
   var ClassHandle=env.ClassHandle;
   var _emscripten_asm_const_ii=env._emscripten_asm_const_ii;
@@ -128,7 +127,7 @@ Module["asm"] =  (function(global, env, buffer) {
   var ___buildEnvironment=env.___buildEnvironment;
   var _embind_repr=env._embind_repr;
   var _pthread_getspecific=env._pthread_getspecific;
-  var throwUnboundTypeError=env.throwUnboundTypeError;
+  var RegisteredPointer=env.RegisteredPointer;
   var craftInvokerFunction=env.craftInvokerFunction;
   var _getenv=env._getenv;
   var runDestructors=env.runDestructors;
@@ -159,7 +158,7 @@ Module["asm"] =  (function(global, env, buffer) {
   var __embind_register_std_wstring=env.__embind_register_std_wstring;
   var ClassHandle_isAliasOf=env.ClassHandle_isAliasOf;
   var __emval_incref=env.__emval_incref;
-  var RegisteredPointer=env.RegisteredPointer;
+  var throwUnboundTypeError=env.throwUnboundTypeError;
   var readLatin1String=env.readLatin1String;
   var getBasestPointer=env.getBasestPointer;
   var getInheritedInstanceCount=env.getInheritedInstanceCount;
@@ -233,75 +232,79 @@ function getTempRet0() {
 }
 
 function __GLOBAL__sub_I_asm_dom_cpp() {
- var $__begin_$i$i$i$i = 0, $__end_$i$i$i$i = 0, $__end_cap_$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i2$i$i$i = 0, $__first_$i$i$i$i5$i$i$i = 0, $__left_$i$i$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i1$i$i$i = 0, $__left_$i$i$i$i$i4$i$i$i = 0, $call$i = 0, $callbacks$i$i$i = 0, $data$i$i = 0, $props$i$i$i = 0, label = 0, sp = 0;
+ var $__begin_$i$i$i$i = 0, $__begin_node_$i$i$i$i$i$i = 0, $__begin_node_$i$i$i4$i$i$i = 0, $__begin_node_$i$i$i8$i$i$i = 0, $__end_$i$i$i$i = 0, $__end_cap_$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i2$i$i$i = 0, $__first_$i$i$i$i6$i$i$i = 0, $__left_$i$i$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i1$i$i$i = 0, $__left_$i$i$i$i$i5$i$i$i = 0, $call$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $call$i = (__Znwj(88)|0);
- $data$i$i = ((($call$i)) + 36|0);
  $__left_$i$i$i$i$i$i$i$i = ((($call$i)) + 40|0);
  store4($__left_$i$i$i$i$i$i$i$i,0);
  $__first_$i$i$i$i$i$i$i = ((($call$i)) + 44|0);
  store4($__first_$i$i$i$i$i$i$i,0);
+ $__begin_node_$i$i$i$i$i$i = ((($call$i)) + 36|0);
  ; store8($call$i,i64_const(0,0),4); store8($call$i+8|0,i64_const(0,0),4); store8($call$i+16|0,i64_const(0,0),4); store8($call$i+24|0,i64_const(0,0),4); store4($call$i+32|0,0,4);
- store4($data$i$i,$__left_$i$i$i$i$i$i$i$i);
- $props$i$i$i = ((($call$i)) + 48|0);
- $__left_$i$i$i$i$i4$i$i$i = ((($call$i)) + 52|0);
- store4($__left_$i$i$i$i$i4$i$i$i,0);
- $__first_$i$i$i$i5$i$i$i = ((($call$i)) + 56|0);
- store4($__first_$i$i$i$i5$i$i$i,0);
- store4($props$i$i$i,$__left_$i$i$i$i$i4$i$i$i);
- $callbacks$i$i$i = ((($call$i)) + 60|0);
+ store4($__begin_node_$i$i$i$i$i$i,$__left_$i$i$i$i$i$i$i$i);
+ $__left_$i$i$i$i$i5$i$i$i = ((($call$i)) + 52|0);
+ store4($__left_$i$i$i$i$i5$i$i$i,0);
+ $__first_$i$i$i$i6$i$i$i = ((($call$i)) + 56|0);
+ store4($__first_$i$i$i$i6$i$i$i,0);
+ $__begin_node_$i$i$i8$i$i$i = ((($call$i)) + 48|0);
+ store4($__begin_node_$i$i$i8$i$i$i,$__left_$i$i$i$i$i5$i$i$i);
  $__left_$i$i$i$i$i1$i$i$i = ((($call$i)) + 64|0);
  store4($__left_$i$i$i$i$i1$i$i$i,0);
  $__first_$i$i$i$i2$i$i$i = ((($call$i)) + 68|0);
  store4($__first_$i$i$i$i2$i$i$i,0);
- store4($callbacks$i$i$i,$__left_$i$i$i$i$i1$i$i$i);
+ $__begin_node_$i$i$i4$i$i$i = ((($call$i)) + 60|0);
+ store4($__begin_node_$i$i$i4$i$i$i,$__left_$i$i$i$i$i1$i$i$i);
  $__begin_$i$i$i$i = ((($call$i)) + 76|0);
  store4($__begin_$i$i$i$i,0);
  $__end_$i$i$i$i = ((($call$i)) + 80|0);
  store4($__end_$i$i$i$i,0);
  $__end_cap_$i$i$i$i = ((($call$i)) + 84|0);
  store4($__end_cap_$i$i$i$i,0);
- store4(10632,$call$i);
+ store4(10232,$call$i);
  return;
 }
 function __ZN6asmdom5addNSEPNS_5VNodeE($vnode) {
  $vnode = $vnode|0;
  var $$pre$i$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__cc$i$i$i$i = 0, $__end_$i = 0, $__first_$i$i$i$i7$i$i = 0, $__left_7$i$i$i = 0;
- var $__parent$i$i = 0, $__parent_$i$i$i = 0, $__r$0$i$i = 0, $__right_$i$i$i = 0, $arrayidx$i = 0, $attrs = 0, $call$i$i$i$i$i$i10 = 0, $call$i$i89 = 0, $call3 = 0, $children = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp7 = 0, $i$017 = 0, $inc = 0, $inc$i$i$i = 0, $ref$tmp = 0, $second$i = 0;
- var $second$i$i$i$i$i$i5$i$i = 0, $sub$ptr$div$i = 0, $sub$ptr$sub$i = 0, label = 0, sp = 0;
+ var $__parent$i$i = 0, $__parent_$i$i$i = 0, $__r$0$i$i = 0, $__right_$i$i$i = 0, $__size_$i12$i$i = 0, $arrayidx$i = 0, $arrayidx$i$i = 0, $attrs = 0, $call$i$i$i$i$i$i13 = 0, $call$i$i812 = 0, $call3 = 0, $children = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i$i10 = 0, $cmp$i$i9 = 0, $cmp7 = 0, $i$026 = 0, $inc = 0, $inc$i$i$i = 0;
+ var $ref$tmp = 0, $second$i = 0, $second$i$i$i$i$i$i5$i$i = 0, $sub$ptr$div$i = 0, $sub$ptr$sub$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $__parent$i$i = sp + 12|0;
  $ref$tmp = sp;
  $attrs = ((($vnode)) + 36|0);
  ; store8($ref$tmp,i64_const(0,0),4); store4($ref$tmp+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($ref$tmp,2800,2);
- $call$i$i89 = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESK_RKT_($attrs,$__parent$i$i,$ref$tmp)|0);
- $0 = load4($call$i$i89);
- $cmp$i$i = ($0|0)==(0|0);
- if ($cmp$i$i) {
-  $call$i$i$i$i$i$i10 = (__Znwj(40)|0);
-  $__cc$i$i$i$i = ((($call$i$i$i$i$i$i10)) + 16|0);
+ $__size_$i12$i$i = ((($ref$tmp)) + 11|0);
+ store1($__size_$i12$i$i,2);
+ store2($ref$tmp,29550);
+ $arrayidx$i$i = ((($ref$tmp)) + 2|0);
+ store1($arrayidx$i$i,0);
+ $call$i$i812 = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISJ_EERKT_($attrs,$__parent$i$i,$ref$tmp)|0);
+ $0 = load4($call$i$i812);
+ $cmp$i$i9 = ($0|0)==(0|0);
+ if ($cmp$i$i9) {
+  $call$i$i$i$i$i$i13 = (__Znwj(40)|0);
+  $__cc$i$i$i$i = ((($call$i$i$i$i$i$i13)) + 16|0);
   ; store8($__cc$i$i$i$i,load8($ref$tmp,4),4); store4($__cc$i$i$i$i+8 | 0,load4($ref$tmp+8 | 0,4),4);
   ; store8($ref$tmp,i64_const(0,0),4); store4($ref$tmp+8|0,0,4);
-  $second$i$i$i$i$i$i5$i$i = ((($call$i$i$i$i$i$i10)) + 28|0);
+  $second$i$i$i$i$i$i5$i$i = ((($call$i$i$i$i$i$i13)) + 28|0);
   ; store8($second$i$i$i$i$i$i5$i$i,i64_const(0,0),4); store4($second$i$i$i$i$i$i5$i$i+8|0,0,4);
   $1 = load4($__parent$i$i);
-  store4($call$i$i$i$i$i$i10,0);
-  $__right_$i$i$i = ((($call$i$i$i$i$i$i10)) + 4|0);
+  store4($call$i$i$i$i$i$i13,0);
+  $__right_$i$i$i = ((($call$i$i$i$i$i$i13)) + 4|0);
   store4($__right_$i$i$i,0);
-  $__parent_$i$i$i = ((($call$i$i$i$i$i$i10)) + 8|0);
+  $__parent_$i$i$i = ((($call$i$i$i$i$i$i13)) + 8|0);
   store4($__parent_$i$i$i,$1);
-  store4($call$i$i89,$call$i$i$i$i$i$i10);
+  store4($call$i$i812,$call$i$i$i$i$i$i13);
   $2 = load4($attrs);
   $3 = load4($2);
-  $cmp$i$i$i = ($3|0)==(0|0);
-  if ($cmp$i$i$i) {
-   $6 = $call$i$i$i$i$i$i10;
+  $cmp$i$i$i10 = ($3|0)==(0|0);
+  if ($cmp$i$i$i10) {
+   $6 = $call$i$i$i$i$i$i13;
   } else {
    $4 = $3;
    store4($attrs,$4);
-   $$pre$i$i$i = load4($call$i$i89);
+   $$pre$i$i$i = load4($call$i$i812);
    $6 = $$pre$i$i$i;
   }
   $__left_7$i$i$i = ((($vnode)) + 40|0);
@@ -311,14 +314,13 @@ function __ZN6asmdom5addNSEPNS_5VNodeE($vnode) {
   $7 = load4($__first_$i$i$i$i7$i$i);
   $inc$i$i$i = (($7) + 1)|0;
   store4($__first_$i$i$i$i7$i$i,$inc$i$i$i);
-  $__r$0$i$i = $call$i$i$i$i$i$i10;
+  $__r$0$i$i = $call$i$i$i$i$i$i13;
  } else {
   $__r$0$i$i = $0;
  }
  $second$i = ((($__r$0$i$i)) + 28|0);
  (__ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6assignEPKc($second$i)|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
- $call3 = (__ZNKSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE7compareEPKc($vnode,2830)|0);
+ $call3 = (__ZNKSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE7compareEPKc($vnode,2827)|0);
  $cmp = ($call3|0)==(0);
  if ($cmp) {
   STACKTOP = sp;return;
@@ -331,12 +333,12 @@ function __ZN6asmdom5addNSEPNS_5VNodeE($vnode) {
  if ($cmp$i) {
   STACKTOP = sp;return;
  }
- $10 = $8;$i$017 = 0;
+ $10 = $8;$i$026 = 0;
  while(1) {
-  $arrayidx$i = (($10) + ($i$017<<2)|0);
+  $arrayidx$i = (($10) + ($i$026<<2)|0);
   $11 = load4($arrayidx$i);
   __ZN6asmdom5addNSEPNS_5VNodeE($11);
-  $inc = (($i$017) + 1)|0;
+  $inc = (($i$026) + 1)|0;
   $12 = load4($__end_$i);
   $13 = load4($children);
   $sub$ptr$sub$i = (($12) - ($13))|0;
@@ -346,18 +348,18 @@ function __ZN6asmdom5addNSEPNS_5VNodeE($vnode) {
   if ($cmp7) {
    break;
   } else {
-   $10 = $14;$i$017 = $inc;
+   $10 = $14;$i$026 = $inc;
   }
  }
  STACKTOP = sp;return;
 }
-function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESK_RKT_($this,$__parent,$__v) {
+function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISJ_EERKT_($this,$__parent,$__v) {
  $this = $this|0;
  $__parent = $__parent|0;
  $__v = $__v|0;
- var $$sink = 0, $$sroa$speculated$i$i$i$i = 0, $$sroa$speculated$i$i$i$i30 = 0, $0 = 0, $1 = 0, $10 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i = 0, $__nd$0 = 0, $__size_$i$i$i$i$i$i18 = 0, $__size_$i$i5$i$i$i$i24 = 0, $__size_$i3$i$i$i$i$i20 = 0, $__size_$i3$i7$i$i$i$i26 = 0;
- var $__value_ = 0, $call$i$i$i$i$i = 0, $call$i$i$i$i$i38 = 0, $cmp = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i29 = 0, $cmp$i$i$i$i$i31 = 0, $cmp$i$i$i$i39 = 0, $cmp$i$i$i46 = 0, $cmp14 = 0, $cmp5 = 0, $cmp8$i$i$i$i41 = 0, $cond$i$i$i$i$i$i = 0, $cond$i$i$i$i$i22 = 0, $cond$i$i22$i$i$i$i = 0, $cond$i$i22$i$i$i$i37 = 0, $cond$i11$i$i$i$i28 = 0;
- var $conv$i$i$i$i$i$i21 = 0, $conv$i$i9$i$i$i$i27 = 0, $retval$0 = 0, $tobool$i$i$i$i$i$i19 = 0, $tobool$i$i6$i$i$i$i25 = 0, label = 0, sp = 0;
+ var $$in = 0, $$sroa$speculated$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i31 = 0, $0 = 0, $1 = 0, $10 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i = 0, $__left_$i = 0, $__nd$0 = 0, $__nd_ptr$0 = 0, $__nd_ptr$0$ph = 0, $__size_$i$i$i$i$i$i$i$i19 = 0;
+ var $__size_$i$i$i$i$i$i$i25 = 0, $__size_$i3$i$i$i$i$i$i21 = 0, $__size_$i3$i$i2$i$i$i$i27 = 0, $__value_ = 0, $call$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i39 = 0, $cmp = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i30 = 0, $cmp$i$i$i$i$i$i32 = 0, $cmp$i$i$i$i$i40 = 0, $cmp$i$i$i47 = 0, $cmp17 = 0, $cmp6 = 0, $cmp7$i$i$i$i$i42 = 0, $cond$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i23 = 0;
+ var $cond$i$i1$i$i$i$i$i = 0, $cond$i$i1$i$i$i$i$i38 = 0, $cond$i16$i$i$i$i$i29 = 0, $conv$i$i$i$i$i$i$i22 = 0, $conv$i$i$i4$i$i$i$i28 = 0, $retval$0 = 0, $tobool$i$i$i$i$i$i$i$i20 = 0, $tobool$i$i$i$i$i$i$i26 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $__first_$i$i$i$i = ((($this)) + 4|0);
  $0 = load4($__first_$i$i$i$i);
@@ -367,108 +369,109 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
   $retval$0 = $__first_$i$i$i$i;
   return ($retval$0|0);
  }
- $__size_$i$i$i$i$i$i18 = ((($__v)) + 11|0);
- $1 = load1($__size_$i$i$i$i$i$i18);
- $tobool$i$i$i$i$i$i19 = ($1<<24>>24)<(0);
- $__size_$i3$i$i$i$i$i20 = ((($__v)) + 4|0);
- $2 = load4($__size_$i3$i$i$i$i$i20);
- $conv$i$i$i$i$i$i21 = $1&255;
- $cond$i$i$i$i$i22 = $tobool$i$i$i$i$i$i19 ? $2 : $conv$i$i$i$i$i$i21;
+ $__left_$i = ((($this)) + 4|0);
+ $__size_$i$i$i$i$i$i$i25 = ((($__v)) + 11|0);
+ $1 = load1($__size_$i$i$i$i$i$i$i25);
+ $tobool$i$i$i$i$i$i$i26 = ($1<<24>>24)<(0);
+ $__size_$i3$i$i2$i$i$i$i27 = ((($__v)) + 4|0);
+ $2 = load4($__size_$i3$i$i2$i$i$i$i27);
+ $conv$i$i$i4$i$i$i$i28 = $1&255;
+ $cond$i16$i$i$i$i$i29 = $tobool$i$i$i$i$i$i$i26 ? $2 : $conv$i$i$i4$i$i$i$i28;
  $3 = load4($__v);
- $cond$i$i22$i$i$i$i = $tobool$i$i$i$i$i$i19 ? $3 : $__v;
- $__nd$0 = $0;
+ $cond$i$i1$i$i$i$i$i = $tobool$i$i$i$i$i$i$i26 ? $3 : $__v;
+ $__nd$0 = $0;$__nd_ptr$0 = $__left_$i;
  while(1) {
   $__value_ = ((($__nd$0)) + 16|0);
-  $__size_$i$i5$i$i$i$i24 = ((($__value_)) + 11|0);
-  $4 = load1($__size_$i$i5$i$i$i$i24);
-  $tobool$i$i6$i$i$i$i25 = ($4<<24>>24)<(0);
-  $__size_$i3$i7$i$i$i$i26 = ((($__nd$0)) + 20|0);
-  $5 = load4($__size_$i3$i7$i$i$i$i26);
-  $conv$i$i9$i$i$i$i27 = $4&255;
-  $cond$i11$i$i$i$i28 = $tobool$i$i6$i$i$i$i25 ? $5 : $conv$i$i9$i$i$i$i27;
-  $cmp$i$i$i$i$i$i$i29 = ($cond$i11$i$i$i$i28>>>0)<($cond$i$i$i$i$i22>>>0);
-  $$sroa$speculated$i$i$i$i30 = $cmp$i$i$i$i$i$i$i29 ? $cond$i11$i$i$i$i28 : $cond$i$i$i$i$i22;
-  $cmp$i$i$i$i$i31 = ($$sroa$speculated$i$i$i$i30|0)==(0);
-  if ($cmp$i$i$i$i$i31) {
-   label = 5;
+  $__size_$i$i$i$i$i$i$i$i19 = ((($__value_)) + 11|0);
+  $4 = load1($__size_$i$i$i$i$i$i$i$i19);
+  $tobool$i$i$i$i$i$i$i$i20 = ($4<<24>>24)<(0);
+  $__size_$i3$i$i$i$i$i$i21 = ((($__nd$0)) + 20|0);
+  $5 = load4($__size_$i3$i$i$i$i$i$i21);
+  $conv$i$i$i$i$i$i$i22 = $4&255;
+  $cond$i$i$i$i$i$i23 = $tobool$i$i$i$i$i$i$i$i20 ? $5 : $conv$i$i$i$i$i$i$i22;
+  $cmp$i$i$i$i$i$i$i$i30 = ($cond$i$i$i$i$i$i23>>>0)<($cond$i16$i$i$i$i$i29>>>0);
+  $$sroa$speculated$i$i$i$i$i31 = $cmp$i$i$i$i$i$i$i$i30 ? $cond$i$i$i$i$i$i23 : $cond$i16$i$i$i$i$i29;
+  $cmp$i$i$i$i$i$i32 = ($$sroa$speculated$i$i$i$i$i31|0)==(0);
+  if ($cmp$i$i$i$i$i$i32) {
+   label = 6;
   } else {
    $6 = load4($__value_);
-   $cond$i$i22$i$i$i$i37 = $tobool$i$i6$i$i$i$i25 ? $6 : $__value_;
-   $call$i$i$i$i$i38 = (_memcmp($cond$i$i22$i$i$i$i,$cond$i$i22$i$i$i$i37,$$sroa$speculated$i$i$i$i30)|0);
-   $cmp$i$i$i$i39 = ($call$i$i$i$i$i38|0)==(0);
-   if ($cmp$i$i$i$i39) {
-    label = 5;
+   $cond$i$i1$i$i$i$i$i38 = $tobool$i$i$i$i$i$i$i$i20 ? $6 : $__value_;
+   $call$i$i$i$i$i$i39 = (_memcmp($cond$i$i1$i$i$i$i$i,$cond$i$i1$i$i$i$i$i38,$$sroa$speculated$i$i$i$i$i31)|0);
+   $cmp$i$i$i$i$i40 = ($call$i$i$i$i$i$i39|0)==(0);
+   if ($cmp$i$i$i$i$i40) {
+    label = 6;
    } else {
-    $cmp$i$i$i46 = ($call$i$i$i$i$i38|0)<(0);
-    if ($cmp$i$i$i46) {
-     label = 7;
+    $cmp$i$i$i47 = ($call$i$i$i$i$i$i39|0)<(0);
+    if ($cmp$i$i$i47) {
+     label = 8;
     } else {
-     label = 9;
+     label = 10;
     }
    }
   }
-  if ((label|0) == 5) {
+  if ((label|0) == 6) {
    label = 0;
-   $cmp8$i$i$i$i41 = ($cond$i$i$i$i$i22>>>0)<($cond$i11$i$i$i$i28>>>0);
-   if ($cmp8$i$i$i$i41) {
-    label = 7;
+   $cmp7$i$i$i$i$i42 = ($cond$i16$i$i$i$i$i29>>>0)<($cond$i$i$i$i$i$i23>>>0);
+   if ($cmp7$i$i$i$i$i42) {
+    label = 8;
    } else {
-    label = 9;
+    label = 10;
    }
   }
-  if ((label|0) == 7) {
+  if ((label|0) == 8) {
    label = 0;
    $7 = load4($__nd$0);
-   $cmp5 = ($7|0)==(0|0);
-   if ($cmp5) {
-    label = 8;
+   $cmp6 = ($7|0)==(0|0);
+   if ($cmp6) {
+    label = 9;
     break;
    } else {
-    $$sink = $7;
+    $$in = $7;$__nd_ptr$0$ph = $__nd$0;
    }
   }
-  else if ((label|0) == 9) {
+  else if ((label|0) == 10) {
    label = 0;
-   $cmp$i$i$i$i$i$i$i = ($cond$i$i$i$i$i22>>>0)<($cond$i11$i$i$i$i28>>>0);
-   $$sroa$speculated$i$i$i$i = $cmp$i$i$i$i$i$i$i ? $cond$i$i$i$i$i22 : $cond$i11$i$i$i$i28;
-   $cmp$i$i$i$i$i = ($$sroa$speculated$i$i$i$i|0)==(0);
-   if ($cmp$i$i$i$i$i) {
-    label = 11;
+   $cmp$i$i$i$i$i$i$i$i = ($cond$i16$i$i$i$i$i29>>>0)<($cond$i$i$i$i$i$i23>>>0);
+   $$sroa$speculated$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i ? $cond$i16$i$i$i$i$i29 : $cond$i$i$i$i$i$i23;
+   $cmp$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i|0)==(0);
+   if ($cmp$i$i$i$i$i$i) {
+    label = 12;
    } else {
     $8 = load4($__value_);
-    $cond$i$i$i$i$i$i = $tobool$i$i6$i$i$i$i25 ? $8 : $__value_;
-    $call$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i,$cond$i$i22$i$i$i$i,$$sroa$speculated$i$i$i$i)|0);
-    $cmp$i$i$i$i = ($call$i$i$i$i$i|0)==(0);
-    if ($cmp$i$i$i$i) {
-     label = 11;
+    $cond$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i20 ? $8 : $__value_;
+    $call$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i,$cond$i$i1$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i)|0);
+    $cmp$i$i$i$i$i = ($call$i$i$i$i$i$i|0)==(0);
+    if ($cmp$i$i$i$i$i) {
+     label = 12;
     } else {
-     $cmp$i$i$i = ($call$i$i$i$i$i|0)<(0);
+     $cmp$i$i$i = ($call$i$i$i$i$i$i|0)<(0);
      if (!($cmp$i$i$i)) {
       label = 16;
       break;
      }
     }
    }
-   if ((label|0) == 11) {
+   if ((label|0) == 12) {
     label = 0;
-    if (!($cmp$i$i$i$i$i$i$i29)) {
+    if (!($cmp$i$i$i$i$i$i$i$i30)) {
      label = 16;
      break;
     }
    }
    $9 = ((($__nd$0)) + 4|0);
    $10 = load4($9);
-   $cmp14 = ($10|0)==(0|0);
-   if ($cmp14) {
+   $cmp17 = ($10|0)==(0|0);
+   if ($cmp17) {
     label = 15;
     break;
    } else {
-    $$sink = $10;
+    $$in = $10;$__nd_ptr$0$ph = $9;
    }
   }
-  $__nd$0 = $$sink;
+  $__nd$0 = $$in;$__nd_ptr$0 = $__nd_ptr$0$ph;
  }
- if ((label|0) == 8) {
+ if ((label|0) == 9) {
   store4($__parent,$__nd$0);
   $retval$0 = $__nd$0;
   return ($retval$0|0);
@@ -480,7 +483,7 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
  }
  else if ((label|0) == 16) {
   store4($__parent,$__nd$0);
-  $retval$0 = $__parent;
+  $retval$0 = $__nd_ptr$0;
   return ($retval$0|0);
  }
  return (0)|0;
@@ -488,11 +491,11 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
 function __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($__root,$__x) {
  $__root = $__root|0;
  $__x = $__x|0;
- var $$pre = 0, $$pre94 = 0, $$pre96 = 0, $$pre97 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0;
+ var $$pre = 0, $$pre113 = 0, $$pre116 = 0, $$pre118 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0;
  var $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $4 = 0, $5 = 0, $6 = 0;
- var $7 = 0, $8 = 0, $9 = 0, $__is_black_ = 0, $__is_black_14 = 0, $__is_black_2 = 0, $__is_black_21 = 0, $__is_black_23 = 0, $__is_black_31 = 0, $__is_black_47 = 0, $__is_black_49 = 0, $__is_black_7 = 0, $__is_black_7$sink = 0, $__parent_ = 0, $__parent_$i = 0, $__parent_$i46 = 0, $__parent_$i50 = 0, $__parent_$i63 = 0, $__parent_$i74 = 0, $__parent_4$i = 0;
- var $__parent_4$i65 = 0, $__parent_5$i = 0, $__parent_5$i66 = 0, $__parent_5$i77 = 0, $__right_$i = 0, $__right_$i48 = 0, $__right_$i61 = 0, $__right_$i71 = 0, $__right_10$sink$i = 0, $__right_10$sink$i56 = 0, $__right_10$sink$i69 = 0, $__right_10$sink$i80 = 0, $__x$addr$089 = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i55 = 0, $cmp$i$i68 = 0, $cmp$i$i79 = 0, $cmp$i45 = 0;
- var $cmp$i49 = 0, $cmp$i59 = 0, $cmp$i62 = 0, $cmp$i73 = 0, $cmp$i84 = 0, $cmp13 = 0, $cmp29 = 0, $cmp6 = 0, $frombool = 0, $frombool15 = 0, $lnot = 0, $tobool32 = 0, $tobool8 = 0, label = 0, sp = 0;
+ var $7 = 0, $8 = 0, $9 = 0, $__is_black_ = 0, $__is_black_11 = 0, $__is_black_11$sink = 0, $__is_black_2 = 0, $__is_black_20 = 0, $__is_black_29 = 0, $__is_black_32 = 0, $__is_black_40 = 0, $__is_black_61 = 0, $__is_black_64 = 0, $__left_$i$$i = 0, $__left_$i$$i56 = 0, $__left_$i$$i72 = 0, $__left_$i$$i85 = 0, $__parent_$i = 0, $__parent_$i$i = 0, $__parent_$i$i50 = 0;
+ var $__parent_$i$i66 = 0, $__parent_$i$i79 = 0, $__parent_$i44 = 0, $__parent_$i68 = 0, $__parent_$i95 = 0, $__parent_4$i = 0, $__parent_4$i69 = 0, $__parent_4$i82 = 0, $__right_$i = 0, $__right_$i48 = 0, $__right_$i64 = 0, $__right_$i76 = 0, $__x$addr$0104 = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i55 = 0, $cmp$i$i71 = 0, $cmp$i$i84 = 0, $cmp$i49 = 0;
+ var $cmp$i60 = 0, $cmp$i65 = 0, $cmp$i78 = 0, $cmp$i90 = 0, $cmp$i97 = 0, $cmp10 = 0, $cmp19 = 0, $cmp38 = 0, $frombool = 0, $frombool21 = 0, $lnot = 0, $tobool12 = 0, $tobool41 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $cmp = ($__x|0)==($__root|0);
  $__is_black_ = ((($__x)) + 12|0);
@@ -501,11 +504,11 @@ function __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT
  if ($cmp) {
   return;
  } else {
-  $__x$addr$089 = $__x;
+  $__x$addr$0104 = $__x;
  }
  while(1) {
-  $__parent_ = ((($__x$addr$089)) + 8|0);
-  $0 = load4($__parent_);
+  $__parent_$i = ((($__x$addr$0104)) + 8|0);
+  $0 = load4($__parent_$i);
   $__is_black_2 = ((($0)) + 12|0);
   $1 = load1($__is_black_2);
   $lnot = ($1<<24>>24)==(0);
@@ -513,172 +516,172 @@ function __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT
    label = 23;
    break;
   }
-  $__parent_$i = ((($0)) + 8|0);
-  $2 = load4($__parent_$i);
+  $__parent_$i95 = ((($0)) + 8|0);
+  $2 = load4($__parent_$i95);
   $3 = load4($2);
-  $cmp$i = ($3|0)==($0|0);
-  if ($cmp$i) {
+  $cmp$i97 = ($3|0)==($0|0);
+  if ($cmp$i97) {
    $4 = ((($2)) + 4|0);
    $5 = load4($4);
-   $cmp6 = ($5|0)==(0|0);
-   if ($cmp6) {
+   $cmp10 = ($5|0)==(0|0);
+   if ($cmp10) {
     label = 7;
     break;
    }
-   $__is_black_7 = ((($5)) + 12|0);
-   $6 = load1($__is_black_7);
-   $tobool8 = ($6<<24>>24)==(0);
-   if ($tobool8) {
-    $__is_black_7$sink = $__is_black_7;
+   $__is_black_11 = ((($5)) + 12|0);
+   $6 = load1($__is_black_11);
+   $tobool12 = ($6<<24>>24)==(0);
+   if ($tobool12) {
+    $__is_black_11$sink = $__is_black_11;
    } else {
     label = 7;
     break;
    }
   } else {
-   $cmp29 = ($3|0)==(0|0);
-   if ($cmp29) {
+   $cmp38 = ($3|0)==(0|0);
+   if ($cmp38) {
     label = 16;
     break;
    }
-   $__is_black_31 = ((($3)) + 12|0);
-   $23 = load1($__is_black_31);
-   $tobool32 = ($23<<24>>24)==(0);
-   if ($tobool32) {
-    $__is_black_7$sink = $__is_black_31;
+   $__is_black_40 = ((($3)) + 12|0);
+   $23 = load1($__is_black_40);
+   $tobool41 = ($23<<24>>24)==(0);
+   if ($tobool41) {
+    $__is_black_11$sink = $__is_black_40;
    } else {
     label = 16;
     break;
    }
   }
   store1($__is_black_2,1);
-  $cmp13 = ($2|0)==($__root|0);
-  $__is_black_14 = ((($2)) + 12|0);
-  $frombool15 = $cmp13&1;
-  store1($__is_black_14,$frombool15);
-  store1($__is_black_7$sink,1);
-  if ($cmp13) {
+  $cmp19 = ($2|0)==($__root|0);
+  $__is_black_20 = ((($2)) + 12|0);
+  $frombool21 = $cmp19&1;
+  store1($__is_black_20,$frombool21);
+  store1($__is_black_11$sink,1);
+  if ($cmp19) {
    label = 23;
    break;
   } else {
-   $__x$addr$089 = $2;
+   $__x$addr$0104 = $2;
   }
  }
  if ((label|0) == 7) {
   $7 = load4($0);
-  $cmp$i84 = ($7|0)==($__x$addr$089|0);
-  if ($cmp$i84) {
+  $cmp$i90 = ($7|0)==($__x$addr$0104|0);
+  if ($cmp$i90) {
    $15 = $0;$16 = $2;
   } else {
    $8 = $2;
-   $__right_$i71 = ((($0)) + 4|0);
-   $9 = load4($__right_$i71);
+   $__right_$i76 = ((($0)) + 4|0);
+   $9 = load4($__right_$i76);
    $10 = load4($9);
-   store4($__right_$i71,$10);
-   $cmp$i73 = ($10|0)==(0|0);
-   if ($cmp$i73) {
+   store4($__right_$i76,$10);
+   $cmp$i78 = ($10|0)==(0|0);
+   if ($cmp$i78) {
     $11 = $8;
    } else {
-    $__parent_$i74 = ((($10)) + 8|0);
-    store4($__parent_$i74,$0);
-    $$pre96 = load4($__parent_$i);
-    $11 = $$pre96;
+    $__parent_$i$i79 = ((($10)) + 8|0);
+    store4($__parent_$i$i79,$0);
+    $$pre116 = load4($__parent_$i95);
+    $11 = $$pre116;
    }
-   $__parent_5$i77 = ((($9)) + 8|0);
-   store4($__parent_5$i77,$11);
-   $12 = load4($__parent_$i);
+   $__parent_4$i82 = ((($9)) + 8|0);
+   store4($__parent_4$i82,$11);
+   $12 = load4($__parent_$i95);
    $13 = load4($12);
-   $cmp$i$i79 = ($13|0)==($0|0);
+   $cmp$i$i84 = ($13|0)==($0|0);
    $14 = ((($12)) + 4|0);
-   $__right_10$sink$i80 = $cmp$i$i79 ? $12 : $14;
-   store4($__right_10$sink$i80,$9);
+   $__left_$i$$i85 = $cmp$i$i84 ? $12 : $14;
+   store4($__left_$i$$i85,$9);
    store4($9,$0);
-   store4($__parent_$i,$9);
-   $$pre97 = load4($__parent_5$i77);
-   $15 = $9;$16 = $$pre97;
+   store4($__parent_$i95,$9);
+   $$pre118 = load4($__parent_4$i82);
+   $15 = $9;$16 = $$pre118;
   }
-  $__is_black_21 = ((($15)) + 12|0);
-  store1($__is_black_21,1);
-  $__is_black_23 = ((($16)) + 12|0);
-  store1($__is_black_23,0);
+  $__is_black_29 = ((($15)) + 12|0);
+  store1($__is_black_29,1);
+  $__is_black_32 = ((($16)) + 12|0);
+  store1($__is_black_32,0);
   $17 = load4($16);
-  $__right_$i61 = ((($17)) + 4|0);
-  $18 = load4($__right_$i61);
+  $__right_$i64 = ((($17)) + 4|0);
+  $18 = load4($__right_$i64);
   store4($16,$18);
-  $cmp$i62 = ($18|0)==(0|0);
-  if (!($cmp$i62)) {
-   $__parent_$i63 = ((($18)) + 8|0);
-   store4($__parent_$i63,$16);
+  $cmp$i65 = ($18|0)==(0|0);
+  if (!($cmp$i65)) {
+   $__parent_$i$i66 = ((($18)) + 8|0);
+   store4($__parent_$i$i66,$16);
   }
-  $__parent_4$i65 = ((($16)) + 8|0);
-  $19 = load4($__parent_4$i65);
-  $__parent_5$i66 = ((($17)) + 8|0);
-  store4($__parent_5$i66,$19);
-  $20 = load4($__parent_4$i65);
+  $__parent_$i68 = ((($16)) + 8|0);
+  $19 = load4($__parent_$i68);
+  $__parent_4$i69 = ((($17)) + 8|0);
+  store4($__parent_4$i69,$19);
+  $20 = load4($__parent_$i68);
   $21 = load4($20);
-  $cmp$i$i68 = ($21|0)==($16|0);
+  $cmp$i$i71 = ($21|0)==($16|0);
   $22 = ((($20)) + 4|0);
-  $__right_10$sink$i69 = $cmp$i$i68 ? $20 : $22;
-  store4($__right_10$sink$i69,$17);
-  store4($__right_$i61,$16);
-  store4($__parent_4$i65,$17);
+  $__left_$i$$i72 = $cmp$i$i71 ? $20 : $22;
+  store4($__left_$i$$i72,$17);
+  store4($__right_$i64,$16);
+  store4($__parent_$i68,$17);
   return;
  }
  else if ((label|0) == 16) {
   $24 = load4($0);
-  $cmp$i59 = ($24|0)==($__x$addr$089|0);
-  if ($cmp$i59) {
+  $cmp$i60 = ($24|0)==($__x$addr$0104|0);
+  if ($cmp$i60) {
    $25 = $2;
-   $__right_$i48 = ((($__x$addr$089)) + 4|0);
+   $__right_$i48 = ((($__x$addr$0104)) + 4|0);
    $26 = load4($__right_$i48);
    store4($0,$26);
    $cmp$i49 = ($26|0)==(0|0);
    if ($cmp$i49) {
     $27 = $25;
    } else {
-    $__parent_$i50 = ((($26)) + 8|0);
-    store4($__parent_$i50,$0);
-    $$pre = load4($__parent_$i);
+    $__parent_$i$i50 = ((($26)) + 8|0);
+    store4($__parent_$i$i50,$0);
+    $$pre = load4($__parent_$i95);
     $27 = $$pre;
    }
-   store4($__parent_,$27);
-   $28 = load4($__parent_$i);
+   store4($__parent_$i,$27);
+   $28 = load4($__parent_$i95);
    $29 = load4($28);
    $cmp$i$i55 = ($29|0)==($0|0);
    $30 = ((($28)) + 4|0);
-   $__right_10$sink$i56 = $cmp$i$i55 ? $28 : $30;
-   store4($__right_10$sink$i56,$__x$addr$089);
+   $__left_$i$$i56 = $cmp$i$i55 ? $28 : $30;
+   store4($__left_$i$$i56,$__x$addr$0104);
    store4($__right_$i48,$0);
-   store4($__parent_$i,$__x$addr$089);
-   $$pre94 = load4($__parent_);
-   $31 = $__x$addr$089;$32 = $$pre94;
+   store4($__parent_$i95,$__x$addr$0104);
+   $$pre113 = load4($__parent_$i);
+   $31 = $__x$addr$0104;$32 = $$pre113;
   } else {
    $31 = $0;$32 = $2;
   }
-  $__is_black_47 = ((($31)) + 12|0);
-  store1($__is_black_47,1);
-  $__is_black_49 = ((($32)) + 12|0);
-  store1($__is_black_49,0);
+  $__is_black_61 = ((($31)) + 12|0);
+  store1($__is_black_61,1);
+  $__is_black_64 = ((($32)) + 12|0);
+  store1($__is_black_64,0);
   $__right_$i = ((($32)) + 4|0);
   $33 = load4($__right_$i);
   $34 = load4($33);
   store4($__right_$i,$34);
-  $cmp$i45 = ($34|0)==(0|0);
-  if (!($cmp$i45)) {
-   $__parent_$i46 = ((($34)) + 8|0);
-   store4($__parent_$i46,$32);
+  $cmp$i = ($34|0)==(0|0);
+  if (!($cmp$i)) {
+   $__parent_$i$i = ((($34)) + 8|0);
+   store4($__parent_$i$i,$32);
   }
-  $__parent_4$i = ((($32)) + 8|0);
-  $35 = load4($__parent_4$i);
-  $__parent_5$i = ((($33)) + 8|0);
-  store4($__parent_5$i,$35);
-  $36 = load4($__parent_4$i);
+  $__parent_$i44 = ((($32)) + 8|0);
+  $35 = load4($__parent_$i44);
+  $__parent_4$i = ((($33)) + 8|0);
+  store4($__parent_4$i,$35);
+  $36 = load4($__parent_$i44);
   $37 = load4($36);
   $cmp$i$i = ($37|0)==($32|0);
   $38 = ((($36)) + 4|0);
-  $__right_10$sink$i = $cmp$i$i ? $36 : $38;
-  store4($__right_10$sink$i,$33);
+  $__left_$i$$i = $cmp$i$i ? $36 : $38;
+  store4($__left_$i$$i,$33);
   store4($33,$32);
-  store4($__parent_4$i,$33);
+  store4($__parent_$i44,$33);
   return;
  }
  else if ((label|0) == 23) {
@@ -688,225 +691,233 @@ function __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT
 function __ZN6asmdom5VNode11adjustVNodeEv($this) {
  $this = $this|0;
  var $$in = 0, $$in$i = 0, $$pre = 0, $$pre$i$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0;
- var $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__begin_$i = 0, $__cc$i$i$i$i = 0, $__end_$i = 0, $__first_$i$i$i$i7$i$i = 0, $__left_7$i$i$i = 0, $__new_last3$i$i$i = 0, $__parent$i$i = 0, $__parent_$i$i$i = 0;
- var $__r$0$i$i = 0, $__right_$i$i$i = 0, $__size_$i$i$i = 0, $add$ptr$i = 0, $add$ptr$i24 = 0, $attrs = 0, $call$i$i$i$i$i$i6 = 0, $call$i$i45 = 0, $call$i1 = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i36 = 0, $cmp11 = 0, $cmp15 = 0, $cmp20 = 0, $cond$i$i = 0, $cond$i$i14 = 0, $cond$i$i23 = 0;
- var $inc$i$i$i = 0, $incdec$ptr$i$i$i = 0, $incdec$ptr$i19$i = 0, $incdec$ptr$i9$i = 0, $incdec$ptr$i920$i = 0, $key = 0, $lnot$i$i = 0, $lnot$i$i$i = 0, $lnot$i$i39 = 0, $lnot$i12$i = 0, $lnot$i2$i$i = 0, $lnot$i21$i = 0, $ref$tmp4 = 0, $retval$sroa$0$0$copyload$i = 0, $retval$sroa$0$0$copyload23$i = 0, $retval$sroa$0$0$copyload24$i = 0, $scevgep$i$i$i = 0, $scevgep5$i$i$i = 0, $second$i = 0, $second$i$i$i$i$i$i5$i$i = 0;
- var $tobool$i$i$i = 0, label = 0, sp = 0;
+ var $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__begin_$i = 0, $__cc$i$i$i$i = 0, $__end_$i = 0, $__first_$i$i$i$i7$i$i = 0, $__left_7$i$i$i = 0, $__new_last3$i$i$i = 0;
+ var $__parent$i$i = 0, $__parent_$i$i$i = 0, $__r$0$i$i = 0, $__right_$i$i$i = 0, $__size_$i$i$i50 = 0, $__size_$i12$i$i = 0, $__size_$i12$i$i17 = 0, $add$ptr$i = 0, $add$ptr$i69 = 0, $arrayidx$i$i = 0, $arrayidx$i$i23 = 0, $attrs = 0, $call$i$i$i$i$i$i31 = 0, $call$i$i2630 = 0, $call$i1 = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i$i28 = 0, $cmp$i$i27 = 0, $cmp$i$i73 = 0;
+ var $cmp11 = 0, $cmp15 = 0, $cmp20 = 0, $cond$i$i = 0, $cond$i$i59 = 0, $cond$i$i68 = 0, $inc$i$i$i = 0, $incdec$ptr$i$i$i = 0, $incdec$ptr$i19$i = 0, $incdec$ptr$i9$i = 0, $incdec$ptr$i920$i = 0, $key = 0, $lnot$i$i = 0, $lnot$i$i$i = 0, $lnot$i$i79 = 0, $lnot$i12$i = 0, $lnot$i2$i$i = 0, $lnot$i21$i = 0, $ref$tmp4 = 0, $retval$sroa$0$0$copyload$i = 0;
+ var $retval$sroa$0$0$copyload23$i = 0, $retval$sroa$0$0$copyload24$i = 0, $scevgep$i$i$i = 0, $scevgep5$i$i$i = 0, $second$i = 0, $second$i$i$i$i$i$i5$i$i = 0, $tobool$i$i$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 32|0;
  $__parent$i$i = sp + 12|0;
  $ref$tmp4 = sp;
  $attrs = ((($this)) + 36|0);
- ; store8($__parent$i$i,i64_const(0,0),4); store4($__parent$i$i+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($__parent$i$i,2844,3);
+ $0 = ((($__parent$i$i)) + 4|0);
+ store8($0,i64_const(0,0),4);
+ $__size_$i12$i$i = ((($__parent$i$i)) + 11|0);
+ store1($__size_$i12$i$i,3);
+ ; store2($__parent$i$i,load2(2841,1),1); store1($__parent$i$i+2 | 0,load1(2841+2 | 0,1),1);
+ $arrayidx$i$i = ((($__parent$i$i)) + 3|0);
+ store1($arrayidx$i$i,0);
  $call$i1 = (__ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE14__count_uniqueIS7_EEjRKT_($attrs,$__parent$i$i)|0);
  $cmp = ($call$i1|0)==(0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($__parent$i$i);
  if (!($cmp)) {
-  ; store8($ref$tmp4,i64_const(0,0),4); store4($ref$tmp4+8|0,0,4);
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($ref$tmp4,2844,3);
-  $call$i$i45 = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESK_RKT_($attrs,$__parent$i$i,$ref$tmp4)|0);
-  $0 = load4($call$i$i45);
-  $cmp$i$i = ($0|0)==(0|0);
-  if ($cmp$i$i) {
-   $call$i$i$i$i$i$i6 = (__Znwj(40)|0);
-   $__cc$i$i$i$i = ((($call$i$i$i$i$i$i6)) + 16|0);
+  $1 = ((($ref$tmp4)) + 4|0);
+  store8($1,i64_const(0,0),4);
+  $__size_$i12$i$i17 = ((($ref$tmp4)) + 11|0);
+  store1($__size_$i12$i$i17,3);
+  ; store2($ref$tmp4,load2(2841,1),1); store1($ref$tmp4+2 | 0,load1(2841+2 | 0,1),1);
+  $arrayidx$i$i23 = ((($ref$tmp4)) + 3|0);
+  store1($arrayidx$i$i23,0);
+  $call$i$i2630 = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISJ_EERKT_($attrs,$__parent$i$i,$ref$tmp4)|0);
+  $2 = load4($call$i$i2630);
+  $cmp$i$i27 = ($2|0)==(0|0);
+  if ($cmp$i$i27) {
+   $call$i$i$i$i$i$i31 = (__Znwj(40)|0);
+   $__cc$i$i$i$i = ((($call$i$i$i$i$i$i31)) + 16|0);
    ; store8($__cc$i$i$i$i,load8($ref$tmp4,4),4); store4($__cc$i$i$i$i+8 | 0,load4($ref$tmp4+8 | 0,4),4);
    ; store8($ref$tmp4,i64_const(0,0),4); store4($ref$tmp4+8|0,0,4);
-   $second$i$i$i$i$i$i5$i$i = ((($call$i$i$i$i$i$i6)) + 28|0);
+   $second$i$i$i$i$i$i5$i$i = ((($call$i$i$i$i$i$i31)) + 28|0);
    ; store8($second$i$i$i$i$i$i5$i$i,i64_const(0,0),4); store4($second$i$i$i$i$i$i5$i$i+8|0,0,4);
-   $1 = load4($__parent$i$i);
-   store4($call$i$i$i$i$i$i6,0);
-   $__right_$i$i$i = ((($call$i$i$i$i$i$i6)) + 4|0);
+   $3 = load4($__parent$i$i);
+   store4($call$i$i$i$i$i$i31,0);
+   $__right_$i$i$i = ((($call$i$i$i$i$i$i31)) + 4|0);
    store4($__right_$i$i$i,0);
-   $__parent_$i$i$i = ((($call$i$i$i$i$i$i6)) + 8|0);
-   store4($__parent_$i$i$i,$1);
-   store4($call$i$i45,$call$i$i$i$i$i$i6);
-   $2 = load4($attrs);
-   $3 = load4($2);
-   $cmp$i$i$i = ($3|0)==(0|0);
-   if ($cmp$i$i$i) {
-    $6 = $call$i$i$i$i$i$i6;
+   $__parent_$i$i$i = ((($call$i$i$i$i$i$i31)) + 8|0);
+   store4($__parent_$i$i$i,$3);
+   store4($call$i$i2630,$call$i$i$i$i$i$i31);
+   $4 = load4($attrs);
+   $5 = load4($4);
+   $cmp$i$i$i28 = ($5|0)==(0|0);
+   if ($cmp$i$i$i28) {
+    $8 = $call$i$i$i$i$i$i31;
    } else {
-    $4 = $3;
-    store4($attrs,$4);
-    $$pre$i$i$i = load4($call$i$i45);
-    $6 = $$pre$i$i$i;
+    $6 = $5;
+    store4($attrs,$6);
+    $$pre$i$i$i = load4($call$i$i2630);
+    $8 = $$pre$i$i$i;
    }
    $__left_7$i$i$i = ((($this)) + 40|0);
-   $5 = load4($__left_7$i$i$i);
-   __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($5,$6);
+   $7 = load4($__left_7$i$i$i);
+   __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($7,$8);
    $__first_$i$i$i$i7$i$i = ((($this)) + 44|0);
-   $7 = load4($__first_$i$i$i$i7$i$i);
-   $inc$i$i$i = (($7) + 1)|0;
+   $9 = load4($__first_$i$i$i$i7$i$i);
+   $inc$i$i$i = (($9) + 1)|0;
    store4($__first_$i$i$i$i7$i$i,$inc$i$i$i);
-   $__r$0$i$i = $call$i$i$i$i$i$i6;
+   $__r$0$i$i = $call$i$i$i$i$i$i31;
   } else {
-   $__r$0$i$i = $0;
+   $__r$0$i$i = $2;
   }
   $second$i = ((($__r$0$i$i)) + 28|0);
   $key = ((($this)) + 12|0);
   (__ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEaSERKS5_($key,$second$i)|0);
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp4);
  }
- $__size_$i$i$i = ((($this)) + 11|0);
- $8 = load1($__size_$i$i$i);
- $tobool$i$i$i = ($8<<24>>24)<(0);
+ $__size_$i$i$i50 = ((($this)) + 11|0);
+ $10 = load1($__size_$i$i$i50);
+ $tobool$i$i$i = ($10<<24>>24)<(0);
  if ($tobool$i$i$i) {
-  $9 = load4($this);
-  $cond$i$i = $9;
+  $11 = load4($this);
+  $cond$i$i = $11;
  } else {
   $cond$i$i = $this;
  }
- $10 = load1($cond$i$i);
- $cmp11 = ($10<<24>>24)==(115);
+ $12 = load1($cond$i$i);
+ $cmp11 = ($12<<24>>24)==(115);
  if ($cmp11) {
   if ($tobool$i$i$i) {
-   $11 = load4($this);
-   $cond$i$i14 = $11;
+   $13 = load4($this);
+   $cond$i$i59 = $13;
   } else {
-   $cond$i$i14 = $this;
+   $cond$i$i59 = $this;
   }
-  $add$ptr$i = ((($cond$i$i14)) + 1|0);
-  $12 = load1($add$ptr$i);
-  $cmp15 = ($12<<24>>24)==(118);
+  $add$ptr$i = ((($cond$i$i59)) + 1|0);
+  $14 = load1($add$ptr$i);
+  $cmp15 = ($14<<24>>24)==(118);
   if ($cmp15) {
    if ($tobool$i$i$i) {
-    $13 = load4($this);
-    $cond$i$i23 = $13;
+    $15 = load4($this);
+    $cond$i$i68 = $15;
    } else {
-    $cond$i$i23 = $this;
+    $cond$i$i68 = $this;
    }
-   $add$ptr$i24 = ((($cond$i$i23)) + 2|0);
-   $14 = load1($add$ptr$i24);
-   $cmp20 = ($14<<24>>24)==(103);
+   $add$ptr$i69 = ((($cond$i$i68)) + 2|0);
+   $16 = load1($add$ptr$i69);
+   $cmp20 = ($16<<24>>24)==(103);
    if ($cmp20) {
     __ZN6asmdom5addNSEPNS_5VNodeE($this);
    }
   }
  }
  $__begin_$i = ((($this)) + 76|0);
- $15 = load4($__begin_$i);
+ $17 = load4($__begin_$i);
  $__end_$i = ((($this)) + 80|0);
- $16 = load4($__end_$i);
- $lnot$i2$i$i = ($15|0)==($16|0);
+ $18 = load4($__end_$i);
+ $lnot$i2$i$i = ($17|0)==($18|0);
  L27: do {
   if ($lnot$i2$i$i) {
-   $19 = $15;
+   $21 = $17;
   } else {
-   $18 = $15;
+   $20 = $17;
    while(1) {
-    $17 = load4($18);
-    $cmp$i$i36 = ($17|0)==(0|0);
-    if ($cmp$i$i36) {
-     $19 = $18;
+    $19 = load4($20);
+    $cmp$i$i73 = ($19|0)==(0|0);
+    if ($cmp$i$i73) {
+     $21 = $20;
      break L27;
     }
-    $incdec$ptr$i$i$i = ((($18)) + 4|0);
-    $lnot$i$i$i = ($incdec$ptr$i$i$i|0)==($16|0);
+    $incdec$ptr$i$i$i = ((($20)) + 4|0);
+    $lnot$i$i$i = ($incdec$ptr$i$i$i|0)==($18|0);
     if ($lnot$i$i$i) {
      break;
     } else {
-     $18 = $incdec$ptr$i$i$i;
+     $20 = $incdec$ptr$i$i$i;
     }
    }
    STACKTOP = sp;return;
   }
  } while(0);
- $lnot$i12$i = ($19|0)==($16|0);
+ $lnot$i12$i = ($21|0)==($18|0);
  if ($lnot$i12$i) {
   STACKTOP = sp;return;
  }
- $incdec$ptr$i920$i = ((($19)) + 4|0);
- $lnot$i21$i = ($incdec$ptr$i920$i|0)==($16|0);
+ $incdec$ptr$i920$i = ((($21)) + 4|0);
+ $lnot$i21$i = ($incdec$ptr$i920$i|0)==($18|0);
  if ($lnot$i21$i) {
-  $$in = $16;$retval$sroa$0$0$copyload$i = $19;
+  $$in = $18;$retval$sroa$0$0$copyload$i = $21;
  } else {
-  $$in$i = $incdec$ptr$i920$i;$22 = $19;$retval$sroa$0$0$copyload24$i = $19;
+  $$in$i = $incdec$ptr$i920$i;$24 = $21;$retval$sroa$0$0$copyload24$i = $21;
   while(1) {
-   $20 = load4($$in$i);
-   $cmp$i = ($20|0)==(0|0);
+   $22 = load4($$in$i);
+   $cmp$i = ($22|0)==(0|0);
    if ($cmp$i) {
-    $27 = $22;$retval$sroa$0$0$copyload23$i = $retval$sroa$0$0$copyload24$i;
+    $29 = $24;$retval$sroa$0$0$copyload23$i = $retval$sroa$0$0$copyload24$i;
    } else {
-    $21 = $20;
-    store4($22,$21);
-    $incdec$ptr$i19$i = ((($22)) + 4|0);
-    $27 = $incdec$ptr$i19$i;$retval$sroa$0$0$copyload23$i = $incdec$ptr$i19$i;
+    $23 = $22;
+    store4($24,$23);
+    $incdec$ptr$i19$i = ((($24)) + 4|0);
+    $29 = $incdec$ptr$i19$i;$retval$sroa$0$0$copyload23$i = $incdec$ptr$i19$i;
    }
    $incdec$ptr$i9$i = ((($$in$i)) + 4|0);
-   $lnot$i$i39 = ($incdec$ptr$i9$i|0)==($16|0);
-   if ($lnot$i$i39) {
+   $lnot$i$i = ($incdec$ptr$i9$i|0)==($18|0);
+   if ($lnot$i$i) {
     break;
    } else {
-    $$in$i = $incdec$ptr$i9$i;$22 = $27;$retval$sroa$0$0$copyload24$i = $retval$sroa$0$0$copyload23$i;
+    $$in$i = $incdec$ptr$i9$i;$24 = $29;$retval$sroa$0$0$copyload24$i = $retval$sroa$0$0$copyload23$i;
    }
   }
   $$pre = load4($__end_$i);
   $$in = $$pre;$retval$sroa$0$0$copyload$i = $retval$sroa$0$0$copyload23$i;
  }
- $lnot$i$i = ($retval$sroa$0$0$copyload$i|0)==($$in|0);
- if ($lnot$i$i) {
+ $lnot$i$i79 = ($retval$sroa$0$0$copyload$i|0)==($$in|0);
+ if ($lnot$i$i79) {
   STACKTOP = sp;return;
  }
  $scevgep$i$i$i = ((($$in)) + -4|0);
- $23 = $scevgep$i$i$i;
+ $25 = $scevgep$i$i$i;
  $__new_last3$i$i$i = $retval$sroa$0$0$copyload$i;
- $24 = (($23) - ($__new_last3$i$i$i))|0;
- $25 = $24 >>> 2;
- $26 = $25 ^ -1;
- $scevgep5$i$i$i = (($$in) + ($26<<2)|0);
+ $26 = (($25) - ($__new_last3$i$i$i))|0;
+ $27 = $26 >>> 2;
+ $28 = $27 ^ -1;
+ $scevgep5$i$i$i = (($$in) + ($28<<2)|0);
  store4($__end_$i,$scevgep5$i$i$i);
  STACKTOP = sp;return;
 }
 function __ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE14__count_uniqueIS7_EEjRKT_($this,$__k) {
  $this = $this|0;
  $__k = $__k|0;
- var $$sink$be = 0, $$sroa$speculated$i$i$i$i = 0, $$sroa$speculated$i$i$i$i22 = 0, $0 = 0, $1 = 0, $10 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i = 0, $__size_$i$i$i$i$i$i10 = 0, $__size_$i$i5$i$i$i$i16 = 0, $__size_$i3$i$i$i$i$i12 = 0, $__size_$i3$i7$i$i$i$i18 = 0, $__value_ = 0;
- var $call$i$i$i$i$i = 0, $call$i$i$i$i$i30 = 0, $cmp = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i21 = 0, $cmp$i$i$i$i$i23 = 0, $cmp$i$i$i$i31 = 0, $cmp$i$i$i38 = 0, $cmp47 = 0, $cmp8$i$i$i$i33 = 0, $cond$i$i$i$i$i$i = 0, $cond$i$i$i$i$i14 = 0, $cond$i$i22$i$i$i$i = 0, $cond$i$i22$i$i$i$i29 = 0, $cond$i11$i$i$i$i20 = 0, $conv$i$i$i$i$i$i13 = 0, $conv$i$i9$i$i$i$i19 = 0;
- var $retval$0 = 0, $tobool$i$i$i$i$i$i11 = 0, $tobool$i$i6$i$i$i$i17 = 0, label = 0, sp = 0;
+ var $$sink$be = 0, $$sroa$speculated$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i21 = 0, $0 = 0, $1 = 0, $10 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i = 0, $__size_$i$i$i$i$i$i$i$i9 = 0, $__size_$i$i$i$i$i$i$i15 = 0, $__size_$i3$i$i$i$i$i$i11 = 0, $__size_$i3$i$i2$i$i$i$i17 = 0, $__value_ = 0;
+ var $call$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i29 = 0, $cmp = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i20 = 0, $cmp$i$i$i$i$i$i22 = 0, $cmp$i$i$i$i$i30 = 0, $cmp$i$i$i37 = 0, $cmp45 = 0, $cmp7$i$i$i$i$i32 = 0, $cond$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i13 = 0, $cond$i$i1$i$i$i$i$i = 0, $cond$i$i1$i$i$i$i$i28 = 0, $cond$i16$i$i$i$i$i19 = 0, $conv$i$i$i$i$i$i$i12 = 0, $conv$i$i$i4$i$i$i$i18 = 0;
+ var $retval$0 = 0, $tobool$i$i$i$i$i$i$i$i10 = 0, $tobool$i$i$i$i$i$i$i16 = 0, label = 0, sp = 0;
  sp = STACKTOP;
- $__first_$i$i$i = ((($this)) + 4|0);
- $0 = load4($__first_$i$i$i);
- $cmp47 = ($0|0)==(0|0);
- if ($cmp47) {
+ $__first_$i$i$i$i = ((($this)) + 4|0);
+ $0 = load4($__first_$i$i$i$i);
+ $cmp45 = ($0|0)==(0|0);
+ if ($cmp45) {
   $retval$0 = 0;
   return ($retval$0|0);
  }
- $__size_$i$i$i$i$i$i10 = ((($__k)) + 11|0);
- $1 = load1($__size_$i$i$i$i$i$i10);
- $tobool$i$i$i$i$i$i11 = ($1<<24>>24)<(0);
- $__size_$i3$i$i$i$i$i12 = ((($__k)) + 4|0);
- $2 = load4($__size_$i3$i$i$i$i$i12);
- $conv$i$i$i$i$i$i13 = $1&255;
- $cond$i$i$i$i$i14 = $tobool$i$i$i$i$i$i11 ? $2 : $conv$i$i$i$i$i$i13;
+ $__size_$i$i$i$i$i$i$i15 = ((($__k)) + 11|0);
+ $1 = load1($__size_$i$i$i$i$i$i$i15);
+ $tobool$i$i$i$i$i$i$i16 = ($1<<24>>24)<(0);
+ $__size_$i3$i$i2$i$i$i$i17 = ((($__k)) + 4|0);
+ $2 = load4($__size_$i3$i$i2$i$i$i$i17);
+ $conv$i$i$i4$i$i$i$i18 = $1&255;
+ $cond$i16$i$i$i$i$i19 = $tobool$i$i$i$i$i$i$i16 ? $2 : $conv$i$i$i4$i$i$i$i18;
  $3 = load4($__k);
- $cond$i$i22$i$i$i$i = $tobool$i$i$i$i$i$i11 ? $3 : $__k;
+ $cond$i$i1$i$i$i$i$i = $tobool$i$i$i$i$i$i$i16 ? $3 : $__k;
  $4 = $0;
  while(1) {
   $__value_ = ((($4)) + 16|0);
-  $__size_$i$i5$i$i$i$i16 = ((($__value_)) + 11|0);
-  $5 = load1($__size_$i$i5$i$i$i$i16);
-  $tobool$i$i6$i$i$i$i17 = ($5<<24>>24)<(0);
-  $__size_$i3$i7$i$i$i$i18 = ((($4)) + 20|0);
-  $6 = load4($__size_$i3$i7$i$i$i$i18);
-  $conv$i$i9$i$i$i$i19 = $5&255;
-  $cond$i11$i$i$i$i20 = $tobool$i$i6$i$i$i$i17 ? $6 : $conv$i$i9$i$i$i$i19;
-  $cmp$i$i$i$i$i$i$i21 = ($cond$i11$i$i$i$i20>>>0)<($cond$i$i$i$i$i14>>>0);
-  $$sroa$speculated$i$i$i$i22 = $cmp$i$i$i$i$i$i$i21 ? $cond$i11$i$i$i$i20 : $cond$i$i$i$i$i14;
-  $cmp$i$i$i$i$i23 = ($$sroa$speculated$i$i$i$i22|0)==(0);
-  if ($cmp$i$i$i$i$i23) {
+  $__size_$i$i$i$i$i$i$i$i9 = ((($__value_)) + 11|0);
+  $5 = load1($__size_$i$i$i$i$i$i$i$i9);
+  $tobool$i$i$i$i$i$i$i$i10 = ($5<<24>>24)<(0);
+  $__size_$i3$i$i$i$i$i$i11 = ((($4)) + 20|0);
+  $6 = load4($__size_$i3$i$i$i$i$i$i11);
+  $conv$i$i$i$i$i$i$i12 = $5&255;
+  $cond$i$i$i$i$i$i13 = $tobool$i$i$i$i$i$i$i$i10 ? $6 : $conv$i$i$i$i$i$i$i12;
+  $cmp$i$i$i$i$i$i$i$i20 = ($cond$i$i$i$i$i$i13>>>0)<($cond$i16$i$i$i$i$i19>>>0);
+  $$sroa$speculated$i$i$i$i$i21 = $cmp$i$i$i$i$i$i$i$i20 ? $cond$i$i$i$i$i$i13 : $cond$i16$i$i$i$i$i19;
+  $cmp$i$i$i$i$i$i22 = ($$sroa$speculated$i$i$i$i$i21|0)==(0);
+  if ($cmp$i$i$i$i$i$i22) {
    label = 5;
   } else {
    $7 = load4($__value_);
-   $cond$i$i22$i$i$i$i29 = $tobool$i$i6$i$i$i$i17 ? $7 : $__value_;
-   $call$i$i$i$i$i30 = (_memcmp($cond$i$i22$i$i$i$i,$cond$i$i22$i$i$i$i29,$$sroa$speculated$i$i$i$i22)|0);
-   $cmp$i$i$i$i31 = ($call$i$i$i$i$i30|0)==(0);
-   if ($cmp$i$i$i$i31) {
+   $cond$i$i1$i$i$i$i$i28 = $tobool$i$i$i$i$i$i$i$i10 ? $7 : $__value_;
+   $call$i$i$i$i$i$i29 = (_memcmp($cond$i$i1$i$i$i$i$i,$cond$i$i1$i$i$i$i$i28,$$sroa$speculated$i$i$i$i$i21)|0);
+   $cmp$i$i$i$i$i30 = ($call$i$i$i$i$i$i29|0)==(0);
+   if ($cmp$i$i$i$i$i30) {
     label = 5;
    } else {
-    $cmp$i$i$i38 = ($call$i$i$i$i$i30|0)<(0);
-    if ($cmp$i$i$i38) {
+    $cmp$i$i$i37 = ($call$i$i$i$i$i$i29|0)<(0);
+    if ($cmp$i$i$i37) {
      label = 7;
     } else {
      label = 8;
@@ -915,8 +926,8 @@ function __ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_trait
   }
   if ((label|0) == 5) {
    label = 0;
-   $cmp8$i$i$i$i33 = ($cond$i$i$i$i$i14>>>0)<($cond$i11$i$i$i$i20>>>0);
-   if ($cmp8$i$i$i$i33) {
+   $cmp7$i$i$i$i$i32 = ($cond$i16$i$i$i$i$i19>>>0)<($cond$i$i$i$i$i$i13>>>0);
+   if ($cmp7$i$i$i$i$i32) {
     label = 7;
    } else {
     label = 8;
@@ -928,20 +939,20 @@ function __ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_trait
   }
   else if ((label|0) == 8) {
    label = 0;
-   $cmp$i$i$i$i$i$i$i = ($cond$i$i$i$i$i14>>>0)<($cond$i11$i$i$i$i20>>>0);
-   $$sroa$speculated$i$i$i$i = $cmp$i$i$i$i$i$i$i ? $cond$i$i$i$i$i14 : $cond$i11$i$i$i$i20;
-   $cmp$i$i$i$i$i = ($$sroa$speculated$i$i$i$i|0)==(0);
-   if ($cmp$i$i$i$i$i) {
+   $cmp$i$i$i$i$i$i$i$i = ($cond$i16$i$i$i$i$i19>>>0)<($cond$i$i$i$i$i$i13>>>0);
+   $$sroa$speculated$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i ? $cond$i16$i$i$i$i$i19 : $cond$i$i$i$i$i$i13;
+   $cmp$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i|0)==(0);
+   if ($cmp$i$i$i$i$i$i) {
     label = 10;
    } else {
     $8 = load4($__value_);
-    $cond$i$i$i$i$i$i = $tobool$i$i6$i$i$i$i17 ? $8 : $__value_;
-    $call$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i,$cond$i$i22$i$i$i$i,$$sroa$speculated$i$i$i$i)|0);
-    $cmp$i$i$i$i = ($call$i$i$i$i$i|0)==(0);
-    if ($cmp$i$i$i$i) {
+    $cond$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i10 ? $8 : $__value_;
+    $call$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i,$cond$i$i1$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i)|0);
+    $cmp$i$i$i$i$i = ($call$i$i$i$i$i$i|0)==(0);
+    if ($cmp$i$i$i$i$i) {
      label = 10;
     } else {
-     $cmp$i$i$i = ($call$i$i$i$i$i|0)<(0);
+     $cmp$i$i$i = ($call$i$i$i$i$i$i|0)<(0);
      if (!($cmp$i$i$i)) {
       $retval$0 = 1;
       label = 14;
@@ -951,7 +962,7 @@ function __ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_trait
    }
    if ((label|0) == 10) {
     label = 0;
-    if (!($cmp$i$i$i$i$i$i$i21)) {
+    if (!($cmp$i$i$i$i$i$i$i$i20)) {
      $retval$0 = 1;
      label = 14;
      break;
@@ -977,9 +988,9 @@ function __ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_trait
 }
 function __ZN6asmdom11deleteVNodeEPNS_5VNodeE($vnode) {
  $vnode = $vnode|0;
- var $$pre = 0, $$pre7 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__begin_$i$i$phi$trans$insert = 0, $__end_$i = 0, $__first_$i$i$i$i$i$i$i$i = 0;
- var $__first_$i$i$i$i$i$i2$i$i = 0, $__first_$i$i$i$i$i$i4$i$i = 0, $arrayidx$i = 0, $arrayidx$i10 = 0, $children = 0, $cmp$i$i = 0, $cmp1$i$i$i$i = 0, $dec6 = 0, $dec612 = 0, $dec69 = 0, $key$i = 0, $scevgep$i$i$i$i = 0, $scevgep5$i$i$i$i = 0, $sub$ptr$div$i = 0, $sub$ptr$sub$i = 0, $text$i = 0, $tobool = 0, $tobool11 = 0, $tobool5 = 0, label = 0;
- var sp = 0;
+ var $$pre = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0;
+ var $8 = 0, $9 = 0, $__begin_$i$i = 0, $__end_$i = 0, $__first_$i$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i2$i$i = 0, $__first_$i$i$i$i$i$i4$i$i = 0, $__size_$i$i$i = 0, $__size_$i$i3$i = 0, $__size_$i$i9$i = 0, $arrayidx$i = 0, $arrayidx$i8 = 0, $children = 0, $cmp$i$i = 0, $cmp1$i$i$i$i = 0, $dec6 = 0, $dec610 = 0, $dec67 = 0, $key$i = 0, $scevgep$i$i$i$i = 0;
+ var $scevgep5$i$i$i$i = 0, $sub$ptr$div$i = 0, $sub$ptr$sub$i = 0, $text$i = 0, $tobool = 0, $tobool$i$i$i = 0, $tobool$i$i10$i = 0, $tobool$i$i4$i = 0, $tobool5 = 0, $tobool9 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $children = ((($vnode)) + 76|0);
  $__end_$i = ((($vnode)) + 80|0);
@@ -988,20 +999,18 @@ function __ZN6asmdom11deleteVNodeEPNS_5VNodeE($vnode) {
  $sub$ptr$sub$i = (($0) - ($1))|0;
  $sub$ptr$div$i = $sub$ptr$sub$i >> 2;
  $tobool5 = ($sub$ptr$div$i|0)==(0);
- $2 = $1;
- if ($tobool5) {
-  $5 = $2;
- } else {
-  $dec69 = (($sub$ptr$div$i) + -1)|0;
-  $arrayidx$i10 = (($2) + ($dec69<<2)|0);
-  $3 = load4($arrayidx$i10);
+ if (!($tobool5)) {
+  $2 = $1;
+  $dec67 = (($sub$ptr$div$i) + -1)|0;
+  $arrayidx$i8 = (($2) + ($dec67<<2)|0);
+  $3 = load4($arrayidx$i8);
   __ZN6asmdom11deleteVNodeEPNS_5VNodeE($3);
-  $tobool11 = ($dec69|0)==(0);
-  if (!($tobool11)) {
-   $dec612 = $dec69;
+  $tobool9 = ($dec67|0)==(0);
+  if (!($tobool9)) {
+   $dec610 = $dec67;
    while(1) {
     $$pre = load4($children);
-    $dec6 = (($dec612) + -1)|0;
+    $dec6 = (($dec610) + -1)|0;
     $arrayidx$i = (($$pre) + ($dec6<<2)|0);
     $4 = load4($arrayidx$i);
     __ZN6asmdom11deleteVNodeEPNS_5VNodeE($4);
@@ -1009,14 +1018,13 @@ function __ZN6asmdom11deleteVNodeEPNS_5VNodeE($vnode) {
     if ($tobool) {
      break;
     } else {
-     $dec612 = $dec6;
+     $dec610 = $dec6;
     }
    }
   }
-  $__begin_$i$i$phi$trans$insert = ((($vnode)) + 76|0);
-  $$pre7 = load4($__begin_$i$i$phi$trans$insert);
-  $5 = $$pre7;
  }
+ $__begin_$i$i = ((($vnode)) + 76|0);
+ $5 = load4($__begin_$i$i);
  $cmp$i$i = ($5|0)==(0|0);
  if (!($cmp$i$i)) {
   $6 = load4($__end_$i);
@@ -1043,16 +1051,37 @@ function __ZN6asmdom11deleteVNodeEPNS_5VNodeE($vnode) {
  $14 = load4($__first_$i$i$i$i$i$i4$i$i);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($14);
  $text$i = ((($vnode)) + 24|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($text$i);
+ $__size_$i$i$i = ((($text$i)) + 11|0);
+ $15 = load1($__size_$i$i$i);
+ $tobool$i$i$i = ($15<<24>>24)<(0);
+ if ($tobool$i$i$i) {
+  $16 = load4($text$i);
+  __ZdlPv($16);
+ }
  $key$i = ((($vnode)) + 12|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($key$i);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($vnode);
+ $__size_$i$i3$i = ((($key$i)) + 11|0);
+ $17 = load1($__size_$i$i3$i);
+ $tobool$i$i4$i = ($17<<24>>24)<(0);
+ if ($tobool$i$i4$i) {
+  $18 = load4($key$i);
+  __ZdlPv($18);
+ }
+ $__size_$i$i9$i = ((($vnode)) + 11|0);
+ $19 = load1($__size_$i$i9$i);
+ $tobool$i$i10$i = ($19<<24>>24)<(0);
+ if (!($tobool$i$i10$i)) {
+  __ZdlPv($vnode);
+  return;
+ }
+ $20 = load4($vnode);
+ __ZdlPv($20);
  __ZdlPv($vnode);
  return;
 }
 function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE7destroyEPNS_11__tree_nodeISD_PvEE($__nd) {
  $__nd = $__nd|0;
- var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $__f_$i$i$i$i = 0, $cmp = 0, $cmp$i$i$i$i = 0, $first$i$i$i = 0, $tobool$i$i$i$i = 0, $vfn$i$i$i$i = 0, $vfn7$i$i$i$i = 0, $vtable$i$i$i$i = 0, $vtable6$i$i$i$i = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $__cc$i = 0, $__f_$i$i$i$i = 0, $__size_$i$i$i$i$i = 0, $cmp = 0, $cmp$i$i$i$i = 0, $tobool$i$i$i$i = 0, $tobool$i$i$i$i$i = 0, $vfn$i$i$i$i = 0, $vfn7$i$i$i$i = 0, $vtable$i$i$i$i = 0, $vtable6$i$i$i$i = 0;
+ var label = 0, sp = 0;
  sp = STACKTOP;
  $cmp = ($__nd|0)==(0|0);
  if ($cmp) {
@@ -1063,6 +1092,7 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
  $1 = ((($__nd)) + 4|0);
  $2 = load4($1);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE7destroyEPNS_11__tree_nodeISD_PvEE($2);
+ $__cc$i = ((($__nd)) + 16|0);
  $__f_$i$i$i$i = ((($__nd)) + 48|0);
  $3 = load4($__f_$i$i$i$i);
  $4 = ((($__nd)) + 32|0);
@@ -1081,14 +1111,19 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
    FUNCTION_TABLE_vi[$6 & 31]($3);
   }
  }
- $first$i$i$i = ((($__nd)) + 16|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($first$i$i$i);
+ $__size_$i$i$i$i$i = ((($__cc$i)) + 11|0);
+ $7 = load1($__size_$i$i$i$i$i);
+ $tobool$i$i$i$i$i = ($7<<24>>24)<(0);
+ if ($tobool$i$i$i$i$i) {
+  $8 = load4($__cc$i);
+  __ZdlPv($8);
+ }
  __ZdlPv($__nd);
  return;
 }
 function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($__nd) {
  $__nd = $__nd|0;
- var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $cmp = 0, $first$i$i$i = 0, $handle$i$i$i$i = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $__cc$i = 0, $__size_$i$i$i$i$i = 0, $cmp = 0, $handle$i$i$i$i = 0, $tobool$i$i$i$i$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $cmp = ($__nd|0)==(0|0);
  if ($cmp) {
@@ -1099,34 +1134,51 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
  $1 = ((($__nd)) + 4|0);
  $2 = load4($1);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($2);
+ $__cc$i = ((($__nd)) + 16|0);
  $handle$i$i$i$i = ((($__nd)) + 28|0);
  $3 = load4($handle$i$i$i$i);
  __emval_decref(($3|0));
- $first$i$i$i = ((($__nd)) + 16|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($first$i$i$i);
+ $__size_$i$i$i$i$i = ((($__cc$i)) + 11|0);
+ $4 = load1($__size_$i$i$i$i$i);
+ $tobool$i$i$i$i$i = ($4<<24>>24)<(0);
+ if ($tobool$i$i$i$i$i) {
+  $5 = load4($__cc$i);
+  __ZdlPv($5);
+ }
  __ZdlPv($__nd);
  return;
 }
 function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($__nd) {
  $__nd = $__nd|0;
- var $0 = 0, $1 = 0, $2 = 0, $cmp = 0, $first$i$i$i = 0, $second$i$i$i = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $__cc$i = 0, $__size_$i$i$i$i$i = 0, $__size_$i$i2$i$i$i = 0, $cmp = 0, $second$i$i$i = 0, $tobool$i$i$i$i$i = 0, $tobool$i$i3$i$i$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $cmp = ($__nd|0)==(0|0);
  if ($cmp) {
   return;
- } else {
-  $0 = load4($__nd);
-  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($0);
-  $1 = ((($__nd)) + 4|0);
-  $2 = load4($1);
-  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($2);
-  $second$i$i$i = ((($__nd)) + 28|0);
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($second$i$i$i);
-  $first$i$i$i = ((($__nd)) + 16|0);
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($first$i$i$i);
-  __ZdlPv($__nd);
-  return;
  }
+ $0 = load4($__nd);
+ __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($0);
+ $1 = ((($__nd)) + 4|0);
+ $2 = load4($1);
+ __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($2);
+ $__cc$i = ((($__nd)) + 16|0);
+ $second$i$i$i = ((($__nd)) + 28|0);
+ $__size_$i$i$i$i$i = ((($second$i$i$i)) + 11|0);
+ $3 = load1($__size_$i$i$i$i$i);
+ $tobool$i$i$i$i$i = ($3<<24>>24)<(0);
+ if ($tobool$i$i$i$i$i) {
+  $4 = load4($second$i$i$i);
+  __ZdlPv($4);
+ }
+ $__size_$i$i2$i$i$i = ((($__cc$i)) + 11|0);
+ $5 = load1($__size_$i$i2$i$i$i);
+ $tobool$i$i3$i$i$i = ($5<<24>>24)<(0);
+ if ($tobool$i$i3$i$i$i) {
+  $6 = load4($__cc$i);
+  __ZdlPv($6);
+ }
+ __ZdlPv($__nd);
+ return;
 }
 function ___clang_call_terminate($0) {
  $0 = $0|0;
@@ -1159,10 +1211,11 @@ function __ZN6asmdom5VNodeC2ERKNSt3__212basic_stringIcNS1_11char_traitsIcEENS1_9
 function __ZN6asmdom4DataC2ERKS0_($this,$data) {
  $this = $this|0;
  $data = $data|0;
- var $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0;
- var $9 = 0, $__begin_node_$i$i$i$i38 = 0, $__begin_node_$i$i$i$i8 = 0, $__cc$i$i$i = 0, $__cc$i$i$i12 = 0, $__cc$i$i$i42 = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i37 = 0, $__first_$i$i$i$i$i6$i = 0, $__first_$i$i$i$i$i6$i39 = 0, $__first_$i$i$i$i$i6$i9 = 0, $__first_$i$i$i$i$i7 = 0, $__first_$i$i$i$i36 = 0, $__first_$i$i$i$i6 = 0, $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i35 = 0, $__left_$i$i$i$i$i5 = 0, $__parent_$i$i$i$i$i$i = 0, $__parent_$i$i$i$i$i$i24 = 0;
- var $__parent_$i$i$i$i$i$i54 = 0, $__right_$i$i$i$i$i = 0, $__right_$i$i$i$i$i16 = 0, $__right_$i$i$i$i$i46 = 0, $__x$addr$0$i$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i19 = 0, $__x$addr$0$i$i$i$i$i$i49 = 0, $__x$addr$0$i$i$i$i$i23 = 0, $__x$addr$0$i$i$i$i$i53 = 0, $callbacks = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i21 = 0, $cmp$i$i$i$i$i$i51 = 0, $cmp$i$i$i$i$i17 = 0, $cmp$i$i$i$i$i47 = 0, $cmp$i5$i$i$i$i$i = 0, $cmp$i5$i$i$i$i$i26 = 0, $cmp$i5$i$i$i$i$i56 = 0;
- var $lnot$i$i$i$i = 0, $lnot$i$i$i$i31 = 0, $lnot$i$i$i$i61 = 0, $lnot$i$i7$i$i = 0, $lnot$i$i7$i$i10 = 0, $lnot$i$i7$i$i40 = 0, $props = 0, $retval$0$i$i$i$i$i = 0, $retval$0$i$i$i$i$i29 = 0, $retval$0$i$i$i$i$i59 = 0, label = 0, sp = 0;
+ var $$in7$i$i = 0, $$in7$i$i13 = 0, $$in7$i$i47 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0;
+ var $24 = 0, $25 = 0, $26 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__begin_node_$i$i$i$i43 = 0, $__begin_node_$i$i$i$i9 = 0, $__cc$i$i$i = 0, $__cc$i$i$i14 = 0, $__cc$i$i$i48 = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i42 = 0, $__first_$i$i$i$i$i6$i = 0, $__first_$i$i$i$i$i6$i10 = 0;
+ var $__first_$i$i$i$i$i6$i44 = 0, $__first_$i$i$i$i$i8 = 0, $__first_$i$i$i$i41 = 0, $__first_$i$i$i$i7 = 0, $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i40 = 0, $__left_$i$i$i$i$i6 = 0, $__parent_$i4$i$i$i$i$i = 0, $__parent_$i4$i$i$i$i$i30 = 0, $__parent_$i4$i$i$i$i$i64 = 0, $__parent_$i410$i$i$i$i$i = 0, $__parent_$i410$i$i$i$i$i29 = 0, $__parent_$i410$i$i$i$i$i63 = 0, $__parent_$i47$i$i$i$i$i = 0, $__parent_$i47$i$i$i$i$i20 = 0, $__parent_$i47$i$i$i$i$i54 = 0, $__x$addr$0$i$i$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i24 = 0, $__x$addr$0$i$i$i$i$i$i58 = 0, $callbacks = 0;
+ var $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i26 = 0, $cmp$i$i$i$i$i$i60 = 0, $cmp$i$i$i$i$i18 = 0, $cmp$i$i$i$i$i52 = 0, $cmp$i6$i$i$i$i$i = 0, $cmp$i6$i$i$i$i$i32 = 0, $cmp$i6$i$i$i$i$i66 = 0, $cmp$i69$i$i$i$i$i = 0, $cmp$i69$i$i$i$i$i22 = 0, $cmp$i69$i$i$i$i$i56 = 0, $lnot$i$i$i$i = 0, $lnot$i$i$i$i35 = 0, $lnot$i$i$i$i69 = 0, $lnot$i$i6$i$i = 0, $lnot$i$i6$i$i11 = 0, $lnot$i$i6$i$i45 = 0, $props = 0, $retval$0$i$i$i$i$i = 0;
+ var $retval$0$i$i$i$i$i34 = 0, $retval$0$i$i$i$i$i68 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $__left_$i$i$i$i$i = ((($this)) + 4|0);
  store4($__left_$i$i$i$i$i,0);
@@ -1172,157 +1225,185 @@ function __ZN6asmdom4DataC2ERKS0_($this,$data) {
  store4($this,$__first_$i$i$i$i$i);
  $0 = load4($data);
  $__first_$i$i$i$i$i6$i = ((($data)) + 4|0);
- $lnot$i$i7$i$i = ($0|0)==($__first_$i$i$i$i$i6$i|0);
- if (!($lnot$i$i7$i$i)) {
-  $1 = $0;$2 = $0;
+ $lnot$i$i6$i$i = ($0|0)==($__first_$i$i$i$i$i6$i|0);
+ if (!($lnot$i$i6$i$i)) {
+  $$in7$i$i = $0;
   while(1) {
-   $__cc$i$i$i = ((($1)) + 16|0);
+   $__cc$i$i$i = ((($$in7$i$i)) + 16|0);
    __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE30__emplace_hint_unique_key_argsIS7_JRKNS_4pairIKS7_S7_EEEEENS_15__tree_iteratorIS8_PNS_11__tree_nodeIS8_PvEEiEENS_21__tree_const_iteratorIS8_SP_iEERKT_DpOT0_($this,$__first_$i$i$i$i$i,$__cc$i$i$i,$__cc$i$i$i);
-   $__right_$i$i$i$i$i = ((($2)) + 4|0);
-   $3 = load4($__right_$i$i$i$i$i);
-   $cmp$i$i$i$i$i = ($3|0)==(0|0);
+   $1 = ((($$in7$i$i)) + 4|0);
+   $2 = load4($1);
+   $cmp$i$i$i$i$i = ($2|0)==(0|0);
    if ($cmp$i$i$i$i$i) {
-    $__x$addr$0$i$i$i$i$i = $2;
-    while(1) {
-     $__parent_$i$i$i$i$i$i = ((($__x$addr$0$i$i$i$i$i)) + 8|0);
-     $5 = load4($__parent_$i$i$i$i$i$i);
-     $6 = load4($5);
-     $cmp$i5$i$i$i$i$i = ($6|0)==($__x$addr$0$i$i$i$i$i|0);
-     if ($cmp$i5$i$i$i$i$i) {
-      $retval$0$i$i$i$i$i = $5;
-      break;
-     } else {
-      $__x$addr$0$i$i$i$i$i = $5;
+    $__parent_$i47$i$i$i$i$i = ((($$in7$i$i)) + 8|0);
+    $3 = load4($__parent_$i47$i$i$i$i$i);
+    $4 = load4($3);
+    $cmp$i69$i$i$i$i$i = ($4|0)==($$in7$i$i|0);
+    if ($cmp$i69$i$i$i$i$i) {
+     $retval$0$i$i$i$i$i = $3;
+    } else {
+     $__parent_$i410$i$i$i$i$i = $__parent_$i47$i$i$i$i$i;
+     while(1) {
+      $6 = load4($__parent_$i410$i$i$i$i$i);
+      $__parent_$i4$i$i$i$i$i = ((($6)) + 8|0);
+      $7 = load4($__parent_$i4$i$i$i$i$i);
+      $8 = load4($7);
+      $cmp$i6$i$i$i$i$i = ($8|0)==($6|0);
+      if ($cmp$i6$i$i$i$i$i) {
+       $retval$0$i$i$i$i$i = $7;
+       break;
+      } else {
+       $__parent_$i410$i$i$i$i$i = $__parent_$i4$i$i$i$i$i;
+      }
      }
     }
    } else {
-    $__x$addr$0$i$i$i$i$i$i = $3;
+    $__x$addr$0$i$i$i$i$i$i = $2;
     while(1) {
-     $4 = load4($__x$addr$0$i$i$i$i$i$i);
-     $cmp$i$i$i$i$i$i = ($4|0)==(0|0);
+     $5 = load4($__x$addr$0$i$i$i$i$i$i);
+     $cmp$i$i$i$i$i$i = ($5|0)==(0|0);
      if ($cmp$i$i$i$i$i$i) {
-      $retval$0$i$i$i$i$i = $__x$addr$0$i$i$i$i$i$i;
       break;
      } else {
-      $__x$addr$0$i$i$i$i$i$i = $4;
+      $__x$addr$0$i$i$i$i$i$i = $5;
      }
     }
+    $retval$0$i$i$i$i$i = $__x$addr$0$i$i$i$i$i$i;
    }
    $lnot$i$i$i$i = ($retval$0$i$i$i$i$i|0)==($__first_$i$i$i$i$i6$i|0);
    if ($lnot$i$i$i$i) {
     break;
    } else {
-    $1 = $retval$0$i$i$i$i$i;$2 = $retval$0$i$i$i$i$i;
+    $$in7$i$i = $retval$0$i$i$i$i$i;
    }
   }
  }
  $props = ((($this)) + 12|0);
- $__left_$i$i$i$i$i5 = ((($this)) + 16|0);
- store4($__left_$i$i$i$i$i5,0);
- $__first_$i$i$i$i6 = ((($this)) + 20|0);
- store4($__first_$i$i$i$i6,0);
- $__first_$i$i$i$i$i7 = ((($this)) + 16|0);
- store4($props,$__first_$i$i$i$i$i7);
- $__begin_node_$i$i$i$i8 = ((($data)) + 12|0);
- $7 = load4($__begin_node_$i$i$i$i8);
- $__first_$i$i$i$i$i6$i9 = ((($data)) + 16|0);
- $lnot$i$i7$i$i10 = ($7|0)==($__first_$i$i$i$i$i6$i9|0);
- if (!($lnot$i$i7$i$i10)) {
-  $8 = $7;$9 = $7;
+ $__left_$i$i$i$i$i6 = ((($this)) + 16|0);
+ store4($__left_$i$i$i$i$i6,0);
+ $__first_$i$i$i$i7 = ((($this)) + 20|0);
+ store4($__first_$i$i$i$i7,0);
+ $__first_$i$i$i$i$i8 = ((($this)) + 16|0);
+ store4($props,$__first_$i$i$i$i$i8);
+ $__begin_node_$i$i$i$i9 = ((($data)) + 12|0);
+ $9 = load4($__begin_node_$i$i$i$i9);
+ $__first_$i$i$i$i$i6$i10 = ((($data)) + 16|0);
+ $lnot$i$i6$i$i11 = ($9|0)==($__first_$i$i$i$i$i6$i10|0);
+ if (!($lnot$i$i6$i$i11)) {
+  $$in7$i$i13 = $9;
   while(1) {
-   $__cc$i$i$i12 = ((($8)) + 16|0);
-   __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE30__emplace_hint_unique_key_argsIS7_JRKNS_4pairIKS7_S9_EEEEENS_15__tree_iteratorISA_PNS_11__tree_nodeISA_PvEEiEENS_21__tree_const_iteratorISA_SR_iEERKT_DpOT0_($props,$__first_$i$i$i$i$i7,$__cc$i$i$i12,$__cc$i$i$i12);
-   $__right_$i$i$i$i$i16 = ((($9)) + 4|0);
-   $10 = load4($__right_$i$i$i$i$i16);
-   $cmp$i$i$i$i$i17 = ($10|0)==(0|0);
-   if ($cmp$i$i$i$i$i17) {
-    $__x$addr$0$i$i$i$i$i23 = $9;
-    while(1) {
-     $__parent_$i$i$i$i$i$i24 = ((($__x$addr$0$i$i$i$i$i23)) + 8|0);
-     $12 = load4($__parent_$i$i$i$i$i$i24);
-     $13 = load4($12);
-     $cmp$i5$i$i$i$i$i26 = ($13|0)==($__x$addr$0$i$i$i$i$i23|0);
-     if ($cmp$i5$i$i$i$i$i26) {
-      $retval$0$i$i$i$i$i29 = $12;
-      break;
-     } else {
-      $__x$addr$0$i$i$i$i$i23 = $12;
+   $__cc$i$i$i14 = ((($$in7$i$i13)) + 16|0);
+   __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE30__emplace_hint_unique_key_argsIS7_JRKNS_4pairIKS7_S9_EEEEENS_15__tree_iteratorISA_PNS_11__tree_nodeISA_PvEEiEENS_21__tree_const_iteratorISA_SR_iEERKT_DpOT0_($props,$__first_$i$i$i$i$i8,$__cc$i$i$i14,$__cc$i$i$i14);
+   $10 = ((($$in7$i$i13)) + 4|0);
+   $11 = load4($10);
+   $cmp$i$i$i$i$i18 = ($11|0)==(0|0);
+   if ($cmp$i$i$i$i$i18) {
+    $__parent_$i47$i$i$i$i$i20 = ((($$in7$i$i13)) + 8|0);
+    $12 = load4($__parent_$i47$i$i$i$i$i20);
+    $13 = load4($12);
+    $cmp$i69$i$i$i$i$i22 = ($13|0)==($$in7$i$i13|0);
+    if ($cmp$i69$i$i$i$i$i22) {
+     $retval$0$i$i$i$i$i34 = $12;
+    } else {
+     $__parent_$i410$i$i$i$i$i29 = $__parent_$i47$i$i$i$i$i20;
+     while(1) {
+      $15 = load4($__parent_$i410$i$i$i$i$i29);
+      $__parent_$i4$i$i$i$i$i30 = ((($15)) + 8|0);
+      $16 = load4($__parent_$i4$i$i$i$i$i30);
+      $17 = load4($16);
+      $cmp$i6$i$i$i$i$i32 = ($17|0)==($15|0);
+      if ($cmp$i6$i$i$i$i$i32) {
+       $retval$0$i$i$i$i$i34 = $16;
+       break;
+      } else {
+       $__parent_$i410$i$i$i$i$i29 = $__parent_$i4$i$i$i$i$i30;
+      }
      }
     }
    } else {
-    $__x$addr$0$i$i$i$i$i$i19 = $10;
+    $__x$addr$0$i$i$i$i$i$i24 = $11;
     while(1) {
-     $11 = load4($__x$addr$0$i$i$i$i$i$i19);
-     $cmp$i$i$i$i$i$i21 = ($11|0)==(0|0);
-     if ($cmp$i$i$i$i$i$i21) {
-      $retval$0$i$i$i$i$i29 = $__x$addr$0$i$i$i$i$i$i19;
+     $14 = load4($__x$addr$0$i$i$i$i$i$i24);
+     $cmp$i$i$i$i$i$i26 = ($14|0)==(0|0);
+     if ($cmp$i$i$i$i$i$i26) {
       break;
      } else {
-      $__x$addr$0$i$i$i$i$i$i19 = $11;
+      $__x$addr$0$i$i$i$i$i$i24 = $14;
      }
     }
+    $retval$0$i$i$i$i$i34 = $__x$addr$0$i$i$i$i$i$i24;
    }
-   $lnot$i$i$i$i31 = ($retval$0$i$i$i$i$i29|0)==($__first_$i$i$i$i$i6$i9|0);
-   if ($lnot$i$i$i$i31) {
+   $lnot$i$i$i$i35 = ($retval$0$i$i$i$i$i34|0)==($__first_$i$i$i$i$i6$i10|0);
+   if ($lnot$i$i$i$i35) {
     break;
    } else {
-    $8 = $retval$0$i$i$i$i$i29;$9 = $retval$0$i$i$i$i$i29;
+    $$in7$i$i13 = $retval$0$i$i$i$i$i34;
    }
   }
  }
  $callbacks = ((($this)) + 24|0);
- $__left_$i$i$i$i$i35 = ((($this)) + 28|0);
- store4($__left_$i$i$i$i$i35,0);
- $__first_$i$i$i$i36 = ((($this)) + 32|0);
- store4($__first_$i$i$i$i36,0);
- $__first_$i$i$i$i$i37 = ((($this)) + 28|0);
- store4($callbacks,$__first_$i$i$i$i$i37);
- $__begin_node_$i$i$i$i38 = ((($data)) + 24|0);
- $14 = load4($__begin_node_$i$i$i$i38);
- $__first_$i$i$i$i$i6$i39 = ((($data)) + 28|0);
- $lnot$i$i7$i$i40 = ($14|0)==($__first_$i$i$i$i$i6$i39|0);
- if ($lnot$i$i7$i$i40) {
+ $__left_$i$i$i$i$i40 = ((($this)) + 28|0);
+ store4($__left_$i$i$i$i$i40,0);
+ $__first_$i$i$i$i41 = ((($this)) + 32|0);
+ store4($__first_$i$i$i$i41,0);
+ $__first_$i$i$i$i$i42 = ((($this)) + 28|0);
+ store4($callbacks,$__first_$i$i$i$i$i42);
+ $__begin_node_$i$i$i$i43 = ((($data)) + 24|0);
+ $18 = load4($__begin_node_$i$i$i$i43);
+ $__first_$i$i$i$i$i6$i44 = ((($data)) + 28|0);
+ $lnot$i$i6$i$i45 = ($18|0)==($__first_$i$i$i$i$i6$i44|0);
+ if ($lnot$i$i6$i$i45) {
   return;
+ } else {
+  $$in7$i$i47 = $18;
  }
- $15 = $14;$16 = $14;
  while(1) {
-  $__cc$i$i$i42 = ((($15)) + 16|0);
-  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE30__emplace_hint_unique_key_argsIS7_JRKNS_4pairIKS7_SC_EEEEENS_15__tree_iteratorISD_PNS_11__tree_nodeISD_PvEEiEENS_21__tree_const_iteratorISD_SU_iEERKT_DpOT0_($callbacks,$__first_$i$i$i$i$i37,$__cc$i$i$i42,$__cc$i$i$i42);
-  $__right_$i$i$i$i$i46 = ((($16)) + 4|0);
-  $17 = load4($__right_$i$i$i$i$i46);
-  $cmp$i$i$i$i$i47 = ($17|0)==(0|0);
-  if ($cmp$i$i$i$i$i47) {
-   $__x$addr$0$i$i$i$i$i53 = $16;
-   while(1) {
-    $__parent_$i$i$i$i$i$i54 = ((($__x$addr$0$i$i$i$i$i53)) + 8|0);
-    $19 = load4($__parent_$i$i$i$i$i$i54);
-    $20 = load4($19);
-    $cmp$i5$i$i$i$i$i56 = ($20|0)==($__x$addr$0$i$i$i$i$i53|0);
-    if ($cmp$i5$i$i$i$i$i56) {
-     $retval$0$i$i$i$i$i59 = $19;
-     break;
-    } else {
-     $__x$addr$0$i$i$i$i$i53 = $19;
+  $__cc$i$i$i48 = ((($$in7$i$i47)) + 16|0);
+  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE30__emplace_hint_unique_key_argsIS7_JRKNS_4pairIKS7_SC_EEEEENS_15__tree_iteratorISD_PNS_11__tree_nodeISD_PvEEiEENS_21__tree_const_iteratorISD_SU_iEERKT_DpOT0_($callbacks,$__first_$i$i$i$i$i42,$__cc$i$i$i48,$__cc$i$i$i48);
+  $19 = ((($$in7$i$i47)) + 4|0);
+  $20 = load4($19);
+  $cmp$i$i$i$i$i52 = ($20|0)==(0|0);
+  if ($cmp$i$i$i$i$i52) {
+   $__parent_$i47$i$i$i$i$i54 = ((($$in7$i$i47)) + 8|0);
+   $21 = load4($__parent_$i47$i$i$i$i$i54);
+   $22 = load4($21);
+   $cmp$i69$i$i$i$i$i56 = ($22|0)==($$in7$i$i47|0);
+   if ($cmp$i69$i$i$i$i$i56) {
+    $retval$0$i$i$i$i$i68 = $21;
+   } else {
+    $__parent_$i410$i$i$i$i$i63 = $__parent_$i47$i$i$i$i$i54;
+    while(1) {
+     $24 = load4($__parent_$i410$i$i$i$i$i63);
+     $__parent_$i4$i$i$i$i$i64 = ((($24)) + 8|0);
+     $25 = load4($__parent_$i4$i$i$i$i$i64);
+     $26 = load4($25);
+     $cmp$i6$i$i$i$i$i66 = ($26|0)==($24|0);
+     if ($cmp$i6$i$i$i$i$i66) {
+      $retval$0$i$i$i$i$i68 = $25;
+      break;
+     } else {
+      $__parent_$i410$i$i$i$i$i63 = $__parent_$i4$i$i$i$i$i64;
+     }
     }
    }
   } else {
-   $__x$addr$0$i$i$i$i$i$i49 = $17;
+   $__x$addr$0$i$i$i$i$i$i58 = $20;
    while(1) {
-    $18 = load4($__x$addr$0$i$i$i$i$i$i49);
-    $cmp$i$i$i$i$i$i51 = ($18|0)==(0|0);
-    if ($cmp$i$i$i$i$i$i51) {
-     $retval$0$i$i$i$i$i59 = $__x$addr$0$i$i$i$i$i$i49;
+    $23 = load4($__x$addr$0$i$i$i$i$i$i58);
+    $cmp$i$i$i$i$i$i60 = ($23|0)==(0|0);
+    if ($cmp$i$i$i$i$i$i60) {
      break;
     } else {
-     $__x$addr$0$i$i$i$i$i$i49 = $18;
+     $__x$addr$0$i$i$i$i$i$i58 = $23;
     }
    }
+   $retval$0$i$i$i$i$i68 = $__x$addr$0$i$i$i$i$i$i58;
   }
-  $lnot$i$i$i$i61 = ($retval$0$i$i$i$i$i59|0)==($__first_$i$i$i$i$i6$i39|0);
-  if ($lnot$i$i$i$i61) {
+  $lnot$i$i$i$i69 = ($retval$0$i$i$i$i$i68|0)==($__first_$i$i$i$i$i6$i44|0);
+  if ($lnot$i$i$i$i69) {
    break;
   } else {
-   $15 = $retval$0$i$i$i$i$i59;$16 = $retval$0$i$i$i$i$i59;
+   $$in7$i$i47 = $retval$0$i$i$i$i$i68;
   }
  }
  return;
@@ -1332,17 +1413,18 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
  $__p$0 = $__p$0|0;
  $__k = $__k|0;
  $__args = $__args|0;
- var $$pre$i = 0, $$pre$i2 = 0, $$sroa$speculated$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i106$i = 0, $$sroa$speculated$i$i$i$i39$i = 0, $$sroa$speculated$i$i$i$i75$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0;
- var $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $4 = 0, $5 = 0;
- var $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i6 = 0, $__left_7$i = 0, $__parent = 0, $__parent_$i = 0, $__parent_$i$i$i$i = 0, $__parent_$i$i$i$i$i$i$i = 0, $__prior$sroa$0$0$i = 0, $__right_$i = 0, $__right_$i$i$i$i = 0, $__right_$i5 = 0, $__size_$i$i$i$i$i$i63$i = 0, $__size_$i$i$i$i$i$i94$i = 0, $__size_$i$i5$i$i$i$i$i = 0, $__size_$i$i5$i$i$i$i100$i = 0, $__size_$i$i5$i$i$i$i69$i = 0;
- var $__size_$i3$i$i$i$i$i65$i = 0, $__size_$i3$i$i$i$i$i96$i = 0, $__size_$i3$i7$i$i$i$i$i = 0, $__size_$i3$i7$i$i$i$i102$i = 0, $__size_$i3$i7$i$i$i$i71$i = 0, $__value_$i$i = 0, $__value_$i125$i = 0, $__value_$i61$i = 0, $__x$addr$0$i$i$i = 0, $__x$addr$0$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i$i = 0, $call$i$i$i$i = 0, $call$i$i$i$i$i$i = 0, $call$i$i$i$i$i114$i = 0, $call$i$i$i$i$i47$i = 0, $call$i$i$i$i$i83$i = 0, $call22$i = 0, $call52$i = 0, $cmp = 0;
- var $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i105$i = 0, $cmp$i$i$i$i$i$i$i38$i = 0, $cmp$i$i$i$i$i$i$i74$i = 0, $cmp$i$i$i$i$i107$i = 0, $cmp$i$i$i$i$i25$i = 0, $cmp$i$i$i$i$i40$i = 0, $cmp$i$i$i$i$i76$i = 0, $cmp$i$i$i$i115$i = 0, $cmp$i$i$i$i48$i = 0, $cmp$i$i$i$i84$i = 0, $cmp$i$i$i122$i = 0, $cmp$i$i$i126$i = 0;
- var $cmp$i$i$i55$i = 0, $cmp$i$i$i91$i = 0, $cmp$i130$i = 0, $cmp$i21$i = 0, $cmp$i4 = 0, $cmp$i4$i$i$i = 0, $cmp$i5$i$i$i$i$i$i = 0, $cmp8$i$i$i$i$i = 0, $cmp8$i$i$i$i117$i = 0, $cmp8$i$i$i$i86$i = 0, $cond$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i110$i = 0, $cond$i$i$i$i$i$i43$i = 0, $cond$i$i$i$i$i$i79$i = 0, $cond$i$i$i$i$i67$i = 0, $cond$i$i$i$i$i98$i = 0, $cond$i$i22$i$i$i$i$i = 0, $cond$i$i22$i$i$i$i113$i = 0, $cond$i$i22$i$i$i$i46$i = 0, $cond$i$i22$i$i$i$i82$i = 0;
- var $cond$i11$i$i$i$i$i = 0, $cond$i11$i$i$i$i104$i = 0, $cond$i11$i$i$i$i73$i = 0, $conv$i$i$i$i$i$i66$i = 0, $conv$i$i$i$i$i$i97$i = 0, $conv$i$i9$i$i$i$i$i = 0, $conv$i$i9$i$i$i$i103$i = 0, $conv$i$i9$i$i$i$i72$i = 0, $first$i$i$i$i$i = 0, $inc$i = 0, $retval$0$i$i$i = 0, $retval$0$i$i$i$i$i$i = 0, $retval$2$i = 0, $second$i$i$i$i$i = 0, $second3$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i64$i = 0, $tobool$i$i$i$i$i$i95$i = 0, $tobool$i$i6$i$i$i$i$i = 0, $tobool$i$i6$i$i$i$i101$i = 0, $tobool$i$i6$i$i$i$i70$i = 0;
- var label = 0, sp = 0;
+ var $$pre$i = 0, $$pre$i2 = 0, $$sroa$speculated$i$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i102$i = 0, $$sroa$speculated$i$i$i$i$i37$i = 0, $$sroa$speculated$i$i$i$i$i71$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0;
+ var $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0;
+ var $4 = 0, $40 = 0, $41 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__cc$i$i = 0, $__dummy$sroa$0 = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i6 = 0, $__left_7$i = 0, $__parent = 0, $__parent_$i = 0, $__parent_$i4$i$i$i$i$i$i = 0, $__parent_$i410$i$i$i$i$i$i = 0, $__parent_$i47$i$i$i$i$i$i = 0, $__parent_$i5$i$i$i = 0, $__prior$sroa$0$0$i = 0;
+ var $__right_$i = 0, $__right_$i$i$i$i = 0, $__size_$i$i$i$i$i$i$i$i$i = 0, $__size_$i$i$i$i$i$i$i$i59$i = 0, $__size_$i$i$i$i$i$i$i$i90$i = 0, $__size_$i$i$i$i$i$i$i65$i = 0, $__size_$i$i$i$i$i$i$i96$i = 0, $__size_$i3$i$i$i$i$i$i$i = 0, $__size_$i3$i$i$i$i$i$i61$i = 0, $__size_$i3$i$i$i$i$i$i92$i = 0, $__size_$i3$i$i2$i$i$i$i67$i = 0, $__size_$i3$i$i2$i$i$i$i98$i = 0, $__value_$i$i = 0, $__value_$i120$i = 0, $__value_$i57$i = 0, $__x$addr$0$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i$i = 0, $__xx$0$i$i$i = 0, $call$i$i$i$i = 0, $call$i$i$i$i$i$i$i = 0;
+ var $call$i$i$i$i$i$i110$i = 0, $call$i$i$i$i$i$i45$i = 0, $call$i$i$i$i$i$i79$i = 0, $call23$i = 0, $call54$i = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i101$i = 0, $cmp$i$i$i$i$i$i$i$i36$i = 0, $cmp$i$i$i$i$i$i$i$i70$i = 0, $cmp$i$i$i$i$i$i103$i = 0, $cmp$i$i$i$i$i$i23$i = 0, $cmp$i$i$i$i$i$i38$i = 0, $cmp$i$i$i$i$i$i72$i = 0;
+ var $cmp$i$i$i$i$i111$i = 0, $cmp$i$i$i$i$i22$i = 0, $cmp$i$i$i$i$i46$i = 0, $cmp$i$i$i$i$i80$i = 0, $cmp$i$i$i118$i = 0, $cmp$i$i$i122$i = 0, $cmp$i$i$i53$i = 0, $cmp$i$i$i87$i = 0, $cmp$i126$i = 0, $cmp$i18$i = 0, $cmp$i4 = 0, $cmp$i6$i$i$i = 0, $cmp$i6$i$i$i$i$i$i = 0, $cmp$i69$i$i$i$i$i$i = 0, $cmp7$i$i$i$i$i$i = 0, $cmp7$i$i$i$i$i113$i = 0, $cmp7$i$i$i$i$i82$i = 0, $cond$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i$i106$i = 0;
+ var $cond$i$i$i$i$i$i$i41$i = 0, $cond$i$i$i$i$i$i$i75$i = 0, $cond$i$i$i$i$i$i63$i = 0, $cond$i$i$i$i$i$i94$i = 0, $cond$i$i1$i$i$i$i$i$i = 0, $cond$i$i1$i$i$i$i$i109$i = 0, $cond$i$i1$i$i$i$i$i44$i = 0, $cond$i$i1$i$i$i$i$i78$i = 0, $cond$i16$i$i$i$i$i100$i = 0, $cond$i16$i$i$i$i$i69$i = 0, $conv$i$i$i$i$i$i$i$i = 0, $conv$i$i$i$i$i$i$i62$i = 0, $conv$i$i$i$i$i$i$i93$i = 0, $conv$i$i$i4$i$i$i$i68$i = 0, $conv$i$i$i4$i$i$i$i99$i = 0, $inc$i = 0, $retval$0$i$i$i = 0, $retval$0$i$i$i$i$i$i = 0, $retval$2$i = 0, $second$i$i$i$i$i = 0;
+ var $second3$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i$i$i60$i = 0, $tobool$i$i$i$i$i$i$i$i91$i = 0, $tobool$i$i$i$i$i$i$i66$i = 0, $tobool$i$i$i$i$i$i$i97$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
- $__parent = sp;
+ $__parent = sp + 4|0;
+ $__dummy$sroa$0 = sp;
  $__first_$i$i$i$i$i = ((($this)) + 4|0);
  $cmp$i$i = ($__first_$i$i$i$i$i|0)==($__p$0|0);
  $0 = $__p$0;
@@ -1350,157 +1432,167 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
   if ($cmp$i$i) {
    label = 6;
   } else {
-   $__value_$i61$i = ((($__p$0)) + 16|0);
-   $__size_$i$i$i$i$i$i94$i = ((($__k)) + 11|0);
-   $1 = load1($__size_$i$i$i$i$i$i94$i);
-   $tobool$i$i$i$i$i$i95$i = ($1<<24>>24)<(0);
-   $__size_$i3$i$i$i$i$i96$i = ((($__k)) + 4|0);
-   $2 = load4($__size_$i3$i$i$i$i$i96$i);
-   $conv$i$i$i$i$i$i97$i = $1&255;
-   $cond$i$i$i$i$i98$i = $tobool$i$i$i$i$i$i95$i ? $2 : $conv$i$i$i$i$i$i97$i;
-   $__size_$i$i5$i$i$i$i100$i = ((($__value_$i61$i)) + 11|0);
-   $3 = load1($__size_$i$i5$i$i$i$i100$i);
-   $tobool$i$i6$i$i$i$i101$i = ($3<<24>>24)<(0);
-   $__size_$i3$i7$i$i$i$i102$i = ((($__p$0)) + 20|0);
-   $4 = load4($__size_$i3$i7$i$i$i$i102$i);
-   $conv$i$i9$i$i$i$i103$i = $3&255;
-   $cond$i11$i$i$i$i104$i = $tobool$i$i6$i$i$i$i101$i ? $4 : $conv$i$i9$i$i$i$i103$i;
-   $cmp$i$i$i$i$i$i$i105$i = ($cond$i11$i$i$i$i104$i>>>0)<($cond$i$i$i$i$i98$i>>>0);
-   $$sroa$speculated$i$i$i$i106$i = $cmp$i$i$i$i$i$i$i105$i ? $cond$i11$i$i$i$i104$i : $cond$i$i$i$i$i98$i;
-   $cmp$i$i$i$i$i107$i = ($$sroa$speculated$i$i$i$i106$i|0)==(0);
-   if ($cmp$i$i$i$i$i107$i) {
+   $__value_$i57$i = ((($__p$0)) + 16|0);
+   $__size_$i$i$i$i$i$i$i$i90$i = ((($__value_$i57$i)) + 11|0);
+   $1 = load1($__size_$i$i$i$i$i$i$i$i90$i);
+   $tobool$i$i$i$i$i$i$i$i91$i = ($1<<24>>24)<(0);
+   $__size_$i3$i$i$i$i$i$i92$i = ((($__p$0)) + 20|0);
+   $2 = load4($__size_$i3$i$i$i$i$i$i92$i);
+   $conv$i$i$i$i$i$i$i93$i = $1&255;
+   $cond$i$i$i$i$i$i94$i = $tobool$i$i$i$i$i$i$i$i91$i ? $2 : $conv$i$i$i$i$i$i$i93$i;
+   $__size_$i$i$i$i$i$i$i96$i = ((($__k)) + 11|0);
+   $3 = load1($__size_$i$i$i$i$i$i$i96$i);
+   $tobool$i$i$i$i$i$i$i97$i = ($3<<24>>24)<(0);
+   $__size_$i3$i$i2$i$i$i$i98$i = ((($__k)) + 4|0);
+   $4 = load4($__size_$i3$i$i2$i$i$i$i98$i);
+   $conv$i$i$i4$i$i$i$i99$i = $3&255;
+   $cond$i16$i$i$i$i$i100$i = $tobool$i$i$i$i$i$i$i97$i ? $4 : $conv$i$i$i4$i$i$i$i99$i;
+   $cmp$i$i$i$i$i$i$i$i101$i = ($cond$i$i$i$i$i$i94$i>>>0)<($cond$i16$i$i$i$i$i100$i>>>0);
+   $$sroa$speculated$i$i$i$i$i102$i = $cmp$i$i$i$i$i$i$i$i101$i ? $cond$i$i$i$i$i$i94$i : $cond$i16$i$i$i$i$i100$i;
+   $cmp$i$i$i$i$i$i103$i = ($$sroa$speculated$i$i$i$i$i102$i|0)==(0);
+   if ($cmp$i$i$i$i$i$i103$i) {
     label = 4;
    } else {
     $5 = load4($__k);
-    $cond$i$i$i$i$i$i110$i = $tobool$i$i$i$i$i$i95$i ? $5 : $__k;
-    $6 = load4($__value_$i61$i);
-    $cond$i$i22$i$i$i$i113$i = $tobool$i$i6$i$i$i$i101$i ? $6 : $__value_$i61$i;
-    $call$i$i$i$i$i114$i = (_memcmp($cond$i$i$i$i$i$i110$i,$cond$i$i22$i$i$i$i113$i,$$sroa$speculated$i$i$i$i106$i)|0);
-    $cmp$i$i$i$i115$i = ($call$i$i$i$i$i114$i|0)==(0);
-    if ($cmp$i$i$i$i115$i) {
+    $cond$i$i$i$i$i$i$i106$i = $tobool$i$i$i$i$i$i$i97$i ? $5 : $__k;
+    $6 = load4($__value_$i57$i);
+    $cond$i$i1$i$i$i$i$i109$i = $tobool$i$i$i$i$i$i$i$i91$i ? $6 : $__value_$i57$i;
+    $call$i$i$i$i$i$i110$i = (_memcmp($cond$i$i$i$i$i$i$i106$i,$cond$i$i1$i$i$i$i$i109$i,$$sroa$speculated$i$i$i$i$i102$i)|0);
+    $cmp$i$i$i$i$i111$i = ($call$i$i$i$i$i$i110$i|0)==(0);
+    if ($cmp$i$i$i$i$i111$i) {
      label = 4;
     } else {
-     $cmp$i$i$i122$i = ($call$i$i$i$i$i114$i|0)<(0);
-     if ($cmp$i$i$i122$i) {
+     $cmp$i$i$i118$i = ($call$i$i$i$i$i$i110$i|0)<(0);
+     if ($cmp$i$i$i118$i) {
       label = 6;
       break;
      }
     }
    }
    if ((label|0) == 4) {
-    $cmp8$i$i$i$i117$i = ($cond$i$i$i$i$i98$i>>>0)<($cond$i11$i$i$i$i104$i>>>0);
-    if ($cmp8$i$i$i$i117$i) {
+    $cmp7$i$i$i$i$i113$i = ($cond$i16$i$i$i$i$i100$i>>>0)<($cond$i$i$i$i$i$i94$i>>>0);
+    if ($cmp7$i$i$i$i$i113$i) {
      label = 6;
      break;
     }
    }
-   $cmp$i$i$i$i$i$i$i38$i = ($cond$i$i$i$i$i98$i>>>0)<($cond$i11$i$i$i$i104$i>>>0);
-   $$sroa$speculated$i$i$i$i39$i = $cmp$i$i$i$i$i$i$i38$i ? $cond$i$i$i$i$i98$i : $cond$i11$i$i$i$i104$i;
-   $cmp$i$i$i$i$i40$i = ($$sroa$speculated$i$i$i$i39$i|0)==(0);
-   if ($cmp$i$i$i$i$i40$i) {
+   $cmp$i$i$i$i$i$i$i$i36$i = ($cond$i16$i$i$i$i$i100$i>>>0)<($cond$i$i$i$i$i$i94$i>>>0);
+   $$sroa$speculated$i$i$i$i$i37$i = $cmp$i$i$i$i$i$i$i$i36$i ? $cond$i16$i$i$i$i$i100$i : $cond$i$i$i$i$i$i94$i;
+   $cmp$i$i$i$i$i$i38$i = ($$sroa$speculated$i$i$i$i$i37$i|0)==(0);
+   if ($cmp$i$i$i$i$i$i38$i) {
     label = 20;
    } else {
-    $19 = load4($__value_$i61$i);
-    $cond$i$i$i$i$i$i43$i = $tobool$i$i6$i$i$i$i101$i ? $19 : $__value_$i61$i;
-    $20 = load4($__k);
-    $cond$i$i22$i$i$i$i46$i = $tobool$i$i$i$i$i$i95$i ? $20 : $__k;
-    $call$i$i$i$i$i47$i = (_memcmp($cond$i$i$i$i$i$i43$i,$cond$i$i22$i$i$i$i46$i,$$sroa$speculated$i$i$i$i39$i)|0);
-    $cmp$i$i$i$i48$i = ($call$i$i$i$i$i47$i|0)==(0);
-    if ($cmp$i$i$i$i48$i) {
+    $20 = load4($__value_$i57$i);
+    $cond$i$i$i$i$i$i$i41$i = $tobool$i$i$i$i$i$i$i$i91$i ? $20 : $__value_$i57$i;
+    $21 = load4($__k);
+    $cond$i$i1$i$i$i$i$i44$i = $tobool$i$i$i$i$i$i$i97$i ? $21 : $__k;
+    $call$i$i$i$i$i$i45$i = (_memcmp($cond$i$i$i$i$i$i$i41$i,$cond$i$i1$i$i$i$i$i44$i,$$sroa$speculated$i$i$i$i$i37$i)|0);
+    $cmp$i$i$i$i$i46$i = ($call$i$i$i$i$i$i45$i|0)==(0);
+    if ($cmp$i$i$i$i$i46$i) {
      label = 20;
     } else {
-     $cmp$i$i$i55$i = ($call$i$i$i$i$i47$i|0)<(0);
-     if (!($cmp$i$i$i55$i)) {
-      label = 34;
+     $cmp$i$i$i53$i = ($call$i$i$i$i$i$i45$i|0)<(0);
+     if (!($cmp$i$i$i53$i)) {
+      label = 36;
      }
     }
    }
    if ((label|0) == 20) {
-    if (!($cmp$i$i$i$i$i$i$i105$i)) {
-     label = 34;
+    if (!($cmp$i$i$i$i$i$i$i$i101$i)) {
+     label = 36;
     }
    }
-   if ((label|0) == 34) {
+   if ((label|0) == 36) {
     store4($__parent,$0);
-    $retval$2$i = $__parent;
+    store4($__dummy$sroa$0,$0);
+    $retval$2$i = $__dummy$sroa$0;
     break;
    }
-   $21 = ((($__p$0)) + 4|0);
-   $22 = load4($21);
-   $cmp$i$i$i$i$i25$i = ($22|0)==(0|0);
-   if ($cmp$i$i$i$i$i25$i) {
-    $__x$addr$0$i$i$i$i$i$i = $__p$0;
-    while(1) {
-     $__parent_$i$i$i$i$i$i$i = ((($__x$addr$0$i$i$i$i$i$i)) + 8|0);
-     $24 = load4($__parent_$i$i$i$i$i$i$i);
-     $25 = load4($24);
-     $cmp$i5$i$i$i$i$i$i = ($25|0)==($__x$addr$0$i$i$i$i$i$i|0);
-     if ($cmp$i5$i$i$i$i$i$i) {
-      $retval$0$i$i$i$i$i$i = $24;
-      break;
-     } else {
-      $__x$addr$0$i$i$i$i$i$i = $24;
+   $22 = ((($__p$0)) + 4|0);
+   $23 = load4($22);
+   $cmp$i$i$i$i$i22$i = ($23|0)==(0|0);
+   if ($cmp$i$i$i$i$i22$i) {
+    $__parent_$i47$i$i$i$i$i$i = ((($__p$0)) + 8|0);
+    $24 = load4($__parent_$i47$i$i$i$i$i$i);
+    $25 = load4($24);
+    $cmp$i69$i$i$i$i$i$i = ($25|0)==($__p$0|0);
+    if ($cmp$i69$i$i$i$i$i$i) {
+     $retval$0$i$i$i$i$i$i = $24;
+    } else {
+     $__parent_$i410$i$i$i$i$i$i = $__parent_$i47$i$i$i$i$i$i;
+     while(1) {
+      $27 = load4($__parent_$i410$i$i$i$i$i$i);
+      $__parent_$i4$i$i$i$i$i$i = ((($27)) + 8|0);
+      $28 = load4($__parent_$i4$i$i$i$i$i$i);
+      $29 = load4($28);
+      $cmp$i6$i$i$i$i$i$i = ($29|0)==($27|0);
+      if ($cmp$i6$i$i$i$i$i$i) {
+       $retval$0$i$i$i$i$i$i = $28;
+       break;
+      } else {
+       $__parent_$i410$i$i$i$i$i$i = $__parent_$i4$i$i$i$i$i$i;
+      }
      }
     }
    } else {
-    $__x$addr$0$i$i$i$i$i$i$i = $22;
+    $__x$addr$0$i$i$i$i$i$i$i = $23;
     while(1) {
-     $23 = load4($__x$addr$0$i$i$i$i$i$i$i);
-     $cmp$i$i$i$i$i$i$i = ($23|0)==(0|0);
-     if ($cmp$i$i$i$i$i$i$i) {
-      $retval$0$i$i$i$i$i$i = $__x$addr$0$i$i$i$i$i$i$i;
+     $26 = load4($__x$addr$0$i$i$i$i$i$i$i);
+     $cmp$i$i$i$i$i$i23$i = ($26|0)==(0|0);
+     if ($cmp$i$i$i$i$i$i23$i) {
       break;
      } else {
-      $__x$addr$0$i$i$i$i$i$i$i = $23;
+      $__x$addr$0$i$i$i$i$i$i$i = $26;
      }
     }
+    $retval$0$i$i$i$i$i$i = $__x$addr$0$i$i$i$i$i$i$i;
    }
-   $cmp$i21$i = ($retval$0$i$i$i$i$i$i|0)==($__first_$i$i$i$i$i|0);
+   $cmp$i18$i = ($retval$0$i$i$i$i$i$i|0)==($__first_$i$i$i$i$i|0);
    do {
-    if (!($cmp$i21$i)) {
+    if (!($cmp$i18$i)) {
      $__value_$i$i = ((($retval$0$i$i$i$i$i$i)) + 16|0);
-     $__size_$i$i5$i$i$i$i$i = ((($__value_$i$i)) + 11|0);
-     $26 = load1($__size_$i$i5$i$i$i$i$i);
-     $tobool$i$i6$i$i$i$i$i = ($26<<24>>24)<(0);
-     $__size_$i3$i7$i$i$i$i$i = ((($retval$0$i$i$i$i$i$i)) + 20|0);
-     $27 = load4($__size_$i3$i7$i$i$i$i$i);
-     $conv$i$i9$i$i$i$i$i = $26&255;
-     $cond$i11$i$i$i$i$i = $tobool$i$i6$i$i$i$i$i ? $27 : $conv$i$i9$i$i$i$i$i;
-     $cmp$i$i$i$i$i$i$i$i = ($cond$i11$i$i$i$i$i>>>0)<($cond$i$i$i$i$i98$i>>>0);
-     $$sroa$speculated$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i ? $cond$i11$i$i$i$i$i : $cond$i$i$i$i$i98$i;
-     $cmp$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i|0)==(0);
-     if ($cmp$i$i$i$i$i$i) {
-      label = 28;
+     $__size_$i$i$i$i$i$i$i$i$i = ((($__value_$i$i)) + 11|0);
+     $30 = load1($__size_$i$i$i$i$i$i$i$i$i);
+     $tobool$i$i$i$i$i$i$i$i$i = ($30<<24>>24)<(0);
+     $__size_$i3$i$i$i$i$i$i$i = ((($retval$0$i$i$i$i$i$i)) + 20|0);
+     $31 = load4($__size_$i3$i$i$i$i$i$i$i);
+     $conv$i$i$i$i$i$i$i$i = $30&255;
+     $cond$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i$i ? $31 : $conv$i$i$i$i$i$i$i$i;
+     $cmp$i$i$i$i$i$i$i$i$i = ($cond$i$i$i$i$i$i$i>>>0)<($cond$i16$i$i$i$i$i100$i>>>0);
+     $$sroa$speculated$i$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i$i ? $cond$i$i$i$i$i$i$i : $cond$i16$i$i$i$i$i100$i;
+     $cmp$i$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i$i|0)==(0);
+     if ($cmp$i$i$i$i$i$i$i) {
+      label = 30;
      } else {
-      $28 = load4($__k);
-      $cond$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i95$i ? $28 : $__k;
-      $29 = load4($__value_$i$i);
-      $cond$i$i22$i$i$i$i$i = $tobool$i$i6$i$i$i$i$i ? $29 : $__value_$i$i;
-      $call$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i,$cond$i$i22$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i)|0);
-      $cmp$i$i$i$i$i = ($call$i$i$i$i$i$i|0)==(0);
-      if ($cmp$i$i$i$i$i) {
-       label = 28;
+      $32 = load4($__k);
+      $cond$i$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i97$i ? $32 : $__k;
+      $33 = load4($__value_$i$i);
+      $cond$i$i1$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i$i ? $33 : $__value_$i$i;
+      $call$i$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i$i,$cond$i$i1$i$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i$i)|0);
+      $cmp$i$i$i$i$i$i = ($call$i$i$i$i$i$i$i|0)==(0);
+      if ($cmp$i$i$i$i$i$i) {
+       label = 30;
       } else {
-       $cmp$i$i$i$i = ($call$i$i$i$i$i$i|0)<(0);
+       $cmp$i$i$i$i = ($call$i$i$i$i$i$i$i|0)<(0);
        if ($cmp$i$i$i$i) {
         break;
        }
       }
      }
-     if ((label|0) == 28) {
-      $cmp8$i$i$i$i$i = ($cond$i$i$i$i$i98$i>>>0)<($cond$i11$i$i$i$i$i>>>0);
-      if ($cmp8$i$i$i$i$i) {
+     if ((label|0) == 30) {
+      $cmp7$i$i$i$i$i$i = ($cond$i16$i$i$i$i$i100$i>>>0)<($cond$i$i$i$i$i$i$i>>>0);
+      if ($cmp7$i$i$i$i$i$i) {
        break;
       }
      }
-     $call52$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESK_RKT_($this,$__parent,$__k)|0);
-     $retval$2$i = $call52$i;
+     $call54$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISJ_EERKT_($this,$__parent,$__k)|0);
+     $retval$2$i = $call54$i;
      break L1;
     }
    } while(0);
-   if ($cmp$i$i$i$i$i25$i) {
-    store4($__parent,$__p$0);
-    $retval$2$i = $21;
+   if ($cmp$i$i$i$i$i22$i) {
+    store4($__parent,$0);
+    $retval$2$i = $22;
     break;
    } else {
     store4($__parent,$retval$0$i$i$i$i$i$i);
@@ -1509,25 +1601,25 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
    }
   }
  } while(0);
- L35: do {
+ L37: do {
   if ((label|0) == 6) {
    $7 = load4($this);
-   $cmp$i130$i = ($7|0)==($__p$0|0);
+   $cmp$i126$i = ($7|0)==($__p$0|0);
    $$pre$i2 = load4($__p$0);
    do {
-    if ($cmp$i130$i) {
+    if ($cmp$i126$i) {
      $__prior$sroa$0$0$i = $0;
     } else {
      $cmp$i$i$i = ($$pre$i2|0)==(0|0);
      if ($cmp$i$i$i) {
-      $__x$addr$0$i$i$i = $__p$0;
+      $__xx$0$i$i$i = $__p$0;
       while(1) {
-       $__parent_$i$i$i$i = ((($__x$addr$0$i$i$i)) + 8|0);
-       $9 = load4($__parent_$i$i$i$i);
+       $__parent_$i5$i$i$i = ((($__xx$0$i$i$i)) + 8|0);
+       $9 = load4($__parent_$i5$i$i$i);
        $10 = load4($9);
-       $cmp$i4$i$i$i = ($10|0)==($__x$addr$0$i$i$i|0);
-       if ($cmp$i4$i$i$i) {
-        $__x$addr$0$i$i$i = $9;
+       $cmp$i6$i$i$i = ($10|0)==($__xx$0$i$i$i|0);
+       if ($cmp$i6$i$i$i) {
+        $__xx$0$i$i$i = $9;
        } else {
         $retval$0$i$i$i = $9;
         break;
@@ -1538,8 +1630,8 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
       while(1) {
        $__right_$i$i$i$i = ((($__x$addr$0$i$i$i$i)) + 4|0);
        $8 = load4($__right_$i$i$i$i);
-       $cmp$i$i$i126$i = ($8|0)==(0|0);
-       if ($cmp$i$i$i126$i) {
+       $cmp$i$i$i122$i = ($8|0)==(0|0);
+       if ($cmp$i$i$i122$i) {
         $retval$0$i$i$i = $__x$addr$0$i$i$i$i;
         break;
        } else {
@@ -1548,53 +1640,53 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
       }
      }
      $11 = $retval$0$i$i$i;
-     $__value_$i125$i = ((($retval$0$i$i$i)) + 16|0);
-     $__size_$i$i$i$i$i$i63$i = ((($__value_$i125$i)) + 11|0);
-     $12 = load1($__size_$i$i$i$i$i$i63$i);
-     $tobool$i$i$i$i$i$i64$i = ($12<<24>>24)<(0);
-     $__size_$i3$i$i$i$i$i65$i = ((($retval$0$i$i$i)) + 20|0);
-     $13 = load4($__size_$i3$i$i$i$i$i65$i);
-     $conv$i$i$i$i$i$i66$i = $12&255;
-     $cond$i$i$i$i$i67$i = $tobool$i$i$i$i$i$i64$i ? $13 : $conv$i$i$i$i$i$i66$i;
-     $__size_$i$i5$i$i$i$i69$i = ((($__k)) + 11|0);
-     $14 = load1($__size_$i$i5$i$i$i$i69$i);
-     $tobool$i$i6$i$i$i$i70$i = ($14<<24>>24)<(0);
-     $__size_$i3$i7$i$i$i$i71$i = ((($__k)) + 4|0);
-     $15 = load4($__size_$i3$i7$i$i$i$i71$i);
-     $conv$i$i9$i$i$i$i72$i = $14&255;
-     $cond$i11$i$i$i$i73$i = $tobool$i$i6$i$i$i$i70$i ? $15 : $conv$i$i9$i$i$i$i72$i;
-     $cmp$i$i$i$i$i$i$i74$i = ($cond$i11$i$i$i$i73$i>>>0)<($cond$i$i$i$i$i67$i>>>0);
-     $$sroa$speculated$i$i$i$i75$i = $cmp$i$i$i$i$i$i$i74$i ? $cond$i11$i$i$i$i73$i : $cond$i$i$i$i$i67$i;
-     $cmp$i$i$i$i$i76$i = ($$sroa$speculated$i$i$i$i75$i|0)==(0);
-     if ($cmp$i$i$i$i$i76$i) {
+     $__value_$i120$i = ((($retval$0$i$i$i)) + 16|0);
+     $__size_$i$i$i$i$i$i$i$i59$i = ((($__k)) + 11|0);
+     $12 = load1($__size_$i$i$i$i$i$i$i$i59$i);
+     $tobool$i$i$i$i$i$i$i$i60$i = ($12<<24>>24)<(0);
+     $__size_$i3$i$i$i$i$i$i61$i = ((($__k)) + 4|0);
+     $13 = load4($__size_$i3$i$i$i$i$i$i61$i);
+     $conv$i$i$i$i$i$i$i62$i = $12&255;
+     $cond$i$i$i$i$i$i63$i = $tobool$i$i$i$i$i$i$i$i60$i ? $13 : $conv$i$i$i$i$i$i$i62$i;
+     $__size_$i$i$i$i$i$i$i65$i = ((($__value_$i120$i)) + 11|0);
+     $14 = load1($__size_$i$i$i$i$i$i$i65$i);
+     $tobool$i$i$i$i$i$i$i66$i = ($14<<24>>24)<(0);
+     $__size_$i3$i$i2$i$i$i$i67$i = ((($retval$0$i$i$i)) + 20|0);
+     $15 = load4($__size_$i3$i$i2$i$i$i$i67$i);
+     $conv$i$i$i4$i$i$i$i68$i = $14&255;
+     $cond$i16$i$i$i$i$i69$i = $tobool$i$i$i$i$i$i$i66$i ? $15 : $conv$i$i$i4$i$i$i$i68$i;
+     $cmp$i$i$i$i$i$i$i$i70$i = ($cond$i$i$i$i$i$i63$i>>>0)<($cond$i16$i$i$i$i$i69$i>>>0);
+     $$sroa$speculated$i$i$i$i$i71$i = $cmp$i$i$i$i$i$i$i$i70$i ? $cond$i$i$i$i$i$i63$i : $cond$i16$i$i$i$i$i69$i;
+     $cmp$i$i$i$i$i$i72$i = ($$sroa$speculated$i$i$i$i$i71$i|0)==(0);
+     if ($cmp$i$i$i$i$i$i72$i) {
       label = 12;
      } else {
-      $16 = load4($__value_$i125$i);
-      $cond$i$i$i$i$i$i79$i = $tobool$i$i$i$i$i$i64$i ? $16 : $__value_$i125$i;
+      $16 = load4($__value_$i120$i);
+      $cond$i$i$i$i$i$i$i75$i = $tobool$i$i$i$i$i$i$i66$i ? $16 : $__value_$i120$i;
       $17 = load4($__k);
-      $cond$i$i22$i$i$i$i82$i = $tobool$i$i6$i$i$i$i70$i ? $17 : $__k;
-      $call$i$i$i$i$i83$i = (_memcmp($cond$i$i$i$i$i$i79$i,$cond$i$i22$i$i$i$i82$i,$$sroa$speculated$i$i$i$i75$i)|0);
-      $cmp$i$i$i$i84$i = ($call$i$i$i$i$i83$i|0)==(0);
-      if ($cmp$i$i$i$i84$i) {
+      $cond$i$i1$i$i$i$i$i78$i = $tobool$i$i$i$i$i$i$i$i60$i ? $17 : $__k;
+      $call$i$i$i$i$i$i79$i = (_memcmp($cond$i$i$i$i$i$i$i75$i,$cond$i$i1$i$i$i$i$i78$i,$$sroa$speculated$i$i$i$i$i71$i)|0);
+      $cmp$i$i$i$i$i80$i = ($call$i$i$i$i$i$i79$i|0)==(0);
+      if ($cmp$i$i$i$i$i80$i) {
        label = 12;
       } else {
-       $cmp$i$i$i91$i = ($call$i$i$i$i$i83$i|0)<(0);
-       if ($cmp$i$i$i91$i) {
+       $cmp$i$i$i87$i = ($call$i$i$i$i$i$i79$i|0)<(0);
+       if ($cmp$i$i$i87$i) {
         $__prior$sroa$0$0$i = $11;
         break;
        }
       }
      }
      if ((label|0) == 12) {
-      $cmp8$i$i$i$i86$i = ($cond$i$i$i$i$i67$i>>>0)<($cond$i11$i$i$i$i73$i>>>0);
-      if ($cmp8$i$i$i$i86$i) {
+      $cmp7$i$i$i$i$i82$i = ($cond$i16$i$i$i$i$i69$i>>>0)<($cond$i$i$i$i$i$i63$i>>>0);
+      if ($cmp7$i$i$i$i$i82$i) {
        $__prior$sroa$0$0$i = $11;
        break;
       }
      }
-     $call22$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESK_RKT_($this,$__parent,$__k)|0);
-     $retval$2$i = $call22$i;
-     break L35;
+     $call23$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISJ_EERKT_($this,$__parent,$__k)|0);
+     $retval$2$i = $call23$i;
+     break L37;
     }
    } while(0);
    $cmp$i4 = ($$pre$i2|0)==(0|0);
@@ -1605,47 +1697,47 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
    } else {
     $18 = $__prior$sroa$0$0$i;
     store4($__parent,$18);
-    $__right_$i5 = ((($18)) + 4|0);
-    $retval$2$i = $__right_$i5;
+    $19 = ((($18)) + 4|0);
+    $retval$2$i = $19;
     break;
    }
   }
  } while(0);
- $30 = load4($retval$2$i);
- $cmp = ($30|0)==(0|0);
+ $34 = load4($retval$2$i);
+ $cmp = ($34|0)==(0|0);
  if (!($cmp)) {
   STACKTOP = sp;return;
  }
  $call$i$i$i$i = (__Znwj(40)|0);
- $first$i$i$i$i$i = ((($call$i$i$i$i)) + 16|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($first$i$i$i$i$i,$__args);
+ $__cc$i$i = ((($call$i$i$i$i)) + 16|0);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($__cc$i$i,$__args);
  $second$i$i$i$i$i = ((($call$i$i$i$i)) + 28|0);
  $second3$i$i$i$i$i = ((($__args)) + 12|0);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($second$i$i$i$i$i,$second3$i$i$i$i$i);
- $31 = load4($__parent);
+ $35 = load4($__parent);
  store4($call$i$i$i$i,0);
  $__right_$i = ((($call$i$i$i$i)) + 4|0);
  store4($__right_$i,0);
  $__parent_$i = ((($call$i$i$i$i)) + 8|0);
- store4($__parent_$i,$31);
+ store4($__parent_$i,$35);
  store4($retval$2$i,$call$i$i$i$i);
- $32 = load4($this);
- $33 = load4($32);
- $cmp$i = ($33|0)==(0|0);
+ $36 = load4($this);
+ $37 = load4($36);
+ $cmp$i = ($37|0)==(0|0);
  if ($cmp$i) {
-  $36 = $call$i$i$i$i;
+  $40 = $call$i$i$i$i;
  } else {
-  $34 = $33;
-  store4($this,$34);
+  $38 = $37;
+  store4($this,$38);
   $$pre$i = load4($retval$2$i);
-  $36 = $$pre$i;
+  $40 = $$pre$i;
  }
  $__left_7$i = ((($this)) + 4|0);
- $35 = load4($__left_7$i);
- __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($35,$36);
+ $39 = load4($__left_7$i);
+ __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($39,$40);
  $__first_$i$i$i$i6 = ((($this)) + 8|0);
- $37 = load4($__first_$i$i$i$i6);
- $inc$i = (($37) + 1)|0;
+ $41 = load4($__first_$i$i$i$i6);
+ $inc$i = (($41) + 1)|0;
  store4($__first_$i$i$i$i6,$inc$i);
  STACKTOP = sp;return;
 }
@@ -1654,17 +1746,18 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
  $__p$0 = $__p$0|0;
  $__k = $__k|0;
  $__args = $__args|0;
- var $$pre$i = 0, $$pre$i7 = 0, $$sroa$speculated$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i106$i = 0, $$sroa$speculated$i$i$i$i39$i = 0, $$sroa$speculated$i$i$i$i75$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0;
- var $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $4 = 0;
- var $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i8 = 0, $__left_7$i = 0, $__parent = 0, $__parent_$i = 0, $__parent_$i$i$i$i = 0, $__parent_$i$i$i$i$i$i$i = 0, $__prior$sroa$0$0$i = 0, $__right_$i = 0, $__right_$i$i$i$i = 0, $__right_$i4 = 0, $__size_$i$i$i$i$i$i63$i = 0, $__size_$i$i$i$i$i$i94$i = 0, $__size_$i$i5$i$i$i$i$i = 0, $__size_$i$i5$i$i$i$i100$i = 0;
- var $__size_$i$i5$i$i$i$i69$i = 0, $__size_$i3$i$i$i$i$i65$i = 0, $__size_$i3$i$i$i$i$i96$i = 0, $__size_$i3$i7$i$i$i$i$i = 0, $__size_$i3$i7$i$i$i$i102$i = 0, $__size_$i3$i7$i$i$i$i71$i = 0, $__value_$i$i = 0, $__value_$i125$i = 0, $__value_$i61$i = 0, $__x$addr$0$i$i$i = 0, $__x$addr$0$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i$i = 0, $call$i$i$i$i = 0, $call$i$i$i$i$i$i = 0, $call$i$i$i$i$i114$i = 0, $call$i$i$i$i$i47$i = 0, $call$i$i$i$i$i83$i = 0, $call22$i = 0, $call52$i = 0;
- var $cmp = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i105$i = 0, $cmp$i$i$i$i$i$i$i38$i = 0, $cmp$i$i$i$i$i$i$i74$i = 0, $cmp$i$i$i$i$i107$i = 0, $cmp$i$i$i$i$i25$i = 0, $cmp$i$i$i$i$i40$i = 0, $cmp$i$i$i$i$i76$i = 0, $cmp$i$i$i$i115$i = 0, $cmp$i$i$i$i48$i = 0, $cmp$i$i$i$i84$i = 0, $cmp$i$i$i122$i = 0;
- var $cmp$i$i$i126$i = 0, $cmp$i$i$i55$i = 0, $cmp$i$i$i91$i = 0, $cmp$i130$i = 0, $cmp$i21$i = 0, $cmp$i3 = 0, $cmp$i4$i$i$i = 0, $cmp$i5$i$i$i$i$i$i = 0, $cmp8$i$i$i$i$i = 0, $cmp8$i$i$i$i117$i = 0, $cmp8$i$i$i$i86$i = 0, $cond$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i110$i = 0, $cond$i$i$i$i$i$i43$i = 0, $cond$i$i$i$i$i$i79$i = 0, $cond$i$i$i$i$i67$i = 0, $cond$i$i$i$i$i98$i = 0, $cond$i$i22$i$i$i$i$i = 0, $cond$i$i22$i$i$i$i113$i = 0, $cond$i$i22$i$i$i$i46$i = 0;
- var $cond$i$i22$i$i$i$i82$i = 0, $cond$i11$i$i$i$i$i = 0, $cond$i11$i$i$i$i104$i = 0, $cond$i11$i$i$i$i73$i = 0, $conv$i$i$i$i$i$i66$i = 0, $conv$i$i$i$i$i$i97$i = 0, $conv$i$i9$i$i$i$i$i = 0, $conv$i$i9$i$i$i$i103$i = 0, $conv$i$i9$i$i$i$i72$i = 0, $first$i$i$i$i$i = 0, $handle$i$i$i$i$i$i = 0, $handle2$i$i$i$i$i$i = 0, $inc$i = 0, $retval$0$i$i$i = 0, $retval$0$i$i$i$i$i$i = 0, $retval$2$i = 0, $tobool$i$i$i$i$i$i64$i = 0, $tobool$i$i$i$i$i$i95$i = 0, $tobool$i$i6$i$i$i$i$i = 0, $tobool$i$i6$i$i$i$i101$i = 0;
- var $tobool$i$i6$i$i$i$i70$i = 0, label = 0, sp = 0;
+ var $$pre$i = 0, $$pre$i2 = 0, $$sroa$speculated$i$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i102$i = 0, $$sroa$speculated$i$i$i$i$i37$i = 0, $$sroa$speculated$i$i$i$i$i71$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0;
+ var $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0;
+ var $4 = 0, $40 = 0, $41 = 0, $42 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__cc$i$i = 0, $__dummy$sroa$0 = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i7 = 0, $__left_7$i = 0, $__parent = 0, $__parent_$i = 0, $__parent_$i4$i$i$i$i$i$i = 0, $__parent_$i410$i$i$i$i$i$i = 0, $__parent_$i47$i$i$i$i$i$i = 0, $__parent_$i5$i$i$i = 0;
+ var $__prior$sroa$0$0$i = 0, $__right_$i = 0, $__right_$i$i$i$i = 0, $__size_$i$i$i$i$i$i$i$i$i = 0, $__size_$i$i$i$i$i$i$i$i59$i = 0, $__size_$i$i$i$i$i$i$i$i90$i = 0, $__size_$i$i$i$i$i$i$i65$i = 0, $__size_$i$i$i$i$i$i$i96$i = 0, $__size_$i3$i$i$i$i$i$i$i = 0, $__size_$i3$i$i$i$i$i$i61$i = 0, $__size_$i3$i$i$i$i$i$i92$i = 0, $__size_$i3$i$i2$i$i$i$i67$i = 0, $__size_$i3$i$i2$i$i$i$i98$i = 0, $__value_$i$i = 0, $__value_$i120$i = 0, $__value_$i57$i = 0, $__x$addr$0$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i$i = 0, $__xx$0$i$i$i = 0, $call$i$i$i$i = 0;
+ var $call$i$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i110$i = 0, $call$i$i$i$i$i$i45$i = 0, $call$i$i$i$i$i$i79$i = 0, $call23$i = 0, $call54$i = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i101$i = 0, $cmp$i$i$i$i$i$i$i$i36$i = 0, $cmp$i$i$i$i$i$i$i$i70$i = 0, $cmp$i$i$i$i$i$i103$i = 0, $cmp$i$i$i$i$i$i23$i = 0, $cmp$i$i$i$i$i$i38$i = 0;
+ var $cmp$i$i$i$i$i$i72$i = 0, $cmp$i$i$i$i$i111$i = 0, $cmp$i$i$i$i$i22$i = 0, $cmp$i$i$i$i$i46$i = 0, $cmp$i$i$i$i$i80$i = 0, $cmp$i$i$i118$i = 0, $cmp$i$i$i122$i = 0, $cmp$i$i$i53$i = 0, $cmp$i$i$i87$i = 0, $cmp$i126$i = 0, $cmp$i18$i = 0, $cmp$i4 = 0, $cmp$i6$i$i$i = 0, $cmp$i6$i$i$i$i$i$i = 0, $cmp$i69$i$i$i$i$i$i = 0, $cmp7$i$i$i$i$i$i = 0, $cmp7$i$i$i$i$i113$i = 0, $cmp7$i$i$i$i$i82$i = 0, $cond$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i$i$i = 0;
+ var $cond$i$i$i$i$i$i$i106$i = 0, $cond$i$i$i$i$i$i$i41$i = 0, $cond$i$i$i$i$i$i$i75$i = 0, $cond$i$i$i$i$i$i63$i = 0, $cond$i$i$i$i$i$i94$i = 0, $cond$i$i1$i$i$i$i$i$i = 0, $cond$i$i1$i$i$i$i$i109$i = 0, $cond$i$i1$i$i$i$i$i44$i = 0, $cond$i$i1$i$i$i$i$i78$i = 0, $cond$i16$i$i$i$i$i100$i = 0, $cond$i16$i$i$i$i$i69$i = 0, $conv$i$i$i$i$i$i$i$i = 0, $conv$i$i$i$i$i$i$i62$i = 0, $conv$i$i$i$i$i$i$i93$i = 0, $conv$i$i$i4$i$i$i$i68$i = 0, $conv$i$i$i4$i$i$i$i99$i = 0, $handle$i$i$i$i$i$i = 0, $handle2$i$i$i$i$i$i = 0, $inc$i = 0, $retval$0$i$i$i = 0;
+ var $retval$0$i$i$i$i$i$i = 0, $retval$2$i = 0, $tobool$i$i$i$i$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i$i$i60$i = 0, $tobool$i$i$i$i$i$i$i$i91$i = 0, $tobool$i$i$i$i$i$i$i66$i = 0, $tobool$i$i$i$i$i$i$i97$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
- $__parent = sp;
+ $__parent = sp + 4|0;
+ $__dummy$sroa$0 = sp;
  $__first_$i$i$i$i$i = ((($this)) + 4|0);
  $cmp$i$i = ($__first_$i$i$i$i$i|0)==($__p$0|0);
  $0 = $__p$0;
@@ -1672,157 +1765,167 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
   if ($cmp$i$i) {
    label = 6;
   } else {
-   $__value_$i61$i = ((($__p$0)) + 16|0);
-   $__size_$i$i$i$i$i$i94$i = ((($__k)) + 11|0);
-   $1 = load1($__size_$i$i$i$i$i$i94$i);
-   $tobool$i$i$i$i$i$i95$i = ($1<<24>>24)<(0);
-   $__size_$i3$i$i$i$i$i96$i = ((($__k)) + 4|0);
-   $2 = load4($__size_$i3$i$i$i$i$i96$i);
-   $conv$i$i$i$i$i$i97$i = $1&255;
-   $cond$i$i$i$i$i98$i = $tobool$i$i$i$i$i$i95$i ? $2 : $conv$i$i$i$i$i$i97$i;
-   $__size_$i$i5$i$i$i$i100$i = ((($__value_$i61$i)) + 11|0);
-   $3 = load1($__size_$i$i5$i$i$i$i100$i);
-   $tobool$i$i6$i$i$i$i101$i = ($3<<24>>24)<(0);
-   $__size_$i3$i7$i$i$i$i102$i = ((($__p$0)) + 20|0);
-   $4 = load4($__size_$i3$i7$i$i$i$i102$i);
-   $conv$i$i9$i$i$i$i103$i = $3&255;
-   $cond$i11$i$i$i$i104$i = $tobool$i$i6$i$i$i$i101$i ? $4 : $conv$i$i9$i$i$i$i103$i;
-   $cmp$i$i$i$i$i$i$i105$i = ($cond$i11$i$i$i$i104$i>>>0)<($cond$i$i$i$i$i98$i>>>0);
-   $$sroa$speculated$i$i$i$i106$i = $cmp$i$i$i$i$i$i$i105$i ? $cond$i11$i$i$i$i104$i : $cond$i$i$i$i$i98$i;
-   $cmp$i$i$i$i$i107$i = ($$sroa$speculated$i$i$i$i106$i|0)==(0);
-   if ($cmp$i$i$i$i$i107$i) {
+   $__value_$i57$i = ((($__p$0)) + 16|0);
+   $__size_$i$i$i$i$i$i$i$i90$i = ((($__value_$i57$i)) + 11|0);
+   $1 = load1($__size_$i$i$i$i$i$i$i$i90$i);
+   $tobool$i$i$i$i$i$i$i$i91$i = ($1<<24>>24)<(0);
+   $__size_$i3$i$i$i$i$i$i92$i = ((($__p$0)) + 20|0);
+   $2 = load4($__size_$i3$i$i$i$i$i$i92$i);
+   $conv$i$i$i$i$i$i$i93$i = $1&255;
+   $cond$i$i$i$i$i$i94$i = $tobool$i$i$i$i$i$i$i$i91$i ? $2 : $conv$i$i$i$i$i$i$i93$i;
+   $__size_$i$i$i$i$i$i$i96$i = ((($__k)) + 11|0);
+   $3 = load1($__size_$i$i$i$i$i$i$i96$i);
+   $tobool$i$i$i$i$i$i$i97$i = ($3<<24>>24)<(0);
+   $__size_$i3$i$i2$i$i$i$i98$i = ((($__k)) + 4|0);
+   $4 = load4($__size_$i3$i$i2$i$i$i$i98$i);
+   $conv$i$i$i4$i$i$i$i99$i = $3&255;
+   $cond$i16$i$i$i$i$i100$i = $tobool$i$i$i$i$i$i$i97$i ? $4 : $conv$i$i$i4$i$i$i$i99$i;
+   $cmp$i$i$i$i$i$i$i$i101$i = ($cond$i$i$i$i$i$i94$i>>>0)<($cond$i16$i$i$i$i$i100$i>>>0);
+   $$sroa$speculated$i$i$i$i$i102$i = $cmp$i$i$i$i$i$i$i$i101$i ? $cond$i$i$i$i$i$i94$i : $cond$i16$i$i$i$i$i100$i;
+   $cmp$i$i$i$i$i$i103$i = ($$sroa$speculated$i$i$i$i$i102$i|0)==(0);
+   if ($cmp$i$i$i$i$i$i103$i) {
     label = 4;
    } else {
     $5 = load4($__k);
-    $cond$i$i$i$i$i$i110$i = $tobool$i$i$i$i$i$i95$i ? $5 : $__k;
-    $6 = load4($__value_$i61$i);
-    $cond$i$i22$i$i$i$i113$i = $tobool$i$i6$i$i$i$i101$i ? $6 : $__value_$i61$i;
-    $call$i$i$i$i$i114$i = (_memcmp($cond$i$i$i$i$i$i110$i,$cond$i$i22$i$i$i$i113$i,$$sroa$speculated$i$i$i$i106$i)|0);
-    $cmp$i$i$i$i115$i = ($call$i$i$i$i$i114$i|0)==(0);
-    if ($cmp$i$i$i$i115$i) {
+    $cond$i$i$i$i$i$i$i106$i = $tobool$i$i$i$i$i$i$i97$i ? $5 : $__k;
+    $6 = load4($__value_$i57$i);
+    $cond$i$i1$i$i$i$i$i109$i = $tobool$i$i$i$i$i$i$i$i91$i ? $6 : $__value_$i57$i;
+    $call$i$i$i$i$i$i110$i = (_memcmp($cond$i$i$i$i$i$i$i106$i,$cond$i$i1$i$i$i$i$i109$i,$$sroa$speculated$i$i$i$i$i102$i)|0);
+    $cmp$i$i$i$i$i111$i = ($call$i$i$i$i$i$i110$i|0)==(0);
+    if ($cmp$i$i$i$i$i111$i) {
      label = 4;
     } else {
-     $cmp$i$i$i122$i = ($call$i$i$i$i$i114$i|0)<(0);
-     if ($cmp$i$i$i122$i) {
+     $cmp$i$i$i118$i = ($call$i$i$i$i$i$i110$i|0)<(0);
+     if ($cmp$i$i$i118$i) {
       label = 6;
       break;
      }
     }
    }
    if ((label|0) == 4) {
-    $cmp8$i$i$i$i117$i = ($cond$i$i$i$i$i98$i>>>0)<($cond$i11$i$i$i$i104$i>>>0);
-    if ($cmp8$i$i$i$i117$i) {
+    $cmp7$i$i$i$i$i113$i = ($cond$i16$i$i$i$i$i100$i>>>0)<($cond$i$i$i$i$i$i94$i>>>0);
+    if ($cmp7$i$i$i$i$i113$i) {
      label = 6;
      break;
     }
    }
-   $cmp$i$i$i$i$i$i$i38$i = ($cond$i$i$i$i$i98$i>>>0)<($cond$i11$i$i$i$i104$i>>>0);
-   $$sroa$speculated$i$i$i$i39$i = $cmp$i$i$i$i$i$i$i38$i ? $cond$i$i$i$i$i98$i : $cond$i11$i$i$i$i104$i;
-   $cmp$i$i$i$i$i40$i = ($$sroa$speculated$i$i$i$i39$i|0)==(0);
-   if ($cmp$i$i$i$i$i40$i) {
+   $cmp$i$i$i$i$i$i$i$i36$i = ($cond$i16$i$i$i$i$i100$i>>>0)<($cond$i$i$i$i$i$i94$i>>>0);
+   $$sroa$speculated$i$i$i$i$i37$i = $cmp$i$i$i$i$i$i$i$i36$i ? $cond$i16$i$i$i$i$i100$i : $cond$i$i$i$i$i$i94$i;
+   $cmp$i$i$i$i$i$i38$i = ($$sroa$speculated$i$i$i$i$i37$i|0)==(0);
+   if ($cmp$i$i$i$i$i$i38$i) {
     label = 20;
    } else {
-    $19 = load4($__value_$i61$i);
-    $cond$i$i$i$i$i$i43$i = $tobool$i$i6$i$i$i$i101$i ? $19 : $__value_$i61$i;
-    $20 = load4($__k);
-    $cond$i$i22$i$i$i$i46$i = $tobool$i$i$i$i$i$i95$i ? $20 : $__k;
-    $call$i$i$i$i$i47$i = (_memcmp($cond$i$i$i$i$i$i43$i,$cond$i$i22$i$i$i$i46$i,$$sroa$speculated$i$i$i$i39$i)|0);
-    $cmp$i$i$i$i48$i = ($call$i$i$i$i$i47$i|0)==(0);
-    if ($cmp$i$i$i$i48$i) {
+    $20 = load4($__value_$i57$i);
+    $cond$i$i$i$i$i$i$i41$i = $tobool$i$i$i$i$i$i$i$i91$i ? $20 : $__value_$i57$i;
+    $21 = load4($__k);
+    $cond$i$i1$i$i$i$i$i44$i = $tobool$i$i$i$i$i$i$i97$i ? $21 : $__k;
+    $call$i$i$i$i$i$i45$i = (_memcmp($cond$i$i$i$i$i$i$i41$i,$cond$i$i1$i$i$i$i$i44$i,$$sroa$speculated$i$i$i$i$i37$i)|0);
+    $cmp$i$i$i$i$i46$i = ($call$i$i$i$i$i$i45$i|0)==(0);
+    if ($cmp$i$i$i$i$i46$i) {
      label = 20;
     } else {
-     $cmp$i$i$i55$i = ($call$i$i$i$i$i47$i|0)<(0);
-     if (!($cmp$i$i$i55$i)) {
-      label = 34;
+     $cmp$i$i$i53$i = ($call$i$i$i$i$i$i45$i|0)<(0);
+     if (!($cmp$i$i$i53$i)) {
+      label = 36;
      }
     }
    }
    if ((label|0) == 20) {
-    if (!($cmp$i$i$i$i$i$i$i105$i)) {
-     label = 34;
+    if (!($cmp$i$i$i$i$i$i$i$i101$i)) {
+     label = 36;
     }
    }
-   if ((label|0) == 34) {
+   if ((label|0) == 36) {
     store4($__parent,$0);
-    $retval$2$i = $__parent;
+    store4($__dummy$sroa$0,$0);
+    $retval$2$i = $__dummy$sroa$0;
     break;
    }
-   $21 = ((($__p$0)) + 4|0);
-   $22 = load4($21);
-   $cmp$i$i$i$i$i25$i = ($22|0)==(0|0);
-   if ($cmp$i$i$i$i$i25$i) {
-    $__x$addr$0$i$i$i$i$i$i = $__p$0;
-    while(1) {
-     $__parent_$i$i$i$i$i$i$i = ((($__x$addr$0$i$i$i$i$i$i)) + 8|0);
-     $24 = load4($__parent_$i$i$i$i$i$i$i);
-     $25 = load4($24);
-     $cmp$i5$i$i$i$i$i$i = ($25|0)==($__x$addr$0$i$i$i$i$i$i|0);
-     if ($cmp$i5$i$i$i$i$i$i) {
-      $retval$0$i$i$i$i$i$i = $24;
-      break;
-     } else {
-      $__x$addr$0$i$i$i$i$i$i = $24;
+   $22 = ((($__p$0)) + 4|0);
+   $23 = load4($22);
+   $cmp$i$i$i$i$i22$i = ($23|0)==(0|0);
+   if ($cmp$i$i$i$i$i22$i) {
+    $__parent_$i47$i$i$i$i$i$i = ((($__p$0)) + 8|0);
+    $24 = load4($__parent_$i47$i$i$i$i$i$i);
+    $25 = load4($24);
+    $cmp$i69$i$i$i$i$i$i = ($25|0)==($__p$0|0);
+    if ($cmp$i69$i$i$i$i$i$i) {
+     $retval$0$i$i$i$i$i$i = $24;
+    } else {
+     $__parent_$i410$i$i$i$i$i$i = $__parent_$i47$i$i$i$i$i$i;
+     while(1) {
+      $27 = load4($__parent_$i410$i$i$i$i$i$i);
+      $__parent_$i4$i$i$i$i$i$i = ((($27)) + 8|0);
+      $28 = load4($__parent_$i4$i$i$i$i$i$i);
+      $29 = load4($28);
+      $cmp$i6$i$i$i$i$i$i = ($29|0)==($27|0);
+      if ($cmp$i6$i$i$i$i$i$i) {
+       $retval$0$i$i$i$i$i$i = $28;
+       break;
+      } else {
+       $__parent_$i410$i$i$i$i$i$i = $__parent_$i4$i$i$i$i$i$i;
+      }
      }
     }
    } else {
-    $__x$addr$0$i$i$i$i$i$i$i = $22;
+    $__x$addr$0$i$i$i$i$i$i$i = $23;
     while(1) {
-     $23 = load4($__x$addr$0$i$i$i$i$i$i$i);
-     $cmp$i$i$i$i$i$i$i = ($23|0)==(0|0);
-     if ($cmp$i$i$i$i$i$i$i) {
-      $retval$0$i$i$i$i$i$i = $__x$addr$0$i$i$i$i$i$i$i;
+     $26 = load4($__x$addr$0$i$i$i$i$i$i$i);
+     $cmp$i$i$i$i$i$i23$i = ($26|0)==(0|0);
+     if ($cmp$i$i$i$i$i$i23$i) {
       break;
      } else {
-      $__x$addr$0$i$i$i$i$i$i$i = $23;
+      $__x$addr$0$i$i$i$i$i$i$i = $26;
      }
     }
+    $retval$0$i$i$i$i$i$i = $__x$addr$0$i$i$i$i$i$i$i;
    }
-   $cmp$i21$i = ($retval$0$i$i$i$i$i$i|0)==($__first_$i$i$i$i$i|0);
+   $cmp$i18$i = ($retval$0$i$i$i$i$i$i|0)==($__first_$i$i$i$i$i|0);
    do {
-    if (!($cmp$i21$i)) {
+    if (!($cmp$i18$i)) {
      $__value_$i$i = ((($retval$0$i$i$i$i$i$i)) + 16|0);
-     $__size_$i$i5$i$i$i$i$i = ((($__value_$i$i)) + 11|0);
-     $26 = load1($__size_$i$i5$i$i$i$i$i);
-     $tobool$i$i6$i$i$i$i$i = ($26<<24>>24)<(0);
-     $__size_$i3$i7$i$i$i$i$i = ((($retval$0$i$i$i$i$i$i)) + 20|0);
-     $27 = load4($__size_$i3$i7$i$i$i$i$i);
-     $conv$i$i9$i$i$i$i$i = $26&255;
-     $cond$i11$i$i$i$i$i = $tobool$i$i6$i$i$i$i$i ? $27 : $conv$i$i9$i$i$i$i$i;
-     $cmp$i$i$i$i$i$i$i$i = ($cond$i11$i$i$i$i$i>>>0)<($cond$i$i$i$i$i98$i>>>0);
-     $$sroa$speculated$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i ? $cond$i11$i$i$i$i$i : $cond$i$i$i$i$i98$i;
-     $cmp$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i|0)==(0);
-     if ($cmp$i$i$i$i$i$i) {
-      label = 28;
+     $__size_$i$i$i$i$i$i$i$i$i = ((($__value_$i$i)) + 11|0);
+     $30 = load1($__size_$i$i$i$i$i$i$i$i$i);
+     $tobool$i$i$i$i$i$i$i$i$i = ($30<<24>>24)<(0);
+     $__size_$i3$i$i$i$i$i$i$i = ((($retval$0$i$i$i$i$i$i)) + 20|0);
+     $31 = load4($__size_$i3$i$i$i$i$i$i$i);
+     $conv$i$i$i$i$i$i$i$i = $30&255;
+     $cond$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i$i ? $31 : $conv$i$i$i$i$i$i$i$i;
+     $cmp$i$i$i$i$i$i$i$i$i = ($cond$i$i$i$i$i$i$i>>>0)<($cond$i16$i$i$i$i$i100$i>>>0);
+     $$sroa$speculated$i$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i$i ? $cond$i$i$i$i$i$i$i : $cond$i16$i$i$i$i$i100$i;
+     $cmp$i$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i$i|0)==(0);
+     if ($cmp$i$i$i$i$i$i$i) {
+      label = 30;
      } else {
-      $28 = load4($__k);
-      $cond$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i95$i ? $28 : $__k;
-      $29 = load4($__value_$i$i);
-      $cond$i$i22$i$i$i$i$i = $tobool$i$i6$i$i$i$i$i ? $29 : $__value_$i$i;
-      $call$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i,$cond$i$i22$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i)|0);
-      $cmp$i$i$i$i$i = ($call$i$i$i$i$i$i|0)==(0);
-      if ($cmp$i$i$i$i$i) {
-       label = 28;
+      $32 = load4($__k);
+      $cond$i$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i97$i ? $32 : $__k;
+      $33 = load4($__value_$i$i);
+      $cond$i$i1$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i$i ? $33 : $__value_$i$i;
+      $call$i$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i$i,$cond$i$i1$i$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i$i)|0);
+      $cmp$i$i$i$i$i$i = ($call$i$i$i$i$i$i$i|0)==(0);
+      if ($cmp$i$i$i$i$i$i) {
+       label = 30;
       } else {
-       $cmp$i$i$i$i = ($call$i$i$i$i$i$i|0)<(0);
+       $cmp$i$i$i$i = ($call$i$i$i$i$i$i$i|0)<(0);
        if ($cmp$i$i$i$i) {
         break;
        }
       }
      }
-     if ((label|0) == 28) {
-      $cmp8$i$i$i$i$i = ($cond$i$i$i$i$i98$i>>>0)<($cond$i11$i$i$i$i$i>>>0);
-      if ($cmp8$i$i$i$i$i) {
+     if ((label|0) == 30) {
+      $cmp7$i$i$i$i$i$i = ($cond$i16$i$i$i$i$i100$i>>>0)<($cond$i$i$i$i$i$i$i>>>0);
+      if ($cmp7$i$i$i$i$i$i) {
        break;
       }
      }
-     $call52$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESM_RKT_($this,$__parent,$__k)|0);
-     $retval$2$i = $call52$i;
+     $call54$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISL_EERKT_($this,$__parent,$__k)|0);
+     $retval$2$i = $call54$i;
      break L1;
     }
    } while(0);
-   if ($cmp$i$i$i$i$i25$i) {
-    store4($__parent,$__p$0);
-    $retval$2$i = $21;
+   if ($cmp$i$i$i$i$i22$i) {
+    store4($__parent,$0);
+    $retval$2$i = $22;
     break;
    } else {
     store4($__parent,$retval$0$i$i$i$i$i$i);
@@ -1831,37 +1934,37 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
    }
   }
  } while(0);
- L35: do {
+ L37: do {
   if ((label|0) == 6) {
    $7 = load4($this);
-   $cmp$i130$i = ($7|0)==($__p$0|0);
-   $$pre$i = load4($__p$0);
+   $cmp$i126$i = ($7|0)==($__p$0|0);
+   $$pre$i2 = load4($__p$0);
    do {
-    if ($cmp$i130$i) {
+    if ($cmp$i126$i) {
      $__prior$sroa$0$0$i = $0;
     } else {
-     $cmp$i$i$i = ($$pre$i|0)==(0|0);
+     $cmp$i$i$i = ($$pre$i2|0)==(0|0);
      if ($cmp$i$i$i) {
-      $__x$addr$0$i$i$i = $__p$0;
+      $__xx$0$i$i$i = $__p$0;
       while(1) {
-       $__parent_$i$i$i$i = ((($__x$addr$0$i$i$i)) + 8|0);
-       $9 = load4($__parent_$i$i$i$i);
+       $__parent_$i5$i$i$i = ((($__xx$0$i$i$i)) + 8|0);
+       $9 = load4($__parent_$i5$i$i$i);
        $10 = load4($9);
-       $cmp$i4$i$i$i = ($10|0)==($__x$addr$0$i$i$i|0);
-       if ($cmp$i4$i$i$i) {
-        $__x$addr$0$i$i$i = $9;
+       $cmp$i6$i$i$i = ($10|0)==($__xx$0$i$i$i|0);
+       if ($cmp$i6$i$i$i) {
+        $__xx$0$i$i$i = $9;
        } else {
         $retval$0$i$i$i = $9;
         break;
        }
       }
      } else {
-      $__x$addr$0$i$i$i$i = $$pre$i;
+      $__x$addr$0$i$i$i$i = $$pre$i2;
       while(1) {
        $__right_$i$i$i$i = ((($__x$addr$0$i$i$i$i)) + 4|0);
        $8 = load4($__right_$i$i$i$i);
-       $cmp$i$i$i126$i = ($8|0)==(0|0);
-       if ($cmp$i$i$i126$i) {
+       $cmp$i$i$i122$i = ($8|0)==(0|0);
+       if ($cmp$i$i$i122$i) {
         $retval$0$i$i$i = $__x$addr$0$i$i$i$i;
         break;
        } else {
@@ -1870,107 +1973,107 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
       }
      }
      $11 = $retval$0$i$i$i;
-     $__value_$i125$i = ((($retval$0$i$i$i)) + 16|0);
-     $__size_$i$i$i$i$i$i63$i = ((($__value_$i125$i)) + 11|0);
-     $12 = load1($__size_$i$i$i$i$i$i63$i);
-     $tobool$i$i$i$i$i$i64$i = ($12<<24>>24)<(0);
-     $__size_$i3$i$i$i$i$i65$i = ((($retval$0$i$i$i)) + 20|0);
-     $13 = load4($__size_$i3$i$i$i$i$i65$i);
-     $conv$i$i$i$i$i$i66$i = $12&255;
-     $cond$i$i$i$i$i67$i = $tobool$i$i$i$i$i$i64$i ? $13 : $conv$i$i$i$i$i$i66$i;
-     $__size_$i$i5$i$i$i$i69$i = ((($__k)) + 11|0);
-     $14 = load1($__size_$i$i5$i$i$i$i69$i);
-     $tobool$i$i6$i$i$i$i70$i = ($14<<24>>24)<(0);
-     $__size_$i3$i7$i$i$i$i71$i = ((($__k)) + 4|0);
-     $15 = load4($__size_$i3$i7$i$i$i$i71$i);
-     $conv$i$i9$i$i$i$i72$i = $14&255;
-     $cond$i11$i$i$i$i73$i = $tobool$i$i6$i$i$i$i70$i ? $15 : $conv$i$i9$i$i$i$i72$i;
-     $cmp$i$i$i$i$i$i$i74$i = ($cond$i11$i$i$i$i73$i>>>0)<($cond$i$i$i$i$i67$i>>>0);
-     $$sroa$speculated$i$i$i$i75$i = $cmp$i$i$i$i$i$i$i74$i ? $cond$i11$i$i$i$i73$i : $cond$i$i$i$i$i67$i;
-     $cmp$i$i$i$i$i76$i = ($$sroa$speculated$i$i$i$i75$i|0)==(0);
-     if ($cmp$i$i$i$i$i76$i) {
+     $__value_$i120$i = ((($retval$0$i$i$i)) + 16|0);
+     $__size_$i$i$i$i$i$i$i$i59$i = ((($__k)) + 11|0);
+     $12 = load1($__size_$i$i$i$i$i$i$i$i59$i);
+     $tobool$i$i$i$i$i$i$i$i60$i = ($12<<24>>24)<(0);
+     $__size_$i3$i$i$i$i$i$i61$i = ((($__k)) + 4|0);
+     $13 = load4($__size_$i3$i$i$i$i$i$i61$i);
+     $conv$i$i$i$i$i$i$i62$i = $12&255;
+     $cond$i$i$i$i$i$i63$i = $tobool$i$i$i$i$i$i$i$i60$i ? $13 : $conv$i$i$i$i$i$i$i62$i;
+     $__size_$i$i$i$i$i$i$i65$i = ((($__value_$i120$i)) + 11|0);
+     $14 = load1($__size_$i$i$i$i$i$i$i65$i);
+     $tobool$i$i$i$i$i$i$i66$i = ($14<<24>>24)<(0);
+     $__size_$i3$i$i2$i$i$i$i67$i = ((($retval$0$i$i$i)) + 20|0);
+     $15 = load4($__size_$i3$i$i2$i$i$i$i67$i);
+     $conv$i$i$i4$i$i$i$i68$i = $14&255;
+     $cond$i16$i$i$i$i$i69$i = $tobool$i$i$i$i$i$i$i66$i ? $15 : $conv$i$i$i4$i$i$i$i68$i;
+     $cmp$i$i$i$i$i$i$i$i70$i = ($cond$i$i$i$i$i$i63$i>>>0)<($cond$i16$i$i$i$i$i69$i>>>0);
+     $$sroa$speculated$i$i$i$i$i71$i = $cmp$i$i$i$i$i$i$i$i70$i ? $cond$i$i$i$i$i$i63$i : $cond$i16$i$i$i$i$i69$i;
+     $cmp$i$i$i$i$i$i72$i = ($$sroa$speculated$i$i$i$i$i71$i|0)==(0);
+     if ($cmp$i$i$i$i$i$i72$i) {
       label = 12;
      } else {
-      $16 = load4($__value_$i125$i);
-      $cond$i$i$i$i$i$i79$i = $tobool$i$i$i$i$i$i64$i ? $16 : $__value_$i125$i;
+      $16 = load4($__value_$i120$i);
+      $cond$i$i$i$i$i$i$i75$i = $tobool$i$i$i$i$i$i$i66$i ? $16 : $__value_$i120$i;
       $17 = load4($__k);
-      $cond$i$i22$i$i$i$i82$i = $tobool$i$i6$i$i$i$i70$i ? $17 : $__k;
-      $call$i$i$i$i$i83$i = (_memcmp($cond$i$i$i$i$i$i79$i,$cond$i$i22$i$i$i$i82$i,$$sroa$speculated$i$i$i$i75$i)|0);
-      $cmp$i$i$i$i84$i = ($call$i$i$i$i$i83$i|0)==(0);
-      if ($cmp$i$i$i$i84$i) {
+      $cond$i$i1$i$i$i$i$i78$i = $tobool$i$i$i$i$i$i$i$i60$i ? $17 : $__k;
+      $call$i$i$i$i$i$i79$i = (_memcmp($cond$i$i$i$i$i$i$i75$i,$cond$i$i1$i$i$i$i$i78$i,$$sroa$speculated$i$i$i$i$i71$i)|0);
+      $cmp$i$i$i$i$i80$i = ($call$i$i$i$i$i$i79$i|0)==(0);
+      if ($cmp$i$i$i$i$i80$i) {
        label = 12;
       } else {
-       $cmp$i$i$i91$i = ($call$i$i$i$i$i83$i|0)<(0);
-       if ($cmp$i$i$i91$i) {
+       $cmp$i$i$i87$i = ($call$i$i$i$i$i$i79$i|0)<(0);
+       if ($cmp$i$i$i87$i) {
         $__prior$sroa$0$0$i = $11;
         break;
        }
       }
      }
      if ((label|0) == 12) {
-      $cmp8$i$i$i$i86$i = ($cond$i$i$i$i$i67$i>>>0)<($cond$i11$i$i$i$i73$i>>>0);
-      if ($cmp8$i$i$i$i86$i) {
+      $cmp7$i$i$i$i$i82$i = ($cond$i16$i$i$i$i$i69$i>>>0)<($cond$i$i$i$i$i$i63$i>>>0);
+      if ($cmp7$i$i$i$i$i82$i) {
        $__prior$sroa$0$0$i = $11;
        break;
       }
      }
-     $call22$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESM_RKT_($this,$__parent,$__k)|0);
-     $retval$2$i = $call22$i;
-     break L35;
+     $call23$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISL_EERKT_($this,$__parent,$__k)|0);
+     $retval$2$i = $call23$i;
+     break L37;
     }
    } while(0);
-   $cmp$i3 = ($$pre$i|0)==(0|0);
-   if ($cmp$i3) {
+   $cmp$i4 = ($$pre$i2|0)==(0|0);
+   if ($cmp$i4) {
     store4($__parent,$__p$0);
     $retval$2$i = $__p$0;
     break;
    } else {
     $18 = $__prior$sroa$0$0$i;
     store4($__parent,$18);
-    $__right_$i4 = ((($18)) + 4|0);
-    $retval$2$i = $__right_$i4;
+    $19 = ((($18)) + 4|0);
+    $retval$2$i = $19;
     break;
    }
   }
  } while(0);
- $30 = load4($retval$2$i);
- $cmp = ($30|0)==(0|0);
+ $34 = load4($retval$2$i);
+ $cmp = ($34|0)==(0|0);
  if (!($cmp)) {
   STACKTOP = sp;return;
  }
  $call$i$i$i$i = (__Znwj(32)|0);
- $first$i$i$i$i$i = ((($call$i$i$i$i)) + 16|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($first$i$i$i$i$i,$__args);
+ $__cc$i$i = ((($call$i$i$i$i)) + 16|0);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($__cc$i$i,$__args);
  $handle$i$i$i$i$i$i = ((($call$i$i$i$i)) + 28|0);
  $handle2$i$i$i$i$i$i = ((($__args)) + 12|0);
- $31 = load4($handle2$i$i$i$i$i$i);
- store4($handle$i$i$i$i$i$i,$31);
- __emval_incref(($31|0));
- $32 = load4($__parent);
+ $35 = load4($handle2$i$i$i$i$i$i);
+ store4($handle$i$i$i$i$i$i,$35);
+ __emval_incref(($35|0));
+ $36 = load4($__parent);
  store4($call$i$i$i$i,0);
  $__right_$i = ((($call$i$i$i$i)) + 4|0);
  store4($__right_$i,0);
  $__parent_$i = ((($call$i$i$i$i)) + 8|0);
- store4($__parent_$i,$32);
+ store4($__parent_$i,$36);
  store4($retval$2$i,$call$i$i$i$i);
- $33 = load4($this);
- $34 = load4($33);
- $cmp$i = ($34|0)==(0|0);
+ $37 = load4($this);
+ $38 = load4($37);
+ $cmp$i = ($38|0)==(0|0);
  if ($cmp$i) {
-  $37 = $call$i$i$i$i;
+  $41 = $call$i$i$i$i;
  } else {
-  $35 = $34;
-  store4($this,$35);
-  $$pre$i7 = load4($retval$2$i);
-  $37 = $$pre$i7;
+  $39 = $38;
+  store4($this,$39);
+  $$pre$i = load4($retval$2$i);
+  $41 = $$pre$i;
  }
  $__left_7$i = ((($this)) + 4|0);
- $36 = load4($__left_7$i);
- __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($36,$37);
- $__first_$i$i$i$i8 = ((($this)) + 8|0);
- $38 = load4($__first_$i$i$i$i8);
- $inc$i = (($38) + 1)|0;
- store4($__first_$i$i$i$i8,$inc$i);
+ $40 = load4($__left_7$i);
+ __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($40,$41);
+ $__first_$i$i$i$i7 = ((($this)) + 8|0);
+ $42 = load4($__first_$i$i$i$i7);
+ $inc$i = (($42) + 1)|0;
+ store4($__first_$i$i$i$i7,$inc$i);
  STACKTOP = sp;return;
 }
 function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE30__emplace_hint_unique_key_argsIS7_JRKNS_4pairIKS7_SC_EEEEENS_15__tree_iteratorISD_PNS_11__tree_nodeISD_PvEEiEENS_21__tree_const_iteratorISD_SU_iEERKT_DpOT0_($this,$__p$0,$__k,$__args) {
@@ -1978,17 +2081,19 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
  $__p$0 = $__p$0|0;
  $__k = $__k|0;
  $__args = $__args|0;
- var $$pre$i = 0, $$pre$i7 = 0, $$sroa$speculated$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i106$i = 0, $$sroa$speculated$i$i$i$i39$i = 0, $$sroa$speculated$i$i$i$i75$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0;
+ var $$pre$i = 0, $$pre$i2 = 0, $$sroa$speculated$i$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i102$i = 0, $$sroa$speculated$i$i$i$i$i37$i = 0, $$sroa$speculated$i$i$i$i$i71$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0;
  var $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0;
- var $4 = 0, $40 = 0, $41 = 0, $42 = 0, $43 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__f_$i$i$i$i$i$i = 0, $__f_16$i$i$i$i$i$i = 0, $__f_2$i$i$i$i$i$i = 0, $__f_8$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i8 = 0, $__left_7$i = 0, $__parent = 0, $__parent_$i = 0, $__parent_$i$i$i$i = 0;
- var $__parent_$i$i$i$i$i$i$i = 0, $__prior$sroa$0$0$i = 0, $__right_$i = 0, $__right_$i$i$i$i = 0, $__right_$i4 = 0, $__size_$i$i$i$i$i$i63$i = 0, $__size_$i$i$i$i$i$i94$i = 0, $__size_$i$i5$i$i$i$i$i = 0, $__size_$i$i5$i$i$i$i100$i = 0, $__size_$i$i5$i$i$i$i69$i = 0, $__size_$i3$i$i$i$i$i65$i = 0, $__size_$i3$i$i$i$i$i96$i = 0, $__size_$i3$i7$i$i$i$i$i = 0, $__size_$i3$i7$i$i$i$i102$i = 0, $__size_$i3$i7$i$i$i$i71$i = 0, $__value_$i$i = 0, $__value_$i125$i = 0, $__value_$i61$i = 0, $__x$addr$0$i$i$i = 0, $__x$addr$0$i$i$i$i = 0;
- var $__x$addr$0$i$i$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i$i = 0, $call$i$i$i$i = 0, $call$i$i$i$i$i$i = 0, $call$i$i$i$i$i114$i = 0, $call$i$i$i$i$i47$i = 0, $call$i$i$i$i$i83$i = 0, $call15$i2$i$i$i$i$i = 0, $call22$i = 0, $call52$i = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i105$i = 0;
- var $cmp$i$i$i$i$i$i$i38$i = 0, $cmp$i$i$i$i$i$i$i74$i = 0, $cmp$i$i$i$i$i$i5 = 0, $cmp$i$i$i$i$i107$i = 0, $cmp$i$i$i$i$i25$i = 0, $cmp$i$i$i$i$i40$i = 0, $cmp$i$i$i$i$i76$i = 0, $cmp$i$i$i$i115$i = 0, $cmp$i$i$i$i48$i = 0, $cmp$i$i$i$i84$i = 0, $cmp$i$i$i122$i = 0, $cmp$i$i$i126$i = 0, $cmp$i$i$i55$i = 0, $cmp$i$i$i91$i = 0, $cmp$i130$i = 0, $cmp$i21$i = 0, $cmp$i3 = 0, $cmp$i4$i$i$i = 0, $cmp$i5$i$i$i$i$i$i = 0, $cmp5$i$i$i$i$i$i = 0;
- var $cmp8$i$i$i$i$i = 0, $cmp8$i$i$i$i117$i = 0, $cmp8$i$i$i$i86$i = 0, $cond$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i110$i = 0, $cond$i$i$i$i$i$i43$i = 0, $cond$i$i$i$i$i$i79$i = 0, $cond$i$i$i$i$i67$i = 0, $cond$i$i$i$i$i98$i = 0, $cond$i$i22$i$i$i$i$i = 0, $cond$i$i22$i$i$i$i113$i = 0, $cond$i$i22$i$i$i$i46$i = 0, $cond$i$i22$i$i$i$i82$i = 0, $cond$i11$i$i$i$i$i = 0, $cond$i11$i$i$i$i104$i = 0, $cond$i11$i$i$i$i73$i = 0, $conv$i$i$i$i$i$i66$i = 0, $conv$i$i$i$i$i$i97$i = 0, $conv$i$i9$i$i$i$i$i = 0, $conv$i$i9$i$i$i$i103$i = 0;
- var $conv$i$i9$i$i$i$i72$i = 0, $first$i$i$i$i$i = 0, $inc$i = 0, $retval$0$i$i$i = 0, $retval$0$i$i$i$i$i$i = 0, $retval$2$i = 0, $second$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i64$i = 0, $tobool$i$i$i$i$i$i95$i = 0, $tobool$i$i6$i$i$i$i$i = 0, $tobool$i$i6$i$i$i$i101$i = 0, $tobool$i$i6$i$i$i$i70$i = 0, $vfn$i$i$i$i$i$i = 0, $vfn14$i$i$i$i$i$i = 0, $vtable$i$i$i$i$i$i = 0, $vtable13$i$i$i$i$i$i = 0, label = 0, sp = 0;
+ var $4 = 0, $40 = 0, $41 = 0, $42 = 0, $43 = 0, $44 = 0, $45 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__cc$i$i = 0, $__dummy$sroa$0 = 0, $__f_$i$i$i$i$i$i = 0, $__f_16$i$i$i$i$i$i = 0, $__f_2$i$i$i$i$i$i = 0, $__f_8$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i8 = 0;
+ var $__left_7$i = 0, $__parent = 0, $__parent_$i = 0, $__parent_$i4$i$i$i$i$i$i = 0, $__parent_$i410$i$i$i$i$i$i = 0, $__parent_$i47$i$i$i$i$i$i = 0, $__parent_$i5$i$i$i = 0, $__prior$sroa$0$0$i = 0, $__right_$i = 0, $__right_$i$i$i$i = 0, $__size_$i$i$i$i$i$i$i$i$i = 0, $__size_$i$i$i$i$i$i$i$i59$i = 0, $__size_$i$i$i$i$i$i$i$i90$i = 0, $__size_$i$i$i$i$i$i$i65$i = 0, $__size_$i$i$i$i$i$i$i96$i = 0, $__size_$i3$i$i$i$i$i$i$i = 0, $__size_$i3$i$i$i$i$i$i61$i = 0, $__size_$i3$i$i$i$i$i$i92$i = 0, $__size_$i3$i$i2$i$i$i$i67$i = 0, $__size_$i3$i$i2$i$i$i$i98$i = 0;
+ var $__value_$i$i = 0, $__value_$i120$i = 0, $__value_$i57$i = 0, $__x$addr$0$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i$i = 0, $__xx$0$i$i$i = 0, $call$i$i$i$i = 0, $call$i$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i110$i = 0, $call$i$i$i$i$i$i45$i = 0, $call$i$i$i$i$i$i79$i = 0, $call15$i2$i$i$i$i$i = 0, $call23$i = 0, $call54$i = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0;
+ var $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i101$i = 0, $cmp$i$i$i$i$i$i$i$i36$i = 0, $cmp$i$i$i$i$i$i$i$i70$i = 0, $cmp$i$i$i$i$i$i103$i = 0, $cmp$i$i$i$i$i$i23$i = 0, $cmp$i$i$i$i$i$i38$i = 0, $cmp$i$i$i$i$i$i5 = 0, $cmp$i$i$i$i$i$i72$i = 0, $cmp$i$i$i$i$i111$i = 0, $cmp$i$i$i$i$i22$i = 0, $cmp$i$i$i$i$i46$i = 0, $cmp$i$i$i$i$i80$i = 0, $cmp$i$i$i118$i = 0, $cmp$i$i$i122$i = 0, $cmp$i$i$i53$i = 0, $cmp$i$i$i87$i = 0, $cmp$i126$i = 0, $cmp$i18$i = 0;
+ var $cmp$i4 = 0, $cmp$i6$i$i$i = 0, $cmp$i6$i$i$i$i$i$i = 0, $cmp$i69$i$i$i$i$i$i = 0, $cmp5$i$i$i$i$i$i = 0, $cmp7$i$i$i$i$i$i = 0, $cmp7$i$i$i$i$i113$i = 0, $cmp7$i$i$i$i$i82$i = 0, $cond$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i$i106$i = 0, $cond$i$i$i$i$i$i$i41$i = 0, $cond$i$i$i$i$i$i$i75$i = 0, $cond$i$i$i$i$i$i63$i = 0, $cond$i$i$i$i$i$i94$i = 0, $cond$i$i1$i$i$i$i$i$i = 0, $cond$i$i1$i$i$i$i$i109$i = 0, $cond$i$i1$i$i$i$i$i44$i = 0, $cond$i$i1$i$i$i$i$i78$i = 0, $cond$i16$i$i$i$i$i100$i = 0;
+ var $cond$i16$i$i$i$i$i69$i = 0, $conv$i$i$i$i$i$i$i$i = 0, $conv$i$i$i$i$i$i$i62$i = 0, $conv$i$i$i$i$i$i$i93$i = 0, $conv$i$i$i4$i$i$i$i68$i = 0, $conv$i$i$i4$i$i$i$i99$i = 0, $inc$i = 0, $retval$0$i$i$i = 0, $retval$0$i$i$i$i$i$i = 0, $retval$2$i = 0, $second$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i$i$i60$i = 0, $tobool$i$i$i$i$i$i$i$i91$i = 0, $tobool$i$i$i$i$i$i$i66$i = 0, $tobool$i$i$i$i$i$i$i97$i = 0, $vfn$i$i$i$i$i$i = 0, $vfn14$i$i$i$i$i$i = 0, $vtable$i$i$i$i$i$i = 0, $vtable13$i$i$i$i$i$i = 0;
+ var label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
- $__parent = sp;
+ $__parent = sp + 4|0;
+ $__dummy$sroa$0 = sp;
  $__first_$i$i$i$i$i = ((($this)) + 4|0);
  $cmp$i$i = ($__first_$i$i$i$i$i|0)==($__p$0|0);
  $0 = $__p$0;
@@ -1996,157 +2101,167 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
   if ($cmp$i$i) {
    label = 6;
   } else {
-   $__value_$i61$i = ((($__p$0)) + 16|0);
-   $__size_$i$i$i$i$i$i94$i = ((($__k)) + 11|0);
-   $1 = load1($__size_$i$i$i$i$i$i94$i);
-   $tobool$i$i$i$i$i$i95$i = ($1<<24>>24)<(0);
-   $__size_$i3$i$i$i$i$i96$i = ((($__k)) + 4|0);
-   $2 = load4($__size_$i3$i$i$i$i$i96$i);
-   $conv$i$i$i$i$i$i97$i = $1&255;
-   $cond$i$i$i$i$i98$i = $tobool$i$i$i$i$i$i95$i ? $2 : $conv$i$i$i$i$i$i97$i;
-   $__size_$i$i5$i$i$i$i100$i = ((($__value_$i61$i)) + 11|0);
-   $3 = load1($__size_$i$i5$i$i$i$i100$i);
-   $tobool$i$i6$i$i$i$i101$i = ($3<<24>>24)<(0);
-   $__size_$i3$i7$i$i$i$i102$i = ((($__p$0)) + 20|0);
-   $4 = load4($__size_$i3$i7$i$i$i$i102$i);
-   $conv$i$i9$i$i$i$i103$i = $3&255;
-   $cond$i11$i$i$i$i104$i = $tobool$i$i6$i$i$i$i101$i ? $4 : $conv$i$i9$i$i$i$i103$i;
-   $cmp$i$i$i$i$i$i$i105$i = ($cond$i11$i$i$i$i104$i>>>0)<($cond$i$i$i$i$i98$i>>>0);
-   $$sroa$speculated$i$i$i$i106$i = $cmp$i$i$i$i$i$i$i105$i ? $cond$i11$i$i$i$i104$i : $cond$i$i$i$i$i98$i;
-   $cmp$i$i$i$i$i107$i = ($$sroa$speculated$i$i$i$i106$i|0)==(0);
-   if ($cmp$i$i$i$i$i107$i) {
+   $__value_$i57$i = ((($__p$0)) + 16|0);
+   $__size_$i$i$i$i$i$i$i$i90$i = ((($__value_$i57$i)) + 11|0);
+   $1 = load1($__size_$i$i$i$i$i$i$i$i90$i);
+   $tobool$i$i$i$i$i$i$i$i91$i = ($1<<24>>24)<(0);
+   $__size_$i3$i$i$i$i$i$i92$i = ((($__p$0)) + 20|0);
+   $2 = load4($__size_$i3$i$i$i$i$i$i92$i);
+   $conv$i$i$i$i$i$i$i93$i = $1&255;
+   $cond$i$i$i$i$i$i94$i = $tobool$i$i$i$i$i$i$i$i91$i ? $2 : $conv$i$i$i$i$i$i$i93$i;
+   $__size_$i$i$i$i$i$i$i96$i = ((($__k)) + 11|0);
+   $3 = load1($__size_$i$i$i$i$i$i$i96$i);
+   $tobool$i$i$i$i$i$i$i97$i = ($3<<24>>24)<(0);
+   $__size_$i3$i$i2$i$i$i$i98$i = ((($__k)) + 4|0);
+   $4 = load4($__size_$i3$i$i2$i$i$i$i98$i);
+   $conv$i$i$i4$i$i$i$i99$i = $3&255;
+   $cond$i16$i$i$i$i$i100$i = $tobool$i$i$i$i$i$i$i97$i ? $4 : $conv$i$i$i4$i$i$i$i99$i;
+   $cmp$i$i$i$i$i$i$i$i101$i = ($cond$i$i$i$i$i$i94$i>>>0)<($cond$i16$i$i$i$i$i100$i>>>0);
+   $$sroa$speculated$i$i$i$i$i102$i = $cmp$i$i$i$i$i$i$i$i101$i ? $cond$i$i$i$i$i$i94$i : $cond$i16$i$i$i$i$i100$i;
+   $cmp$i$i$i$i$i$i103$i = ($$sroa$speculated$i$i$i$i$i102$i|0)==(0);
+   if ($cmp$i$i$i$i$i$i103$i) {
     label = 4;
    } else {
     $5 = load4($__k);
-    $cond$i$i$i$i$i$i110$i = $tobool$i$i$i$i$i$i95$i ? $5 : $__k;
-    $6 = load4($__value_$i61$i);
-    $cond$i$i22$i$i$i$i113$i = $tobool$i$i6$i$i$i$i101$i ? $6 : $__value_$i61$i;
-    $call$i$i$i$i$i114$i = (_memcmp($cond$i$i$i$i$i$i110$i,$cond$i$i22$i$i$i$i113$i,$$sroa$speculated$i$i$i$i106$i)|0);
-    $cmp$i$i$i$i115$i = ($call$i$i$i$i$i114$i|0)==(0);
-    if ($cmp$i$i$i$i115$i) {
+    $cond$i$i$i$i$i$i$i106$i = $tobool$i$i$i$i$i$i$i97$i ? $5 : $__k;
+    $6 = load4($__value_$i57$i);
+    $cond$i$i1$i$i$i$i$i109$i = $tobool$i$i$i$i$i$i$i$i91$i ? $6 : $__value_$i57$i;
+    $call$i$i$i$i$i$i110$i = (_memcmp($cond$i$i$i$i$i$i$i106$i,$cond$i$i1$i$i$i$i$i109$i,$$sroa$speculated$i$i$i$i$i102$i)|0);
+    $cmp$i$i$i$i$i111$i = ($call$i$i$i$i$i$i110$i|0)==(0);
+    if ($cmp$i$i$i$i$i111$i) {
      label = 4;
     } else {
-     $cmp$i$i$i122$i = ($call$i$i$i$i$i114$i|0)<(0);
-     if ($cmp$i$i$i122$i) {
+     $cmp$i$i$i118$i = ($call$i$i$i$i$i$i110$i|0)<(0);
+     if ($cmp$i$i$i118$i) {
       label = 6;
       break;
      }
     }
    }
    if ((label|0) == 4) {
-    $cmp8$i$i$i$i117$i = ($cond$i$i$i$i$i98$i>>>0)<($cond$i11$i$i$i$i104$i>>>0);
-    if ($cmp8$i$i$i$i117$i) {
+    $cmp7$i$i$i$i$i113$i = ($cond$i16$i$i$i$i$i100$i>>>0)<($cond$i$i$i$i$i$i94$i>>>0);
+    if ($cmp7$i$i$i$i$i113$i) {
      label = 6;
      break;
     }
    }
-   $cmp$i$i$i$i$i$i$i38$i = ($cond$i$i$i$i$i98$i>>>0)<($cond$i11$i$i$i$i104$i>>>0);
-   $$sroa$speculated$i$i$i$i39$i = $cmp$i$i$i$i$i$i$i38$i ? $cond$i$i$i$i$i98$i : $cond$i11$i$i$i$i104$i;
-   $cmp$i$i$i$i$i40$i = ($$sroa$speculated$i$i$i$i39$i|0)==(0);
-   if ($cmp$i$i$i$i$i40$i) {
-    label = 21;
+   $cmp$i$i$i$i$i$i$i$i36$i = ($cond$i16$i$i$i$i$i100$i>>>0)<($cond$i$i$i$i$i$i94$i>>>0);
+   $$sroa$speculated$i$i$i$i$i37$i = $cmp$i$i$i$i$i$i$i$i36$i ? $cond$i16$i$i$i$i$i100$i : $cond$i$i$i$i$i$i94$i;
+   $cmp$i$i$i$i$i$i38$i = ($$sroa$speculated$i$i$i$i$i37$i|0)==(0);
+   if ($cmp$i$i$i$i$i$i38$i) {
+    label = 20;
    } else {
-    $21 = load4($__value_$i61$i);
-    $cond$i$i$i$i$i$i43$i = $tobool$i$i6$i$i$i$i101$i ? $21 : $__value_$i61$i;
-    $22 = load4($__k);
-    $cond$i$i22$i$i$i$i46$i = $tobool$i$i$i$i$i$i95$i ? $22 : $__k;
-    $call$i$i$i$i$i47$i = (_memcmp($cond$i$i$i$i$i$i43$i,$cond$i$i22$i$i$i$i46$i,$$sroa$speculated$i$i$i$i39$i)|0);
-    $cmp$i$i$i$i48$i = ($call$i$i$i$i$i47$i|0)==(0);
-    if ($cmp$i$i$i$i48$i) {
-     label = 21;
+    $20 = load4($__value_$i57$i);
+    $cond$i$i$i$i$i$i$i41$i = $tobool$i$i$i$i$i$i$i$i91$i ? $20 : $__value_$i57$i;
+    $21 = load4($__k);
+    $cond$i$i1$i$i$i$i$i44$i = $tobool$i$i$i$i$i$i$i97$i ? $21 : $__k;
+    $call$i$i$i$i$i$i45$i = (_memcmp($cond$i$i$i$i$i$i$i41$i,$cond$i$i1$i$i$i$i$i44$i,$$sroa$speculated$i$i$i$i$i37$i)|0);
+    $cmp$i$i$i$i$i46$i = ($call$i$i$i$i$i$i45$i|0)==(0);
+    if ($cmp$i$i$i$i$i46$i) {
+     label = 20;
     } else {
-     $cmp$i$i$i55$i = ($call$i$i$i$i$i47$i|0)<(0);
-     if (!($cmp$i$i$i55$i)) {
-      label = 35;
+     $cmp$i$i$i53$i = ($call$i$i$i$i$i$i45$i|0)<(0);
+     if (!($cmp$i$i$i53$i)) {
+      label = 36;
      }
     }
    }
-   if ((label|0) == 21) {
-    if (!($cmp$i$i$i$i$i$i$i105$i)) {
-     label = 35;
+   if ((label|0) == 20) {
+    if (!($cmp$i$i$i$i$i$i$i$i101$i)) {
+     label = 36;
     }
    }
-   if ((label|0) == 35) {
+   if ((label|0) == 36) {
     store4($__parent,$0);
-    $retval$2$i = $__parent;
+    store4($__dummy$sroa$0,$0);
+    $retval$2$i = $__dummy$sroa$0;
     break;
    }
-   $23 = ((($__p$0)) + 4|0);
-   $24 = load4($23);
-   $cmp$i$i$i$i$i25$i = ($24|0)==(0|0);
-   if ($cmp$i$i$i$i$i25$i) {
-    $__x$addr$0$i$i$i$i$i$i = $__p$0;
-    while(1) {
-     $__parent_$i$i$i$i$i$i$i = ((($__x$addr$0$i$i$i$i$i$i)) + 8|0);
-     $26 = load4($__parent_$i$i$i$i$i$i$i);
-     $27 = load4($26);
-     $cmp$i5$i$i$i$i$i$i = ($27|0)==($__x$addr$0$i$i$i$i$i$i|0);
-     if ($cmp$i5$i$i$i$i$i$i) {
-      $retval$0$i$i$i$i$i$i = $26;
-      break;
-     } else {
-      $__x$addr$0$i$i$i$i$i$i = $26;
+   $22 = ((($__p$0)) + 4|0);
+   $23 = load4($22);
+   $cmp$i$i$i$i$i22$i = ($23|0)==(0|0);
+   if ($cmp$i$i$i$i$i22$i) {
+    $__parent_$i47$i$i$i$i$i$i = ((($__p$0)) + 8|0);
+    $24 = load4($__parent_$i47$i$i$i$i$i$i);
+    $25 = load4($24);
+    $cmp$i69$i$i$i$i$i$i = ($25|0)==($__p$0|0);
+    if ($cmp$i69$i$i$i$i$i$i) {
+     $retval$0$i$i$i$i$i$i = $24;
+    } else {
+     $__parent_$i410$i$i$i$i$i$i = $__parent_$i47$i$i$i$i$i$i;
+     while(1) {
+      $27 = load4($__parent_$i410$i$i$i$i$i$i);
+      $__parent_$i4$i$i$i$i$i$i = ((($27)) + 8|0);
+      $28 = load4($__parent_$i4$i$i$i$i$i$i);
+      $29 = load4($28);
+      $cmp$i6$i$i$i$i$i$i = ($29|0)==($27|0);
+      if ($cmp$i6$i$i$i$i$i$i) {
+       $retval$0$i$i$i$i$i$i = $28;
+       break;
+      } else {
+       $__parent_$i410$i$i$i$i$i$i = $__parent_$i4$i$i$i$i$i$i;
+      }
      }
     }
    } else {
-    $__x$addr$0$i$i$i$i$i$i$i = $24;
+    $__x$addr$0$i$i$i$i$i$i$i = $23;
     while(1) {
-     $25 = load4($__x$addr$0$i$i$i$i$i$i$i);
-     $cmp$i$i$i$i$i$i$i = ($25|0)==(0|0);
-     if ($cmp$i$i$i$i$i$i$i) {
-      $retval$0$i$i$i$i$i$i = $__x$addr$0$i$i$i$i$i$i$i;
+     $26 = load4($__x$addr$0$i$i$i$i$i$i$i);
+     $cmp$i$i$i$i$i$i23$i = ($26|0)==(0|0);
+     if ($cmp$i$i$i$i$i$i23$i) {
       break;
      } else {
-      $__x$addr$0$i$i$i$i$i$i$i = $25;
+      $__x$addr$0$i$i$i$i$i$i$i = $26;
      }
     }
+    $retval$0$i$i$i$i$i$i = $__x$addr$0$i$i$i$i$i$i$i;
    }
-   $cmp$i21$i = ($retval$0$i$i$i$i$i$i|0)==($__first_$i$i$i$i$i|0);
+   $cmp$i18$i = ($retval$0$i$i$i$i$i$i|0)==($__first_$i$i$i$i$i|0);
    do {
-    if (!($cmp$i21$i)) {
+    if (!($cmp$i18$i)) {
      $__value_$i$i = ((($retval$0$i$i$i$i$i$i)) + 16|0);
-     $__size_$i$i5$i$i$i$i$i = ((($__value_$i$i)) + 11|0);
-     $28 = load1($__size_$i$i5$i$i$i$i$i);
-     $tobool$i$i6$i$i$i$i$i = ($28<<24>>24)<(0);
-     $__size_$i3$i7$i$i$i$i$i = ((($retval$0$i$i$i$i$i$i)) + 20|0);
-     $29 = load4($__size_$i3$i7$i$i$i$i$i);
-     $conv$i$i9$i$i$i$i$i = $28&255;
-     $cond$i11$i$i$i$i$i = $tobool$i$i6$i$i$i$i$i ? $29 : $conv$i$i9$i$i$i$i$i;
-     $cmp$i$i$i$i$i$i$i$i = ($cond$i11$i$i$i$i$i>>>0)<($cond$i$i$i$i$i98$i>>>0);
-     $$sroa$speculated$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i ? $cond$i11$i$i$i$i$i : $cond$i$i$i$i$i98$i;
-     $cmp$i$i$i$i$i$i5 = ($$sroa$speculated$i$i$i$i$i|0)==(0);
-     if ($cmp$i$i$i$i$i$i5) {
-      label = 29;
+     $__size_$i$i$i$i$i$i$i$i$i = ((($__value_$i$i)) + 11|0);
+     $30 = load1($__size_$i$i$i$i$i$i$i$i$i);
+     $tobool$i$i$i$i$i$i$i$i$i = ($30<<24>>24)<(0);
+     $__size_$i3$i$i$i$i$i$i$i = ((($retval$0$i$i$i$i$i$i)) + 20|0);
+     $31 = load4($__size_$i3$i$i$i$i$i$i$i);
+     $conv$i$i$i$i$i$i$i$i = $30&255;
+     $cond$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i$i ? $31 : $conv$i$i$i$i$i$i$i$i;
+     $cmp$i$i$i$i$i$i$i$i$i = ($cond$i$i$i$i$i$i$i>>>0)<($cond$i16$i$i$i$i$i100$i>>>0);
+     $$sroa$speculated$i$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i$i ? $cond$i$i$i$i$i$i$i : $cond$i16$i$i$i$i$i100$i;
+     $cmp$i$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i$i|0)==(0);
+     if ($cmp$i$i$i$i$i$i$i) {
+      label = 30;
      } else {
-      $30 = load4($__k);
-      $cond$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i95$i ? $30 : $__k;
-      $31 = load4($__value_$i$i);
-      $cond$i$i22$i$i$i$i$i = $tobool$i$i6$i$i$i$i$i ? $31 : $__value_$i$i;
-      $call$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i,$cond$i$i22$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i)|0);
-      $cmp$i$i$i$i$i = ($call$i$i$i$i$i$i|0)==(0);
-      if ($cmp$i$i$i$i$i) {
-       label = 29;
+      $32 = load4($__k);
+      $cond$i$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i97$i ? $32 : $__k;
+      $33 = load4($__value_$i$i);
+      $cond$i$i1$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i$i ? $33 : $__value_$i$i;
+      $call$i$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i$i,$cond$i$i1$i$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i$i)|0);
+      $cmp$i$i$i$i$i$i5 = ($call$i$i$i$i$i$i$i|0)==(0);
+      if ($cmp$i$i$i$i$i$i5) {
+       label = 30;
       } else {
-       $cmp$i$i$i$i = ($call$i$i$i$i$i$i|0)<(0);
+       $cmp$i$i$i$i = ($call$i$i$i$i$i$i$i|0)<(0);
        if ($cmp$i$i$i$i) {
         break;
        }
       }
      }
-     if ((label|0) == 29) {
-      $cmp8$i$i$i$i$i = ($cond$i$i$i$i$i98$i>>>0)<($cond$i11$i$i$i$i$i>>>0);
-      if ($cmp8$i$i$i$i$i) {
+     if ((label|0) == 30) {
+      $cmp7$i$i$i$i$i$i = ($cond$i16$i$i$i$i$i100$i>>>0)<($cond$i$i$i$i$i$i$i>>>0);
+      if ($cmp7$i$i$i$i$i$i) {
        break;
       }
      }
-     $call52$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESP_RKT_($this,$__parent,$__k)|0);
-     $retval$2$i = $call52$i;
+     $call54$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISO_EERKT_($this,$__parent,$__k)|0);
+     $retval$2$i = $call54$i;
      break L1;
     }
    } while(0);
-   if ($cmp$i$i$i$i$i25$i) {
-    store4($__parent,$__p$0);
-    $retval$2$i = $23;
+   if ($cmp$i$i$i$i$i22$i) {
+    store4($__parent,$0);
+    $retval$2$i = $22;
     break;
    } else {
     store4($__parent,$retval$0$i$i$i$i$i$i);
@@ -2155,181 +2270,180 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
    }
   }
  } while(0);
- L35: do {
+ L37: do {
   if ((label|0) == 6) {
    $7 = load4($this);
-   $cmp$i130$i = ($7|0)==($__p$0|0);
+   $cmp$i126$i = ($7|0)==($__p$0|0);
+   $$pre$i2 = load4($__p$0);
    do {
-    if ($cmp$i130$i) {
-     $$pre$i = load4($__p$0);
-     $19 = $$pre$i;$__prior$sroa$0$0$i = $0;
+    if ($cmp$i126$i) {
+     $__prior$sroa$0$0$i = $0;
     } else {
-     $8 = load4($__p$0);
-     $cmp$i$i$i = ($8|0)==(0|0);
+     $cmp$i$i$i = ($$pre$i2|0)==(0|0);
      if ($cmp$i$i$i) {
-      $__x$addr$0$i$i$i = $__p$0;
+      $__xx$0$i$i$i = $__p$0;
       while(1) {
-       $__parent_$i$i$i$i = ((($__x$addr$0$i$i$i)) + 8|0);
-       $10 = load4($__parent_$i$i$i$i);
-       $11 = load4($10);
-       $cmp$i4$i$i$i = ($11|0)==($__x$addr$0$i$i$i|0);
-       if ($cmp$i4$i$i$i) {
-        $__x$addr$0$i$i$i = $10;
+       $__parent_$i5$i$i$i = ((($__xx$0$i$i$i)) + 8|0);
+       $9 = load4($__parent_$i5$i$i$i);
+       $10 = load4($9);
+       $cmp$i6$i$i$i = ($10|0)==($__xx$0$i$i$i|0);
+       if ($cmp$i6$i$i$i) {
+        $__xx$0$i$i$i = $9;
        } else {
-        $retval$0$i$i$i = $10;
+        $retval$0$i$i$i = $9;
         break;
        }
       }
      } else {
-      $__x$addr$0$i$i$i$i = $8;
+      $__x$addr$0$i$i$i$i = $$pre$i2;
       while(1) {
        $__right_$i$i$i$i = ((($__x$addr$0$i$i$i$i)) + 4|0);
-       $9 = load4($__right_$i$i$i$i);
-       $cmp$i$i$i126$i = ($9|0)==(0|0);
-       if ($cmp$i$i$i126$i) {
+       $8 = load4($__right_$i$i$i$i);
+       $cmp$i$i$i122$i = ($8|0)==(0|0);
+       if ($cmp$i$i$i122$i) {
         $retval$0$i$i$i = $__x$addr$0$i$i$i$i;
         break;
        } else {
-        $__x$addr$0$i$i$i$i = $9;
+        $__x$addr$0$i$i$i$i = $8;
        }
       }
      }
-     $12 = $retval$0$i$i$i;
-     $__value_$i125$i = ((($retval$0$i$i$i)) + 16|0);
-     $__size_$i$i$i$i$i$i63$i = ((($__value_$i125$i)) + 11|0);
-     $13 = load1($__size_$i$i$i$i$i$i63$i);
-     $tobool$i$i$i$i$i$i64$i = ($13<<24>>24)<(0);
-     $__size_$i3$i$i$i$i$i65$i = ((($retval$0$i$i$i)) + 20|0);
-     $14 = load4($__size_$i3$i$i$i$i$i65$i);
-     $conv$i$i$i$i$i$i66$i = $13&255;
-     $cond$i$i$i$i$i67$i = $tobool$i$i$i$i$i$i64$i ? $14 : $conv$i$i$i$i$i$i66$i;
-     $__size_$i$i5$i$i$i$i69$i = ((($__k)) + 11|0);
-     $15 = load1($__size_$i$i5$i$i$i$i69$i);
-     $tobool$i$i6$i$i$i$i70$i = ($15<<24>>24)<(0);
-     $__size_$i3$i7$i$i$i$i71$i = ((($__k)) + 4|0);
-     $16 = load4($__size_$i3$i7$i$i$i$i71$i);
-     $conv$i$i9$i$i$i$i72$i = $15&255;
-     $cond$i11$i$i$i$i73$i = $tobool$i$i6$i$i$i$i70$i ? $16 : $conv$i$i9$i$i$i$i72$i;
-     $cmp$i$i$i$i$i$i$i74$i = ($cond$i11$i$i$i$i73$i>>>0)<($cond$i$i$i$i$i67$i>>>0);
-     $$sroa$speculated$i$i$i$i75$i = $cmp$i$i$i$i$i$i$i74$i ? $cond$i11$i$i$i$i73$i : $cond$i$i$i$i$i67$i;
-     $cmp$i$i$i$i$i76$i = ($$sroa$speculated$i$i$i$i75$i|0)==(0);
-     if ($cmp$i$i$i$i$i76$i) {
-      label = 13;
+     $11 = $retval$0$i$i$i;
+     $__value_$i120$i = ((($retval$0$i$i$i)) + 16|0);
+     $__size_$i$i$i$i$i$i$i$i59$i = ((($__k)) + 11|0);
+     $12 = load1($__size_$i$i$i$i$i$i$i$i59$i);
+     $tobool$i$i$i$i$i$i$i$i60$i = ($12<<24>>24)<(0);
+     $__size_$i3$i$i$i$i$i$i61$i = ((($__k)) + 4|0);
+     $13 = load4($__size_$i3$i$i$i$i$i$i61$i);
+     $conv$i$i$i$i$i$i$i62$i = $12&255;
+     $cond$i$i$i$i$i$i63$i = $tobool$i$i$i$i$i$i$i$i60$i ? $13 : $conv$i$i$i$i$i$i$i62$i;
+     $__size_$i$i$i$i$i$i$i65$i = ((($__value_$i120$i)) + 11|0);
+     $14 = load1($__size_$i$i$i$i$i$i$i65$i);
+     $tobool$i$i$i$i$i$i$i66$i = ($14<<24>>24)<(0);
+     $__size_$i3$i$i2$i$i$i$i67$i = ((($retval$0$i$i$i)) + 20|0);
+     $15 = load4($__size_$i3$i$i2$i$i$i$i67$i);
+     $conv$i$i$i4$i$i$i$i68$i = $14&255;
+     $cond$i16$i$i$i$i$i69$i = $tobool$i$i$i$i$i$i$i66$i ? $15 : $conv$i$i$i4$i$i$i$i68$i;
+     $cmp$i$i$i$i$i$i$i$i70$i = ($cond$i$i$i$i$i$i63$i>>>0)<($cond$i16$i$i$i$i$i69$i>>>0);
+     $$sroa$speculated$i$i$i$i$i71$i = $cmp$i$i$i$i$i$i$i$i70$i ? $cond$i$i$i$i$i$i63$i : $cond$i16$i$i$i$i$i69$i;
+     $cmp$i$i$i$i$i$i72$i = ($$sroa$speculated$i$i$i$i$i71$i|0)==(0);
+     if ($cmp$i$i$i$i$i$i72$i) {
+      label = 12;
      } else {
-      $17 = load4($__value_$i125$i);
-      $cond$i$i$i$i$i$i79$i = $tobool$i$i$i$i$i$i64$i ? $17 : $__value_$i125$i;
-      $18 = load4($__k);
-      $cond$i$i22$i$i$i$i82$i = $tobool$i$i6$i$i$i$i70$i ? $18 : $__k;
-      $call$i$i$i$i$i83$i = (_memcmp($cond$i$i$i$i$i$i79$i,$cond$i$i22$i$i$i$i82$i,$$sroa$speculated$i$i$i$i75$i)|0);
-      $cmp$i$i$i$i84$i = ($call$i$i$i$i$i83$i|0)==(0);
-      if ($cmp$i$i$i$i84$i) {
-       label = 13;
+      $16 = load4($__value_$i120$i);
+      $cond$i$i$i$i$i$i$i75$i = $tobool$i$i$i$i$i$i$i66$i ? $16 : $__value_$i120$i;
+      $17 = load4($__k);
+      $cond$i$i1$i$i$i$i$i78$i = $tobool$i$i$i$i$i$i$i$i60$i ? $17 : $__k;
+      $call$i$i$i$i$i$i79$i = (_memcmp($cond$i$i$i$i$i$i$i75$i,$cond$i$i1$i$i$i$i$i78$i,$$sroa$speculated$i$i$i$i$i71$i)|0);
+      $cmp$i$i$i$i$i80$i = ($call$i$i$i$i$i$i79$i|0)==(0);
+      if ($cmp$i$i$i$i$i80$i) {
+       label = 12;
       } else {
-       $cmp$i$i$i91$i = ($call$i$i$i$i$i83$i|0)<(0);
-       if ($cmp$i$i$i91$i) {
-        $19 = $8;$__prior$sroa$0$0$i = $12;
+       $cmp$i$i$i87$i = ($call$i$i$i$i$i$i79$i|0)<(0);
+       if ($cmp$i$i$i87$i) {
+        $__prior$sroa$0$0$i = $11;
         break;
        }
       }
      }
-     if ((label|0) == 13) {
-      $cmp8$i$i$i$i86$i = ($cond$i$i$i$i$i67$i>>>0)<($cond$i11$i$i$i$i73$i>>>0);
-      if ($cmp8$i$i$i$i86$i) {
-       $19 = $8;$__prior$sroa$0$0$i = $12;
+     if ((label|0) == 12) {
+      $cmp7$i$i$i$i$i82$i = ($cond$i16$i$i$i$i$i69$i>>>0)<($cond$i$i$i$i$i$i63$i>>>0);
+      if ($cmp7$i$i$i$i$i82$i) {
+       $__prior$sroa$0$0$i = $11;
        break;
       }
      }
-     $call22$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESP_RKT_($this,$__parent,$__k)|0);
-     $retval$2$i = $call22$i;
-     break L35;
+     $call23$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISO_EERKT_($this,$__parent,$__k)|0);
+     $retval$2$i = $call23$i;
+     break L37;
     }
    } while(0);
-   $cmp$i3 = ($19|0)==(0|0);
-   if ($cmp$i3) {
+   $cmp$i4 = ($$pre$i2|0)==(0|0);
+   if ($cmp$i4) {
     store4($__parent,$__p$0);
     $retval$2$i = $__p$0;
     break;
    } else {
-    $20 = $__prior$sroa$0$0$i;
-    store4($__parent,$20);
-    $__right_$i4 = ((($20)) + 4|0);
-    $retval$2$i = $__right_$i4;
+    $18 = $__prior$sroa$0$0$i;
+    store4($__parent,$18);
+    $19 = ((($18)) + 4|0);
+    $retval$2$i = $19;
     break;
    }
   }
  } while(0);
- $32 = load4($retval$2$i);
- $cmp = ($32|0)==(0|0);
+ $34 = load4($retval$2$i);
+ $cmp = ($34|0)==(0|0);
  if (!($cmp)) {
   STACKTOP = sp;return;
  }
  $call$i$i$i$i = (__Znwj(56)|0);
- $first$i$i$i$i$i = ((($call$i$i$i$i)) + 16|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($first$i$i$i$i$i,$__args);
+ $__cc$i$i = ((($call$i$i$i$i)) + 16|0);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($__cc$i$i,$__args);
  $second$i$i$i$i$i = ((($call$i$i$i$i)) + 32|0);
  $__f_$i$i$i$i$i$i = ((($__args)) + 32|0);
- $33 = load4($__f_$i$i$i$i$i$i);
- $cmp$i$i$i$i$i$i = ($33|0)==(0|0);
+ $35 = load4($__f_$i$i$i$i$i$i);
+ $cmp$i$i$i$i$i$i = ($35|0)==(0|0);
  do {
   if ($cmp$i$i$i$i$i$i) {
    $__f_2$i$i$i$i$i$i = ((($call$i$i$i$i)) + 48|0);
    store4($__f_2$i$i$i$i$i$i,0);
   } else {
-   $34 = ((($__args)) + 16|0);
-   $cmp5$i$i$i$i$i$i = ($33|0)==($34|0);
+   $36 = ((($__args)) + 16|0);
+   $cmp5$i$i$i$i$i$i = ($35|0)==($36|0);
    if ($cmp5$i$i$i$i$i$i) {
     $__f_8$i$i$i$i$i$i = ((($call$i$i$i$i)) + 48|0);
     store4($__f_8$i$i$i$i$i$i,$second$i$i$i$i$i);
-    $vtable$i$i$i$i$i$i = load4($33);
+    $vtable$i$i$i$i$i$i = load4($35);
     $vfn$i$i$i$i$i$i = ((($vtable$i$i$i$i$i$i)) + 12|0);
-    $35 = load4($vfn$i$i$i$i$i$i);
-    FUNCTION_TABLE_vii[$35 & 3]($33,$second$i$i$i$i$i);
+    $37 = load4($vfn$i$i$i$i$i$i);
+    FUNCTION_TABLE_vii[$37 & 3]($35,$second$i$i$i$i$i);
     break;
    } else {
-    $vtable13$i$i$i$i$i$i = load4($33);
+    $vtable13$i$i$i$i$i$i = load4($35);
     $vfn14$i$i$i$i$i$i = ((($vtable13$i$i$i$i$i$i)) + 8|0);
-    $36 = load4($vfn14$i$i$i$i$i$i);
-    $call15$i2$i$i$i$i$i = (FUNCTION_TABLE_ii[$36 & 31]($33)|0);
+    $38 = load4($vfn14$i$i$i$i$i$i);
+    $call15$i2$i$i$i$i$i = (FUNCTION_TABLE_ii[$38 & 31]($35)|0);
     $__f_16$i$i$i$i$i$i = ((($call$i$i$i$i)) + 48|0);
     store4($__f_16$i$i$i$i$i$i,$call15$i2$i$i$i$i$i);
     break;
    }
   }
  } while(0);
- $37 = load4($__parent);
+ $39 = load4($__parent);
  store4($call$i$i$i$i,0);
  $__right_$i = ((($call$i$i$i$i)) + 4|0);
  store4($__right_$i,0);
  $__parent_$i = ((($call$i$i$i$i)) + 8|0);
- store4($__parent_$i,$37);
+ store4($__parent_$i,$39);
  store4($retval$2$i,$call$i$i$i$i);
- $38 = load4($this);
- $39 = load4($38);
- $cmp$i = ($39|0)==(0|0);
+ $40 = load4($this);
+ $41 = load4($40);
+ $cmp$i = ($41|0)==(0|0);
  if ($cmp$i) {
-  $42 = $call$i$i$i$i;
+  $44 = $call$i$i$i$i;
  } else {
-  $40 = $39;
-  store4($this,$40);
-  $$pre$i7 = load4($retval$2$i);
-  $42 = $$pre$i7;
+  $42 = $41;
+  store4($this,$42);
+  $$pre$i = load4($retval$2$i);
+  $44 = $$pre$i;
  }
  $__left_7$i = ((($this)) + 4|0);
- $41 = load4($__left_7$i);
- __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($41,$42);
+ $43 = load4($__left_7$i);
+ __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($43,$44);
  $__first_$i$i$i$i8 = ((($this)) + 8|0);
- $43 = load4($__first_$i$i$i$i8);
- $inc$i = (($43) + 1)|0;
+ $45 = load4($__first_$i$i$i$i8);
+ $inc$i = (($45) + 1)|0;
  store4($__first_$i$i$i$i8,$inc$i);
  STACKTOP = sp;return;
 }
-function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESP_RKT_($this,$__parent,$__v) {
+function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISO_EERKT_($this,$__parent,$__v) {
  $this = $this|0;
  $__parent = $__parent|0;
  $__v = $__v|0;
- var $$sink = 0, $$sroa$speculated$i$i$i$i = 0, $$sroa$speculated$i$i$i$i30 = 0, $0 = 0, $1 = 0, $10 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i = 0, $__nd$0 = 0, $__size_$i$i$i$i$i$i18 = 0, $__size_$i$i5$i$i$i$i24 = 0, $__size_$i3$i$i$i$i$i20 = 0, $__size_$i3$i7$i$i$i$i26 = 0;
- var $__value_ = 0, $call$i$i$i$i$i = 0, $call$i$i$i$i$i38 = 0, $cmp = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i29 = 0, $cmp$i$i$i$i$i31 = 0, $cmp$i$i$i$i39 = 0, $cmp$i$i$i46 = 0, $cmp14 = 0, $cmp5 = 0, $cmp8$i$i$i$i41 = 0, $cond$i$i$i$i$i$i = 0, $cond$i$i$i$i$i22 = 0, $cond$i$i22$i$i$i$i = 0, $cond$i$i22$i$i$i$i37 = 0, $cond$i11$i$i$i$i28 = 0;
- var $conv$i$i$i$i$i$i21 = 0, $conv$i$i9$i$i$i$i27 = 0, $retval$0 = 0, $tobool$i$i$i$i$i$i19 = 0, $tobool$i$i6$i$i$i$i25 = 0, label = 0, sp = 0;
+ var $$sroa$speculated$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i31 = 0, $0 = 0, $1 = 0, $10 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i = 0, $__left_$i = 0, $__nd$0 = 0, $__nd$0$be$in = 0, $__nd_ptr$0 = 0, $__nd_ptr$0$be = 0, $__size_$i$i$i$i$i$i$i$i19 = 0;
+ var $__size_$i$i$i$i$i$i$i25 = 0, $__size_$i3$i$i$i$i$i$i21 = 0, $__size_$i3$i$i2$i$i$i$i27 = 0, $__value_ = 0, $call$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i39 = 0, $cmp = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i30 = 0, $cmp$i$i$i$i$i$i32 = 0, $cmp$i$i$i$i$i40 = 0, $cmp$i$i$i47 = 0, $cmp17 = 0, $cmp6 = 0, $cmp7$i$i$i$i$i42 = 0, $cond$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i23 = 0;
+ var $cond$i$i1$i$i$i$i$i = 0, $cond$i$i1$i$i$i$i$i38 = 0, $cond$i16$i$i$i$i$i29 = 0, $conv$i$i$i$i$i$i$i22 = 0, $conv$i$i$i4$i$i$i$i28 = 0, $retval$0 = 0, $tobool$i$i$i$i$i$i$i$i20 = 0, $tobool$i$i$i$i$i$i$i26 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $__first_$i$i$i$i = ((($this)) + 4|0);
  $0 = load4($__first_$i$i$i$i);
@@ -2339,40 +2453,41 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
   $retval$0 = $__first_$i$i$i$i;
   return ($retval$0|0);
  }
- $__size_$i$i$i$i$i$i18 = ((($__v)) + 11|0);
- $1 = load1($__size_$i$i$i$i$i$i18);
- $tobool$i$i$i$i$i$i19 = ($1<<24>>24)<(0);
- $__size_$i3$i$i$i$i$i20 = ((($__v)) + 4|0);
- $2 = load4($__size_$i3$i$i$i$i$i20);
- $conv$i$i$i$i$i$i21 = $1&255;
- $cond$i$i$i$i$i22 = $tobool$i$i$i$i$i$i19 ? $2 : $conv$i$i$i$i$i$i21;
+ $__left_$i = ((($this)) + 4|0);
+ $__size_$i$i$i$i$i$i$i25 = ((($__v)) + 11|0);
+ $1 = load1($__size_$i$i$i$i$i$i$i25);
+ $tobool$i$i$i$i$i$i$i26 = ($1<<24>>24)<(0);
+ $__size_$i3$i$i2$i$i$i$i27 = ((($__v)) + 4|0);
+ $2 = load4($__size_$i3$i$i2$i$i$i$i27);
+ $conv$i$i$i4$i$i$i$i28 = $1&255;
+ $cond$i16$i$i$i$i$i29 = $tobool$i$i$i$i$i$i$i26 ? $2 : $conv$i$i$i4$i$i$i$i28;
  $3 = load4($__v);
- $cond$i$i22$i$i$i$i = $tobool$i$i$i$i$i$i19 ? $3 : $__v;
- $__nd$0 = $0;
+ $cond$i$i1$i$i$i$i$i = $tobool$i$i$i$i$i$i$i26 ? $3 : $__v;
+ $__nd$0 = $0;$__nd_ptr$0 = $__left_$i;
  while(1) {
   $__value_ = ((($__nd$0)) + 16|0);
-  $__size_$i$i5$i$i$i$i24 = ((($__value_)) + 11|0);
-  $4 = load1($__size_$i$i5$i$i$i$i24);
-  $tobool$i$i6$i$i$i$i25 = ($4<<24>>24)<(0);
-  $__size_$i3$i7$i$i$i$i26 = ((($__nd$0)) + 20|0);
-  $5 = load4($__size_$i3$i7$i$i$i$i26);
-  $conv$i$i9$i$i$i$i27 = $4&255;
-  $cond$i11$i$i$i$i28 = $tobool$i$i6$i$i$i$i25 ? $5 : $conv$i$i9$i$i$i$i27;
-  $cmp$i$i$i$i$i$i$i29 = ($cond$i11$i$i$i$i28>>>0)<($cond$i$i$i$i$i22>>>0);
-  $$sroa$speculated$i$i$i$i30 = $cmp$i$i$i$i$i$i$i29 ? $cond$i11$i$i$i$i28 : $cond$i$i$i$i$i22;
-  $cmp$i$i$i$i$i31 = ($$sroa$speculated$i$i$i$i30|0)==(0);
-  if ($cmp$i$i$i$i$i31) {
+  $__size_$i$i$i$i$i$i$i$i19 = ((($__value_)) + 11|0);
+  $4 = load1($__size_$i$i$i$i$i$i$i$i19);
+  $tobool$i$i$i$i$i$i$i$i20 = ($4<<24>>24)<(0);
+  $__size_$i3$i$i$i$i$i$i21 = ((($__nd$0)) + 20|0);
+  $5 = load4($__size_$i3$i$i$i$i$i$i21);
+  $conv$i$i$i$i$i$i$i22 = $4&255;
+  $cond$i$i$i$i$i$i23 = $tobool$i$i$i$i$i$i$i$i20 ? $5 : $conv$i$i$i$i$i$i$i22;
+  $cmp$i$i$i$i$i$i$i$i30 = ($cond$i$i$i$i$i$i23>>>0)<($cond$i16$i$i$i$i$i29>>>0);
+  $$sroa$speculated$i$i$i$i$i31 = $cmp$i$i$i$i$i$i$i$i30 ? $cond$i$i$i$i$i$i23 : $cond$i16$i$i$i$i$i29;
+  $cmp$i$i$i$i$i$i32 = ($$sroa$speculated$i$i$i$i$i31|0)==(0);
+  if ($cmp$i$i$i$i$i$i32) {
    label = 5;
   } else {
    $6 = load4($__value_);
-   $cond$i$i22$i$i$i$i37 = $tobool$i$i6$i$i$i$i25 ? $6 : $__value_;
-   $call$i$i$i$i$i38 = (_memcmp($cond$i$i22$i$i$i$i,$cond$i$i22$i$i$i$i37,$$sroa$speculated$i$i$i$i30)|0);
-   $cmp$i$i$i$i39 = ($call$i$i$i$i$i38|0)==(0);
-   if ($cmp$i$i$i$i39) {
+   $cond$i$i1$i$i$i$i$i38 = $tobool$i$i$i$i$i$i$i$i20 ? $6 : $__value_;
+   $call$i$i$i$i$i$i39 = (_memcmp($cond$i$i1$i$i$i$i$i,$cond$i$i1$i$i$i$i$i38,$$sroa$speculated$i$i$i$i$i31)|0);
+   $cmp$i$i$i$i$i40 = ($call$i$i$i$i$i$i39|0)==(0);
+   if ($cmp$i$i$i$i$i40) {
     label = 5;
    } else {
-    $cmp$i$i$i46 = ($call$i$i$i$i$i38|0)<(0);
-    if ($cmp$i$i$i46) {
+    $cmp$i$i$i47 = ($call$i$i$i$i$i$i39|0)<(0);
+    if ($cmp$i$i$i47) {
      label = 7;
     } else {
      label = 9;
@@ -2381,8 +2496,8 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
   }
   if ((label|0) == 5) {
    label = 0;
-   $cmp8$i$i$i$i41 = ($cond$i$i$i$i$i22>>>0)<($cond$i11$i$i$i$i28>>>0);
-   if ($cmp8$i$i$i$i41) {
+   $cmp7$i$i$i$i$i42 = ($cond$i16$i$i$i$i$i29>>>0)<($cond$i$i$i$i$i$i23>>>0);
+   if ($cmp7$i$i$i$i$i42) {
     label = 7;
    } else {
     label = 9;
@@ -2391,30 +2506,30 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
   if ((label|0) == 7) {
    label = 0;
    $7 = load4($__nd$0);
-   $cmp5 = ($7|0)==(0|0);
-   if ($cmp5) {
+   $cmp6 = ($7|0)==(0|0);
+   if ($cmp6) {
     label = 8;
     break;
    } else {
-    $$sink = $7;
+    $__nd$0$be$in = $7;$__nd_ptr$0$be = $__nd$0;
    }
   }
   else if ((label|0) == 9) {
    label = 0;
-   $cmp$i$i$i$i$i$i$i = ($cond$i$i$i$i$i22>>>0)<($cond$i11$i$i$i$i28>>>0);
-   $$sroa$speculated$i$i$i$i = $cmp$i$i$i$i$i$i$i ? $cond$i$i$i$i$i22 : $cond$i11$i$i$i$i28;
-   $cmp$i$i$i$i$i = ($$sroa$speculated$i$i$i$i|0)==(0);
-   if ($cmp$i$i$i$i$i) {
+   $cmp$i$i$i$i$i$i$i$i = ($cond$i16$i$i$i$i$i29>>>0)<($cond$i$i$i$i$i$i23>>>0);
+   $$sroa$speculated$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i ? $cond$i16$i$i$i$i$i29 : $cond$i$i$i$i$i$i23;
+   $cmp$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i|0)==(0);
+   if ($cmp$i$i$i$i$i$i) {
     label = 11;
    } else {
     $8 = load4($__value_);
-    $cond$i$i$i$i$i$i = $tobool$i$i6$i$i$i$i25 ? $8 : $__value_;
-    $call$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i,$cond$i$i22$i$i$i$i,$$sroa$speculated$i$i$i$i)|0);
-    $cmp$i$i$i$i = ($call$i$i$i$i$i|0)==(0);
-    if ($cmp$i$i$i$i) {
+    $cond$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i20 ? $8 : $__value_;
+    $call$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i,$cond$i$i1$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i)|0);
+    $cmp$i$i$i$i$i = ($call$i$i$i$i$i$i|0)==(0);
+    if ($cmp$i$i$i$i$i) {
      label = 11;
     } else {
-     $cmp$i$i$i = ($call$i$i$i$i$i|0)<(0);
+     $cmp$i$i$i = ($call$i$i$i$i$i$i|0)<(0);
      if (!($cmp$i$i$i)) {
       label = 16;
       break;
@@ -2423,22 +2538,22 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
    }
    if ((label|0) == 11) {
     label = 0;
-    if (!($cmp$i$i$i$i$i$i$i29)) {
+    if (!($cmp$i$i$i$i$i$i$i$i30)) {
      label = 16;
      break;
     }
    }
    $9 = ((($__nd$0)) + 4|0);
    $10 = load4($9);
-   $cmp14 = ($10|0)==(0|0);
-   if ($cmp14) {
+   $cmp17 = ($10|0)==(0|0);
+   if ($cmp17) {
     label = 15;
     break;
    } else {
-    $$sink = $10;
+    $__nd$0$be$in = $10;$__nd_ptr$0$be = $9;
    }
   }
-  $__nd$0 = $$sink;
+  $__nd$0 = $__nd$0$be$in;$__nd_ptr$0 = $__nd_ptr$0$be;
  }
  if ((label|0) == 8) {
   store4($__parent,$__nd$0);
@@ -2452,18 +2567,18 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
  }
  else if ((label|0) == 16) {
   store4($__parent,$__nd$0);
-  $retval$0 = $__parent;
+  $retval$0 = $__nd_ptr$0;
   return ($retval$0|0);
  }
  return (0)|0;
 }
-function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESM_RKT_($this,$__parent,$__v) {
+function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISL_EERKT_($this,$__parent,$__v) {
  $this = $this|0;
  $__parent = $__parent|0;
  $__v = $__v|0;
- var $$sink = 0, $$sroa$speculated$i$i$i$i = 0, $$sroa$speculated$i$i$i$i30 = 0, $0 = 0, $1 = 0, $10 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i = 0, $__nd$0 = 0, $__size_$i$i$i$i$i$i18 = 0, $__size_$i$i5$i$i$i$i24 = 0, $__size_$i3$i$i$i$i$i20 = 0, $__size_$i3$i7$i$i$i$i26 = 0;
- var $__value_ = 0, $call$i$i$i$i$i = 0, $call$i$i$i$i$i38 = 0, $cmp = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i29 = 0, $cmp$i$i$i$i$i31 = 0, $cmp$i$i$i$i39 = 0, $cmp$i$i$i46 = 0, $cmp14 = 0, $cmp5 = 0, $cmp8$i$i$i$i41 = 0, $cond$i$i$i$i$i$i = 0, $cond$i$i$i$i$i22 = 0, $cond$i$i22$i$i$i$i = 0, $cond$i$i22$i$i$i$i37 = 0, $cond$i11$i$i$i$i28 = 0;
- var $conv$i$i$i$i$i$i21 = 0, $conv$i$i9$i$i$i$i27 = 0, $retval$0 = 0, $tobool$i$i$i$i$i$i19 = 0, $tobool$i$i6$i$i$i$i25 = 0, label = 0, sp = 0;
+ var $$in = 0, $$sroa$speculated$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i31 = 0, $0 = 0, $1 = 0, $10 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i = 0, $__left_$i = 0, $__nd$0 = 0, $__nd_ptr$0 = 0, $__nd_ptr$0$ph = 0, $__size_$i$i$i$i$i$i$i$i19 = 0;
+ var $__size_$i$i$i$i$i$i$i25 = 0, $__size_$i3$i$i$i$i$i$i21 = 0, $__size_$i3$i$i2$i$i$i$i27 = 0, $__value_ = 0, $call$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i39 = 0, $cmp = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i30 = 0, $cmp$i$i$i$i$i$i32 = 0, $cmp$i$i$i$i$i40 = 0, $cmp$i$i$i47 = 0, $cmp17 = 0, $cmp6 = 0, $cmp7$i$i$i$i$i42 = 0, $cond$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i23 = 0;
+ var $cond$i$i1$i$i$i$i$i = 0, $cond$i$i1$i$i$i$i$i38 = 0, $cond$i16$i$i$i$i$i29 = 0, $conv$i$i$i$i$i$i$i22 = 0, $conv$i$i$i4$i$i$i$i28 = 0, $retval$0 = 0, $tobool$i$i$i$i$i$i$i$i20 = 0, $tobool$i$i$i$i$i$i$i26 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $__first_$i$i$i$i = ((($this)) + 4|0);
  $0 = load4($__first_$i$i$i$i);
@@ -2473,108 +2588,109 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
   $retval$0 = $__first_$i$i$i$i;
   return ($retval$0|0);
  }
- $__size_$i$i$i$i$i$i18 = ((($__v)) + 11|0);
- $1 = load1($__size_$i$i$i$i$i$i18);
- $tobool$i$i$i$i$i$i19 = ($1<<24>>24)<(0);
- $__size_$i3$i$i$i$i$i20 = ((($__v)) + 4|0);
- $2 = load4($__size_$i3$i$i$i$i$i20);
- $conv$i$i$i$i$i$i21 = $1&255;
- $cond$i$i$i$i$i22 = $tobool$i$i$i$i$i$i19 ? $2 : $conv$i$i$i$i$i$i21;
+ $__left_$i = ((($this)) + 4|0);
+ $__size_$i$i$i$i$i$i$i25 = ((($__v)) + 11|0);
+ $1 = load1($__size_$i$i$i$i$i$i$i25);
+ $tobool$i$i$i$i$i$i$i26 = ($1<<24>>24)<(0);
+ $__size_$i3$i$i2$i$i$i$i27 = ((($__v)) + 4|0);
+ $2 = load4($__size_$i3$i$i2$i$i$i$i27);
+ $conv$i$i$i4$i$i$i$i28 = $1&255;
+ $cond$i16$i$i$i$i$i29 = $tobool$i$i$i$i$i$i$i26 ? $2 : $conv$i$i$i4$i$i$i$i28;
  $3 = load4($__v);
- $cond$i$i22$i$i$i$i = $tobool$i$i$i$i$i$i19 ? $3 : $__v;
- $__nd$0 = $0;
+ $cond$i$i1$i$i$i$i$i = $tobool$i$i$i$i$i$i$i26 ? $3 : $__v;
+ $__nd$0 = $0;$__nd_ptr$0 = $__left_$i;
  while(1) {
   $__value_ = ((($__nd$0)) + 16|0);
-  $__size_$i$i5$i$i$i$i24 = ((($__value_)) + 11|0);
-  $4 = load1($__size_$i$i5$i$i$i$i24);
-  $tobool$i$i6$i$i$i$i25 = ($4<<24>>24)<(0);
-  $__size_$i3$i7$i$i$i$i26 = ((($__nd$0)) + 20|0);
-  $5 = load4($__size_$i3$i7$i$i$i$i26);
-  $conv$i$i9$i$i$i$i27 = $4&255;
-  $cond$i11$i$i$i$i28 = $tobool$i$i6$i$i$i$i25 ? $5 : $conv$i$i9$i$i$i$i27;
-  $cmp$i$i$i$i$i$i$i29 = ($cond$i11$i$i$i$i28>>>0)<($cond$i$i$i$i$i22>>>0);
-  $$sroa$speculated$i$i$i$i30 = $cmp$i$i$i$i$i$i$i29 ? $cond$i11$i$i$i$i28 : $cond$i$i$i$i$i22;
-  $cmp$i$i$i$i$i31 = ($$sroa$speculated$i$i$i$i30|0)==(0);
-  if ($cmp$i$i$i$i$i31) {
-   label = 5;
+  $__size_$i$i$i$i$i$i$i$i19 = ((($__value_)) + 11|0);
+  $4 = load1($__size_$i$i$i$i$i$i$i$i19);
+  $tobool$i$i$i$i$i$i$i$i20 = ($4<<24>>24)<(0);
+  $__size_$i3$i$i$i$i$i$i21 = ((($__nd$0)) + 20|0);
+  $5 = load4($__size_$i3$i$i$i$i$i$i21);
+  $conv$i$i$i$i$i$i$i22 = $4&255;
+  $cond$i$i$i$i$i$i23 = $tobool$i$i$i$i$i$i$i$i20 ? $5 : $conv$i$i$i$i$i$i$i22;
+  $cmp$i$i$i$i$i$i$i$i30 = ($cond$i$i$i$i$i$i23>>>0)<($cond$i16$i$i$i$i$i29>>>0);
+  $$sroa$speculated$i$i$i$i$i31 = $cmp$i$i$i$i$i$i$i$i30 ? $cond$i$i$i$i$i$i23 : $cond$i16$i$i$i$i$i29;
+  $cmp$i$i$i$i$i$i32 = ($$sroa$speculated$i$i$i$i$i31|0)==(0);
+  if ($cmp$i$i$i$i$i$i32) {
+   label = 6;
   } else {
    $6 = load4($__value_);
-   $cond$i$i22$i$i$i$i37 = $tobool$i$i6$i$i$i$i25 ? $6 : $__value_;
-   $call$i$i$i$i$i38 = (_memcmp($cond$i$i22$i$i$i$i,$cond$i$i22$i$i$i$i37,$$sroa$speculated$i$i$i$i30)|0);
-   $cmp$i$i$i$i39 = ($call$i$i$i$i$i38|0)==(0);
-   if ($cmp$i$i$i$i39) {
-    label = 5;
+   $cond$i$i1$i$i$i$i$i38 = $tobool$i$i$i$i$i$i$i$i20 ? $6 : $__value_;
+   $call$i$i$i$i$i$i39 = (_memcmp($cond$i$i1$i$i$i$i$i,$cond$i$i1$i$i$i$i$i38,$$sroa$speculated$i$i$i$i$i31)|0);
+   $cmp$i$i$i$i$i40 = ($call$i$i$i$i$i$i39|0)==(0);
+   if ($cmp$i$i$i$i$i40) {
+    label = 6;
    } else {
-    $cmp$i$i$i46 = ($call$i$i$i$i$i38|0)<(0);
-    if ($cmp$i$i$i46) {
-     label = 7;
+    $cmp$i$i$i47 = ($call$i$i$i$i$i$i39|0)<(0);
+    if ($cmp$i$i$i47) {
+     label = 8;
     } else {
-     label = 9;
+     label = 10;
     }
    }
   }
-  if ((label|0) == 5) {
+  if ((label|0) == 6) {
    label = 0;
-   $cmp8$i$i$i$i41 = ($cond$i$i$i$i$i22>>>0)<($cond$i11$i$i$i$i28>>>0);
-   if ($cmp8$i$i$i$i41) {
-    label = 7;
+   $cmp7$i$i$i$i$i42 = ($cond$i16$i$i$i$i$i29>>>0)<($cond$i$i$i$i$i$i23>>>0);
+   if ($cmp7$i$i$i$i$i42) {
+    label = 8;
    } else {
-    label = 9;
+    label = 10;
    }
   }
-  if ((label|0) == 7) {
+  if ((label|0) == 8) {
    label = 0;
    $7 = load4($__nd$0);
-   $cmp5 = ($7|0)==(0|0);
-   if ($cmp5) {
-    label = 8;
+   $cmp6 = ($7|0)==(0|0);
+   if ($cmp6) {
+    label = 9;
     break;
    } else {
-    $$sink = $7;
+    $$in = $7;$__nd_ptr$0$ph = $__nd$0;
    }
   }
-  else if ((label|0) == 9) {
+  else if ((label|0) == 10) {
    label = 0;
-   $cmp$i$i$i$i$i$i$i = ($cond$i$i$i$i$i22>>>0)<($cond$i11$i$i$i$i28>>>0);
-   $$sroa$speculated$i$i$i$i = $cmp$i$i$i$i$i$i$i ? $cond$i$i$i$i$i22 : $cond$i11$i$i$i$i28;
-   $cmp$i$i$i$i$i = ($$sroa$speculated$i$i$i$i|0)==(0);
-   if ($cmp$i$i$i$i$i) {
-    label = 11;
+   $cmp$i$i$i$i$i$i$i$i = ($cond$i16$i$i$i$i$i29>>>0)<($cond$i$i$i$i$i$i23>>>0);
+   $$sroa$speculated$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i ? $cond$i16$i$i$i$i$i29 : $cond$i$i$i$i$i$i23;
+   $cmp$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i|0)==(0);
+   if ($cmp$i$i$i$i$i$i) {
+    label = 12;
    } else {
     $8 = load4($__value_);
-    $cond$i$i$i$i$i$i = $tobool$i$i6$i$i$i$i25 ? $8 : $__value_;
-    $call$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i,$cond$i$i22$i$i$i$i,$$sroa$speculated$i$i$i$i)|0);
-    $cmp$i$i$i$i = ($call$i$i$i$i$i|0)==(0);
-    if ($cmp$i$i$i$i) {
-     label = 11;
+    $cond$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i20 ? $8 : $__value_;
+    $call$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i,$cond$i$i1$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i)|0);
+    $cmp$i$i$i$i$i = ($call$i$i$i$i$i$i|0)==(0);
+    if ($cmp$i$i$i$i$i) {
+     label = 12;
     } else {
-     $cmp$i$i$i = ($call$i$i$i$i$i|0)<(0);
+     $cmp$i$i$i = ($call$i$i$i$i$i$i|0)<(0);
      if (!($cmp$i$i$i)) {
       label = 16;
       break;
      }
     }
    }
-   if ((label|0) == 11) {
+   if ((label|0) == 12) {
     label = 0;
-    if (!($cmp$i$i$i$i$i$i$i29)) {
+    if (!($cmp$i$i$i$i$i$i$i$i30)) {
      label = 16;
      break;
     }
    }
    $9 = ((($__nd$0)) + 4|0);
    $10 = load4($9);
-   $cmp14 = ($10|0)==(0|0);
-   if ($cmp14) {
+   $cmp17 = ($10|0)==(0|0);
+   if ($cmp17) {
     label = 15;
     break;
    } else {
-    $$sink = $10;
+    $$in = $10;$__nd_ptr$0$ph = $9;
    }
   }
-  $__nd$0 = $$sink;
+  $__nd$0 = $$in;$__nd_ptr$0 = $__nd_ptr$0$ph;
  }
- if ((label|0) == 8) {
+ if ((label|0) == 9) {
   store4($__parent,$__nd$0);
   $retval$0 = $__nd$0;
   return ($retval$0|0);
@@ -2586,7 +2702,7 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
  }
  else if ((label|0) == 16) {
   store4($__parent,$__nd$0);
-  $retval$0 = $__parent;
+  $retval$0 = $__nd_ptr$0;
   return ($retval$0|0);
  }
  return (0)|0;
@@ -2594,13 +2710,13 @@ function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traits
 function __ZN6asmdom9diffAttrsEPNS_5VNodeES1_($oldVnode,$vnode) {
  $oldVnode = $oldVnode|0;
  $vnode = $vnode|0;
- var $$pre$i$i$i = 0, $$sroa$speculated$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0;
- var $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__begin$sroa$0$085 = 0, $__begin25$sroa$0$083 = 0;
- var $__begin_node_$i$i$i70 = 0, $__cc$i = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i69 = 0, $__first_$i$i$i$i36 = 0, $__left_7$i$i$i = 0, $__parent$i$i = 0, $__parent_$i$i$i = 0, $__parent_$i$i$i$i = 0, $__parent_$i$i$i$i45 = 0, $__r$0$i$i = 0, $__right_$i$i$i = 0, $__right_$i$i$i38 = 0, $__right_$i$i$i4 = 0, $__size_$i$i$i = 0, $__size_$i$i$i$i = 0, $__size_$i$i$i$i20 = 0, $__size_$i$i$i$i53 = 0, $__size_$i$i5$i = 0;
- var $__size_$i3$i$i = 0, $__size_$i3$i7$i = 0, $__tree_$i62 = 0, $__x$addr$0$i$i$i = 0, $__x$addr$0$i$i$i$i = 0, $__x$addr$0$i$i$i$i40 = 0, $__x$addr$0$i$i$i44 = 0, $attrs = 0, $call$i = 0, $call$i$i = 0, $call$i$i$i$i$i$i = 0, $call$i$i2 = 0, $call$i63 = 0, $call19 = 0, $call56 = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i33 = 0;
- var $cmp$i$i$i$i42 = 0, $cmp$i$i$i39 = 0, $cmp$i$i$i5 = 0, $cmp$i$i3 = 0, $cmp$i34 = 0, $cmp$i37 = 0, $cmp$i5$i$i$i = 0, $cmp$i5$i$i$i47 = 0, $cmp8$i = 0, $cond$i$i = 0, $cond$i$i$i = 0, $cond$i$i$i26 = 0, $cond$i$i$i32 = 0, $cond$i$i$i59 = 0, $cond$i$i22$i = 0, $cond$i11$i = 0, $conv$i$i$i = 0, $conv$i$i9$i = 0, $elm = 0, $elm51 = 0;
- var $first = 0, $first$i$i$i$i$i$i5$i$i = 0, $inc$i$i$i = 0, $lnot$i$i = 0, $lnot$i$i66 = 0, $lnot$i$i6684 = 0, $lnot$i$i82 = 0, $or$cond = 0, $retval$0$i$i$i = 0, $retval$0$i$i$i50 = 0, $second = 0, $second$i = 0, $second$i$i$i$i$i$i6$i$i = 0, $second54 = 0, $tobool = 0, $tobool$i$i$i = 0, $tobool$i$i$i$i = 0, $tobool$i$i$i$i21 = 0, $tobool$i$i$i$i54 = 0, $tobool$i$i6$i = 0;
- var $tobool43 = 0, $tobool49 = 0, label = 0, sp = 0;
+ var $$pre$i$i$i = 0, $$sroa$speculated$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0;
+ var $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $5 = 0;
+ var $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__begin$sroa$0$0$be = 0, $__begin$sroa$0$084 = 0, $__begin25$sroa$0$0$be = 0, $__begin25$sroa$0$082 = 0, $__begin_node_$i$i$i70 = 0, $__cc$i = 0, $__cc$i68 = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i69 = 0, $__first_$i$i$i$i33 = 0, $__left_7$i$i$i = 0, $__parent$i$i = 0, $__parent_$i$i$i = 0, $__parent_$i4$i$i$i = 0, $__parent_$i4$i$i$i48 = 0;
+ var $__parent_$i410$i$i$i = 0, $__parent_$i410$i$i$i47 = 0, $__parent_$i47$i$i$i = 0, $__parent_$i47$i$i$i38 = 0, $__r$0$i$i = 0, $__right_$i$i$i = 0, $__size_$i$i$i$i = 0, $__size_$i$i$i$i$i = 0, $__size_$i$i$i$i20 = 0, $__size_$i$i$i$i30 = 0, $__size_$i$i$i$i55 = 0, $__size_$i3$i$i$i = 0, $__size_$i3$i$i2$i = 0, $__tree_$i63 = 0, $__x$addr$0$i$i$i$i = 0, $__x$addr$0$i$i$i$i42 = 0, $attrs = 0, $call$i = 0, $call$i$i = 0, $call$i$i$i = 0;
+ var $call$i$i$i$i$i$i = 0, $call$i64 = 0, $call19 = 0, $call56 = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i44 = 0, $cmp$i$i$i3 = 0, $cmp$i$i$i32 = 0, $cmp$i$i$i37 = 0, $cmp$i$i2 = 0, $cmp$i34 = 0, $cmp$i6$i$i$i = 0, $cmp$i6$i$i$i50 = 0, $cmp$i69$i$i$i = 0, $cmp$i69$i$i$i40 = 0, $cmp7$i$i = 0;
+ var $cond$i$i$i = 0, $cond$i$i$i$i = 0, $cond$i$i$i26 = 0, $cond$i$i$i28 = 0, $cond$i$i$i61 = 0, $cond$i$i1$i$i = 0, $cond$i16$i$i = 0, $conv$i$i$i$i = 0, $conv$i$i$i4$i = 0, $elm = 0, $elm51 = 0, $first$i$i$i$i$i$i$i$i = 0, $inc$i$i$i = 0, $lnot$i$i = 0, $lnot$i$i67 = 0, $lnot$i$i6783 = 0, $lnot$i$i81 = 0, $or$cond = 0, $second = 0, $second$i = 0;
+ var $second$i$i$i$i$i$i5$i$i = 0, $second54 = 0, $tobool = 0, $tobool$i$i$i$i = 0, $tobool$i$i$i$i$i = 0, $tobool$i$i$i$i21 = 0, $tobool$i$i$i$i31 = 0, $tobool$i$i$i$i56 = 0, $tobool43 = 0, $tobool49 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $__parent$i$i = sp;
@@ -2609,227 +2725,245 @@ function __ZN6asmdom9diffAttrsEPNS_5VNodeES1_($oldVnode,$vnode) {
  $0 = load4($__first_$i$i$i$i);
  $cmp$i = ($0|0)==(0);
  if ($cmp$i) {
-  $__first_$i$i$i$i36 = ((($vnode)) + 44|0);
-  $1 = load4($__first_$i$i$i$i36);
-  $cmp$i37 = ($1|0)==(0);
-  if ($cmp$i37) {
+  $__first_$i$i$i$i33 = ((($vnode)) + 44|0);
+  $1 = load4($__first_$i$i$i$i33);
+  $cmp$i34 = ($1|0)==(0);
+  if ($cmp$i34) {
    STACKTOP = sp;return;
   }
  }
  $2 = load4($attrs);
  $__first_$i$i$i$i$i = ((($oldVnode)) + 40|0);
- $lnot$i$i6684 = ($2|0)==($__first_$i$i$i$i$i|0);
- if (!($lnot$i$i6684)) {
-  $__tree_$i62 = ((($vnode)) + 36|0);
+ $lnot$i$i6783 = ($2|0)==($__first_$i$i$i$i$i|0);
+ if (!($lnot$i$i6783)) {
+  $__tree_$i63 = ((($vnode)) + 36|0);
   $elm = ((($vnode)) + 72|0);
-  $7 = $2;$__begin$sroa$0$085 = $2;
+  $__begin$sroa$0$084 = $2;
   while(1) {
-   $first = ((($__begin$sroa$0$085)) + 16|0);
-   $call$i63 = (__ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE14__count_uniqueIS7_EEjRKT_($__tree_$i62,$first)|0);
-   $tobool = ($call$i63|0)==(0);
+   $__cc$i68 = ((($__begin$sroa$0$084)) + 16|0);
+   $call$i64 = (__ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE14__count_uniqueIS7_EEjRKT_($__tree_$i63,$__cc$i68)|0);
+   $tobool = ($call$i64|0)==(0);
    if ($tobool) {
     $4 = load4($elm);
-    $__size_$i$i$i$i53 = ((($first)) + 11|0);
-    $5 = load1($__size_$i$i$i$i53);
-    $tobool$i$i$i$i54 = ($5<<24>>24)<(0);
-    if ($tobool$i$i$i$i54) {
-     $6 = load4($first);
-     $cond$i$i$i59 = $6;
+    $__size_$i$i$i$i55 = ((($__cc$i68)) + 11|0);
+    $5 = load1($__size_$i$i$i$i55);
+    $tobool$i$i$i$i56 = ($5<<24>>24)<(0);
+    if ($tobool$i$i$i$i56) {
+     $6 = load4($__cc$i68);
+     $cond$i$i$i61 = $6;
     } else {
-     $cond$i$i$i59 = $first;
+     $cond$i$i$i61 = $__cc$i68;
     }
-    $call19 = _emscripten_asm_const_iii(0, ($4|0), ($cond$i$i$i59|0))|0;
+    $call19 = _emscripten_asm_const_iii(0, ($4|0), ($cond$i$i$i61|0))|0;
    }
-   $__right_$i$i$i38 = ((($7)) + 4|0);
-   $8 = load4($__right_$i$i$i38);
-   $cmp$i$i$i39 = ($8|0)==(0|0);
-   if ($cmp$i$i$i39) {
-    $__x$addr$0$i$i$i44 = $7;
-    while(1) {
-     $__parent_$i$i$i$i45 = ((($__x$addr$0$i$i$i44)) + 8|0);
-     $10 = load4($__parent_$i$i$i$i45);
-     $11 = load4($10);
-     $cmp$i5$i$i$i47 = ($11|0)==($__x$addr$0$i$i$i44|0);
-     if ($cmp$i5$i$i$i47) {
-      $retval$0$i$i$i50 = $10;
-      break;
-     } else {
-      $__x$addr$0$i$i$i44 = $10;
+   $7 = ((($__begin$sroa$0$084)) + 4|0);
+   $8 = load4($7);
+   $cmp$i$i$i37 = ($8|0)==(0|0);
+   if ($cmp$i$i$i37) {
+    $__parent_$i47$i$i$i38 = ((($__begin$sroa$0$084)) + 8|0);
+    $9 = load4($__parent_$i47$i$i$i38);
+    $10 = load4($9);
+    $cmp$i69$i$i$i40 = ($10|0)==($__begin$sroa$0$084|0);
+    if ($cmp$i69$i$i$i40) {
+     $__begin$sroa$0$0$be = $9;
+    } else {
+     $__parent_$i410$i$i$i47 = $__parent_$i47$i$i$i38;
+     while(1) {
+      $12 = load4($__parent_$i410$i$i$i47);
+      $__parent_$i4$i$i$i48 = ((($12)) + 8|0);
+      $13 = load4($__parent_$i4$i$i$i48);
+      $14 = load4($13);
+      $cmp$i6$i$i$i50 = ($14|0)==($12|0);
+      if ($cmp$i6$i$i$i50) {
+       $__begin$sroa$0$0$be = $13;
+       break;
+      } else {
+       $__parent_$i410$i$i$i47 = $__parent_$i4$i$i$i48;
+      }
      }
     }
    } else {
-    $__x$addr$0$i$i$i$i40 = $8;
+    $__x$addr$0$i$i$i$i42 = $8;
     while(1) {
-     $9 = load4($__x$addr$0$i$i$i$i40);
-     $cmp$i$i$i$i42 = ($9|0)==(0|0);
-     if ($cmp$i$i$i$i42) {
-      $retval$0$i$i$i50 = $__x$addr$0$i$i$i$i40;
+     $11 = load4($__x$addr$0$i$i$i$i42);
+     $cmp$i$i$i$i44 = ($11|0)==(0|0);
+     if ($cmp$i$i$i$i44) {
       break;
      } else {
-      $__x$addr$0$i$i$i$i40 = $9;
+      $__x$addr$0$i$i$i$i42 = $11;
      }
     }
+    $__begin$sroa$0$0$be = $__x$addr$0$i$i$i$i42;
    }
-   $lnot$i$i66 = ($retval$0$i$i$i50|0)==($__first_$i$i$i$i$i|0);
-   if ($lnot$i$i66) {
+   $lnot$i$i67 = ($__begin$sroa$0$0$be|0)==($__first_$i$i$i$i$i|0);
+   if ($lnot$i$i67) {
     break;
    } else {
-    $7 = $retval$0$i$i$i50;$__begin$sroa$0$085 = $retval$0$i$i$i50;
+    $__begin$sroa$0$084 = $__begin$sroa$0$0$be;
    }
   }
  }
  $__begin_node_$i$i$i70 = ((($vnode)) + 36|0);
  $3 = load4($__begin_node_$i$i$i70);
  $__first_$i$i$i$i$i69 = ((($vnode)) + 40|0);
- $lnot$i$i82 = ($3|0)==($__first_$i$i$i$i$i69|0);
- if ($lnot$i$i82) {
+ $lnot$i$i81 = ($3|0)==($__first_$i$i$i$i$i69|0);
+ if ($lnot$i$i81) {
   STACKTOP = sp;return;
  }
  $elm51 = ((($vnode)) + 72|0);
  $__left_7$i$i$i = ((($oldVnode)) + 40|0);
- $31 = $3;$__begin25$sroa$0$083 = $3;
+ $__begin25$sroa$0$082 = $3;
  while(1) {
-  $__cc$i = ((($__begin25$sroa$0$083)) + 16|0);
+  $__cc$i = ((($__begin25$sroa$0$082)) + 16|0);
   $call$i = (__ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE14__count_uniqueIS7_EEjRKT_($attrs,$__cc$i)|0);
   $tobool43 = ($call$i|0)==(0);
   do {
    if ($tobool43) {
-    label = 24;
+    label = 26;
    } else {
-    $call$i$i2 = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESK_RKT_($attrs,$__parent$i$i,$__cc$i)|0);
-    $12 = load4($call$i$i2);
-    $cmp$i$i3 = ($12|0)==(0|0);
-    if ($cmp$i$i3) {
+    $call$i$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISJ_EERKT_($attrs,$__parent$i$i,$__cc$i)|0);
+    $15 = load4($call$i$i);
+    $cmp$i$i2 = ($15|0)==(0|0);
+    if ($cmp$i$i2) {
      $call$i$i$i$i$i$i = (__Znwj(40)|0);
-     $first$i$i$i$i$i$i5$i$i = ((($call$i$i$i$i$i$i)) + 16|0);
-     __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($first$i$i$i$i$i$i5$i$i,$__cc$i);
-     $second$i$i$i$i$i$i6$i$i = ((($call$i$i$i$i$i$i)) + 28|0);
-     ; store8($second$i$i$i$i$i$i6$i$i,i64_const(0,0),4); store4($second$i$i$i$i$i$i6$i$i+8|0,0,4);
-     $13 = load4($__parent$i$i);
+     $first$i$i$i$i$i$i$i$i = ((($call$i$i$i$i$i$i)) + 16|0);
+     __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($first$i$i$i$i$i$i$i$i,$__cc$i);
+     $second$i$i$i$i$i$i5$i$i = ((($call$i$i$i$i$i$i)) + 28|0);
+     ; store8($second$i$i$i$i$i$i5$i$i,i64_const(0,0),4); store4($second$i$i$i$i$i$i5$i$i+8|0,0,4);
+     $16 = load4($__parent$i$i);
      store4($call$i$i$i$i$i$i,0);
-     $__right_$i$i$i4 = ((($call$i$i$i$i$i$i)) + 4|0);
-     store4($__right_$i$i$i4,0);
+     $__right_$i$i$i = ((($call$i$i$i$i$i$i)) + 4|0);
+     store4($__right_$i$i$i,0);
      $__parent_$i$i$i = ((($call$i$i$i$i$i$i)) + 8|0);
-     store4($__parent_$i$i$i,$13);
-     store4($call$i$i2,$call$i$i$i$i$i$i);
-     $14 = load4($attrs);
-     $15 = load4($14);
-     $cmp$i$i$i5 = ($15|0)==(0|0);
-     if ($cmp$i$i$i5) {
-      $18 = $call$i$i$i$i$i$i;
+     store4($__parent_$i$i$i,$16);
+     store4($call$i$i,$call$i$i$i$i$i$i);
+     $17 = load4($attrs);
+     $18 = load4($17);
+     $cmp$i$i$i3 = ($18|0)==(0|0);
+     if ($cmp$i$i$i3) {
+      $21 = $call$i$i$i$i$i$i;
      } else {
-      $16 = $15;
-      store4($attrs,$16);
-      $$pre$i$i$i = load4($call$i$i2);
-      $18 = $$pre$i$i$i;
+      $19 = $18;
+      store4($attrs,$19);
+      $$pre$i$i$i = load4($call$i$i);
+      $21 = $$pre$i$i$i;
      }
-     $17 = load4($__left_7$i$i$i);
-     __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($17,$18);
-     $19 = load4($__first_$i$i$i$i);
-     $inc$i$i$i = (($19) + 1)|0;
+     $20 = load4($__left_7$i$i$i);
+     __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($20,$21);
+     $22 = load4($__first_$i$i$i$i);
+     $inc$i$i$i = (($22) + 1)|0;
      store4($__first_$i$i$i$i,$inc$i$i$i);
      $__r$0$i$i = $call$i$i$i$i$i$i;
     } else {
-     $__r$0$i$i = $12;
+     $__r$0$i$i = $15;
     }
     $second$i = ((($__r$0$i$i)) + 28|0);
-    $second = ((($__begin25$sroa$0$083)) + 28|0);
-    $__size_$i$i$i = ((($second$i)) + 11|0);
-    $20 = load1($__size_$i$i$i);
-    $tobool$i$i$i = ($20<<24>>24)<(0);
-    $__size_$i3$i$i = ((($__r$0$i$i)) + 32|0);
-    $21 = load4($__size_$i3$i$i);
-    $conv$i$i$i = $20&255;
-    $cond$i$i = $tobool$i$i$i ? $21 : $conv$i$i$i;
-    $__size_$i$i5$i = ((($second)) + 11|0);
-    $22 = load1($__size_$i$i5$i);
-    $tobool$i$i6$i = ($22<<24>>24)<(0);
-    $__size_$i3$i7$i = ((($__begin25$sroa$0$083)) + 32|0);
-    $23 = load4($__size_$i3$i7$i);
-    $conv$i$i9$i = $22&255;
-    $cond$i11$i = $tobool$i$i6$i ? $23 : $conv$i$i9$i;
-    $cmp$i$i$i$i33 = ($cond$i11$i>>>0)<($cond$i$i>>>0);
-    $$sroa$speculated$i = $cmp$i$i$i$i33 ? $cond$i11$i : $cond$i$i;
-    $cmp$i$i = ($$sroa$speculated$i|0)==(0);
-    if (!($cmp$i$i)) {
-     $24 = load4($second$i);
-     $cond$i$i$i32 = $tobool$i$i$i ? $24 : $second$i;
-     $25 = load4($second);
-     $cond$i$i22$i = $tobool$i$i6$i ? $25 : $second;
-     $call$i$i = (_memcmp($cond$i$i$i32,$cond$i$i22$i,$$sroa$speculated$i)|0);
-     $cmp$i34 = ($call$i$i|0)==(0);
-     if (!($cmp$i34)) {
-      label = 24;
+    $second = ((($__begin25$sroa$0$082)) + 28|0);
+    $__size_$i$i$i$i$i = ((($second)) + 11|0);
+    $23 = load1($__size_$i$i$i$i$i);
+    $tobool$i$i$i$i$i = ($23<<24>>24)<(0);
+    $__size_$i3$i$i$i = ((($__begin25$sroa$0$082)) + 32|0);
+    $24 = load4($__size_$i3$i$i$i);
+    $conv$i$i$i$i = $23&255;
+    $cond$i$i$i28 = $tobool$i$i$i$i$i ? $24 : $conv$i$i$i$i;
+    $__size_$i$i$i$i30 = ((($second$i)) + 11|0);
+    $25 = load1($__size_$i$i$i$i30);
+    $tobool$i$i$i$i31 = ($25<<24>>24)<(0);
+    $__size_$i3$i$i2$i = ((($__r$0$i$i)) + 32|0);
+    $26 = load4($__size_$i3$i$i2$i);
+    $conv$i$i$i4$i = $25&255;
+    $cond$i16$i$i = $tobool$i$i$i$i31 ? $26 : $conv$i$i$i4$i;
+    $cmp$i$i$i$i$i = ($cond$i$i$i28>>>0)<($cond$i16$i$i>>>0);
+    $$sroa$speculated$i$i = $cmp$i$i$i$i$i ? $cond$i$i$i28 : $cond$i16$i$i;
+    $cmp$i$i$i32 = ($$sroa$speculated$i$i|0)==(0);
+    if (!($cmp$i$i$i32)) {
+     $27 = load4($second$i);
+     $cond$i$i$i$i = $tobool$i$i$i$i31 ? $27 : $second$i;
+     $28 = load4($second);
+     $cond$i$i1$i$i = $tobool$i$i$i$i$i ? $28 : $second;
+     $call$i$i$i = (_memcmp($cond$i$i$i$i,$cond$i$i1$i$i,$$sroa$speculated$i$i)|0);
+     $cmp$i$i = ($call$i$i$i|0)==(0);
+     if (!($cmp$i$i)) {
+      label = 26;
       break;
      }
     }
-    $cmp8$i = ($cond$i$i>>>0)>=($cond$i11$i>>>0);
-    $tobool49 = $cmp$i$i$i$i33 ^ 1;
-    $or$cond = $cmp8$i & $tobool49;
+    $cmp7$i$i = ($cond$i16$i$i>>>0)>=($cond$i$i$i28>>>0);
+    $tobool49 = $cmp$i$i$i$i$i ^ 1;
+    $or$cond = $cmp7$i$i & $tobool49;
     if (!($or$cond)) {
-     label = 24;
+     label = 26;
     }
    }
   } while(0);
-  if ((label|0) == 24) {
+  if ((label|0) == 26) {
    label = 0;
-   $26 = load4($elm51);
+   $29 = load4($elm51);
    $__size_$i$i$i$i20 = ((($__cc$i)) + 11|0);
-   $27 = load1($__size_$i$i$i$i20);
-   $tobool$i$i$i$i21 = ($27<<24>>24)<(0);
+   $30 = load1($__size_$i$i$i$i20);
+   $tobool$i$i$i$i21 = ($30<<24>>24)<(0);
    if ($tobool$i$i$i$i21) {
-    $28 = load4($__cc$i);
-    $cond$i$i$i26 = $28;
+    $31 = load4($__cc$i);
+    $cond$i$i$i26 = $31;
    } else {
     $cond$i$i$i26 = $__cc$i;
    }
-   $second54 = ((($__begin25$sroa$0$083)) + 28|0);
+   $second54 = ((($__begin25$sroa$0$082)) + 28|0);
    $__size_$i$i$i$i = ((($second54)) + 11|0);
-   $29 = load1($__size_$i$i$i$i);
-   $tobool$i$i$i$i = ($29<<24>>24)<(0);
+   $32 = load1($__size_$i$i$i$i);
+   $tobool$i$i$i$i = ($32<<24>>24)<(0);
    if ($tobool$i$i$i$i) {
-    $30 = load4($second54);
-    $cond$i$i$i = $30;
+    $33 = load4($second54);
+    $cond$i$i$i = $33;
    } else {
     $cond$i$i$i = $second54;
    }
-   $call56 = _emscripten_asm_const_iiii(1, ($26|0), ($cond$i$i$i26|0), ($cond$i$i$i|0))|0;
+   $call56 = _emscripten_asm_const_iiii(1, ($29|0), ($cond$i$i$i26|0), ($cond$i$i$i|0))|0;
   }
-  $__right_$i$i$i = ((($31)) + 4|0);
-  $32 = load4($__right_$i$i$i);
-  $cmp$i$i$i = ($32|0)==(0|0);
+  $34 = ((($__begin25$sroa$0$082)) + 4|0);
+  $35 = load4($34);
+  $cmp$i$i$i = ($35|0)==(0|0);
   if ($cmp$i$i$i) {
-   $__x$addr$0$i$i$i = $31;
-   while(1) {
-    $__parent_$i$i$i$i = ((($__x$addr$0$i$i$i)) + 8|0);
-    $34 = load4($__parent_$i$i$i$i);
-    $35 = load4($34);
-    $cmp$i5$i$i$i = ($35|0)==($__x$addr$0$i$i$i|0);
-    if ($cmp$i5$i$i$i) {
-     $retval$0$i$i$i = $34;
-     break;
-    } else {
-     $__x$addr$0$i$i$i = $34;
+   $__parent_$i47$i$i$i = ((($__begin25$sroa$0$082)) + 8|0);
+   $36 = load4($__parent_$i47$i$i$i);
+   $37 = load4($36);
+   $cmp$i69$i$i$i = ($37|0)==($__begin25$sroa$0$082|0);
+   if ($cmp$i69$i$i$i) {
+    $__begin25$sroa$0$0$be = $36;
+   } else {
+    $__parent_$i410$i$i$i = $__parent_$i47$i$i$i;
+    while(1) {
+     $39 = load4($__parent_$i410$i$i$i);
+     $__parent_$i4$i$i$i = ((($39)) + 8|0);
+     $40 = load4($__parent_$i4$i$i$i);
+     $41 = load4($40);
+     $cmp$i6$i$i$i = ($41|0)==($39|0);
+     if ($cmp$i6$i$i$i) {
+      $__begin25$sroa$0$0$be = $40;
+      break;
+     } else {
+      $__parent_$i410$i$i$i = $__parent_$i4$i$i$i;
+     }
     }
    }
   } else {
-   $__x$addr$0$i$i$i$i = $32;
+   $__x$addr$0$i$i$i$i = $35;
    while(1) {
-    $33 = load4($__x$addr$0$i$i$i$i);
-    $cmp$i$i$i$i = ($33|0)==(0|0);
+    $38 = load4($__x$addr$0$i$i$i$i);
+    $cmp$i$i$i$i = ($38|0)==(0|0);
     if ($cmp$i$i$i$i) {
-     $retval$0$i$i$i = $__x$addr$0$i$i$i$i;
      break;
     } else {
-     $__x$addr$0$i$i$i$i = $33;
+     $__x$addr$0$i$i$i$i = $38;
     }
    }
+   $__begin25$sroa$0$0$be = $__x$addr$0$i$i$i$i;
   }
-  $lnot$i$i = ($retval$0$i$i$i|0)==($__first_$i$i$i$i$i69|0);
+  $lnot$i$i = ($__begin25$sroa$0$0$be|0)==($__first_$i$i$i$i$i69|0);
   if ($lnot$i$i) {
    break;
   } else {
-   $31 = $retval$0$i$i$i;$__begin25$sroa$0$083 = $retval$0$i$i$i;
+   $__begin25$sroa$0$082 = $__begin25$sroa$0$0$be;
   }
  }
  STACKTOP = sp;return;
@@ -2837,114 +2971,239 @@ function __ZN6asmdom9diffAttrsEPNS_5VNodeES1_($oldVnode,$vnode) {
 function __ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($vnode1,$vnode2) {
  $vnode1 = $vnode1|0;
  $vnode2 = $vnode2|0;
- var $$$$i37 = 0, $$$i36 = 0, $$sroa$speculated$i = 0, $$sroa$speculated$i26 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__size_$i$i$i = 0, $__size_$i$i$i6 = 0, $__size_$i$i5$i = 0;
- var $__size_$i$i5$i14 = 0, $__size_$i3$i$i = 0, $__size_$i3$i$i8 = 0, $__size_$i3$i7$i = 0, $__size_$i3$i7$i16 = 0, $call$i$i = 0, $call$i$i32 = 0, $call341 = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i25 = 0, $cmp$i$i27 = 0, $cmp$i33 = 0, $cmp8$i = 0, $cmp8$i35 = 0, $cond$i$i = 0, $cond$i$i$i = 0, $cond$i$i$i24 = 0, $cond$i$i12 = 0;
- var $cond$i$i22$i = 0, $cond$i$i22$i31 = 0, $cond$i11$i = 0, $cond$i11$i18 = 0, $conv$i$i$i = 0, $conv$i$i$i10 = 0, $conv$i$i9$i = 0, $conv$i$i9$i17 = 0, $key = 0, $key1 = 0, $lnot = 0, $or$cond = 0, $tobool = 0, $tobool$i$i$i = 0, $tobool$i$i$i7 = 0, $tobool$i$i6$i = 0, $tobool$i$i6$i15 = 0, label = 0, sp = 0;
+ var $$$$i$i32 = 0, $$$i$i31 = 0, $$sroa$speculated$i$i = 0, $$sroa$speculated$i$i24 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__size_$i$i$i$i = 0, $__size_$i$i$i$i$i = 0, $__size_$i$i$i$i$i4 = 0;
+ var $__size_$i$i$i$i13 = 0, $__size_$i3$i$i$i = 0, $__size_$i3$i$i$i7 = 0, $__size_$i3$i$i2$i = 0, $__size_$i3$i$i2$i15 = 0, $call$i$i$i = 0, $call$i$i$i27 = 0, $call7$i34 = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i23 = 0, $cmp$i$i$i25 = 0, $cmp$i$i28 = 0, $cmp7$i$i = 0, $cmp7$i$i30 = 0, $cond$i$i$i = 0, $cond$i$i$i$i = 0, $cond$i$i$i$i22 = 0, $cond$i$i$i11 = 0;
+ var $cond$i$i1$i$i = 0, $cond$i$i1$i$i10 = 0, $cond$i16$i$i = 0, $cond$i16$i$i21 = 0, $conv$i$i$i$i = 0, $conv$i$i$i$i9 = 0, $conv$i$i$i4$i = 0, $conv$i$i$i4$i18 = 0, $key = 0, $key1 = 0, $lnot = 0, $or$cond = 0, $tobool = 0, $tobool$i$i$i$i = 0, $tobool$i$i$i$i$i = 0, $tobool$i$i$i$i$i5 = 0, $tobool$i$i$i$i14 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $key = ((($vnode1)) + 12|0);
  $key1 = ((($vnode2)) + 12|0);
- $__size_$i$i$i = ((($key)) + 11|0);
- $0 = load1($__size_$i$i$i);
- $tobool$i$i$i = ($0<<24>>24)<(0);
- if ($tobool$i$i$i) {
-  $__size_$i3$i$i = ((($vnode1)) + 16|0);
-  $1 = load4($__size_$i3$i$i);
-  $cond$i$i = $1;
+ $__size_$i$i$i$i$i = ((($key1)) + 11|0);
+ $0 = load1($__size_$i$i$i$i$i);
+ $tobool$i$i$i$i$i = ($0<<24>>24)<(0);
+ $1 = load4($key1);
+ $__size_$i3$i$i$i = ((($vnode2)) + 16|0);
+ $2 = load4($__size_$i3$i$i$i);
+ $conv$i$i$i$i = $0&255;
+ $cond$i$i1$i$i = $tobool$i$i$i$i$i ? $1 : $key1;
+ $cond$i$i$i = $tobool$i$i$i$i$i ? $2 : $conv$i$i$i$i;
+ $__size_$i$i$i$i = ((($key)) + 11|0);
+ $3 = load1($__size_$i$i$i$i);
+ $tobool$i$i$i$i = ($3<<24>>24)<(0);
+ if ($tobool$i$i$i$i) {
+  $__size_$i3$i$i2$i = ((($vnode1)) + 16|0);
+  $4 = load4($__size_$i3$i$i2$i);
+  $5 = load4($key);
+  $cond$i$i$i$i = $5;$cond$i16$i$i = $4;
  } else {
-  $conv$i$i$i = $0&255;
-  $cond$i$i = $conv$i$i$i;
+  $conv$i$i$i4$i = $3&255;
+  $cond$i$i$i$i = $key;$cond$i16$i$i = $conv$i$i$i4$i;
  }
- $__size_$i$i5$i = ((($key1)) + 11|0);
- $2 = load1($__size_$i$i5$i);
- $tobool$i$i6$i = ($2<<24>>24)<(0);
- $__size_$i3$i7$i = ((($vnode2)) + 16|0);
- $3 = load4($__size_$i3$i7$i);
- $conv$i$i9$i = $2&255;
- $cond$i11$i = $tobool$i$i6$i ? $3 : $conv$i$i9$i;
- if ($tobool$i$i$i) {
-  $4 = load4($key);
-  $cond$i$i$i = $4;
- } else {
-  $cond$i$i$i = $key;
- }
- $cmp$i$i$i$i = ($cond$i11$i>>>0)<($cond$i$i>>>0);
- $$sroa$speculated$i = $cmp$i$i$i$i ? $cond$i11$i : $cond$i$i;
- $cmp$i$i = ($$sroa$speculated$i|0)==(0);
- if (!($cmp$i$i)) {
-  $5 = load4($key1);
-  $cond$i$i22$i = $tobool$i$i6$i ? $5 : $key1;
-  $call$i$i = (_memcmp($cond$i$i$i,$cond$i$i22$i,$$sroa$speculated$i)|0);
-  $cmp$i = ($call$i$i|0)==(0);
-  if (!($cmp$i)) {
+ $cmp$i$i$i$i$i = ($cond$i$i$i>>>0)<($cond$i16$i$i>>>0);
+ $$sroa$speculated$i$i = $cmp$i$i$i$i$i ? $cond$i$i$i : $cond$i16$i$i;
+ $cmp$i$i$i = ($$sroa$speculated$i$i|0)==(0);
+ if (!($cmp$i$i$i)) {
+  $call$i$i$i = (_memcmp($cond$i$i$i$i,$cond$i$i1$i$i,$$sroa$speculated$i$i)|0);
+  $cmp$i$i = ($call$i$i$i|0)==(0);
+  if (!($cmp$i$i)) {
    $12 = 0;
    return ($12|0);
   }
  }
- $cmp8$i = ($cond$i$i>>>0)>=($cond$i11$i>>>0);
- $tobool = $cmp$i$i$i$i ^ 1;
- $or$cond = $cmp8$i & $tobool;
+ $cmp7$i$i = ($cond$i16$i$i>>>0)>=($cond$i$i$i>>>0);
+ $tobool = $cmp$i$i$i$i$i ^ 1;
+ $or$cond = $cmp7$i$i & $tobool;
  if (!($or$cond)) {
   $12 = 0;
   return ($12|0);
  }
- $__size_$i$i$i6 = ((($vnode1)) + 11|0);
- $6 = load1($__size_$i$i$i6);
- $tobool$i$i$i7 = ($6<<24>>24)<(0);
- if ($tobool$i$i$i7) {
-  $__size_$i3$i$i8 = ((($vnode1)) + 4|0);
-  $7 = load4($__size_$i3$i$i8);
-  $cond$i$i12 = $7;
+ $__size_$i$i$i$i$i4 = ((($vnode2)) + 11|0);
+ $6 = load1($__size_$i$i$i$i$i4);
+ $tobool$i$i$i$i$i5 = ($6<<24>>24)<(0);
+ $7 = load4($vnode2);
+ $__size_$i3$i$i$i7 = ((($vnode2)) + 4|0);
+ $8 = load4($__size_$i3$i$i$i7);
+ $conv$i$i$i$i9 = $6&255;
+ $cond$i$i1$i$i10 = $tobool$i$i$i$i$i5 ? $7 : $vnode2;
+ $cond$i$i$i11 = $tobool$i$i$i$i$i5 ? $8 : $conv$i$i$i$i9;
+ $__size_$i$i$i$i13 = ((($vnode1)) + 11|0);
+ $9 = load1($__size_$i$i$i$i13);
+ $tobool$i$i$i$i14 = ($9<<24>>24)<(0);
+ if ($tobool$i$i$i$i14) {
+  $__size_$i3$i$i2$i15 = ((($vnode1)) + 4|0);
+  $10 = load4($__size_$i3$i$i2$i15);
+  $11 = load4($vnode1);
+  $cond$i$i$i$i22 = $11;$cond$i16$i$i21 = $10;
  } else {
-  $conv$i$i$i10 = $6&255;
-  $cond$i$i12 = $conv$i$i$i10;
+  $conv$i$i$i4$i18 = $9&255;
+  $cond$i$i$i$i22 = $vnode1;$cond$i16$i$i21 = $conv$i$i$i4$i18;
  }
- $__size_$i$i5$i14 = ((($vnode2)) + 11|0);
- $8 = load1($__size_$i$i5$i14);
- $tobool$i$i6$i15 = ($8<<24>>24)<(0);
- $__size_$i3$i7$i16 = ((($vnode2)) + 4|0);
- $9 = load4($__size_$i3$i7$i16);
- $conv$i$i9$i17 = $8&255;
- $cond$i11$i18 = $tobool$i$i6$i15 ? $9 : $conv$i$i9$i17;
- if ($tobool$i$i$i7) {
-  $10 = load4($vnode1);
-  $cond$i$i$i24 = $10;
+ $cmp$i$i$i$i$i23 = ($cond$i$i$i11>>>0)<($cond$i16$i$i21>>>0);
+ $$sroa$speculated$i$i24 = $cmp$i$i$i$i$i23 ? $cond$i$i$i11 : $cond$i16$i$i21;
+ $cmp$i$i$i25 = ($$sroa$speculated$i$i24|0)==(0);
+ if ($cmp$i$i$i25) {
+  label = 12;
  } else {
-  $cond$i$i$i24 = $vnode1;
- }
- $cmp$i$i$i$i25 = ($cond$i11$i18>>>0)<($cond$i$i12>>>0);
- $$sroa$speculated$i26 = $cmp$i$i$i$i25 ? $cond$i11$i18 : $cond$i$i12;
- $cmp$i$i27 = ($$sroa$speculated$i26|0)==(0);
- if ($cmp$i$i27) {
-  label = 18;
- } else {
-  $11 = load4($vnode2);
-  $cond$i$i22$i31 = $tobool$i$i6$i15 ? $11 : $vnode2;
-  $call$i$i32 = (_memcmp($cond$i$i$i24,$cond$i$i22$i31,$$sroa$speculated$i26)|0);
-  $cmp$i33 = ($call$i$i32|0)==(0);
-  if ($cmp$i33) {
-   label = 18;
+  $call$i$i$i27 = (_memcmp($cond$i$i$i$i22,$cond$i$i1$i$i10,$$sroa$speculated$i$i24)|0);
+  $cmp$i$i28 = ($call$i$i$i27|0)==(0);
+  if ($cmp$i$i28) {
+   label = 12;
   } else {
-   $call341 = $call$i$i32;
+   $call7$i34 = $call$i$i$i27;
   }
  }
- if ((label|0) == 18) {
-  $cmp8$i35 = ($cond$i$i12>>>0)<($cond$i11$i18>>>0);
-  $$$i36 = $cmp$i$i$i$i25&1;
-  $$$$i37 = $cmp8$i35 ? -1 : $$$i36;
-  $call341 = $$$$i37;
+ if ((label|0) == 12) {
+  $cmp7$i$i30 = ($cond$i16$i$i21>>>0)<($cond$i$i$i11>>>0);
+  $$$i$i31 = $cmp$i$i$i$i$i23&1;
+  $$$$i$i32 = $cmp7$i$i30 ? -1 : $$$i$i31;
+  $call7$i34 = $$$$i$i32;
  }
- $lnot = ($call341|0)==(0);
+ $lnot = ($call7$i34|0)==(0);
  $12 = $lnot;
  return ($12|0);
 }
+function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISJ_EERKT_($this,$__parent,$__v) {
+ $this = $this|0;
+ $__parent = $__parent|0;
+ $__v = $__v|0;
+ var $$in = 0, $$sroa$speculated$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i31 = 0, $0 = 0, $1 = 0, $10 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i = 0, $__left_$i = 0, $__nd$0 = 0, $__nd_ptr$0 = 0, $__nd_ptr$0$ph = 0, $__size_$i$i$i$i$i$i$i$i19 = 0;
+ var $__size_$i$i$i$i$i$i$i25 = 0, $__size_$i3$i$i$i$i$i$i21 = 0, $__size_$i3$i$i2$i$i$i$i27 = 0, $__value_ = 0, $call$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i39 = 0, $cmp = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i30 = 0, $cmp$i$i$i$i$i$i32 = 0, $cmp$i$i$i$i$i40 = 0, $cmp$i$i$i47 = 0, $cmp17 = 0, $cmp6 = 0, $cmp7$i$i$i$i$i42 = 0, $cond$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i23 = 0;
+ var $cond$i$i1$i$i$i$i$i = 0, $cond$i$i1$i$i$i$i$i38 = 0, $cond$i16$i$i$i$i$i29 = 0, $conv$i$i$i$i$i$i$i22 = 0, $conv$i$i$i4$i$i$i$i28 = 0, $retval$0 = 0, $tobool$i$i$i$i$i$i$i$i20 = 0, $tobool$i$i$i$i$i$i$i26 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ $__first_$i$i$i$i = ((($this)) + 4|0);
+ $0 = load4($__first_$i$i$i$i);
+ $cmp = ($0|0)==(0|0);
+ if ($cmp) {
+  store4($__parent,$__first_$i$i$i$i);
+  $retval$0 = $__first_$i$i$i$i;
+  return ($retval$0|0);
+ }
+ $__left_$i = ((($this)) + 4|0);
+ $__size_$i$i$i$i$i$i$i25 = ((($__v)) + 11|0);
+ $1 = load1($__size_$i$i$i$i$i$i$i25);
+ $tobool$i$i$i$i$i$i$i26 = ($1<<24>>24)<(0);
+ $__size_$i3$i$i2$i$i$i$i27 = ((($__v)) + 4|0);
+ $2 = load4($__size_$i3$i$i2$i$i$i$i27);
+ $conv$i$i$i4$i$i$i$i28 = $1&255;
+ $cond$i16$i$i$i$i$i29 = $tobool$i$i$i$i$i$i$i26 ? $2 : $conv$i$i$i4$i$i$i$i28;
+ $3 = load4($__v);
+ $cond$i$i1$i$i$i$i$i = $tobool$i$i$i$i$i$i$i26 ? $3 : $__v;
+ $__nd$0 = $0;$__nd_ptr$0 = $__left_$i;
+ while(1) {
+  $__value_ = ((($__nd$0)) + 16|0);
+  $__size_$i$i$i$i$i$i$i$i19 = ((($__value_)) + 11|0);
+  $4 = load1($__size_$i$i$i$i$i$i$i$i19);
+  $tobool$i$i$i$i$i$i$i$i20 = ($4<<24>>24)<(0);
+  $__size_$i3$i$i$i$i$i$i21 = ((($__nd$0)) + 20|0);
+  $5 = load4($__size_$i3$i$i$i$i$i$i21);
+  $conv$i$i$i$i$i$i$i22 = $4&255;
+  $cond$i$i$i$i$i$i23 = $tobool$i$i$i$i$i$i$i$i20 ? $5 : $conv$i$i$i$i$i$i$i22;
+  $cmp$i$i$i$i$i$i$i$i30 = ($cond$i$i$i$i$i$i23>>>0)<($cond$i16$i$i$i$i$i29>>>0);
+  $$sroa$speculated$i$i$i$i$i31 = $cmp$i$i$i$i$i$i$i$i30 ? $cond$i$i$i$i$i$i23 : $cond$i16$i$i$i$i$i29;
+  $cmp$i$i$i$i$i$i32 = ($$sroa$speculated$i$i$i$i$i31|0)==(0);
+  if ($cmp$i$i$i$i$i$i32) {
+   label = 6;
+  } else {
+   $6 = load4($__value_);
+   $cond$i$i1$i$i$i$i$i38 = $tobool$i$i$i$i$i$i$i$i20 ? $6 : $__value_;
+   $call$i$i$i$i$i$i39 = (_memcmp($cond$i$i1$i$i$i$i$i,$cond$i$i1$i$i$i$i$i38,$$sroa$speculated$i$i$i$i$i31)|0);
+   $cmp$i$i$i$i$i40 = ($call$i$i$i$i$i$i39|0)==(0);
+   if ($cmp$i$i$i$i$i40) {
+    label = 6;
+   } else {
+    $cmp$i$i$i47 = ($call$i$i$i$i$i$i39|0)<(0);
+    if ($cmp$i$i$i47) {
+     label = 8;
+    } else {
+     label = 10;
+    }
+   }
+  }
+  if ((label|0) == 6) {
+   label = 0;
+   $cmp7$i$i$i$i$i42 = ($cond$i16$i$i$i$i$i29>>>0)<($cond$i$i$i$i$i$i23>>>0);
+   if ($cmp7$i$i$i$i$i42) {
+    label = 8;
+   } else {
+    label = 10;
+   }
+  }
+  if ((label|0) == 8) {
+   label = 0;
+   $7 = load4($__nd$0);
+   $cmp6 = ($7|0)==(0|0);
+   if ($cmp6) {
+    label = 9;
+    break;
+   } else {
+    $$in = $7;$__nd_ptr$0$ph = $__nd$0;
+   }
+  }
+  else if ((label|0) == 10) {
+   label = 0;
+   $cmp$i$i$i$i$i$i$i$i = ($cond$i16$i$i$i$i$i29>>>0)<($cond$i$i$i$i$i$i23>>>0);
+   $$sroa$speculated$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i ? $cond$i16$i$i$i$i$i29 : $cond$i$i$i$i$i$i23;
+   $cmp$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i|0)==(0);
+   if ($cmp$i$i$i$i$i$i) {
+    label = 12;
+   } else {
+    $8 = load4($__value_);
+    $cond$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i20 ? $8 : $__value_;
+    $call$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i,$cond$i$i1$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i)|0);
+    $cmp$i$i$i$i$i = ($call$i$i$i$i$i$i|0)==(0);
+    if ($cmp$i$i$i$i$i) {
+     label = 12;
+    } else {
+     $cmp$i$i$i = ($call$i$i$i$i$i$i|0)<(0);
+     if (!($cmp$i$i$i)) {
+      label = 16;
+      break;
+     }
+    }
+   }
+   if ((label|0) == 12) {
+    label = 0;
+    if (!($cmp$i$i$i$i$i$i$i$i30)) {
+     label = 16;
+     break;
+    }
+   }
+   $9 = ((($__nd$0)) + 4|0);
+   $10 = load4($9);
+   $cmp17 = ($10|0)==(0|0);
+   if ($cmp17) {
+    label = 15;
+    break;
+   } else {
+    $$in = $10;$__nd_ptr$0$ph = $9;
+   }
+  }
+  $__nd$0 = $$in;$__nd_ptr$0 = $__nd_ptr$0$ph;
+ }
+ if ((label|0) == 9) {
+  store4($__parent,$__nd$0);
+  $retval$0 = $__nd$0;
+  return ($retval$0|0);
+ }
+ else if ((label|0) == 15) {
+  store4($__parent,$__nd$0);
+  $retval$0 = $9;
+  return ($retval$0|0);
+ }
+ else if ((label|0) == 16) {
+  store4($__parent,$__nd$0);
+  $retval$0 = $__nd_ptr$0;
+  return ($retval$0|0);
+ }
+ return (0)|0;
+}
 function __ZN6asmdom9createElmEPNS_5VNodeE($vnode) {
  $vnode = $vnode|0;
- var $$pre = 0, $$pre$i$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0;
- var $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__cc$i$i$i$i = 0;
- var $__end_$i41 = 0, $__first_$i$i$i$i7$i$i = 0, $__left_7$i$i$i = 0, $__parent$i$i = 0, $__parent_$i$i$i = 0, $__r$0$i$i = 0, $__right_$i$i$i = 0, $__size_$i$i$i = 0, $__size_$i$i$i$i = 0, $__size_$i$i$i$i44 = 0, $__size_$i$i$i$i60 = 0, $__size_$i$i$i22 = 0, $__size_$i3$i$i = 0, $__size_$i3$i$i24 = 0, $arrayidx$i = 0, $attrs = 0, $call$i = 0, $call$i$i$i$i$i$i58 = 0, $call$i$i5657 = 0, $call$i5253 = 0;
- var $call2 = 0, $call24 = 0, $call29 = 0, $call38 = 0, $call39 = 0, $call4 = 0, $call47 = 0, $call8 = 0, $children = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i29 = 0, $cmp$i42 = 0, $cond$i$i = 0, $cond$i$i$i = 0, $cond$i$i$i38 = 0, $cond$i$i$i50 = 0, $cond$i$i$i66 = 0;
- var $cond$i$i$i75 = 0, $cond$i$i$i84 = 0, $cond$i$i28 = 0, $conv$i$i$i = 0, $conv$i$i$i26 = 0, $elm = 0, $elm$i$pre$phiZZ2D = 0, $elm25 = 0, $elm30 = 0, $elm52$pre$phiZ2D = 0, $elm9 = 0, $i$089 = 0, $inc = 0, $inc$i$i$i = 0, $ref$tmp16 = 0, $second$i = 0, $second$i$i$i$i$i$i5$i$i = 0, $sub$ptr$div$i = 0, $sub$ptr$sub$i = 0, $text = 0;
- var $text41 = 0, $text6 = 0, $tobool = 0, $tobool$i$i$i = 0, $tobool$i$i$i$i = 0, $tobool$i$i$i$i45 = 0, $tobool$i$i$i$i61 = 0, $tobool$i$i$i$i70 = 0, $tobool$i$i$i$i79 = 0, $tobool$i$i$i23 = 0, $tobool12 = 0, label = 0, sp = 0;
+ var $$pre$i$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0;
+ var $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__cc$i$i$i$i = 0, $__end_$i41 = 0;
+ var $__first_$i$i$i$i7$i$i = 0, $__left_7$i$i$i = 0, $__parent$i$i = 0, $__parent_$i$i$i = 0, $__r$0$i$i = 0, $__right_$i$i$i = 0, $__size_$i$i$i = 0, $__size_$i$i$i$i = 0, $__size_$i$i$i$i44 = 0, $__size_$i$i$i$i88 = 0, $__size_$i$i$i22 = 0, $__size_$i12$i$i = 0, $__size_$i12$i$i72 = 0, $__size_$i3$i$i = 0, $__size_$i3$i$i24 = 0, $arrayidx$i = 0, $arrayidx$i$i = 0, $arrayidx$i$i78 = 0, $attrs = 0, $call$i = 0;
+ var $call$i$i$i$i$i$i86 = 0, $call$i$i8185 = 0, $call$i5556 = 0, $call2 = 0, $call24 = 0, $call29 = 0, $call38 = 0, $call39 = 0, $call4 = 0, $call47 = 0, $call8 = 0, $children = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i$i83 = 0, $cmp$i$i82 = 0, $cmp$i29 = 0, $cmp$i42 = 0, $cond$i$i = 0, $cond$i$i$i = 0;
+ var $cond$i$i$i103 = 0, $cond$i$i$i130 = 0, $cond$i$i$i38 = 0, $cond$i$i$i50 = 0, $cond$i$i$i94 = 0, $cond$i$i28 = 0, $conv$i$i$i = 0, $conv$i$i$i26 = 0, $elm = 0, $elm$i$pre$phiZZ2D = 0, $elm25 = 0, $elm30 = 0, $elm52$pre$phiZ2D = 0, $elm9 = 0, $i$0135 = 0, $inc = 0, $inc$i$i$i = 0, $ref$tmp16 = 0, $second$i = 0, $second$i$i$i$i$i$i5$i$i = 0;
+ var $sub$ptr$div$i = 0, $sub$ptr$sub$i = 0, $text = 0, $text41 = 0, $text6 = 0, $tobool = 0, $tobool$i$i$i = 0, $tobool$i$i$i$i = 0, $tobool$i$i$i$i125 = 0, $tobool$i$i$i$i45 = 0, $tobool$i$i$i$i89 = 0, $tobool$i$i$i$i98 = 0, $tobool$i$i$i23 = 0, $tobool12 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 32|0;
  $__parent$i$i = sp + 12|0;
@@ -2979,7 +3238,7 @@ function __ZN6asmdom9createElmEPNS_5VNodeE($vnode) {
   $36 = load4($elm52$pre$phiZ2D);
   STACKTOP = sp;return ($36|0);
  }
- $call4 = (__ZNKSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE7compareEPKc($vnode,10493)|0);
+ $call4 = (__ZNKSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE7compareEPKc($vnode,10093)|0);
  $tobool = ($call4|0)==(0);
  if ($tobool) {
   $text6 = ((($vnode)) + 24|0);
@@ -3001,52 +3260,59 @@ function __ZN6asmdom9createElmEPNS_5VNodeE($vnode) {
  }
  $attrs = ((($vnode)) + 36|0);
  ; store8($__parent$i$i,i64_const(0,0),4); store4($__parent$i$i+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($__parent$i$i,2800,2);
- $call$i5253 = (__ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE14__count_uniqueIS7_EEjRKT_($attrs,$__parent$i$i)|0);
- $tobool12 = ($call$i5253|0)==(0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($__parent$i$i);
+ $__size_$i12$i$i = ((($__parent$i$i)) + 11|0);
+ store1($__size_$i12$i$i,2);
+ store2($__parent$i$i,29550);
+ $arrayidx$i$i = ((($__parent$i$i)) + 2|0);
+ store1($arrayidx$i$i,0);
+ $call$i5556 = (__ZNKSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE14__count_uniqueIS7_EEjRKT_($attrs,$__parent$i$i)|0);
+ $tobool12 = ($call$i5556|0)==(0);
  if ($tobool12) {
   $18 = load1($__size_$i$i$i);
-  $tobool$i$i$i$i79 = ($18<<24>>24)<(0);
-  if ($tobool$i$i$i$i79) {
+  $tobool$i$i$i$i125 = ($18<<24>>24)<(0);
+  if ($tobool$i$i$i$i125) {
    $19 = load4($vnode);
-   $cond$i$i$i84 = $19;
+   $cond$i$i$i130 = $19;
   } else {
-   $cond$i$i$i84 = $vnode;
+   $cond$i$i$i130 = $vnode;
   }
-  $call29 = _emscripten_asm_const_ii(5, ($cond$i$i$i84|0))|0;
+  $call29 = _emscripten_asm_const_ii(5, ($cond$i$i$i130|0))|0;
   $elm30 = ((($vnode)) + 72|0);
   store4($elm30,$call29);
   $23 = $call29;$elm$i$pre$phiZZ2D = $elm30;
  } else {
   ; store8($ref$tmp16,i64_const(0,0),4); store4($ref$tmp16+8|0,0,4);
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($ref$tmp16,2800,2);
-  $call$i$i5657 = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESK_RKT_($attrs,$__parent$i$i,$ref$tmp16)|0);
-  $6 = load4($call$i$i5657);
-  $cmp$i$i = ($6|0)==(0|0);
-  if ($cmp$i$i) {
-   $call$i$i$i$i$i$i58 = (__Znwj(40)|0);
-   $__cc$i$i$i$i = ((($call$i$i$i$i$i$i58)) + 16|0);
+  $__size_$i12$i$i72 = ((($ref$tmp16)) + 11|0);
+  store1($__size_$i12$i$i72,2);
+  store2($ref$tmp16,29550);
+  $arrayidx$i$i78 = ((($ref$tmp16)) + 2|0);
+  store1($arrayidx$i$i78,0);
+  $call$i$i8185 = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISJ_EERKT_($attrs,$__parent$i$i,$ref$tmp16)|0);
+  $6 = load4($call$i$i8185);
+  $cmp$i$i82 = ($6|0)==(0|0);
+  if ($cmp$i$i82) {
+   $call$i$i$i$i$i$i86 = (__Znwj(40)|0);
+   $__cc$i$i$i$i = ((($call$i$i$i$i$i$i86)) + 16|0);
    ; store8($__cc$i$i$i$i,load8($ref$tmp16,4),4); store4($__cc$i$i$i$i+8 | 0,load4($ref$tmp16+8 | 0,4),4);
    ; store8($ref$tmp16,i64_const(0,0),4); store4($ref$tmp16+8|0,0,4);
-   $second$i$i$i$i$i$i5$i$i = ((($call$i$i$i$i$i$i58)) + 28|0);
+   $second$i$i$i$i$i$i5$i$i = ((($call$i$i$i$i$i$i86)) + 28|0);
    ; store8($second$i$i$i$i$i$i5$i$i,i64_const(0,0),4); store4($second$i$i$i$i$i$i5$i$i+8|0,0,4);
    $7 = load4($__parent$i$i);
-   store4($call$i$i$i$i$i$i58,0);
-   $__right_$i$i$i = ((($call$i$i$i$i$i$i58)) + 4|0);
+   store4($call$i$i$i$i$i$i86,0);
+   $__right_$i$i$i = ((($call$i$i$i$i$i$i86)) + 4|0);
    store4($__right_$i$i$i,0);
-   $__parent_$i$i$i = ((($call$i$i$i$i$i$i58)) + 8|0);
+   $__parent_$i$i$i = ((($call$i$i$i$i$i$i86)) + 8|0);
    store4($__parent_$i$i$i,$7);
-   store4($call$i$i5657,$call$i$i$i$i$i$i58);
+   store4($call$i$i8185,$call$i$i$i$i$i$i86);
    $8 = load4($attrs);
    $9 = load4($8);
-   $cmp$i$i$i = ($9|0)==(0|0);
-   if ($cmp$i$i$i) {
-    $12 = $call$i$i$i$i$i$i58;
+   $cmp$i$i$i83 = ($9|0)==(0|0);
+   if ($cmp$i$i$i83) {
+    $12 = $call$i$i$i$i$i$i86;
    } else {
     $10 = $9;
     store4($attrs,$10);
-    $$pre$i$i$i = load4($call$i$i5657);
+    $$pre$i$i$i = load4($call$i$i8185);
     $12 = $$pre$i$i$i;
    }
    $__left_7$i$i$i = ((($vnode)) + 40|0);
@@ -3056,36 +3322,34 @@ function __ZN6asmdom9createElmEPNS_5VNodeE($vnode) {
    $13 = load4($__first_$i$i$i$i7$i$i);
    $inc$i$i$i = (($13) + 1)|0;
    store4($__first_$i$i$i$i7$i$i,$inc$i$i$i);
-   $__r$0$i$i = $call$i$i$i$i$i$i58;
+   $__r$0$i$i = $call$i$i$i$i$i$i86;
   } else {
    $__r$0$i$i = $6;
   }
   $second$i = ((($__r$0$i$i)) + 28|0);
-  $__size_$i$i$i$i60 = ((($second$i)) + 11|0);
-  $14 = load1($__size_$i$i$i$i60);
-  $tobool$i$i$i$i61 = ($14<<24>>24)<(0);
-  if ($tobool$i$i$i$i61) {
+  $__size_$i$i$i$i88 = ((($second$i)) + 11|0);
+  $14 = load1($__size_$i$i$i$i88);
+  $tobool$i$i$i$i89 = ($14<<24>>24)<(0);
+  if ($tobool$i$i$i$i89) {
    $15 = load4($second$i);
-   $cond$i$i$i66 = $15;
+   $cond$i$i$i94 = $15;
   } else {
-   $cond$i$i$i66 = $second$i;
+   $cond$i$i$i94 = $second$i;
   }
   $16 = load1($__size_$i$i$i);
-  $tobool$i$i$i$i70 = ($16<<24>>24)<(0);
-  if ($tobool$i$i$i$i70) {
+  $tobool$i$i$i$i98 = ($16<<24>>24)<(0);
+  if ($tobool$i$i$i$i98) {
    $17 = load4($vnode);
-   $cond$i$i$i75 = $17;
+   $cond$i$i$i103 = $17;
   } else {
-   $cond$i$i$i75 = $vnode;
+   $cond$i$i$i103 = $vnode;
   }
-  $call24 = _emscripten_asm_const_iii(4, ($cond$i$i$i66|0), ($cond$i$i$i75|0))|0;
+  $call24 = _emscripten_asm_const_iii(4, ($cond$i$i$i94|0), ($cond$i$i$i103|0))|0;
   $elm25 = ((($vnode)) + 72|0);
   store4($elm25,$call24);
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp16);
-  $$pre = load4($elm25);
-  $23 = $$pre;$elm$i$pre$phiZZ2D = $elm25;
+  $23 = $call24;$elm$i$pre$phiZZ2D = $elm25;
  }
- $20 = load4(10632);
+ $20 = load4(10232);
  $21 = $20;
  $22 = $vnode;
  $call$i = _emscripten_asm_const_iiii(6, ($21|0), ($22|0), ($23|0))|0;
@@ -3096,14 +3360,14 @@ function __ZN6asmdom9createElmEPNS_5VNodeE($vnode) {
  $25 = load4($__end_$i41);
  $cmp$i42 = ($24|0)==($25|0);
  if (!($cmp$i42)) {
-  $27 = $24;$i$089 = 0;
+  $27 = $24;$i$0135 = 0;
   while(1) {
    $26 = load4($elm$i$pre$phiZZ2D);
-   $arrayidx$i = (($27) + ($i$089<<2)|0);
+   $arrayidx$i = (($27) + ($i$0135<<2)|0);
    $28 = load4($arrayidx$i);
    $call38 = (__ZN6asmdom9createElmEPNS_5VNodeE($28)|0);
    $call39 = _emscripten_asm_const_iii(7, ($26|0), ($call38|0))|0;
-   $inc = (($i$089) + 1)|0;
+   $inc = (($i$0135) + 1)|0;
    $29 = load4($__end_$i41);
    $30 = load4($children);
    $sub$ptr$sub$i = (($29) - ($30))|0;
@@ -3114,7 +3378,7 @@ function __ZN6asmdom9createElmEPNS_5VNodeE($vnode) {
     $elm52$pre$phiZ2D = $elm$i$pre$phiZZ2D;
     break;
    } else {
-    $27 = $31;$i$089 = $inc;
+    $27 = $31;$i$0135 = $inc;
    }
   }
   $36 = load4($elm52$pre$phiZ2D);
@@ -3153,35 +3417,33 @@ function __ZN6asmdom9createElmEPNS_5VNodeE($vnode) {
 function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
  $oldVnode = $oldVnode|0;
  $vnode = $vnode|0;
- var $$pre = 0, $$pre$i = 0, $$pre$i$i$i$i$i$i$i$i = 0, $$pre264$i = 0, $$pre84 = 0, $$pre85 = 0, $$pre86 = 0, $$sink$be$i$i = 0, $$sink$i$i$i = 0, $$sroa$speculated$i = 0, $$sroa$speculated$i$i = 0, $$sroa$speculated$i$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i22$i$i = 0, $$sroa$speculated$i$i$i$i30$i$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $100 = 0, $101 = 0;
- var $102 = 0, $103 = 0, $104 = 0, $105 = 0, $106 = 0, $107 = 0, $108 = 0, $109 = 0, $11 = 0, $110 = 0, $111 = 0, $112 = 0, $113 = 0, $114 = 0, $115 = 0, $116 = 0, $117 = 0, $118 = 0, $119 = 0, $12 = 0;
- var $120 = 0, $121 = 0, $122 = 0, $123 = 0, $124 = 0, $125 = 0, $126 = 0, $127 = 0, $128 = 0, $129 = 0, $13 = 0, $130 = 0, $131 = 0, $132 = 0, $133 = 0, $134 = 0, $135 = 0, $136 = 0, $137 = 0, $138 = 0;
- var $139 = 0, $14 = 0, $140 = 0, $141 = 0, $142 = 0, $143 = 0, $144 = 0, $145 = 0, $146 = 0, $147 = 0, $148 = 0, $149 = 0, $15 = 0, $150 = 0, $151 = 0, $152 = 0, $153 = 0, $154 = 0, $155 = 0, $156 = 0;
- var $157 = 0, $158 = 0, $159 = 0, $16 = 0, $160 = 0, $161 = 0, $162 = 0, $163 = 0, $164 = 0, $165 = 0, $166 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0;
- var $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0;
- var $43 = 0, $44 = 0, $45 = 0, $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $54 = 0, $55 = 0, $56 = 0, $57 = 0, $58 = 0, $59 = 0, $6 = 0, $60 = 0;
- var $61 = 0, $62 = 0, $63 = 0, $64 = 0, $65 = 0, $66 = 0, $67 = 0, $68 = 0, $69 = 0, $7 = 0, $70 = 0, $71 = 0, $72 = 0, $73 = 0, $74 = 0, $75 = 0, $76 = 0, $77 = 0, $78 = 0, $79 = 0;
- var $8 = 0, $80 = 0, $81 = 0, $82 = 0, $83 = 0, $84 = 0, $85 = 0, $86 = 0, $87 = 0, $88 = 0, $89 = 0, $9 = 0, $90 = 0, $91 = 0, $92 = 0, $93 = 0, $94 = 0, $95 = 0, $96 = 0, $97 = 0;
- var $98 = 0, $99 = 0, $__begin_$i40 = 0, $__cc$i$i$i$i$i$i$i$i$i = 0, $__end_$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i5$i = 0, $__left_$i$i$i$i$i$i$i = 0, $__nd$0$i$i$i = 0, $__parent$i$i$i$i$i$i$i$sroa$0 = 0, $__parent$i$i$i$i$i$i$i$sroa$0$0$__parent$i$i$i$i$i$i$i$sroa$0$0$ = 0, $__parent_$i$i$i$i$i$i$i$i = 0, $__right_$i$i$i$i$i$i$i$i = 0, $__size_$i$i$i = 0, $__size_$i$i$i$i = 0, $__size_$i$i$i$i$i = 0, $__size_$i$i$i$i$i$i10$i$i = 0, $__size_$i$i$i$i$i$i18$i$i$i = 0, $__size_$i$i$i29 = 0;
- var $__size_$i$i$i55 = 0, $__size_$i$i5$i = 0, $__size_$i$i5$i$i = 0, $__size_$i$i5$i$i$i$i16$i$i = 0, $__size_$i$i5$i$i$i$i24$i$i$i = 0, $__size_$i3$i$i = 0, $__size_$i3$i$i$i = 0, $__size_$i3$i$i$i$i = 0, $__size_$i3$i$i$i$i$i12$i$i = 0, $__size_$i3$i$i$i$i$i20$i$i$i = 0, $__size_$i3$i$i31 = 0, $__size_$i3$i$i57 = 0, $__size_$i3$i$i67 = 0, $__size_$i3$i7$i = 0, $__size_$i3$i7$i$i = 0, $__size_$i3$i7$i$i$i$i18$i$i = 0, $__size_$i3$i7$i$i$i$i26$i$i$i = 0, $__value_$i$i = 0, $__value_$i$i$i = 0, $add$i = 0;
- var $add$ptr$i$i$i$i = 0, $arrayidx$i$i = 0, $arrayidx$i$i$i = 0, $arrayidx$i$i146$i = 0, $arrayidx$i$i161$i = 0, $arrayidx$i$i2 = 0, $arrayidx$i$i49 = 0, $arrayidx$i$i6$i = 0, $arrayidx$i112$i = 0, $arrayidx$i114$i = 0, $arrayidx$i126$i = 0, $arrayidx$i128$i = 0, $arrayidx$i130$i = 0, $arrayidx$i132$i = 0, $arrayidx$i134$i = 0, $arrayidx$i138$i = 0, $arrayidx$i140$i = 0, $arrayidx$i153$i = 0, $arrayidx$i155$i = 0, $arrayidx$i170$i = 0;
- var $arrayidx$i172$i = 0, $arrayidx$i175$i = 0, $arrayidx$i179$i = 0, $arrayidx$i184$i = 0, $arrayidx$i199$i = 0, $arrayidx$i201$i = 0, $beginIdx$addr$017$i$i = 0, $call$i = 0, $call$i$i = 0, $call$i$i$i = 0, $call$i$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i$i$i$i7$i$i = 0, $call$i$i$i$i$i30$i$i = 0, $call$i$i$i$i$i38$i$i$i = 0, $call$i$i$i$i11$i$i = 0, $call$i$i180$i = 0, $call$i$i186$i = 0, $call$i4$i = 0, $call1$i = 0;
- var $call1$i136$i = 0, $call1$i150$i = 0, $call1$i165$i = 0, $call1$i51 = 0, $call1$i5194 = 0, $call1$i97 = 0, $call112$i = 0, $call115$i = 0, $call126$i = 0, $call16 = 0, $call2$i = 0, $call2$i151$i = 0, $call2$i167$i = 0, $call2$i98 = 0, $call34 = 0, $call36$i = 0, $call47 = 0, $call47$i = 0, $call58$i = 0, $call63$i = 0;
- var $call72$i = 0, $call78$i = 0, $call94$i = 0, $call97$i = 0, $children = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i21$i$i = 0, $cmp$i$i$i$i$i$i$i29$i$i$i = 0, $cmp$i$i$i$i$i$i2$i$i = 0, $cmp$i$i$i$i$i$i20$i = 0, $cmp$i$i$i$i$i21$i = 0;
- var $cmp$i$i$i$i$i23$i$i = 0, $cmp$i$i$i$i$i3$i$i = 0, $cmp$i$i$i$i$i31$i$i$i = 0, $cmp$i$i$i$i1 = 0, $cmp$i$i$i$i22$i = 0, $cmp$i$i$i$i31$i$i = 0, $cmp$i$i$i$i39$i$i$i = 0, $cmp$i$i$i38$i$i = 0, $cmp$i$i$i46$i$i$i = 0, $cmp$i$i11$i = 0, $cmp$i$i8 = 0, $cmp$i1$i = 0, $cmp$i1$i$i = 0, $cmp$i135$i = 0, $cmp$i147$i = 0, $cmp$i15$i = 0, $cmp$i162$i = 0, $cmp$i176$i = 0, $cmp$i181$i = 0, $cmp$i187$i = 0;
- var $cmp$i21 = 0, $cmp$i23$i = 0, $cmp$i36 = 0, $cmp$i39 = 0, $cmp$i3999 = 0, $cmp$i4 = 0, $cmp$i42 = 0, $cmp$i52 = 0, $cmp$i5295 = 0, $cmp$i62 = 0, $cmp$i72 = 0, $cmp$i8$i$i = 0, $cmp$lcssa$i = 0, $cmp13$i = 0, $cmp13$lcssa$i = 0, $cmp13$not$i = 0, $cmp13242$i = 0, $cmp14$i = 0, $cmp14$i$i$i = 0, $cmp144$i = 0;
- var $cmp16$i$i = 0, $cmp18$i = 0, $cmp2$i$i = 0, $cmp2$i141$i = 0, $cmp23$i = 0, $cmp241$i = 0, $cmp29$i = 0, $cmp47$i$i = 0, $cmp5$i$i$i = 0, $cmp8$i = 0, $cmp8$i$i = 0, $cmp8$i$i$i$i33$i$i = 0, $cmp8$i$i$i$i41$i$i$i = 0, $cond$i$i = 0, $cond$i$i$i = 0, $cond$i$i$i$i = 0, $cond$i$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i14$i$i = 0, $cond$i$i$i$i$i22$i$i$i = 0;
- var $cond$i$i$i10$i = 0, $cond$i$i$i7 = 0, $cond$i$i$i78 = 0, $cond$i$i22$i = 0, $cond$i$i22$i$i = 0, $cond$i$i22$i$i$i$i$i$i = 0, $cond$i$i22$i$i$i$i$i$i$i = 0, $cond$i$i22$i$i$i$i29$i$i = 0, $cond$i$i22$i$i$i$i37$i$i$i = 0, $cond$i$i35 = 0, $cond$i$i61 = 0, $cond$i$i71 = 0, $cond$i11$i = 0, $cond$i11$i$i = 0, $cond$i11$i$i$i$i20$i$i = 0, $cond$i11$i$i$i$i28$i$i$i = 0, $conv$i$i$i = 0, $conv$i$i$i$i = 0, $conv$i$i$i$i$i = 0, $conv$i$i$i$i$i$i13$i$i = 0;
- var $conv$i$i$i$i$i$i21$i$i$i = 0, $conv$i$i$i33 = 0, $conv$i$i$i59 = 0, $conv$i$i$i69 = 0, $conv$i$i9$i = 0, $conv$i$i9$i$i = 0, $conv$i$i9$i$i$i$i19$i$i = 0, $conv$i$i9$i$i$i$i27$i$i$i = 0, $dec$i = 0, $dec31$i = 0, $dec50$i = 0, $dec53$i = 0, $dec67$i = 0, $dec79$i = 0, $elm = 0, $elm$i = 0, $elm$i$i = 0, $elm$i50 = 0, $elm$i5093 = 0, $elm1 = 0;
- var $elm113$i = 0, $elm123$i = 0, $elm124$i = 0, $elm149$i = 0, $elm61$i = 0, $elm75$i = 0, $elm76$i = 0, $elm95$i = 0, $exception$i$i = 0, $exception$i188$i = 0, $inc$i = 0, $inc$i$i = 0, $inc$i$i$i$i$i$i$i$i = 0, $inc$i100 = 0, $inc$i14$i = 0, $inc$i145$i = 0, $inc$i160$i = 0, $inc$i3 = 0, $inc$i48 = 0, $inc$i4896 = 0;
- var $inc128$i = 0, $inc25$i = 0, $inc39$i = 0, $inc42$i = 0, $inc64$i = 0, $inc82$i = 0, $inc98$i = 0, $isnull$i = 0, $key$i = 0, $key$i$i = 0, $newEndIdx$0$be$i = 0, $newEndIdx$0$lcssa$i = 0, $newEndIdx$0244$i = 0, $newEndVnode$0$be$i = 0, $newEndVnode$0251$i = 0, $newStartIdx$0$be$i = 0, $newStartIdx$0$lcssa$i = 0, $newStartIdx$0247$i = 0, $newStartVnode$0$be$i = 0, $newStartVnode$0249$i = 0;
- var $oldCh$i$sroa$0$0 = 0, $oldCh$i$sroa$18$0 = 0, $oldEndIdx$0$be$i = 0, $oldEndIdx$0$lcssa$i = 0, $oldEndIdx$0246$i = 0, $oldEndVnode$0$be$i = 0, $oldEndVnode$0248$i = 0, $oldKeyToIdx$0$be$i = 0, $oldKeyToIdx$0$lcssa$i = 0, $oldKeyToIdx$0252$i = 0, $oldKeyToIdx$1$i = 0, $oldStartIdx$0$be$i = 0, $oldStartIdx$0$lcssa$i = 0, $oldStartIdx$0253$i = 0, $oldStartVnode$0$be$i = 0, $oldStartVnode$0245$i = 0, $or$cond = 0, $or$cond$i = 0, $or$cond206$i = 0, $or$cond207$i = 0;
- var $or$cond243$i = 0, $ref$tmp$i$i = 0, $retval$0$i$i$i = 0, $second$i$i = 0, $second$i$i$i$i$i$i$i$i$i$i$i$i = 0, $second$i$i10$i$i = 0, $second$i192$i = 0, $startIdx$addr$03$i$i = 0, $startIdx$addr$03$i144$i = 0, $startIdx$addr$03$i159$i = 0, $sub = 0, $sub$i = 0, $sub$ptr$div$i = 0, $sub$ptr$div$i$i = 0, $sub$ptr$div$i$i$i = 0, $sub$ptr$div$i107$i = 0, $sub$ptr$div$i204$i = 0, $sub$ptr$div$i45 = 0, $sub$ptr$div6$i$i$i$i = 0, $sub$ptr$rhs$cast$i$i$i$i = 0;
- var $sub$ptr$sub$i = 0, $sub$ptr$sub$i$i = 0, $sub$ptr$sub$i$i$i = 0, $sub$ptr$sub$i$i$i$i = 0, $sub$ptr$sub$i106$i = 0, $sub$ptr$sub$i203$i = 0, $sub$ptr$sub$i44 = 0, $sub143$i = 0, $sub2$i = 0, $sub28 = 0, $text = 0, $text12 = 0, $text30 = 0, $text41 = 0, $tobool = 0, $tobool$i = 0, $tobool$i$i$i = 0, $tobool$i$i$i$i = 0, $tobool$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i11$i$i = 0;
- var $tobool$i$i$i$i$i$i19$i$i$i = 0, $tobool$i$i$i30 = 0, $tobool$i$i$i56 = 0, $tobool$i$i6$i = 0, $tobool$i$i6$i$i = 0, $tobool$i$i6$i$i$i$i17$i$i = 0, $tobool$i$i6$i$i$i$i25$i$i$i = 0, $tobool109$i = 0, label = 0, sp = 0;
+ var $$pre = 0, $$pre$i = 0, $$pre$i$i$i$i$i$i$i$i = 0, $$pre265$i = 0, $$pre72 = 0, $$pre73 = 0, $$pre74 = 0, $$sink$be$i$i = 0, $$sroa$speculated$i$i = 0, $$sroa$speculated$i$i$i = 0, $$sroa$speculated$i$i$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i21$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $100 = 0, $101 = 0, $102 = 0, $103 = 0, $104 = 0;
+ var $105 = 0, $106 = 0, $107 = 0, $108 = 0, $109 = 0, $11 = 0, $110 = 0, $111 = 0, $112 = 0, $113 = 0, $114 = 0, $115 = 0, $116 = 0, $117 = 0, $118 = 0, $119 = 0, $12 = 0, $120 = 0, $121 = 0, $122 = 0;
+ var $123 = 0, $124 = 0, $125 = 0, $126 = 0, $127 = 0, $128 = 0, $129 = 0, $13 = 0, $130 = 0, $131 = 0, $132 = 0, $133 = 0, $134 = 0, $135 = 0, $136 = 0, $137 = 0, $138 = 0, $139 = 0, $14 = 0, $140 = 0;
+ var $141 = 0, $142 = 0, $143 = 0, $144 = 0, $145 = 0, $146 = 0, $147 = 0, $148 = 0, $149 = 0, $15 = 0, $150 = 0, $151 = 0, $152 = 0, $153 = 0, $154 = 0, $155 = 0, $156 = 0, $16 = 0, $17 = 0, $18 = 0;
+ var $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0;
+ var $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0, $43 = 0, $44 = 0, $45 = 0, $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $54 = 0;
+ var $55 = 0, $56 = 0, $57 = 0, $58 = 0, $59 = 0, $6 = 0, $60 = 0, $61 = 0, $62 = 0, $63 = 0, $64 = 0, $65 = 0, $66 = 0, $67 = 0, $68 = 0, $69 = 0, $7 = 0, $70 = 0, $71 = 0, $72 = 0;
+ var $73 = 0, $74 = 0, $75 = 0, $76 = 0, $77 = 0, $78 = 0, $79 = 0, $8 = 0, $80 = 0, $81 = 0, $82 = 0, $83 = 0, $84 = 0, $85 = 0, $86 = 0, $87 = 0, $88 = 0, $89 = 0, $9 = 0, $90 = 0;
+ var $91 = 0, $92 = 0, $93 = 0, $94 = 0, $95 = 0, $96 = 0, $97 = 0, $98 = 0, $99 = 0, $__begin_$i40 = 0, $__cc$i$i$i$i$i$i$i$i$i = 0, $__end_$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i12$i = 0, $__first_$i$i$i$i$i2$i = 0, $__left_$i$i$i$i$i$i$i = 0, $__parent$i$i$i$i$i$i$i = 0, $__parent_$i$i$i$i$i$i$i$i = 0, $__right_$i$i$i$i$i$i$i$i = 0, $__size_$i$i$i = 0;
+ var $__size_$i$i$i$i$i = 0, $__size_$i$i$i$i$i$i = 0, $__size_$i$i$i$i$i$i$i$i9$i$i = 0, $__size_$i$i$i$i$i$i$i15$i$i = 0, $__size_$i$i$i$i$i11 = 0, $__size_$i$i$i12$i$i = 0, $__size_$i$i$i29 = 0, $__size_$i$i$i55 = 0, $__size_$i$i$i6$i$i = 0, $__size_$i3$i$i = 0, $__size_$i3$i$i$i = 0, $__size_$i3$i$i$i$i = 0, $__size_$i3$i$i$i$i$i$i11$i$i = 0, $__size_$i3$i$i$i5$i = 0, $__size_$i3$i$i2$i = 0, $__size_$i3$i$i2$i$i = 0, $__size_$i3$i$i2$i$i$i$i17$i$i = 0, $__size_$i3$i$i31 = 0, $__size_$i3$i$i57 = 0, $__value_$i$i = 0;
+ var $add$i = 0, $add$ptr$i$i$i$i = 0, $arrayidx$i$i = 0, $arrayidx$i$i$i = 0, $arrayidx$i$i1 = 0, $arrayidx$i$i146$i = 0, $arrayidx$i$i161$i = 0, $arrayidx$i$i3$i = 0, $arrayidx$i$i49 = 0, $arrayidx$i112$i = 0, $arrayidx$i114$i = 0, $arrayidx$i126$i = 0, $arrayidx$i128$i = 0, $arrayidx$i130$i = 0, $arrayidx$i132$i = 0, $arrayidx$i134$i = 0, $arrayidx$i138$i = 0, $arrayidx$i140$i = 0, $arrayidx$i153$i = 0, $arrayidx$i155$i = 0;
+ var $arrayidx$i170$i = 0, $arrayidx$i172$i = 0, $arrayidx$i175$i = 0, $arrayidx$i182$i = 0, $arrayidx$i184$i = 0, $arrayidx$i200$i = 0, $arrayidx$i202$i = 0, $beginIdx$addr$025$i$i = 0, $call$i = 0, $call$i$i$i = 0, $call$i$i$i$i = 0, $call$i$i$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i$i$i$i15$i$i = 0, $call$i$i$i$i$i$i29$i$i = 0, $call$i$i$i$i$i14$i$i = 0, $call$i$i$i$i11$i$i = 0, $call$i1$i = 0, $call$i177180$i = 0, $call$i187194$i = 0, $call1$i = 0;
+ var $call1$i136$i = 0, $call1$i150$i = 0, $call1$i165$i = 0, $call1$i51 = 0, $call1$i5182 = 0, $call1$i85 = 0, $call112$i = 0, $call115$i = 0, $call126$i = 0, $call16 = 0, $call2$i = 0, $call2$i151$i = 0, $call2$i167$i = 0, $call2$i86 = 0, $call34 = 0, $call36$i = 0, $call47 = 0, $call47$i = 0, $call58$i = 0, $call63$i = 0;
+ var $call72$i = 0, $call78$i = 0, $call94$i = 0, $call97$i = 0, $children = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i20$i$i = 0, $cmp$i$i$i$i$i$i$i16$i = 0, $cmp$i$i$i$i$i$i17$i = 0, $cmp$i$i$i$i$i$i22$i$i = 0, $cmp$i$i$i$i$i30$i$i = 0, $cmp$i$i$i$i$i8 = 0;
+ var $cmp$i$i$i13 = 0, $cmp$i$i$i3$i = 0, $cmp$i$i$i37$i$i = 0, $cmp$i$i14 = 0, $cmp$i$i8$i = 0, $cmp$i1$i = 0, $cmp$i11$i = 0, $cmp$i135$i = 0, $cmp$i147$i = 0, $cmp$i162$i = 0, $cmp$i178$i = 0, $cmp$i18$i = 0, $cmp$i188$i = 0, $cmp$i21 = 0, $cmp$i3 = 0, $cmp$i36 = 0, $cmp$i39 = 0, $cmp$i3987 = 0, $cmp$i42 = 0, $cmp$i52 = 0;
+ var $cmp$i5283 = 0, $cmp$i62 = 0, $cmp$i8$i$i = 0, $cmp$lcssa$i = 0, $cmp13$i = 0, $cmp13$lcssa$i = 0, $cmp13$not$i = 0, $cmp13243$i = 0, $cmp14$i = 0, $cmp144$i = 0, $cmp18$i = 0, $cmp2$i$i = 0, $cmp2$i141$i = 0, $cmp23$i = 0, $cmp24$i$i = 0, $cmp242$i = 0, $cmp29$i = 0, $cmp45$i$i = 0, $cmp7$i$i = 0, $cmp7$i$i$i = 0;
+ var $cmp7$i$i$i$i$i32$i$i = 0, $cond$i$i = 0, $cond$i$i$i = 0, $cond$i$i$i$i = 0, $cond$i$i$i$i$i = 0, $cond$i$i$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i13$i$i = 0, $cond$i$i$i$i9 = 0, $cond$i$i$i67 = 0, $cond$i$i$i7$i = 0, $cond$i$i1$i$i = 0, $cond$i$i1$i$i$i = 0, $cond$i$i1$i$i$i$i$i$i$i = 0, $cond$i$i1$i$i$i$i$i28$i$i = 0, $cond$i$i35 = 0, $cond$i$i61 = 0, $cond$i16$i$i = 0, $cond$i16$i$i$i = 0, $cond$i16$i$i$i$i$i19$i$i = 0, $conv$i$i$i = 0;
+ var $conv$i$i$i$i = 0, $conv$i$i$i$i$i = 0, $conv$i$i$i$i$i$i$i12$i$i = 0, $conv$i$i$i$i6$i = 0, $conv$i$i$i33 = 0, $conv$i$i$i4$i = 0, $conv$i$i$i4$i$i = 0, $conv$i$i$i4$i$i$i$i18$i$i = 0, $conv$i$i$i59 = 0, $dec$i = 0, $dec31$i = 0, $dec50$i = 0, $dec53$i = 0, $dec67$i = 0, $dec79$i = 0, $elm = 0, $elm$i = 0, $elm$i$i = 0, $elm$i50 = 0, $elm$i5081 = 0;
+ var $elm1 = 0, $elm113$i = 0, $elm123$i = 0, $elm124$i = 0, $elm149$i = 0, $elm61$i = 0, $elm75$i = 0, $elm76$i = 0, $elm95$i = 0, $exception$i$i = 0, $exception$i189$i = 0, $inc$i = 0, $inc$i$i = 0, $inc$i$i$i$i$i$i$i$i = 0, $inc$i10$i = 0, $inc$i145$i = 0, $inc$i160$i = 0, $inc$i2 = 0, $inc$i48 = 0, $inc$i4884 = 0;
+ var $inc$i88 = 0, $inc128$i = 0, $inc25$i = 0, $inc39$i = 0, $inc42$i = 0, $inc64$i = 0, $inc82$i = 0, $inc98$i = 0, $isnull$i = 0, $key$i = 0, $key$i$i = 0, $newEndIdx$0$be$i = 0, $newEndIdx$0$lcssa$i = 0, $newEndIdx$0245$i = 0, $newEndVnode$0$be$i = 0, $newEndVnode$0252$i = 0, $newStartIdx$0$be$i = 0, $newStartIdx$0$lcssa$i = 0, $newStartIdx$0248$i = 0, $newStartVnode$0$be$i = 0;
+ var $newStartVnode$0250$i = 0, $oldCh$i$sroa$0$0 = 0, $oldEndIdx$0$be$i = 0, $oldEndIdx$0$lcssa$i = 0, $oldEndIdx$0247$i = 0, $oldEndVnode$0$be$i = 0, $oldEndVnode$0249$i = 0, $oldKeyToIdx$0$be$i = 0, $oldKeyToIdx$0$lcssa$i = 0, $oldKeyToIdx$0253$i = 0, $oldKeyToIdx$1$i = 0, $oldStartIdx$0$be$i = 0, $oldStartIdx$0$lcssa$i = 0, $oldStartIdx$0254$i = 0, $oldStartVnode$0$be$i = 0, $oldStartVnode$0246$i = 0, $or$cond = 0, $or$cond$i = 0, $or$cond207$i = 0, $or$cond208$i = 0;
+ var $or$cond244$i = 0, $ref$tmp$i$i = 0, $second$i$i = 0, $second$i$i$i$i$i$i$i$i$i$i$i$i = 0, $second$i$i18$i$i = 0, $second$i193$i = 0, $startIdx$addr$03$i$i = 0, $startIdx$addr$03$i144$i = 0, $startIdx$addr$03$i159$i = 0, $sub = 0, $sub$i = 0, $sub$ptr$div$i = 0, $sub$ptr$div$i$i = 0, $sub$ptr$div$i$i$i = 0, $sub$ptr$div$i107$i = 0, $sub$ptr$div$i205$i = 0, $sub$ptr$div$i45 = 0, $sub$ptr$div6$i$i$i$i = 0, $sub$ptr$rhs$cast$i$i$i$i = 0, $sub$ptr$sub$i = 0;
+ var $sub$ptr$sub$i$i = 0, $sub$ptr$sub$i$i$i = 0, $sub$ptr$sub$i$i$i$i = 0, $sub$ptr$sub$i106$i = 0, $sub$ptr$sub$i204$i = 0, $sub$ptr$sub$i44 = 0, $sub143$i = 0, $sub2$i = 0, $sub28 = 0, $text = 0, $text12 = 0, $text30 = 0, $text41 = 0, $tobool = 0, $tobool$i = 0, $tobool$i$i$i = 0, $tobool$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i$i$i10$i$i = 0, $tobool$i$i$i$i$i$i$i16$i$i = 0;
+ var $tobool$i$i$i$i$i12 = 0, $tobool$i$i$i13$i$i = 0, $tobool$i$i$i30 = 0, $tobool$i$i$i56 = 0, $tobool$i$i$i7$i$i = 0, $tobool109$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 32|0;
- $__parent$i$i$i$i$i$i$i$sroa$0 = sp + 16|0;
+ $__parent$i$i$i$i$i$i$i = sp + 16|0;
  $ref$tmp$i$i = sp;
  $elm = ((($oldVnode)) + 72|0);
  $0 = load4($elm);
@@ -3206,57 +3468,52 @@ function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
  $cmp$i = ($cond$i$i|0)==(0);
  if (!($cmp$i)) {
   $text41 = ((($oldVnode)) + 24|0);
+  $__size_$i$i$i$i$i = ((($text41)) + 11|0);
+  $134 = load1($__size_$i$i$i$i$i);
+  $tobool$i$i$i$i$i = ($134<<24>>24)<(0);
+  $135 = load4($text41);
+  $__size_$i3$i$i$i = ((($oldVnode)) + 28|0);
+  $136 = load4($__size_$i3$i$i$i);
+  $conv$i$i$i$i = $134&255;
+  $cond$i$i1$i$i = $tobool$i$i$i$i$i ? $135 : $text41;
+  $cond$i$i$i = $tobool$i$i$i$i$i ? $136 : $conv$i$i$i$i;
   if ($tobool$i$i$i) {
-   $__size_$i3$i$i67 = ((($vnode)) + 28|0);
-   $144 = load4($__size_$i3$i$i67);
-   $cond$i$i71 = $144;
+   $__size_$i3$i$i2$i = ((($vnode)) + 28|0);
+   $137 = load4($__size_$i3$i$i2$i);
+   $138 = load4($text);
+   $cond$i$i$i$i = $138;$cond$i16$i$i = $137;
   } else {
-   $conv$i$i$i69 = $3&255;
-   $cond$i$i71 = $conv$i$i$i69;
+   $conv$i$i$i4$i = $3&255;
+   $cond$i$i$i$i = $text;$cond$i16$i$i = $conv$i$i$i4$i;
   }
-  $__size_$i$i5$i = ((($text41)) + 11|0);
-  $145 = load1($__size_$i$i5$i);
-  $tobool$i$i6$i = ($145<<24>>24)<(0);
-  $__size_$i3$i7$i = ((($oldVnode)) + 28|0);
-  $146 = load4($__size_$i3$i7$i);
-  $conv$i$i9$i = $145&255;
-  $cond$i11$i = $tobool$i$i6$i ? $146 : $conv$i$i9$i;
-  if ($tobool$i$i$i) {
-   $147 = load4($text);
-   $cond$i$i$i = $147;
+  $cmp$i$i$i$i$i = ($cond$i$i$i>>>0)<($cond$i16$i$i>>>0);
+  $$sroa$speculated$i$i = $cmp$i$i$i$i$i ? $cond$i$i$i : $cond$i16$i$i;
+  $cmp$i$i$i = ($$sroa$speculated$i$i|0)==(0);
+  if ($cmp$i$i$i) {
+   label = 107;
   } else {
-   $cond$i$i$i = $text;
-  }
-  $cmp$i$i$i$i = ($cond$i11$i>>>0)<($cond$i$i71>>>0);
-  $$sroa$speculated$i = $cmp$i$i$i$i ? $cond$i11$i : $cond$i$i71;
-  $cmp$i$i = ($$sroa$speculated$i|0)==(0);
-  if ($cmp$i$i) {
-   label = 128;
-  } else {
-   $148 = load4($text41);
-   $cond$i$i22$i = $tobool$i$i6$i ? $148 : $text41;
-   $call$i$i = (_memcmp($cond$i$i$i,$cond$i$i22$i,$$sroa$speculated$i)|0);
-   $cmp$i72 = ($call$i$i|0)==(0);
-   if ($cmp$i72) {
-    label = 128;
+   $call$i$i$i = (_memcmp($cond$i$i$i$i,$cond$i$i1$i$i,$$sroa$speculated$i$i)|0);
+   $cmp$i$i = ($call$i$i$i|0)==(0);
+   if ($cmp$i$i) {
+    label = 107;
    }
   }
-  if ((label|0) == 128) {
-   $cmp8$i = ($cond$i$i71>>>0)>=($cond$i11$i>>>0);
-   $tobool = $cmp$i$i$i$i ^ 1;
-   $or$cond = $cmp8$i & $tobool;
+  if ((label|0) == 107) {
+   $cmp7$i$i = ($cond$i16$i$i>>>0)>=($cond$i$i$i>>>0);
+   $tobool = $cmp$i$i$i$i$i ^ 1;
+   $or$cond = $cmp7$i$i & $tobool;
    if ($or$cond) {
     STACKTOP = sp;return;
    }
   }
-  $149 = load4($elm1);
+  $139 = load4($elm1);
   if ($tobool$i$i$i) {
-   $150 = load4($text);
-   $cond$i$i$i78 = $150;
+   $140 = load4($text);
+   $cond$i$i$i67 = $140;
   } else {
-   $cond$i$i$i78 = $text;
+   $cond$i$i$i67 = $text;
   }
-  $call47 = _emscripten_asm_const_iii(14, ($149|0), ($cond$i$i$i78|0))|0;
+  $call47 = _emscripten_asm_const_iii(14, ($139|0), ($cond$i$i$i67|0))|0;
   STACKTOP = sp;return;
  }
  $children = ((($vnode)) + 76|0);
@@ -3274,106 +3531,106 @@ function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
  $cmp$i42 = ($12|0)==($10|0);
  if ($cmp$i21) {
   if (!($cmp$i42)) {
-   $136 = $12;
-   $sub$ptr$sub$i44 = (($11) - ($136))|0;
+   $126 = $12;
+   $sub$ptr$sub$i44 = (($11) - ($126))|0;
    $sub$ptr$div$i45 = $sub$ptr$sub$i44 >> 2;
    $sub28 = (($sub$ptr$div$i45) + -1)|0;
-   $137 = load4($12);
-   $elm$i5093 = ((($137)) + 72|0);
-   $138 = load4($elm$i5093);
-   $call1$i5194 = _emscripten_asm_const_ii(12, ($138|0))|0;
-   $cmp$i5295 = ($sub28|0)==(0);
-   if ($cmp$i5295) {
+   $127 = load4($12);
+   $elm$i5081 = ((($127)) + 72|0);
+   $128 = load4($elm$i5081);
+   $call1$i5182 = _emscripten_asm_const_ii(12, ($128|0))|0;
+   $cmp$i5283 = ($sub28|0)==(0);
+   if ($cmp$i5283) {
     STACKTOP = sp;return;
    } else {
-    $inc$i4896 = 1;
+    $inc$i4884 = 1;
    }
    while(1) {
-    $$pre86 = load4($__begin_$i40);
-    $inc$i48 = (($inc$i4896) + 1)|0;
-    $arrayidx$i$i49 = (($$pre86) + ($inc$i4896<<2)|0);
-    $139 = load4($arrayidx$i$i49);
-    $elm$i50 = ((($139)) + 72|0);
-    $140 = load4($elm$i50);
-    $call1$i51 = _emscripten_asm_const_ii(12, ($140|0))|0;
+    $$pre74 = load4($__begin_$i40);
+    $inc$i48 = (($inc$i4884) + 1)|0;
+    $arrayidx$i$i49 = (($$pre74) + ($inc$i4884<<2)|0);
+    $129 = load4($arrayidx$i$i49);
+    $elm$i50 = ((($129)) + 72|0);
+    $130 = load4($elm$i50);
+    $call1$i51 = _emscripten_asm_const_ii(12, ($130|0))|0;
     $cmp$i52 = ($inc$i48>>>0)>($sub28>>>0);
     if ($cmp$i52) {
      break;
     } else {
-     $inc$i4896 = $inc$i48;
+     $inc$i4884 = $inc$i48;
     }
    }
    STACKTOP = sp;return;
   }
   $text30 = ((($oldVnode)) + 24|0);
   $__size_$i$i$i55 = ((($text30)) + 11|0);
-  $141 = load1($__size_$i$i$i55);
-  $tobool$i$i$i56 = ($141<<24>>24)<(0);
+  $131 = load1($__size_$i$i$i55);
+  $tobool$i$i$i56 = ($131<<24>>24)<(0);
   if ($tobool$i$i$i56) {
    $__size_$i3$i$i57 = ((($oldVnode)) + 28|0);
-   $142 = load4($__size_$i3$i$i57);
-   $cond$i$i61 = $142;
+   $132 = load4($__size_$i3$i$i57);
+   $cond$i$i61 = $132;
   } else {
-   $conv$i$i$i59 = $141&255;
+   $conv$i$i$i59 = $131&255;
    $cond$i$i61 = $conv$i$i$i59;
   }
   $cmp$i62 = ($cond$i$i61|0)==(0);
   if ($cmp$i62) {
    STACKTOP = sp;return;
   }
-  $143 = load4($elm1);
-  $call34 = _emscripten_asm_const_ii(13, ($143|0))|0;
+  $133 = load4($elm1);
+  $call34 = _emscripten_asm_const_ii(13, ($133|0))|0;
   STACKTOP = sp;return;
  }
  if ($cmp$i42) {
   $text12 = ((($oldVnode)) + 24|0);
   $__size_$i$i$i29 = ((($text12)) + 11|0);
-  $126 = load1($__size_$i$i$i29);
-  $tobool$i$i$i30 = ($126<<24>>24)<(0);
+  $116 = load1($__size_$i$i$i29);
+  $tobool$i$i$i30 = ($116<<24>>24)<(0);
   if ($tobool$i$i$i30) {
    $__size_$i3$i$i31 = ((($oldVnode)) + 28|0);
-   $127 = load4($__size_$i3$i$i31);
-   $cond$i$i35 = $127;
+   $117 = load4($__size_$i3$i$i31);
+   $cond$i$i35 = $117;
   } else {
-   $conv$i$i$i33 = $126&255;
+   $conv$i$i$i33 = $116&255;
    $cond$i$i35 = $conv$i$i$i33;
   }
   $cmp$i36 = ($cond$i$i35|0)==(0);
   if ($cmp$i36) {
-   $131 = $7;$132 = $8;$134 = $5;
+   $121 = $7;$122 = $8;$124 = $5;
   } else {
-   $128 = load4($elm1);
-   $call16 = _emscripten_asm_const_ii(13, ($128|0))|0;
+   $118 = load4($elm1);
+   $call16 = _emscripten_asm_const_ii(13, ($118|0))|0;
    $$pre = load4($__end_$i);
-   $$pre84 = load4($children);
-   $129 = $$pre84;
-   $131 = $$pre;$132 = $$pre84;$134 = $129;
+   $$pre72 = load4($children);
+   $119 = $$pre72;
+   $121 = $$pre;$122 = $$pre72;$124 = $119;
   }
-  $130 = load4($elm1);
-  $sub$ptr$sub$i = (($131) - ($132))|0;
+  $120 = load4($elm1);
+  $sub$ptr$sub$i = (($121) - ($122))|0;
   $sub$ptr$div$i = $sub$ptr$sub$i >> 2;
   $sub = (($sub$ptr$div$i) + -1)|0;
-  $133 = load4($134);
-  $call1$i97 = (__ZN6asmdom9createElmEPNS_5VNodeE($133)|0);
-  $call2$i98 = _emscripten_asm_const_iiii(11, ($130|0), ($call1$i97|0), 0)|0;
-  $cmp$i3999 = ($sub|0)==(0);
-  if ($cmp$i3999) {
+  $123 = load4($124);
+  $call1$i85 = (__ZN6asmdom9createElmEPNS_5VNodeE($123)|0);
+  $call2$i86 = _emscripten_asm_const_iiii(11, ($120|0), ($call1$i85|0), 0)|0;
+  $cmp$i3987 = ($sub|0)==(0);
+  if ($cmp$i3987) {
    STACKTOP = sp;return;
   } else {
-   $inc$i100 = 1;
+   $inc$i88 = 1;
   }
   while(1) {
-   $$pre85 = load4($children);
-   $inc$i = (($inc$i100) + 1)|0;
-   $arrayidx$i$i = (($$pre85) + ($inc$i100<<2)|0);
-   $135 = load4($arrayidx$i$i);
-   $call1$i = (__ZN6asmdom9createElmEPNS_5VNodeE($135)|0);
-   $call2$i = _emscripten_asm_const_iiii(11, ($130|0), ($call1$i|0), 0)|0;
+   $$pre73 = load4($children);
+   $inc$i = (($inc$i88) + 1)|0;
+   $arrayidx$i$i = (($$pre73) + ($inc$i88<<2)|0);
+   $125 = load4($arrayidx$i$i);
+   $call1$i = (__ZN6asmdom9createElmEPNS_5VNodeE($125)|0);
+   $call2$i = _emscripten_asm_const_iiii(11, ($120|0), ($call1$i|0), 0)|0;
    $cmp$i39 = ($inc$i>>>0)>($sub>>>0);
    if ($cmp$i39) {
     break;
    } else {
-    $inc$i100 = $inc$i;
+    $inc$i88 = $inc$i;
    }
   }
   STACKTOP = sp;return;
@@ -3384,7 +3641,7 @@ function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
  $sub$ptr$div$i$i$i = $sub$ptr$sub$i$i$i >> 2;
  $cmp$i1$i = ($sub$ptr$div$i$i$i|0)==(0);
  if ($cmp$i1$i) {
-  $oldCh$i$sroa$0$0 = 0;$oldCh$i$sroa$18$0 = 0;
+  $115 = 0;$19 = 0;$20 = 0;$oldCh$i$sroa$0$0 = 0;
  } else {
   $cmp$i8$i$i = ($sub$ptr$div$i$i$i>>>0)>(1073741823);
   if ($cmp$i8$i$i) {
@@ -3392,662 +3649,529 @@ function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
    // unreachable;
   }
   $call$i$i$i$i11$i$i = (__Znwj($sub$ptr$sub$i$i$i)|0);
-  $15 = $call$i$i$i$i11$i$i;
-  $16 = load4($__begin_$i40);
-  $17 = load4($9);
-  $sub$ptr$rhs$cast$i$i$i$i = $16;
-  $sub$ptr$sub$i$i$i$i = (($17) - ($sub$ptr$rhs$cast$i$i$i$i))|0;
-  $cmp$i$i$i$i1 = ($sub$ptr$sub$i$i$i$i|0)>(0);
-  if ($cmp$i$i$i$i1) {
+  $15 = load4($__begin_$i40);
+  $16 = load4($9);
+  $sub$ptr$rhs$cast$i$i$i$i = $15;
+  $sub$ptr$sub$i$i$i$i = (($16) - ($sub$ptr$rhs$cast$i$i$i$i))|0;
+  $cmp$i$i$i3$i = ($sub$ptr$sub$i$i$i$i|0)>(0);
+  $17 = $call$i$i$i$i11$i$i;
+  if ($cmp$i$i$i3$i) {
    $sub$ptr$div6$i$i$i$i = $sub$ptr$sub$i$i$i$i >>> 2;
    $add$ptr$i$i$i$i = (($call$i$i$i$i11$i$i) + ($sub$ptr$div6$i$i$i$i<<2)|0);
-   _memcpy(($call$i$i$i$i11$i$i|0),($16|0),($sub$ptr$sub$i$i$i$i|0))|0;
+   _memcpy(($call$i$i$i$i11$i$i|0),($15|0),($sub$ptr$sub$i$i$i$i|0))|0;
    $18 = $add$ptr$i$i$i$i;
-   $oldCh$i$sroa$0$0 = $15;$oldCh$i$sroa$18$0 = $18;
+   $115 = $call$i$i$i$i11$i$i;$19 = $18;$20 = $17;$oldCh$i$sroa$0$0 = $call$i$i$i$i11$i$i;
   } else {
-   $oldCh$i$sroa$0$0 = $15;$oldCh$i$sroa$18$0 = $15;
+   $115 = $call$i$i$i$i11$i$i;$19 = $17;$20 = $17;$oldCh$i$sroa$0$0 = $call$i$i$i$i11$i$i;
   }
  }
- $sub$ptr$sub$i$i = (($oldCh$i$sroa$18$0) - ($oldCh$i$sroa$0$0))|0;
+ $sub$ptr$sub$i$i = (($19) - ($20))|0;
  $sub$ptr$div$i$i = $sub$ptr$sub$i$i >> 2;
  $sub$i = (($sub$ptr$div$i$i) + -1)|0;
- $19 = load4($__end_$i);
- $20 = load4($children);
- $sub$ptr$sub$i106$i = (($19) - ($20))|0;
+ $21 = load4($__end_$i);
+ $22 = load4($children);
+ $sub$ptr$sub$i106$i = (($21) - ($22))|0;
  $sub$ptr$div$i107$i = $sub$ptr$sub$i106$i >> 2;
  $sub2$i = (($sub$ptr$div$i107$i) + -1)|0;
- $21 = $oldCh$i$sroa$0$0;
- $22 = $20;
- $cmp241$i = ($sub$ptr$sub$i$i|0)<(4);
- $cmp13242$i = ($sub$ptr$sub$i106$i|0)<(4);
- $or$cond243$i = $cmp241$i | $cmp13242$i;
- L68: do {
-  if ($or$cond243$i) {
-   $113 = $20;$114 = $22;$124 = 0;$151 = $22;$152 = $22;$cmp$lcssa$i = $cmp241$i;$cmp13$lcssa$i = $cmp13242$i;$newEndIdx$0$lcssa$i = $sub2$i;$newStartIdx$0$lcssa$i = 0;$oldEndIdx$0$lcssa$i = $sub$i;$oldKeyToIdx$0$lcssa$i = 0;$oldStartIdx$0$lcssa$i = 0;
+ $23 = $20;
+ $24 = $22;
+ $cmp242$i = ($sub$ptr$sub$i$i|0)<(4);
+ $cmp13243$i = ($sub$ptr$sub$i106$i|0)<(4);
+ $or$cond244$i = $cmp242$i | $cmp13243$i;
+ L64: do {
+  if ($or$cond244$i) {
+   $103 = $22;$104 = $24;$114 = 0;$141 = $24;$142 = $24;$cmp$lcssa$i = $cmp242$i;$cmp13$lcssa$i = $cmp13243$i;$newEndIdx$0$lcssa$i = $sub2$i;$newStartIdx$0$lcssa$i = 0;$oldEndIdx$0$lcssa$i = $sub$i;$oldKeyToIdx$0$lcssa$i = 0;$oldStartIdx$0$lcssa$i = 0;
   } else {
-   $arrayidx$i112$i = (($22) + ($sub2$i<<2)|0);
-   $23 = load4($arrayidx$i112$i);
-   $24 = load4($22);
-   $arrayidx$i$i2 = (($21) + ($sub$i<<2)|0);
-   $25 = load4($arrayidx$i$i2);
-   $26 = load4($21);
-   $second$i$i10$i$i = ((($ref$tmp$i$i)) + 12|0);
-   $__size_$i$i$i$i$i$i18$i$i$i = ((($ref$tmp$i$i)) + 11|0);
-   $__size_$i3$i$i$i$i$i20$i$i$i = ((($ref$tmp$i$i)) + 4|0);
-   $153 = $22;$154 = $22;$155 = $22;$156 = $20;$157 = 0;$29 = $22;$31 = $22;$99 = $24;$newEndIdx$0244$i = $sub2$i;$newEndVnode$0251$i = $23;$newStartIdx$0247$i = 0;$newStartVnode$0249$i = $24;$oldEndIdx$0246$i = $sub$i;$oldEndVnode$0248$i = $25;$oldKeyToIdx$0252$i = 0;$oldStartIdx$0253$i = 0;$oldStartVnode$0245$i = $26;
-   L70: while(1) {
-    $cmp14$i = ($oldStartVnode$0245$i|0)==(0|0);
-    L72: do {
+   $arrayidx$i112$i = (($24) + ($sub2$i<<2)|0);
+   $25 = load4($arrayidx$i112$i);
+   $26 = load4($24);
+   $arrayidx$i$i1 = (($23) + ($sub$i<<2)|0);
+   $27 = load4($arrayidx$i$i1);
+   $28 = load4($23);
+   $second$i$i18$i$i = ((($ref$tmp$i$i)) + 12|0);
+   $__size_$i$i$i6$i$i = ((($ref$tmp$i$i)) + 11|0);
+   $143 = $24;$144 = $24;$145 = $24;$146 = $22;$147 = 0;$31 = $24;$33 = $24;$87 = $26;$newEndIdx$0245$i = $sub2$i;$newEndVnode$0252$i = $25;$newStartIdx$0248$i = 0;$newStartVnode$0250$i = $26;$oldEndIdx$0247$i = $sub$i;$oldEndVnode$0249$i = $27;$oldKeyToIdx$0253$i = 0;$oldStartIdx$0254$i = 0;$oldStartVnode$0246$i = $28;
+   L66: while(1) {
+    $cmp14$i = ($oldStartVnode$0246$i|0)==(0|0);
+    L68: do {
      if ($cmp14$i) {
-      $inc$i3 = (($oldStartIdx$0253$i) + 1)|0;
-      $arrayidx$i114$i = (($21) + ($inc$i3<<2)|0);
-      $27 = load4($arrayidx$i114$i);
-      $158 = $153;$159 = $154;$160 = $155;$161 = $156;$162 = $29;$163 = $31;$164 = $99;$165 = $157;$newEndIdx$0$be$i = $newEndIdx$0244$i;$newEndVnode$0$be$i = $newEndVnode$0251$i;$newStartIdx$0$be$i = $newStartIdx$0247$i;$newStartVnode$0$be$i = $newStartVnode$0249$i;$oldEndIdx$0$be$i = $oldEndIdx$0246$i;$oldEndVnode$0$be$i = $oldEndVnode$0248$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0252$i;$oldStartIdx$0$be$i = $inc$i3;$oldStartVnode$0$be$i = $27;
+      $inc$i2 = (($oldStartIdx$0254$i) + 1)|0;
+      $arrayidx$i114$i = (($oldCh$i$sroa$0$0) + ($inc$i2<<2)|0);
+      $29 = load4($arrayidx$i114$i);
+      $148 = $143;$149 = $144;$150 = $145;$151 = $146;$152 = $31;$153 = $33;$154 = $87;$155 = $147;$newEndIdx$0$be$i = $newEndIdx$0245$i;$newEndVnode$0$be$i = $newEndVnode$0252$i;$newStartIdx$0$be$i = $newStartIdx$0248$i;$newStartVnode$0$be$i = $newStartVnode$0250$i;$oldEndIdx$0$be$i = $oldEndIdx$0247$i;$oldEndVnode$0$be$i = $oldEndVnode$0249$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0253$i;$oldStartIdx$0$be$i = $inc$i2;$oldStartVnode$0$be$i = $29;
      } else {
-      $cmp18$i = ($oldEndVnode$0248$i|0)==(0|0);
+      $cmp18$i = ($oldEndVnode$0249$i|0)==(0|0);
       if ($cmp18$i) {
-       $dec$i = (($oldEndIdx$0246$i) + -1)|0;
-       $arrayidx$i126$i = (($21) + ($dec$i<<2)|0);
-       $28 = load4($arrayidx$i126$i);
-       $158 = $153;$159 = $154;$160 = $155;$161 = $156;$162 = $29;$163 = $31;$164 = $99;$165 = $157;$newEndIdx$0$be$i = $newEndIdx$0244$i;$newEndVnode$0$be$i = $newEndVnode$0251$i;$newStartIdx$0$be$i = $newStartIdx$0247$i;$newStartVnode$0$be$i = $newStartVnode$0249$i;$oldEndIdx$0$be$i = $dec$i;$oldEndVnode$0$be$i = $28;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0252$i;$oldStartIdx$0$be$i = $oldStartIdx$0253$i;$oldStartVnode$0$be$i = $oldStartVnode$0245$i;
+       $dec$i = (($oldEndIdx$0247$i) + -1)|0;
+       $arrayidx$i126$i = (($oldCh$i$sroa$0$0) + ($dec$i<<2)|0);
+       $30 = load4($arrayidx$i126$i);
+       $148 = $143;$149 = $144;$150 = $145;$151 = $146;$152 = $31;$153 = $33;$154 = $87;$155 = $147;$newEndIdx$0$be$i = $newEndIdx$0245$i;$newEndVnode$0$be$i = $newEndVnode$0252$i;$newStartIdx$0$be$i = $newStartIdx$0248$i;$newStartVnode$0$be$i = $newStartVnode$0250$i;$oldEndIdx$0$be$i = $dec$i;$oldEndVnode$0$be$i = $30;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0253$i;$oldStartIdx$0$be$i = $oldStartIdx$0254$i;$oldStartVnode$0$be$i = $oldStartVnode$0246$i;
        break;
       }
-      $cmp23$i = ($newStartVnode$0249$i|0)==(0|0);
+      $cmp23$i = ($newStartVnode$0250$i|0)==(0|0);
       if ($cmp23$i) {
-       $inc25$i = (($newStartIdx$0247$i) + 1)|0;
-       $arrayidx$i128$i = (($29) + ($inc25$i<<2)|0);
-       $30 = load4($arrayidx$i128$i);
-       $158 = $153;$159 = $154;$160 = $155;$161 = $156;$162 = $29;$163 = $29;$164 = $30;$165 = $157;$newEndIdx$0$be$i = $newEndIdx$0244$i;$newEndVnode$0$be$i = $newEndVnode$0251$i;$newStartIdx$0$be$i = $inc25$i;$newStartVnode$0$be$i = $30;$oldEndIdx$0$be$i = $oldEndIdx$0246$i;$oldEndVnode$0$be$i = $oldEndVnode$0248$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0252$i;$oldStartIdx$0$be$i = $oldStartIdx$0253$i;$oldStartVnode$0$be$i = $oldStartVnode$0245$i;
+       $inc25$i = (($newStartIdx$0248$i) + 1)|0;
+       $arrayidx$i128$i = (($31) + ($inc25$i<<2)|0);
+       $32 = load4($arrayidx$i128$i);
+       $148 = $143;$149 = $144;$150 = $145;$151 = $146;$152 = $31;$153 = $31;$154 = $32;$155 = $147;$newEndIdx$0$be$i = $newEndIdx$0245$i;$newEndVnode$0$be$i = $newEndVnode$0252$i;$newStartIdx$0$be$i = $inc25$i;$newStartVnode$0$be$i = $32;$oldEndIdx$0$be$i = $oldEndIdx$0247$i;$oldEndVnode$0$be$i = $oldEndVnode$0249$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0253$i;$oldStartIdx$0$be$i = $oldStartIdx$0254$i;$oldStartVnode$0$be$i = $oldStartVnode$0246$i;
        break;
       }
-      $cmp29$i = ($newEndVnode$0251$i|0)==(0|0);
+      $cmp29$i = ($newEndVnode$0252$i|0)==(0|0);
       if ($cmp29$i) {
-       $dec31$i = (($newEndIdx$0244$i) + -1)|0;
-       $arrayidx$i130$i = (($31) + ($dec31$i<<2)|0);
-       $32 = load4($arrayidx$i130$i);
-       $158 = $153;$159 = $154;$160 = $155;$161 = $156;$162 = $29;$163 = $31;$164 = $99;$165 = $157;$newEndIdx$0$be$i = $dec31$i;$newEndVnode$0$be$i = $32;$newStartIdx$0$be$i = $newStartIdx$0247$i;$newStartVnode$0$be$i = $newStartVnode$0249$i;$oldEndIdx$0$be$i = $oldEndIdx$0246$i;$oldEndVnode$0$be$i = $oldEndVnode$0248$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0252$i;$oldStartIdx$0$be$i = $oldStartIdx$0253$i;$oldStartVnode$0$be$i = $oldStartVnode$0245$i;
+       $dec31$i = (($newEndIdx$0245$i) + -1)|0;
+       $arrayidx$i130$i = (($33) + ($dec31$i<<2)|0);
+       $34 = load4($arrayidx$i130$i);
+       $148 = $143;$149 = $144;$150 = $145;$151 = $146;$152 = $31;$153 = $33;$154 = $87;$155 = $147;$newEndIdx$0$be$i = $dec31$i;$newEndVnode$0$be$i = $34;$newStartIdx$0$be$i = $newStartIdx$0248$i;$newStartVnode$0$be$i = $newStartVnode$0250$i;$oldEndIdx$0$be$i = $oldEndIdx$0247$i;$oldEndVnode$0$be$i = $oldEndVnode$0249$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0253$i;$oldStartIdx$0$be$i = $oldStartIdx$0254$i;$oldStartVnode$0$be$i = $oldStartVnode$0246$i;
        break;
       }
-      $call36$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldStartVnode$0245$i,$newStartVnode$0249$i)|0);
+      $call36$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldStartVnode$0246$i,$newStartVnode$0250$i)|0);
       if ($call36$i) {
-       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldStartVnode$0245$i,$newStartVnode$0249$i);
-       $inc39$i = (($oldStartIdx$0253$i) + 1)|0;
-       $arrayidx$i132$i = (($21) + ($inc39$i<<2)|0);
-       $33 = load4($arrayidx$i132$i);
-       $inc42$i = (($newStartIdx$0247$i) + 1)|0;
-       $34 = load4($children);
-       $arrayidx$i134$i = (($34) + ($inc42$i<<2)|0);
-       $35 = load4($arrayidx$i134$i);
-       $36 = $34;
-       $158 = $34;$159 = $34;$160 = $34;$161 = $36;$162 = $34;$163 = $34;$164 = $35;$165 = $157;$newEndIdx$0$be$i = $newEndIdx$0244$i;$newEndVnode$0$be$i = $newEndVnode$0251$i;$newStartIdx$0$be$i = $inc42$i;$newStartVnode$0$be$i = $35;$oldEndIdx$0$be$i = $oldEndIdx$0246$i;$oldEndVnode$0$be$i = $oldEndVnode$0248$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0252$i;$oldStartIdx$0$be$i = $inc39$i;$oldStartVnode$0$be$i = $33;
+       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldStartVnode$0246$i,$newStartVnode$0250$i);
+       $inc39$i = (($oldStartIdx$0254$i) + 1)|0;
+       $arrayidx$i132$i = (($oldCh$i$sroa$0$0) + ($inc39$i<<2)|0);
+       $35 = load4($arrayidx$i132$i);
+       $inc42$i = (($newStartIdx$0248$i) + 1)|0;
+       $36 = load4($children);
+       $arrayidx$i134$i = (($36) + ($inc42$i<<2)|0);
+       $37 = load4($arrayidx$i134$i);
+       $38 = $36;
+       $148 = $36;$149 = $36;$150 = $36;$151 = $38;$152 = $36;$153 = $36;$154 = $37;$155 = $147;$newEndIdx$0$be$i = $newEndIdx$0245$i;$newEndVnode$0$be$i = $newEndVnode$0252$i;$newStartIdx$0$be$i = $inc42$i;$newStartVnode$0$be$i = $37;$oldEndIdx$0$be$i = $oldEndIdx$0247$i;$oldEndVnode$0$be$i = $oldEndVnode$0249$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0253$i;$oldStartIdx$0$be$i = $inc39$i;$oldStartVnode$0$be$i = $35;
        break;
       }
-      $call47$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldEndVnode$0248$i,$newEndVnode$0251$i)|0);
+      $call47$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldEndVnode$0249$i,$newEndVnode$0252$i)|0);
       if ($call47$i) {
-       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldEndVnode$0248$i,$newEndVnode$0251$i);
-       $dec50$i = (($oldEndIdx$0246$i) + -1)|0;
-       $arrayidx$i138$i = (($21) + ($dec50$i<<2)|0);
-       $37 = load4($arrayidx$i138$i);
-       $dec53$i = (($newEndIdx$0244$i) + -1)|0;
-       $38 = load4($children);
-       $arrayidx$i140$i = (($38) + ($dec53$i<<2)|0);
-       $39 = load4($arrayidx$i140$i);
-       $40 = $38;
-       $158 = $38;$159 = $38;$160 = $38;$161 = $40;$162 = $38;$163 = $38;$164 = $99;$165 = $157;$newEndIdx$0$be$i = $dec53$i;$newEndVnode$0$be$i = $39;$newStartIdx$0$be$i = $newStartIdx$0247$i;$newStartVnode$0$be$i = $newStartVnode$0249$i;$oldEndIdx$0$be$i = $dec50$i;$oldEndVnode$0$be$i = $37;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0252$i;$oldStartIdx$0$be$i = $oldStartIdx$0253$i;$oldStartVnode$0$be$i = $oldStartVnode$0245$i;
+       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldEndVnode$0249$i,$newEndVnode$0252$i);
+       $dec50$i = (($oldEndIdx$0247$i) + -1)|0;
+       $arrayidx$i138$i = (($oldCh$i$sroa$0$0) + ($dec50$i<<2)|0);
+       $39 = load4($arrayidx$i138$i);
+       $dec53$i = (($newEndIdx$0245$i) + -1)|0;
+       $40 = load4($children);
+       $arrayidx$i140$i = (($40) + ($dec53$i<<2)|0);
+       $41 = load4($arrayidx$i140$i);
+       $42 = $40;
+       $148 = $40;$149 = $40;$150 = $40;$151 = $42;$152 = $40;$153 = $40;$154 = $87;$155 = $147;$newEndIdx$0$be$i = $dec53$i;$newEndVnode$0$be$i = $41;$newStartIdx$0$be$i = $newStartIdx$0248$i;$newStartVnode$0$be$i = $newStartVnode$0250$i;$oldEndIdx$0$be$i = $dec50$i;$oldEndVnode$0$be$i = $39;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0253$i;$oldStartIdx$0$be$i = $oldStartIdx$0254$i;$oldStartVnode$0$be$i = $oldStartVnode$0246$i;
        break;
       }
-      $call58$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldStartVnode$0245$i,$newEndVnode$0251$i)|0);
+      $call58$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldStartVnode$0246$i,$newEndVnode$0252$i)|0);
       if ($call58$i) {
-       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldStartVnode$0245$i,$newEndVnode$0251$i);
-       $elm$i = ((($oldStartVnode$0245$i)) + 72|0);
-       $41 = load4($elm$i);
-       $elm61$i = ((($oldEndVnode$0248$i)) + 72|0);
-       $42 = load4($elm61$i);
-       $call63$i = _emscripten_asm_const_iiii(9, ($14|0), ($41|0), ($42|0))|0;
-       $inc64$i = (($oldStartIdx$0253$i) + 1)|0;
-       $arrayidx$i153$i = (($21) + ($inc64$i<<2)|0);
-       $43 = load4($arrayidx$i153$i);
-       $dec67$i = (($newEndIdx$0244$i) + -1)|0;
-       $44 = load4($children);
-       $arrayidx$i155$i = (($44) + ($dec67$i<<2)|0);
-       $45 = load4($arrayidx$i155$i);
-       $46 = $44;
-       $158 = $44;$159 = $44;$160 = $44;$161 = $46;$162 = $44;$163 = $44;$164 = $99;$165 = $157;$newEndIdx$0$be$i = $dec67$i;$newEndVnode$0$be$i = $45;$newStartIdx$0$be$i = $newStartIdx$0247$i;$newStartVnode$0$be$i = $newStartVnode$0249$i;$oldEndIdx$0$be$i = $oldEndIdx$0246$i;$oldEndVnode$0$be$i = $oldEndVnode$0248$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0252$i;$oldStartIdx$0$be$i = $inc64$i;$oldStartVnode$0$be$i = $43;
+       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldStartVnode$0246$i,$newEndVnode$0252$i);
+       $elm$i = ((($oldStartVnode$0246$i)) + 72|0);
+       $43 = load4($elm$i);
+       $elm61$i = ((($oldEndVnode$0249$i)) + 72|0);
+       $44 = load4($elm61$i);
+       $call63$i = _emscripten_asm_const_iiii(9, ($14|0), ($43|0), ($44|0))|0;
+       $inc64$i = (($oldStartIdx$0254$i) + 1)|0;
+       $arrayidx$i153$i = (($oldCh$i$sroa$0$0) + ($inc64$i<<2)|0);
+       $45 = load4($arrayidx$i153$i);
+       $dec67$i = (($newEndIdx$0245$i) + -1)|0;
+       $46 = load4($children);
+       $arrayidx$i155$i = (($46) + ($dec67$i<<2)|0);
+       $47 = load4($arrayidx$i155$i);
+       $48 = $46;
+       $148 = $46;$149 = $46;$150 = $46;$151 = $48;$152 = $46;$153 = $46;$154 = $87;$155 = $147;$newEndIdx$0$be$i = $dec67$i;$newEndVnode$0$be$i = $47;$newStartIdx$0$be$i = $newStartIdx$0248$i;$newStartVnode$0$be$i = $newStartVnode$0250$i;$oldEndIdx$0$be$i = $oldEndIdx$0247$i;$oldEndVnode$0$be$i = $oldEndVnode$0249$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0253$i;$oldStartIdx$0$be$i = $inc64$i;$oldStartVnode$0$be$i = $45;
        break;
       }
-      $call72$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldEndVnode$0248$i,$newStartVnode$0249$i)|0);
+      $call72$i = (__ZN6asmdom9sameVNodeEPKNS_5VNodeES2_($oldEndVnode$0249$i,$newStartVnode$0250$i)|0);
       if ($call72$i) {
-       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldEndVnode$0248$i,$newStartVnode$0249$i);
-       $elm75$i = ((($oldEndVnode$0248$i)) + 72|0);
-       $47 = load4($elm75$i);
-       $elm76$i = ((($oldStartVnode$0245$i)) + 72|0);
-       $48 = load4($elm76$i);
-       $call78$i = _emscripten_asm_const_iiii(10, ($14|0), ($47|0), ($48|0))|0;
-       $dec79$i = (($oldEndIdx$0246$i) + -1)|0;
-       $arrayidx$i170$i = (($21) + ($dec79$i<<2)|0);
-       $49 = load4($arrayidx$i170$i);
-       $inc82$i = (($newStartIdx$0247$i) + 1)|0;
-       $50 = load4($children);
-       $arrayidx$i172$i = (($50) + ($inc82$i<<2)|0);
-       $51 = load4($arrayidx$i172$i);
-       $52 = $50;
-       $158 = $50;$159 = $50;$160 = $50;$161 = $52;$162 = $50;$163 = $50;$164 = $51;$165 = $157;$newEndIdx$0$be$i = $newEndIdx$0244$i;$newEndVnode$0$be$i = $newEndVnode$0251$i;$newStartIdx$0$be$i = $inc82$i;$newStartVnode$0$be$i = $51;$oldEndIdx$0$be$i = $dec79$i;$oldEndVnode$0$be$i = $49;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0252$i;$oldStartIdx$0$be$i = $oldStartIdx$0253$i;$oldStartVnode$0$be$i = $oldStartVnode$0245$i;
+       __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldEndVnode$0249$i,$newStartVnode$0250$i);
+       $elm75$i = ((($oldEndVnode$0249$i)) + 72|0);
+       $49 = load4($elm75$i);
+       $elm76$i = ((($oldStartVnode$0246$i)) + 72|0);
+       $50 = load4($elm76$i);
+       $call78$i = _emscripten_asm_const_iiii(10, ($14|0), ($49|0), ($50|0))|0;
+       $dec79$i = (($oldEndIdx$0247$i) + -1)|0;
+       $arrayidx$i170$i = (($oldCh$i$sroa$0$0) + ($dec79$i<<2)|0);
+       $51 = load4($arrayidx$i170$i);
+       $inc82$i = (($newStartIdx$0248$i) + 1)|0;
+       $52 = load4($children);
+       $arrayidx$i172$i = (($52) + ($inc82$i<<2)|0);
+       $53 = load4($arrayidx$i172$i);
+       $54 = $52;
+       $148 = $52;$149 = $52;$150 = $52;$151 = $54;$152 = $52;$153 = $52;$154 = $53;$155 = $147;$newEndIdx$0$be$i = $newEndIdx$0245$i;$newEndVnode$0$be$i = $newEndVnode$0252$i;$newStartIdx$0$be$i = $inc82$i;$newStartVnode$0$be$i = $53;$oldEndIdx$0$be$i = $dec79$i;$oldEndVnode$0$be$i = $51;$oldKeyToIdx$0$be$i = $oldKeyToIdx$0253$i;$oldStartIdx$0$be$i = $oldStartIdx$0254$i;$oldStartVnode$0$be$i = $oldStartVnode$0246$i;
        break;
       }
-      $tobool$i = ($oldKeyToIdx$0252$i|0)==(0|0);
+      $tobool$i = ($oldKeyToIdx$0253$i|0)==(0|0);
       if ($tobool$i) {
-       $call$i4$i = (__Znwj(12)|0);
-       $__left_$i$i$i$i$i$i$i = ((($call$i4$i)) + 4|0);
+       $call$i1$i = (__Znwj(12)|0);
+       $__left_$i$i$i$i$i$i$i = ((($call$i1$i)) + 4|0);
        store4($__left_$i$i$i$i$i$i$i,0);
-       $__first_$i$i$i$i$i5$i = ((($call$i4$i)) + 8|0);
-       store4($__first_$i$i$i$i$i5$i,0);
-       store4($call$i4$i,$__left_$i$i$i$i$i$i$i);
-       $cmp16$i$i = ($oldStartIdx$0253$i|0)>($oldEndIdx$0246$i|0);
-       if ($cmp16$i$i) {
-        $166 = $call$i4$i;$oldKeyToIdx$1$i = $call$i4$i;
+       $__first_$i$i$i$i$i2$i = ((($call$i1$i)) + 8|0);
+       store4($__first_$i$i$i$i$i2$i,0);
+       store4($call$i1$i,$__left_$i$i$i$i$i$i$i);
+       $cmp24$i$i = ($oldStartIdx$0254$i|0)>($oldEndIdx$0247$i|0);
+       if ($cmp24$i$i) {
+        $156 = $call$i1$i;$oldKeyToIdx$1$i = $call$i1$i;
        } else {
-        $53 = $__left_$i$i$i$i$i$i$i;
-        $beginIdx$addr$017$i$i = $oldStartIdx$0253$i;
+        $beginIdx$addr$025$i$i = $oldStartIdx$0254$i;
         while(1) {
-         $arrayidx$i$i6$i = (($21) + ($beginIdx$addr$017$i$i<<2)|0);
-         $54 = load4($arrayidx$i$i6$i);
-         $key$i$i = ((($54)) + 12|0);
-         $__size_$i$i$i$i$i = ((($key$i$i)) + 11|0);
-         $55 = load1($__size_$i$i$i$i$i);
-         $tobool$i$i$i$i$i = ($55<<24>>24)<(0);
-         if ($tobool$i$i$i$i$i) {
-          $__size_$i3$i$i$i$i = ((($54)) + 16|0);
-          $56 = load4($__size_$i3$i$i$i$i);
-          $cond$i$i$i10$i = $56;
+         $arrayidx$i$i3$i = (($oldCh$i$sroa$0$0) + ($beginIdx$addr$025$i$i<<2)|0);
+         $55 = load4($arrayidx$i$i3$i);
+         $key$i$i = ((($55)) + 12|0);
+         $__size_$i$i$i12$i$i = ((($key$i$i)) + 11|0);
+         $56 = load1($__size_$i$i$i12$i$i);
+         $tobool$i$i$i13$i$i = ($56<<24>>24)<(0);
+         if ($tobool$i$i$i13$i$i) {
+          $__size_$i3$i$i$i5$i = ((($55)) + 16|0);
+          $57 = load4($__size_$i3$i$i$i5$i);
+          $cond$i$i$i7$i = $57;
          } else {
-          $conv$i$i$i$i$i = $55&255;
-          $cond$i$i$i10$i = $conv$i$i$i$i$i;
+          $conv$i$i$i$i6$i = $56&255;
+          $cond$i$i$i7$i = $conv$i$i$i$i6$i;
          }
-         $cmp$i$i11$i = ($cond$i$i$i10$i|0)==(0);
-         if (!($cmp$i$i11$i)) {
+         $cmp$i$i8$i = ($cond$i$i$i7$i|0)==(0);
+         if (!($cmp$i$i8$i)) {
           __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($ref$tmp$i$i,$key$i$i);
-          store4($second$i$i10$i$i,$beginIdx$addr$017$i$i);
-          $57 = load4($__left_$i$i$i$i$i$i$i);
-          $cmp$i1$i$i = ($57|0)==(0|0);
-          do {
-           if ($cmp$i1$i$i) {
-            store4($__parent$i$i$i$i$i$i$i$sroa$0,$53);
-            $__parent$i$i$i$i$i$i$i$sroa$0$0$__parent$i$i$i$i$i$i$i$sroa$0$0$ = $53;$retval$0$i$i$i = $__left_$i$i$i$i$i$i$i;
-           } else {
-            $58 = load1($__size_$i$i$i$i$i$i18$i$i$i);
-            $tobool$i$i$i$i$i$i19$i$i$i = ($58<<24>>24)<(0);
-            $59 = load4($__size_$i3$i$i$i$i$i20$i$i$i);
-            $conv$i$i$i$i$i$i21$i$i$i = $58&255;
-            $cond$i$i$i$i$i22$i$i$i = $tobool$i$i$i$i$i$i19$i$i$i ? $59 : $conv$i$i$i$i$i$i21$i$i$i;
-            $60 = load4($ref$tmp$i$i);
-            $cond$i$i22$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i19$i$i$i ? $60 : $ref$tmp$i$i;
-            $__nd$0$i$i$i = $57;
-            L110: while(1) {
-             $__value_$i$i$i = ((($__nd$0$i$i$i)) + 16|0);
-             $__size_$i$i5$i$i$i$i24$i$i$i = ((($__value_$i$i$i)) + 11|0);
-             $61 = load1($__size_$i$i5$i$i$i$i24$i$i$i);
-             $tobool$i$i6$i$i$i$i25$i$i$i = ($61<<24>>24)<(0);
-             $__size_$i3$i7$i$i$i$i26$i$i$i = ((($__nd$0$i$i$i)) + 20|0);
-             $62 = load4($__size_$i3$i7$i$i$i$i26$i$i$i);
-             $conv$i$i9$i$i$i$i27$i$i$i = $61&255;
-             $cond$i11$i$i$i$i28$i$i$i = $tobool$i$i6$i$i$i$i25$i$i$i ? $62 : $conv$i$i9$i$i$i$i27$i$i$i;
-             $cmp$i$i$i$i$i$i$i29$i$i$i = ($cond$i11$i$i$i$i28$i$i$i>>>0)<($cond$i$i$i$i$i22$i$i$i>>>0);
-             $$sroa$speculated$i$i$i$i30$i$i$i = $cmp$i$i$i$i$i$i$i29$i$i$i ? $cond$i11$i$i$i$i28$i$i$i : $cond$i$i$i$i$i22$i$i$i;
-             $cmp$i$i$i$i$i31$i$i$i = ($$sroa$speculated$i$i$i$i30$i$i$i|0)==(0);
-             do {
-              if ($cmp$i$i$i$i$i31$i$i$i) {
-               label = 42;
-              } else {
-               $63 = load4($__value_$i$i$i);
-               $cond$i$i22$i$i$i$i37$i$i$i = $tobool$i$i6$i$i$i$i25$i$i$i ? $63 : $__value_$i$i$i;
-               $call$i$i$i$i$i38$i$i$i = (_memcmp($cond$i$i22$i$i$i$i$i$i$i,$cond$i$i22$i$i$i$i37$i$i$i,$$sroa$speculated$i$i$i$i30$i$i$i)|0);
-               $cmp$i$i$i$i39$i$i$i = ($call$i$i$i$i$i38$i$i$i|0)==(0);
-               if ($cmp$i$i$i$i39$i$i$i) {
-                label = 42;
-                break;
-               }
-               $cmp$i$i$i46$i$i$i = ($call$i$i$i$i$i38$i$i$i|0)<(0);
-               if ($cmp$i$i$i46$i$i$i) {
-                label = 44;
-               } else {
-                label = 46;
-               }
-              }
-             } while(0);
-             if ((label|0) == 42) {
-              label = 0;
-              $cmp8$i$i$i$i41$i$i$i = ($cond$i$i$i$i$i22$i$i$i>>>0)<($cond$i11$i$i$i$i28$i$i$i>>>0);
-              if ($cmp8$i$i$i$i41$i$i$i) {
-               label = 44;
-              } else {
-               label = 46;
-              }
-             }
-             if ((label|0) == 44) {
-              label = 0;
-              $64 = load4($__nd$0$i$i$i);
-              $cmp5$i$i$i = ($64|0)==(0|0);
-              if ($cmp5$i$i$i) {
-               label = 45;
-               break;
-              } else {
-               $$sink$i$i$i = $64;
-              }
-             }
-             else if ((label|0) == 46) {
-              label = 0;
-              $cmp$i$i$i$i$i$i$i$i$i$i = ($cond$i$i$i$i$i22$i$i$i>>>0)<($cond$i11$i$i$i$i28$i$i$i>>>0);
-              $$sroa$speculated$i$i$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i$i$i ? $cond$i$i$i$i$i22$i$i$i : $cond$i11$i$i$i$i28$i$i$i;
-              $cmp$i$i$i$i$i$i2$i$i = ($$sroa$speculated$i$i$i$i$i$i$i|0)==(0);
-              do {
-               if ($cmp$i$i$i$i$i$i2$i$i) {
-                label = 48;
-               } else {
-                $66 = load4($__value_$i$i$i);
-                $cond$i$i$i$i$i$i$i$i$i = $tobool$i$i6$i$i$i$i25$i$i$i ? $66 : $__value_$i$i$i;
-                $call$i$i$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i$i$i,$cond$i$i22$i$i$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i$i$i)|0);
-                $cmp$i$i$i$i$i3$i$i = ($call$i$i$i$i$i$i$i$i|0)==(0);
-                if ($cmp$i$i$i$i$i3$i$i) {
-                 label = 48;
-                 break;
-                }
-                $cmp$i$i$i$i$i$i = ($call$i$i$i$i$i$i$i$i|0)<(0);
-                if (!($cmp$i$i$i$i$i$i)) {
-                 label = 53;
-                 break L110;
-                }
-               }
-              } while(0);
-              if ((label|0) == 48) {
-               label = 0;
-               if (!($cmp$i$i$i$i$i$i$i29$i$i$i)) {
-                label = 53;
-                break;
-               }
-              }
-              $67 = ((($__nd$0$i$i$i)) + 4|0);
-              $68 = load4($67);
-              $cmp14$i$i$i = ($68|0)==(0|0);
-              if ($cmp14$i$i$i) {
-               label = 52;
-               break;
-              } else {
-               $$sink$i$i$i = $68;
-              }
-             }
-             $__nd$0$i$i$i = $$sink$i$i$i;
-            }
-            if ((label|0) == 45) {
-             label = 0;
-             $65 = $__nd$0$i$i$i;
-             store4($__parent$i$i$i$i$i$i$i$sroa$0,$65);
-             $__parent$i$i$i$i$i$i$i$sroa$0$0$__parent$i$i$i$i$i$i$i$sroa$0$0$ = $65;$retval$0$i$i$i = $__nd$0$i$i$i;
-             break;
-            }
-            else if ((label|0) == 52) {
-             label = 0;
-             $69 = $__nd$0$i$i$i;
-             store4($__parent$i$i$i$i$i$i$i$sroa$0,$69);
-             $__parent$i$i$i$i$i$i$i$sroa$0$0$__parent$i$i$i$i$i$i$i$sroa$0$0$ = $69;$retval$0$i$i$i = $67;
-             break;
-            }
-            else if ((label|0) == 53) {
-             label = 0;
-             $70 = $__nd$0$i$i$i;
-             store4($__parent$i$i$i$i$i$i$i$sroa$0,$70);
-             $__parent$i$i$i$i$i$i$i$sroa$0$0$__parent$i$i$i$i$i$i$i$sroa$0$0$ = $70;$retval$0$i$i$i = $__parent$i$i$i$i$i$i$i$sroa$0;
-             break;
-            }
-           }
-          } while(0);
-          $71 = load4($retval$0$i$i$i);
-          $cmp$i$i$i$i$i$i$i = ($71|0)==(0|0);
+          store4($second$i$i18$i$i,$beginIdx$addr$025$i$i);
+          $call$i$i$i$i$i14$i$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISJ_EERKT_($call$i1$i,$__parent$i$i$i$i$i$i$i,$ref$tmp$i$i)|0);
+          $58 = load4($call$i$i$i$i$i14$i$i);
+          $cmp$i$i$i$i$i$i$i = ($58|0)==(0|0);
           if ($cmp$i$i$i$i$i$i$i) {
-           $call$i$i$i$i$i$i$i$i$i7$i$i = (__Znwj(32)|0);
-           $__cc$i$i$i$i$i$i$i$i$i = ((($call$i$i$i$i$i$i$i$i$i7$i$i)) + 16|0);
+           $call$i$i$i$i$i$i$i$i$i15$i$i = (__Znwj(32)|0);
+           $__cc$i$i$i$i$i$i$i$i$i = ((($call$i$i$i$i$i$i$i$i$i15$i$i)) + 16|0);
            ; store8($__cc$i$i$i$i$i$i$i$i$i,load8($ref$tmp$i$i,4),4); store4($__cc$i$i$i$i$i$i$i$i$i+8 | 0,load4($ref$tmp$i$i+8 | 0,4),4);
            ; store8($ref$tmp$i$i,i64_const(0,0),4); store4($ref$tmp$i$i+8|0,0,4);
-           $second$i$i$i$i$i$i$i$i$i$i$i$i = ((($call$i$i$i$i$i$i$i$i$i7$i$i)) + 28|0);
-           $72 = load4($second$i$i10$i$i);
-           store4($second$i$i$i$i$i$i$i$i$i$i$i$i,$72);
-           store4($call$i$i$i$i$i$i$i$i$i7$i$i,0);
-           $__right_$i$i$i$i$i$i$i$i = ((($call$i$i$i$i$i$i$i$i$i7$i$i)) + 4|0);
+           $second$i$i$i$i$i$i$i$i$i$i$i$i = ((($call$i$i$i$i$i$i$i$i$i15$i$i)) + 28|0);
+           $59 = load4($second$i$i18$i$i);
+           store4($second$i$i$i$i$i$i$i$i$i$i$i$i,$59);
+           $60 = load4($__parent$i$i$i$i$i$i$i);
+           store4($call$i$i$i$i$i$i$i$i$i15$i$i,0);
+           $__right_$i$i$i$i$i$i$i$i = ((($call$i$i$i$i$i$i$i$i$i15$i$i)) + 4|0);
            store4($__right_$i$i$i$i$i$i$i$i,0);
-           $__parent_$i$i$i$i$i$i$i$i = ((($call$i$i$i$i$i$i$i$i$i7$i$i)) + 8|0);
-           store4($__parent_$i$i$i$i$i$i$i$i,$__parent$i$i$i$i$i$i$i$sroa$0$0$__parent$i$i$i$i$i$i$i$sroa$0$0$);
-           store4($retval$0$i$i$i,$call$i$i$i$i$i$i$i$i$i7$i$i);
-           $73 = load4($call$i4$i);
-           $74 = load4($73);
-           $cmp$i$i$i$i$i$i$i$i = ($74|0)==(0|0);
+           $__parent_$i$i$i$i$i$i$i$i = ((($call$i$i$i$i$i$i$i$i$i15$i$i)) + 8|0);
+           store4($__parent_$i$i$i$i$i$i$i$i,$60);
+           store4($call$i$i$i$i$i14$i$i,$call$i$i$i$i$i$i$i$i$i15$i$i);
+           $61 = load4($call$i1$i);
+           $62 = load4($61);
+           $cmp$i$i$i$i$i$i$i$i = ($62|0)==(0|0);
            if ($cmp$i$i$i$i$i$i$i$i) {
-            $77 = $call$i$i$i$i$i$i$i$i$i7$i$i;
+            $65 = $call$i$i$i$i$i$i$i$i$i15$i$i;
            } else {
-            $75 = $74;
-            store4($call$i4$i,$75);
-            $$pre$i$i$i$i$i$i$i$i = load4($retval$0$i$i$i);
-            $77 = $$pre$i$i$i$i$i$i$i$i;
+            $63 = $62;
+            store4($call$i1$i,$63);
+            $$pre$i$i$i$i$i$i$i$i = load4($call$i$i$i$i$i14$i$i);
+            $65 = $$pre$i$i$i$i$i$i$i$i;
            }
-           $76 = load4($__left_$i$i$i$i$i$i$i);
-           __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($76,$77);
-           $78 = load4($__first_$i$i$i$i$i5$i);
-           $inc$i$i$i$i$i$i$i$i = (($78) + 1)|0;
-           store4($__first_$i$i$i$i$i5$i,$inc$i$i$i$i$i$i$i$i);
+           $64 = load4($__left_$i$i$i$i$i$i$i);
+           __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($64,$65);
+           $66 = load4($__first_$i$i$i$i$i2$i);
+           $inc$i$i$i$i$i$i$i$i = (($66) + 1)|0;
+           store4($__first_$i$i$i$i$i2$i,$inc$i$i$i$i$i$i$i$i);
           }
-          __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp$i$i);
+          $67 = load1($__size_$i$i$i6$i$i);
+          $tobool$i$i$i7$i$i = ($67<<24>>24)<(0);
+          if ($tobool$i$i$i7$i$i) {
+           $68 = load4($ref$tmp$i$i);
+           __ZdlPv($68);
+          }
          }
-         $inc$i14$i = (($beginIdx$addr$017$i$i) + 1)|0;
-         $cmp$i15$i = ($beginIdx$addr$017$i$i|0)<($oldEndIdx$0246$i|0);
-         if ($cmp$i15$i) {
-          $beginIdx$addr$017$i$i = $inc$i14$i;
+         $inc$i10$i = (($beginIdx$addr$025$i$i) + 1)|0;
+         $cmp$i11$i = ($beginIdx$addr$025$i$i|0)<($oldEndIdx$0247$i|0);
+         if ($cmp$i11$i) {
+          $beginIdx$addr$025$i$i = $inc$i10$i;
          } else {
-          $166 = $call$i4$i;$oldKeyToIdx$1$i = $call$i4$i;
+          $156 = $call$i1$i;$oldKeyToIdx$1$i = $call$i1$i;
           break;
          }
         }
        }
       } else {
-       $166 = $157;$oldKeyToIdx$1$i = $oldKeyToIdx$0252$i;
+       $156 = $147;$oldKeyToIdx$1$i = $oldKeyToIdx$0253$i;
       }
-      $key$i = ((($newStartVnode$0249$i)) + 12|0);
-      $__first_$i$i$i$i$i = ((($oldKeyToIdx$1$i)) + 4|0);
-      $79 = load4($__first_$i$i$i$i$i);
-      $cmp47$i$i = ($79|0)==(0|0);
-      L140: do {
-       if (!($cmp47$i$i)) {
-        $__size_$i$i$i$i$i$i10$i$i = ((($key$i)) + 11|0);
-        $80 = load1($__size_$i$i$i$i$i$i10$i$i);
-        $tobool$i$i$i$i$i$i11$i$i = ($80<<24>>24)<(0);
-        $__size_$i3$i$i$i$i$i12$i$i = ((($newStartVnode$0249$i)) + 16|0);
-        $81 = load4($__size_$i3$i$i$i$i$i12$i$i);
-        $conv$i$i$i$i$i$i13$i$i = $80&255;
-        $cond$i$i$i$i$i14$i$i = $tobool$i$i$i$i$i$i11$i$i ? $81 : $conv$i$i$i$i$i$i13$i$i;
-        $82 = load4($key$i);
-        $cond$i$i22$i$i$i$i$i$i = $tobool$i$i$i$i$i$i11$i$i ? $82 : $key$i;
-        $83 = $79;
-        L142: while(1) {
-         $__value_$i$i = ((($83)) + 16|0);
-         $__size_$i$i5$i$i$i$i16$i$i = ((($__value_$i$i)) + 11|0);
-         $84 = load1($__size_$i$i5$i$i$i$i16$i$i);
-         $tobool$i$i6$i$i$i$i17$i$i = ($84<<24>>24)<(0);
-         $__size_$i3$i7$i$i$i$i18$i$i = ((($83)) + 20|0);
-         $85 = load4($__size_$i3$i7$i$i$i$i18$i$i);
-         $conv$i$i9$i$i$i$i19$i$i = $84&255;
-         $cond$i11$i$i$i$i20$i$i = $tobool$i$i6$i$i$i$i17$i$i ? $85 : $conv$i$i9$i$i$i$i19$i$i;
-         $cmp$i$i$i$i$i$i$i21$i$i = ($cond$i11$i$i$i$i20$i$i>>>0)<($cond$i$i$i$i$i14$i$i>>>0);
-         $$sroa$speculated$i$i$i$i22$i$i = $cmp$i$i$i$i$i$i$i21$i$i ? $cond$i11$i$i$i$i20$i$i : $cond$i$i$i$i$i14$i$i;
-         $cmp$i$i$i$i$i23$i$i = ($$sroa$speculated$i$i$i$i22$i$i|0)==(0);
+      $key$i = ((($newStartVnode$0250$i)) + 12|0);
+      $__first_$i$i$i$i$i12$i = ((($oldKeyToIdx$1$i)) + 4|0);
+      $69 = load4($__first_$i$i$i$i$i12$i);
+      $cmp45$i$i = ($69|0)==(0|0);
+      L114: do {
+       if (!($cmp45$i$i)) {
+        $__size_$i$i$i$i$i$i$i15$i$i = ((($key$i)) + 11|0);
+        $70 = load1($__size_$i$i$i$i$i$i$i15$i$i);
+        $tobool$i$i$i$i$i$i$i16$i$i = ($70<<24>>24)<(0);
+        $__size_$i3$i$i2$i$i$i$i17$i$i = ((($newStartVnode$0250$i)) + 16|0);
+        $71 = load4($__size_$i3$i$i2$i$i$i$i17$i$i);
+        $conv$i$i$i4$i$i$i$i18$i$i = $70&255;
+        $cond$i16$i$i$i$i$i19$i$i = $tobool$i$i$i$i$i$i$i16$i$i ? $71 : $conv$i$i$i4$i$i$i$i18$i$i;
+        $72 = load4($key$i);
+        $cond$i$i1$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i16$i$i ? $72 : $key$i;
+        $73 = $69;
+        L116: while(1) {
+         $__value_$i$i = ((($73)) + 16|0);
+         $__size_$i$i$i$i$i$i$i$i9$i$i = ((($__value_$i$i)) + 11|0);
+         $74 = load1($__size_$i$i$i$i$i$i$i$i9$i$i);
+         $tobool$i$i$i$i$i$i$i$i10$i$i = ($74<<24>>24)<(0);
+         $__size_$i3$i$i$i$i$i$i11$i$i = ((($73)) + 20|0);
+         $75 = load4($__size_$i3$i$i$i$i$i$i11$i$i);
+         $conv$i$i$i$i$i$i$i12$i$i = $74&255;
+         $cond$i$i$i$i$i$i13$i$i = $tobool$i$i$i$i$i$i$i$i10$i$i ? $75 : $conv$i$i$i$i$i$i$i12$i$i;
+         $cmp$i$i$i$i$i$i$i$i20$i$i = ($cond$i$i$i$i$i$i13$i$i>>>0)<($cond$i16$i$i$i$i$i19$i$i>>>0);
+         $$sroa$speculated$i$i$i$i$i21$i$i = $cmp$i$i$i$i$i$i$i$i20$i$i ? $cond$i$i$i$i$i$i13$i$i : $cond$i16$i$i$i$i$i19$i$i;
+         $cmp$i$i$i$i$i$i22$i$i = ($$sroa$speculated$i$i$i$i$i21$i$i|0)==(0);
          do {
-          if ($cmp$i$i$i$i$i23$i$i) {
-           label = 65;
+          if ($cmp$i$i$i$i$i$i22$i$i) {
+           label = 50;
           } else {
-           $86 = load4($__value_$i$i);
-           $cond$i$i22$i$i$i$i29$i$i = $tobool$i$i6$i$i$i$i17$i$i ? $86 : $__value_$i$i;
-           $call$i$i$i$i$i30$i$i = (_memcmp($cond$i$i22$i$i$i$i$i$i,$cond$i$i22$i$i$i$i29$i$i,$$sroa$speculated$i$i$i$i22$i$i)|0);
-           $cmp$i$i$i$i31$i$i = ($call$i$i$i$i$i30$i$i|0)==(0);
-           if ($cmp$i$i$i$i31$i$i) {
-            label = 65;
+           $76 = load4($__value_$i$i);
+           $cond$i$i1$i$i$i$i$i28$i$i = $tobool$i$i$i$i$i$i$i$i10$i$i ? $76 : $__value_$i$i;
+           $call$i$i$i$i$i$i29$i$i = (_memcmp($cond$i$i1$i$i$i$i$i$i$i,$cond$i$i1$i$i$i$i$i28$i$i,$$sroa$speculated$i$i$i$i$i21$i$i)|0);
+           $cmp$i$i$i$i$i30$i$i = ($call$i$i$i$i$i$i29$i$i|0)==(0);
+           if ($cmp$i$i$i$i$i30$i$i) {
+            label = 50;
             break;
            }
-           $cmp$i$i$i38$i$i = ($call$i$i$i$i$i30$i$i|0)<(0);
-           if ($cmp$i$i$i38$i$i) {
-            label = 67;
+           $cmp$i$i$i37$i$i = ($call$i$i$i$i$i$i29$i$i|0)<(0);
+           if ($cmp$i$i$i37$i$i) {
+            label = 52;
            } else {
-            label = 68;
+            label = 53;
            }
           }
          } while(0);
-         if ((label|0) == 65) {
+         if ((label|0) == 50) {
           label = 0;
-          $cmp8$i$i$i$i33$i$i = ($cond$i$i$i$i$i14$i$i>>>0)<($cond$i11$i$i$i$i20$i$i>>>0);
-          if ($cmp8$i$i$i$i33$i$i) {
-           label = 67;
+          $cmp7$i$i$i$i$i32$i$i = ($cond$i16$i$i$i$i$i19$i$i>>>0)<($cond$i$i$i$i$i$i13$i$i>>>0);
+          if ($cmp7$i$i$i$i$i32$i$i) {
+           label = 52;
           } else {
-           label = 68;
+           label = 53;
           }
          }
-         if ((label|0) == 67) {
+         if ((label|0) == 52) {
           label = 0;
-          $$sink$be$i$i = $83;
+          $$sink$be$i$i = $73;
          }
-         else if ((label|0) == 68) {
+         else if ((label|0) == 53) {
           label = 0;
-          $cmp$i$i$i$i$i$i$i$i$i = ($cond$i$i$i$i$i14$i$i>>>0)<($cond$i11$i$i$i$i20$i$i>>>0);
-          $$sroa$speculated$i$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i$i ? $cond$i$i$i$i$i14$i$i : $cond$i11$i$i$i$i20$i$i;
-          $cmp$i$i$i$i$i$i20$i = ($$sroa$speculated$i$i$i$i$i$i|0)==(0);
+          $cmp$i$i$i$i$i$i$i$i$i$i = ($cond$i16$i$i$i$i$i19$i$i>>>0)<($cond$i$i$i$i$i$i13$i$i>>>0);
+          $$sroa$speculated$i$i$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i$i$i ? $cond$i16$i$i$i$i$i19$i$i : $cond$i$i$i$i$i$i13$i$i;
+          $cmp$i$i$i$i$i$i$i16$i = ($$sroa$speculated$i$i$i$i$i$i$i|0)==(0);
           do {
-           if ($cmp$i$i$i$i$i$i20$i) {
-            label = 70;
+           if ($cmp$i$i$i$i$i$i$i16$i) {
+            label = 55;
            } else {
-            $87 = load4($__value_$i$i);
-            $cond$i$i$i$i$i$i$i$i = $tobool$i$i6$i$i$i$i17$i$i ? $87 : $__value_$i$i;
-            $call$i$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i$i,$cond$i$i22$i$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i$i)|0);
-            $cmp$i$i$i$i$i21$i = ($call$i$i$i$i$i$i$i|0)==(0);
-            if ($cmp$i$i$i$i$i21$i) {
-             label = 70;
+            $77 = load4($__value_$i$i);
+            $cond$i$i$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i10$i$i ? $77 : $__value_$i$i;
+            $call$i$i$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i$i$i,$cond$i$i1$i$i$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i$i$i)|0);
+            $cmp$i$i$i$i$i$i17$i = ($call$i$i$i$i$i$i$i$i|0)==(0);
+            if ($cmp$i$i$i$i$i$i17$i) {
+             label = 55;
              break;
             }
-            $cmp$i$i$i$i22$i = ($call$i$i$i$i$i$i$i|0)<(0);
-            if (!($cmp$i$i$i$i22$i)) {
-             break L142;
+            $cmp$i$i$i$i$i8 = ($call$i$i$i$i$i$i$i$i|0)<(0);
+            if (!($cmp$i$i$i$i$i8)) {
+             break L116;
             }
            }
           } while(0);
-          if ((label|0) == 70) {
+          if ((label|0) == 55) {
            label = 0;
-           if (!($cmp$i$i$i$i$i$i$i21$i$i)) {
+           if (!($cmp$i$i$i$i$i$i$i$i20$i$i)) {
             break;
            }
           }
-          $88 = ((($83)) + 4|0);
-          $$sink$be$i$i = $88;
+          $78 = ((($73)) + 4|0);
+          $$sink$be$i$i = $78;
          }
-         $89 = load4($$sink$be$i$i);
-         $cmp$i23$i = ($89|0)==(0|0);
-         if ($cmp$i23$i) {
-          break L140;
+         $79 = load4($$sink$be$i$i);
+         $cmp$i18$i = ($79|0)==(0|0);
+         if ($cmp$i18$i) {
+          break L114;
          } else {
-          $83 = $89;
+          $73 = $79;
          }
         }
-        $call$i$i$i = (__ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiNS_4lessIS6_EENS4_INS_4pairIKS6_iEEEEE16__find_equal_keyERPNS_16__tree_node_baseIPvEERSA_($oldKeyToIdx$1$i,$__parent$i$i$i$i$i$i$i$sroa$0,$key$i)|0);
-        $94 = load4($call$i$i$i);
-        $cmp$i176$i = ($94|0)==(0|0);
-        if ($cmp$i176$i) {
-         label = 76;
-         break L70;
+        $call$i177180$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISJ_EERKT_($oldKeyToIdx$1$i,$__parent$i$i$i$i$i$i$i,$key$i)|0);
+        $84 = load4($call$i177180$i);
+        $cmp$i178$i = ($84|0)==(0|0);
+        if ($cmp$i178$i) {
+         label = 61;
+         break L66;
         }
-        $second$i$i = ((($94)) + 28|0);
-        $95 = load4($second$i$i);
-        $arrayidx$i179$i = (($21) + ($95<<2)|0);
-        $96 = load4($arrayidx$i179$i);
-        $__size_$i$i$i$i = ((($96)) + 11|0);
-        $97 = load1($__size_$i$i$i$i);
-        $tobool$i$i$i$i = ($97<<24>>24)<(0);
-        if ($tobool$i$i$i$i) {
-         $__size_$i3$i$i$i = ((($96)) + 4|0);
-         $98 = load4($__size_$i3$i$i$i);
-         $cond$i$i$i7 = $98;
+        $second$i$i = ((($84)) + 28|0);
+        $85 = load4($second$i$i);
+        $arrayidx$i182$i = (($oldCh$i$sroa$0$0) + ($85<<2)|0);
+        $86 = load4($arrayidx$i182$i);
+        $__size_$i$i$i$i$i$i = ((($87)) + 11|0);
+        $88 = load1($__size_$i$i$i$i$i$i);
+        $tobool$i$i$i$i$i$i = ($88<<24>>24)<(0);
+        $89 = load4($newStartVnode$0250$i);
+        $__size_$i3$i$i$i$i = ((($newStartVnode$0250$i)) + 4|0);
+        $90 = load4($__size_$i3$i$i$i$i);
+        $conv$i$i$i$i$i = $88&255;
+        $cond$i$i1$i$i$i = $tobool$i$i$i$i$i$i ? $89 : $newStartVnode$0250$i;
+        $cond$i$i$i$i9 = $tobool$i$i$i$i$i$i ? $90 : $conv$i$i$i$i$i;
+        $__size_$i$i$i$i$i11 = ((($86)) + 11|0);
+        $91 = load1($__size_$i$i$i$i$i11);
+        $tobool$i$i$i$i$i12 = ($91<<24>>24)<(0);
+        if ($tobool$i$i$i$i$i12) {
+         $__size_$i3$i$i2$i$i = ((($86)) + 4|0);
+         $92 = load4($__size_$i3$i$i2$i$i);
+         $93 = load4($86);
+         $cond$i$i$i$i$i = $93;$cond$i16$i$i$i = $92;
         } else {
-         $conv$i$i$i$i = $97&255;
-         $cond$i$i$i7 = $conv$i$i$i$i;
+         $conv$i$i$i4$i$i = $91&255;
+         $cond$i$i$i$i$i = $86;$cond$i16$i$i$i = $conv$i$i$i4$i$i;
         }
-        $__size_$i$i5$i$i = ((($99)) + 11|0);
-        $100 = load1($__size_$i$i5$i$i);
-        $tobool$i$i6$i$i = ($100<<24>>24)<(0);
-        $__size_$i3$i7$i$i = ((($newStartVnode$0249$i)) + 4|0);
-        $101 = load4($__size_$i3$i7$i$i);
-        $conv$i$i9$i$i = $100&255;
-        $cond$i11$i$i = $tobool$i$i6$i$i ? $101 : $conv$i$i9$i$i;
-        if ($tobool$i$i$i$i) {
-         $102 = load4($96);
-         $cond$i$i$i$i = $102;
+        $cmp$i$i$i$i$i$i = ($cond$i$i$i$i9>>>0)<($cond$i16$i$i$i>>>0);
+        $$sroa$speculated$i$i$i = $cmp$i$i$i$i$i$i ? $cond$i$i$i$i9 : $cond$i16$i$i$i;
+        $cmp$i$i$i$i = ($$sroa$speculated$i$i$i|0)==(0);
+        if ($cmp$i$i$i$i) {
+         label = 67;
         } else {
-         $cond$i$i$i$i = $96;
-        }
-        $cmp$i$i$i$i$i = ($cond$i11$i$i>>>0)<($cond$i$i$i7>>>0);
-        $$sroa$speculated$i$i = $cmp$i$i$i$i$i ? $cond$i11$i$i : $cond$i$i$i7;
-        $cmp$i$i$i = ($$sroa$speculated$i$i|0)==(0);
-        if ($cmp$i$i$i) {
-         label = 85;
-        } else {
-         $103 = load4($newStartVnode$0249$i);
-         $cond$i$i22$i$i = $tobool$i$i6$i$i ? $103 : $newStartVnode$0249$i;
-         $call$i$i180$i = (_memcmp($cond$i$i$i$i,$cond$i$i22$i$i,$$sroa$speculated$i$i)|0);
-         $cmp$i181$i = ($call$i$i180$i|0)==(0);
-         if ($cmp$i181$i) {
-          label = 85;
+         $call$i$i$i$i = (_memcmp($cond$i$i$i$i$i,$cond$i$i1$i$i$i,$$sroa$speculated$i$i$i)|0);
+         $cmp$i$i$i13 = ($call$i$i$i$i|0)==(0);
+         if ($cmp$i$i$i13) {
+          label = 67;
          } else {
-          label = 86;
+          label = 68;
          }
         }
         do {
-         if ((label|0) == 85) {
+         if ((label|0) == 67) {
           label = 0;
-          $cmp8$i$i = ($cond$i$i$i7>>>0)>=($cond$i11$i$i>>>0);
-          $tobool109$i = $cmp$i$i$i$i$i ^ 1;
-          $or$cond206$i = $cmp8$i$i & $tobool109$i;
-          if (!($or$cond206$i)) {
-           label = 86;
+          $cmp7$i$i$i = ($cond$i16$i$i$i>>>0)>=($cond$i$i$i$i9>>>0);
+          $tobool109$i = $cmp$i$i$i$i$i$i ^ 1;
+          $or$cond207$i = $cmp7$i$i$i & $tobool109$i;
+          if (!($or$cond207$i)) {
+           label = 68;
            break;
           }
-          __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($96,$newStartVnode$0249$i);
-          $call$i$i186$i = (__ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiNS_4lessIS6_EENS4_INS_4pairIKS6_iEEEEE16__find_equal_keyERPNS_16__tree_node_baseIPvEERSA_($oldKeyToIdx$1$i,$__parent$i$i$i$i$i$i$i$sroa$0,$key$i)|0);
-          $105 = load4($call$i$i186$i);
-          $cmp$i187$i = ($105|0)==(0|0);
-          if ($cmp$i187$i) {
-           label = 88;
-           break L70;
+          __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($86,$newStartVnode$0250$i);
+          $call$i187194$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISJ_EERKT_($oldKeyToIdx$1$i,$__parent$i$i$i$i$i$i$i,$key$i)|0);
+          $95 = load4($call$i187194$i);
+          $cmp$i188$i = ($95|0)==(0|0);
+          if ($cmp$i188$i) {
+           label = 70;
+           break L66;
           }
-          $second$i192$i = ((($105)) + 28|0);
-          $106 = load4($second$i192$i);
-          $arrayidx$i199$i = (($21) + ($106<<2)|0);
-          store4($arrayidx$i199$i,0);
-          $elm123$i = ((($96)) + 72|0);
-          $107 = load4($elm123$i);
-          $elm124$i = ((($oldStartVnode$0245$i)) + 72|0);
-          $108 = load4($elm124$i);
-          $call126$i = _emscripten_asm_const_iiii(10, ($14|0), ($107|0), ($108|0))|0;
+          $second$i193$i = ((($95)) + 28|0);
+          $96 = load4($second$i193$i);
+          $arrayidx$i200$i = (($oldCh$i$sroa$0$0) + ($96<<2)|0);
+          store4($arrayidx$i200$i,0);
+          $elm123$i = ((($86)) + 72|0);
+          $97 = load4($elm123$i);
+          $elm124$i = ((($oldStartVnode$0246$i)) + 72|0);
+          $98 = load4($elm124$i);
+          $call126$i = _emscripten_asm_const_iiii(10, ($14|0), ($97|0), ($98|0))|0;
          }
         } while(0);
-        if ((label|0) == 86) {
+        if ((label|0) == 68) {
          label = 0;
-         $call112$i = (__ZN6asmdom9createElmEPNS_5VNodeE($newStartVnode$0249$i)|0);
-         $elm113$i = ((($oldStartVnode$0245$i)) + 72|0);
-         $104 = load4($elm113$i);
-         $call115$i = _emscripten_asm_const_iiii(10, ($14|0), ($call112$i|0), ($104|0))|0;
+         $call112$i = (__ZN6asmdom9createElmEPNS_5VNodeE($newStartVnode$0250$i)|0);
+         $elm113$i = ((($oldStartVnode$0246$i)) + 72|0);
+         $94 = load4($elm113$i);
+         $call115$i = _emscripten_asm_const_iiii(10, ($14|0), ($call112$i|0), ($94|0))|0;
         }
-        $inc128$i = (($newStartIdx$0247$i) + 1)|0;
-        $109 = load4($children);
-        $arrayidx$i201$i = (($109) + ($inc128$i<<2)|0);
-        $110 = load4($arrayidx$i201$i);
-        $111 = $109;
-        $158 = $109;$159 = $109;$160 = $109;$161 = $111;$162 = $109;$163 = $109;$164 = $110;$165 = $166;$newEndIdx$0$be$i = $newEndIdx$0244$i;$newEndVnode$0$be$i = $newEndVnode$0251$i;$newStartIdx$0$be$i = $inc128$i;$newStartVnode$0$be$i = $110;$oldEndIdx$0$be$i = $oldEndIdx$0246$i;$oldEndVnode$0$be$i = $oldEndVnode$0248$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$1$i;$oldStartIdx$0$be$i = $oldStartIdx$0253$i;$oldStartVnode$0$be$i = $oldStartVnode$0245$i;
-        break L72;
+        $inc128$i = (($newStartIdx$0248$i) + 1)|0;
+        $99 = load4($children);
+        $arrayidx$i202$i = (($99) + ($inc128$i<<2)|0);
+        $100 = load4($arrayidx$i202$i);
+        $101 = $99;
+        $148 = $99;$149 = $99;$150 = $99;$151 = $101;$152 = $99;$153 = $99;$154 = $100;$155 = $156;$newEndIdx$0$be$i = $newEndIdx$0245$i;$newEndVnode$0$be$i = $newEndVnode$0252$i;$newStartIdx$0$be$i = $inc128$i;$newStartVnode$0$be$i = $100;$oldEndIdx$0$be$i = $oldEndIdx$0247$i;$oldEndVnode$0$be$i = $oldEndVnode$0249$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$1$i;$oldStartIdx$0$be$i = $oldStartIdx$0254$i;$oldStartVnode$0$be$i = $oldStartVnode$0246$i;
+        break L68;
        }
       } while(0);
-      $call94$i = (__ZN6asmdom9createElmEPNS_5VNodeE($newStartVnode$0249$i)|0);
-      $elm95$i = ((($oldStartVnode$0245$i)) + 72|0);
-      $90 = load4($elm95$i);
-      $call97$i = _emscripten_asm_const_iiii(10, ($14|0), ($call94$i|0), ($90|0))|0;
-      $inc98$i = (($newStartIdx$0247$i) + 1)|0;
-      $91 = load4($children);
-      $arrayidx$i175$i = (($91) + ($inc98$i<<2)|0);
-      $92 = load4($arrayidx$i175$i);
-      $93 = $91;
-      $158 = $91;$159 = $91;$160 = $91;$161 = $93;$162 = $91;$163 = $91;$164 = $92;$165 = $166;$newEndIdx$0$be$i = $newEndIdx$0244$i;$newEndVnode$0$be$i = $newEndVnode$0251$i;$newStartIdx$0$be$i = $inc98$i;$newStartVnode$0$be$i = $92;$oldEndIdx$0$be$i = $oldEndIdx$0246$i;$oldEndVnode$0$be$i = $oldEndVnode$0248$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$1$i;$oldStartIdx$0$be$i = $oldStartIdx$0253$i;$oldStartVnode$0$be$i = $oldStartVnode$0245$i;
+      $call94$i = (__ZN6asmdom9createElmEPNS_5VNodeE($newStartVnode$0250$i)|0);
+      $elm95$i = ((($oldStartVnode$0246$i)) + 72|0);
+      $80 = load4($elm95$i);
+      $call97$i = _emscripten_asm_const_iiii(10, ($14|0), ($call94$i|0), ($80|0))|0;
+      $inc98$i = (($newStartIdx$0248$i) + 1)|0;
+      $81 = load4($children);
+      $arrayidx$i175$i = (($81) + ($inc98$i<<2)|0);
+      $82 = load4($arrayidx$i175$i);
+      $83 = $81;
+      $148 = $81;$149 = $81;$150 = $81;$151 = $83;$152 = $81;$153 = $81;$154 = $82;$155 = $156;$newEndIdx$0$be$i = $newEndIdx$0245$i;$newEndVnode$0$be$i = $newEndVnode$0252$i;$newStartIdx$0$be$i = $inc98$i;$newStartVnode$0$be$i = $82;$oldEndIdx$0$be$i = $oldEndIdx$0247$i;$oldEndVnode$0$be$i = $oldEndVnode$0249$i;$oldKeyToIdx$0$be$i = $oldKeyToIdx$1$i;$oldStartIdx$0$be$i = $oldStartIdx$0254$i;$oldStartVnode$0$be$i = $oldStartVnode$0246$i;
      }
     } while(0);
-    $cmp$i4 = ($oldStartIdx$0$be$i|0)>($oldEndIdx$0$be$i|0);
+    $cmp$i3 = ($oldStartIdx$0$be$i|0)>($oldEndIdx$0$be$i|0);
     $cmp13$i = ($newStartIdx$0$be$i|0)>($newEndIdx$0$be$i|0);
-    $or$cond$i = $cmp13$i | $cmp$i4;
+    $or$cond$i = $cmp13$i | $cmp$i3;
     if ($or$cond$i) {
-     $113 = $161;$114 = $160;$124 = $165;$151 = $158;$152 = $159;$cmp$lcssa$i = $cmp$i4;$cmp13$lcssa$i = $cmp13$i;$newEndIdx$0$lcssa$i = $newEndIdx$0$be$i;$newStartIdx$0$lcssa$i = $newStartIdx$0$be$i;$oldEndIdx$0$lcssa$i = $oldEndIdx$0$be$i;$oldKeyToIdx$0$lcssa$i = $oldKeyToIdx$0$be$i;$oldStartIdx$0$lcssa$i = $oldStartIdx$0$be$i;
-     break L68;
+     $103 = $151;$104 = $150;$114 = $155;$141 = $148;$142 = $149;$cmp$lcssa$i = $cmp$i3;$cmp13$lcssa$i = $cmp13$i;$newEndIdx$0$lcssa$i = $newEndIdx$0$be$i;$newStartIdx$0$lcssa$i = $newStartIdx$0$be$i;$oldEndIdx$0$lcssa$i = $oldEndIdx$0$be$i;$oldKeyToIdx$0$lcssa$i = $oldKeyToIdx$0$be$i;$oldStartIdx$0$lcssa$i = $oldStartIdx$0$be$i;
+     break L64;
     } else {
-     $153 = $158;$154 = $159;$155 = $160;$156 = $161;$157 = $165;$29 = $162;$31 = $163;$99 = $164;$newEndIdx$0244$i = $newEndIdx$0$be$i;$newEndVnode$0251$i = $newEndVnode$0$be$i;$newStartIdx$0247$i = $newStartIdx$0$be$i;$newStartVnode$0249$i = $newStartVnode$0$be$i;$oldEndIdx$0246$i = $oldEndIdx$0$be$i;$oldEndVnode$0248$i = $oldEndVnode$0$be$i;$oldKeyToIdx$0252$i = $oldKeyToIdx$0$be$i;$oldStartIdx$0253$i = $oldStartIdx$0$be$i;$oldStartVnode$0245$i = $oldStartVnode$0$be$i;
+     $143 = $148;$144 = $149;$145 = $150;$146 = $151;$147 = $155;$31 = $152;$33 = $153;$87 = $154;$newEndIdx$0245$i = $newEndIdx$0$be$i;$newEndVnode$0252$i = $newEndVnode$0$be$i;$newStartIdx$0248$i = $newStartIdx$0$be$i;$newStartVnode$0250$i = $newStartVnode$0$be$i;$oldEndIdx$0247$i = $oldEndIdx$0$be$i;$oldEndVnode$0249$i = $oldEndVnode$0$be$i;$oldKeyToIdx$0253$i = $oldKeyToIdx$0$be$i;$oldStartIdx$0254$i = $oldStartIdx$0$be$i;$oldStartVnode$0246$i = $oldStartVnode$0$be$i;
     }
    }
-   if ((label|0) == 76) {
+   if ((label|0) == 61) {
     $exception$i$i = (___cxa_allocate_exception(8)|0);
-    __ZNSt11logic_errorC2EPKc($exception$i$i);
+    __ZNSt11logic_errorC2EPKc($exception$i$i,4066);
     store4($exception$i$i,(2668));
-    ___cxa_throw(($exception$i$i|0),(1544|0),(12|0));
+    ___cxa_throw(($exception$i$i|0),(1544|0),(10|0));
     // unreachable;
    }
-   else if ((label|0) == 88) {
-    $exception$i188$i = (___cxa_allocate_exception(8)|0);
-    __ZNSt11logic_errorC2EPKc($exception$i188$i);
-    store4($exception$i188$i,(2668));
-    ___cxa_throw(($exception$i188$i|0),(1544|0),(12|0));
+   else if ((label|0) == 70) {
+    $exception$i189$i = (___cxa_allocate_exception(8)|0);
+    __ZNSt11logic_errorC2EPKc($exception$i189$i,4066);
+    store4($exception$i189$i,(2668));
+    ___cxa_throw(($exception$i189$i|0),(1544|0),(10|0));
     // unreachable;
    }
   }
  } while(0);
- L184: do {
+ L154: do {
   if ($cmp$lcssa$i) {
    $add$i = (($newEndIdx$0$lcssa$i) + 1)|0;
-   $112 = load4($__end_$i);
-   $sub$ptr$sub$i203$i = (($112) - ($113))|0;
-   $sub$ptr$div$i204$i = $sub$ptr$sub$i203$i >> 2;
-   $sub143$i = (($sub$ptr$div$i204$i) + -1)|0;
+   $102 = load4($__end_$i);
+   $sub$ptr$sub$i204$i = (($102) - ($103))|0;
+   $sub$ptr$div$i205$i = $sub$ptr$sub$i204$i >> 2;
+   $sub143$i = (($sub$ptr$div$i205$i) + -1)|0;
    $cmp144$i = ($add$i>>>0)>($sub143$i>>>0);
    $cmp2$i141$i = ($newStartIdx$0$lcssa$i>>>0)>($newEndIdx$0$lcssa$i>>>0);
    if ($cmp144$i) {
     if ($cmp2$i141$i) {
      break;
     } else {
-     $119 = $151;$startIdx$addr$03$i144$i = $newStartIdx$0$lcssa$i;
+     $109 = $141;$startIdx$addr$03$i144$i = $newStartIdx$0$lcssa$i;
     }
     while(1) {
      $inc$i145$i = (($startIdx$addr$03$i144$i) + 1)|0;
-     $arrayidx$i$i146$i = (($119) + ($startIdx$addr$03$i144$i<<2)|0);
-     $120 = load4($arrayidx$i$i146$i);
-     $call1$i150$i = (__ZN6asmdom9createElmEPNS_5VNodeE($120)|0);
+     $arrayidx$i$i146$i = (($109) + ($startIdx$addr$03$i144$i<<2)|0);
+     $110 = load4($arrayidx$i$i146$i);
+     $call1$i150$i = (__ZN6asmdom9createElmEPNS_5VNodeE($110)|0);
      $call2$i151$i = _emscripten_asm_const_iiii(11, ($14|0), ($call1$i150$i|0), 0)|0;
      $cmp$i147$i = ($inc$i145$i>>>0)>($newEndIdx$0$lcssa$i>>>0);
      if ($cmp$i147$i) {
-      break L184;
+      break L154;
      }
-     $$pre264$i = load4($children);
-     $119 = $$pre264$i;$startIdx$addr$03$i144$i = $inc$i145$i;
+     $$pre265$i = load4($children);
+     $109 = $$pre265$i;$startIdx$addr$03$i144$i = $inc$i145$i;
     }
    } else {
-    $arrayidx$i184$i = (($114) + ($add$i<<2)|0);
-    $115 = load4($arrayidx$i184$i);
-    $elm149$i = ((($115)) + 72|0);
-    $116 = load4($elm149$i);
+    $arrayidx$i184$i = (($104) + ($add$i<<2)|0);
+    $105 = load4($arrayidx$i184$i);
+    $elm149$i = ((($105)) + 72|0);
+    $106 = load4($elm149$i);
     if ($cmp2$i141$i) {
      break;
     } else {
-     $117 = $152;$startIdx$addr$03$i159$i = $newStartIdx$0$lcssa$i;
+     $107 = $142;$startIdx$addr$03$i159$i = $newStartIdx$0$lcssa$i;
     }
     while(1) {
      $inc$i160$i = (($startIdx$addr$03$i159$i) + 1)|0;
-     $arrayidx$i$i161$i = (($117) + ($startIdx$addr$03$i159$i<<2)|0);
-     $118 = load4($arrayidx$i$i161$i);
-     $call1$i165$i = (__ZN6asmdom9createElmEPNS_5VNodeE($118)|0);
-     $call2$i167$i = _emscripten_asm_const_iiii(11, ($14|0), ($call1$i165$i|0), ($116|0))|0;
+     $arrayidx$i$i161$i = (($107) + ($startIdx$addr$03$i159$i<<2)|0);
+     $108 = load4($arrayidx$i$i161$i);
+     $call1$i165$i = (__ZN6asmdom9createElmEPNS_5VNodeE($108)|0);
+     $call2$i167$i = _emscripten_asm_const_iiii(11, ($14|0), ($call1$i165$i|0), ($106|0))|0;
      $cmp$i162$i = ($inc$i160$i>>>0)>($newEndIdx$0$lcssa$i>>>0);
      if ($cmp$i162$i) {
-      break L184;
+      break L154;
      }
      $$pre$i = load4($children);
-     $117 = $$pre$i;$startIdx$addr$03$i159$i = $inc$i160$i;
+     $107 = $$pre$i;$startIdx$addr$03$i159$i = $inc$i160$i;
     }
    }
   } else {
    $cmp13$not$i = $cmp13$lcssa$i ^ 1;
    $cmp2$i$i = ($oldStartIdx$0$lcssa$i>>>0)>($oldEndIdx$0$lcssa$i>>>0);
-   $or$cond207$i = $cmp2$i$i | $cmp13$not$i;
-   if (!($or$cond207$i)) {
+   $or$cond208$i = $cmp2$i$i | $cmp13$not$i;
+   if (!($or$cond208$i)) {
     $startIdx$addr$03$i$i = $oldStartIdx$0$lcssa$i;
     while(1) {
      $inc$i$i = (($startIdx$addr$03$i$i) + 1)|0;
-     $arrayidx$i$i$i = (($21) + ($startIdx$addr$03$i$i<<2)|0);
-     $121 = load4($arrayidx$i$i$i);
-     $elm$i$i = ((($121)) + 72|0);
-     $122 = load4($elm$i$i);
-     $call1$i136$i = _emscripten_asm_const_ii(12, ($122|0))|0;
+     $arrayidx$i$i$i = (($oldCh$i$sroa$0$0) + ($startIdx$addr$03$i$i<<2)|0);
+     $111 = load4($arrayidx$i$i$i);
+     $elm$i$i = ((($111)) + 72|0);
+     $112 = load4($elm$i$i);
+     $call1$i136$i = _emscripten_asm_const_ii(12, ($112|0))|0;
      $cmp$i135$i = ($inc$i$i>>>0)>($oldEndIdx$0$lcssa$i>>>0);
      if ($cmp$i135$i) {
       break;
@@ -4061,180 +4185,51 @@ function __ZN6asmdom10patchVNodeEPNS_5VNodeES1_($oldVnode,$vnode) {
  $isnull$i = ($oldKeyToIdx$0$lcssa$i|0)==(0|0);
  if (!($isnull$i)) {
   $__first_$i$i$i$i$i$i$i = ((($oldKeyToIdx$0$lcssa$i)) + 4|0);
-  $123 = load4($__first_$i$i$i$i$i$i$i);
-  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($123);
-  __ZdlPv($124);
+  $113 = load4($__first_$i$i$i$i$i$i$i);
+  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($113);
+  __ZdlPv($114);
  }
- $cmp$i$i8 = ($oldCh$i$sroa$0$0|0)==(0);
- if ($cmp$i$i8) {
+ $cmp$i$i14 = ($oldCh$i$sroa$0$0|0)==(0|0);
+ if ($cmp$i$i14) {
   STACKTOP = sp;return;
  }
- $125 = $oldCh$i$sroa$0$0;
- __ZdlPv($125);
+ __ZdlPv($115);
  STACKTOP = sp;return;
-}
-function __ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiNS_4lessIS6_EENS4_INS_4pairIKS6_iEEEEE16__find_equal_keyERPNS_16__tree_node_baseIPvEERSA_($this,$__parent,$__k) {
- $this = $this|0;
- $__parent = $__parent|0;
- $__k = $__k|0;
- var $$sink = 0, $$sroa$speculated$i$i$i = 0, $$sroa$speculated$i$i$i30 = 0, $0 = 0, $1 = 0, $10 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i = 0, $__nd$0 = 0, $__size_$i$i$i$i$i18 = 0, $__size_$i$i5$i$i$i24 = 0, $__size_$i3$i$i$i$i20 = 0, $__size_$i3$i7$i$i$i26 = 0;
- var $call$i$i$i$i = 0, $call$i$i$i$i38 = 0, $cmp = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i29 = 0, $cmp$i$i$i$i31 = 0, $cmp$i$i$i39 = 0, $cmp$i$i46 = 0, $cmp20 = 0, $cmp7 = 0, $cmp8$i$i$i41 = 0, $cond$i$i$i$i$i = 0, $cond$i$i$i$i22 = 0, $cond$i$i22$i$i$i = 0, $cond$i$i22$i$i$i37 = 0, $cond$i11$i$i$i28 = 0, $conv$i$i$i$i$i21 = 0;
- var $conv$i$i9$i$i$i27 = 0, $first = 0, $retval$0 = 0, $tobool$i$i$i$i$i19 = 0, $tobool$i$i6$i$i$i25 = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $__first_$i$i$i$i = ((($this)) + 4|0);
- $0 = load4($__first_$i$i$i$i);
- $cmp = ($0|0)==(0|0);
- if ($cmp) {
-  store4($__parent,$__first_$i$i$i$i);
-  $retval$0 = $__first_$i$i$i$i;
-  return ($retval$0|0);
- }
- $__size_$i$i$i$i$i18 = ((($__k)) + 11|0);
- $1 = load1($__size_$i$i$i$i$i18);
- $tobool$i$i$i$i$i19 = ($1<<24>>24)<(0);
- $__size_$i3$i$i$i$i20 = ((($__k)) + 4|0);
- $2 = load4($__size_$i3$i$i$i$i20);
- $conv$i$i$i$i$i21 = $1&255;
- $cond$i$i$i$i22 = $tobool$i$i$i$i$i19 ? $2 : $conv$i$i$i$i$i21;
- $3 = load4($__k);
- $cond$i$i22$i$i$i = $tobool$i$i$i$i$i19 ? $3 : $__k;
- $__nd$0 = $0;
- while(1) {
-  $first = ((($__nd$0)) + 16|0);
-  $__size_$i$i5$i$i$i24 = ((($first)) + 11|0);
-  $4 = load1($__size_$i$i5$i$i$i24);
-  $tobool$i$i6$i$i$i25 = ($4<<24>>24)<(0);
-  $__size_$i3$i7$i$i$i26 = ((($__nd$0)) + 20|0);
-  $5 = load4($__size_$i3$i7$i$i$i26);
-  $conv$i$i9$i$i$i27 = $4&255;
-  $cond$i11$i$i$i28 = $tobool$i$i6$i$i$i25 ? $5 : $conv$i$i9$i$i$i27;
-  $cmp$i$i$i$i$i$i29 = ($cond$i11$i$i$i28>>>0)<($cond$i$i$i$i22>>>0);
-  $$sroa$speculated$i$i$i30 = $cmp$i$i$i$i$i$i29 ? $cond$i11$i$i$i28 : $cond$i$i$i$i22;
-  $cmp$i$i$i$i31 = ($$sroa$speculated$i$i$i30|0)==(0);
-  if ($cmp$i$i$i$i31) {
-   label = 5;
-  } else {
-   $6 = load4($first);
-   $cond$i$i22$i$i$i37 = $tobool$i$i6$i$i$i25 ? $6 : $first;
-   $call$i$i$i$i38 = (_memcmp($cond$i$i22$i$i$i,$cond$i$i22$i$i$i37,$$sroa$speculated$i$i$i30)|0);
-   $cmp$i$i$i39 = ($call$i$i$i$i38|0)==(0);
-   if ($cmp$i$i$i39) {
-    label = 5;
-   } else {
-    $cmp$i$i46 = ($call$i$i$i$i38|0)<(0);
-    if ($cmp$i$i46) {
-     label = 7;
-    } else {
-     label = 9;
-    }
-   }
-  }
-  if ((label|0) == 5) {
-   label = 0;
-   $cmp8$i$i$i41 = ($cond$i$i$i$i22>>>0)<($cond$i11$i$i$i28>>>0);
-   if ($cmp8$i$i$i41) {
-    label = 7;
-   } else {
-    label = 9;
-   }
-  }
-  if ((label|0) == 7) {
-   label = 0;
-   $7 = load4($__nd$0);
-   $cmp7 = ($7|0)==(0|0);
-   if ($cmp7) {
-    label = 8;
-    break;
-   } else {
-    $$sink = $7;
-   }
-  }
-  else if ((label|0) == 9) {
-   label = 0;
-   $cmp$i$i$i$i$i$i = ($cond$i$i$i$i22>>>0)<($cond$i11$i$i$i28>>>0);
-   $$sroa$speculated$i$i$i = $cmp$i$i$i$i$i$i ? $cond$i$i$i$i22 : $cond$i11$i$i$i28;
-   $cmp$i$i$i$i = ($$sroa$speculated$i$i$i|0)==(0);
-   if ($cmp$i$i$i$i) {
-    label = 11;
-   } else {
-    $8 = load4($first);
-    $cond$i$i$i$i$i = $tobool$i$i6$i$i$i25 ? $8 : $first;
-    $call$i$i$i$i = (_memcmp($cond$i$i$i$i$i,$cond$i$i22$i$i$i,$$sroa$speculated$i$i$i)|0);
-    $cmp$i$i$i = ($call$i$i$i$i|0)==(0);
-    if ($cmp$i$i$i) {
-     label = 11;
-    } else {
-     $cmp$i$i = ($call$i$i$i$i|0)<(0);
-     if (!($cmp$i$i)) {
-      label = 16;
-      break;
-     }
-    }
-   }
-   if ((label|0) == 11) {
-    label = 0;
-    if (!($cmp$i$i$i$i$i$i29)) {
-     label = 16;
-     break;
-    }
-   }
-   $9 = ((($__nd$0)) + 4|0);
-   $10 = load4($9);
-   $cmp20 = ($10|0)==(0|0);
-   if ($cmp20) {
-    label = 15;
-    break;
-   } else {
-    $$sink = $10;
-   }
-  }
-  $__nd$0 = $$sink;
- }
- if ((label|0) == 8) {
-  store4($__parent,$__nd$0);
-  $retval$0 = $__nd$0;
-  return ($retval$0|0);
- }
- else if ((label|0) == 15) {
-  store4($__parent,$__nd$0);
-  $retval$0 = $9;
-  return ($retval$0|0);
- }
- else if ((label|0) == 16) {
-  store4($__parent,$__nd$0);
-  $retval$0 = $__parent;
-  return ($retval$0|0);
- }
- return (0)|0;
 }
 function __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($__nd) {
  $__nd = $__nd|0;
- var $0 = 0, $1 = 0, $2 = 0, $cmp = 0, $first$i$i$i = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $__cc$i = 0, $__size_$i$i$i$i$i = 0, $cmp = 0, $tobool$i$i$i$i$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $cmp = ($__nd|0)==(0|0);
  if ($cmp) {
   return;
- } else {
-  $0 = load4($__nd);
-  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($0);
-  $1 = ((($__nd)) + 4|0);
-  $2 = load4($1);
-  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($2);
-  $first$i$i$i = ((($__nd)) + 16|0);
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($first$i$i$i);
-  __ZdlPv($__nd);
-  return;
  }
+ $0 = load4($__nd);
+ __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($0);
+ $1 = ((($__nd)) + 4|0);
+ $2 = load4($1);
+ __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($2);
+ $__cc$i = ((($__nd)) + 16|0);
+ $__size_$i$i$i$i$i = ((($__cc$i)) + 11|0);
+ $3 = load1($__size_$i$i$i$i$i);
+ $tobool$i$i$i$i$i = ($3<<24>>24)<(0);
+ if ($tobool$i$i$i$i$i) {
+  $4 = load4($__cc$i);
+  __ZdlPv($4);
+ }
+ __ZdlPv($__nd);
+ return;
 }
 function __ZN6asmdom4DataC2ERKNSt3__23mapINS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES8_NS1_4lessIS8_EENS6_INS1_4pairIKS8_S8_EEEEEERKNS2_IS8_N10emscripten3valESA_NS6_INSB_ISC_SJ_EEEEEERKNS2_IS8_NS1_8functionIFbSJ_EEESA_NS6_INSB_ISC_SR_EEEEEE($this,$dataAttrs,$dataProps,$dataCallbacks) {
  $this = $this|0;
  $dataAttrs = $dataAttrs|0;
  $dataProps = $dataProps|0;
  $dataCallbacks = $dataCallbacks|0;
- var $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0;
- var $9 = 0, $__cc$i$i$i = 0, $__cc$i$i$i10 = 0, $__cc$i$i$i40 = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i35 = 0, $__first_$i$i$i$i$i5 = 0, $__first_$i$i$i$i$i6$i = 0, $__first_$i$i$i$i$i6$i37 = 0, $__first_$i$i$i$i$i6$i7 = 0, $__first_$i$i$i$i34 = 0, $__first_$i$i$i$i4 = 0, $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i3 = 0, $__left_$i$i$i$i$i33 = 0, $__parent_$i$i$i$i$i$i = 0, $__parent_$i$i$i$i$i$i22 = 0, $__parent_$i$i$i$i$i$i52 = 0, $__right_$i$i$i$i$i = 0;
- var $__right_$i$i$i$i$i14 = 0, $__right_$i$i$i$i$i44 = 0, $__x$addr$0$i$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i17 = 0, $__x$addr$0$i$i$i$i$i$i47 = 0, $__x$addr$0$i$i$i$i$i21 = 0, $__x$addr$0$i$i$i$i$i51 = 0, $callbacks = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i19 = 0, $cmp$i$i$i$i$i$i49 = 0, $cmp$i$i$i$i$i15 = 0, $cmp$i$i$i$i$i45 = 0, $cmp$i5$i$i$i$i$i = 0, $cmp$i5$i$i$i$i$i24 = 0, $cmp$i5$i$i$i$i$i54 = 0, $lnot$i$i$i$i = 0, $lnot$i$i$i$i29 = 0;
- var $lnot$i$i$i$i59 = 0, $lnot$i$i7$i$i = 0, $lnot$i$i7$i$i38 = 0, $lnot$i$i7$i$i8 = 0, $props = 0, $retval$0$i$i$i$i$i = 0, $retval$0$i$i$i$i$i27 = 0, $retval$0$i$i$i$i$i57 = 0, label = 0, sp = 0;
+ var $$in7$i$i = 0, $$in7$i$i11 = 0, $$in7$i$i45 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0;
+ var $24 = 0, $25 = 0, $26 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__cc$i$i$i = 0, $__cc$i$i$i12 = 0, $__cc$i$i$i46 = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i40 = 0, $__first_$i$i$i$i$i6 = 0, $__first_$i$i$i$i$i6$i = 0, $__first_$i$i$i$i$i6$i42 = 0, $__first_$i$i$i$i$i6$i8 = 0;
+ var $__first_$i$i$i$i39 = 0, $__first_$i$i$i$i5 = 0, $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i38 = 0, $__left_$i$i$i$i$i4 = 0, $__parent_$i4$i$i$i$i$i = 0, $__parent_$i4$i$i$i$i$i28 = 0, $__parent_$i4$i$i$i$i$i62 = 0, $__parent_$i410$i$i$i$i$i = 0, $__parent_$i410$i$i$i$i$i27 = 0, $__parent_$i410$i$i$i$i$i61 = 0, $__parent_$i47$i$i$i$i$i = 0, $__parent_$i47$i$i$i$i$i18 = 0, $__parent_$i47$i$i$i$i$i52 = 0, $__x$addr$0$i$i$i$i$i$i = 0, $__x$addr$0$i$i$i$i$i$i22 = 0, $__x$addr$0$i$i$i$i$i$i56 = 0, $callbacks = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0;
+ var $cmp$i$i$i$i$i$i24 = 0, $cmp$i$i$i$i$i$i58 = 0, $cmp$i$i$i$i$i16 = 0, $cmp$i$i$i$i$i50 = 0, $cmp$i6$i$i$i$i$i = 0, $cmp$i6$i$i$i$i$i30 = 0, $cmp$i6$i$i$i$i$i64 = 0, $cmp$i69$i$i$i$i$i = 0, $cmp$i69$i$i$i$i$i20 = 0, $cmp$i69$i$i$i$i$i54 = 0, $lnot$i$i$i$i = 0, $lnot$i$i$i$i33 = 0, $lnot$i$i$i$i67 = 0, $lnot$i$i6$i$i = 0, $lnot$i$i6$i$i43 = 0, $lnot$i$i6$i$i9 = 0, $props = 0, $retval$0$i$i$i$i$i = 0, $retval$0$i$i$i$i$i32 = 0, $retval$0$i$i$i$i$i66 = 0;
+ var label = 0, sp = 0;
  sp = STACKTOP;
  $__left_$i$i$i$i$i = ((($this)) + 4|0);
  store4($__left_$i$i$i$i$i,0);
@@ -4244,155 +4239,183 @@ function __ZN6asmdom4DataC2ERKNSt3__23mapINS1_12basic_stringIcNS1_11char_traitsI
  store4($this,$__first_$i$i$i$i$i);
  $0 = load4($dataAttrs);
  $__first_$i$i$i$i$i6$i = ((($dataAttrs)) + 4|0);
- $lnot$i$i7$i$i = ($0|0)==($__first_$i$i$i$i$i6$i|0);
- if (!($lnot$i$i7$i$i)) {
-  $1 = $0;$2 = $0;
+ $lnot$i$i6$i$i = ($0|0)==($__first_$i$i$i$i$i6$i|0);
+ if (!($lnot$i$i6$i$i)) {
+  $$in7$i$i = $0;
   while(1) {
-   $__cc$i$i$i = ((($1)) + 16|0);
+   $__cc$i$i$i = ((($$in7$i$i)) + 16|0);
    __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE30__emplace_hint_unique_key_argsIS7_JRKNS_4pairIKS7_S7_EEEEENS_15__tree_iteratorIS8_PNS_11__tree_nodeIS8_PvEEiEENS_21__tree_const_iteratorIS8_SP_iEERKT_DpOT0_($this,$__first_$i$i$i$i$i,$__cc$i$i$i,$__cc$i$i$i);
-   $__right_$i$i$i$i$i = ((($2)) + 4|0);
-   $3 = load4($__right_$i$i$i$i$i);
-   $cmp$i$i$i$i$i = ($3|0)==(0|0);
+   $1 = ((($$in7$i$i)) + 4|0);
+   $2 = load4($1);
+   $cmp$i$i$i$i$i = ($2|0)==(0|0);
    if ($cmp$i$i$i$i$i) {
-    $__x$addr$0$i$i$i$i$i = $2;
-    while(1) {
-     $__parent_$i$i$i$i$i$i = ((($__x$addr$0$i$i$i$i$i)) + 8|0);
-     $5 = load4($__parent_$i$i$i$i$i$i);
-     $6 = load4($5);
-     $cmp$i5$i$i$i$i$i = ($6|0)==($__x$addr$0$i$i$i$i$i|0);
-     if ($cmp$i5$i$i$i$i$i) {
-      $retval$0$i$i$i$i$i = $5;
-      break;
-     } else {
-      $__x$addr$0$i$i$i$i$i = $5;
+    $__parent_$i47$i$i$i$i$i = ((($$in7$i$i)) + 8|0);
+    $3 = load4($__parent_$i47$i$i$i$i$i);
+    $4 = load4($3);
+    $cmp$i69$i$i$i$i$i = ($4|0)==($$in7$i$i|0);
+    if ($cmp$i69$i$i$i$i$i) {
+     $retval$0$i$i$i$i$i = $3;
+    } else {
+     $__parent_$i410$i$i$i$i$i = $__parent_$i47$i$i$i$i$i;
+     while(1) {
+      $6 = load4($__parent_$i410$i$i$i$i$i);
+      $__parent_$i4$i$i$i$i$i = ((($6)) + 8|0);
+      $7 = load4($__parent_$i4$i$i$i$i$i);
+      $8 = load4($7);
+      $cmp$i6$i$i$i$i$i = ($8|0)==($6|0);
+      if ($cmp$i6$i$i$i$i$i) {
+       $retval$0$i$i$i$i$i = $7;
+       break;
+      } else {
+       $__parent_$i410$i$i$i$i$i = $__parent_$i4$i$i$i$i$i;
+      }
      }
     }
    } else {
-    $__x$addr$0$i$i$i$i$i$i = $3;
+    $__x$addr$0$i$i$i$i$i$i = $2;
     while(1) {
-     $4 = load4($__x$addr$0$i$i$i$i$i$i);
-     $cmp$i$i$i$i$i$i = ($4|0)==(0|0);
+     $5 = load4($__x$addr$0$i$i$i$i$i$i);
+     $cmp$i$i$i$i$i$i = ($5|0)==(0|0);
      if ($cmp$i$i$i$i$i$i) {
-      $retval$0$i$i$i$i$i = $__x$addr$0$i$i$i$i$i$i;
       break;
      } else {
-      $__x$addr$0$i$i$i$i$i$i = $4;
+      $__x$addr$0$i$i$i$i$i$i = $5;
      }
     }
+    $retval$0$i$i$i$i$i = $__x$addr$0$i$i$i$i$i$i;
    }
    $lnot$i$i$i$i = ($retval$0$i$i$i$i$i|0)==($__first_$i$i$i$i$i6$i|0);
    if ($lnot$i$i$i$i) {
     break;
    } else {
-    $1 = $retval$0$i$i$i$i$i;$2 = $retval$0$i$i$i$i$i;
+    $$in7$i$i = $retval$0$i$i$i$i$i;
    }
   }
  }
  $props = ((($this)) + 12|0);
- $__left_$i$i$i$i$i3 = ((($this)) + 16|0);
- store4($__left_$i$i$i$i$i3,0);
- $__first_$i$i$i$i4 = ((($this)) + 20|0);
- store4($__first_$i$i$i$i4,0);
- $__first_$i$i$i$i$i5 = ((($this)) + 16|0);
- store4($props,$__first_$i$i$i$i$i5);
- $7 = load4($dataProps);
- $__first_$i$i$i$i$i6$i7 = ((($dataProps)) + 4|0);
- $lnot$i$i7$i$i8 = ($7|0)==($__first_$i$i$i$i$i6$i7|0);
- if (!($lnot$i$i7$i$i8)) {
-  $8 = $7;$9 = $7;
+ $__left_$i$i$i$i$i4 = ((($this)) + 16|0);
+ store4($__left_$i$i$i$i$i4,0);
+ $__first_$i$i$i$i5 = ((($this)) + 20|0);
+ store4($__first_$i$i$i$i5,0);
+ $__first_$i$i$i$i$i6 = ((($this)) + 16|0);
+ store4($props,$__first_$i$i$i$i$i6);
+ $9 = load4($dataProps);
+ $__first_$i$i$i$i$i6$i8 = ((($dataProps)) + 4|0);
+ $lnot$i$i6$i$i9 = ($9|0)==($__first_$i$i$i$i$i6$i8|0);
+ if (!($lnot$i$i6$i$i9)) {
+  $$in7$i$i11 = $9;
   while(1) {
-   $__cc$i$i$i10 = ((($8)) + 16|0);
-   __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE30__emplace_hint_unique_key_argsIS7_JRKNS_4pairIKS7_S9_EEEEENS_15__tree_iteratorISA_PNS_11__tree_nodeISA_PvEEiEENS_21__tree_const_iteratorISA_SR_iEERKT_DpOT0_($props,$__first_$i$i$i$i$i5,$__cc$i$i$i10,$__cc$i$i$i10);
-   $__right_$i$i$i$i$i14 = ((($9)) + 4|0);
-   $10 = load4($__right_$i$i$i$i$i14);
-   $cmp$i$i$i$i$i15 = ($10|0)==(0|0);
-   if ($cmp$i$i$i$i$i15) {
-    $__x$addr$0$i$i$i$i$i21 = $9;
-    while(1) {
-     $__parent_$i$i$i$i$i$i22 = ((($__x$addr$0$i$i$i$i$i21)) + 8|0);
-     $12 = load4($__parent_$i$i$i$i$i$i22);
-     $13 = load4($12);
-     $cmp$i5$i$i$i$i$i24 = ($13|0)==($__x$addr$0$i$i$i$i$i21|0);
-     if ($cmp$i5$i$i$i$i$i24) {
-      $retval$0$i$i$i$i$i27 = $12;
-      break;
-     } else {
-      $__x$addr$0$i$i$i$i$i21 = $12;
+   $__cc$i$i$i12 = ((($$in7$i$i11)) + 16|0);
+   __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE30__emplace_hint_unique_key_argsIS7_JRKNS_4pairIKS7_S9_EEEEENS_15__tree_iteratorISA_PNS_11__tree_nodeISA_PvEEiEENS_21__tree_const_iteratorISA_SR_iEERKT_DpOT0_($props,$__first_$i$i$i$i$i6,$__cc$i$i$i12,$__cc$i$i$i12);
+   $10 = ((($$in7$i$i11)) + 4|0);
+   $11 = load4($10);
+   $cmp$i$i$i$i$i16 = ($11|0)==(0|0);
+   if ($cmp$i$i$i$i$i16) {
+    $__parent_$i47$i$i$i$i$i18 = ((($$in7$i$i11)) + 8|0);
+    $12 = load4($__parent_$i47$i$i$i$i$i18);
+    $13 = load4($12);
+    $cmp$i69$i$i$i$i$i20 = ($13|0)==($$in7$i$i11|0);
+    if ($cmp$i69$i$i$i$i$i20) {
+     $retval$0$i$i$i$i$i32 = $12;
+    } else {
+     $__parent_$i410$i$i$i$i$i27 = $__parent_$i47$i$i$i$i$i18;
+     while(1) {
+      $15 = load4($__parent_$i410$i$i$i$i$i27);
+      $__parent_$i4$i$i$i$i$i28 = ((($15)) + 8|0);
+      $16 = load4($__parent_$i4$i$i$i$i$i28);
+      $17 = load4($16);
+      $cmp$i6$i$i$i$i$i30 = ($17|0)==($15|0);
+      if ($cmp$i6$i$i$i$i$i30) {
+       $retval$0$i$i$i$i$i32 = $16;
+       break;
+      } else {
+       $__parent_$i410$i$i$i$i$i27 = $__parent_$i4$i$i$i$i$i28;
+      }
      }
     }
    } else {
-    $__x$addr$0$i$i$i$i$i$i17 = $10;
+    $__x$addr$0$i$i$i$i$i$i22 = $11;
     while(1) {
-     $11 = load4($__x$addr$0$i$i$i$i$i$i17);
-     $cmp$i$i$i$i$i$i19 = ($11|0)==(0|0);
-     if ($cmp$i$i$i$i$i$i19) {
-      $retval$0$i$i$i$i$i27 = $__x$addr$0$i$i$i$i$i$i17;
+     $14 = load4($__x$addr$0$i$i$i$i$i$i22);
+     $cmp$i$i$i$i$i$i24 = ($14|0)==(0|0);
+     if ($cmp$i$i$i$i$i$i24) {
       break;
      } else {
-      $__x$addr$0$i$i$i$i$i$i17 = $11;
+      $__x$addr$0$i$i$i$i$i$i22 = $14;
      }
     }
+    $retval$0$i$i$i$i$i32 = $__x$addr$0$i$i$i$i$i$i22;
    }
-   $lnot$i$i$i$i29 = ($retval$0$i$i$i$i$i27|0)==($__first_$i$i$i$i$i6$i7|0);
-   if ($lnot$i$i$i$i29) {
+   $lnot$i$i$i$i33 = ($retval$0$i$i$i$i$i32|0)==($__first_$i$i$i$i$i6$i8|0);
+   if ($lnot$i$i$i$i33) {
     break;
    } else {
-    $8 = $retval$0$i$i$i$i$i27;$9 = $retval$0$i$i$i$i$i27;
+    $$in7$i$i11 = $retval$0$i$i$i$i$i32;
    }
   }
  }
  $callbacks = ((($this)) + 24|0);
- $__left_$i$i$i$i$i33 = ((($this)) + 28|0);
- store4($__left_$i$i$i$i$i33,0);
- $__first_$i$i$i$i34 = ((($this)) + 32|0);
- store4($__first_$i$i$i$i34,0);
- $__first_$i$i$i$i$i35 = ((($this)) + 28|0);
- store4($callbacks,$__first_$i$i$i$i$i35);
- $14 = load4($dataCallbacks);
- $__first_$i$i$i$i$i6$i37 = ((($dataCallbacks)) + 4|0);
- $lnot$i$i7$i$i38 = ($14|0)==($__first_$i$i$i$i$i6$i37|0);
- if ($lnot$i$i7$i$i38) {
+ $__left_$i$i$i$i$i38 = ((($this)) + 28|0);
+ store4($__left_$i$i$i$i$i38,0);
+ $__first_$i$i$i$i39 = ((($this)) + 32|0);
+ store4($__first_$i$i$i$i39,0);
+ $__first_$i$i$i$i$i40 = ((($this)) + 28|0);
+ store4($callbacks,$__first_$i$i$i$i$i40);
+ $18 = load4($dataCallbacks);
+ $__first_$i$i$i$i$i6$i42 = ((($dataCallbacks)) + 4|0);
+ $lnot$i$i6$i$i43 = ($18|0)==($__first_$i$i$i$i$i6$i42|0);
+ if ($lnot$i$i6$i$i43) {
   return;
+ } else {
+  $$in7$i$i45 = $18;
  }
- $15 = $14;$16 = $14;
  while(1) {
-  $__cc$i$i$i40 = ((($15)) + 16|0);
-  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE30__emplace_hint_unique_key_argsIS7_JRKNS_4pairIKS7_SC_EEEEENS_15__tree_iteratorISD_PNS_11__tree_nodeISD_PvEEiEENS_21__tree_const_iteratorISD_SU_iEERKT_DpOT0_($callbacks,$__first_$i$i$i$i$i35,$__cc$i$i$i40,$__cc$i$i$i40);
-  $__right_$i$i$i$i$i44 = ((($16)) + 4|0);
-  $17 = load4($__right_$i$i$i$i$i44);
-  $cmp$i$i$i$i$i45 = ($17|0)==(0|0);
-  if ($cmp$i$i$i$i$i45) {
-   $__x$addr$0$i$i$i$i$i51 = $16;
-   while(1) {
-    $__parent_$i$i$i$i$i$i52 = ((($__x$addr$0$i$i$i$i$i51)) + 8|0);
-    $19 = load4($__parent_$i$i$i$i$i$i52);
-    $20 = load4($19);
-    $cmp$i5$i$i$i$i$i54 = ($20|0)==($__x$addr$0$i$i$i$i$i51|0);
-    if ($cmp$i5$i$i$i$i$i54) {
-     $retval$0$i$i$i$i$i57 = $19;
-     break;
-    } else {
-     $__x$addr$0$i$i$i$i$i51 = $19;
+  $__cc$i$i$i46 = ((($$in7$i$i45)) + 16|0);
+  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE30__emplace_hint_unique_key_argsIS7_JRKNS_4pairIKS7_SC_EEEEENS_15__tree_iteratorISD_PNS_11__tree_nodeISD_PvEEiEENS_21__tree_const_iteratorISD_SU_iEERKT_DpOT0_($callbacks,$__first_$i$i$i$i$i40,$__cc$i$i$i46,$__cc$i$i$i46);
+  $19 = ((($$in7$i$i45)) + 4|0);
+  $20 = load4($19);
+  $cmp$i$i$i$i$i50 = ($20|0)==(0|0);
+  if ($cmp$i$i$i$i$i50) {
+   $__parent_$i47$i$i$i$i$i52 = ((($$in7$i$i45)) + 8|0);
+   $21 = load4($__parent_$i47$i$i$i$i$i52);
+   $22 = load4($21);
+   $cmp$i69$i$i$i$i$i54 = ($22|0)==($$in7$i$i45|0);
+   if ($cmp$i69$i$i$i$i$i54) {
+    $retval$0$i$i$i$i$i66 = $21;
+   } else {
+    $__parent_$i410$i$i$i$i$i61 = $__parent_$i47$i$i$i$i$i52;
+    while(1) {
+     $24 = load4($__parent_$i410$i$i$i$i$i61);
+     $__parent_$i4$i$i$i$i$i62 = ((($24)) + 8|0);
+     $25 = load4($__parent_$i4$i$i$i$i$i62);
+     $26 = load4($25);
+     $cmp$i6$i$i$i$i$i64 = ($26|0)==($24|0);
+     if ($cmp$i6$i$i$i$i$i64) {
+      $retval$0$i$i$i$i$i66 = $25;
+      break;
+     } else {
+      $__parent_$i410$i$i$i$i$i61 = $__parent_$i4$i$i$i$i$i62;
+     }
     }
    }
   } else {
-   $__x$addr$0$i$i$i$i$i$i47 = $17;
+   $__x$addr$0$i$i$i$i$i$i56 = $20;
    while(1) {
-    $18 = load4($__x$addr$0$i$i$i$i$i$i47);
-    $cmp$i$i$i$i$i$i49 = ($18|0)==(0|0);
-    if ($cmp$i$i$i$i$i$i49) {
-     $retval$0$i$i$i$i$i57 = $__x$addr$0$i$i$i$i$i$i47;
+    $23 = load4($__x$addr$0$i$i$i$i$i$i56);
+    $cmp$i$i$i$i$i$i58 = ($23|0)==(0|0);
+    if ($cmp$i$i$i$i$i$i58) {
      break;
     } else {
-     $__x$addr$0$i$i$i$i$i$i47 = $18;
+     $__x$addr$0$i$i$i$i$i$i56 = $23;
     }
    }
+   $retval$0$i$i$i$i$i66 = $__x$addr$0$i$i$i$i$i$i56;
   }
-  $lnot$i$i$i$i59 = ($retval$0$i$i$i$i$i57|0)==($__first_$i$i$i$i$i6$i37|0);
-  if ($lnot$i$i$i$i59) {
+  $lnot$i$i$i$i67 = ($retval$0$i$i$i$i$i66|0)==($__first_$i$i$i$i$i6$i42|0);
+  if ($lnot$i$i$i$i67) {
    break;
   } else {
-   $15 = $retval$0$i$i$i$i$i57;$16 = $retval$0$i$i$i$i$i57;
+   $$in7$i$i45 = $retval$0$i$i$i$i$i66;
   }
  }
  return;
@@ -4400,55 +4423,55 @@ function __ZN6asmdom4DataC2ERKNSt3__23mapINS1_12basic_stringIcNS1_11char_traitsI
 function __GLOBAL__sub_I_index_cpp() {
  var $$repack4$i$i$i$i = 0, $$repack4$i$i$i3$i = 0, $$repack4$i$i29$i$i = 0, $$repack4$i$i37$i$i = 0, $call$i$i$i$i = 0, $call$i$i$i1$i = 0, $call$i$i2$i$i = 0, $call$i$i27$i$i = 0, $call$i$i3$i$i = 0, $call$i$i35$i$i = 0, $call$i$i38$i$i = 0, $call$i$i39$i$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
- __embind_register_class((1104|0),(1200|0),(1216|0),(0|0),(5164|0),(11|0),(5167|0),(0|0),(5167|0),(0|0),(4633|0),(5169|0),(21|0));
- __embind_register_class_constructor((1104|0),1,(2028|0),(5164|0),(12|0),(1|0));
+ __embind_register_class((1104|0),(1200|0),(1216|0),(0|0),(5235|0),(10|0),(5238|0),(0|0),(5238|0),(0|0),(4636|0),(5240|0),(20|0));
+ __embind_register_class_constructor((1104|0),1,(2028|0),(5235|0),(11|0),(1|0));
  $call$i$i$i$i = (__Znwj(8)|0);
- store4($call$i$i$i$i,(13));
+ store4($call$i$i$i$i,(12));
  $$repack4$i$i$i$i = ((($call$i$i$i$i)) + 4|0);
  store4($$repack4$i$i$i$i,0);
- __embind_register_class_function((1104|0),(5195|0),2,(2032|0),(4690|0),(1|0),($call$i$i$i$i|0),0);
+ __embind_register_class_function((1104|0),(5266|0),2,(2032|0),(4693|0),(1|0),($call$i$i$i$i|0),0);
  $call$i$i2$i$i = (__Znwj(4)|0);
  store4($call$i$i2$i$i,(1));
- __embind_register_class_function((1104|0),(5200|0),3,(2040|0),(4717|0),(6|0),($call$i$i2$i$i|0),0);
+ __embind_register_class_function((1104|0),(5271|0),3,(2040|0),(4720|0),(6|0),($call$i$i2$i$i|0),0);
  $call$i$i3$i$i = (__Znwj(4)|0);
  store4($call$i$i3$i$i,(2));
- __embind_register_class_function((1104|0),(5204|0),4,(2052|0),(5189|0),(4|0),($call$i$i3$i$i|0),0);
- __embind_register_class((1112|0),(1168|0),(1184|0),(0|0),(5164|0),(14|0),(5167|0),(0|0),(5167|0),(0|0),(4649|0),(5169|0),(22|0));
- __embind_register_class_constructor((1112|0),1,(1960|0),(5164|0),(15|0),(2|0));
+ __embind_register_class_function((1104|0),(5275|0),4,(2052|0),(5260|0),(4|0),($call$i$i3$i$i|0),0);
+ __embind_register_class((1112|0),(1168|0),(1184|0),(0|0),(5235|0),(13|0),(5238|0),(0|0),(5238|0),(0|0),(4652|0),(5240|0),(21|0));
+ __embind_register_class_constructor((1112|0),1,(1960|0),(5235|0),(14|0),(2|0));
  $call$i$i$i1$i = (__Znwj(8)|0);
  store4($call$i$i$i1$i,(1));
  $$repack4$i$i$i3$i = ((($call$i$i$i1$i)) + 4|0);
  store4($$repack4$i$i$i3$i,0);
- __embind_register_class_function((1112|0),(5172|0),3,(1964|0),(4701|0),(3|0),($call$i$i$i1$i|0),0);
+ __embind_register_class_function((1112|0),(5243|0),3,(1964|0),(4704|0),(3|0),($call$i$i$i1$i|0),0);
  $call$i$i27$i$i = (__Znwj(8)|0);
  store4($call$i$i27$i$i,(4));
  $$repack4$i$i29$i$i = ((($call$i$i27$i$i)) + 4|0);
  store4($$repack4$i$i29$i$i,0);
- __embind_register_class_function((1112|0),(5182|0),4,(1976|0),(5189|0),(5|0),($call$i$i27$i$i|0),0);
+ __embind_register_class_function((1112|0),(5253|0),4,(1976|0),(5260|0),(5|0),($call$i$i27$i$i|0),0);
  $call$i$i35$i$i = (__Znwj(8)|0);
- store4($call$i$i35$i$i,(16));
+ store4($call$i$i35$i$i,(15));
  $$repack4$i$i37$i$i = ((($call$i$i35$i$i)) + 4|0);
  store4($$repack4$i$i37$i$i,0);
- __embind_register_class_function((1112|0),(5195|0),2,(1992|0),(4690|0),(2|0),($call$i$i35$i$i|0),0);
+ __embind_register_class_function((1112|0),(5266|0),2,(1992|0),(4693|0),(2|0),($call$i$i35$i$i|0),0);
  $call$i$i38$i$i = (__Znwj(4)|0);
  store4($call$i$i38$i$i,(5));
- __embind_register_class_function((1112|0),(5200|0),3,(2000|0),(4717|0),(7|0),($call$i$i38$i$i|0),0);
+ __embind_register_class_function((1112|0),(5271|0),3,(2000|0),(4720|0),(7|0),($call$i$i38$i$i|0),0);
  $call$i$i39$i$i = (__Znwj(4)|0);
  store4($call$i$i39$i$i,(8));
- __embind_register_class_function((1112|0),(5204|0),4,(2012|0),(4753|0),(1|0),($call$i$i39$i$i|0),0);
- __embind_register_function((4664|0),2,(1752|0),(4677|0),(2|0),(23|0));
- __embind_register_function((4681|0),2,(1760|0),(4690|0),(3|0),(17|0));
- __embind_register_function((4694|0),3,(1768|0),(4701|0),(6|0),(3|0));
- __embind_register_function((4706|0),2,(1780|0),(4690|0),(4|0),(18|0));
- __embind_register_function((4711|0),3,(1788|0),(4717|0),(9|0),(5|0));
- __embind_register_function((4722|0),3,(1800|0),(4717|0),(10|0),(6|0));
- __embind_register_function((4728|0),3,(1812|0),(4717|0),(11|0),(7|0));
- __embind_register_function((4734|0),3,(1824|0),(4717|0),(12|0),(8|0));
- __embind_register_function((4740|0),3,(1836|0),(4717|0),(13|0),(9|0));
- __embind_register_function((4746|0),4,(1848|0),(4753|0),(2|0),(14|0));
- __embind_register_function((4759|0),4,(1864|0),(4753|0),(3|0),(15|0));
- __embind_register_function((4766|0),4,(1880|0),(4753|0),(4|0),(16|0));
- __embind_register_function((4773|0),4,(1896|0),(4753|0),(5|0),(17|0));
+ __embind_register_class_function((1112|0),(5275|0),4,(2012|0),(4756|0),(1|0),($call$i$i39$i$i|0),0);
+ __embind_register_function((4667|0),2,(1752|0),(4680|0),(2|0),(22|0));
+ __embind_register_function((4684|0),2,(1760|0),(4693|0),(3|0),(16|0));
+ __embind_register_function((4697|0),3,(1768|0),(4704|0),(6|0),(3|0));
+ __embind_register_function((4709|0),2,(1780|0),(4693|0),(4|0),(17|0));
+ __embind_register_function((4714|0),3,(1788|0),(4720|0),(9|0),(5|0));
+ __embind_register_function((4725|0),3,(1800|0),(4720|0),(10|0),(6|0));
+ __embind_register_function((4731|0),3,(1812|0),(4720|0),(11|0),(7|0));
+ __embind_register_function((4737|0),3,(1824|0),(4720|0),(12|0),(8|0));
+ __embind_register_function((4743|0),3,(1836|0),(4720|0),(13|0),(9|0));
+ __embind_register_function((4749|0),4,(1848|0),(4756|0),(2|0),(14|0));
+ __embind_register_function((4762|0),4,(1864|0),(4756|0),(3|0),(15|0));
+ __embind_register_function((4769|0),4,(1880|0),(4756|0),(4|0),(16|0));
+ __embind_register_function((4776|0),4,(1896|0),(4756|0),(5|0),(17|0));
  return;
 }
 function __ZN10emscripten8internal7InvokerIvJRKjEE6invokeEPFvS3_Ej($fn,$args) {
@@ -4530,21 +4553,27 @@ function __Z8patchPtrRKjS0_($oldVnode,$vnode) {
 function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEEE6invokeEPFjSA_EPNS0_11BindingTypeIS8_EUt_E($fn,$args) {
  $fn = $fn|0;
  $args = $args|0;
- var $0 = 0, $arraydecay$i = 0, $call = 0, $ref$tmp1 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $__size_$i$i1 = 0, $call = 0, $ref$tmp1 = 0, $tobool$i$i2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $ref$tmp1 = sp;
- $arraydecay$i = ((($args)) + 4|0);
- $0 = load4($args);
- ; store8($ref$tmp1,i64_const(0,0),4); store4($ref$tmp1+8|0,0,4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($ref$tmp1,$arraydecay$i,$0);
+ __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($ref$tmp1,$args);
  $call = (FUNCTION_TABLE_ii[$fn & 31]($ref$tmp1)|0);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($ref$tmp1);
+ $0 = ((($ref$tmp1)) + 8|0);
+ $__size_$i$i1 = ((($0)) + 3|0);
+ $1 = load1($__size_$i$i1);
+ $tobool$i$i2 = ($1<<24>>24)<(0);
+ if (!($tobool$i$i2)) {
+  STACKTOP = sp;return ($call|0);
+ }
+ $2 = load4($ref$tmp1);
+ __ZdlPv($2);
  STACKTOP = sp;return ($call|0);
 }
 function __Z3h_sRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEE($sel) {
  $sel = $sel|0;
- var $0 = 0, $__begin_$i$i$i$i = 0, $__end_$i$i$i$i = 0, $__end_cap_$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i2$i$i$i = 0, $__first_$i$i$i$i5$i$i$i = 0, $__left_$i$i$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i1$i$i$i = 0, $__left_$i$i$i$i$i4$i$i$i = 0, $call$i = 0, $callbacks$i$i$i = 0, $data$i$i = 0, $key$i$i = 0, $props$i$i$i = 0, $ref$tmp = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $__begin_$i$i$i$i = 0, $__begin_node_$i$i$i$i$i$i = 0, $__begin_node_$i$i$i4$i$i$i = 0, $__begin_node_$i$i$i8$i$i$i = 0, $__end_$i$i$i$i = 0, $__end_cap_$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i2$i$i$i = 0, $__first_$i$i$i$i6$i$i$i = 0, $__left_$i$i$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i1$i$i$i = 0, $__left_$i$i$i$i$i5$i$i$i = 0, $__size_$i$i = 0, $call$i = 0, $key$i$i = 0, $ref$tmp = 0, $tobool$i$i = 0;
+ var label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $ref$tmp = sp;
@@ -4552,25 +4581,25 @@ function __Z3h_sRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEE
  $call$i = (__Znwj(88)|0);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($call$i,$ref$tmp);
  $key$i$i = ((($call$i)) + 12|0);
- $data$i$i = ((($call$i)) + 36|0);
  $__left_$i$i$i$i$i$i$i$i = ((($call$i)) + 40|0);
  store4($__left_$i$i$i$i$i$i$i$i,0);
  $__first_$i$i$i$i$i$i$i = ((($call$i)) + 44|0);
  store4($__first_$i$i$i$i$i$i$i,0);
+ $__begin_node_$i$i$i$i$i$i = ((($call$i)) + 36|0);
  ; store8($key$i$i,i64_const(0,0),4); store8($key$i$i+8|0,i64_const(0,0),4); store8($key$i$i+16|0,i64_const(0,0),4);
- store4($data$i$i,$__left_$i$i$i$i$i$i$i$i);
- $props$i$i$i = ((($call$i)) + 48|0);
- $__left_$i$i$i$i$i4$i$i$i = ((($call$i)) + 52|0);
- store4($__left_$i$i$i$i$i4$i$i$i,0);
- $__first_$i$i$i$i5$i$i$i = ((($call$i)) + 56|0);
- store4($__first_$i$i$i$i5$i$i$i,0);
- store4($props$i$i$i,$__left_$i$i$i$i$i4$i$i$i);
- $callbacks$i$i$i = ((($call$i)) + 60|0);
+ store4($__begin_node_$i$i$i$i$i$i,$__left_$i$i$i$i$i$i$i$i);
+ $__left_$i$i$i$i$i5$i$i$i = ((($call$i)) + 52|0);
+ store4($__left_$i$i$i$i$i5$i$i$i,0);
+ $__first_$i$i$i$i6$i$i$i = ((($call$i)) + 56|0);
+ store4($__first_$i$i$i$i6$i$i$i,0);
+ $__begin_node_$i$i$i8$i$i$i = ((($call$i)) + 48|0);
+ store4($__begin_node_$i$i$i8$i$i$i,$__left_$i$i$i$i$i5$i$i$i);
  $__left_$i$i$i$i$i1$i$i$i = ((($call$i)) + 64|0);
  store4($__left_$i$i$i$i$i1$i$i$i,0);
  $__first_$i$i$i$i2$i$i$i = ((($call$i)) + 68|0);
  store4($__first_$i$i$i$i2$i$i$i,0);
- store4($callbacks$i$i$i,$__left_$i$i$i$i$i1$i$i$i);
+ $__begin_node_$i$i$i4$i$i$i = ((($call$i)) + 60|0);
+ store4($__begin_node_$i$i$i4$i$i$i,$__left_$i$i$i$i$i1$i$i$i);
  $__begin_$i$i$i$i = ((($call$i)) + 76|0);
  store4($__begin_$i$i$i$i,0);
  $__end_$i$i$i$i = ((($call$i)) + 80|0);
@@ -4578,53 +4607,66 @@ function __Z3h_sRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEE
  $__end_cap_$i$i$i$i = ((($call$i)) + 84|0);
  store4($__end_cap_$i$i$i$i,0);
  $0 = $call$i;
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
+ $__size_$i$i = ((($ref$tmp)) + 11|0);
+ $1 = load1($__size_$i$i);
+ $tobool$i$i = ($1<<24>>24)<(0);
+ if (!($tobool$i$i)) {
+  STACKTOP = sp;return ($0|0);
+ }
+ $2 = load4($ref$tmp);
+ __ZdlPv($2);
  STACKTOP = sp;return ($0|0);
 }
 function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEbEE6invokeEPFjSA_bEPNS0_11BindingTypeIS8_EUt_Eb($fn,$args,$args1) {
  $fn = $fn|0;
  $args = $args|0;
  $args1 = $args1|0;
- var $0 = 0, $arraydecay$i = 0, $call5 = 0, $ref$tmp3 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $__size_$i$i1 = 0, $call5 = 0, $ref$tmp3 = 0, $tobool$i$i2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $ref$tmp3 = sp;
- $arraydecay$i = ((($args)) + 4|0);
- $0 = load4($args);
- ; store8($ref$tmp3,i64_const(0,0),4); store4($ref$tmp3+8|0,0,4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($ref$tmp3,$arraydecay$i,$0);
+ __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($ref$tmp3,$args);
  $call5 = (FUNCTION_TABLE_iii[$fn & 15]($ref$tmp3,$args1)|0);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($ref$tmp3);
+ $0 = ((($ref$tmp3)) + 8|0);
+ $__size_$i$i1 = ((($0)) + 3|0);
+ $1 = load1($__size_$i$i1);
+ $tobool$i$i2 = ($1<<24>>24)<(0);
+ if (!($tobool$i$i2)) {
+  STACKTOP = sp;return ($call5|0);
+ }
+ $2 = load4($ref$tmp3);
+ __ZdlPv($2);
  STACKTOP = sp;return ($call5|0);
 }
 function __Z4h_tiRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEEb($nodeText,$isText) {
  $nodeText = $nodeText|0;
  $isText = $isText|0;
- var $0 = 0, $__begin_$i$i$i$i = 0, $__end_$i$i$i$i = 0, $__end_cap_$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i2$i$i$i = 0, $__first_$i$i$i$i5$i$i$i = 0, $__left_$i$i$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i1$i$i$i = 0, $__left_$i$i$i$i$i4$i$i$i = 0, $call$i = 0, $callbacks$i$i$i = 0, $data$i$i = 0, $props$i$i$i = 0, $ref$tmp = 0, $text$i$i = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $__begin_$i$i$i$i = 0, $__begin_node_$i$i$i$i$i$i = 0, $__begin_node_$i$i$i4$i$i$i = 0, $__begin_node_$i$i$i8$i$i$i = 0, $__end_$i$i$i$i = 0, $__end_cap_$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i2$i$i$i = 0, $__first_$i$i$i$i6$i$i$i = 0, $__left_$i$i$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i1$i$i$i = 0, $__left_$i$i$i$i$i5$i$i$i = 0, $__size_$i$i = 0, $call$i = 0, $ref$tmp = 0, $text$i$i = 0, $tobool$i$i = 0;
+ var label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $ref$tmp = sp;
  __Z15wstring_to_utf8RKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEE($ref$tmp,$nodeText);
  $call$i = (__Znwj(88)|0);
- $data$i$i = ((($call$i)) + 36|0);
  $__left_$i$i$i$i$i$i$i$i = ((($call$i)) + 40|0);
  store4($__left_$i$i$i$i$i$i$i$i,0);
  $__first_$i$i$i$i$i$i$i = ((($call$i)) + 44|0);
  store4($__first_$i$i$i$i$i$i$i,0);
+ $__begin_node_$i$i$i$i$i$i = ((($call$i)) + 36|0);
  ; store8($call$i,i64_const(0,0),4); store8($call$i+8|0,i64_const(0,0),4); store8($call$i+16|0,i64_const(0,0),4); store8($call$i+24|0,i64_const(0,0),4); store4($call$i+32|0,0,4);
- store4($data$i$i,$__left_$i$i$i$i$i$i$i$i);
- $props$i$i$i = ((($call$i)) + 48|0);
- $__left_$i$i$i$i$i4$i$i$i = ((($call$i)) + 52|0);
- store4($__left_$i$i$i$i$i4$i$i$i,0);
- $__first_$i$i$i$i5$i$i$i = ((($call$i)) + 56|0);
- store4($__first_$i$i$i$i5$i$i$i,0);
- store4($props$i$i$i,$__left_$i$i$i$i$i4$i$i$i);
- $callbacks$i$i$i = ((($call$i)) + 60|0);
+ store4($__begin_node_$i$i$i$i$i$i,$__left_$i$i$i$i$i$i$i$i);
+ $__left_$i$i$i$i$i5$i$i$i = ((($call$i)) + 52|0);
+ store4($__left_$i$i$i$i$i5$i$i$i,0);
+ $__first_$i$i$i$i6$i$i$i = ((($call$i)) + 56|0);
+ store4($__first_$i$i$i$i6$i$i$i,0);
+ $__begin_node_$i$i$i8$i$i$i = ((($call$i)) + 48|0);
+ store4($__begin_node_$i$i$i8$i$i$i,$__left_$i$i$i$i$i5$i$i$i);
  $__left_$i$i$i$i$i1$i$i$i = ((($call$i)) + 64|0);
  store4($__left_$i$i$i$i$i1$i$i$i,0);
  $__first_$i$i$i$i2$i$i$i = ((($call$i)) + 68|0);
  store4($__first_$i$i$i$i2$i$i$i,0);
- store4($callbacks$i$i$i,$__left_$i$i$i$i$i1$i$i$i);
+ $__begin_node_$i$i$i4$i$i$i = ((($call$i)) + 60|0);
+ store4($__begin_node_$i$i$i4$i$i$i,$__left_$i$i$i$i$i1$i$i$i);
  $__begin_$i$i$i$i = ((($call$i)) + 76|0);
  store4($__begin_$i$i$i$i,0);
  $__end_$i$i$i$i = ((($call$i)) + 80|0);
@@ -4634,40 +4676,48 @@ function __Z4h_tiRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE
  if ($isText) {
   $text$i$i = ((($call$i)) + 24|0);
   (__ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEaSERKS5_($text$i$i,$ref$tmp)|0);
-  $0 = $call$i;
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
-  STACKTOP = sp;return ($0|0);
  } else {
   (__ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEaSERKS5_($call$i,$ref$tmp)|0);
-  $0 = $call$i;
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
+ }
+ $0 = $call$i;
+ $__size_$i$i = ((($ref$tmp)) + 11|0);
+ $1 = load1($__size_$i$i);
+ $tobool$i$i = ($1<<24>>24)<(0);
+ if (!($tobool$i$i)) {
   STACKTOP = sp;return ($0|0);
  }
- return (0)|0;
+ $2 = load4($ref$tmp);
+ __ZdlPv($2);
+ STACKTOP = sp;return ($0|0);
 }
 function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEERKjEE6invokeEPFjSA_SC_EPNS0_11BindingTypeIS8_EUt_Ej($fn,$args,$args1) {
  $fn = $fn|0;
  $args = $args|0;
  $args1 = $args1|0;
- var $0 = 0, $arraydecay$i = 0, $call6 = 0, $ref$tmp3 = 0, $ref$tmp4 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $__size_$i$i1 = 0, $call6 = 0, $ref$tmp3 = 0, $ref$tmp4 = 0, $tobool$i$i2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $ref$tmp3 = sp + 4|0;
  $ref$tmp4 = sp;
- $arraydecay$i = ((($args)) + 4|0);
- $0 = load4($args);
- ; store8($ref$tmp3,i64_const(0,0),4); store4($ref$tmp3+8|0,0,4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($ref$tmp3,$arraydecay$i,$0);
+ __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($ref$tmp3,$args);
  store4($ref$tmp4,$args1);
  $call6 = (FUNCTION_TABLE_iii[$fn & 15]($ref$tmp3,$ref$tmp4)|0);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($ref$tmp3);
+ $0 = ((($ref$tmp3)) + 8|0);
+ $__size_$i$i1 = ((($0)) + 3|0);
+ $1 = load1($__size_$i$i1);
+ $tobool$i$i2 = ($1<<24>>24)<(0);
+ if (!($tobool$i$i2)) {
+  STACKTOP = sp;return ($call6|0);
+ }
+ $2 = load4($ref$tmp3);
+ __ZdlPv($2);
  STACKTOP = sp;return ($call6|0);
 }
 function __Z4h_snRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEERKj($sel,$node) {
  $sel = $sel|0;
  $node = $node|0;
- var $0 = 0, $1 = 0, $__end_$i$i$i$i = 0, $__end_cap_$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i2$i$i$i = 0, $__first_$i$i$i$i5$i$i$i = 0, $__left_$i$i$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i1$i$i$i = 0, $__left_$i$i$i$i$i4$i$i$i = 0, $add$ptr$i9$i$i$i = 0, $call$i = 0, $call$i$i$i$i11$i$i$i = 0, $callbacks$i$i$i = 0, $children$i$i = 0, $data$i$i = 0, $key$i$i = 0, $props$i$i$i = 0, $ref$tmp = 0, label = 0;
- var sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $__begin_node_$i$i$i$i$i$i = 0, $__begin_node_$i$i$i4$i$i$i = 0, $__begin_node_$i$i$i8$i$i$i = 0, $__end_$i$i$i$i = 0, $__end_cap_$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i2$i$i$i = 0, $__first_$i$i$i$i6$i$i$i = 0, $__left_$i$i$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i1$i$i$i = 0, $__left_$i$i$i$i$i5$i$i$i = 0, $__size_$i$i = 0, $add$ptr$i10$i$i$i = 0, $call$i = 0, $call$i$i$i$i11$i$i$i = 0, $children$i$i = 0;
+ var $key$i$i = 0, $ref$tmp = 0, $tobool$i$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $ref$tmp = sp;
@@ -4676,25 +4726,25 @@ function __Z4h_snRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE
  $call$i = (__Znwj(88)|0);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($call$i,$ref$tmp);
  $key$i$i = ((($call$i)) + 12|0);
- $data$i$i = ((($call$i)) + 36|0);
  $__left_$i$i$i$i$i$i$i$i = ((($call$i)) + 40|0);
  store4($__left_$i$i$i$i$i$i$i$i,0);
  $__first_$i$i$i$i$i$i$i = ((($call$i)) + 44|0);
  store4($__first_$i$i$i$i$i$i$i,0);
+ $__begin_node_$i$i$i$i$i$i = ((($call$i)) + 36|0);
  ; store8($key$i$i,i64_const(0,0),4); store8($key$i$i+8|0,i64_const(0,0),4); store8($key$i$i+16|0,i64_const(0,0),4);
- store4($data$i$i,$__left_$i$i$i$i$i$i$i$i);
- $props$i$i$i = ((($call$i)) + 48|0);
- $__left_$i$i$i$i$i4$i$i$i = ((($call$i)) + 52|0);
- store4($__left_$i$i$i$i$i4$i$i$i,0);
- $__first_$i$i$i$i5$i$i$i = ((($call$i)) + 56|0);
- store4($__first_$i$i$i$i5$i$i$i,0);
- store4($props$i$i$i,$__left_$i$i$i$i$i4$i$i$i);
- $callbacks$i$i$i = ((($call$i)) + 60|0);
+ store4($__begin_node_$i$i$i$i$i$i,$__left_$i$i$i$i$i$i$i$i);
+ $__left_$i$i$i$i$i5$i$i$i = ((($call$i)) + 52|0);
+ store4($__left_$i$i$i$i$i5$i$i$i,0);
+ $__first_$i$i$i$i6$i$i$i = ((($call$i)) + 56|0);
+ store4($__first_$i$i$i$i6$i$i$i,0);
+ $__begin_node_$i$i$i8$i$i$i = ((($call$i)) + 48|0);
+ store4($__begin_node_$i$i$i8$i$i$i,$__left_$i$i$i$i$i5$i$i$i);
  $__left_$i$i$i$i$i1$i$i$i = ((($call$i)) + 64|0);
  store4($__left_$i$i$i$i$i1$i$i$i,0);
  $__first_$i$i$i$i2$i$i$i = ((($call$i)) + 68|0);
  store4($__first_$i$i$i$i2$i$i$i,0);
- store4($callbacks$i$i$i,$__left_$i$i$i$i$i1$i$i$i);
+ $__begin_node_$i$i$i4$i$i$i = ((($call$i)) + 60|0);
+ store4($__begin_node_$i$i$i4$i$i$i,$__left_$i$i$i$i$i1$i$i$i);
  $children$i$i = ((($call$i)) + 76|0);
  store4($children$i$i,0);
  $__end_$i$i$i$i = ((($call$i)) + 80|0);
@@ -4703,40 +4753,57 @@ function __Z4h_snRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE
  store4($__end_cap_$i$i$i$i,0);
  $call$i$i$i$i11$i$i$i = (__Znwj(4)|0);
  store4($children$i$i,$call$i$i$i$i11$i$i$i);
- $add$ptr$i9$i$i$i = ((($call$i$i$i$i11$i$i$i)) + 4|0);
- store4($__end_cap_$i$i$i$i,$add$ptr$i9$i$i$i);
+ $add$ptr$i10$i$i$i = ((($call$i$i$i$i11$i$i$i)) + 4|0);
+ store4($__end_cap_$i$i$i$i,$add$ptr$i10$i$i$i);
  store4($call$i$i$i$i11$i$i$i,$0);
- store4($__end_$i$i$i$i,$add$ptr$i9$i$i$i);
+ store4($__end_$i$i$i$i,$add$ptr$i10$i$i$i);
  $1 = $call$i;
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
+ $__size_$i$i = ((($ref$tmp)) + 11|0);
+ $2 = load1($__size_$i$i);
+ $tobool$i$i = ($2<<24>>24)<(0);
+ if (!($tobool$i$i)) {
+  STACKTOP = sp;return ($1|0);
+ }
+ $3 = load4($ref$tmp);
+ __ZdlPv($3);
  STACKTOP = sp;return ($1|0);
 }
 function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEESA_EE6invokeEPFjSA_SA_EPNS0_11BindingTypeIS8_EUt_ESH_($fn,$args,$args1) {
  $fn = $fn|0;
  $args = $args|0;
  $args1 = $args1|0;
- var $0 = 0, $1 = 0, $arraydecay$i = 0, $arraydecay$i1 = 0, $call = 0, $ref$tmp3 = 0, $ref$tmp4 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $__size_$i$i1 = 0, $__size_$i$i5 = 0, $call = 0, $ref$tmp3 = 0, $ref$tmp4 = 0, $tobool$i$i2 = 0, $tobool$i$i6 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 32|0;
  $ref$tmp3 = sp + 12|0;
  $ref$tmp4 = sp;
- $arraydecay$i = ((($args)) + 4|0);
- $0 = load4($args);
- ; store8($ref$tmp3,i64_const(0,0),4); store4($ref$tmp3+8|0,0,4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($ref$tmp3,$arraydecay$i,$0);
- $arraydecay$i1 = ((($args1)) + 4|0);
- $1 = load4($args1);
- ; store8($ref$tmp4,i64_const(0,0),4); store4($ref$tmp4+8|0,0,4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($ref$tmp4,$arraydecay$i1,$1);
+ __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($ref$tmp3,$args);
+ __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($ref$tmp4,$args1);
  $call = (FUNCTION_TABLE_iii[$fn & 15]($ref$tmp3,$ref$tmp4)|0);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($ref$tmp4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($ref$tmp3);
+ $0 = ((($ref$tmp4)) + 8|0);
+ $__size_$i$i1 = ((($0)) + 3|0);
+ $1 = load1($__size_$i$i1);
+ $tobool$i$i2 = ($1<<24>>24)<(0);
+ if ($tobool$i$i2) {
+  $2 = load4($ref$tmp4);
+  __ZdlPv($2);
+ }
+ $3 = ((($ref$tmp3)) + 8|0);
+ $__size_$i$i5 = ((($3)) + 3|0);
+ $4 = load1($__size_$i$i5);
+ $tobool$i$i6 = ($4<<24>>24)<(0);
+ if (!($tobool$i$i6)) {
+  STACKTOP = sp;return ($call|0);
+ }
+ $5 = load4($ref$tmp3);
+ __ZdlPv($5);
  STACKTOP = sp;return ($call|0);
 }
 function __Z4h_stRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEES7_($sel,$nodeText) {
  $sel = $sel|0;
  $nodeText = $nodeText|0;
- var $0 = 0, $__begin_$i$i$i$i = 0, $__end_$i$i$i$i = 0, $__end_cap_$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i2$i$i$i = 0, $__first_$i$i$i$i5$i$i$i = 0, $__left_$i$i$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i1$i$i$i = 0, $__left_$i$i$i$i$i4$i$i$i = 0, $call$i = 0, $callbacks$i$i$i = 0, $data$i$i = 0, $key$i$i = 0, $props$i$i$i = 0, $ref$tmp = 0, $ref$tmp1 = 0, $text$i$i = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $__begin_$i$i$i$i = 0, $__begin_node_$i$i$i$i$i$i = 0, $__begin_node_$i$i$i4$i$i$i = 0, $__begin_node_$i$i$i8$i$i$i = 0, $__end_$i$i$i$i = 0, $__end_cap_$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i2$i$i$i = 0, $__first_$i$i$i$i6$i$i$i = 0, $__left_$i$i$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i1$i$i$i = 0, $__left_$i$i$i$i$i5$i$i$i = 0, $__size_$i$i = 0, $__size_$i$i2 = 0, $call$i = 0;
+ var $key$i$i = 0, $ref$tmp = 0, $ref$tmp1 = 0, $text$i$i = 0, $tobool$i$i = 0, $tobool$i$i3 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 32|0;
  $ref$tmp = sp + 12|0;
@@ -4749,24 +4816,24 @@ function __Z4h_stRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE
  ; store8($key$i$i,i64_const(0,0),4); store4($key$i$i+8|0,0,4);
  $text$i$i = ((($call$i)) + 24|0);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($text$i$i,$ref$tmp1);
- $data$i$i = ((($call$i)) + 36|0);
  $__left_$i$i$i$i$i$i$i$i = ((($call$i)) + 40|0);
  store4($__left_$i$i$i$i$i$i$i$i,0);
  $__first_$i$i$i$i$i$i$i = ((($call$i)) + 44|0);
  store4($__first_$i$i$i$i$i$i$i,0);
- store4($data$i$i,$__left_$i$i$i$i$i$i$i$i);
- $props$i$i$i = ((($call$i)) + 48|0);
- $__left_$i$i$i$i$i4$i$i$i = ((($call$i)) + 52|0);
- store4($__left_$i$i$i$i$i4$i$i$i,0);
- $__first_$i$i$i$i5$i$i$i = ((($call$i)) + 56|0);
- store4($__first_$i$i$i$i5$i$i$i,0);
- store4($props$i$i$i,$__left_$i$i$i$i$i4$i$i$i);
- $callbacks$i$i$i = ((($call$i)) + 60|0);
+ $__begin_node_$i$i$i$i$i$i = ((($call$i)) + 36|0);
+ store4($__begin_node_$i$i$i$i$i$i,$__left_$i$i$i$i$i$i$i$i);
+ $__left_$i$i$i$i$i5$i$i$i = ((($call$i)) + 52|0);
+ store4($__left_$i$i$i$i$i5$i$i$i,0);
+ $__first_$i$i$i$i6$i$i$i = ((($call$i)) + 56|0);
+ store4($__first_$i$i$i$i6$i$i$i,0);
+ $__begin_node_$i$i$i8$i$i$i = ((($call$i)) + 48|0);
+ store4($__begin_node_$i$i$i8$i$i$i,$__left_$i$i$i$i$i5$i$i$i);
  $__left_$i$i$i$i$i1$i$i$i = ((($call$i)) + 64|0);
  store4($__left_$i$i$i$i$i1$i$i$i,0);
  $__first_$i$i$i$i2$i$i$i = ((($call$i)) + 68|0);
  store4($__first_$i$i$i$i2$i$i$i,0);
- store4($callbacks$i$i$i,$__left_$i$i$i$i$i1$i$i$i);
+ $__begin_node_$i$i$i4$i$i$i = ((($call$i)) + 60|0);
+ store4($__begin_node_$i$i$i4$i$i$i,$__left_$i$i$i$i$i1$i$i$i);
  $__begin_$i$i$i$i = ((($call$i)) + 76|0);
  store4($__begin_$i$i$i$i,0);
  $__end_$i$i$i$i = ((($call$i)) + 80|0);
@@ -4774,31 +4841,49 @@ function __Z4h_stRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE
  $__end_cap_$i$i$i$i = ((($call$i)) + 84|0);
  store4($__end_cap_$i$i$i$i,0);
  $0 = $call$i;
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp1);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
+ $__size_$i$i = ((($ref$tmp1)) + 11|0);
+ $1 = load1($__size_$i$i);
+ $tobool$i$i = ($1<<24>>24)<(0);
+ if ($tobool$i$i) {
+  $2 = load4($ref$tmp1);
+  __ZdlPv($2);
+ }
+ $__size_$i$i2 = ((($ref$tmp)) + 11|0);
+ $3 = load1($__size_$i$i2);
+ $tobool$i$i3 = ($3<<24>>24)<(0);
+ if (!($tobool$i$i3)) {
+  STACKTOP = sp;return ($0|0);
+ }
+ $4 = load4($ref$tmp);
+ __ZdlPv($4);
  STACKTOP = sp;return ($0|0);
 }
 function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEERKNS2_3mapINS3_IcNS4_IcEENS6_IcEEEESE_NS2_4lessISE_EENS6_INS2_4pairIKSE_SE_EEEEEEEE6invokeEPFjSA_SN_EPNS0_11BindingTypeIS8_EUt_EPSL_($fn,$args,$args1) {
  $fn = $fn|0;
  $args = $args|0;
  $args1 = $args1|0;
- var $0 = 0, $arraydecay$i = 0, $call5 = 0, $ref$tmp3 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $__size_$i$i1 = 0, $call5 = 0, $ref$tmp3 = 0, $tobool$i$i2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $ref$tmp3 = sp;
- $arraydecay$i = ((($args)) + 4|0);
- $0 = load4($args);
- ; store8($ref$tmp3,i64_const(0,0),4); store4($ref$tmp3+8|0,0,4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($ref$tmp3,$arraydecay$i,$0);
+ __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($ref$tmp3,$args);
  $call5 = (FUNCTION_TABLE_iii[$fn & 15]($ref$tmp3,$args1)|0);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($ref$tmp3);
+ $0 = ((($ref$tmp3)) + 8|0);
+ $__size_$i$i1 = ((($0)) + 3|0);
+ $1 = load1($__size_$i$i1);
+ $tobool$i$i2 = ($1<<24>>24)<(0);
+ if (!($tobool$i$i2)) {
+  STACKTOP = sp;return ($call5|0);
+ }
+ $2 = load4($ref$tmp3);
+ __ZdlPv($2);
  STACKTOP = sp;return ($call5|0);
 }
 function __Z4h_sdRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEERKNS_3mapINS0_IcNS1_IcEENS3_IcEEEESB_NS_4lessISB_EENS3_INS_4pairIKSB_SB_EEEEEE($sel,$nodeAttrs) {
  $sel = $sel|0;
  $nodeAttrs = $nodeAttrs|0;
- var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i2$i = 0, $__first_$i$i$i$i$i$i4$i = 0, $__first_$i$i$i$i$i3 = 0, $__first_$i$i$i$i2 = 0, $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i1 = 0, $call$i = 0, $ref$tmp = 0, $ref$tmp1 = 0, $ref$tmp2 = 0, $ref$tmp3 = 0;
- var label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i2$i = 0, $__first_$i$i$i$i$i$i4$i = 0, $__first_$i$i$i$i$i3 = 0, $__first_$i$i$i$i2 = 0, $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i1 = 0, $__size_$i$i10 = 0, $call$i = 0, $ref$tmp = 0;
+ var $ref$tmp1 = 0, $ref$tmp2 = 0, $ref$tmp3 = 0, $tobool$i$i11 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 80|0;
  $ref$tmp = sp + 60|0;
@@ -4835,32 +4920,44 @@ function __Z4h_sdRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE7destroyEPNS_11__tree_nodeISD_PvEE($4);
  $5 = load4($__first_$i$i$i$i$i);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($5);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
+ $__size_$i$i10 = ((($ref$tmp)) + 11|0);
+ $6 = load1($__size_$i$i10);
+ $tobool$i$i11 = ($6<<24>>24)<(0);
+ if (!($tobool$i$i11)) {
+  STACKTOP = sp;return ($0|0);
+ }
+ $7 = load4($ref$tmp);
+ __ZdlPv($7);
  STACKTOP = sp;return ($0|0);
 }
 function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEERKNS2_6vectorIjNS6_IjEEEEEE6invokeEPFjSA_SF_EPNS0_11BindingTypeIS8_EUt_EPSD_($fn,$args,$args1) {
  $fn = $fn|0;
  $args = $args|0;
  $args1 = $args1|0;
- var $0 = 0, $arraydecay$i = 0, $call5 = 0, $ref$tmp3 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $__size_$i$i1 = 0, $call5 = 0, $ref$tmp3 = 0, $tobool$i$i2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $ref$tmp3 = sp;
- $arraydecay$i = ((($args)) + 4|0);
- $0 = load4($args);
- ; store8($ref$tmp3,i64_const(0,0),4); store4($ref$tmp3+8|0,0,4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($ref$tmp3,$arraydecay$i,$0);
+ __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($ref$tmp3,$args);
  $call5 = (FUNCTION_TABLE_iii[$fn & 15]($ref$tmp3,$args1)|0);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($ref$tmp3);
+ $0 = ((($ref$tmp3)) + 8|0);
+ $__size_$i$i1 = ((($0)) + 3|0);
+ $1 = load1($__size_$i$i1);
+ $tobool$i$i2 = ($1<<24>>24)<(0);
+ if (!($tobool$i$i2)) {
+  STACKTOP = sp;return ($call5|0);
+ }
+ $2 = load4($ref$tmp3);
+ __ZdlPv($2);
  STACKTOP = sp;return ($call5|0);
 }
 function __Z4h_scRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEERKNS_6vectorIjNS3_IjEEEE($sel,$nodeChildren) {
  $sel = $sel|0;
  $nodeChildren = $nodeChildren|0;
- var $$in = 0, $$pre = 0, $$pre24 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0;
- var $8 = 0, $9 = 0, $__end_$i = 0, $__end_$i$i = 0, $__end_$i13$i$i = 0, $__end_cap_$i$i = 0, $__end_cap_$i14$i$i = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i$i = 0, $__first_$i$i$i$i2$i$i = 0, $__first_$i$i$i$i5$i$i = 0, $__left_$i$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i1$i$i = 0, $__left_$i$i$i$i$i4$i$i = 0, $add$ptr$i$i$i = 0, $add$ptr$i$i$i$i = 0, $arrayidx$i = 0, $call$i = 0, $call$i$i$i$i11$i$i = 0, $callbacks$i$i = 0;
- var $children = 0, $children$i = 0, $cmp = 0, $cmp$i$i$i$i = 0, $cmp$i1$i = 0, $cmp$i18 = 0, $cmp$i7 = 0, $cmp$i8$i$i = 0, $cmp1$i$i$i9 = 0, $cmp22 = 0, $data$i = 0, $i$023 = 0, $inc = 0, $incdec$ptr$i = 0, $key$i = 0, $props$i$i = 0, $ref$tmp = 0, $scevgep$i$i$i11 = 0, $scevgep5$i$i$i12 = 0, $sub$ptr$div$i = 0;
- var $sub$ptr$div$i$i$i = 0, $sub$ptr$div6$i$i$i$i = 0, $sub$ptr$sub$i = 0, $sub$ptr$sub$i$i$i = 0, label = 0, sp = 0;
+ var $$in = 0, $$pre = 0, $$pre31 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $3 = 0, $4 = 0, $5 = 0;
+ var $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__begin_node_$i$i$i$i$i = 0, $__begin_node_$i$i$i4$i$i = 0, $__begin_node_$i$i$i8$i$i = 0, $__end_$i = 0, $__end_$i$i = 0, $__end_$i13$i$i = 0, $__end_cap_$i$i = 0, $__end_cap_$i14$i$i = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i$i = 0, $__first_$i$i$i$i2$i$i = 0, $__first_$i$i$i$i6$i$i = 0, $__left_$i$i$i$i$i$i$i = 0, $__left_$i$i$i$i$i1$i$i = 0, $__left_$i$i$i$i$i5$i$i = 0, $__size_$i$i22 = 0;
+ var $add$ptr$i$i$i = 0, $add$ptr$i$i$i$i = 0, $arrayidx$i = 0, $call$i = 0, $call$i$i$i$i11$i$i = 0, $children = 0, $children$i = 0, $cmp = 0, $cmp$i$i$i$i = 0, $cmp$i1$i = 0, $cmp$i19 = 0, $cmp$i8$i$i = 0, $cmp$i9 = 0, $cmp1$i$i$i11 = 0, $cmp29 = 0, $i$030 = 0, $inc = 0, $incdec$ptr$i = 0, $key$i = 0, $ref$tmp = 0;
+ var $scevgep$i$i$i13 = 0, $scevgep5$i$i$i14 = 0, $sub$ptr$div$i = 0, $sub$ptr$div$i$i$i = 0, $sub$ptr$div6$i$i$i$i = 0, $sub$ptr$sub$i = 0, $sub$ptr$sub$i$i$i = 0, $tobool$i$i23 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 32|0;
  $children = sp + 12|0;
@@ -4873,25 +4970,25 @@ function __Z4h_scRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE
  $__end_$i = ((($nodeChildren)) + 4|0);
  $0 = load4($__end_$i);
  $1 = load4($nodeChildren);
- $cmp22 = ($0|0)==($1|0);
+ $cmp29 = ($0|0)==($1|0);
  L1: do {
-  if (!($cmp22)) {
+  if (!($cmp29)) {
    $__first_$i$i$i$i = ((($children)) + 8|0);
-   $$in = $1;$8 = 0;$9 = 0;$i$023 = 0;
+   $$in = $1;$8 = 0;$9 = 0;$i$030 = 0;
    while(1) {
     $6 = $$in;
-    $arrayidx$i = (($6) + ($i$023<<2)|0);
+    $arrayidx$i = (($6) + ($i$030<<2)|0);
     $7 = load4($arrayidx$i);
     store4($ref$tmp,$7);
-    $cmp$i18 = ($8>>>0)<($9>>>0);
-    if ($cmp$i18) {
+    $cmp$i19 = ($8>>>0)<($9>>>0);
+    if ($cmp$i19) {
      store4($8,$7);
      $incdec$ptr$i = ((($8)) + 4|0);
      store4($__end_$i$i,$incdec$ptr$i);
     } else {
      __ZNSt3__26vectorIPN6asmdom5VNodeENS_9allocatorIS3_EEE21__push_back_slow_pathIS3_EEvOT_($children,$ref$tmp);
     }
-    $inc = (($i$023) + 1)|0;
+    $inc = (($i$030) + 1)|0;
     $10 = load4($__end_$i);
     $11 = load4($nodeChildren);
     $sub$ptr$sub$i = (($10) - ($11))|0;
@@ -4901,8 +4998,8 @@ function __Z4h_scRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE
      break L1;
     }
     $$pre = load4($__end_$i$i);
-    $$pre24 = load4($__first_$i$i$i$i);
-    $$in = $11;$8 = $$pre;$9 = $$pre24;$i$023 = $inc;
+    $$pre31 = load4($__first_$i$i$i$i);
+    $$in = $11;$8 = $$pre;$9 = $$pre31;$i$030 = $inc;
    }
   }
  } while(0);
@@ -4910,25 +5007,25 @@ function __Z4h_scRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE
  $call$i = (__Znwj(88)|0);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($call$i,$ref$tmp);
  $key$i = ((($call$i)) + 12|0);
- $data$i = ((($call$i)) + 36|0);
  $__left_$i$i$i$i$i$i$i = ((($call$i)) + 40|0);
  store4($__left_$i$i$i$i$i$i$i,0);
  $__first_$i$i$i$i$i$i = ((($call$i)) + 44|0);
  store4($__first_$i$i$i$i$i$i,0);
+ $__begin_node_$i$i$i$i$i = ((($call$i)) + 36|0);
  ; store8($key$i,i64_const(0,0),4); store8($key$i+8|0,i64_const(0,0),4); store8($key$i+16|0,i64_const(0,0),4);
- store4($data$i,$__left_$i$i$i$i$i$i$i);
- $props$i$i = ((($call$i)) + 48|0);
- $__left_$i$i$i$i$i4$i$i = ((($call$i)) + 52|0);
- store4($__left_$i$i$i$i$i4$i$i,0);
- $__first_$i$i$i$i5$i$i = ((($call$i)) + 56|0);
- store4($__first_$i$i$i$i5$i$i,0);
- store4($props$i$i,$__left_$i$i$i$i$i4$i$i);
- $callbacks$i$i = ((($call$i)) + 60|0);
+ store4($__begin_node_$i$i$i$i$i,$__left_$i$i$i$i$i$i$i);
+ $__left_$i$i$i$i$i5$i$i = ((($call$i)) + 52|0);
+ store4($__left_$i$i$i$i$i5$i$i,0);
+ $__first_$i$i$i$i6$i$i = ((($call$i)) + 56|0);
+ store4($__first_$i$i$i$i6$i$i,0);
+ $__begin_node_$i$i$i8$i$i = ((($call$i)) + 48|0);
+ store4($__begin_node_$i$i$i8$i$i,$__left_$i$i$i$i$i5$i$i);
  $__left_$i$i$i$i$i1$i$i = ((($call$i)) + 64|0);
  store4($__left_$i$i$i$i$i1$i$i,0);
  $__first_$i$i$i$i2$i$i = ((($call$i)) + 68|0);
  store4($__first_$i$i$i$i2$i$i,0);
- store4($callbacks$i$i,$__left_$i$i$i$i$i1$i$i);
+ $__begin_node_$i$i$i4$i$i = ((($call$i)) + 60|0);
+ store4($__begin_node_$i$i$i4$i$i,$__left_$i$i$i$i$i1$i$i);
  $children$i = ((($call$i)) + 76|0);
  store4($children$i,0);
  $__end_$i13$i$i = ((($call$i)) + 80|0);
@@ -4955,32 +5052,38 @@ function __Z4h_scRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE
   store4($__end_cap_$i14$i$i,$add$ptr$i$i$i);
   $cmp$i$i$i$i = ($sub$ptr$sub$i$i$i|0)>(0);
   if ($cmp$i$i$i$i) {
+   $12 = $3;
    $sub$ptr$div6$i$i$i$i = $sub$ptr$sub$i$i$i >>> 2;
    $add$ptr$i$i$i$i = (($call$i$i$i$i11$i$i) + ($sub$ptr$div6$i$i$i$i<<2)|0);
-   $12 = $3;
    _memcpy(($call$i$i$i$i11$i$i|0),($12|0),($sub$ptr$sub$i$i$i|0))|0;
    store4($__end_$i13$i$i,$add$ptr$i$i$i$i);
   }
  }
  __ZN6asmdom5VNode11adjustVNodeEv($call$i);
  $13 = $call$i;
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
- $cmp$i7 = ($3|0)==(0);
- $14 = $3;
- if ($cmp$i7) {
+ $__size_$i$i22 = ((($ref$tmp)) + 11|0);
+ $14 = load1($__size_$i$i22);
+ $tobool$i$i23 = ($14<<24>>24)<(0);
+ if ($tobool$i$i23) {
+  $15 = load4($ref$tmp);
+  __ZdlPv($15);
+ }
+ $cmp$i9 = ($3|0)==(0);
+ $16 = $3;
+ if ($cmp$i9) {
   STACKTOP = sp;return ($13|0);
  }
- $cmp1$i$i$i9 = ($5|0)==($4|0);
- if (!($cmp1$i$i$i9)) {
-  $scevgep$i$i$i11 = ((($5)) + -4|0);
-  $15 = $scevgep$i$i$i11;
-  $16 = (($15) - ($3))|0;
-  $17 = $16 >>> 2;
-  $18 = $17 ^ -1;
-  $scevgep5$i$i$i12 = (($5) + ($18<<2)|0);
-  store4($__end_$i$i,$scevgep5$i$i$i12);
+ $cmp1$i$i$i11 = ($5|0)==($4|0);
+ if (!($cmp1$i$i$i11)) {
+  $scevgep$i$i$i13 = ((($5)) + -4|0);
+  $17 = $scevgep$i$i$i13;
+  $18 = (($17) - ($3))|0;
+  $19 = $18 >>> 2;
+  $20 = $19 ^ -1;
+  $scevgep5$i$i$i14 = (($5) + ($20<<2)|0);
+  store4($__end_$i$i,$scevgep5$i$i$i14);
  }
- __ZdlPv($14);
+ __ZdlPv($16);
  STACKTOP = sp;return ($13|0);
 }
 function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEERKNS2_3mapINS3_IcNS4_IcEENS6_IcEEEESE_NS2_4lessISE_EENS6_INS2_4pairIKSE_SE_EEEEEERKjEE6invokeEPFjSA_SN_SP_EPNS0_11BindingTypeIS8_EUt_EPSL_j($fn,$args,$args1,$args3) {
@@ -4988,26 +5091,31 @@ function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char
  $args = $args|0;
  $args1 = $args1|0;
  $args3 = $args3|0;
- var $0 = 0, $arraydecay$i = 0, $call11 = 0, $ref$tmp5 = 0, $ref$tmp6 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $__size_$i$i1 = 0, $call11 = 0, $ref$tmp5 = 0, $ref$tmp6 = 0, $tobool$i$i2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $ref$tmp5 = sp + 4|0;
  $ref$tmp6 = sp;
- $arraydecay$i = ((($args)) + 4|0);
- $0 = load4($args);
- ; store8($ref$tmp5,i64_const(0,0),4); store4($ref$tmp5+8|0,0,4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($ref$tmp5,$arraydecay$i,$0);
+ __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($ref$tmp5,$args);
  store4($ref$tmp6,$args3);
  $call11 = (FUNCTION_TABLE_iiii[$fn & 31]($ref$tmp5,$args1,$ref$tmp6)|0);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($ref$tmp5);
+ $0 = ((($ref$tmp5)) + 8|0);
+ $__size_$i$i1 = ((($0)) + 3|0);
+ $1 = load1($__size_$i$i1);
+ $tobool$i$i2 = ($1<<24>>24)<(0);
+ if (!($tobool$i$i2)) {
+  STACKTOP = sp;return ($call11|0);
+ }
+ $2 = load4($ref$tmp5);
+ __ZdlPv($2);
  STACKTOP = sp;return ($call11|0);
 }
 function __Z5h_sdnRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEERKNS_3mapINS0_IcNS1_IcEENS3_IcEEEESB_NS_4lessISB_EENS3_INS_4pairIKSB_SB_EEEEEERKj($sel,$nodeAttrs,$node) {
  $sel = $sel|0;
  $nodeAttrs = $nodeAttrs|0;
  $node = $node|0;
- var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $__end_$i$i$i = 0, $__end_cap_$i$i$i = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i2$i = 0, $__first_$i$i$i$i$i$i4$i = 0, $__first_$i$i$i$i$i3 = 0, $__first_$i$i$i$i2 = 0, $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i1 = 0, $add$ptr$i9$i$i = 0, $call$i = 0;
- var $call$i$i$i$i11$i$i = 0, $children$i = 0, $data$i = 0, $key$i = 0, $ref$tmp = 0, $ref$tmp1 = 0, $ref$tmp2 = 0, $ref$tmp3 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $__end_$i$i$i = 0, $__end_cap_$i$i$i = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i2$i = 0, $__first_$i$i$i$i$i$i4$i = 0, $__first_$i$i$i$i$i3 = 0, $__first_$i$i$i$i2 = 0, $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i1 = 0;
+ var $__size_$i$i10 = 0, $add$ptr$i10$i$i = 0, $call$i = 0, $call$i$i$i$i11$i$i = 0, $children$i = 0, $data$i = 0, $key$i = 0, $ref$tmp = 0, $ref$tmp1 = 0, $ref$tmp2 = 0, $ref$tmp3 = 0, $tobool$i$i11 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 80|0;
  $ref$tmp = sp + 60|0;
@@ -5043,10 +5151,10 @@ function __Z5h_sdnRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEE
  store4($__end_cap_$i$i$i,0);
  $call$i$i$i$i11$i$i = (__Znwj(4)|0);
  store4($children$i,$call$i$i$i$i11$i$i);
- $add$ptr$i9$i$i = ((($call$i$i$i$i11$i$i)) + 4|0);
- store4($__end_cap_$i$i$i,$add$ptr$i9$i$i);
+ $add$ptr$i10$i$i = ((($call$i$i$i$i11$i$i)) + 4|0);
+ store4($__end_cap_$i$i$i,$add$ptr$i10$i$i);
  store4($call$i$i$i$i11$i$i,$0);
- store4($__end_$i$i$i,$add$ptr$i9$i$i);
+ store4($__end_$i$i$i,$add$ptr$i10$i$i);
  __ZN6asmdom5VNode11adjustVNodeEv($call$i);
  $1 = $call$i;
  $__first_$i$i$i$i$i$i$i = ((($ref$tmp1)) + 28|0);
@@ -5062,7 +5170,14 @@ function __Z5h_sdnRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEE
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE7destroyEPNS_11__tree_nodeISD_PvEE($5);
  $6 = load4($__first_$i$i$i$i$i);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($6);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
+ $__size_$i$i10 = ((($ref$tmp)) + 11|0);
+ $7 = load1($__size_$i$i10);
+ $tobool$i$i11 = ($7<<24>>24)<(0);
+ if (!($tobool$i$i11)) {
+  STACKTOP = sp;return ($1|0);
+ }
+ $8 = load4($ref$tmp);
+ __ZdlPv($8);
  STACKTOP = sp;return ($1|0);
 }
 function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEERKNS2_3mapINS3_IcNS4_IcEENS6_IcEEEESE_NS2_4lessISE_EENS6_INS2_4pairIKSE_SE_EEEEEESA_EE6invokeEPFjSA_SN_SA_EPNS0_11BindingTypeIS8_EUt_EPSL_SU_($fn,$args,$args1,$args3) {
@@ -5070,30 +5185,39 @@ function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char
  $args = $args|0;
  $args1 = $args1|0;
  $args3 = $args3|0;
- var $0 = 0, $1 = 0, $arraydecay$i = 0, $arraydecay$i1 = 0, $call11 = 0, $ref$tmp5 = 0, $ref$tmp6 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $__size_$i$i5 = 0, $__size_$i$i9 = 0, $call11 = 0, $ref$tmp5 = 0, $ref$tmp6 = 0, $tobool$i$i10 = 0, $tobool$i$i6 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 32|0;
  $ref$tmp5 = sp + 12|0;
  $ref$tmp6 = sp;
- $arraydecay$i = ((($args)) + 4|0);
- $0 = load4($args);
- ; store8($ref$tmp5,i64_const(0,0),4); store4($ref$tmp5+8|0,0,4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($ref$tmp5,$arraydecay$i,$0);
- $arraydecay$i1 = ((($args3)) + 4|0);
- $1 = load4($args3);
- ; store8($ref$tmp6,i64_const(0,0),4); store4($ref$tmp6+8|0,0,4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($ref$tmp6,$arraydecay$i1,$1);
+ __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($ref$tmp5,$args);
+ __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($ref$tmp6,$args3);
  $call11 = (FUNCTION_TABLE_iiii[$fn & 31]($ref$tmp5,$args1,$ref$tmp6)|0);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($ref$tmp6);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($ref$tmp5);
+ $0 = ((($ref$tmp6)) + 8|0);
+ $__size_$i$i5 = ((($0)) + 3|0);
+ $1 = load1($__size_$i$i5);
+ $tobool$i$i6 = ($1<<24>>24)<(0);
+ if ($tobool$i$i6) {
+  $2 = load4($ref$tmp6);
+  __ZdlPv($2);
+ }
+ $3 = ((($ref$tmp5)) + 8|0);
+ $__size_$i$i9 = ((($3)) + 3|0);
+ $4 = load1($__size_$i$i9);
+ $tobool$i$i10 = ($4<<24>>24)<(0);
+ if (!($tobool$i$i10)) {
+  STACKTOP = sp;return ($call11|0);
+ }
+ $5 = load4($ref$tmp5);
+ __ZdlPv($5);
  STACKTOP = sp;return ($call11|0);
 }
 function __Z5h_sdtRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEERKNS_3mapINS0_IcNS1_IcEENS3_IcEEEESB_NS_4lessISB_EENS3_INS_4pairIKSB_SB_EEEEEES7_($sel,$nodeAttrs,$nodeText) {
  $sel = $sel|0;
  $nodeAttrs = $nodeAttrs|0;
  $nodeText = $nodeText|0;
- var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $__begin_$i$i$i = 0, $__end_$i$i$i = 0, $__end_cap_$i$i$i = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i2$i = 0, $__first_$i$i$i$i$i$i4$i = 0, $__first_$i$i$i$i$i3 = 0, $__first_$i$i$i$i2 = 0, $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i1 = 0, $call$i = 0, $data$i = 0;
- var $key$i = 0, $ref$tmp = 0, $ref$tmp1 = 0, $ref$tmp2 = 0, $ref$tmp3 = 0, $ref$tmp4 = 0, $text$i = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__begin_$i$i$i = 0, $__end_$i$i$i = 0, $__end_cap_$i$i$i = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i2$i = 0, $__first_$i$i$i$i$i$i4$i = 0, $__first_$i$i$i$i$i3 = 0, $__first_$i$i$i$i2 = 0;
+ var $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i1 = 0, $__size_$i$i16 = 0, $__size_$i$i6 = 0, $call$i = 0, $data$i = 0, $key$i = 0, $ref$tmp = 0, $ref$tmp1 = 0, $ref$tmp2 = 0, $ref$tmp3 = 0, $ref$tmp4 = 0, $text$i = 0, $tobool$i$i17 = 0, $tobool$i$i7 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 96|0;
  $ref$tmp = sp + 72|0;
@@ -5132,21 +5256,34 @@ function __Z5h_sdtRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEE
  store4($__end_cap_$i$i$i,0);
  __ZN6asmdom5VNode11adjustVNodeEv($call$i);
  $0 = $call$i;
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp4);
+ $__size_$i$i6 = ((($ref$tmp4)) + 11|0);
+ $1 = load1($__size_$i$i6);
+ $tobool$i$i7 = ($1<<24>>24)<(0);
+ if ($tobool$i$i7) {
+  $2 = load4($ref$tmp4);
+  __ZdlPv($2);
+ }
  $__first_$i$i$i$i$i$i$i = ((($ref$tmp1)) + 28|0);
- $1 = load4($__first_$i$i$i$i$i$i$i);
- __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE7destroyEPNS_11__tree_nodeISD_PvEE($1);
+ $3 = load4($__first_$i$i$i$i$i$i$i);
+ __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE7destroyEPNS_11__tree_nodeISD_PvEE($3);
  $__first_$i$i$i$i$i$i2$i = ((($ref$tmp1)) + 16|0);
- $2 = load4($__first_$i$i$i$i$i$i2$i);
- __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($2);
+ $4 = load4($__first_$i$i$i$i$i$i2$i);
+ __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($4);
  $__first_$i$i$i$i$i$i4$i = ((($ref$tmp1)) + 4|0);
- $3 = load4($__first_$i$i$i$i$i$i4$i);
- __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($3);
- $4 = load4($__first_$i$i$i$i$i3);
- __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE7destroyEPNS_11__tree_nodeISD_PvEE($4);
- $5 = load4($__first_$i$i$i$i$i);
- __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($5);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
+ $5 = load4($__first_$i$i$i$i$i$i4$i);
+ __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($5);
+ $6 = load4($__first_$i$i$i$i$i3);
+ __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE7destroyEPNS_11__tree_nodeISD_PvEE($6);
+ $7 = load4($__first_$i$i$i$i$i);
+ __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($7);
+ $__size_$i$i16 = ((($ref$tmp)) + 11|0);
+ $8 = load1($__size_$i$i16);
+ $tobool$i$i17 = ($8<<24>>24)<(0);
+ if (!($tobool$i$i17)) {
+  STACKTOP = sp;return ($0|0);
+ }
+ $9 = load4($ref$tmp);
+ __ZdlPv($9);
  STACKTOP = sp;return ($0|0);
 }
 function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEERKNS2_3mapINS3_IcNS4_IcEENS6_IcEEEESE_NS2_4lessISE_EENS6_INS2_4pairIKSE_SE_EEEEEERKNS2_6vectorIjNS6_IjEEEEEE6invokeEPFjSA_SN_SS_EPNS0_11BindingTypeIS8_EUt_EPSL_PSQ_($fn,$args,$args1,$args3) {
@@ -5154,26 +5291,31 @@ function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char
  $args = $args|0;
  $args1 = $args1|0;
  $args3 = $args3|0;
- var $0 = 0, $arraydecay$i = 0, $call9 = 0, $ref$tmp5 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $__size_$i$i1 = 0, $call9 = 0, $ref$tmp5 = 0, $tobool$i$i2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $ref$tmp5 = sp;
- $arraydecay$i = ((($args)) + 4|0);
- $0 = load4($args);
- ; store8($ref$tmp5,i64_const(0,0),4); store4($ref$tmp5+8|0,0,4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($ref$tmp5,$arraydecay$i,$0);
+ __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($ref$tmp5,$args);
  $call9 = (FUNCTION_TABLE_iiii[$fn & 31]($ref$tmp5,$args1,$args3)|0);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($ref$tmp5);
+ $0 = ((($ref$tmp5)) + 8|0);
+ $__size_$i$i1 = ((($0)) + 3|0);
+ $1 = load1($__size_$i$i1);
+ $tobool$i$i2 = ($1<<24>>24)<(0);
+ if (!($tobool$i$i2)) {
+  STACKTOP = sp;return ($call9|0);
+ }
+ $2 = load4($ref$tmp5);
+ __ZdlPv($2);
  STACKTOP = sp;return ($call9|0);
 }
 function __Z5h_sdcRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEERKNS_3mapINS0_IcNS1_IcEENS3_IcEEEESB_NS_4lessISB_EENS3_INS_4pairIKSB_SB_EEEEEERKNS_6vectorIjNS3_IjEEEE($sel,$nodeAttrs,$nodeChildren) {
  $sel = $sel|0;
  $nodeAttrs = $nodeAttrs|0;
  $nodeChildren = $nodeChildren|0;
- var $$in = 0, $$pre = 0, $$pre40 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0;
- var $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__end_$i = 0, $__end_$i$i = 0, $__end_$i13$i$i = 0, $__end_cap_$i$i = 0, $__end_cap_$i14$i$i = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i17 = 0, $__first_$i$i$i$i$i$i2$i19 = 0, $__first_$i$i$i$i$i$i4$i21 = 0, $__first_$i$i$i$i$i15 = 0, $__first_$i$i$i$i12 = 0, $__first_$i$i$i$i14 = 0;
- var $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i13 = 0, $add$ptr$i$i$i = 0, $add$ptr$i$i$i$i = 0, $arrayidx$i = 0, $call$i = 0, $call$i$i$i$i11$i$i = 0, $children = 0, $children$i = 0, $cmp = 0, $cmp$i$i$i$i = 0, $cmp$i1$i = 0, $cmp$i10 = 0, $cmp$i27 = 0, $cmp$i8$i$i = 0, $cmp1$i$i$i29 = 0, $cmp38 = 0, $data$i = 0, $i$039 = 0, $inc = 0;
- var $incdec$ptr$i = 0, $key$i = 0, $ref$tmp = 0, $ref$tmp6 = 0, $ref$tmp7 = 0, $ref$tmp8 = 0, $scevgep$i$i$i31 = 0, $scevgep5$i$i$i32 = 0, $sub$ptr$div$i = 0, $sub$ptr$div$i$i$i = 0, $sub$ptr$div6$i$i$i$i = 0, $sub$ptr$sub$i = 0, $sub$ptr$sub$i$i$i = 0, label = 0, sp = 0;
+ var $$in = 0, $$pre = 0, $$pre48 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0;
+ var $24 = 0, $25 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__end_$i = 0, $__end_$i$i = 0, $__end_$i13$i$i = 0, $__end_cap_$i$i = 0, $__end_cap_$i14$i$i = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i19 = 0, $__first_$i$i$i$i$i$i2$i21 = 0, $__first_$i$i$i$i$i$i4$i23 = 0, $__first_$i$i$i$i$i16 = 0;
+ var $__first_$i$i$i$i11 = 0, $__first_$i$i$i$i15 = 0, $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i14 = 0, $__size_$i$i29 = 0, $add$ptr$i$i$i = 0, $add$ptr$i$i$i$i = 0, $arrayidx$i = 0, $call$i = 0, $call$i$i$i$i11$i$i = 0, $children = 0, $children$i = 0, $cmp = 0, $cmp$i$i$i$i = 0, $cmp$i1$i = 0, $cmp$i35 = 0, $cmp$i8$i$i = 0, $cmp$i9 = 0, $cmp1$i$i$i37 = 0, $cmp46 = 0;
+ var $data$i = 0, $i$047 = 0, $inc = 0, $incdec$ptr$i = 0, $key$i = 0, $ref$tmp = 0, $ref$tmp6 = 0, $ref$tmp7 = 0, $ref$tmp8 = 0, $scevgep$i$i$i39 = 0, $scevgep5$i$i$i40 = 0, $sub$ptr$div$i = 0, $sub$ptr$div$i$i$i = 0, $sub$ptr$div6$i$i$i$i = 0, $sub$ptr$sub$i = 0, $sub$ptr$sub$i$i$i = 0, $tobool$i$i30 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 96|0;
  $children = sp + 72|0;
@@ -5189,25 +5331,25 @@ function __Z5h_sdcRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEE
  $__end_$i = ((($nodeChildren)) + 4|0);
  $0 = load4($__end_$i);
  $1 = load4($nodeChildren);
- $cmp38 = ($0|0)==($1|0);
+ $cmp46 = ($0|0)==($1|0);
  L1: do {
-  if (!($cmp38)) {
+  if (!($cmp46)) {
    $__first_$i$i$i$i = ((($children)) + 8|0);
-   $$in = $1;$8 = 0;$9 = 0;$i$039 = 0;
+   $$in = $1;$8 = 0;$9 = 0;$i$047 = 0;
    while(1) {
     $6 = $$in;
-    $arrayidx$i = (($6) + ($i$039<<2)|0);
+    $arrayidx$i = (($6) + ($i$047<<2)|0);
     $7 = load4($arrayidx$i);
     store4($ref$tmp,$7);
-    $cmp$i10 = ($8>>>0)<($9>>>0);
-    if ($cmp$i10) {
+    $cmp$i9 = ($8>>>0)<($9>>>0);
+    if ($cmp$i9) {
      store4($8,$7);
      $incdec$ptr$i = ((($8)) + 4|0);
      store4($__end_$i$i,$incdec$ptr$i);
     } else {
      __ZNSt3__26vectorIPN6asmdom5VNodeENS_9allocatorIS3_EEE21__push_back_slow_pathIS3_EEvOT_($children,$ref$tmp);
     }
-    $inc = (($i$039) + 1)|0;
+    $inc = (($i$047) + 1)|0;
     $10 = load4($__end_$i);
     $11 = load4($nodeChildren);
     $sub$ptr$sub$i = (($10) - ($11))|0;
@@ -5217,24 +5359,24 @@ function __Z5h_sdcRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEE
      break L1;
     }
     $$pre = load4($__end_$i$i);
-    $$pre40 = load4($__first_$i$i$i$i);
-    $$in = $11;$8 = $$pre;$9 = $$pre40;$i$039 = $inc;
+    $$pre48 = load4($__first_$i$i$i$i);
+    $$in = $11;$8 = $$pre;$9 = $$pre48;$i$047 = $inc;
    }
   }
  } while(0);
  __Z15wstring_to_utf8RKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEE($ref$tmp,$sel);
  $__left_$i$i$i$i$i = ((($ref$tmp7)) + 4|0);
  store4($__left_$i$i$i$i$i,0);
- $__first_$i$i$i$i12 = ((($ref$tmp7)) + 8|0);
- store4($__first_$i$i$i$i12,0);
+ $__first_$i$i$i$i11 = ((($ref$tmp7)) + 8|0);
+ store4($__first_$i$i$i$i11,0);
  $__first_$i$i$i$i$i = ((($ref$tmp7)) + 4|0);
  store4($ref$tmp7,$__first_$i$i$i$i$i);
- $__left_$i$i$i$i$i13 = ((($ref$tmp8)) + 4|0);
- store4($__left_$i$i$i$i$i13,0);
- $__first_$i$i$i$i14 = ((($ref$tmp8)) + 8|0);
- store4($__first_$i$i$i$i14,0);
- $__first_$i$i$i$i$i15 = ((($ref$tmp8)) + 4|0);
- store4($ref$tmp8,$__first_$i$i$i$i$i15);
+ $__left_$i$i$i$i$i14 = ((($ref$tmp8)) + 4|0);
+ store4($__left_$i$i$i$i$i14,0);
+ $__first_$i$i$i$i15 = ((($ref$tmp8)) + 8|0);
+ store4($__first_$i$i$i$i15,0);
+ $__first_$i$i$i$i$i16 = ((($ref$tmp8)) + 4|0);
+ store4($ref$tmp8,$__first_$i$i$i$i$i16);
  __ZN6asmdom4DataC2ERKNSt3__23mapINS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES8_NS1_4lessIS8_EENS6_INS1_4pairIKS8_S8_EEEEEERKNS2_IS8_N10emscripten3valESA_NS6_INSB_ISC_SJ_EEEEEERKNS2_IS8_NS1_8functionIFbSJ_EEESA_NS6_INSB_ISC_SR_EEEEEE($ref$tmp6,$nodeAttrs,$ref$tmp7,$ref$tmp8);
  $call$i = (__Znwj(88)|0);
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($call$i,$ref$tmp);
@@ -5268,45 +5410,51 @@ function __Z5h_sdcRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEE
   store4($__end_cap_$i14$i$i,$add$ptr$i$i$i);
   $cmp$i$i$i$i = ($sub$ptr$sub$i$i$i|0)>(0);
   if ($cmp$i$i$i$i) {
+   $12 = $3;
    $sub$ptr$div6$i$i$i$i = $sub$ptr$sub$i$i$i >>> 2;
    $add$ptr$i$i$i$i = (($call$i$i$i$i11$i$i) + ($sub$ptr$div6$i$i$i$i<<2)|0);
-   $12 = $3;
    _memcpy(($call$i$i$i$i11$i$i|0),($12|0),($sub$ptr$sub$i$i$i|0))|0;
    store4($__end_$i13$i$i,$add$ptr$i$i$i$i);
   }
  }
  __ZN6asmdom5VNode11adjustVNodeEv($call$i);
  $13 = $call$i;
- $__first_$i$i$i$i$i$i$i17 = ((($ref$tmp6)) + 28|0);
- $14 = load4($__first_$i$i$i$i$i$i$i17);
+ $__first_$i$i$i$i$i$i$i19 = ((($ref$tmp6)) + 28|0);
+ $14 = load4($__first_$i$i$i$i$i$i$i19);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE7destroyEPNS_11__tree_nodeISD_PvEE($14);
- $__first_$i$i$i$i$i$i2$i19 = ((($ref$tmp6)) + 16|0);
- $15 = load4($__first_$i$i$i$i$i$i2$i19);
+ $__first_$i$i$i$i$i$i2$i21 = ((($ref$tmp6)) + 16|0);
+ $15 = load4($__first_$i$i$i$i$i$i2$i21);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($15);
- $__first_$i$i$i$i$i$i4$i21 = ((($ref$tmp6)) + 4|0);
- $16 = load4($__first_$i$i$i$i$i$i4$i21);
+ $__first_$i$i$i$i$i$i4$i23 = ((($ref$tmp6)) + 4|0);
+ $16 = load4($__first_$i$i$i$i$i$i4$i23);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE7destroyEPNS_11__tree_nodeIS8_PvEE($16);
- $17 = load4($__first_$i$i$i$i$i15);
+ $17 = load4($__first_$i$i$i$i$i16);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE7destroyEPNS_11__tree_nodeISD_PvEE($17);
  $18 = load4($__first_$i$i$i$i$i);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($18);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
- $cmp$i27 = ($3|0)==(0);
- $19 = $3;
- if ($cmp$i27) {
+ $__size_$i$i29 = ((($ref$tmp)) + 11|0);
+ $19 = load1($__size_$i$i29);
+ $tobool$i$i30 = ($19<<24>>24)<(0);
+ if ($tobool$i$i30) {
+  $20 = load4($ref$tmp);
+  __ZdlPv($20);
+ }
+ $cmp$i35 = ($3|0)==(0);
+ $21 = $3;
+ if ($cmp$i35) {
   STACKTOP = sp;return ($13|0);
  }
- $cmp1$i$i$i29 = ($5|0)==($4|0);
- if (!($cmp1$i$i$i29)) {
-  $scevgep$i$i$i31 = ((($5)) + -4|0);
-  $20 = $scevgep$i$i$i31;
-  $21 = (($20) - ($3))|0;
-  $22 = $21 >>> 2;
-  $23 = $22 ^ -1;
-  $scevgep5$i$i$i32 = (($5) + ($23<<2)|0);
-  store4($__end_$i$i,$scevgep5$i$i$i32);
+ $cmp1$i$i$i37 = ($5|0)==($4|0);
+ if (!($cmp1$i$i$i37)) {
+  $scevgep$i$i$i39 = ((($5)) + -4|0);
+  $22 = $scevgep$i$i$i39;
+  $23 = (($22) - ($3))|0;
+  $24 = $23 >>> 2;
+  $25 = $24 ^ -1;
+  $scevgep5$i$i$i40 = (($5) + ($25<<2)|0);
+  store4($__end_$i$i,$scevgep5$i$i$i40);
  }
- __ZdlPv($19);
+ __ZdlPv($21);
  STACKTOP = sp;return ($13|0);
 }
 function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEERKNS2_3mapINS3_IcNS4_IcEENS6_IcEEEESE_NS2_4lessISE_EENS6_INS2_4pairIKSE_SE_EEEEEEiEE6invokeEPFjSA_SN_iEPNS0_11BindingTypeIS8_EUt_EPSL_i($fn,$args,$args1,$args3) {
@@ -5314,24 +5462,29 @@ function __ZN10emscripten8internal7InvokerIjJRKNSt3__212basic_stringIwNS2_11char
  $args = $args|0;
  $args1 = $args1|0;
  $args3 = $args3|0;
- var $0 = 0, $arraydecay$i = 0, $call9 = 0, $ref$tmp5 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $__size_$i$i1 = 0, $call9 = 0, $ref$tmp5 = 0, $tobool$i$i2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $ref$tmp5 = sp;
- $arraydecay$i = ((($args)) + 4|0);
- $0 = load4($args);
- ; store8($ref$tmp5,i64_const(0,0),4); store4($ref$tmp5+8|0,0,4);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($ref$tmp5,$arraydecay$i,$0);
+ __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($ref$tmp5,$args);
  $call9 = (FUNCTION_TABLE_iiii[$fn & 31]($ref$tmp5,$args1,$args3)|0);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($ref$tmp5);
+ $0 = ((($ref$tmp5)) + 8|0);
+ $__size_$i$i1 = ((($0)) + 3|0);
+ $1 = load1($__size_$i$i1);
+ $tobool$i$i2 = ($1<<24>>24)<(0);
+ if (!($tobool$i$i2)) {
+  STACKTOP = sp;return ($call9|0);
+ }
+ $2 = load4($ref$tmp5);
+ __ZdlPv($2);
  STACKTOP = sp;return ($call9|0);
 }
 function __Z5h_elmRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEERKNS_3mapINS0_IcNS1_IcEENS3_IcEEEESB_NS_4lessISB_EENS3_INS_4pairIKSB_SB_EEEEEEi($sel,$nodeAttrs,$elm) {
  $sel = $sel|0;
  $nodeAttrs = $nodeAttrs|0;
  $elm = $elm|0;
- var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i2$i = 0, $__first_$i$i$i$i$i$i4$i = 0, $__first_$i$i$i$i$i5 = 0, $__first_$i$i$i$i4 = 0, $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i3 = 0, $call$i = 0, $elm12 = 0, $ref$tmp = 0, $ref$tmp1 = 0, $ref$tmp2 = 0;
- var $ref$tmp3 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $__first_$i$i$i$i = 0, $__first_$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i$i = 0, $__first_$i$i$i$i$i$i2$i = 0, $__first_$i$i$i$i$i$i4$i = 0, $__first_$i$i$i$i$i5 = 0, $__first_$i$i$i$i4 = 0, $__left_$i$i$i$i$i = 0, $__left_$i$i$i$i$i3 = 0, $__size_$i$i12 = 0, $call$i = 0, $elm12 = 0;
+ var $ref$tmp = 0, $ref$tmp1 = 0, $ref$tmp2 = 0, $ref$tmp3 = 0, $tobool$i$i13 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 80|0;
  $ref$tmp = sp + 60|0;
@@ -5367,28 +5520,43 @@ function __Z5h_elmRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEE
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_8functionIFbN10emscripten3valEEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE7destroyEPNS_11__tree_nodeISD_PvEE($3);
  $4 = load4($__first_$i$i$i$i$i);
  __ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10emscripten3valEEENS_19__map_value_compareIS7_SA_NS_4lessIS7_EELb1EEENS5_ISA_EEE7destroyEPNS_11__tree_nodeISA_PvEE($4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
+ $__size_$i$i12 = ((($ref$tmp)) + 11|0);
+ $5 = load1($__size_$i$i12);
+ $tobool$i$i13 = ($5<<24>>24)<(0);
+ if (!($tobool$i$i13)) {
+  $elm12 = ((($call$i)) + 72|0);
+  store4($elm12,$elm);
+  $7 = $call$i;
+  STACKTOP = sp;return ($7|0);
+ }
+ $6 = load4($ref$tmp);
+ __ZdlPv($6);
  $elm12 = ((($call$i)) + 72|0);
  store4($elm12,$elm);
- $5 = $call$i;
- STACKTOP = sp;return ($5|0);
+ $7 = $call$i;
+ STACKTOP = sp;return ($7|0);
 }
 function __Z15wstring_to_utf8RKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEE($agg$result,$str) {
  $agg$result = $agg$result|0;
  $str = $str|0;
- var $$ph266$i = 0, $$pn346$i = 0, $$pre = 0, $$pre$i$i = 0, $$pre312$i = 0, $$pre314$i = 0, $$pre316$i = 0, $$pre39 = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0;
+ var $$cmp1$i$i$i = 0, $$ph262$i = 0, $$pn341$i = 0, $$pre = 0, $$pre$i$i = 0, $$pre308$i = 0, $$pre310$i = 0, $$pre312$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0;
  var $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0;
- var $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0, $43 = 0, $44 = 0, $45 = 0, $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $6 = 0, $7 = 0;
- var $8 = 0, $9 = 0, $_Maxcode_$i$i = 0, $_Mode_$i$i = 0, $__cap_$i$i$i = 0, $__cap_$i$i$i$i = 0, $__cap_$i$i195$i = 0, $__cvtcount_$i = 0, $__cvtptr_$i = 0, $__cvtstate_$i = 0, $__first$addr$036$i$i = 0, $__frm$addr$0$i = 0, $__frm$addr$1$i = 0, $__frm_nxt$i = 0, $__p$0$lcssa$i$i = 0, $__p$037$i$i = 0, $__size_$i$i$i = 0, $__size_$i$i$i$i = 0, $__size_$i$i$i47$i$phi$trans$insert = 0, $__size_$i$i202$pre$phi$iZZZ2D = 0;
- var $__size_$i2$i$i = 0, $__size_$i3$i$i$i = 0, $__size_$i3$i$pre$phi$iZZZ2D = 0, $__size_$i3$i162$i = 0, $__size_$i3$i204$i = 0, $__size_$i3$i213$pre$phi$iZZZ2D = 0, $__size_$i3$i79$i = 0, $__st$i = 0, $__to$0$i = 0, $__to75$0$i = 0, $__to_end$0$i = 0, $__to_end79$0$i = 0, $__to_nxt$i = 0, $__wide_err_string_$i7 = 0, $add$i = 0, $add$i$i = 0, $add$i35 = 0, $add$ptr$i = 0, $add$ptr$i$i = 0, $add$ptr$i$idx = 0;
- var $add$ptr$i7 = 0, $add$ptr118257261$i = 0, $add$ptr122$i = 0, $add$ptr53236240$i = 0, $add$ptr57$i = 0, $add$ptr78252$i = 0, $add$ptr81$i = 0, $add9$i$i = 0, $and$i$i$i = 0, $and$i$i$i$i = 0, $and$i$i196$i = 0, $call = 0, $call$i146$i = 0, $call$i95$i = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i121$i = 0, $cmp19$i = 0, $cmp2$i = 0, $cmp63$i = 0;
- var $cmp7$i$i = 0, $cmp735$i$i = 0, $cond$i$i = 0, $cond$i$i$i = 0, $cond$i$i103$i = 0, $cond$i$i112$i = 0, $cond$i$i131$i = 0, $cond$i$i141$i = 0, $cond$i$i156$i = 0, $cond$i$i226242$i = 0, $cond$i$i231$i = 0, $cond$i$i3 = 0, $cond$i$i51$i = 0, $cond$i$i64263$i = 0, $cond$i$i92$i = 0, $cond$i166$i = 0, $cond$i199$i = 0, $cond$i208323$i = 0, $cond$i217$i = 0, $cond$i29$i$i = 0;
- var $cond$i34$i$i = 0, $cond$i40$i$i = 0, $cond$i56$i = 0, $cond$i83$i = 0, $conv$i$i$i = 0, $conv$i$i$i$i = 0, $conv$i$i$i119$i = 0, $conv$i$i$i8 = 0, $conv$i$i164$i = 0, $conv$i$i206$i = 0, $conv$i$i215$i = 0, $conv$i$i23$i$i = 0, $conv$i$i81$i = 0, $converter = 0, $exception$i = 0, $incdec$ptr$i$i = 0, $incdec$ptr8$i$i = 0, $isnull$i3 = 0, $mul$i = 0, $mul113$i = 0;
- var $mul48$i = 0, $phitmp$i$i = 0, $phitmp$i$i$i = 0, $phitmp$i197$i = 0, $scevgep$i$i = 0, $scevgep38$i$i = 0, $scevgep39$i$i = 0, $sub$i$i = 0, $sub$ptr$div17$i = 0, $sub$ptr$lhs$cast$i = 0, $sub$ptr$lhs$cast14$i = 0, $sub$ptr$lhs$cast25$i = 0, $sub$ptr$lhs$cast92$i = 0, $sub$ptr$rhs$cast102$i = 0, $sub$ptr$rhs$cast111$i = 0, $sub$ptr$rhs$cast15$i = 0, $sub$ptr$rhs$cast26$i = 0, $sub$ptr$rhs$cast37$i = 0, $sub$ptr$rhs$cast46$i = 0, $sub$ptr$rhs$cast93$i = 0;
- var $sub$ptr$sub$i$i$i$i = 0, $sub$ptr$sub103$i = 0, $sub$ptr$sub112$i = 0, $sub$ptr$sub16$i = 0, $sub$ptr$sub27$i = 0, $sub$ptr$sub38$i = 0, $sub$ptr$sub47$i = 0, $sub$ptr$sub94$i = 0, $sub5$i$i = 0, $tobool$i$i = 0, $tobool$i$i$i = 0, $tobool$i$i$i$i = 0, $tobool$i$i$i$i5 = 0, $tobool$i$i$i107$i = 0, $tobool$i$i$i118$i = 0, $tobool$i$i$i126$i = 0, $tobool$i$i$i136$i = 0, $tobool$i$i$i151$i = 0, $tobool$i$i$i170$i = 0, $tobool$i$i$i184$i = 0;
- var $tobool$i$i$i48$i = 0, $tobool$i$i$i68$i = 0, $tobool$i$i$i87$i = 0, $tobool$i$i$i98$i = 0, $tobool$i$i203$i = 0, $tobool$i$i22$i$i = 0, $tobool$i$i26$i$i = 0, $vfn$i$i = 0, $vfn$i145$i = 0, $vfn$i5 = 0, $vtable$i$i = 0, $vtable$i144$i = 0, $vtable$i4 = 0, label = 0, sp = 0;
+ var $38 = 0, $39 = 0, $4 = i64(), $40 = 0, $41 = 0, $42 = 0, $43 = 0, $44 = 0, $45 = 0, $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $54 = 0, $55 = 0;
+ var $56 = 0, $57 = 0, $58 = 0, $59 = 0, $6 = 0, $60 = 0, $61 = 0, $62 = 0, $63 = 0, $64 = 0, $65 = 0, $66 = 0, $67 = 0, $68 = 0, $69 = 0, $7 = i64(), $8 = 0, $9 = 0, $_Maxcode_$i$i = 0, $_Mode_$i$i = 0;
+ var $__cap_$i$i$i = 0, $__cap_$i$i$i$i = 0, $__cap_$i$i$i$i$i = 0, $__cap_$i$i$i5$i = 0, $__cap_$i$i188$i = 0, $__cvtcount_$i = 0, $__cvtcount_$i1$promoted = 0, $__cvtptr_$i = 0, $__cvtstate_$i = 0, $__first$addr$018$i$i$i$i = 0, $__first$addr$096$i$i = 0, $__frm$addr$0$i = 0, $__frm$addr$1$i = 0, $__frm_nxt$i = 0, $__p$0$lcssa$i$i = 0, $__p$0$lcssa$i$i$i$i = 0, $__p$0$ph$i$i$i$i = 0, $__p$015$i$i$i = 0, $__p$016$i$i$i = 0, $__p$017$i$i$i$i = 0;
+ var $__p$097$i$i = 0, $__size_$i$i$i$i = 0, $__size_$i$i$i$i$i = 0, $__size_$i$i$i$i4 = 0, $__size_$i$i$i6 = 0, $__size_$i$i$i64$i$i = 0, $__size_$i$i$i7 = 0, $__size_$i$i$i85$i = 0, $__size_$i$i1$i13 = 0, $__size_$i$i105$pre$phi$iZZZ2D = 0, $__size_$i$i167$pre$phi$iZZZ2D = 0, $__size_$i12$i$i$i = 0, $__size_$i15$i$i$i$i = 0, $__size_$i2$i$i = 0, $__size_$i2$i$i$i = 0, $__size_$i3$i$i = 0, $__size_$i3$i$i$i = 0, $__size_$i3$i$i4$i = 0, $__size_$i3$i122$pre$phi$iZZZ2D = 0, $__size_$i3$i150$pre$phi$iZZZ2D = 0;
+ var $__size_$i3$i169$i = 0, $__size_$i3$i219$i = 0, $__size_$i3$i57$i$i = 0, $__size_$i3$i77$i$i = 0, $__st$i = 0, $__temp$i$i = 0, $__to$0$i = 0, $__to68$0$i = 0, $__to_end$0$i = 0, $__to_end71$0$i = 0, $__to_nxt$i = 0, $__wide_err_string_$i10 = 0, $add$i = 0, $add$i$i = 0, $add$i$i$i$i$i = 0, $add$i$i$i$i$i$i = 0, $add$i38 = 0, $add$ptr$i = 0, $add$ptr$i$i = 0, $add$ptr$i$idx = 0;
+ var $add$ptr$i12 = 0, $add$ptr106253257$i = 0, $add$ptr109$i = 0, $add$ptr17$i$i = 0, $add$ptr47232236$i = 0, $add$ptr50$i = 0, $add$ptr70248$i = 0, $add$ptr73$i = 0, $add20$i$i = 0, $and$i$i$i = 0, $and$i$i$i$i = 0, $and$i$i$i$i$i = 0, $and$i$i$i$i$i$i = 0, $and$i$i189$i = 0, $arrayidx$i$i$i = 0, $call = 0, $call$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i$i = 0, $call$i205$i = 0, $call$i53$i = 0;
+ var $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i7$i = 0, $cmp$i8$i = 0, $cmp1$i$i$i = 0, $cmp11$i$i$i$i = 0, $cmp1116$i$i$i$i = 0, $cmp17$i = 0, $cmp18$i$i = 0, $cmp1895$i$i = 0, $cmp2$i = 0, $cmp2$i$i$i = 0, $cmp3$i$i$i$i = 0, $cmp56$i = 0, $cond$i$i = 0, $cond$i$i$i = 0, $cond$i$i117238$i = 0, $cond$i$i135259$i = 0;
+ var $cond$i$i163$i = 0, $cond$i$i182$i = 0, $cond$i$i201$i = 0, $cond$i$i227$i = 0, $cond$i$i61$i = 0, $cond$i$i72$i = 0, $cond$i$i8 = 0, $cond$i$i82$i = 0, $cond$i$i90$i = 0, $cond$i$i90106$i$i = 0, $cond$i$i93$i$i = 0, $cond$i100$i$i = 0, $cond$i126$i = 0, $cond$i154$i = 0, $cond$i173321$i = 0, $cond$i192$i = 0, $cond$i223$i = 0, $cond$i37$i$i = 0, $cond$i47$i$i = 0, $cond$i52$i = 0;
+ var $cond$i61$i$i = 0, $cond$i81$i$i = 0, $conv$i$i$i = 0, $conv$i$i$i$i = 0, $conv$i$i$i$i$i = 0, $conv$i$i$i11 = 0, $conv$i$i$i3$i = 0, $conv$i$i$i88$i = 0, $conv$i$i124$i = 0, $conv$i$i152$i = 0, $conv$i$i171$i = 0, $conv$i$i221$i = 0, $conv$i$i31$i$i = 0, $conv$i$i59$i$i = 0, $conv$i$i79$i$i = 0, $converter = 0, $exception$i$i = 0, $incdec$ptr$i$i = 0, $incdec$ptr$i$i$i$i = 0, $incdec$ptr12$i$i$i$i = 0;
+ var $incdec$ptr19$i$i = 0, $isnull$i3 = 0, $mul$i = 0, $mul102$i = 0, $mul43$i = 0, $not$cmp$i$i$i = 0, $or$i$i$i$i = 0, $or$i$i$i$i$i = 0, $phitmp$i$i = 0, $phitmp$i$i$i = 0, $phitmp$i190$i = 0, $scevgep$i$i = 0, $scevgep20$i$i$i$i = 0, $scevgep98$i$i = 0, $scevgep99$i$i = 0, $sub$i$i = 0, $sub$ptr$div15$i = 0, $sub$ptr$lhs$cast$i$i$i$i = 0, $sub$ptr$lhs$cast12$i = 0, $sub$ptr$lhs$cast22$i = 0;
+ var $sub$ptr$lhs$cast83$i = 0, $sub$ptr$rhs$cast100$i = 0, $sub$ptr$rhs$cast13$i = 0, $sub$ptr$rhs$cast23$i = 0, $sub$ptr$rhs$cast33$i = 0, $sub$ptr$rhs$cast41$i = 0, $sub$ptr$rhs$cast84$i = 0, $sub$ptr$rhs$cast92$i = 0, $sub$ptr$sub$i$i$i$i = 0, $sub$ptr$sub101$i = 0, $sub$ptr$sub14$i = 0, $sub$ptr$sub24$i = 0, $sub$ptr$sub34$i = 0, $sub$ptr$sub42$i = 0, $sub$ptr$sub85$i = 0, $sub$ptr$sub93$i = 0, $sub15$i$i = 0, $tobool$i$i = 0, $tobool$i$i$i$i = 0, $tobool$i$i$i$i$i = 0;
+ var $tobool$i$i$i$i10 = 0, $tobool$i$i$i139$i = 0, $tobool$i$i$i158$i = 0, $tobool$i$i$i177$i = 0, $tobool$i$i$i196$i = 0, $tobool$i$i$i2$i = 0, $tobool$i$i$i209$i = 0, $tobool$i$i$i56$i = 0, $tobool$i$i$i67$i = 0, $tobool$i$i$i7 = 0, $tobool$i$i$i77$i = 0, $tobool$i$i$i8 = 0, $tobool$i$i$i86$i = 0, $tobool$i$i$i97$i = 0, $tobool$i$i106$i = 0, $tobool$i$i168$i = 0, $tobool$i$i2$i14 = 0, $tobool$i$i30$i$i = 0, $tobool$i$i34$i$i = 0, $vfn$i$i = 0;
+ var $vfn$i204$i = 0, $vfn$i5 = 0, $vtable$i$i = 0, $vtable$i203$i = 0, $vtable$i4 = 0, label = 0, sp = 0;
  sp = STACKTOP;
- STACKTOP = STACKTOP + 64|0;
+ STACKTOP = STACKTOP + 80|0;
+ $__temp$i$i = sp + 56|0;
  $__st$i = sp;
  $__frm_nxt$i = sp + 52|0;
  $__to_nxt$i = sp + 48|0;
@@ -5421,403 +5589,534 @@ function __Z15wstring_to_utf8RKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9al
  $cmp$i = ($call|0)==(0|0);
  L1: do {
   if ($cmp$i) {
-   $49 = 0;
-   label = 63;
+   label = 86;
   } else {
-   $sub$ptr$lhs$cast$i = $add$ptr$i;
    $add$ptr$i$idx = $cond$i$i << 2;
    $mul$i = $add$ptr$i$idx >> 1;
    ; store8($agg$result,i64_const(0,0),4); store4($agg$result+8|0,0,4);
-   __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEjc($agg$result,$mul$i);
+   $cmp$i$i$i = ($mul$i>>>0)>(4294967279);
+   if ($cmp$i$i$i) {
+    __ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv();
+    // unreachable;
+   }
+   $cmp2$i$i$i = ($mul$i>>>0)<(11);
+   if ($cmp2$i$i$i) {
+    $conv$i$i$i$i = $mul$i&255;
+    $__size_$i12$i$i$i = ((($agg$result)) + 11|0);
+    store1($__size_$i12$i$i$i,$conv$i$i$i$i);
+    $cmp$i$i$i$i = ($mul$i|0)==(0);
+    if ($cmp$i$i$i$i) {
+     $__p$016$i$i$i = $agg$result;
+    } else {
+     $__p$015$i$i$i = $agg$result;
+     label = 7;
+    }
+   } else {
+    $add$i$i$i$i$i = (($mul$i) + 16)|0;
+    $and$i$i$i$i$i = $add$i$i$i$i$i & -16;
+    $call$i$i$i$i$i$i = (__Znwj($and$i$i$i$i$i)|0);
+    store4($agg$result,$call$i$i$i$i$i$i);
+    $or$i$i$i$i = $and$i$i$i$i$i | -2147483648;
+    $__cap_$i$i$i$i = ((($agg$result)) + 8|0);
+    store4($__cap_$i$i$i$i,$or$i$i$i$i);
+    $__size_$i$i$i$i4 = ((($agg$result)) + 4|0);
+    store4($__size_$i$i$i$i4,$mul$i);
+    $__p$015$i$i$i = $call$i$i$i$i$i$i;
+    label = 7;
+   }
+   if ((label|0) == 7) {
+    _memset(($__p$015$i$i$i|0),0,($mul$i|0))|0;
+    $__p$016$i$i$i = $__p$015$i$i$i;
+   }
+   $arrayidx$i$i$i = (($__p$016$i$i$i) + ($mul$i)|0);
+   store1($arrayidx$i$i$i,0);
    $cmp2$i = ($cond$i$i|0)==(0);
    do {
     if ($cmp2$i) {
-     store8($__st$i,i64_const(0,0));
-     $$pre314$i = ((($agg$result)) + 11|0);
-     $53 = $__st$i;$__size_$i$i202$pre$phi$iZZZ2D = $$pre314$i;
-     label = 40;
+     $4 = load8($__cvtstate_$i,4);
+     store8($__st$i,$4);
+     $$pre310$i = ((($agg$result)) + 11|0);
+     $69 = $__st$i;$__size_$i$i167$pre$phi$iZZZ2D = $$pre310$i;
+     label = 62;
     } else {
-     $__size_$i$i$i = ((($agg$result)) + 11|0);
-     $4 = load1($__size_$i$i$i);
-     $tobool$i$i$i = ($4<<24>>24)<(0);
-     if ($tobool$i$i$i) {
+     $__size_$i$i$i6 = ((($agg$result)) + 11|0);
+     $5 = load1($__size_$i$i$i6);
+     $tobool$i$i$i7 = ($5<<24>>24)<(0);
+     if ($tobool$i$i$i7) {
       $__cap_$i$i$i = ((($agg$result)) + 8|0);
-      $5 = load4($__cap_$i$i$i);
-      $and$i$i$i = $5 & 2147483647;
+      $6 = load4($__cap_$i$i$i);
+      $and$i$i$i = $6 & 2147483647;
       $phitmp$i$i = (($and$i$i$i) + -1)|0;
-      $cond$i$i3 = $phitmp$i$i;
+      $cond$i$i8 = $phitmp$i$i;
      } else {
-      $cond$i$i3 = 10;
+      $cond$i$i8 = 10;
      }
-     __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$cond$i$i3);
-     store8($__st$i,i64_const(0,0));
-     $6 = load1($__size_$i$i$i);
-     $tobool$i$i$i$i5 = ($6<<24>>24)<(0);
-     if ($tobool$i$i$i$i5) {
-      $7 = load4($agg$result);
-      $__size_$i3$i79$i = ((($agg$result)) + 4|0);
-      $8 = load4($__size_$i3$i79$i);
-      $__size_$i3$i213$pre$phi$iZZZ2D = $__size_$i3$i79$i;$cond$i$i231$i = $7;$cond$i83$i = $8;
+     __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$cond$i$i8);
+     $7 = load8($__cvtstate_$i,4);
+     store8($__st$i,$7);
+     $8 = load1($__size_$i$i$i6);
+     $tobool$i$i$i$i10 = ($8<<24>>24)<(0);
+     if ($tobool$i$i$i$i10) {
+      $9 = load4($agg$result);
+      $__size_$i3$i$i = ((($agg$result)) + 4|0);
+      $10 = load4($__size_$i3$i$i);
+      $__size_$i3$i150$pre$phi$iZZZ2D = $__size_$i3$i$i;$cond$i$i227$i = $9;$cond$i52$i = $10;
      } else {
-      $conv$i$i81$i = $6&255;
-      $$pre312$i = ((($agg$result)) + 4|0);
-      $__size_$i3$i213$pre$phi$iZZZ2D = $$pre312$i;$cond$i$i231$i = $agg$result;$cond$i83$i = $conv$i$i81$i;
+      $conv$i$i$i11 = $8&255;
+      $$pre308$i = ((($agg$result)) + 4|0);
+      $__size_$i3$i150$pre$phi$iZZZ2D = $$pre308$i;$cond$i$i227$i = $agg$result;$cond$i52$i = $conv$i$i$i11;
      }
-     $add$ptr$i7 = (($cond$i$i231$i) + ($cond$i83$i)|0);
-     $__frm$addr$0$i = $cond$i$i$i;$__to$0$i = $cond$i$i231$i;$__to_end$0$i = $add$ptr$i7;$add$i35 = 0;
-     L13: while(1) {
-      $vtable$i$i = load4($call);
+     $add$ptr$i12 = (($cond$i$i227$i) + ($cond$i52$i)|0);
+     $11 = load4($__cvtptr_$i);
+     $__cvtcount_$i1$promoted = load4($__cvtcount_$i);
+     $__frm$addr$0$i = $cond$i$i$i;$__to$0$i = $cond$i$i227$i;$__to_end$0$i = $add$ptr$i12;$add$i38 = $__cvtcount_$i1$promoted;
+     L22: while(1) {
+      $vtable$i$i = load4($11);
       $vfn$i$i = ((($vtable$i$i)) + 12|0);
-      $9 = load4($vfn$i$i);
-      $call$i95$i = (FUNCTION_TABLE_iiiiiiiii[$9 & 7]($call,$__st$i,$__frm$addr$0$i,$add$ptr$i,$__frm_nxt$i,$__to$0$i,$__to_end$0$i,$__to_nxt$i)|0);
-      $10 = load4($__frm_nxt$i);
-      $sub$ptr$lhs$cast14$i = $10;
-      $sub$ptr$rhs$cast15$i = $__frm$addr$0$i;
-      $sub$ptr$sub16$i = (($sub$ptr$lhs$cast14$i) - ($sub$ptr$rhs$cast15$i))|0;
-      $sub$ptr$div17$i = $sub$ptr$sub16$i >> 2;
-      $add$i = (($sub$ptr$div17$i) + ($add$i35))|0;
-      $cmp19$i = ($10|0)==($__frm$addr$0$i|0);
-      if ($cmp19$i) {
-       label = 39;
+      $12 = load4($vfn$i$i);
+      $call$i53$i = (FUNCTION_TABLE_iiiiiiiii[$12 & 7]($11,$__st$i,$__frm$addr$0$i,$add$ptr$i,$__frm_nxt$i,$__to$0$i,$__to_end$0$i,$__to_nxt$i)|0);
+      $13 = load4($__frm_nxt$i);
+      $sub$ptr$lhs$cast12$i = $13;
+      $sub$ptr$rhs$cast13$i = $__frm$addr$0$i;
+      $sub$ptr$sub14$i = (($sub$ptr$lhs$cast12$i) - ($sub$ptr$rhs$cast13$i))|0;
+      $sub$ptr$div15$i = $sub$ptr$sub14$i >> 2;
+      $add$i = (($sub$ptr$div15$i) + ($add$i38))|0;
+      $cmp17$i = ($13|0)==($__frm$addr$0$i|0);
+      if ($cmp17$i) {
+       label = 61;
        break;
       }
-      switch ($call$i95$i|0) {
+      switch ($call$i53$i|0) {
       case 3:  {
-       label = 12;
-       break L13;
+       label = 18;
+       break L22;
        break;
       }
       case 0:  {
-       label = 28;
-       break L13;
+       label = 50;
+       break L22;
        break;
       }
       case 1:  {
        break;
       }
       default: {
-       label = 39;
-       break L13;
+       label = 61;
+       break L22;
       }
       }
-      $24 = load4($__to_nxt$i);
-      $25 = load1($__size_$i$i$i);
-      $tobool$i$i$i151$i = ($25<<24>>24)<(0);
-      if ($tobool$i$i$i151$i) {
-       $26 = load4($agg$result);
-       $cond$i$i156$i = $26;
+      $33 = load4($__to_nxt$i);
+      $34 = load1($__size_$i$i$i6);
+      $tobool$i$i$i77$i = ($34<<24>>24)<(0);
+      if ($tobool$i$i$i77$i) {
+       $35 = load4($agg$result);
+       $cond$i$i82$i = $35;
       } else {
-       $cond$i$i156$i = $agg$result;
+       $cond$i$i82$i = $agg$result;
       }
-      $sub$ptr$rhs$cast46$i = $cond$i$i156$i;
-      $sub$ptr$sub47$i = (($24) - ($sub$ptr$rhs$cast46$i))|0;
-      $mul48$i = $sub$ptr$sub47$i << 1;
-      __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$mul48$i);
-      $27 = load1($__size_$i$i$i);
-      $tobool$i$i$i184$i = ($27<<24>>24)<(0);
-      if ($tobool$i$i$i184$i) {
-       $28 = load4($agg$result);
-       $29 = load4($__size_$i3$i213$pre$phi$iZZZ2D);
-       $cond$i$i226242$i = $28;$cond$i217$i = $29;
+      $sub$ptr$rhs$cast41$i = $cond$i$i82$i;
+      $sub$ptr$sub42$i = (($33) - ($sub$ptr$rhs$cast41$i))|0;
+      $mul43$i = $sub$ptr$sub42$i << 1;
+      __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$mul43$i);
+      $36 = load1($__size_$i$i$i6);
+      $tobool$i$i$i97$i = ($36<<24>>24)<(0);
+      if ($tobool$i$i$i97$i) {
+       $37 = load4($agg$result);
+       $38 = load4($__size_$i3$i150$pre$phi$iZZZ2D);
+       $cond$i$i117238$i = $37;$cond$i154$i = $38;
       } else {
-       $conv$i$i215$i = $27&255;
-       $cond$i$i226242$i = $agg$result;$cond$i217$i = $conv$i$i215$i;
+       $conv$i$i152$i = $36&255;
+       $cond$i$i117238$i = $agg$result;$cond$i154$i = $conv$i$i152$i;
       }
-      $add$ptr53236240$i = (($cond$i$i226242$i) + ($sub$ptr$sub47$i)|0);
-      $add$ptr57$i = (($cond$i$i226242$i) + ($cond$i217$i)|0);
+      $add$ptr47232236$i = (($cond$i$i117238$i) + ($sub$ptr$sub42$i)|0);
+      $add$ptr50$i = (($cond$i$i117238$i) + ($cond$i154$i)|0);
       $__frm$addr$1$i = load4($__frm_nxt$i);
-      $cmp63$i = ($__frm$addr$1$i>>>0)<($add$ptr$i>>>0);
-      if ($cmp63$i) {
-       $__frm$addr$0$i = $__frm$addr$1$i;$__to$0$i = $add$ptr53236240$i;$__to_end$0$i = $add$ptr57$i;$add$i35 = $add$i;
+      $cmp56$i = ($__frm$addr$1$i>>>0)<($add$ptr$i>>>0);
+      if ($cmp56$i) {
+       $__frm$addr$0$i = $__frm$addr$1$i;$__to$0$i = $add$ptr47232236$i;$__to_end$0$i = $add$ptr50$i;$add$i38 = $add$i;
       } else {
-       label = 37;
+       label = 59;
        break;
       }
      }
-     if ((label|0) == 12) {
+     if ((label|0) == 18) {
       store4($__cvtcount_$i,$add$i);
-      $11 = load1($__size_$i$i$i);
-      $tobool$i$i$i98$i = ($11<<24>>24)<(0);
-      if ($tobool$i$i$i98$i) {
-       $12 = load4($agg$result);
-       $cond$i$i103$i = $12;
+      $14 = load1($__size_$i$i$i6);
+      $tobool$i$i$i56$i = ($14<<24>>24)<(0);
+      if ($tobool$i$i$i56$i) {
+       $15 = load4($agg$result);
+       $cond$i$i61$i = $15;
       } else {
-       $cond$i$i103$i = $agg$result;
+       $cond$i$i61$i = $agg$result;
       }
-      $sub$ptr$lhs$cast25$i = $__to$0$i;
-      $sub$ptr$rhs$cast26$i = $cond$i$i103$i;
-      $sub$ptr$sub27$i = (($sub$ptr$lhs$cast25$i) - ($sub$ptr$rhs$cast26$i))|0;
-      __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$sub$ptr$sub27$i);
-      $13 = load1($__size_$i$i$i);
-      $tobool$i$i$i118$i = ($13<<24>>24)<(0);
-      if ($tobool$i$i$i118$i) {
-       $14 = load4($__size_$i3$i213$pre$phi$iZZZ2D);
-       $__cap_$i$i$i$i = ((($agg$result)) + 8|0);
-       $15 = load4($__cap_$i$i$i$i);
-       $and$i$i$i$i = $15 & 2147483647;
+      $sub$ptr$lhs$cast22$i = $__to$0$i;
+      $sub$ptr$rhs$cast23$i = $cond$i$i61$i;
+      $sub$ptr$sub24$i = (($sub$ptr$lhs$cast22$i) - ($sub$ptr$rhs$cast23$i))|0;
+      __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$sub$ptr$sub24$i);
+      $16 = load1($__size_$i$i$i6);
+      $tobool$i$i$i2$i = ($16<<24>>24)<(0);
+      if ($tobool$i$i$i2$i) {
+       $__size_$i3$i$i4$i = ((($agg$result)) + 4|0);
+       $17 = load4($__size_$i3$i$i4$i);
+       $__cap_$i$i$i5$i = ((($agg$result)) + 8|0);
+       $18 = load4($__cap_$i$i$i5$i);
+       $and$i$i$i$i = $18 & 2147483647;
        $phitmp$i$i$i = (($and$i$i$i$i) + -1)|0;
-       $cond$i34$i$i = $phitmp$i$i$i;$cond$i40$i$i = $14;
+       $cond$i100$i$i = $17;$cond$i47$i$i = $phitmp$i$i$i;
       } else {
-       $conv$i$i$i119$i = $13&255;
-       $cond$i34$i$i = 10;$cond$i40$i$i = $conv$i$i$i119$i;
+       $conv$i$i$i3$i = $16&255;
+       $cond$i100$i$i = $conv$i$i$i3$i;$cond$i47$i$i = 10;
       }
-      $sub$ptr$sub$i$i$i$i = (($sub$ptr$lhs$cast$i) - ($sub$ptr$rhs$cast15$i))|0;
+      $sub$ptr$lhs$cast$i$i$i$i = $add$ptr$i;
+      $sub$ptr$sub$i$i$i$i = (($sub$ptr$lhs$cast$i$i$i$i) - ($sub$ptr$rhs$cast13$i))|0;
       $tobool$i$i = ($sub$ptr$sub$i$i$i$i|0)==(0);
       do {
        if (!($tobool$i$i)) {
-        $sub$i$i = (($cond$i34$i$i) - ($cond$i40$i$i))|0;
-        $cmp$i121$i = ($sub$i$i>>>0)<($sub$ptr$sub$i$i$i$i>>>0);
-        if ($cmp$i121$i) {
-         $add$i$i = (($cond$i40$i$i) + ($sub$ptr$sub$i$i$i$i))|0;
-         $sub5$i$i = (($add$i$i) - ($cond$i34$i$i))|0;
-         __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE9__grow_byEjjjjjj($agg$result,$cond$i34$i$i,$sub5$i$i,$cond$i40$i$i,$cond$i40$i$i);
-         $$pre$i$i = load1($__size_$i$i$i);
-         $16 = $$pre$i$i;
+        if ($tobool$i$i$i2$i) {
+         $19 = load4($agg$result);
+         $__size_$i3$i77$i$i = ((($agg$result)) + 4|0);
+         $20 = load4($__size_$i3$i77$i$i);
+         $cond$i$i90106$i$i = $19;$cond$i81$i$i = $20;
         } else {
-         $16 = $13;
+         $conv$i$i79$i$i = $16&255;
+         $cond$i$i90106$i$i = $agg$result;$cond$i81$i$i = $conv$i$i79$i$i;
         }
-        $tobool$i$i26$i$i = ($16<<24>>24)<(0);
-        if ($tobool$i$i26$i$i) {
-         $17 = load4($agg$result);
-         $cond$i29$i$i = $17;
-        } else {
-         $cond$i29$i$i = $agg$result;
-        }
-        $add$ptr$i$i = (($cond$i29$i$i) + ($cond$i40$i$i)|0);
-        $cmp735$i$i = ($__frm$addr$0$i|0)==($add$ptr$i|0);
-        if ($cmp735$i$i) {
-         $__p$0$lcssa$i$i = $add$ptr$i$i;
-        } else {
-         $__first$addr$036$i$i = $__frm$addr$0$i;$__p$037$i$i = $add$ptr$i$i;
-         while(1) {
-          $18 = load1($__first$addr$036$i$i);
-          store1($__p$037$i$i,$18);
-          $incdec$ptr$i$i = ((($__p$037$i$i)) + 1|0);
-          $incdec$ptr8$i$i = ((($__first$addr$036$i$i)) + 1|0);
-          $cmp7$i$i = ($incdec$ptr8$i$i|0)==($add$ptr$i|0);
-          if ($cmp7$i$i) {
-           break;
-          } else {
-           $__first$addr$036$i$i = $incdec$ptr8$i$i;$__p$037$i$i = $incdec$ptr$i$i;
-          }
+        $add$ptr$i$i = (($cond$i$i90106$i$i) + ($cond$i81$i$i)|0);
+        $cmp1$i$i$i = ($add$ptr$i$i>>>0)>($__frm$addr$0$i>>>0);
+        $not$cmp$i$i$i = ($cond$i$i90106$i$i>>>0)<=($__frm$addr$0$i>>>0);
+        $$cmp1$i$i$i = $not$cmp$i$i$i & $cmp1$i$i$i;
+        if ($$cmp1$i$i$i) {
+         ; store8($__temp$i$i,i64_const(0,0),4); store4($__temp$i$i+8|0,0,4);
+         $cmp$i$i$i7$i = ($sub$ptr$sub$i$i$i$i>>>0)>(4294967279);
+         if ($cmp$i$i$i7$i) {
+          __ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv();
+          // unreachable;
          }
-         $19 = (($cond$i40$i$i) - ($sub$ptr$rhs$cast15$i))|0;
-         $scevgep$i$i = (($add$ptr$i) + ($19)|0);
-         $scevgep38$i$i = $scevgep$i$i;
-         $scevgep39$i$i = (($cond$i29$i$i) + ($scevgep38$i$i)|0);
-         $__p$0$lcssa$i$i = $scevgep39$i$i;
-        }
-        store1($__p$0$lcssa$i$i,0);
-        $add9$i$i = (($cond$i40$i$i) + ($sub$ptr$sub$i$i$i$i))|0;
-        $20 = load1($__size_$i$i$i);
-        $tobool$i$i22$i$i = ($20<<24>>24)<(0);
-        if ($tobool$i$i22$i$i) {
-         store4($__size_$i3$i213$pre$phi$iZZZ2D,$add9$i$i);
+         $cmp3$i$i$i$i = ($sub$ptr$sub$i$i$i$i>>>0)<(11);
+         if ($cmp3$i$i$i$i) {
+          $conv$i$i$i$i$i = $sub$ptr$sub$i$i$i$i&255;
+          $__size_$i15$i$i$i$i = ((($__temp$i$i)) + 11|0);
+          store1($__size_$i15$i$i$i$i,$conv$i$i$i$i$i);
+          $__p$0$ph$i$i$i$i = $__temp$i$i;
+         } else {
+          $add$i$i$i$i$i$i = (($sub$ptr$sub$i$i$i$i) + 16)|0;
+          $and$i$i$i$i$i$i = $add$i$i$i$i$i$i & -16;
+          $call$i$i$i$i$i$i$i = (__Znwj($and$i$i$i$i$i$i)|0);
+          store4($__temp$i$i,$call$i$i$i$i$i$i$i);
+          $or$i$i$i$i$i = $and$i$i$i$i$i$i | -2147483648;
+          $__cap_$i$i$i$i$i = ((($__temp$i$i)) + 8|0);
+          store4($__cap_$i$i$i$i$i,$or$i$i$i$i$i);
+          $__size_$i$i$i64$i$i = ((($__temp$i$i)) + 4|0);
+          store4($__size_$i$i$i64$i$i,$sub$ptr$sub$i$i$i$i);
+          $__p$0$ph$i$i$i$i = $call$i$i$i$i$i$i$i;
+         }
+         $cmp1116$i$i$i$i = ($__frm$addr$0$i|0)==($add$ptr$i|0);
+         if ($cmp1116$i$i$i$i) {
+          $__p$0$lcssa$i$i$i$i = $__p$0$ph$i$i$i$i;
+         } else {
+          $__first$addr$018$i$i$i$i = $__frm$addr$0$i;$__p$017$i$i$i$i = $__p$0$ph$i$i$i$i;
+          while(1) {
+           $21 = load1($__first$addr$018$i$i$i$i);
+           store1($__p$017$i$i$i$i,$21);
+           $incdec$ptr$i$i$i$i = ((($__first$addr$018$i$i$i$i)) + 1|0);
+           $incdec$ptr12$i$i$i$i = ((($__p$017$i$i$i$i)) + 1|0);
+           $cmp11$i$i$i$i = ($incdec$ptr$i$i$i$i|0)==($add$ptr$i|0);
+           if ($cmp11$i$i$i$i) {
+            break;
+           } else {
+            $__first$addr$018$i$i$i$i = $incdec$ptr$i$i$i$i;$__p$017$i$i$i$i = $incdec$ptr12$i$i$i$i;
+           }
+          }
+          $scevgep20$i$i$i$i = (($__p$0$ph$i$i$i$i) + ($sub$ptr$sub$i$i$i$i)|0);
+          $__p$0$lcssa$i$i$i$i = $scevgep20$i$i$i$i;
+         }
+         store1($__p$0$lcssa$i$i$i$i,0);
+         $__size_$i$i$i$i$i = ((($__temp$i$i)) + 11|0);
+         $22 = load1($__size_$i$i$i$i$i);
+         $tobool$i$i$i$i$i = ($22<<24>>24)<(0);
+         $23 = load4($__temp$i$i);
+         $__size_$i3$i57$i$i = ((($__temp$i$i)) + 4|0);
+         $24 = load4($__size_$i3$i57$i$i);
+         $conv$i$i59$i$i = $22&255;
+         $cond$i$i93$i$i = $tobool$i$i$i$i$i ? $23 : $__temp$i$i;
+         $cond$i61$i$i = $tobool$i$i$i$i$i ? $24 : $conv$i$i59$i$i;
+         (__ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6appendEPKcj($agg$result,$cond$i$i93$i$i,$cond$i61$i$i)|0);
+         if ($tobool$i$i$i$i$i) {
+          __ZdlPv($23);
+         }
          break;
         } else {
-         $conv$i$i23$i$i = $add9$i$i&255;
-         store1($__size_$i$i$i,$conv$i$i23$i$i);
-         break;
+         $sub$i$i = (($cond$i47$i$i) - ($cond$i100$i$i))|0;
+         $cmp$i8$i = ($sub$i$i>>>0)<($sub$ptr$sub$i$i$i$i>>>0);
+         if ($cmp$i8$i) {
+          $add$i$i = (($cond$i100$i$i) + ($sub$ptr$sub$i$i$i$i))|0;
+          $sub15$i$i = (($add$i$i) - ($cond$i47$i$i))|0;
+          __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE9__grow_byEjjjjjj($agg$result,$cond$i47$i$i,$sub15$i$i,$cond$i100$i$i,$cond$i100$i$i);
+          $$pre$i$i = load1($__size_$i$i$i6);
+          $25 = $$pre$i$i;
+         } else {
+          $25 = $16;
+         }
+         $tobool$i$i34$i$i = ($25<<24>>24)<(0);
+         if ($tobool$i$i34$i$i) {
+          $26 = load4($agg$result);
+          $cond$i37$i$i = $26;
+         } else {
+          $cond$i37$i$i = $agg$result;
+         }
+         $add$ptr17$i$i = (($cond$i37$i$i) + ($cond$i100$i$i)|0);
+         $cmp1895$i$i = ($__frm$addr$0$i|0)==($add$ptr$i|0);
+         if ($cmp1895$i$i) {
+          $__p$0$lcssa$i$i = $add$ptr17$i$i;
+         } else {
+          $27 = (($cond$i100$i$i) - ($sub$ptr$rhs$cast13$i))|0;
+          $__first$addr$096$i$i = $__frm$addr$0$i;$__p$097$i$i = $add$ptr17$i$i;
+          while(1) {
+           $28 = load1($__first$addr$096$i$i);
+           store1($__p$097$i$i,$28);
+           $incdec$ptr$i$i = ((($__p$097$i$i)) + 1|0);
+           $incdec$ptr19$i$i = ((($__first$addr$096$i$i)) + 1|0);
+           $cmp18$i$i = ($incdec$ptr19$i$i|0)==($add$ptr$i|0);
+           if ($cmp18$i$i) {
+            break;
+           } else {
+            $__first$addr$096$i$i = $incdec$ptr19$i$i;$__p$097$i$i = $incdec$ptr$i$i;
+           }
+          }
+          $scevgep$i$i = (($add$ptr$i) + ($27)|0);
+          $scevgep98$i$i = $scevgep$i$i;
+          $scevgep99$i$i = (($cond$i37$i$i) + ($scevgep98$i$i)|0);
+          $__p$0$lcssa$i$i = $scevgep99$i$i;
+         }
+         store1($__p$0$lcssa$i$i,0);
+         $add20$i$i = (($cond$i100$i$i) + ($sub$ptr$sub$i$i$i$i))|0;
+         $29 = load1($__size_$i$i$i6);
+         $tobool$i$i30$i$i = ($29<<24>>24)<(0);
+         if ($tobool$i$i30$i$i) {
+          $__size_$i2$i$i$i = ((($agg$result)) + 4|0);
+          store4($__size_$i2$i$i$i,$add20$i$i);
+          break;
+         } else {
+          $conv$i$i31$i$i = $add20$i$i&255;
+          store1($__size_$i$i$i6,$conv$i$i31$i$i);
+          break;
+         }
         }
        }
       } while(0);
-      $53 = $__st$i;$__size_$i$i202$pre$phi$iZZZ2D = $__size_$i$i$i;
-      label = 40;
+      $69 = $__st$i;$__size_$i$i167$pre$phi$iZZZ2D = $__size_$i$i$i6;
+      label = 62;
       break;
      }
-     else if ((label|0) == 28) {
+     else if ((label|0) == 50) {
       store4($__cvtcount_$i,$add$i);
-      $21 = load4($__to_nxt$i);
-      $22 = load1($__size_$i$i$i);
-      $tobool$i$i$i126$i = ($22<<24>>24)<(0);
-      if ($tobool$i$i$i126$i) {
-       $23 = load4($agg$result);
-       $cond$i$i131$i = $23;
+      $30 = load4($__to_nxt$i);
+      $31 = load1($__size_$i$i$i6);
+      $tobool$i$i$i67$i = ($31<<24>>24)<(0);
+      if ($tobool$i$i$i67$i) {
+       $32 = load4($agg$result);
+       $cond$i$i72$i = $32;
       } else {
-       $cond$i$i131$i = $agg$result;
+       $cond$i$i72$i = $agg$result;
       }
-      $sub$ptr$rhs$cast37$i = $cond$i$i131$i;
-      $sub$ptr$sub38$i = (($21) - ($sub$ptr$rhs$cast37$i))|0;
-      __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$sub$ptr$sub38$i);
-      $53 = $__st$i;$__size_$i$i202$pre$phi$iZZZ2D = $__size_$i$i$i;
-      label = 40;
+      $sub$ptr$rhs$cast33$i = $cond$i$i72$i;
+      $sub$ptr$sub34$i = (($30) - ($sub$ptr$rhs$cast33$i))|0;
+      __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$sub$ptr$sub34$i);
+      $69 = $__st$i;$__size_$i$i167$pre$phi$iZZZ2D = $__size_$i$i$i6;
+      label = 62;
       break;
      }
-     else if ((label|0) == 37) {
+     else if ((label|0) == 59) {
       store4($__cvtcount_$i,$add$i);
-      $$ph266$i = $__st$i;
+      $$ph262$i = $__st$i;$__size_$i$i105$pre$phi$iZZZ2D = $__size_$i$i$i6;
       break;
      }
-     else if ((label|0) == 39) {
+     else if ((label|0) == 61) {
       store4($__cvtcount_$i,$add$i);
-      $$ph266$i = $__st$i;
+      $$ph262$i = $__st$i;$__size_$i$i105$pre$phi$iZZZ2D = $__size_$i$i$i6;
       break;
      }
     }
    } while(0);
    do {
-    if ((label|0) == 40) {
-     $30 = load1($__size_$i$i202$pre$phi$iZZZ2D);
-     $tobool$i$i203$i = ($30<<24>>24)<(0);
-     if ($tobool$i$i203$i) {
-      $__size_$i3$i204$i = ((($agg$result)) + 4|0);
-      $31 = load4($__size_$i3$i204$i);
-      $__cap_$i$i195$i = ((($agg$result)) + 8|0);
-      $32 = load4($__cap_$i$i195$i);
-      $and$i$i196$i = $32 & 2147483647;
-      $phitmp$i197$i = (($and$i$i196$i) + -1)|0;
-      $cond$i199$i = $phitmp$i197$i;$cond$i208323$i = $31;
+    if ((label|0) == 62) {
+     $39 = load1($__size_$i$i167$pre$phi$iZZZ2D);
+     $tobool$i$i168$i = ($39<<24>>24)<(0);
+     if ($tobool$i$i168$i) {
+      $__size_$i3$i169$i = ((($agg$result)) + 4|0);
+      $40 = load4($__size_$i3$i169$i);
+      $__cap_$i$i188$i = ((($agg$result)) + 8|0);
+      $41 = load4($__cap_$i$i188$i);
+      $and$i$i189$i = $41 & 2147483647;
+      $phitmp$i190$i = (($and$i$i189$i) + -1)|0;
+      $cond$i173321$i = $40;$cond$i192$i = $phitmp$i190$i;
      } else {
-      $conv$i$i206$i = $30&255;
-      $cond$i199$i = 10;$cond$i208323$i = $conv$i$i206$i;
+      $conv$i$i171$i = $39&255;
+      $cond$i173321$i = $conv$i$i171$i;$cond$i192$i = 10;
      }
-     __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$cond$i199$i);
-     $33 = load1($__size_$i$i202$pre$phi$iZZZ2D);
-     $tobool$i$i$i170$i = ($33<<24>>24)<(0);
-     if ($tobool$i$i$i170$i) {
-      $34 = load4($agg$result);
-      $__size_$i3$i162$i = ((($agg$result)) + 4|0);
-      $35 = load4($__size_$i3$i162$i);
-      $$pn346$i = $34;$__size_$i3$i$pre$phi$iZZZ2D = $__size_$i3$i162$i;$cond$i166$i = $35;
+     __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$cond$i192$i);
+     $42 = load1($__size_$i$i167$pre$phi$iZZZ2D);
+     $tobool$i$i$i209$i = ($42<<24>>24)<(0);
+     if ($tobool$i$i$i209$i) {
+      $43 = load4($agg$result);
+      $__size_$i3$i219$i = ((($agg$result)) + 4|0);
+      $44 = load4($__size_$i3$i219$i);
+      $$pn341$i = $43;$__size_$i3$i122$pre$phi$iZZZ2D = $__size_$i3$i219$i;$cond$i223$i = $44;
      } else {
-      $conv$i$i164$i = $33&255;
-      $$pre316$i = ((($agg$result)) + 4|0);
-      $$pn346$i = $agg$result;$__size_$i3$i$pre$phi$iZZZ2D = $$pre316$i;$cond$i166$i = $conv$i$i164$i;
+      $conv$i$i221$i = $42&255;
+      $$pre312$i = ((($agg$result)) + 4|0);
+      $$pn341$i = $agg$result;$__size_$i3$i122$pre$phi$iZZZ2D = $$pre312$i;$cond$i223$i = $conv$i$i221$i;
      }
-     $add$ptr78252$i = (($$pn346$i) + ($cond$i208323$i)|0);
-     $add$ptr81$i = (($add$ptr78252$i) + ($cond$i166$i)|0);
-     $36 = load4($__cvtptr_$i);
-     $__to75$0$i = $add$ptr78252$i;$__to_end79$0$i = $add$ptr81$i;
-     L66: while(1) {
-      $vtable$i144$i = load4($36);
-      $vfn$i145$i = ((($vtable$i144$i)) + 20|0);
-      $37 = load4($vfn$i145$i);
-      $call$i146$i = (FUNCTION_TABLE_iiiiii[$37 & 7]($36,$__st$i,$__to75$0$i,$__to_end79$0$i,$__frm_nxt$i)|0);
-      switch ($call$i146$i|0) {
+     $add$ptr70248$i = (($$pn341$i) + ($cond$i173321$i)|0);
+     $add$ptr73$i = (($add$ptr70248$i) + ($cond$i223$i)|0);
+     $45 = load4($__cvtptr_$i);
+     $__to68$0$i = $add$ptr70248$i;$__to_end71$0$i = $add$ptr73$i;
+     L98: while(1) {
+      $vtable$i203$i = load4($45);
+      $vfn$i204$i = ((($vtable$i203$i)) + 20|0);
+      $46 = load4($vfn$i204$i);
+      $call$i205$i = (FUNCTION_TABLE_iiiiii[$46 & 7]($45,$__st$i,$__to68$0$i,$__to_end71$0$i,$__temp$i$i)|0);
+      switch ($call$i205$i|0) {
       case 3:  {
-       label = 48;
-       break L66;
+       label = 70;
+       break L98;
        break;
       }
       case 0:  {
-       label = 51;
-       break L66;
+       label = 73;
+       break L98;
        break;
       }
       case 1:  {
        break;
       }
       default: {
-       label = 60;
-       break L66;
+       label = 82;
+       break L98;
       }
       }
-      $43 = load4($__frm_nxt$i);
-      $44 = load1($__size_$i$i202$pre$phi$iZZZ2D);
-      $tobool$i$i$i87$i = ($44<<24>>24)<(0);
-      if ($tobool$i$i$i87$i) {
-       $45 = load4($agg$result);
-       $cond$i$i92$i = $45;
+      $52 = load4($__temp$i$i);
+      $53 = load1($__size_$i$i167$pre$phi$iZZZ2D);
+      $tobool$i$i$i158$i = ($53<<24>>24)<(0);
+      if ($tobool$i$i$i158$i) {
+       $54 = load4($agg$result);
+       $cond$i$i163$i = $54;
       } else {
-       $cond$i$i92$i = $agg$result;
+       $cond$i$i163$i = $agg$result;
       }
-      $sub$ptr$rhs$cast111$i = $cond$i$i92$i;
-      $sub$ptr$sub112$i = (($43) - ($sub$ptr$rhs$cast111$i))|0;
-      $mul113$i = $sub$ptr$sub112$i << 1;
-      __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$mul113$i);
-      $46 = load1($__size_$i$i202$pre$phi$iZZZ2D);
-      $tobool$i$i$i68$i = ($46<<24>>24)<(0);
-      if ($tobool$i$i$i68$i) {
-       $47 = load4($agg$result);
-       $48 = load4($__size_$i3$i$pre$phi$iZZZ2D);
-       $cond$i$i64263$i = $47;$cond$i56$i = $48;
+      $sub$ptr$rhs$cast100$i = $cond$i$i163$i;
+      $sub$ptr$sub101$i = (($52) - ($sub$ptr$rhs$cast100$i))|0;
+      $mul102$i = $sub$ptr$sub101$i << 1;
+      __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$mul102$i);
+      $55 = load1($__size_$i$i167$pre$phi$iZZZ2D);
+      $tobool$i$i$i139$i = ($55<<24>>24)<(0);
+      if ($tobool$i$i$i139$i) {
+       $56 = load4($agg$result);
+       $57 = load4($__size_$i3$i122$pre$phi$iZZZ2D);
+       $cond$i$i135259$i = $56;$cond$i126$i = $57;
       } else {
-       $conv$i$i$i8 = $46&255;
-       $cond$i$i64263$i = $agg$result;$cond$i56$i = $conv$i$i$i8;
+       $conv$i$i124$i = $55&255;
+       $cond$i$i135259$i = $agg$result;$cond$i126$i = $conv$i$i124$i;
       }
-      $add$ptr118257261$i = (($cond$i$i64263$i) + ($sub$ptr$sub112$i)|0);
-      $add$ptr122$i = (($cond$i$i64263$i) + ($cond$i56$i)|0);
-      $__to75$0$i = $add$ptr118257261$i;$__to_end79$0$i = $add$ptr122$i;
+      $add$ptr106253257$i = (($cond$i$i135259$i) + ($sub$ptr$sub101$i)|0);
+      $add$ptr109$i = (($cond$i$i135259$i) + ($cond$i126$i)|0);
+      $__to68$0$i = $add$ptr106253257$i;$__to_end71$0$i = $add$ptr109$i;
      }
-     if ((label|0) == 48) {
-      $38 = load1($__size_$i$i202$pre$phi$iZZZ2D);
-      $tobool$i$i$i136$i = ($38<<24>>24)<(0);
-      if ($tobool$i$i$i136$i) {
-       $39 = load4($agg$result);
-       $cond$i$i141$i = $39;
+     if ((label|0) == 70) {
+      $47 = load1($__size_$i$i167$pre$phi$iZZZ2D);
+      $tobool$i$i$i196$i = ($47<<24>>24)<(0);
+      if ($tobool$i$i$i196$i) {
+       $48 = load4($agg$result);
+       $cond$i$i201$i = $48;
       } else {
-       $cond$i$i141$i = $agg$result;
+       $cond$i$i201$i = $agg$result;
       }
-      $sub$ptr$lhs$cast92$i = $__to75$0$i;
-      $sub$ptr$rhs$cast93$i = $cond$i$i141$i;
-      $sub$ptr$sub94$i = (($sub$ptr$lhs$cast92$i) - ($sub$ptr$rhs$cast93$i))|0;
-      __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$sub$ptr$sub94$i);
+      $sub$ptr$lhs$cast83$i = $__to68$0$i;
+      $sub$ptr$rhs$cast84$i = $cond$i$i201$i;
+      $sub$ptr$sub85$i = (($sub$ptr$lhs$cast83$i) - ($sub$ptr$rhs$cast84$i))|0;
+      __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$sub$ptr$sub85$i);
      }
-     else if ((label|0) == 51) {
-      $40 = load4($__frm_nxt$i);
-      $41 = load1($__size_$i$i202$pre$phi$iZZZ2D);
-      $tobool$i$i$i107$i = ($41<<24>>24)<(0);
-      if ($tobool$i$i$i107$i) {
-       $42 = load4($agg$result);
-       $cond$i$i112$i = $42;
+     else if ((label|0) == 73) {
+      $49 = load4($__temp$i$i);
+      $50 = load1($__size_$i$i167$pre$phi$iZZZ2D);
+      $tobool$i$i$i177$i = ($50<<24>>24)<(0);
+      if ($tobool$i$i$i177$i) {
+       $51 = load4($agg$result);
+       $cond$i$i182$i = $51;
       } else {
-       $cond$i$i112$i = $agg$result;
+       $cond$i$i182$i = $agg$result;
       }
-      $sub$ptr$rhs$cast102$i = $cond$i$i112$i;
-      $sub$ptr$sub103$i = (($40) - ($sub$ptr$rhs$cast102$i))|0;
-      __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$sub$ptr$sub103$i);
+      $sub$ptr$rhs$cast92$i = $cond$i$i182$i;
+      $sub$ptr$sub93$i = (($49) - ($sub$ptr$rhs$cast92$i))|0;
+      __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($agg$result,$sub$ptr$sub93$i);
      }
-     else if ((label|0) == 60) {
-      $$ph266$i = $53;
+     else if ((label|0) == 82) {
+      $$ph262$i = $69;$__size_$i$i105$pre$phi$iZZZ2D = $__size_$i$i167$pre$phi$iZZZ2D;
       break;
      }
-     $51 = $36;
+     $62 = $45;
      break L1;
     }
    } while(0);
-   __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($agg$result);
-   $__size_$i$i$i47$i$phi$trans$insert = ((($converter)) + 11|0);
-   $$pre = load1($__size_$i$i$i47$i$phi$trans$insert);
-   $49 = $$pre;
-   label = 63;
+   $58 = load1($__size_$i$i105$pre$phi$iZZZ2D);
+   $tobool$i$i106$i = ($58<<24>>24)<(0);
+   if ($tobool$i$i106$i) {
+    $59 = load4($agg$result);
+    __ZdlPv($59);
+    label = 86;
+   } else {
+    label = 86;
+   }
   }
  } while(0);
  do {
-  if ((label|0) == 63) {
-   $tobool$i$i$i48$i = ($49<<24>>24)<(0);
+  if ((label|0) == 86) {
+   $__size_$i$i$i85$i = ((($converter)) + 11|0);
+   $60 = load1($__size_$i$i$i85$i);
+   $tobool$i$i$i86$i = ($60<<24>>24)<(0);
    $__size_$i3$i$i$i = ((($converter)) + 4|0);
-   $50 = load4($__size_$i3$i$i$i);
-   $conv$i$i$i$i = $49&255;
-   $cond$i$i51$i = $tobool$i$i$i48$i ? $50 : $conv$i$i$i$i;
-   $cmp$i$i = ($cond$i$i51$i|0)==(0);
+   $61 = load4($__size_$i3$i$i$i);
+   $conv$i$i$i88$i = $60&255;
+   $cond$i$i90$i = $tobool$i$i$i86$i ? $61 : $conv$i$i$i88$i;
+   $cmp$i$i = ($cond$i$i90$i|0)==(0);
    if ($cmp$i$i) {
-    $exception$i = (___cxa_allocate_exception(8)|0);
-    __ZNSt13runtime_errorC2EPKc($exception$i);
-    store4($exception$i,(2688));
-    ___cxa_throw(($exception$i|0),(1560|0),(14|0));
+    $exception$i$i = (___cxa_allocate_exception(8)|0);
+    __ZNSt13runtime_errorC2EPKc($exception$i$i);
+    store4($exception$i$i,(2688));
+    ___cxa_throw(($exception$i$i|0),(1560|0),(12|0));
     // unreachable;
    } else {
     __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($agg$result,$converter);
-    $$pre39 = load4($__cvtptr_$i);
-    $51 = $$pre39;
+    $$pre = load4($__cvtptr_$i);
+    $62 = $$pre;
     break;
    }
   }
  } while(0);
- $isnull$i3 = ($51|0)==(0|0);
- if ($isnull$i3) {
-  $__wide_err_string_$i7 = ((($converter)) + 12|0);
-  __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($__wide_err_string_$i7);
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($converter);
+ $isnull$i3 = ($62|0)==(0|0);
+ if (!($isnull$i3)) {
+  $vtable$i4 = load4($62);
+  $vfn$i5 = ((($vtable$i4)) + 4|0);
+  $63 = load4($vfn$i5);
+  FUNCTION_TABLE_vi[$63 & 31]($62);
+ }
+ $64 = ((($converter)) + 20|0);
+ $__size_$i$i$i7 = ((($64)) + 3|0);
+ $65 = load1($__size_$i$i$i7);
+ $tobool$i$i$i8 = ($65<<24>>24)<(0);
+ if ($tobool$i$i$i8) {
+  $__wide_err_string_$i10 = ((($converter)) + 12|0);
+  $66 = load4($__wide_err_string_$i10);
+  __ZdlPv($66);
+ }
+ $__size_$i$i1$i13 = ((($converter)) + 11|0);
+ $67 = load1($__size_$i$i1$i13);
+ $tobool$i$i2$i14 = ($67<<24>>24)<(0);
+ if (!($tobool$i$i2$i14)) {
   STACKTOP = sp;return;
  }
- $vtable$i4 = load4($51);
- $vfn$i5 = ((($vtable$i4)) + 4|0);
- $52 = load4($vfn$i5);
- FUNCTION_TABLE_vi[$52 & 31]($51);
- $__wide_err_string_$i7 = ((($converter)) + 12|0);
- __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($__wide_err_string_$i7);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($converter);
+ $68 = load4($converter);
+ __ZdlPv($68);
  STACKTOP = sp;return;
 }
 function __ZNSt3__212codecvt_utf8IwLm1114111ELNS_12codecvt_modeE0EED0Ev($this) {
@@ -5828,11 +6127,71 @@ function __ZNSt3__212codecvt_utf8IwLm1114111ELNS_12codecvt_modeE0EED0Ev($this) {
  __ZdlPv($this);
  return;
 }
+function __ZN10emscripten8internal11BindingTypeINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE12fromWireTypeEPNS9_Ut_E($agg$result,$v) {
+ $agg$result = $agg$result|0;
+ $v = $v|0;
+ var $0 = 0, $1 = 0, $__cap_$i$i$i = 0, $__p$016$i$i = 0, $__p$017$i$i = 0, $__size_$i$i$i = 0, $__size_$i12$i$i = 0, $add$i$i$i$i = 0, $and$i$i$i$i = 0, $arraydecay = 0, $arrayidx$i$i = 0, $call$i$i$i$i$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp2$i$i = 0, $conv$i$i$i = 0, $exception$i$i$i$i$i = 0, $mul$i$i$i$i = 0, $or$i$i$i = 0;
+ var label = 0, sp = 0;
+ sp = STACKTOP;
+ $arraydecay = ((($v)) + 4|0);
+ $0 = load4($v);
+ ; store8($agg$result,i64_const(0,0),4); store4($agg$result+8|0,0,4);
+ $cmp$i$i = ($0>>>0)>(1073741807);
+ if ($cmp$i$i) {
+  __ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv();
+  // unreachable;
+ }
+ $cmp2$i$i = ($0>>>0)<(2);
+ do {
+  if ($cmp2$i$i) {
+   $conv$i$i$i = $0&255;
+   $1 = ((($agg$result)) + 8|0);
+   $__size_$i$i$i = ((($1)) + 3|0);
+   store1($__size_$i$i$i,$conv$i$i$i);
+   $cmp$i$i$i = ($0|0)==(0);
+   if ($cmp$i$i$i) {
+    $__p$017$i$i = $agg$result;
+    $arrayidx$i$i = (($__p$017$i$i) + ($0<<2)|0);
+    store4($arrayidx$i$i,0);
+    return;
+   } else {
+    $__p$016$i$i = $agg$result;
+   }
+  } else {
+   $add$i$i$i$i = (($0) + 4)|0;
+   $and$i$i$i$i = $add$i$i$i$i & -4;
+   $cmp$i$i$i$i = ($and$i$i$i$i>>>0)>(1073741823);
+   if ($cmp$i$i$i$i) {
+    $exception$i$i$i$i$i = (___cxa_allocate_exception(8)|0);
+    __ZNSt11logic_errorC2EPKc($exception$i$i$i$i$i,4872);
+    store4($exception$i$i$i$i$i,(2648));
+    ___cxa_throw(($exception$i$i$i$i$i|0),(1528|0),(10|0));
+    // unreachable;
+   } else {
+    $mul$i$i$i$i = $and$i$i$i$i << 2;
+    $call$i$i$i$i$i = (__Znwj($mul$i$i$i$i)|0);
+    store4($agg$result,$call$i$i$i$i$i);
+    $or$i$i$i = $and$i$i$i$i | -2147483648;
+    $__cap_$i$i$i = ((($agg$result)) + 8|0);
+    store4($__cap_$i$i$i,$or$i$i$i);
+    $__size_$i12$i$i = ((($agg$result)) + 4|0);
+    store4($__size_$i12$i$i,$0);
+    $__p$016$i$i = $call$i$i$i$i$i;
+    break;
+   }
+  }
+ } while(0);
+ (_wmemcpy($__p$016$i$i,$arraydecay,$0)|0);
+ $__p$017$i$i = $__p$016$i$i;
+ $arrayidx$i$i = (($__p$017$i$i) + ($0<<2)|0);
+ store4($arrayidx$i$i,0);
+ return;
+}
 function __ZNSt3__26vectorIPN6asmdom5VNodeENS_9allocatorIS3_EEE21__push_back_slow_pathIS3_EEvOT_($this,$__x) {
  $this = $this|0;
  $__x = $__x|0;
  var $$sroa$speculated$$i = 0, $$sroa$speculated$i = 0, $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $__end_$i = 0, $__first_$i$i$i$i$i$i = 0, $add = 0, $add$ptr$i = 0, $add$ptr$i$i = 0, $add$ptr5$i = 0, $call$i$i$i$i = 0, $cmp$i = 0, $cmp$i$i = 0;
- var $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i22 = 0, $cmp3$i = 0, $cond$i = 0, $exception$i$i$i = 0, $idx$neg$i$i = 0, $incdec$ptr = 0, $mul$i = 0, $mul$i$i$i = 0, $sub$ptr$div$i = 0, $sub$ptr$div$i$i$i = 0, $sub$ptr$sub$i = 0, $sub$ptr$sub$i$i$i = 0, $tobool$i12 = 0, label = 0, sp = 0;
+ var $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i22 = 0, $cmp3$i = 0, $cond$i = 0, $exception$i$i$i$i = 0, $idx$neg$i$i = 0, $incdec$ptr = 0, $mul$i = 0, $mul$i$i$i = 0, $sub$ptr$div$i = 0, $sub$ptr$div$i$i$i = 0, $sub$ptr$sub$i = 0, $sub$ptr$sub$i$i$i = 0, $tobool$i12 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $__end_$i = ((($this)) + 4|0);
  $0 = load4($__end_$i);
@@ -5861,9 +6220,10 @@ function __ZNSt3__26vectorIPN6asmdom5VNodeENS_9allocatorIS3_EEE21__push_back_slo
   } else {
    $cmp$i$i$i = ($$sroa$speculated$$i>>>0)>(1073741823);
    if ($cmp$i$i$i) {
-    $exception$i$i$i = (___cxa_allocate_exception(4)|0);
-    __ZNSt9bad_allocC2Ev($exception$i$i$i);
-    ___cxa_throw(($exception$i$i$i|0),(1496|0),(10|0));
+    $exception$i$i$i$i = (___cxa_allocate_exception(8)|0);
+    __ZNSt11logic_errorC2EPKc($exception$i$i$i$i,4872);
+    store4($exception$i$i$i$i,(2648));
+    ___cxa_throw(($exception$i$i$i$i|0),(1528|0),(10|0));
     // unreachable;
    } else {
     $mul$i$i$i = $$sroa$speculated$$i << 2;
@@ -5956,7 +6316,7 @@ function __ZNSt3__26vectorIjNS_9allocatorIjEEE9push_backERKj($this,$__x) {
  $this = $this|0;
  $__x = $__x|0;
  var $$sroa$speculated$$i$i = 0, $$sroa$speculated$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__end_ = 0, $__first_$i$i$i = 0, $add$i = 0, $add$ptr$i$i = 0, $add$ptr$i$i$i = 0, $add$ptr5$i$i = 0;
- var $call$i$i$i$i$i = 0, $cmp = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i22$i = 0, $cmp3$i$i = 0, $cond$i$i = 0, $exception$i$i$i$i = 0, $idx$neg$i$i$i = 0, $incdec$ptr = 0, $incdec$ptr$i = 0, $mul$i$i = 0, $mul$i$i$i$i = 0, $sub$ptr$div$i$i = 0, $sub$ptr$div$i$i$i$i = 0, $sub$ptr$sub$i$i = 0, $sub$ptr$sub$i$i$i$i = 0, $tobool$i12$i = 0;
+ var $call$i$i$i$i$i = 0, $cmp = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i22$i = 0, $cmp3$i$i = 0, $cond$i$i = 0, $exception$i$i$i$i$i = 0, $idx$neg$i$i$i = 0, $incdec$ptr = 0, $incdec$ptr$i = 0, $mul$i$i = 0, $mul$i$i$i$i = 0, $sub$ptr$div$i$i = 0, $sub$ptr$div$i$i$i$i = 0, $sub$ptr$sub$i$i = 0, $sub$ptr$sub$i$i$i$i = 0, $tobool$i12$i = 0;
  var label = 0, sp = 0;
  sp = STACKTOP;
  $__end_ = ((($this)) + 4|0);
@@ -5996,9 +6356,10 @@ function __ZNSt3__26vectorIjNS_9allocatorIjEEE9push_backERKj($this,$__x) {
   } else {
    $cmp$i$i$i$i = ($$sroa$speculated$$i$i>>>0)>(1073741823);
    if ($cmp$i$i$i$i) {
-    $exception$i$i$i$i = (___cxa_allocate_exception(4)|0);
-    __ZNSt9bad_allocC2Ev($exception$i$i$i$i);
-    ___cxa_throw(($exception$i$i$i$i|0),(1496|0),(10|0));
+    $exception$i$i$i$i$i = (___cxa_allocate_exception(8)|0);
+    __ZNSt11logic_errorC2EPKc($exception$i$i$i$i$i,4872);
+    store4($exception$i$i$i$i$i,(2648));
+    ___cxa_throw(($exception$i$i$i$i$i|0),(1528|0),(10|0));
     // unreachable;
    } else {
     $mul$i$i$i$i = $$sroa$speculated$$i$i << 2;
@@ -6068,7 +6429,7 @@ function __ZNSt3__26vectorIjNS_9allocatorIjEEE6resizeEjRKj($this,$__sz,$__x) {
  $__x = $__x|0;
  var $$sroa$speculated$$i$i = 0, $$sroa$speculated$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0;
  var $__end_$i = 0, $__first_$i$i$i$i = 0, $__n$addr$0$i$i = 0, $__n$addr$0$i22$i = 0, $__new_last3$i$i = 0, $add$ptr = 0, $add$ptr$i$i = 0, $add$ptr$i$i$i = 0, $add$ptr5$i$i = 0, $call$i$i$i$i$i = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i25$i = 0, $cmp$i29$i = 0, $cmp$i35$i = 0, $cmp1$i$i = 0;
- var $cmp2 = 0, $cmp3$i$i = 0, $cond$i$i = 0, $dec$i$i = 0, $dec$i24$i = 0, $exception$i$i$i$i = 0, $idx$neg$i$i$i = 0, $incdec$ptr$i$i = 0, $incdec$ptr$i23$i = 0, $mul$i$i = 0, $mul$i$i$i$i = 0, $scevgep$i$i = 0, $scevgep$i$i4 = 0, $scevgep$i27$i = 0, $scevgep5$i$i = 0, $sub = 0, $sub$ptr$div$i = 0, $sub$ptr$div$i$i$i$i = 0, $sub$ptr$div$i3 = 0, $sub$ptr$sub$i = 0;
+ var $cmp2 = 0, $cmp3$i$i = 0, $cond$i$i = 0, $dec$i$i = 0, $dec$i24$i = 0, $exception$i$i$i$i$i = 0, $idx$neg$i$i$i = 0, $incdec$ptr$i$i = 0, $incdec$ptr$i23$i = 0, $mul$i$i = 0, $mul$i$i$i$i = 0, $scevgep$i$i = 0, $scevgep$i$i4 = 0, $scevgep$i27$i = 0, $scevgep5$i$i = 0, $sub = 0, $sub$ptr$div$i = 0, $sub$ptr$div$i$i$i$i = 0, $sub$ptr$div$i3 = 0, $sub$ptr$sub$i = 0;
  var $sub$ptr$sub$i$i$i$i = 0, $sub$ptr$sub$i2 = 0, $tobool$i15$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $__end_$i = ((($this)) + 4|0);
@@ -6142,9 +6503,10 @@ function __ZNSt3__26vectorIjNS_9allocatorIjEEE6resizeEjRKj($this,$__sz,$__x) {
   } else {
    $cmp$i$i$i$i = ($$sroa$speculated$$i$i>>>0)>(1073741823);
    if ($cmp$i$i$i$i) {
-    $exception$i$i$i$i = (___cxa_allocate_exception(4)|0);
-    __ZNSt9bad_allocC2Ev($exception$i$i$i$i);
-    ___cxa_throw(($exception$i$i$i$i|0),(1496|0),(10|0));
+    $exception$i$i$i$i$i = (___cxa_allocate_exception(8)|0);
+    __ZNSt11logic_errorC2EPKc($exception$i$i$i$i$i,4872);
+    store4($exception$i$i$i$i$i,(2648));
+    ___cxa_throw(($exception$i$i$i$i$i|0),(1528|0),(10|0));
     // unreachable;
    } else {
     $mul$i$i$i$i = $$sroa$speculated$$i$i << 2;
@@ -6405,10 +6767,10 @@ function __ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2
  $agg$result = $agg$result|0;
  $m = $m|0;
  $k = $k|0;
- var $$sink = 0, $$sroa$speculated$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i$i1 = 0;
- var $__result$addr$0$ph$lcssa$i$i = 0, $__result$addr$0$ph14$i$i = 0, $__root$addr$0$ph13$i$i = 0, $__root$addr$09$i$i = 0, $__size_$i$i$i$i$i$i$i = 0, $__size_$i$i$i$i$i$i$i$i = 0, $__size_$i$i5$i$i$i$i$i = 0, $__size_$i$i5$i$i$i$i$i$i = 0, $__size_$i3$i$i$i$i$i$i = 0, $__size_$i3$i$i$i$i$i$i$i = 0, $__size_$i3$i7$i$i$i$i$i = 0, $__size_$i3$i7$i$i$i$i$i$i = 0, $__value_$i$i = 0, $__value_$i4$i = 0, $add$i$i$i$i = 0, $argv$i = 0, $call$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i$i = 0, $call1$i$i$i$i = 0, $call4$i = 0;
- var $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i6$i = 0, $cmp$i$i$i$i7$i = 0, $cmp$i$i2 = 0, $cmp8$i$i = 0, $cmp8$i$i$i$i$i = 0, $cmp8$i$i$i$i$i$i = 0, $cmp812$i$i = 0, $cond$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i5$i = 0, $cond$i$i21$i$i$i$i = 0, $cond$i$i22$i$i$i$i$i = 0, $cond$i$i22$i$i$i$i$i$i = 0, $cond$i11$i$i$i$i$i = 0;
- var $cond$i11$i$i$i$i$i$i = 0, $conv$i$i$i$i$i$i$i = 0, $conv$i$i$i$i$i$i$i$i = 0, $conv$i$i9$i$i$i$i$i = 0, $conv$i$i9$i$i$i$i$i$i = 0, $data$i$i$i$i = 0, $lnot$i$i = 0, $second = 0, $tobool$i$i$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i$i$i = 0, $tobool$i$i6$i$i$i$i$i = 0, $tobool$i$i6$i$i$i$i$i$i = 0, label = 0, sp = 0;
+ var $$sink = 0, $$sroa$speculated$i$i$i$i$i$i = 0, $$sroa$speculated$i$i$i$i$i$i$i = 0, $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $__first_$i$i$i$i$i1 = 0;
+ var $__result$addr$0$ph$lcssa$i$i = 0, $__result$addr$0$ph14$i$i = 0, $__root$addr$0$ph13$i$i = 0, $__root$addr$09$i$i = 0, $__size_$i$i$i$i$i$i$i = 0, $__size_$i$i$i$i$i$i$i$i$i = 0, $__size_$i$i$i$i$i$i$i$i$i$i = 0, $__size_$i$i$i$i$i$i$i$i7$i = 0, $__size_$i3$i$i$i$i$i$i = 0, $__size_$i3$i$i$i$i$i$i$i = 0, $__size_$i3$i$i$i$i$i$i$i$i = 0, $__size_$i3$i$i2$i$i$i$i$i$i = 0, $__value_$i$i = 0, $__value_$i5$i = 0, $add$i$i$i$i = 0, $argv$i = 0, $call$i$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i$i$i = 0, $call1$i$i$i$i = 0, $call4$i = 0;
+ var $cmp$i$i$i$i = 0, $cmp$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i$i$i$i$i = 0, $cmp$i$i$i$i$i$i9$i = 0, $cmp$i$i2 = 0, $cmp7$i$i$i$i$i$i = 0, $cmp7$i$i$i$i$i$i$i = 0, $cmp8$i$i = 0, $cmp812$i$i = 0, $cond$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i$i$i$i = 0, $cond$i$i$i$i$i$i$i4$i = 0, $cond$i$i1$i$i$i$i$i$i = 0, $cond$i$i1$i$i$i$i$i$i$i = 0, $cond$i$i21$i$i$i$i = 0;
+ var $cond$i16$i$i$i$i$i$i$i = 0, $conv$i$i$i$i$i$i$i = 0, $conv$i$i$i$i$i$i$i$i = 0, $conv$i$i$i$i$i$i$i$i$i = 0, $conv$i$i$i4$i$i$i$i$i$i = 0, $data$i$i$i$i = 0, $lnot$i$i = 0, $second = 0, $tobool$i$i$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i$i$i$i$i = 0, $tobool$i$i$i$i$i$i$i$i8$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $argv$i = sp;
@@ -6420,50 +6782,50 @@ function __ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2
   store4($agg$result,$$sink);
   STACKTOP = sp;return;
  }
- $__size_$i$i5$i$i$i$i$i$i = ((($k)) + 11|0);
- $1 = load1($__size_$i$i5$i$i$i$i$i$i);
- $tobool$i$i6$i$i$i$i$i$i = ($1<<24>>24)<(0);
- $__size_$i3$i7$i$i$i$i$i$i = ((($k)) + 4|0);
- $2 = load4($__size_$i3$i7$i$i$i$i$i$i);
- $conv$i$i9$i$i$i$i$i$i = $1&255;
- $cond$i11$i$i$i$i$i$i = $tobool$i$i6$i$i$i$i$i$i ? $2 : $conv$i$i9$i$i$i$i$i$i;
+ $__size_$i$i$i$i$i$i$i$i$i$i = ((($k)) + 11|0);
+ $1 = load1($__size_$i$i$i$i$i$i$i$i$i$i);
+ $tobool$i$i$i$i$i$i$i$i$i$i = ($1<<24>>24)<(0);
+ $__size_$i3$i$i$i$i$i$i$i$i = ((($k)) + 4|0);
+ $2 = load4($__size_$i3$i$i$i$i$i$i$i$i);
+ $conv$i$i$i$i$i$i$i$i$i = $1&255;
+ $cond$i$i$i$i$i$i$i4$i = $tobool$i$i$i$i$i$i$i$i$i$i ? $2 : $conv$i$i$i$i$i$i$i$i$i;
  $3 = load4($k);
- $cond$i$i22$i$i$i$i$i$i = $tobool$i$i6$i$i$i$i$i$i ? $3 : $k;
+ $cond$i$i1$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i$i$i ? $3 : $k;
  $__result$addr$0$ph14$i$i = $__first_$i$i$i$i$i1;$__root$addr$0$ph13$i$i = $0;
  L4: while(1) {
   $__root$addr$09$i$i = $__root$addr$0$ph13$i$i;
   while(1) {
-   $__value_$i4$i = ((($__root$addr$09$i$i)) + 16|0);
-   $__size_$i$i$i$i$i$i$i$i = ((($__value_$i4$i)) + 11|0);
-   $4 = load1($__size_$i$i$i$i$i$i$i$i);
-   $tobool$i$i$i$i$i$i$i$i = ($4<<24>>24)<(0);
-   $__size_$i3$i$i$i$i$i$i$i = ((($__root$addr$09$i$i)) + 20|0);
-   $5 = load4($__size_$i3$i$i$i$i$i$i$i);
-   $conv$i$i$i$i$i$i$i$i = $4&255;
-   $cond$i$i$i$i$i$i5$i = $tobool$i$i$i$i$i$i$i$i ? $5 : $conv$i$i$i$i$i$i$i$i;
-   $cmp$i$i$i$i$i$i$i$i$i = ($cond$i11$i$i$i$i$i$i>>>0)<($cond$i$i$i$i$i$i5$i>>>0);
-   $$sroa$speculated$i$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i$i ? $cond$i11$i$i$i$i$i$i : $cond$i$i$i$i$i$i5$i;
-   $cmp$i$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i$i|0)==(0);
-   if ($cmp$i$i$i$i$i$i$i) {
+   $__value_$i5$i = ((($__root$addr$09$i$i)) + 16|0);
+   $__size_$i$i$i$i$i$i$i$i7$i = ((($__value_$i5$i)) + 11|0);
+   $4 = load1($__size_$i$i$i$i$i$i$i$i7$i);
+   $tobool$i$i$i$i$i$i$i$i8$i = ($4<<24>>24)<(0);
+   $__size_$i3$i$i2$i$i$i$i$i$i = ((($__root$addr$09$i$i)) + 20|0);
+   $5 = load4($__size_$i3$i$i2$i$i$i$i$i$i);
+   $conv$i$i$i4$i$i$i$i$i$i = $4&255;
+   $cond$i16$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i8$i ? $5 : $conv$i$i$i4$i$i$i$i$i$i;
+   $cmp$i$i$i$i$i$i$i$i$i$i = ($cond$i$i$i$i$i$i$i4$i>>>0)<($cond$i16$i$i$i$i$i$i$i>>>0);
+   $$sroa$speculated$i$i$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i$i$i ? $cond$i$i$i$i$i$i$i4$i : $cond$i16$i$i$i$i$i$i$i;
+   $cmp$i$i$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i$i$i|0)==(0);
+   if ($cmp$i$i$i$i$i$i$i$i) {
     label = 6;
    } else {
-    $6 = load4($__value_$i4$i);
-    $cond$i$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i ? $6 : $__value_$i4$i;
-    $call$i$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i$i,$cond$i$i22$i$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i$i)|0);
-    $cmp$i$i$i$i$i6$i = ($call$i$i$i$i$i$i$i|0)==(0);
-    if ($cmp$i$i$i$i$i6$i) {
+    $6 = load4($__value_$i5$i);
+    $cond$i$i$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i8$i ? $6 : $__value_$i5$i;
+    $call$i$i$i$i$i$i$i$i = (_memcmp($cond$i$i$i$i$i$i$i$i$i,$cond$i$i1$i$i$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i$i$i)|0);
+    $cmp$i$i$i$i$i$i9$i = ($call$i$i$i$i$i$i$i$i|0)==(0);
+    if ($cmp$i$i$i$i$i$i9$i) {
      label = 6;
     } else {
-     $cmp$i$i$i$i7$i = ($call$i$i$i$i$i$i$i|0)<(0);
-     if (!($cmp$i$i$i$i7$i)) {
+     $cmp$i$i$i$i$i = ($call$i$i$i$i$i$i$i$i|0)<(0);
+     if (!($cmp$i$i$i$i$i)) {
       break;
      }
     }
    }
    if ((label|0) == 6) {
     label = 0;
-    $cmp8$i$i$i$i$i$i = ($cond$i$i$i$i$i$i5$i>>>0)<($cond$i11$i$i$i$i$i$i>>>0);
-    if (!($cmp8$i$i$i$i$i$i)) {
+    $cmp7$i$i$i$i$i$i$i = ($cond$i16$i$i$i$i$i$i$i>>>0)<($cond$i$i$i$i$i$i$i4$i>>>0);
+    if (!($cmp7$i$i$i$i$i$i$i)) {
      break;
     }
    }
@@ -6493,27 +6855,27 @@ function __ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2
   STACKTOP = sp;return;
  }
  $__value_$i$i = ((($__result$addr$0$ph$lcssa$i$i)) + 16|0);
- $__size_$i$i5$i$i$i$i$i = ((($__value_$i$i)) + 11|0);
- $10 = load1($__size_$i$i5$i$i$i$i$i);
- $tobool$i$i6$i$i$i$i$i = ($10<<24>>24)<(0);
- $__size_$i3$i7$i$i$i$i$i = ((($__result$addr$0$ph$lcssa$i$i)) + 20|0);
- $11 = load4($__size_$i3$i7$i$i$i$i$i);
- $conv$i$i9$i$i$i$i$i = $10&255;
- $cond$i11$i$i$i$i$i = $tobool$i$i6$i$i$i$i$i ? $11 : $conv$i$i9$i$i$i$i$i;
- $cmp$i$i$i$i$i$i$i$i = ($cond$i11$i$i$i$i$i>>>0)<($cond$i11$i$i$i$i$i$i>>>0);
- $$sroa$speculated$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i ? $cond$i11$i$i$i$i$i : $cond$i11$i$i$i$i$i$i;
- $cmp$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i|0)==(0);
- if ($cmp$i$i$i$i$i$i) {
+ $__size_$i$i$i$i$i$i$i$i$i = ((($__value_$i$i)) + 11|0);
+ $10 = load1($__size_$i$i$i$i$i$i$i$i$i);
+ $tobool$i$i$i$i$i$i$i$i$i = ($10<<24>>24)<(0);
+ $__size_$i3$i$i$i$i$i$i$i = ((($__result$addr$0$ph$lcssa$i$i)) + 20|0);
+ $11 = load4($__size_$i3$i$i$i$i$i$i$i);
+ $conv$i$i$i$i$i$i$i$i = $10&255;
+ $cond$i$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i$i ? $11 : $conv$i$i$i$i$i$i$i$i;
+ $cmp$i$i$i$i$i$i$i$i$i = ($cond$i$i$i$i$i$i$i>>>0)<($cond$i$i$i$i$i$i$i4$i>>>0);
+ $$sroa$speculated$i$i$i$i$i$i = $cmp$i$i$i$i$i$i$i$i$i ? $cond$i$i$i$i$i$i$i : $cond$i$i$i$i$i$i$i4$i;
+ $cmp$i$i$i$i$i$i$i = ($$sroa$speculated$i$i$i$i$i$i|0)==(0);
+ if ($cmp$i$i$i$i$i$i$i) {
   label = 13;
  } else {
   $12 = load4($__value_$i$i);
-  $cond$i$i22$i$i$i$i$i = $tobool$i$i6$i$i$i$i$i ? $12 : $__value_$i$i;
-  $call$i$i$i$i$i$i = (_memcmp($cond$i$i22$i$i$i$i$i$i,$cond$i$i22$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i)|0);
-  $cmp$i$i$i$i$i = ($call$i$i$i$i$i$i|0)==(0);
-  if ($cmp$i$i$i$i$i) {
+  $cond$i$i1$i$i$i$i$i$i = $tobool$i$i$i$i$i$i$i$i$i ? $12 : $__value_$i$i;
+  $call$i$i$i$i$i$i$i = (_memcmp($cond$i$i1$i$i$i$i$i$i$i,$cond$i$i1$i$i$i$i$i$i,$$sroa$speculated$i$i$i$i$i$i)|0);
+  $cmp$i$i$i$i$i$i = ($call$i$i$i$i$i$i$i|0)==(0);
+  if ($cmp$i$i$i$i$i$i) {
    label = 13;
   } else {
-   $cmp$i$i$i$i = ($call$i$i$i$i$i$i|0)<(0);
+   $cmp$i$i$i$i = ($call$i$i$i$i$i$i$i|0)<(0);
    if ($cmp$i$i$i$i) {
     $$sink = (1);
     store4($agg$result,$$sink);
@@ -6522,8 +6884,8 @@ function __ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2
   }
  }
  if ((label|0) == 13) {
-  $cmp8$i$i$i$i$i = ($cond$i11$i$i$i$i$i$i>>>0)<($cond$i11$i$i$i$i$i>>>0);
-  if ($cmp8$i$i$i$i$i) {
+  $cmp7$i$i$i$i$i$i = ($cond$i$i$i$i$i$i$i4$i>>>0)<($cond$i$i$i$i$i$i$i>>>0);
+  if ($cmp7$i$i$i$i$i$i) {
    $$sink = (1);
    store4($agg$result,$$sink);
    STACKTOP = sp;return;
@@ -6545,7 +6907,7 @@ function __ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2
  $cond$i$i21$i$i$i$i = $tobool$i$i$i$i$i$i$i ? $15 : $second;
  _memcpy(($data$i$i$i$i|0),($cond$i$i21$i$i$i$i|0),($cond$i$i$i$i$i$i|0))|0;
  store4($argv$i,$call1$i$i$i$i);
- $call4$i = (__emval_take_value((1024|0),($argv$i|0))|0);
+ $call4$i = (__emval_take_value((1032|0),($argv$i|0))|0);
  $$sink = $call4$i;
  store4($agg$result,$$sink);
  STACKTOP = sp;return;
@@ -6554,7 +6916,8 @@ function __ZN10emscripten8internal15FunctionInvokerIPFNS_3valERKNSt3__23mapINS3_
  $function = $function|0;
  $wireThis = $wireThis|0;
  $args = $args|0;
- var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $arraydecay$i = 0, $ref$tmp = 0, $ref$tmp1 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $__cap_$i$i$i$i = 0, $__p$015$i$i$i = 0, $__p$016$i$i$i = 0, $__size_$i$i$i$i = 0, $__size_$i$i3 = 0, $__size_$i12$i$i$i = 0, $add$i$i$i$i$i = 0, $and$i$i$i$i$i = 0, $arraydecay$i = 0, $arrayidx$i$i$i = 0, $call$i$i$i$i$i$i = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp2$i$i$i = 0;
+ var $conv$i$i$i$i = 0, $or$i$i$i$i = 0, $ref$tmp = 0, $ref$tmp1 = 0, $tobool$i$i4 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $ref$tmp = sp + 12|0;
@@ -6563,25 +6926,67 @@ function __ZN10emscripten8internal15FunctionInvokerIPFNS_3valERKNSt3__23mapINS3_
  $arraydecay$i = ((($args)) + 4|0);
  $1 = load4($args);
  ; store8($ref$tmp1,i64_const(0,0),4); store4($ref$tmp1+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($ref$tmp1,$arraydecay$i,$1);
+ $cmp$i$i$i = ($1>>>0)>(4294967279);
+ if ($cmp$i$i$i) {
+  __ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv();
+  // unreachable;
+ }
+ $cmp2$i$i$i = ($1>>>0)<(11);
+ if ($cmp2$i$i$i) {
+  $conv$i$i$i$i = $1&255;
+  $__size_$i12$i$i$i = ((($ref$tmp1)) + 11|0);
+  store1($__size_$i12$i$i$i,$conv$i$i$i$i);
+  $cmp$i$i$i$i = ($1|0)==(0);
+  if ($cmp$i$i$i$i) {
+   $__p$016$i$i$i = $ref$tmp1;
+  } else {
+   $__p$015$i$i$i = $ref$tmp1;
+   label = 6;
+  }
+ } else {
+  $add$i$i$i$i$i = (($1) + 16)|0;
+  $and$i$i$i$i$i = $add$i$i$i$i$i & -16;
+  $call$i$i$i$i$i$i = (__Znwj($and$i$i$i$i$i)|0);
+  store4($ref$tmp1,$call$i$i$i$i$i$i);
+  $or$i$i$i$i = $and$i$i$i$i$i | -2147483648;
+  $__cap_$i$i$i$i = ((($ref$tmp1)) + 8|0);
+  store4($__cap_$i$i$i$i,$or$i$i$i$i);
+  $__size_$i$i$i$i = ((($ref$tmp1)) + 4|0);
+  store4($__size_$i$i$i$i,$1);
+  $__p$015$i$i$i = $call$i$i$i$i$i$i;
+  label = 6;
+ }
+ if ((label|0) == 6) {
+  _memcpy(($__p$015$i$i$i|0),($arraydecay$i|0),($1|0))|0;
+  $__p$016$i$i$i = $__p$015$i$i$i;
+ }
+ $arrayidx$i$i$i = (($__p$016$i$i$i) + ($1)|0);
+ store1($arrayidx$i$i$i,0);
  FUNCTION_TABLE_viii[$0 & 7]($ref$tmp,$wireThis,$ref$tmp1);
  $2 = load4($ref$tmp);
  __emval_incref(($2|0));
  $3 = load4($ref$tmp);
  __emval_decref(($3|0));
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp1);
+ $__size_$i$i3 = ((($ref$tmp1)) + 11|0);
+ $4 = load1($__size_$i$i3);
+ $tobool$i$i4 = ($4<<24>>24)<(0);
+ if (!($tobool$i$i4)) {
+  STACKTOP = sp;return ($3|0);
+ }
+ $5 = load4($ref$tmp1);
+ __ZdlPv($5);
  STACKTOP = sp;return ($3|0);
 }
 function __ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEE3setERSG_RSD_SJ_($m,$k,$v) {
  $m = $m|0;
  $k = $k|0;
  $v = $v|0;
- var $$pre$i$i$i = 0, $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $__first_$i$i$i$i8$i$i = 0, $__left_7$i$i$i = 0, $__parent$i$i = 0, $__parent_$i$i$i = 0, $__r$0$i$i = 0, $__right_$i$i$i = 0, $call$i$i = 0, $call$i$i$i$i$i$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $first$i$i$i$i$i$i5$i$i = 0;
- var $inc$i$i$i = 0, $second$i = 0, $second$i$i$i$i$i$i6$i$i = 0, label = 0, sp = 0;
+ var $$pre$i$i$i = 0, $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $__first_$i$i$i$i7$i$i = 0, $__left_7$i$i$i = 0, $__parent$i$i = 0, $__parent_$i$i$i = 0, $__r$0$i$i = 0, $__right_$i$i$i = 0, $call$i$i = 0, $call$i$i$i$i$i$i = 0, $cmp$i$i = 0, $cmp$i$i$i = 0, $first$i$i$i$i$i$i$i$i = 0;
+ var $inc$i$i$i = 0, $second$i = 0, $second$i$i$i$i$i$i5$i$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $__parent$i$i = sp;
- $call$i$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEESK_RKT_($m,$__parent$i$i,$k)|0);
+ $call$i$i = (__ZNSt3__26__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_S8_NS_4lessIS7_EELb1EEENS5_IS8_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISJ_EERKT_($m,$__parent$i$i,$k)|0);
  $0 = load4($call$i$i);
  $cmp$i$i = ($0|0)==(0|0);
  if (!($cmp$i$i)) {
@@ -6591,10 +6996,10 @@ function __ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2
   STACKTOP = sp;return;
  }
  $call$i$i$i$i$i$i = (__Znwj(40)|0);
- $first$i$i$i$i$i$i5$i$i = ((($call$i$i$i$i$i$i)) + 16|0);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($first$i$i$i$i$i$i5$i$i,$k);
- $second$i$i$i$i$i$i6$i$i = ((($call$i$i$i$i$i$i)) + 28|0);
- ; store8($second$i$i$i$i$i$i6$i$i,i64_const(0,0),4); store4($second$i$i$i$i$i$i6$i$i+8|0,0,4);
+ $first$i$i$i$i$i$i$i$i = ((($call$i$i$i$i$i$i)) + 16|0);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($first$i$i$i$i$i$i$i$i,$k);
+ $second$i$i$i$i$i$i5$i$i = ((($call$i$i$i$i$i$i)) + 28|0);
+ ; store8($second$i$i$i$i$i$i5$i$i,i64_const(0,0),4); store4($second$i$i$i$i$i$i5$i$i+8|0,0,4);
  $1 = load4($__parent$i$i);
  store4($call$i$i$i$i$i$i,0);
  $__right_$i$i$i = ((($call$i$i$i$i$i$i)) + 4|0);
@@ -6616,10 +7021,10 @@ function __ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2
  $__left_7$i$i$i = ((($m)) + 4|0);
  $5 = load4($__left_7$i$i$i);
  __ZNSt3__227__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_($5,$6);
- $__first_$i$i$i$i8$i$i = ((($m)) + 8|0);
- $7 = load4($__first_$i$i$i$i8$i$i);
+ $__first_$i$i$i$i7$i$i = ((($m)) + 8|0);
+ $7 = load4($__first_$i$i$i$i7$i$i);
  $inc$i$i$i = (($7) + 1)|0;
- store4($__first_$i$i$i$i8$i$i,$inc$i$i$i);
+ store4($__first_$i$i$i$i7$i$i,$inc$i$i$i);
  $__r$0$i$i = $call$i$i$i$i$i$i;
  $second$i = ((($__r$0$i$i)) + 28|0);
  (__ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEaSERKS5_($second$i,$v)|0);
@@ -6630,7 +7035,9 @@ function __ZN10emscripten8internal15FunctionInvokerIPFvRNSt3__23mapINS2_12basic_
  $wireThis = $wireThis|0;
  $args = $args|0;
  $args1 = $args1|0;
- var $0 = 0, $1 = 0, $2 = 0, $arraydecay$i = 0, $arraydecay$i1 = 0, $ref$tmp = 0, $ref$tmp3 = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $__cap_$i$i$i$i = 0, $__cap_$i$i$i$i12 = 0, $__p$015$i$i$i = 0, $__p$015$i$i$i20 = 0, $__p$016$i$i$i = 0, $__p$016$i$i$i22 = 0, $__size_$i$i$i$i = 0, $__size_$i$i$i$i13 = 0, $__size_$i$i27 = 0, $__size_$i$i33 = 0, $__size_$i12$i$i$i = 0, $__size_$i12$i$i$i17 = 0, $add$i$i$i$i$i = 0;
+ var $add$i$i$i$i$i7 = 0, $and$i$i$i$i$i = 0, $and$i$i$i$i$i8 = 0, $arraydecay$i = 0, $arraydecay$i1 = 0, $arrayidx$i$i$i = 0, $arrayidx$i$i$i23 = 0, $call$i$i$i$i$i$i = 0, $call$i$i$i$i$i$i924 = 0, $cmp$i$i$i = 0, $cmp$i$i$i$i = 0, $cmp$i$i$i$i18 = 0, $cmp$i$i$i3 = 0, $cmp2$i$i$i = 0, $cmp2$i$i$i5 = 0, $conv$i$i$i$i = 0, $conv$i$i$i$i15 = 0, $or$i$i$i$i = 0, $or$i$i$i$i11 = 0, $ref$tmp = 0;
+ var $ref$tmp3 = 0, $tobool$i$i28 = 0, $tobool$i$i34 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 32|0;
  $ref$tmp = sp + 12|0;
@@ -6639,54 +7046,137 @@ function __ZN10emscripten8internal15FunctionInvokerIPFvRNSt3__23mapINS2_12basic_
  $arraydecay$i = ((($args)) + 4|0);
  $1 = load4($args);
  ; store8($ref$tmp,i64_const(0,0),4); store4($ref$tmp+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($ref$tmp,$arraydecay$i,$1);
+ $cmp$i$i$i = ($1>>>0)>(4294967279);
+ if ($cmp$i$i$i) {
+  __ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv();
+  // unreachable;
+ }
+ $cmp2$i$i$i = ($1>>>0)<(11);
+ if ($cmp2$i$i$i) {
+  $conv$i$i$i$i = $1&255;
+  $__size_$i12$i$i$i = ((($ref$tmp)) + 11|0);
+  store1($__size_$i12$i$i$i,$conv$i$i$i$i);
+  $cmp$i$i$i$i = ($1|0)==(0);
+  if ($cmp$i$i$i$i) {
+   $__p$016$i$i$i = $ref$tmp;
+  } else {
+   $__p$015$i$i$i = $ref$tmp;
+   label = 6;
+  }
+ } else {
+  $add$i$i$i$i$i = (($1) + 16)|0;
+  $and$i$i$i$i$i = $add$i$i$i$i$i & -16;
+  $call$i$i$i$i$i$i = (__Znwj($and$i$i$i$i$i)|0);
+  store4($ref$tmp,$call$i$i$i$i$i$i);
+  $or$i$i$i$i = $and$i$i$i$i$i | -2147483648;
+  $__cap_$i$i$i$i = ((($ref$tmp)) + 8|0);
+  store4($__cap_$i$i$i$i,$or$i$i$i$i);
+  $__size_$i$i$i$i = ((($ref$tmp)) + 4|0);
+  store4($__size_$i$i$i$i,$1);
+  $__p$015$i$i$i = $call$i$i$i$i$i$i;
+  label = 6;
+ }
+ if ((label|0) == 6) {
+  _memcpy(($__p$015$i$i$i|0),($arraydecay$i|0),($1|0))|0;
+  $__p$016$i$i$i = $__p$015$i$i$i;
+ }
+ $arrayidx$i$i$i = (($__p$016$i$i$i) + ($1)|0);
+ store1($arrayidx$i$i$i,0);
  $arraydecay$i1 = ((($args1)) + 4|0);
  $2 = load4($args1);
  ; store8($ref$tmp3,i64_const(0,0),4); store4($ref$tmp3+8|0,0,4);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($ref$tmp3,$arraydecay$i1,$2);
+ $cmp$i$i$i3 = ($2>>>0)>(4294967279);
+ if ($cmp$i$i$i3) {
+  __ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv();
+  // unreachable;
+ }
+ $cmp2$i$i$i5 = ($2>>>0)<(11);
+ if ($cmp2$i$i$i5) {
+  $conv$i$i$i$i15 = $2&255;
+  $__size_$i12$i$i$i17 = ((($ref$tmp3)) + 11|0);
+  store1($__size_$i12$i$i$i17,$conv$i$i$i$i15);
+  $cmp$i$i$i$i18 = ($2|0)==(0);
+  if ($cmp$i$i$i$i18) {
+   $__p$016$i$i$i22 = $ref$tmp3;
+  } else {
+   $__p$015$i$i$i20 = $ref$tmp3;
+   label = 12;
+  }
+ } else {
+  $add$i$i$i$i$i7 = (($2) + 16)|0;
+  $and$i$i$i$i$i8 = $add$i$i$i$i$i7 & -16;
+  $call$i$i$i$i$i$i924 = (__Znwj($and$i$i$i$i$i8)|0);
+  store4($ref$tmp3,$call$i$i$i$i$i$i924);
+  $or$i$i$i$i11 = $and$i$i$i$i$i8 | -2147483648;
+  $__cap_$i$i$i$i12 = ((($ref$tmp3)) + 8|0);
+  store4($__cap_$i$i$i$i12,$or$i$i$i$i11);
+  $__size_$i$i$i$i13 = ((($ref$tmp3)) + 4|0);
+  store4($__size_$i$i$i$i13,$2);
+  $__p$015$i$i$i20 = $call$i$i$i$i$i$i924;
+  label = 12;
+ }
+ if ((label|0) == 12) {
+  _memcpy(($__p$015$i$i$i20|0),($arraydecay$i1|0),($2|0))|0;
+  $__p$016$i$i$i22 = $__p$015$i$i$i20;
+ }
+ $arrayidx$i$i$i23 = (($__p$016$i$i$i22) + ($2)|0);
+ store1($arrayidx$i$i$i23,0);
  FUNCTION_TABLE_viii[$0 & 7]($wireThis,$ref$tmp,$ref$tmp3);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp3);
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($ref$tmp);
+ $__size_$i$i27 = ((($ref$tmp3)) + 11|0);
+ $3 = load1($__size_$i$i27);
+ $tobool$i$i28 = ($3<<24>>24)<(0);
+ if ($tobool$i$i28) {
+  $4 = load4($ref$tmp3);
+  __ZdlPv($4);
+ }
+ $__size_$i$i33 = ((($ref$tmp)) + 11|0);
+ $5 = load1($__size_$i$i33);
+ $tobool$i$i34 = ($5<<24>>24)<(0);
+ if (!($tobool$i$i34)) {
+  STACKTOP = sp;return;
+ }
+ $6 = load4($ref$tmp);
+ __ZdlPv($6);
  STACKTOP = sp;return;
 }
 function __GLOBAL__sub_I_bind_cpp() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- __embind_register_void((1624|0),(10561|0));
- __embind_register_bool((1640|0),(10566|0),1,1,0);
- __embind_register_integer((1648|0),(10509|0),1,-128,127);
- __embind_register_integer((1664|0),(10514|0),1,-128,127);
- __embind_register_integer((1656|0),(10526|0),1,0,255);
- __embind_register_integer((1672|0),(10540|0),2,-32768,32767);
- __embind_register_integer((1680|0),(10546|0),2,0,65535);
- __embind_register_integer((1688|0),(10571|0),4,-2147483648,2147483647);
- __embind_register_integer((1696|0),(10575|0),4,0,-1);
- __embind_register_integer((1704|0),(10588|0),4,-2147483648,2147483647);
- __embind_register_integer((1712|0),(10593|0),4,0,-1);
- __embind_register_float((1720|0),(10607|0),4);
- __embind_register_float((1728|0),(10613|0),8);
- __embind_register_std_string((1024|0),(10497|0));
- __embind_register_std_string((1232|0),(5516|0));
- __embind_register_std_wstring((1080|0),4,(5549|0));
- __embind_register_emval((1048|0),(5562|0));
- __embind_register_memory_view((1256|0),0,(5578|0));
- __embind_register_memory_view((1264|0),0,(5608|0));
- __embind_register_memory_view((1272|0),1,(5645|0));
- __embind_register_memory_view((1280|0),2,(5684|0));
- __embind_register_memory_view((1288|0),3,(5715|0));
- __embind_register_memory_view((1296|0),4,(5755|0));
- __embind_register_memory_view((1304|0),5,(5784|0));
- __embind_register_memory_view((1312|0),4,(5822|0));
- __embind_register_memory_view((1320|0),5,(5852|0));
- __embind_register_memory_view((1264|0),0,(5891|0));
- __embind_register_memory_view((1272|0),1,(5923|0));
- __embind_register_memory_view((1280|0),2,(5956|0));
- __embind_register_memory_view((1288|0),3,(5989|0));
- __embind_register_memory_view((1296|0),4,(6023|0));
- __embind_register_memory_view((1304|0),5,(6056|0));
- __embind_register_memory_view((1328|0),6,(6090|0));
- __embind_register_memory_view((1336|0),7,(6121|0));
- __embind_register_memory_view((1344|0),7,(6153|0));
+ __embind_register_void((1624|0),(10161|0));
+ __embind_register_bool((1640|0),(10166|0),1,1,0);
+ __embind_register_integer((1648|0),(10109|0),1,-128,127);
+ __embind_register_integer((1664|0),(10114|0),1,-128,127);
+ __embind_register_integer((1656|0),(10126|0),1,0,255);
+ __embind_register_integer((1672|0),(10140|0),2,-32768,32767);
+ __embind_register_integer((1680|0),(10146|0),2,0,65535);
+ __embind_register_integer((1688|0),(10171|0),4,-2147483648,2147483647);
+ __embind_register_integer((1696|0),(10175|0),4,0,-1);
+ __embind_register_integer((1704|0),(10188|0),4,-2147483648,2147483647);
+ __embind_register_integer((1712|0),(10193|0),4,0,-1);
+ __embind_register_float((1720|0),(10207|0),4);
+ __embind_register_float((1728|0),(10213|0),8);
+ __embind_register_std_string((1032|0),(10097|0));
+ __embind_register_std_string((1232|0),(5587|0));
+ __embind_register_std_wstring((1080|0),4,(5620|0));
+ __embind_register_emval((1024|0),(5633|0));
+ __embind_register_memory_view((1256|0),0,(5649|0));
+ __embind_register_memory_view((1264|0),0,(5679|0));
+ __embind_register_memory_view((1272|0),1,(5716|0));
+ __embind_register_memory_view((1280|0),2,(5755|0));
+ __embind_register_memory_view((1288|0),3,(5786|0));
+ __embind_register_memory_view((1296|0),4,(5826|0));
+ __embind_register_memory_view((1304|0),5,(5855|0));
+ __embind_register_memory_view((1312|0),4,(5893|0));
+ __embind_register_memory_view((1320|0),5,(5923|0));
+ __embind_register_memory_view((1264|0),0,(5962|0));
+ __embind_register_memory_view((1272|0),1,(5994|0));
+ __embind_register_memory_view((1280|0),2,(6027|0));
+ __embind_register_memory_view((1288|0),3,(6060|0));
+ __embind_register_memory_view((1296|0),4,(6094|0));
+ __embind_register_memory_view((1304|0),5,(6127|0));
+ __embind_register_memory_view((1328|0),6,(6161|0));
+ __embind_register_memory_view((1336|0),7,(6192|0));
+ __embind_register_memory_view((1344|0),7,(6224|0));
  return;
 }
 function ___getTypeName($ti) {
@@ -6765,7 +7255,7 @@ function _malloc($bytes) {
    $and = $add2 & -8;
    $cond = $cmp1 ? 16 : $and;
    $shr = $cond >>> 3;
-   $0 = load4(10636);
+   $0 = load4(10236);
    $shr3 = $0 >>> $shr;
    $and4 = $shr3 & 3;
    $cmp5 = ($and4|0)==(0);
@@ -6774,7 +7264,7 @@ function _malloc($bytes) {
     $and7 = $neg ^ 1;
     $add8 = (($and7) + ($shr))|0;
     $shl = $add8 << 1;
-    $arrayidx = (10676 + ($shl<<2)|0);
+    $arrayidx = (10276 + ($shl<<2)|0);
     $1 = ((($arrayidx)) + 8|0);
     $2 = load4($1);
     $fd9 = ((($2)) + 8|0);
@@ -6784,7 +7274,7 @@ function _malloc($bytes) {
      $shl12 = 1 << $add8;
      $neg13 = $shl12 ^ -1;
      $and14 = $0 & $neg13;
-     store4(10636,$and14);
+     store4(10236,$and14);
     } else {
      $bk18 = ((($3)) + 12|0);
      store4($bk18,$arrayidx);
@@ -6802,7 +7292,7 @@ function _malloc($bytes) {
     $retval$0 = $fd9;
     STACKTOP = sp;return ($retval$0|0);
    }
-   $5 = load4((10644));
+   $5 = load4((10244));
    $cmp29 = ($cond>>>0)>($5>>>0);
    if ($cmp29) {
     $cmp31 = ($shr3|0)==(0);
@@ -6836,7 +7326,7 @@ function _malloc($bytes) {
      $shr63 = $shr59 >>> $and61;
      $add64 = (($add62) + ($shr63))|0;
      $shl65 = $add64 << 1;
-     $arrayidx66 = (10676 + ($shl65<<2)|0);
+     $arrayidx66 = (10276 + ($shl65<<2)|0);
      $6 = ((($arrayidx66)) + 8|0);
      $7 = load4($6);
      $fd69 = ((($7)) + 8|0);
@@ -6846,7 +7336,7 @@ function _malloc($bytes) {
       $shl72 = 1 << $add64;
       $neg73 = $shl72 ^ -1;
       $and74 = $0 & $neg73;
-      store4(10636,$and74);
+      store4(10236,$and74);
       $10 = $and74;
      } else {
       $bk85 = ((($8)) + 12|0);
@@ -6867,16 +7357,16 @@ function _malloc($bytes) {
      store4($add$ptr98,$sub91);
      $cmp99 = ($5|0)==(0);
      if (!($cmp99)) {
-      $9 = load4((10656));
+      $9 = load4((10256));
       $shr101 = $5 >>> 3;
       $shl102 = $shr101 << 1;
-      $arrayidx103 = (10676 + ($shl102<<2)|0);
+      $arrayidx103 = (10276 + ($shl102<<2)|0);
       $shl105 = 1 << $shr101;
       $and106 = $10 & $shl105;
       $tobool107 = ($and106|0)==(0);
       if ($tobool107) {
        $or110 = $10 | $shl105;
-       store4(10636,$or110);
+       store4(10236,$or110);
        $$pre = ((($arrayidx103)) + 8|0);
        $$pre$phiZ2D = $$pre;$F104$0 = $arrayidx103;
       } else {
@@ -6892,12 +7382,12 @@ function _malloc($bytes) {
       $bk124 = ((($9)) + 12|0);
       store4($bk124,$arrayidx103);
      }
-     store4((10644),$sub91);
-     store4((10656),$add$ptr95);
+     store4((10244),$sub91);
+     store4((10256),$add$ptr95);
      $retval$0 = $fd69;
      STACKTOP = sp;return ($retval$0|0);
     }
-    $13 = load4((10640));
+    $13 = load4((10240));
     $cmp128 = ($13|0)==(0);
     if ($cmp128) {
      $nb$0 = $cond;
@@ -6925,7 +7415,7 @@ function _malloc($bytes) {
      $add18$i = $add14$i | $and17$i;
      $shr19$i = $shr15$i >>> $and17$i;
      $add20$i = (($add18$i) + ($shr19$i))|0;
-     $arrayidx$i = (10940 + ($add20$i<<2)|0);
+     $arrayidx$i = (10540 + ($add20$i<<2)|0);
      $14 = load4($arrayidx$i);
      $head$i = ((($14)) + 4|0);
      $15 = load4($head$i);
@@ -7025,7 +7515,7 @@ function _malloc($bytes) {
        if (!($cmp90$i)) {
         $index$i = ((($v$0$lcssa$i)) + 28|0);
         $29 = load4($index$i);
-        $arrayidx94$i = (10940 + ($29<<2)|0);
+        $arrayidx94$i = (10540 + ($29<<2)|0);
         $30 = load4($arrayidx94$i);
         $cmp95$i = ($v$0$lcssa$i|0)==($30|0);
         $cond$i = ($R$3$i|0)==(0|0);
@@ -7035,7 +7525,7 @@ function _malloc($bytes) {
           $shl$i = 1 << $29;
           $neg$i = $shl$i ^ -1;
           $and103$i = $13 & $neg$i;
-          store4((10640),$and103$i);
+          store4((10240),$and103$i);
           break;
          }
         } else {
@@ -7093,16 +7583,16 @@ function _malloc($bytes) {
        store4($add$ptr190$i,$rsize$0$lcssa$i);
        $cmp191$i = ($5|0)==(0);
        if (!($cmp191$i)) {
-        $35 = load4((10656));
+        $35 = load4((10256));
         $shr194$i = $5 >>> 3;
         $shl195$i = $shr194$i << 1;
-        $arrayidx196$i = (10676 + ($shl195$i<<2)|0);
+        $arrayidx196$i = (10276 + ($shl195$i<<2)|0);
         $shl198$i = 1 << $shr194$i;
         $and199$i = $shl198$i & $0;
         $tobool200$i = ($and199$i|0)==(0);
         if ($tobool200$i) {
          $or204$i = $shl198$i | $0;
-         store4(10636,$or204$i);
+         store4(10236,$or204$i);
          $$pre$i = ((($arrayidx196$i)) + 8|0);
          $$pre$phi$iZ2D = $$pre$i;$F197$0$i = $arrayidx196$i;
         } else {
@@ -7118,8 +7608,8 @@ function _malloc($bytes) {
         $bk220$i = ((($35)) + 12|0);
         store4($bk220$i,$arrayidx196$i);
        }
-       store4((10644),$rsize$0$lcssa$i);
-       store4((10656),$add$ptr$i);
+       store4((10244),$rsize$0$lcssa$i);
+       store4((10256),$add$ptr$i);
       }
       $add$ptr225$i = ((($v$0$lcssa$i)) + 8|0);
       $retval$0 = $add$ptr225$i;
@@ -7138,7 +7628,7 @@ function _malloc($bytes) {
    } else {
     $add144 = (($bytes) + 11)|0;
     $and145 = $add144 & -8;
-    $38 = load4((10640));
+    $38 = load4((10240));
     $cmp146 = ($38|0)==(0);
     if ($cmp146) {
      $nb$0 = $and145;
@@ -7178,7 +7668,7 @@ function _malloc($bytes) {
        $idx$0$i = $add22$i;
       }
      }
-     $arrayidx$i157 = (10940 + ($idx$0$i<<2)|0);
+     $arrayidx$i157 = (10540 + ($idx$0$i<<2)|0);
      $39 = load4($arrayidx$i157);
      $cmp24$i = ($39|0)==(0|0);
      L74: do {
@@ -7270,7 +7760,7 @@ function _malloc($bytes) {
        $add90$i = $add86$i | $and89$i;
        $shr91$i = $shr87$i >>> $and89$i;
        $add92$i = (($add90$i) + ($shr91$i))|0;
-       $arrayidx94$i165 = (10940 + ($add92$i<<2)|0);
+       $arrayidx94$i165 = (10540 + ($add92$i<<2)|0);
        $43 = load4($arrayidx94$i165);
        $t$4$ph$i = $43;$v$4$ph$i = 0;
       } else {
@@ -7314,7 +7804,7 @@ function _malloc($bytes) {
      if ($cmp116$i) {
       $nb$0 = $and145;
      } else {
-      $47 = load4((10644));
+      $47 = load4((10244));
       $sub118$i = (($47) - ($and145))|0;
       $cmp119$i = ($rsize$4$lcssa$i>>>0)<($sub118$i>>>0);
       if ($cmp119$i) {
@@ -7383,7 +7873,7 @@ function _malloc($bytes) {
         } else {
          $index$i180 = ((($v$4$lcssa$i)) + 28|0);
          $55 = load4($index$i180);
-         $arrayidx184$i = (10940 + ($55<<2)|0);
+         $arrayidx184$i = (10540 + ($55<<2)|0);
          $56 = load4($arrayidx184$i);
          $cmp185$i = ($v$4$lcssa$i|0)==($56|0);
          $cond2$i = ($R$3$i179|0)==(0|0);
@@ -7393,7 +7883,7 @@ function _malloc($bytes) {
            $shl192$i = 1 << $55;
            $neg$i181 = $shl192$i ^ -1;
            $and194$i182 = $38 & $neg$i181;
-           store4((10640),$and194$i182);
+           store4((10240),$and194$i182);
            $64 = $and194$i182;
            break;
           }
@@ -7459,14 +7949,14 @@ function _malloc($bytes) {
          $cmp284$i = ($rsize$4$lcssa$i>>>0)<(256);
          if ($cmp284$i) {
           $shl288$i = $shr283$i << 1;
-          $arrayidx289$i = (10676 + ($shl288$i<<2)|0);
-          $61 = load4(10636);
+          $arrayidx289$i = (10276 + ($shl288$i<<2)|0);
+          $61 = load4(10236);
           $shl291$i = 1 << $shr283$i;
           $and292$i = $61 & $shl291$i;
           $tobool293$i = ($and292$i|0)==(0);
           if ($tobool293$i) {
            $or297$i = $61 | $shl291$i;
-           store4(10636,$or297$i);
+           store4(10236,$or297$i);
            $$pre$i186 = ((($arrayidx289$i)) + 8|0);
            $$pre$phi$i187Z2D = $$pre$i186;$F290$0$i = $arrayidx289$i;
           } else {
@@ -7517,7 +8007,7 @@ function _malloc($bytes) {
            $I316$0$i = $add351$i;
           }
          }
-         $arrayidx355$i = (10940 + ($I316$0$i<<2)|0);
+         $arrayidx355$i = (10540 + ($I316$0$i<<2)|0);
          $index356$i = ((($add$ptr$i169)) + 28|0);
          store4($index356$i,$I316$0$i);
          $child357$i = ((($add$ptr$i169)) + 16|0);
@@ -7529,7 +8019,7 @@ function _malloc($bytes) {
          $tobool364$i = ($and363$i|0)==(0);
          if ($tobool364$i) {
           $or368$i = $shl362$i | $64;
-          store4((10640),$or368$i);
+          store4((10240),$or368$i);
           store4($arrayidx355$i,$add$ptr$i169);
           $parent369$i = ((($add$ptr$i169)) + 24|0);
           store4($parent369$i,$arrayidx355$i);
@@ -7604,16 +8094,16 @@ function _malloc($bytes) {
    }
   }
  } while(0);
- $69 = load4((10644));
+ $69 = load4((10244));
  $cmp156 = ($69>>>0)<($nb$0>>>0);
  if (!($cmp156)) {
   $sub160 = (($69) - ($nb$0))|0;
-  $70 = load4((10656));
+  $70 = load4((10256));
   $cmp162 = ($sub160>>>0)>(15);
   if ($cmp162) {
    $add$ptr166 = (($70) + ($nb$0)|0);
-   store4((10656),$add$ptr166);
-   store4((10644),$sub160);
+   store4((10256),$add$ptr166);
+   store4((10244),$sub160);
    $or167 = $sub160 | 1;
    $head168 = ((($add$ptr166)) + 4|0);
    store4($head168,$or167);
@@ -7623,8 +8113,8 @@ function _malloc($bytes) {
    $head173 = ((($70)) + 4|0);
    store4($head173,$or172);
   } else {
-   store4((10644),0);
-   store4((10656),0);
+   store4((10244),0);
+   store4((10256),0);
    $or176 = $69 | 3;
    $head177 = ((($70)) + 4|0);
    store4($head177,$or176);
@@ -7638,14 +8128,14 @@ function _malloc($bytes) {
   $retval$0 = $add$ptr182;
   STACKTOP = sp;return ($retval$0|0);
  }
- $72 = load4((10648));
+ $72 = load4((10248));
  $cmp186 = ($72>>>0)>($nb$0>>>0);
  if ($cmp186) {
   $sub190 = (($72) - ($nb$0))|0;
-  store4((10648),$sub190);
-  $73 = load4((10660));
+  store4((10248),$sub190);
+  $73 = load4((10260));
   $add$ptr193 = (($73) + ($nb$0)|0);
-  store4((10660),$add$ptr193);
+  store4((10260),$add$ptr193);
   $or194 = $sub190 | 1;
   $head195 = ((($add$ptr193)) + 4|0);
   store4($head195,$or194);
@@ -7656,23 +8146,23 @@ function _malloc($bytes) {
   $retval$0 = $add$ptr199;
   STACKTOP = sp;return ($retval$0|0);
  }
- $74 = load4(11108);
+ $74 = load4(10708);
  $cmp$i = ($74|0)==(0);
  if ($cmp$i) {
-  store4((11116),4096);
-  store4((11112),4096);
-  store4((11120),-1);
-  store4((11124),-1);
-  store4((11128),0);
-  store4((11080),0);
+  store4((10716),4096);
+  store4((10712),4096);
+  store4((10720),-1);
+  store4((10724),-1);
+  store4((10728),0);
+  store4((10680),0);
   $75 = $magic$i$i;
   $xor$i$i = $75 & -16;
   $and6$i$i = $xor$i$i ^ 1431655768;
   store4($magic$i$i,$and6$i$i);
-  store4(11108,$and6$i$i);
+  store4(10708,$and6$i$i);
   $76 = 4096;
  } else {
-  $$pre$i133 = load4((11116));
+  $$pre$i133 = load4((10716));
   $76 = $$pre$i133;
  }
  $add$i134 = (($nb$0) + 48)|0;
@@ -7685,10 +8175,10 @@ function _malloc($bytes) {
   $retval$0 = 0;
   STACKTOP = sp;return ($retval$0|0);
  }
- $77 = load4((11076));
+ $77 = load4((10676));
  $cmp15$i = ($77|0)==(0);
  if (!($cmp15$i)) {
-  $78 = load4((11068));
+  $78 = load4((10668));
   $add17$i = (($78) + ($and11$i))|0;
   $cmp19$i = ($add17$i>>>0)<=($78>>>0);
   $cmp21$i = ($add17$i>>>0)>($77>>>0);
@@ -7698,18 +8188,18 @@ function _malloc($bytes) {
    STACKTOP = sp;return ($retval$0|0);
   }
  }
- $79 = load4((11080));
+ $79 = load4((10680));
  $and29$i = $79 & 4;
  $tobool30$i = ($and29$i|0)==(0);
  L167: do {
   if ($tobool30$i) {
-   $80 = load4((10660));
+   $80 = load4((10260));
    $cmp32$i137 = ($80|0)==(0|0);
    L169: do {
     if ($cmp32$i137) {
      label = 118;
     } else {
-     $sp$0$i$i = (11084);
+     $sp$0$i$i = (10684);
      while(1) {
       $81 = load4($sp$0$i$i);
       $cmp$i52$i = ($81>>>0)>($80>>>0);
@@ -7767,7 +8257,7 @@ function _malloc($bytes) {
       $tsize$2617179$i = 0;
      } else {
       $84 = $call37$i;
-      $85 = load4((11112));
+      $85 = load4((10712));
       $sub41$i = (($85) + -1)|0;
       $and42$i = $sub41$i & $84;
       $cmp43$i = ($and42$i|0)==(0);
@@ -7777,13 +8267,13 @@ function _malloc($bytes) {
       $sub50$i = (($and49$i) - ($84))|0;
       $add51$i = $cmp43$i ? 0 : $sub50$i;
       $and11$add51$i = (($add51$i) + ($and11$i))|0;
-      $86 = load4((11068));
+      $86 = load4((10668));
       $add54$i = (($and11$add51$i) + ($86))|0;
       $cmp55$i = ($and11$add51$i>>>0)>($nb$0>>>0);
       $cmp57$i = ($and11$add51$i>>>0)<(2147483647);
       $or$cond$i = $cmp55$i & $cmp57$i;
       if ($or$cond$i) {
-       $87 = load4((11076));
+       $87 = load4((10676));
        $cmp60$i = ($87|0)==(0);
        if (!($cmp60$i)) {
         $cmp63$i = ($add54$i>>>0)<=($86>>>0);
@@ -7829,7 +8319,7 @@ function _malloc($bytes) {
        break L167;
       }
      }
-     $90 = load4((11116));
+     $90 = load4((10716));
      $sub99$i = (($sub$i135) - ($ssize$2$ph$i))|0;
      $add101$i = (($sub99$i) + ($90))|0;
      $neg103$i = (0 - ($90))|0;
@@ -7854,9 +8344,9 @@ function _malloc($bytes) {
      }
     }
    } while(0);
-   $91 = load4((11080));
+   $91 = load4((10680));
    $or$i = $91 | 4;
-   store4((11080),$or$i);
+   store4((10680),$or$i);
    $tsize$4$i = $tsize$2617179$i;
    label = 133;
   } else {
@@ -7892,35 +8382,35 @@ function _malloc($bytes) {
   }
  }
  if ((label|0) == 135) {
-  $92 = load4((11068));
+  $92 = load4((10668));
   $add150$i = (($92) + ($tsize$791$i))|0;
-  store4((11068),$add150$i);
-  $93 = load4((11072));
+  store4((10668),$add150$i);
+  $93 = load4((10672));
   $cmp151$i = ($add150$i>>>0)>($93>>>0);
   if ($cmp151$i) {
-   store4((11072),$add150$i);
+   store4((10672),$add150$i);
   }
-  $94 = load4((10660));
+  $94 = load4((10260));
   $cmp157$i = ($94|0)==(0|0);
   do {
    if ($cmp157$i) {
-    $95 = load4((10652));
+    $95 = load4((10252));
     $cmp159$i = ($95|0)==(0|0);
     $cmp162$i = ($tbase$792$i>>>0)<($95>>>0);
     $or$cond8$i = $cmp159$i | $cmp162$i;
     if ($or$cond8$i) {
-     store4((10652),$tbase$792$i);
+     store4((10252),$tbase$792$i);
     }
-    store4((11084),$tbase$792$i);
-    store4((11088),$tsize$791$i);
-    store4((11096),0);
-    $96 = load4(11108);
-    store4((10672),$96);
-    store4((10668),-1);
+    store4((10684),$tbase$792$i);
+    store4((10688),$tsize$791$i);
+    store4((10696),0);
+    $96 = load4(10708);
+    store4((10272),$96);
+    store4((10268),-1);
     $i$01$i$i = 0;
     while(1) {
      $shl$i49$i = $i$01$i$i << 1;
-     $arrayidx$i50$i = (10676 + ($shl$i49$i<<2)|0);
+     $arrayidx$i50$i = (10276 + ($shl$i49$i<<2)|0);
      $97 = ((($arrayidx$i50$i)) + 12|0);
      store4($97,$arrayidx$i50$i);
      $98 = ((($arrayidx$i50$i)) + 8|0);
@@ -7943,18 +8433,18 @@ function _malloc($bytes) {
     $cond$i42$i = $cmp$i40$i ? 0 : $and3$i41$i;
     $add$ptr4$i43$i = (($tbase$792$i) + ($cond$i42$i)|0);
     $sub5$i44$i = (($sub172$i) - ($cond$i42$i))|0;
-    store4((10660),$add$ptr4$i43$i);
-    store4((10648),$sub5$i44$i);
+    store4((10260),$add$ptr4$i43$i);
+    store4((10248),$sub5$i44$i);
     $or$i45$i = $sub5$i44$i | 1;
     $head$i46$i = ((($add$ptr4$i43$i)) + 4|0);
     store4($head$i46$i,$or$i45$i);
     $add$ptr6$i47$i = (($add$ptr4$i43$i) + ($sub5$i44$i)|0);
     $head7$i48$i = ((($add$ptr6$i47$i)) + 4|0);
     store4($head7$i48$i,40);
-    $101 = load4((11124));
-    store4((10664),$101);
+    $101 = load4((10724));
+    store4((10264),$101);
    } else {
-    $sp$0104$i = (11084);
+    $sp$0104$i = (10684);
     while(1) {
      $102 = load4($sp$0104$i);
      $size188$i = ((($sp$0104$i)) + 4|0);
@@ -7986,7 +8476,7 @@ function _malloc($bytes) {
       if ($or$cond94$i) {
        $add212$i = (($103) + ($tsize$791$i))|0;
        store4($size188$i,$add212$i);
-       $106 = load4((10648));
+       $106 = load4((10248));
        $add$ptr$i31$i = ((($94)) + 8|0);
        $107 = $add$ptr$i31$i;
        $and$i32$i = $107 & 7;
@@ -7997,27 +8487,27 @@ function _malloc($bytes) {
        $add$ptr4$i36$i = (($94) + ($cond$i35$i)|0);
        $add215$i = (($tsize$791$i) - ($cond$i35$i))|0;
        $sub5$i$i = (($106) + ($add215$i))|0;
-       store4((10660),$add$ptr4$i36$i);
-       store4((10648),$sub5$i$i);
+       store4((10260),$add$ptr4$i36$i);
+       store4((10248),$sub5$i$i);
        $or$i$i = $sub5$i$i | 1;
        $head$i37$i = ((($add$ptr4$i36$i)) + 4|0);
        store4($head$i37$i,$or$i$i);
        $add$ptr6$i$i = (($add$ptr4$i36$i) + ($sub5$i$i)|0);
        $head7$i$i = ((($add$ptr6$i$i)) + 4|0);
        store4($head7$i$i,40);
-       $109 = load4((11124));
-       store4((10664),$109);
+       $109 = load4((10724));
+       store4((10264),$109);
        break;
       }
      }
     }
-    $110 = load4((10652));
+    $110 = load4((10252));
     $cmp218$i = ($tbase$792$i>>>0)<($110>>>0);
     if ($cmp218$i) {
-     store4((10652),$tbase$792$i);
+     store4((10252),$tbase$792$i);
     }
     $add$ptr227$i = (($tbase$792$i) + ($tsize$791$i)|0);
-    $sp$1103$i = (11084);
+    $sp$1103$i = (10684);
     while(1) {
      $111 = load4($sp$1103$i);
      $cmp228$i = ($111|0)==($add$ptr227$i|0);
@@ -8072,21 +8562,21 @@ function _malloc($bytes) {
       $cmp20$i$i = ($add$ptr16$i$i|0)==($94|0);
       do {
        if ($cmp20$i$i) {
-        $119 = load4((10648));
+        $119 = load4((10248));
         $add$i$i = (($119) + ($sub18$i$i))|0;
-        store4((10648),$add$i$i);
-        store4((10660),$add$ptr17$i$i);
+        store4((10248),$add$i$i);
+        store4((10260),$add$ptr17$i$i);
         $or22$i$i = $add$i$i | 1;
         $head23$i$i = ((($add$ptr17$i$i)) + 4|0);
         store4($head23$i$i,$or22$i$i);
        } else {
-        $120 = load4((10656));
+        $120 = load4((10256));
         $cmp24$i$i = ($add$ptr16$i$i|0)==($120|0);
         if ($cmp24$i$i) {
-         $121 = load4((10644));
+         $121 = load4((10244));
          $add26$i$i = (($121) + ($sub18$i$i))|0;
-         store4((10644),$add26$i$i);
-         store4((10656),$add$ptr17$i$i);
+         store4((10244),$add26$i$i);
+         store4((10256),$add$ptr17$i$i);
          $or28$i$i = $add26$i$i | 1;
          $head29$i$i = ((($add$ptr17$i$i)) + 4|0);
          store4($head29$i$i,$or28$i$i);
@@ -8112,9 +8602,9 @@ function _malloc($bytes) {
            if ($cmp46$i$i) {
             $shl48$i$i = 1 << $shr$i21$i;
             $neg$i$i = $shl48$i$i ^ -1;
-            $125 = load4(10636);
+            $125 = load4(10236);
             $and49$i$i = $125 & $neg$i$i;
-            store4(10636,$and49$i$i);
+            store4(10236,$and49$i$i);
             break;
            } else {
             $bk67$i$i = ((($123)) + 12|0);
@@ -8182,7 +8672,7 @@ function _malloc($bytes) {
            }
            $index$i25$i = ((($add$ptr16$i$i)) + 28|0);
            $133 = load4($index$i25$i);
-           $arrayidx123$i$i = (10940 + ($133<<2)|0);
+           $arrayidx123$i$i = (10540 + ($133<<2)|0);
            $134 = load4($arrayidx123$i$i);
            $cmp124$i$i = ($add$ptr16$i$i|0)==($134|0);
            $cond1$i$i = ($R$3$i$i|0)==(0|0);
@@ -8194,9 +8684,9 @@ function _malloc($bytes) {
              }
              $shl131$i$i = 1 << $133;
              $neg132$i$i = $shl131$i$i ^ -1;
-             $135 = load4((10640));
+             $135 = load4((10240));
              $and133$i$i = $135 & $neg132$i$i;
-             store4((10640),$and133$i$i);
+             store4((10240),$and133$i$i);
              break L237;
             } else {
              $arrayidx143$i$i = ((($126)) + 16|0);
@@ -8252,14 +8742,14 @@ function _malloc($bytes) {
         $cmp215$i$i = ($qsize$0$i$i>>>0)<(256);
         if ($cmp215$i$i) {
          $shl222$i$i = $shr214$i$i << 1;
-         $arrayidx223$i$i = (10676 + ($shl222$i$i<<2)|0);
-         $140 = load4(10636);
+         $arrayidx223$i$i = (10276 + ($shl222$i$i<<2)|0);
+         $140 = load4(10236);
          $shl226$i$i = 1 << $shr214$i$i;
          $and227$i$i = $140 & $shl226$i$i;
          $tobool228$i$i = ($and227$i$i|0)==(0);
          if ($tobool228$i$i) {
           $or232$i$i = $140 | $shl226$i$i;
-          store4(10636,$or232$i$i);
+          store4(10236,$or232$i$i);
           $$pre$i27$i = ((($arrayidx223$i$i)) + 8|0);
           $$pre$phi$i28$iZ2D = $$pre$i27$i;$F224$0$i$i = $arrayidx223$i$i;
          } else {
@@ -8312,20 +8802,20 @@ function _malloc($bytes) {
           $I252$0$i$i = $add283$i$i;
          }
         } while(0);
-        $arrayidx287$i$i = (10940 + ($I252$0$i$i<<2)|0);
+        $arrayidx287$i$i = (10540 + ($I252$0$i$i<<2)|0);
         $index288$i$i = ((($add$ptr17$i$i)) + 28|0);
         store4($index288$i$i,$I252$0$i$i);
         $child289$i$i = ((($add$ptr17$i$i)) + 16|0);
         $arrayidx290$i$i = ((($child289$i$i)) + 4|0);
         store4($arrayidx290$i$i,0);
         store4($child289$i$i,0);
-        $143 = load4((10640));
+        $143 = load4((10240));
         $shl294$i$i = 1 << $I252$0$i$i;
         $and295$i$i = $143 & $shl294$i$i;
         $tobool296$i$i = ($and295$i$i|0)==(0);
         if ($tobool296$i$i) {
          $or300$i$i = $143 | $shl294$i$i;
-         store4((10640),$or300$i$i);
+         store4((10240),$or300$i$i);
          store4($arrayidx287$i$i,$add$ptr17$i$i);
          $parent301$i$i = ((($add$ptr17$i$i)) + 24|0);
          store4($parent301$i$i,$arrayidx287$i$i);
@@ -8394,7 +8884,7 @@ function _malloc($bytes) {
       STACKTOP = sp;return ($retval$0|0);
      }
     }
-    $sp$0$i$i$i = (11084);
+    $sp$0$i$i$i = (10684);
     while(1) {
      $148 = load4($sp$0$i$i$i);
      $cmp$i$i$i = ($148>>>0)>($94>>>0);
@@ -8435,23 +8925,23 @@ function _malloc($bytes) {
     $cond$i$i$i = $cmp$i3$i$i ? 0 : $and3$i$i$i;
     $add$ptr4$i$i$i = (($tbase$792$i) + ($cond$i$i$i)|0);
     $sub5$i$i$i = (($sub16$i$i) - ($cond$i$i$i))|0;
-    store4((10660),$add$ptr4$i$i$i);
-    store4((10648),$sub5$i$i$i);
+    store4((10260),$add$ptr4$i$i$i);
+    store4((10248),$sub5$i$i$i);
     $or$i$i$i = $sub5$i$i$i | 1;
     $head$i$i$i = ((($add$ptr4$i$i$i)) + 4|0);
     store4($head$i$i$i,$or$i$i$i);
     $add$ptr6$i$i$i = (($add$ptr4$i$i$i) + ($sub5$i$i$i)|0);
     $head7$i$i$i = ((($add$ptr6$i$i$i)) + 4|0);
     store4($head7$i$i$i,40);
-    $155 = load4((11124));
-    store4((10664),$155);
+    $155 = load4((10724));
+    store4((10264),$155);
     $head$i$i = ((($cond13$i$i)) + 4|0);
     store4($head$i$i,27);
-    ; store8($add$ptr14$i$i,load8((11084),4),4); store8($add$ptr14$i$i+8 | 0,load8((11084)+8 | 0,4),4);
-    store4((11084),$tbase$792$i);
-    store4((11088),$tsize$791$i);
-    store4((11096),0);
-    store4((11092),$add$ptr14$i$i);
+    ; store8($add$ptr14$i$i,load8((10684),4),4); store8($add$ptr14$i$i+8 | 0,load8((10684)+8 | 0,4),4);
+    store4((10684),$tbase$792$i);
+    store4((10688),$tsize$791$i);
+    store4((10696),0);
+    store4((10692),$add$ptr14$i$i);
     $156 = $add$ptr15$i$i;
     while(1) {
      $add$ptr24$i$i = ((($156)) + 4|0);
@@ -8480,14 +8970,14 @@ function _malloc($bytes) {
      $cmp36$i$i = ($sub$ptr$sub$i$i>>>0)<(256);
      if ($cmp36$i$i) {
       $shl$i$i = $shr$i$i << 1;
-      $arrayidx$i$i = (10676 + ($shl$i$i<<2)|0);
-      $158 = load4(10636);
+      $arrayidx$i$i = (10276 + ($shl$i$i<<2)|0);
+      $158 = load4(10236);
       $shl39$i$i = 1 << $shr$i$i;
       $and40$i$i = $158 & $shl39$i$i;
       $tobool$i$i = ($and40$i$i|0)==(0);
       if ($tobool$i$i) {
        $or44$i$i = $158 | $shl39$i$i;
-       store4(10636,$or44$i$i);
+       store4(10236,$or44$i$i);
        $$pre$i$i = ((($arrayidx$i$i)) + 8|0);
        $$pre$phi$i$iZ2D = $$pre$i$i;$F$0$i$i = $arrayidx$i$i;
       } else {
@@ -8538,19 +9028,19 @@ function _malloc($bytes) {
        $I57$0$i$i = $add88$i$i;
       }
      }
-     $arrayidx91$i$i = (10940 + ($I57$0$i$i<<2)|0);
+     $arrayidx91$i$i = (10540 + ($I57$0$i$i<<2)|0);
      $index$i$i = ((($94)) + 28|0);
      store4($index$i$i,$I57$0$i$i);
      $arrayidx92$i$i = ((($94)) + 20|0);
      store4($arrayidx92$i$i,0);
      store4($add$ptr81$i$i,0);
-     $161 = load4((10640));
+     $161 = load4((10240));
      $shl95$i$i = 1 << $I57$0$i$i;
      $and96$i$i = $161 & $shl95$i$i;
      $tobool97$i$i = ($and96$i$i|0)==(0);
      if ($tobool97$i$i) {
       $or101$i$i = $161 | $shl95$i$i;
-      store4((10640),$or101$i$i);
+      store4((10240),$or101$i$i);
       store4($arrayidx91$i$i,$94);
       $parent$i$i = ((($94)) + 24|0);
       store4($parent$i$i,$arrayidx91$i$i);
@@ -8615,14 +9105,14 @@ function _malloc($bytes) {
     }
    }
   } while(0);
-  $166 = load4((10648));
+  $166 = load4((10248));
   $cmp257$i = ($166>>>0)>($nb$0>>>0);
   if ($cmp257$i) {
    $sub260$i = (($166) - ($nb$0))|0;
-   store4((10648),$sub260$i);
-   $167 = load4((10660));
+   store4((10248),$sub260$i);
+   $167 = load4((10260));
    $add$ptr262$i = (($167) + ($nb$0)|0);
-   store4((10660),$add$ptr262$i);
+   store4((10260),$add$ptr262$i);
    $or264$i = $sub260$i | 1;
    $head265$i = ((($add$ptr262$i)) + 4|0);
    store4($head265$i,$or264$i);
@@ -8634,7 +9124,7 @@ function _malloc($bytes) {
    STACKTOP = sp;return ($retval$0|0);
   }
  }
- store4(11256,12);
+ store4(10856,12);
  $retval$0 = 0;
  STACKTOP = sp;return ($retval$0|0);
 }
@@ -8660,7 +9150,7 @@ function _free($mem) {
   return;
  }
  $add$ptr = ((($mem)) + -8|0);
- $0 = load4((10652));
+ $0 = load4((10252));
  $head4 = ((($mem)) + -4|0);
  $1 = load4($head4);
  $and5 = $1 & -8;
@@ -8682,7 +9172,7 @@ function _free($mem) {
    if ($cmp18) {
     return;
    }
-   $3 = load4((10656));
+   $3 = load4((10256));
    $cmp22 = ($add$ptr16|0)==($3|0);
    if ($cmp22) {
     $head209 = ((($add$ptr6)) + 4|0);
@@ -8697,7 +9187,7 @@ function _free($mem) {
     $head216 = ((($add$ptr16)) + 4|0);
     $or = $add17 | 1;
     $and215 = $20 & -2;
-    store4((10644),$add17);
+    store4((10244),$add17);
     store4($head209,$and215);
     store4($head216,$or);
     store4($add$ptr217,$add17);
@@ -8714,9 +9204,9 @@ function _free($mem) {
     if ($cmp42) {
      $shl45 = 1 << $shr;
      $neg = $shl45 ^ -1;
-     $6 = load4(10636);
+     $6 = load4(10236);
      $and46 = $6 & $neg;
-     store4(10636,$and46);
+     store4(10236,$and46);
      $21 = $add$ptr16;$p$1 = $add$ptr16;$psize$1 = $add17;
      break;
     } else {
@@ -8786,7 +9276,7 @@ function _free($mem) {
    } else {
     $index = ((($add$ptr16)) + 28|0);
     $14 = load4($index);
-    $arrayidx130 = (10940 + ($14<<2)|0);
+    $arrayidx130 = (10540 + ($14<<2)|0);
     $15 = load4($arrayidx130);
     $cmp131 = ($add$ptr16|0)==($15|0);
     $cond255 = ($R$3|0)==(0|0);
@@ -8795,9 +9285,9 @@ function _free($mem) {
      if ($cond255) {
       $shl138 = 1 << $14;
       $neg139 = $shl138 ^ -1;
-      $16 = load4((10640));
+      $16 = load4((10240));
       $and140 = $16 & $neg139;
-      store4((10640),$and140);
+      store4((10240),$and140);
       $21 = $add$ptr16;$p$1 = $add$ptr16;$psize$1 = $add17;
       break;
      }
@@ -8855,14 +9345,14 @@ function _free($mem) {
  $and240 = $22 & 2;
  $tobool241 = ($and240|0)==(0);
  if ($tobool241) {
-  $23 = load4((10660));
+  $23 = load4((10260));
   $cmp243 = ($add$ptr6|0)==($23|0);
-  $24 = load4((10656));
+  $24 = load4((10256));
   if ($cmp243) {
-   $25 = load4((10648));
+   $25 = load4((10248));
    $add246 = (($25) + ($psize$1))|0;
-   store4((10648),$add246);
-   store4((10660),$p$1);
+   store4((10248),$add246);
+   store4((10260),$p$1);
    $or247 = $add246 | 1;
    $head248 = ((($p$1)) + 4|0);
    store4($head248,$or247);
@@ -8870,16 +9360,16 @@ function _free($mem) {
    if (!($cmp249)) {
     return;
    }
-   store4((10656),0);
-   store4((10644),0);
+   store4((10256),0);
+   store4((10244),0);
    return;
   }
   $cmp255 = ($add$ptr6|0)==($24|0);
   if ($cmp255) {
-   $26 = load4((10644));
+   $26 = load4((10244));
    $add258 = (($26) + ($psize$1))|0;
-   store4((10644),$add258);
-   store4((10656),$21);
+   store4((10244),$add258);
+   store4((10256),$21);
    $or259 = $add258 | 1;
    $head260 = ((($p$1)) + 4|0);
    store4($head260,$or259);
@@ -8901,9 +9391,9 @@ function _free($mem) {
     if ($cmp296) {
      $shl299 = 1 << $shr268;
      $neg300 = $shl299 ^ -1;
-     $29 = load4(10636);
+     $29 = load4(10236);
      $and301 = $29 & $neg300;
-     store4(10636,$and301);
+     store4(10236,$and301);
      break;
     } else {
      $bk321 = ((($27)) + 12|0);
@@ -8969,7 +9459,7 @@ function _free($mem) {
     if (!($cmp395)) {
      $index399 = ((($add$ptr6)) + 28|0);
      $37 = load4($index399);
-     $arrayidx400 = (10940 + ($37<<2)|0);
+     $arrayidx400 = (10540 + ($37<<2)|0);
      $38 = load4($arrayidx400);
      $cmp401 = ($add$ptr6|0)==($38|0);
      $cond256 = ($R332$3|0)==(0|0);
@@ -8978,9 +9468,9 @@ function _free($mem) {
       if ($cond256) {
        $shl408 = 1 << $37;
        $neg409 = $shl408 ^ -1;
-       $39 = load4((10640));
+       $39 = load4((10240));
        $and410 = $39 & $neg409;
-       store4((10640),$and410);
+       store4((10240),$and410);
        break;
       }
      } else {
@@ -9022,10 +9512,10 @@ function _free($mem) {
   store4($head481,$or480);
   $add$ptr482 = (($21) + ($add267)|0);
   store4($add$ptr482,$add267);
-  $43 = load4((10656));
+  $43 = load4((10256));
   $cmp484 = ($p$1|0)==($43|0);
   if ($cmp484) {
-   store4((10644),$add267);
+   store4((10244),$add267);
    return;
   } else {
    $psize$2 = $add267;
@@ -9044,14 +9534,14 @@ function _free($mem) {
  $cmp502 = ($psize$2>>>0)<(256);
  if ($cmp502) {
   $shl508 = $shr501 << 1;
-  $arrayidx509 = (10676 + ($shl508<<2)|0);
-  $44 = load4(10636);
+  $arrayidx509 = (10276 + ($shl508<<2)|0);
+  $44 = load4(10236);
   $shl511 = 1 << $shr501;
   $and512 = $44 & $shl511;
   $tobool513 = ($and512|0)==(0);
   if ($tobool513) {
    $or516 = $44 | $shl511;
-   store4(10636,$or516);
+   store4(10236,$or516);
    $$pre = ((($arrayidx509)) + 8|0);
    $$pre$phiZ2D = $$pre;$F510$0 = $arrayidx509;
   } else {
@@ -9102,21 +9592,21 @@ function _free($mem) {
    $I534$0 = $add564;
   }
  }
- $arrayidx567 = (10940 + ($I534$0<<2)|0);
+ $arrayidx567 = (10540 + ($I534$0<<2)|0);
  $index568 = ((($p$1)) + 28|0);
  store4($index568,$I534$0);
  $child569 = ((($p$1)) + 16|0);
  $arrayidx570 = ((($p$1)) + 20|0);
  store4($arrayidx570,0);
  store4($child569,0);
- $47 = load4((10640));
+ $47 = load4((10240));
  $shl573 = 1 << $I534$0;
  $and574 = $47 & $shl573;
  $tobool575 = ($and574|0)==(0);
  do {
   if ($tobool575) {
    $or578 = $47 | $shl573;
-   store4((10640),$or578);
+   store4((10240),$or578);
    store4($arrayidx567,$p$1);
    $parent579 = ((($p$1)) + 24|0);
    store4($parent579,$arrayidx567);
@@ -9179,12 +9669,12 @@ function _free($mem) {
    }
   }
  } while(0);
- $52 = load4((10668));
+ $52 = load4((10268));
  $dec = (($52) + -1)|0;
- store4((10668),$dec);
+ store4((10268),$dec);
  $cmp640 = ($dec|0)==(0);
  if ($cmp640) {
-  $sp$0$in$i = (11092);
+  $sp$0$in$i = (10692);
  } else {
   return;
  }
@@ -9198,13 +9688,13 @@ function _free($mem) {
    $sp$0$in$i = $next4$i;
   }
  }
- store4((10668),-1);
+ store4((10268),-1);
  return;
 }
 function _emscripten_get_global_libc() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (11132|0);
+ return (10732|0);
 }
 function ___stdio_close($f) {
  $f = $f|0;
@@ -9373,7 +9863,7 @@ function ___syscall_ret($r) {
  $cmp = ($r>>>0)>(4294963200);
  if ($cmp) {
   $sub = (0 - ($r))|0;
-  store4(11256,$sub);
+  store4(10856,$sub);
   $retval$0 = -1;
  } else {
   $retval$0 = $r;
@@ -9563,7 +10053,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     $sub = (2147483647 - ($cnt$0))|0;
     $cmp1 = ($l$0|0)>($sub|0);
     if ($cmp1) {
-     store4(11256,75);
+     store4(10856,75);
      $cnt$1 = -1;
      break;
     } else {
@@ -9849,7 +10339,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
    $36 = load1($35);
    $conv172 = $36 << 24 >> 24;
    $sub173 = (($conv172) + -65)|0;
-   $arrayidx174 = ((6625 + (($st$0*58)|0)|0) + ($sub173)|0);
+   $arrayidx174 = ((6696 + (($st$0*58)|0)|0) + ($sub173)|0);
    $37 = load1($arrayidx174);
    $conv175 = $37&255;
    $sub176 = (($conv175) + -1)|0;
@@ -10000,7 +10490,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     $add270 = (($sub$ptr$sub269) + 1)|0;
     $50 = $tobool265 | $cmp271;
     $p$0$p$0$add270 = $50 ? $p$0 : $add270;
-    $54 = $49;$a$0 = $call263;$fl$4 = $fl$1$and220;$p$2 = $p$0$p$0$add270;$pl$1 = 0;$prefix$1 = 7089;
+    $54 = $49;$a$0 = $call263;$fl$4 = $fl$1$and220;$p$2 = $p$0$p$0$add270;$pl$1 = 0;$prefix$1 = 7160;
     label = 67;
     break;
    }
@@ -10010,7 +10500,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     if ($cmp283) {
      $sub287 = i64_sub(i64_const(0,0),$51);
      store8($arg,$sub287);
-     $53 = $sub287;$pl$0 = 1;$prefix$0 = 7089;
+     $53 = $sub287;$pl$0 = 1;$prefix$0 = 7160;
      label = 66;
      break L71;
     } else {
@@ -10018,8 +10508,8 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
      $tobool291 = ($and290|0)==(0);
      $and295 = $fl$1$and220 & 1;
      $tobool296 = ($and295|0)==(0);
-     $$ = $tobool296 ? 7089 : (7091);
-     $$$ = $tobool291 ? $$ : (7090);
+     $$ = $tobool296 ? 7160 : (7162);
+     $$$ = $tobool291 ? $$ : (7161);
      $52 = $fl$1$and220 & 2049;
      $narrow = ($52|0)!=(0);
      $$194$ = $narrow&1;
@@ -10031,7 +10521,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
    }
    case 117:  {
     $$pre250 = load8($arg);
-    $53 = $$pre250;$pl$0 = 0;$prefix$0 = 7089;
+    $53 = $$pre250;$pl$0 = 0;$prefix$0 = 7160;
     label = 66;
     break;
    }
@@ -10039,11 +10529,11 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     $55 = load8($arg);
     $conv340 = i64_trunc($55)&255;
     store1($add$ptr341,$conv340);
-    $a$2 = $add$ptr341;$fl$6 = $and220;$p$5 = 1;$pl$2 = 0;$prefix$2 = 7089;$z$2 = $add$ptr206;
+    $a$2 = $add$ptr341;$fl$6 = $and220;$p$5 = 1;$pl$2 = 0;$prefix$2 = 7160;$z$2 = $add$ptr206;
     break;
    }
    case 109:  {
-    $56 = load4(11256);
+    $56 = load4(10856);
     $call346 = (_strerror($56)|0);
     $a$1 = $call346;
     label = 71;
@@ -10052,7 +10542,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
    case 115:  {
     $57 = load4($arg);
     $tobool350 = ($57|0)!=(0|0);
-    $cond355 = $tobool350 ? $57 : 9153;
+    $cond355 = $tobool350 ? $57 : 9224;
     $a$1 = $cond355;
     label = 71;
     break;
@@ -10088,7 +10578,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     break;
    }
    default: {
-    $a$2 = $1;$fl$6 = $fl$1$and220;$p$5 = $p$0;$pl$2 = 0;$prefix$2 = 7089;$z$2 = $add$ptr206;
+    $a$2 = $1;$fl$6 = $fl$1$and220;$p$5 = $p$0;$pl$2 = 0;$prefix$2 = 7160;$z$2 = $add$ptr206;
    }
    }
   } while(0);
@@ -10103,8 +10593,8 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     $tobool256 = ($and255|0)==(0);
     $or$cond193 = $tobool256 | $tobool253;
     $shr = $t$1 >> 4;
-    $add$ptr258 = (7089 + ($shr)|0);
-    $$add$ptr258 = $or$cond193 ? 7089 : $add$ptr258;
+    $add$ptr258 = (7160 + ($shr)|0);
+    $$add$ptr258 = $or$cond193 ? 7160 : $add$ptr258;
     $$197 = $or$cond193 ? 0 : 2;
     $54 = $48;$a$0 = $call251;$fl$4 = $fl$3;$p$2 = $p$1;$pl$1 = $$197;$prefix$1 = $$add$ptr258;
     label = 67;
@@ -10125,7 +10615,7 @@ function _printf_core($f,$fmt,$ap,$nl_arg,$nl_type) {
     $add$ptr360 = (($a$1) + ($p$0)|0);
     $p$3 = $tobool358 ? $p$0 : $sub$ptr$sub364;
     $z$1 = $tobool358 ? $add$ptr360 : $call357;
-    $a$2 = $a$1;$fl$6 = $and220;$p$5 = $p$3;$pl$2 = 0;$prefix$2 = 7089;$z$2 = $z$1;
+    $a$2 = $a$1;$fl$6 = $and220;$p$5 = $p$3;$pl$2 = 0;$prefix$2 = 7160;$z$2 = $z$1;
    }
    else if ((label|0) == 75) {
     label = 0;
@@ -10594,7 +11084,7 @@ function _fmt_x($x,$s,$lower) {
   while(1) {
    $0 = i64_trunc($x$addr$07);
    $idxprom = $0 & 15;
-   $arrayidx = (7130 + ($idxprom)|0);
+   $arrayidx = (7201 + ($idxprom)|0);
    $1 = load1($arrayidx);
    $conv4 = $1&255;
    $or = $conv4 | $lower;
@@ -10919,14 +11409,14 @@ function _fmt_fp($f,$y,$w,$p,$fl,$t) {
  $tobool5 = i64_slt($call2,i64_const(0,0));
  if ($tobool5) {
   $sub = -$y;
-  $pl$0 = 1;$prefix$0 = 7099;$y$addr$0 = $sub;
+  $pl$0 = 1;$prefix$0 = 7170;$y$addr$0 = $sub;
  } else {
   $and = $fl & 2048;
   $tobool9 = ($and|0)==(0);
   $and12 = $fl & 1;
   $tobool13 = ($and12|0)==(0);
-  $$ = $tobool13 ? (7100) : (7105);
-  $$$ = $tobool9 ? $$ : (7102);
+  $$ = $tobool13 ? (7171) : (7176);
+  $$$ = $tobool9 ? $$ : (7173);
   $0 = $fl & 2049;
   $narrow = ($0|0)!=(0);
   $$394$ = $narrow&1;
@@ -11019,7 +11509,7 @@ function _fmt_fp($f,$y,$w,$p,$fl,$t) {
     $s$0 = $buf;$y$addr$2 = $y$addr$1;
     while(1) {
      $conv116 = (~~(($y$addr$2)));
-     $arrayidx117 = (7130 + ($conv116)|0);
+     $arrayidx117 = (7201 + ($conv116)|0);
      $8 = load1($arrayidx117);
      $conv118393 = $8&255;
      $or120 = $conv118393 | $and62;
@@ -11626,7 +12116,7 @@ function _fmt_fp($f,$y,$w,$p,$fl,$t) {
     }
     $41 = ($33|0)==(0);
     if (!($41)) {
-     _out($f,10495,1);
+     _out($f,10095,1);
     }
     $cmp707414 = ($incdec$ptr698>>>0)<($z$7>>>0);
     $cmp710415 = ($p$addr$3|0)>(0);
@@ -11709,7 +12199,7 @@ function _fmt_fp($f,$y,$w,$p,$fl,$t) {
          $s753$2 = $incdec$ptr776;
          break;
         }
-        _out($f,10495,1);
+        _out($f,10095,1);
         $s753$2 = $incdec$ptr776;
        } else {
         $cmp770423 = ($s753$0>>>0)>($buf>>>0);
@@ -11766,9 +12256,9 @@ function _fmt_fp($f,$y,$w,$p,$fl,$t) {
   } else {
    $and36 = $t & 32;
    $tobool37 = ($and36|0)!=(0);
-   $cond = $tobool37 ? 7118 : 7122;
+   $cond = $tobool37 ? 7189 : 7193;
    $cmp38 = ($y$addr$0 != $y$addr$0) | (0.0 != 0.0);
-   $cond43 = $tobool37 ? 9038 : 7126;
+   $cond43 = $tobool37 ? 9109 : 7197;
    $s35$0 = $cmp38 ? $cond43 : $cond;
    $add = (($pl$0) + 3)|0;
    $and45 = $fl & -65537;
@@ -11872,7 +12362,7 @@ function _wcrtomb($s,$wc) {
      $retval$0 = 1;
      break;
     } else {
-     store4(11256,84);
+     store4(10856,84);
      $retval$0 = -1;
      break;
     }
@@ -11941,7 +12431,7 @@ function _wcrtomb($s,$wc) {
     $retval$0 = 4;
     break;
    } else {
-    store4(11256,84);
+    store4(10856,84);
     $retval$0 = -1;
     break;
    }
@@ -11957,7 +12447,7 @@ function ___strerror_l($e,$loc) {
  sp = STACKTOP;
  $i$012 = 0;
  while(1) {
-  $arrayidx = (7146 + ($i$012)|0);
+  $arrayidx = (7217 + ($i$012)|0);
   $0 = load1($arrayidx);
   $conv = $0&255;
   $cmp = ($conv|0)==($e|0);
@@ -11968,7 +12458,7 @@ function ___strerror_l($e,$loc) {
   $inc = (($i$012) + 1)|0;
   $tobool = ($inc|0)==(87);
   if ($tobool) {
-   $i$111 = 87;$s$010 = 7234;
+   $i$111 = 87;$s$010 = 7305;
    label = 5;
    break;
   } else {
@@ -11978,9 +12468,9 @@ function ___strerror_l($e,$loc) {
  if ((label|0) == 2) {
   $tobool59 = ($i$012|0)==(0);
   if ($tobool59) {
-   $s$0$lcssa = 7234;
+   $s$0$lcssa = 7305;
   } else {
-   $i$111 = $i$012;$s$010 = 7234;
+   $i$111 = $i$012;$s$010 = 7305;
    label = 5;
   }
  }
@@ -12502,7 +12992,7 @@ function ___loc_is_allocated($loc) {
  var $cmp = 0, $cmp1 = 0, $cmp1$ = 0, $land$ext = 0, $or$cond = 0, $tobool = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $tobool = ($loc|0)!=(0|0);
- $cmp = ($loc|0)!=(11196|0);
+ $cmp = ($loc|0)!=(10796|0);
  $or$cond = $tobool & $cmp;
  $cmp1 = ($loc|0)!=(2116|0);
  $cmp1$ = $cmp1 & $or$cond;
@@ -12521,7 +13011,7 @@ function _mbrtowc($wc,$src,$n,$st) {
  STACKTOP = STACKTOP + 16|0;
  $dummy = sp;
  $tobool = ($st|0)==(0|0);
- $$st = $tobool ? 11220 : $st;
+ $$st = $tobool ? 10820 : $st;
  $0 = load4($$st);
  $tobool1 = ($src|0)==(0|0);
  L1: do {
@@ -12639,7 +13129,7 @@ function _mbrtowc($wc,$src,$n,$st) {
  } while(0);
  if ((label|0) == 17) {
   store4($$st,0);
-  store4(11256,84);
+  store4(10856,84);
   $retval$0 = -1;
  }
  STACKTOP = sp;return ($retval$0|0);
@@ -12661,7 +13151,7 @@ function ___get_locale($cat,$val) {
  $tobool = ($0<<24>>24)==(0);
  do {
   if ($tobool) {
-   $call = (_getenv((9114|0))|0);
+   $call = (_getenv((9185|0))|0);
    $tobool1 = ($call|0)==(0|0);
    if (!($tobool1)) {
     $1 = load1($call);
@@ -12671,7 +13161,7 @@ function ___get_locale($cat,$val) {
      break;
     }
    }
-   $arraydecay = (9042 + (($cat*12)|0)|0);
+   $arraydecay = (9113 + (($cat*12)|0)|0);
    $call3 = (_getenv(($arraydecay|0))|0);
    $tobool4 = ($call3|0)==(0|0);
    if (!($tobool4)) {
@@ -12682,7 +13172,7 @@ function ___get_locale($cat,$val) {
      break;
     }
    }
-   $call9 = (_getenv((9121|0))|0);
+   $call9 = (_getenv((9192|0))|0);
    $tobool10 = ($call9|0)==(0|0);
    if (!($tobool10)) {
     $3 = load1($call9);
@@ -12692,7 +13182,7 @@ function ___get_locale($cat,$val) {
      break;
     }
    }
-   $val$addr$1 = 9126;
+   $val$addr$1 = 9197;
   } else {
    $val$addr$1 = $val;
   }
@@ -12722,7 +13212,7 @@ function ___get_locale($cat,$val) {
  $5 = load1($val$addr$1);
  $cmp25 = ($5<<24>>24)==(46);
  if ($cmp25) {
-  $val$addr$290 = 9126;
+  $val$addr$290 = 9197;
   label = 15;
  } else {
   $arrayidx28 = (($val$addr$1) + ($n$0$lcssa)|0);
@@ -12738,7 +13228,7 @@ function ___get_locale($cat,$val) {
     label = 16;
    }
   } else {
-   $val$addr$290 = 9126;
+   $val$addr$290 = 9197;
    label = 15;
   }
  }
@@ -12756,19 +13246,19 @@ function ___get_locale($cat,$val) {
  }
  L22: do {
   if ((label|0) == 16) {
-   $call41 = (_strcmp($val$addr$291,9126)|0);
+   $call41 = (_strcmp($val$addr$291,9197)|0);
    $tobool42 = ($call41|0)==(0);
    if ($tobool42) {
     $val$addr$292 = $val$addr$291;
     label = 18;
    } else {
-    $call44 = (_strcmp($val$addr$291,9134)|0);
+    $call44 = (_strcmp($val$addr$291,9205)|0);
     $lnot = ($call44|0)==(0);
     if ($lnot) {
      $val$addr$292 = $val$addr$291;
      label = 18;
     } else {
-     $9 = load4(11224);
+     $9 = load4(10824);
      $tobool6183 = ($9|0)==(0|0);
      if (!($tobool6183)) {
       $p$084 = $9;
@@ -12790,8 +13280,8 @@ function ___get_locale($cat,$val) {
        }
       }
      }
-     ___lock((11228|0));
-     $11 = load4(11224);
+     ___lock((10828|0));
+     $11 = load4(10824);
      $tobool7181 = ($11|0)==(0|0);
      L32: do {
       if (!($tobool7181)) {
@@ -12812,16 +13302,16 @@ function ___get_locale($cat,$val) {
          $p$182 = $12;
         }
        }
-       ___unlock((11228|0));
+       ___unlock((10828|0));
        $retval$0 = $p$182;
        break L22;
       }
      } while(0);
-     $13 = load4((11140));
+     $13 = load4((10740));
      $tobool82 = ($13|0)==(0);
      L39: do {
       if ($tobool82) {
-       $call84 = (_getenv((9140|0))|0);
+       $call84 = (_getenv((9211|0))|0);
        $tobool86 = ($call84|0)==(0|0);
        if ($tobool86) {
         label = 41;
@@ -12890,10 +13380,10 @@ function ___get_locale($cat,$val) {
           _memcpy(($name118|0),($val$addr$291|0),($n$0$lcssa|0))|0;
           $arrayidx121 = (($name118) + ($n$0$lcssa)|0);
           store1($arrayidx121,0);
-          $17 = load4(11224);
+          $17 = load4(10824);
           $next122 = ((($call111)) + 24|0);
           store4($next122,$17);
-          store4(11224,$call111);
+          store4(10824,$call111);
           $new$4 = $call111;
           break;
          }
@@ -12916,10 +13406,10 @@ function ___get_locale($cat,$val) {
        _memcpy(($name141|0),($val$addr$291|0),($n$0$lcssa|0))|0;
        $arrayidx144 = (($name141) + ($n$0$lcssa)|0);
        store1($arrayidx144,0);
-       $20 = load4(11224);
+       $20 = load4(10824);
        $next145 = ((($call136)) + 24|0);
        store4($next145,$20);
-       store4(11224,$call136);
+       store4(10824,$call136);
        $new$4 = $call136;
       }
      }
@@ -12927,7 +13417,7 @@ function ___get_locale($cat,$val) {
      $cmp149 = ($cat|0)==(0);
      $or$cond = $cmp149 & $tobool147;
      $__c_dot_utf8$new$4 = $or$cond ? 2068 : $new$4;
-     ___unlock((11228|0));
+     ___unlock((10828|0));
      $retval$0 = $__c_dot_utf8$new$4;
     }
    }
@@ -12971,7 +13461,7 @@ function ___newlocale($mask,$name,$loc) {
     $tobool12 = ($and11|0)!=(0);
     $brmerge = $tobool9 | $tobool12;
     if ($brmerge) {
-     $cond = $tobool12 ? $name : 11268;
+     $cond = $tobool12 ? $name : 10868;
      $call19 = (___get_locale($i$126,$cond)|0);
      $lm$0 = $call19;
     } else {
@@ -12994,7 +13484,7 @@ function ___newlocale($mask,$name,$loc) {
    }
    switch ($j$0$inc23|0) {
    case 0:  {
-    $retval$0 = 11196;
+    $retval$0 = 10796;
     break L1;
     break;
    }
@@ -13043,10 +13533,10 @@ function ___uselocale($new) {
  $tobool = ($new|0)==(0|0);
  if (!($tobool)) {
   $cmp = ($new|0)==((-1)|0);
-  $cond = $cmp ? (11172) : $new;
+  $cond = $cmp ? (10772) : $new;
   store4(2796,$cond);
  }
- $cmp2 = ($0|0)==((11172)|0);
+ $cmp2 = ($0|0)==((10772)|0);
  $cond6 = $cmp2 ? (-1) : $0;
  return ($cond6|0);
 }
@@ -13149,7 +13639,7 @@ function _mbrlen($s,$n,$st) {
  var $call = 0, $cond = 0, $tobool = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $tobool = ($st|0)!=(0|0);
- $cond = $tobool ? $st : 11236;
+ $cond = $tobool ? $st : 10836;
  $call = (_mbrtowc(0,$s,$n,$cond)|0);
  return ($call|0);
 }
@@ -13728,7 +14218,7 @@ function _mbsrtowcs($ws,$src,$wn,$st) {
     $s$1194 = $s$11126;$ws$addr$593 = $ws$addr$5125;
    }
   }
-  store4(11256,84);
+  store4(10856,84);
   $tobool215 = ($ws$addr$593|0)==(0|0);
   if ($tobool215) {
    $retval$0 = -1;
@@ -14089,29 +14579,32 @@ function __ZNSt3__211char_traitsIcE6assignERcRKc($__c1,$__c2$val) {
  store1($__c1,$__c2$val);
  return;
 }
-function __ZNSt3__211char_traitsIwE6assignERwRKw($__c1,$__c2$val) {
- $__c1 = $__c1|0;
- $__c2$val = $__c2$val|0;
- var label = 0, sp = 0;
- sp = STACKTOP;
- store4($__c1,$__c2$val);
- return;
-}
 function __ZNSt3__26__clocEv() {
  var $0 = 0, $1 = 0, $2 = 0, $call = 0, $guard$uninitialized = 0, $tobool = 0, label = 0, sp = 0;
  sp = STACKTOP;
- $0 = load1(10624);
+ $0 = load1(10224);
  $guard$uninitialized = ($0<<24>>24)==(0);
  if ($guard$uninitialized) {
   $1 = (___cxa_guard_acquire()|0);
   $tobool = ($1|0)==(0);
   if (!($tobool)) {
-   $call = (___newlocale(2147483647,9182,0)|0);
-   store4(11240,$call);
+   $call = (___newlocale(2147483647,9253,0)|0);
+   store4(10840,$call);
   }
  }
- $2 = load4(11240);
+ $2 = load4(10840);
  return ($2|0);
+}
+function __ZNSt3__211char_traitsIcE6assignEPcjc($__s,$__n) {
+ $__s = $__s|0;
+ $__n = $__n|0;
+ var $cmp = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ $cmp = ($__n|0)==(0);
+ if (!($cmp)) {
+  _memset(($__s|0),0,($__n|0))|0;
+ }
+ return ($__s|0);
 }
 function __ZNSt3__211char_traitsIcE6lengthEPKc($__s) {
  $__s = $__s|0;
@@ -14119,6 +14612,18 @@ function __ZNSt3__211char_traitsIcE6lengthEPKc($__s) {
  sp = STACKTOP;
  $call = (_strlen($__s)|0);
  return ($call|0);
+}
+function __ZNSt3__211char_traitsIcE4copyEPcPKcj($__s1,$__s2,$__n) {
+ $__s1 = $__s1|0;
+ $__s2 = $__s2|0;
+ $__n = $__n|0;
+ var $cmp = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ $cmp = ($__n|0)==(0);
+ if (!($cmp)) {
+  _memcpy(($__s1|0),($__s2|0),($__n|0))|0;
+ }
+ return ($__s1|0);
 }
 function __ZNSt3__2L19utf8_to_ucs4_lengthEPKhS1_jmNS_12codecvt_modeE($frm,$frm_end,$mx,$Maxcode,$mode) {
  $frm = $frm|0;
@@ -15608,7 +16113,7 @@ function __ZNKSt3__214__codecvt_utf8IwE13do_max_lengthEv($this) {
 function __ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- ___assert_fail((9269|0),(9292|0),304,(9540|0));
+ _abort();
  // unreachable;
 }
 function __ZNSt3__27codecvtIwc11__mbstate_tEC2Ej($this) {
@@ -15627,16 +16132,16 @@ function __ZNSt3__211char_traitsIcE7compareEPKcS3_j($__s1,$__s2,$__n) {
  $__s1 = $__s1|0;
  $__s2 = $__s2|0;
  $__n = $__n|0;
- var $call = 0, $cmp = 0, $cond = 0, label = 0, sp = 0;
+ var $call = 0, $cmp = 0, $retval$0 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $cmp = ($__n|0)==(0);
  if ($cmp) {
-  $cond = 0;
+  $retval$0 = 0;
  } else {
   $call = (_memcmp($__s1,$__s2,$__n)|0);
-  $cond = $call;
+  $retval$0 = $call;
  }
- return ($cond|0);
+ return ($retval$0|0);
 }
 function __Znwj($size) {
  $size = $size|0;
@@ -15689,168 +16194,91 @@ function __ZNSt3__218__libcpp_refstringC2EPKc($this,$msg) {
  store4($cap,$call);
  $count = ((($call3)) + 8|0);
  store4($count,0);
- $call5 = (__ZNSt3__218__libcpp_refstring13data_from_repEPNS0_9_Rep_baseE($call3)|0);
+ $call5 = (__ZNSt3__215__refstring_imp12_GLOBAL__N_113data_from_repEPNS1_9_Rep_baseE($call3)|0);
  $add6 = (($call) + 1)|0;
  _memcpy(($call5|0),($msg|0),($add6|0))|0;
  store4($this,$call5);
  return;
 }
-function __ZNSt3__218__libcpp_refstring13data_from_repEPNS0_9_Rep_baseE($rep) {
+function __ZNSt3__215__refstring_imp12_GLOBAL__N_113data_from_repEPNS1_9_Rep_baseE($rep) {
  $rep = $rep|0;
  var $add$ptr2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $add$ptr2 = ((($rep)) + 12|0);
  return ($add$ptr2|0);
 }
-function __ZNSt11logic_errorC2EPKc($this) {
+function __ZNSt11logic_errorC2EPKc($this,$msg) {
  $this = $this|0;
+ $msg = $msg|0;
  var $__imp_ = 0, label = 0, sp = 0;
  sp = STACKTOP;
- store4($this,(2628));
+ store4($this,(2608));
  $__imp_ = ((($this)) + 4|0);
- __ZNSt3__218__libcpp_refstringC2EPKc($__imp_,4069);
+ __ZNSt3__218__libcpp_refstringC2EPKc($__imp_,$msg);
  return;
 }
 function __ZNSt13runtime_errorC2EPKc($this) {
  $this = $this|0;
  var $__imp_ = 0, label = 0, sp = 0;
  sp = STACKTOP;
- store4($this,(2648));
+ store4($this,(2628));
  $__imp_ = ((($this)) + 4|0);
- __ZNSt3__218__libcpp_refstringC2EPKc($__imp_,4780);
+ __ZNSt3__218__libcpp_refstringC2EPKc($__imp_,4783);
  return;
 }
 function __ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- ___assert_fail((9414|0),(9443|0),1183,(9540|0));
+ _abort();
  // unreachable;
 }
 function __ZNKSt3__221__basic_string_commonILb1EE20__throw_out_of_rangeEv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- ___assert_fail((9561|0),(9443|0),1194,(9590|0));
+ _abort();
  // unreachable;
 }
 function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_($this,$__str) {
  $this = $this|0;
  $__str = $__str|0;
- var $0 = 0, $1 = 0, $2 = 0, $__size_$i = 0, $__size_$i5 = 0, $tobool$i = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $__cap_$i$i = 0, $__p$0$i = 0, $__size_$i = 0, $__size_$i$i = 0, $__size_$i12$i = 0, $__size_$i5 = 0, $add$i$i$i = 0, $and$i$i$i = 0, $arrayidx$i = 0, $call$i$i$i$i = 0, $cmp$i = 0, $cmp2$i = 0, $conv$i$i = 0, $or$i$i = 0, $tobool$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  ; store8($this,i64_const(0,0),4); store4($this+8|0,0,4);
- $__size_$i5 = ((($__str)) + 11|0);
- $0 = load1($__size_$i5);
- $tobool$i = ($0<<24>>24)<(0);
- if ($tobool$i) {
-  $1 = load4($__str);
-  $__size_$i = ((($__str)) + 4|0);
-  $2 = load4($__size_$i);
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($this,$1,$2);
- } else {
-  ; store8($this,load8($__str,4),4); store4($this+8 | 0,load4($__str+8 | 0,4),4);
- }
- return;
-}
-function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEPKcj($this,$__s,$__sz) {
- $this = $this|0;
- $__s = $__s|0;
- $__sz = $__sz|0;
- var $__cap_$i = 0, $__p$0 = 0, $__size_$i = 0, $__size_$i12 = 0, $add$i$i = 0, $and$i$i = 0, $arrayidx = 0, $call$i$i$i = 0, $cmp = 0, $cmp2 = 0, $conv$i = 0, $or$i = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $cmp = ($__sz>>>0)>(4294967279);
- if ($cmp) {
-  __ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv();
-  // unreachable;
- }
- $cmp2 = ($__sz>>>0)<(11);
- if ($cmp2) {
-  $conv$i = $__sz&255;
-  $__size_$i = ((($this)) + 11|0);
-  store1($__size_$i,$conv$i);
-  $__p$0 = $this;
- } else {
-  $add$i$i = (($__sz) + 16)|0;
-  $and$i$i = $add$i$i & -16;
-  $call$i$i$i = (__Znwj($and$i$i)|0);
-  store4($this,$call$i$i$i);
-  $or$i = $and$i$i | -2147483648;
-  $__cap_$i = ((($this)) + 8|0);
-  store4($__cap_$i,$or$i);
-  $__size_$i12 = ((($this)) + 4|0);
-  store4($__size_$i12,$__sz);
-  $__p$0 = $call$i$i$i;
- }
- (__ZNSt3__211char_traitsIcE4copyEPcPKcj($__p$0,$__s,$__sz)|0);
- $arrayidx = (($__p$0) + ($__sz)|0);
- __ZNSt3__211char_traitsIcE6assignERcRKc($arrayidx,0);
- return;
-}
-function __ZNSt3__211char_traitsIcE4copyEPcPKcj($__s1,$__s2,$__n) {
- $__s1 = $__s1|0;
- $__s2 = $__s2|0;
- $__n = $__n|0;
- var $cmp = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $cmp = ($__n|0)==(0);
- if (!($cmp)) {
-  _memcpy(($__s1|0),($__s2|0),($__n|0))|0;
- }
- return ($__s1|0);
-}
-function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6__initEjc($this,$__n) {
- $this = $this|0;
- $__n = $__n|0;
- var $__cap_$i = 0, $__p$0 = 0, $__size_$i = 0, $__size_$i12 = 0, $add$i$i = 0, $and$i$i = 0, $arrayidx = 0, $call$i$i$i = 0, $cmp = 0, $cmp2 = 0, $conv$i = 0, $or$i = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $cmp = ($__n>>>0)>(4294967279);
- if ($cmp) {
-  __ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv();
-  // unreachable;
- }
- $cmp2 = ($__n>>>0)<(11);
- if ($cmp2) {
-  $conv$i = $__n&255;
-  $__size_$i = ((($this)) + 11|0);
-  store1($__size_$i,$conv$i);
-  $__p$0 = $this;
- } else {
-  $add$i$i = (($__n) + 16)|0;
-  $and$i$i = $add$i$i & -16;
-  $call$i$i$i = (__Znwj($and$i$i)|0);
-  store4($this,$call$i$i$i);
-  $or$i = $and$i$i | -2147483648;
-  $__cap_$i = ((($this)) + 8|0);
-  store4($__cap_$i,$or$i);
-  $__size_$i12 = ((($this)) + 4|0);
-  store4($__size_$i12,$__n);
-  $__p$0 = $call$i$i$i;
- }
- (__ZNSt3__211char_traitsIcE6assignEPcjc($__p$0,$__n)|0);
- $arrayidx = (($__p$0) + ($__n)|0);
- __ZNSt3__211char_traitsIcE6assignERcRKc($arrayidx,0);
- return;
-}
-function __ZNSt3__211char_traitsIcE6assignEPcjc($__s,$__n) {
- $__s = $__s|0;
- $__n = $__n|0;
- var $cmp = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $cmp = ($__n|0)==(0);
- if (!($cmp)) {
-  _memset(($__s|0),0,($__n|0))|0;
- }
- return ($__s|0);
-}
-function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEED2Ev($this) {
- $this = $this|0;
- var $0 = 0, $1 = 0, $__size_$i = 0, $tobool$i = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $__size_$i = ((($this)) + 11|0);
+ $__size_$i = ((($__str)) + 11|0);
  $0 = load1($__size_$i);
  $tobool$i = ($0<<24>>24)<(0);
  if ($tobool$i) {
-  $1 = load4($this);
-  __ZdlPv($1);
+  $1 = load4($__str);
+  $__size_$i5 = ((($__str)) + 4|0);
+  $2 = load4($__size_$i5);
+  $cmp$i = ($2>>>0)>(4294967279);
+  if ($cmp$i) {
+   __ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv();
+   // unreachable;
+  }
+  $cmp2$i = ($2>>>0)<(11);
+  if ($cmp2$i) {
+   $conv$i$i = $2&255;
+   $__size_$i$i = ((($this)) + 11|0);
+   store1($__size_$i$i,$conv$i$i);
+   $__p$0$i = $this;
+  } else {
+   $add$i$i$i = (($2) + 16)|0;
+   $and$i$i$i = $add$i$i$i & -16;
+   $call$i$i$i$i = (__Znwj($and$i$i$i)|0);
+   store4($this,$call$i$i$i$i);
+   $or$i$i = $and$i$i$i | -2147483648;
+   $__cap_$i$i = ((($this)) + 8|0);
+   store4($__cap_$i$i,$or$i$i);
+   $__size_$i12$i = ((($this)) + 4|0);
+   store4($__size_$i12$i,$2);
+   $__p$0$i = $call$i$i$i$i;
+  }
+  (__ZNSt3__211char_traitsIcE4copyEPcPKcj($__p$0$i,$1,$2)|0);
+  $arrayidx$i = (($__p$0$i) + ($2)|0);
+  __ZNSt3__211char_traitsIcE6assignERcRKc($arrayidx$i,0);
+ } else {
+  ; store8($this,load8($__str,4),4); store4($this+8 | 0,load4($__str+8 | 0,4),4);
  }
  return;
 }
@@ -15905,7 +16333,7 @@ function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6assign
     $cond$i25 = $conv$i$i;
    }
    $sub = (($__n) - ($cond$i))|0;
-   __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE21__grow_by_and_replaceEjjjjjjPKc($this,$cond$i,$sub,$cond$i25,$cond$i25,$__n,$__s);
+   __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE21__grow_by_and_replaceEjjjjjjPKc($this,$cond$i,$sub,$cond$i25,0,$cond$i25,$__n,$__s);
   } else {
    if ($tobool$i$i) {
     $2 = load4($this);
@@ -15942,16 +16370,17 @@ function __ZNSt3__211char_traitsIcE4moveEPcPKcj($__s1,$__s2,$__n) {
  }
  return ($__s1|0);
 }
-function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE21__grow_by_and_replaceEjjjjjjPKc($this,$__old_cap,$__delta_cap,$__old_sz,$__n_del,$__n_add,$__p_new_stuff) {
+function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE21__grow_by_and_replaceEjjjjjjPKc($this,$__old_cap,$__delta_cap,$__old_sz,$__n_copy,$__n_del,$__n_add,$__p_new_stuff) {
  $this = $this|0;
  $__old_cap = $__old_cap|0;
  $__delta_cap = $__delta_cap|0;
  $__old_sz = $__old_sz|0;
+ $__n_copy = $__n_copy|0;
  $__n_del = $__n_del|0;
  $__n_add = $__n_add|0;
  $__p_new_stuff = $__p_new_stuff|0;
- var $$sroa$speculated = 0, $0 = 0, $1 = 0, $__cap_$i = 0, $__size_$i = 0, $__size_$i$i = 0, $add = 0, $add$i$i = 0, $add$ptr34 = 0, $add$ptr37 = 0, $add48 = 0, $and$i$i = 0, $arrayidx = 0, $call$i$i$i = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i$i = 0, $cmp23 = 0, $cmp30 = 0, $cmp41 = 0;
- var $cmp5 = 0, $cond$i = 0, $cond40 = 0, $mul = 0, $or$i = 0, $phitmp = 0, $sub2 = 0, $sub28 = 0, $tobool$i$i = 0, label = 0, sp = 0;
+ var $$sroa$speculated = 0, $0 = 0, $1 = 0, $__cap_$i = 0, $__size_$i = 0, $__size_$i$i = 0, $add = 0, $add$i$i = 0, $add$ptr33 = 0, $add$ptr34 = 0, $add$ptr36 = 0, $add$ptr37 = 0, $add48 = 0, $and$i$i = 0, $arrayidx = 0, $call$i$i$i = 0, $cmp = 0, $cmp$i = 0, $cmp$i$i$i = 0, $cmp17 = 0;
+ var $cmp23 = 0, $cmp30 = 0, $cmp41 = 0, $cmp5 = 0, $cond$i = 0, $cond40 = 0, $mul = 0, $or$i = 0, $phitmp = 0, $sub2 = 0, $sub28 = 0, $sub29 = 0, $tobool$i$i = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $sub2 = (-18 - ($__old_cap))|0;
  $cmp = ($sub2>>>0)<($__delta_cap>>>0);
@@ -15983,16 +16412,23 @@ function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE21__gro
   $cond40 = -17;
  }
  $call$i$i$i = (__Znwj($cond40)|0);
+ $cmp17 = ($__n_copy|0)==(0);
+ if (!($cmp17)) {
+  (__ZNSt3__211char_traitsIcE4copyEPcPKcj($call$i$i$i,$cond$i,$__n_copy)|0);
+ }
  $cmp23 = ($__n_add|0)==(0);
+ $add$ptr33 = (($call$i$i$i) + ($__n_copy)|0);
  if (!($cmp23)) {
-  (__ZNSt3__211char_traitsIcE4copyEPcPKcj($call$i$i$i,$__p_new_stuff,$__n_add)|0);
+  (__ZNSt3__211char_traitsIcE4copyEPcPKcj($add$ptr33,$__p_new_stuff,$__n_add)|0);
  }
  $sub28 = (($__old_sz) - ($__n_del))|0;
- $cmp30 = ($sub28|0)==(0);
+ $sub29 = (($sub28) - ($__n_copy))|0;
+ $cmp30 = ($sub29|0)==(0);
  if (!($cmp30)) {
-  $add$ptr34 = (($call$i$i$i) + ($__n_add)|0);
-  $add$ptr37 = (($cond$i) + ($__n_del)|0);
-  (__ZNSt3__211char_traitsIcE4copyEPcPKcj($add$ptr34,$add$ptr37,$sub28)|0);
+  $add$ptr34 = (($add$ptr33) + ($__n_add)|0);
+  $add$ptr36 = (($cond$i) + ($__n_copy)|0);
+  $add$ptr37 = (($add$ptr36) + ($__n_del)|0);
+  (__ZNSt3__211char_traitsIcE4copyEPcPKcj($add$ptr34,$add$ptr37,$sub29)|0);
  }
  $cmp41 = ($__old_cap|0)==(10);
  if (!($cmp41)) {
@@ -16013,8 +16449,8 @@ function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6assign
  $this = $this|0;
  var $call = 0, $call2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
- $call = (__ZNSt3__211char_traitsIcE6lengthEPKc(2803)|0);
- $call2 = (__ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6assignEPKcj($this,2803,$call)|0);
+ $call = (__ZNSt3__211char_traitsIcE6lengthEPKc(2800)|0);
+ $call2 = (__ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6assignEPKcj($this,2800,$call)|0);
  return ($call2|0);
 }
 function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resizeEjc($this,$__n) {
@@ -16172,6 +16608,59 @@ function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE9__grow
  store4($__cap_$i,$or$i);
  return;
 }
+function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6appendEPKcj($this,$__s,$__n) {
+ $this = $this|0;
+ $__s = $__s|0;
+ $__n = $__n|0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $__cap_$i$i = 0, $__size_$i$i = 0, $__size_$i3$i = 0, $add = 0, $add$ptr = 0, $and$i$i = 0, $arrayidx = 0, $cmp = 0, $cond$i24 = 0, $cond$i30 = 0, $cond$i36 = 0, $conv$i$i = 0, $conv$i$i34 = 0, $phitmp$i = 0, $sub = 0;
+ var $sub8 = 0, $tobool = 0, $tobool$i$i = 0, $tobool$i$i33 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ $__size_$i$i = ((($this)) + 11|0);
+ $0 = load1($__size_$i$i);
+ $tobool$i$i = ($0<<24>>24)<(0);
+ $__size_$i3$i = ((($this)) + 4|0);
+ if ($tobool$i$i) {
+  $__cap_$i$i = ((($this)) + 8|0);
+  $1 = load4($__cap_$i$i);
+  $and$i$i = $1 & 2147483647;
+  $phitmp$i = (($and$i$i) + -1)|0;
+  $2 = load4($__size_$i3$i);
+  $cond$i24 = $2;$cond$i36 = $phitmp$i;
+ } else {
+  $conv$i$i = $0&255;
+  $cond$i24 = $conv$i$i;$cond$i36 = 10;
+ }
+ $sub = (($cond$i36) - ($cond$i24))|0;
+ $cmp = ($sub>>>0)<($__n>>>0);
+ $add = (($cond$i24) + ($__n))|0;
+ if ($cmp) {
+  $sub8 = (($add) - ($cond$i36))|0;
+  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE21__grow_by_and_replaceEjjjjjjPKc($this,$cond$i36,$sub8,$cond$i24,$cond$i24,0,$__n,$__s);
+ } else {
+  $tobool = ($__n|0)==(0);
+  if (!($tobool)) {
+   if ($tobool$i$i) {
+    $3 = load4($this);
+    $cond$i30 = $3;
+   } else {
+    $cond$i30 = $this;
+   }
+   $add$ptr = (($cond$i30) + ($cond$i24)|0);
+   (__ZNSt3__211char_traitsIcE4copyEPcPKcj($add$ptr,$__s,$__n)|0);
+   $4 = load1($__size_$i$i);
+   $tobool$i$i33 = ($4<<24>>24)<(0);
+   if ($tobool$i$i33) {
+    store4($__size_$i3$i,$add);
+   } else {
+    $conv$i$i34 = $add&255;
+    store1($__size_$i$i,$conv$i$i34);
+   }
+   $arrayidx = (($cond$i30) + ($add)|0);
+   __ZNSt3__211char_traitsIcE6assignERcRKc($arrayidx,0);
+  }
+ }
+ return ($this|0);
+}
 function __ZNKSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE7compareEjjPKcj($this,$__s,$__n2) {
  $this = $this|0;
  $__s = $__s|0;
@@ -16223,76 +16712,6 @@ function __ZNKSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE7compa
  $call2 = (__ZNKSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE7compareEjjPKcj($this,$__s,$call)|0);
  return ($call2|0);
 }
-function __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6__initEPKwj($this,$__s,$__sz) {
- $this = $this|0;
- $__s = $__s|0;
- $__sz = $__sz|0;
- var $__cap_$i = 0, $__p$0 = 0, $__size_$i = 0, $__size_$i12 = 0, $add$i$i = 0, $and$i$i = 0, $arrayidx = 0, $call$i$i$i = 0, $cmp = 0, $cmp$i$i = 0, $cmp2 = 0, $conv$i = 0, $mul$i$i = 0, $or$i = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $cmp = ($__sz>>>0)>(1073741807);
- $__cap_$i = ((($this)) + 8|0);
- if ($cmp) {
-  __ZNKSt3__221__basic_string_commonILb1EE20__throw_length_errorEv();
-  // unreachable;
- }
- $cmp2 = ($__sz>>>0)<(2);
- do {
-  if ($cmp2) {
-   $conv$i = $__sz&255;
-   $__size_$i = ((($__cap_$i)) + 3|0);
-   store1($__size_$i,$conv$i);
-   $__p$0 = $this;
-  } else {
-   $add$i$i = (($__sz) + 4)|0;
-   $and$i$i = $add$i$i & -4;
-   $cmp$i$i = ($and$i$i>>>0)>(1073741823);
-   if ($cmp$i$i) {
-    ___assert_fail((9611|0),(9648|0),1734,(9745|0));
-    // unreachable;
-   } else {
-    $mul$i$i = $and$i$i << 2;
-    $call$i$i$i = (__Znwj($mul$i$i)|0);
-    store4($this,$call$i$i$i);
-    $or$i = $and$i$i | -2147483648;
-    store4($__cap_$i,$or$i);
-    $__size_$i12 = ((($this)) + 4|0);
-    store4($__size_$i12,$__sz);
-    $__p$0 = $call$i$i$i;
-    break;
-   }
-  }
- } while(0);
- __ZNSt3__211char_traitsIwE4copyEPwPKwj($__p$0,$__s,$__sz);
- $arrayidx = (($__p$0) + ($__sz<<2)|0);
- __ZNSt3__211char_traitsIwE6assignERwRKw($arrayidx,0);
- return;
-}
-function __ZNSt3__211char_traitsIwE4copyEPwPKwj($__s1,$__s2,$__n) {
- $__s1 = $__s1|0;
- $__s2 = $__s2|0;
- $__n = $__n|0;
- var $cmp = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $cmp = ($__n|0)==(0);
- if (!($cmp)) {
-  (_wmemcpy($__s1,$__s2,$__n)|0);
- }
- return;
-}
-function __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEED2Ev($this) {
- $this = $this|0;
- var $0 = 0, $1 = 0, $2 = 0, $__size_$i = 0, $tobool$i = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $0 = ((($this)) + 8|0);
- $__size_$i = ((($0)) + 3|0);
- $1 = load1($__size_$i);
- $tobool$i = ($1<<24>>24)<(0);
- if ($tobool$i) {
-  $2 = load4($this);
-  __ZdlPv($2);
- }
- return;
-}
 function __ZL25default_terminate_handlerv() {
  var $0 = 0, $1 = i64(), $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $__type_name$i = 0, $add$ptr = 0, $and = i64(), $call = 0, $call10 = 0, $call14 = 0, $cmp = 0, $cmp7 = 0, $cond = 0, $exception_class = 0, $primaryException = 0, $thrown_object = 0, $tobool = 0;
  var $tobool1 = 0, $vararg_buffer = 0, $vararg_buffer10 = 0, $vararg_buffer3 = 0, $vararg_buffer7 = 0, $vararg_ptr1 = 0, $vararg_ptr2 = 0, $vararg_ptr6 = 0, $vfn13 = 0, $vtable12 = 0, label = 0, sp = 0;
@@ -16315,8 +16734,8 @@ function __ZL25default_terminate_handlerv() {
    $and = i64_and($1,i64_const(4294967040,4294967295));
    $cmp = i64_eq($and,i64_const(1126902528,1129074247));
    if (!($cmp)) {
-    store4($vararg_buffer7,9890);
-    _abort_message(9840,$vararg_buffer7);
+    store4($vararg_buffer7,9501);
+    _abort_message(9451,$vararg_buffer7);
     // unreachable;
    }
    $cmp7 = i64_eq($1,i64_const(1126902529,1129074247));
@@ -16338,23 +16757,23 @@ function __ZL25default_terminate_handlerv() {
     $vfn13 = ((($vtable12)) + 8|0);
     $6 = load4($vfn13);
     $call14 = (FUNCTION_TABLE_ii[$6 & 31]($5)|0);
-    store4($vararg_buffer,9890);
+    store4($vararg_buffer,9501);
     $vararg_ptr1 = ((($vararg_buffer)) + 4|0);
     store4($vararg_ptr1,$4);
     $vararg_ptr2 = ((($vararg_buffer)) + 8|0);
     store4($vararg_ptr2,$call14);
-    _abort_message(9754,$vararg_buffer);
+    _abort_message(9365,$vararg_buffer);
     // unreachable;
    } else {
-    store4($vararg_buffer3,9890);
+    store4($vararg_buffer3,9501);
     $vararg_ptr6 = ((($vararg_buffer3)) + 4|0);
     store4($vararg_ptr6,$4);
-    _abort_message(9799,$vararg_buffer3);
+    _abort_message(9410,$vararg_buffer3);
     // unreachable;
    }
   }
  }
- _abort_message(9878,$vararg_buffer10);
+ _abort_message(9489,$vararg_buffer10);
  // unreachable;
 }
 function ___cxa_get_globals_fast() {
@@ -16362,14 +16781,14 @@ function ___cxa_get_globals_fast() {
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $vararg_buffer = sp;
- $call = (_pthread_once((11244|0),(2|0))|0);
+ $call = (_pthread_once((10844|0),(2|0))|0);
  $cmp = ($call|0)==(0);
  if ($cmp) {
-  $0 = load4(11248);
+  $0 = load4(10848);
   $call1 = (_pthread_getspecific(($0|0))|0);
   STACKTOP = sp;return ($call1|0);
  } else {
-  _abort_message(10029,$vararg_buffer);
+  _abort_message(9640,$vararg_buffer);
   // unreachable;
  }
  return (0)|0;
@@ -16941,12 +17360,12 @@ function __ZN10__cxxabiv112_GLOBAL__N_110construct_Ev() {
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0;
  $vararg_buffer = sp;
- $call = (_pthread_key_create((11248|0),(24|0))|0);
+ $call = (_pthread_key_create((10848|0),(23|0))|0);
  $cmp = ($call|0)==(0);
  if ($cmp) {
   STACKTOP = sp;return;
  } else {
-  _abort_message(10078,$vararg_buffer);
+  _abort_message(9689,$vararg_buffer);
   // unreachable;
  }
 }
@@ -16957,13 +17376,13 @@ function __ZN10__cxxabiv112_GLOBAL__N_19destruct_EPv($p) {
  STACKTOP = STACKTOP + 16|0;
  $vararg_buffer = sp;
  _free($p);
- $0 = load4(11248);
+ $0 = load4(10848);
  $call = (_pthread_setspecific(($0|0),(0|0))|0);
  $cmp = ($call|0)==(0);
  if ($cmp) {
   STACKTOP = sp;return;
  } else {
-  _abort_message(10128,$vararg_buffer);
+  _abort_message(9739,$vararg_buffer);
   // unreachable;
  }
 }
@@ -16999,7 +17418,7 @@ function __ZSt11__terminatePFvvE($func) {
  STACKTOP = STACKTOP + 16|0;
  $vararg_buffer = sp;
  FUNCTION_TABLE_v[$func & 3]();
- _abort_message(10181,$vararg_buffer);
+ _abort_message(9792,$vararg_buffer);
  // unreachable;
 }
 function __ZSt13get_terminatev() {
@@ -17011,32 +17430,13 @@ function __ZSt13get_terminatev() {
  $2 = $0;
  return ($2|0);
 }
-function __ZNSt9bad_allocD2Ev($this) {
- $this = $this|0;
- var label = 0, sp = 0;
- sp = STACKTOP;
- return;
-}
-function __ZNSt9bad_allocD0Ev($this) {
- $this = $this|0;
- var label = 0, sp = 0;
- sp = STACKTOP;
- __ZdlPv($this);
- return;
-}
-function __ZNKSt9bad_alloc4whatEv($this) {
- $this = $this|0;
- var label = 0, sp = 0;
- sp = STACKTOP;
- return (10221|0);
-}
 function __ZNSt11logic_errorD2Ev($this) {
  $this = $this|0;
  var $__imp_ = 0, label = 0, sp = 0;
  sp = STACKTOP;
- store4($this,(2628));
+ store4($this,(2608));
  $__imp_ = ((($this)) + 4|0);
- __ZN12_GLOBAL__N_114__libcpp_nmstrD2Ev($__imp_);
+ __ZNSt3__218__libcpp_refstringD2Ev($__imp_);
  return;
 }
 function __ZNSt11logic_errorD0Ev($this) {
@@ -17053,47 +17453,46 @@ function __ZNKSt11logic_error4whatEv($this) {
  sp = STACKTOP;
  $__imp_$idx = ((($this)) + 4|0);
  $__imp_$idx$val = load4($__imp_$idx);
- $call = (__ZNK12_GLOBAL__N_114__libcpp_nmstr5c_strEv($__imp_$idx$val)|0);
+ $call = (__ZNKSt3__218__libcpp_refstring5c_strEv($__imp_$idx$val)|0);
  return ($call|0);
 }
-function __ZNK12_GLOBAL__N_114__libcpp_nmstr5c_strEv($this$0$0$val) {
+function __ZNKSt3__218__libcpp_refstring5c_strEv($this$0$0$val) {
  $this$0$0$val = $this$0$0$val|0;
  var label = 0, sp = 0;
  sp = STACKTOP;
  return ($this$0$0$val|0);
 }
-function __ZN12_GLOBAL__N_114__libcpp_nmstrD2Ev($this) {
+function __ZNSt3__218__libcpp_refstringD2Ev($this) {
  $this = $this|0;
- var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $add$ptr = 0, $call = 0, $cmp = 0, $this$idx$val = 0, label = 0, sp = 0;
+ var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $call2 = 0, $cmp = 0, $count = 0, label = 0, sp = 0;
  sp = STACKTOP;
- $this$idx$val = load4($this);
- $call = (__ZNK12_GLOBAL__N_114__libcpp_nmstr5countEv($this$idx$val)|0);
- $0 = load4($call);
- $1 = (($0) + -1)|0;
- store4($call,$1);
- $2 = (($0) + -1)|0;
- $cmp = ($2|0)<(0);
+ $0 = load4($this);
+ $call2 = (__ZNSt3__215__refstring_imp12_GLOBAL__N_113rep_from_dataEPKc_371($0)|0);
+ $count = ((($call2)) + 8|0);
+ $1 = load4($count);
+ $2 = (($1) + -1)|0;
+ store4($count,$2);
+ $3 = (($1) + -1)|0;
+ $cmp = ($3|0)<(0);
  if ($cmp) {
-  $3 = load4($this);
-  $add$ptr = ((($3)) + -12|0);
-  __ZdlPv($add$ptr);
+  __ZdlPv($call2);
  }
  return;
 }
-function __ZNK12_GLOBAL__N_114__libcpp_nmstr5countEv($this$0$0$val) {
- $this$0$0$val = $this$0$0$val|0;
- var $count = 0, label = 0, sp = 0;
+function __ZNSt3__215__refstring_imp12_GLOBAL__N_113rep_from_dataEPKc_371($data_) {
+ $data_ = $data_|0;
+ var $add$ptr = 0, label = 0, sp = 0;
  sp = STACKTOP;
- $count = ((($this$0$0$val)) + -4|0);
- return ($count|0);
+ $add$ptr = ((($data_)) + -12|0);
+ return ($add$ptr|0);
 }
 function __ZNSt13runtime_errorD2Ev($this) {
  $this = $this|0;
  var $__imp_ = 0, label = 0, sp = 0;
  sp = STACKTOP;
- store4($this,(2648));
+ store4($this,(2628));
  $__imp_ = ((($this)) + 4|0);
- __ZN12_GLOBAL__N_114__libcpp_nmstrD2Ev($__imp_);
+ __ZNSt3__218__libcpp_refstringD2Ev($__imp_);
  return;
 }
 function __ZNSt13runtime_errorD0Ev($this) {
@@ -17110,8 +17509,16 @@ function __ZNKSt13runtime_error4whatEv($this) {
  sp = STACKTOP;
  $__imp_$idx = ((($this)) + 4|0);
  $__imp_$idx$val = load4($__imp_$idx);
- $call = (__ZNK12_GLOBAL__N_114__libcpp_nmstr5c_strEv($__imp_$idx$val)|0);
+ $call = (__ZNKSt3__218__libcpp_refstring5c_strEv($__imp_$idx$val)|0);
  return ($call|0);
+}
+function __ZNSt12length_errorD0Ev($this) {
+ $this = $this|0;
+ var label = 0, sp = 0;
+ sp = STACKTOP;
+ __ZNSt11logic_errorD2Ev($this);
+ __ZdlPv($this);
+ return;
 }
 function __ZNSt12out_of_rangeD0Ev($this) {
  $this = $this|0;
@@ -17763,29 +18170,22 @@ function __ZNK10__cxxabiv122__base_class_type_info16search_below_dstEPNS_19__dyn
 function ___cxa_guard_acquire() {
  var $0 = 0, $cmp = 0, $retval$0 = 0, label = 0, sp = 0;
  sp = STACKTOP;
- $0 = load1(10624);
+ $0 = load1(10224);
  $cmp = ($0<<24>>24)==(1);
  if ($cmp) {
   $retval$0 = 0;
  } else {
-  store1(10624,1);
+  store1(10224,1);
   $retval$0 = 1;
  }
  return ($retval$0|0);
 }
-function __ZNSt9bad_allocC2Ev($this) {
- $this = $this|0;
- var label = 0, sp = 0;
- sp = STACKTOP;
- store4($this,(2608));
- return;
-}
 function __ZSt15get_new_handlerv() {
  var $0 = 0, $1 = 0, $2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
- $0 = load4(11252);
+ $0 = load4(10852);
  $1 = (($0) + 0)|0;
- store4(11252,$1);
+ store4(10852,$1);
  $2 = $0;
  return ($2|0);
 }
@@ -18145,10 +18545,10 @@ var FUNCTION_TABLE_iiii = [b0,___stdio_write,___stdio_seek,__ZNK10__cxxabiv117__
 ,b0,b0,b0];
 var FUNCTION_TABLE_viiiii = [b1,__ZNK10__cxxabiv117__class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib,__ZNK10__cxxabiv120__si_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib,__ZNK10__cxxabiv121__vmi_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib];
 var FUNCTION_TABLE_i = [b2,__ZN10emscripten8internal12operator_newINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEJEEEPT_DpOT0_,__ZN10emscripten8internal12operator_newINSt3__26vectorIjNS2_9allocatorIjEEEEJEEEPT_DpOT0_,b2];
-var FUNCTION_TABLE_vi = [b3,__ZNSt3__27codecvtIwc11__mbstate_tED2Ev,__ZNSt3__212codecvt_utf8IwLm1114111ELNS_12codecvt_modeE0EED0Ev,__ZNSt3__26locale5facet16__on_zero_sharedEv,__ZNSt3__27codecvtIwc11__mbstate_tED0Ev,__ZN10__cxxabiv116__shim_type_infoD2Ev,__ZN10__cxxabiv117__class_type_infoD0Ev,__ZNK10__cxxabiv116__shim_type_info5noop1Ev,__ZNK10__cxxabiv116__shim_type_info5noop2Ev,__ZN10__cxxabiv120__si_class_type_infoD0Ev,__ZNSt9bad_allocD2Ev,__ZNSt9bad_allocD0Ev,__ZNSt11logic_errorD2Ev,__ZNSt11logic_errorD0Ev,__ZNSt13runtime_errorD2Ev,__ZNSt13runtime_errorD0Ev,__ZNSt12out_of_rangeD0Ev,__ZNSt11range_errorD0Ev,__ZN10__cxxabiv123__fundamental_type_infoD0Ev,__ZN10__cxxabiv119__pointer_type_infoD0Ev,__ZN10__cxxabiv121__vmi_class_type_infoD0Ev,__ZN10emscripten8internal14raw_destructorINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEEEvPT_,__ZN10emscripten8internal14raw_destructorINSt3__26vectorIjNS2_9allocatorIjEEEEEEvPT_,__Z14deleteVNodePtrRKj,__ZN10__cxxabiv112_GLOBAL__N_19destruct_EPv,b3,b3,b3,b3
+var FUNCTION_TABLE_vi = [b3,__ZNSt3__27codecvtIwc11__mbstate_tED2Ev,__ZNSt3__212codecvt_utf8IwLm1114111ELNS_12codecvt_modeE0EED0Ev,__ZNSt3__26locale5facet16__on_zero_sharedEv,__ZNSt3__27codecvtIwc11__mbstate_tED0Ev,__ZN10__cxxabiv116__shim_type_infoD2Ev,__ZN10__cxxabiv117__class_type_infoD0Ev,__ZNK10__cxxabiv116__shim_type_info5noop1Ev,__ZNK10__cxxabiv116__shim_type_info5noop2Ev,__ZN10__cxxabiv120__si_class_type_infoD0Ev,__ZNSt11logic_errorD2Ev,__ZNSt11logic_errorD0Ev,__ZNSt13runtime_errorD2Ev,__ZNSt13runtime_errorD0Ev,__ZNSt12length_errorD0Ev,__ZNSt12out_of_rangeD0Ev,__ZNSt11range_errorD0Ev,__ZN10__cxxabiv123__fundamental_type_infoD0Ev,__ZN10__cxxabiv119__pointer_type_infoD0Ev,__ZN10__cxxabiv121__vmi_class_type_infoD0Ev,__ZN10emscripten8internal14raw_destructorINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEEEvPT_,__ZN10emscripten8internal14raw_destructorINSt3__26vectorIjNS2_9allocatorIjEEEEEEvPT_,__Z14deleteVNodePtrRKj,__ZN10__cxxabiv112_GLOBAL__N_19destruct_EPv,b3,b3,b3,b3,b3
 ,b3,b3,b3];
 var FUNCTION_TABLE_vii = [b4,__ZNSt3__26vectorIjNS_9allocatorIjEEE9push_backERKj,__ZN10emscripten8internal7InvokerIvJRKjEE6invokeEPFvS3_Ej,__Z8patchPtrRKjS0_];
-var FUNCTION_TABLE_ii = [b5,__ZNKSt3__214__codecvt_utf8IwE11do_encodingEv,__ZNKSt3__214__codecvt_utf8IwE16do_always_noconvEv,__ZNKSt3__214__codecvt_utf8IwE13do_max_lengthEv,___stdio_close,__ZNKSt3__27codecvtIwc11__mbstate_tE11do_encodingEv,__ZNKSt3__27codecvtIwc11__mbstate_tE16do_always_noconvEv,__ZNKSt3__27codecvtIwc11__mbstate_tE13do_max_lengthEv,__ZNKSt9bad_alloc4whatEv,__ZNKSt11logic_error4whatEv,__ZNKSt13runtime_error4whatEv,__ZN10emscripten8internal13getActualTypeINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEEEPKvPT_,__ZN10emscripten8internal7InvokerIPNSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEJEE6invokeEPFSH_vE,__ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES6_NS_4lessIS6_EENS4_INS_4pairIKS6_S6_EEEEE4sizeEv,__ZN10emscripten8internal13getActualTypeINSt3__26vectorIjNS2_9allocatorIjEEEEEEPKvPT_,__ZN10emscripten8internal7InvokerIPNSt3__26vectorIjNS2_9allocatorIjEEEEJEE6invokeEPFS7_vE,__ZNKSt3__26vectorIjNS_9allocatorIjEEE4sizeEv,__Z7getNodeRKj,__Z3h_sRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEE,b5,b5,b5,b5,b5,b5,b5,b5,b5,b5
+var FUNCTION_TABLE_ii = [b5,__ZNKSt3__214__codecvt_utf8IwE11do_encodingEv,__ZNKSt3__214__codecvt_utf8IwE16do_always_noconvEv,__ZNKSt3__214__codecvt_utf8IwE13do_max_lengthEv,___stdio_close,__ZNKSt3__27codecvtIwc11__mbstate_tE11do_encodingEv,__ZNKSt3__27codecvtIwc11__mbstate_tE16do_always_noconvEv,__ZNKSt3__27codecvtIwc11__mbstate_tE13do_max_lengthEv,__ZNKSt11logic_error4whatEv,__ZNKSt13runtime_error4whatEv,__ZN10emscripten8internal13getActualTypeINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEEEPKvPT_,__ZN10emscripten8internal7InvokerIPNSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEJEE6invokeEPFSH_vE,__ZNKSt3__23mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES6_NS_4lessIS6_EENS4_INS_4pairIKS6_S6_EEEEE4sizeEv,__ZN10emscripten8internal13getActualTypeINSt3__26vectorIjNS2_9allocatorIjEEEEEEPKvPT_,__ZN10emscripten8internal7InvokerIPNSt3__26vectorIjNS2_9allocatorIjEEEEJEE6invokeEPFS7_vE,__ZNKSt3__26vectorIjNS_9allocatorIjEEE4sizeEv,__Z7getNodeRKj,__Z3h_sRKNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEE,b5,b5,b5,b5,b5,b5,b5,b5,b5,b5,b5
 ,b5,b5,b5];
 var FUNCTION_TABLE_viii = [b6,__ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEE3getERKSG_RSD_,__ZN10emscripten8internal9MapAccessINSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEEE3setERSG_RSD_SJ_,__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEFvRKjEvPS6_JS8_EE6invokeERKSA_SB_j,__ZNSt3__26vectorIjNS_9allocatorIjEEE6resizeEjRKj,__ZN10emscripten8internal12VectorAccessINSt3__26vectorIjNS2_9allocatorIjEEEEE3getERKS6_j,__ZN10emscripten8internal7InvokerIvJRKjS3_EE6invokeEPFvS3_S3_Ejj,b6];
 var FUNCTION_TABLE_v = [b7,__ZL25default_terminate_handlerv,__ZN10__cxxabiv112_GLOBAL__N_110construct_Ev,b7];
@@ -18159,6 +18559,6 @@ var FUNCTION_TABLE_iii = [b11,__ZN10emscripten8internal13MethodInvokerIMNSt3__23
 var FUNCTION_TABLE_iiiiii = [b12,__ZNKSt3__214__codecvt_utf8IwE10do_unshiftER11__mbstate_tPcS4_RS4_,__ZNKSt3__214__codecvt_utf8IwE9do_lengthER11__mbstate_tPKcS5_j,__ZNKSt3__27codecvtIwc11__mbstate_tE10do_unshiftERS1_PcS4_RS4_,__ZNKSt3__27codecvtIwc11__mbstate_tE9do_lengthERS1_PKcS5_j,b12,b12,b12];
 var FUNCTION_TABLE_viiii = [b13,__ZNK10__cxxabiv117__class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZNK10__cxxabiv120__si_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZNK10__cxxabiv121__vmi_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZN10emscripten8internal15FunctionInvokerIPFvRNSt3__23mapINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_NS2_4lessIS9_EENS7_INS2_4pairIKS9_S9_EEEEEERSD_SI_EvSH_JSI_SI_EE6invokeEPSK_PSG_PNS0_11BindingTypeIS9_EUt_ESR_,__ZN10emscripten8internal13MethodInvokerIMNSt3__26vectorIjNS2_9allocatorIjEEEEFvjRKjEvPS6_JjS8_EE6invokeERKSA_SB_jj,b13,b13];
 
-  return { _llvm_bswap_i32: _llvm_bswap_i32, setThrew: setThrew, ___cxa_is_pointer_type: ___cxa_is_pointer_type, _memset: _memset, _sbrk: _sbrk, _memcpy: _memcpy, stackAlloc: stackAlloc, __GLOBAL__sub_I_asm_dom_cpp: __GLOBAL__sub_I_asm_dom_cpp, getTempRet0: getTempRet0, __GLOBAL__sub_I_bind_cpp: __GLOBAL__sub_I_bind_cpp, setTempRet0: setTempRet0, _emscripten_get_global_libc: _emscripten_get_global_libc, ___getTypeName: ___getTypeName, __GLOBAL__sub_I_index_cpp: __GLOBAL__sub_I_index_cpp, stackSave: stackSave, ___cxa_can_catch: ___cxa_can_catch, _free: _free, runPostSets: runPostSets, establishStackSpace: establishStackSpace, _memmove: _memmove, stackRestore: stackRestore, _malloc: _malloc, _emscripten_replace_memory: _emscripten_replace_memory, stackAlloc: stackAlloc, stackSave: stackSave, stackRestore: stackRestore, establishStackSpace: establishStackSpace, setThrew: setThrew, setTempRet0: setTempRet0, getTempRet0: getTempRet0, dynCall_iiii: dynCall_iiii, dynCall_viiiii: dynCall_viiiii, dynCall_i: dynCall_i, dynCall_vi: dynCall_vi, dynCall_vii: dynCall_vii, dynCall_ii: dynCall_ii, dynCall_viii: dynCall_viii, dynCall_v: dynCall_v, dynCall_iiiiiiiii: dynCall_iiiiiiiii, dynCall_iiiii: dynCall_iiiii, dynCall_viiiiii: dynCall_viiiiii, dynCall_iii: dynCall_iii, dynCall_iiiiii: dynCall_iiiiii, dynCall_viiii: dynCall_viiii };
+  return { _llvm_bswap_i32: _llvm_bswap_i32, setThrew: setThrew, dynCall_viii: dynCall_viii, dynCall_vii: dynCall_vii, dynCall_viiii: dynCall_viiii, dynCall_iiiiiiiii: dynCall_iiiiiiiii, ___cxa_is_pointer_type: ___cxa_is_pointer_type, dynCall_iii: dynCall_iii, _memset: _memset, _sbrk: _sbrk, _memcpy: _memcpy, stackAlloc: stackAlloc, dynCall_vi: dynCall_vi, __GLOBAL__sub_I_asm_dom_cpp: __GLOBAL__sub_I_asm_dom_cpp, getTempRet0: getTempRet0, __GLOBAL__sub_I_bind_cpp: __GLOBAL__sub_I_bind_cpp, setTempRet0: setTempRet0, dynCall_iiii: dynCall_iiii, dynCall_ii: dynCall_ii, _emscripten_get_global_libc: _emscripten_get_global_libc, dynCall_iiiii: dynCall_iiiii, ___getTypeName: ___getTypeName, dynCall_i: dynCall_i, __GLOBAL__sub_I_index_cpp: __GLOBAL__sub_I_index_cpp, dynCall_iiiiii: dynCall_iiiiii, stackSave: stackSave, dynCall_viiiii: dynCall_viiiii, ___cxa_can_catch: ___cxa_can_catch, _free: _free, runPostSets: runPostSets, dynCall_viiiiii: dynCall_viiiiii, establishStackSpace: establishStackSpace, _memmove: _memmove, stackRestore: stackRestore, _malloc: _malloc, _emscripten_replace_memory: _emscripten_replace_memory, dynCall_v: dynCall_v };
 })
 ;

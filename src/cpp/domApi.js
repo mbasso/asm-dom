@@ -3,24 +3,24 @@ let lastPtr = 0;
 const freePtrs = [];
 
 const addPtr = (node) => {
-  const ptr = freePtrs.length !== 0 ? freePtrs.pop() : ++lastPtr;
+  if (node === null) return 0;
+  let ptr = freePtrs.pop();
+  if (ptr === undefined) ptr = ++lastPtr;
   nodes[ptr] = node;
-  if (node !== null && node !== undefined) node.asmDomPtr = ptr;
+  node.asmDomPtr = ptr;
   return ptr;
 };
 
 const remove = (node) => {
-  while (node.firstChild) remove(node.firstChild);
+  node.childNodes.forEach(remove);
   freePtrs.push(node.asmDomPtr);
-  node.remove();
 };
 
 export default {
   'addNode'(node) {
     addPtr(node.parentNode);
     addPtr(node.nextSibling);
-    const ptr = addPtr(node);
-    return nodes[ptr] !== null ? ptr : null;
+    return addPtr(node);
   },
   'createElement'(tagName) {
     return addPtr(document.createElement(tagName));
@@ -37,12 +37,13 @@ export default {
   'insertBefore'(parentNodePtr, newNodePtr, referenceNodePtr) {
     nodes[parentNodePtr].insertBefore(
       nodes[newNodePtr],
-      nodes[referenceNodePtr] !== undefined ? nodes[referenceNodePtr] : null,
+      nodes[referenceNodePtr],
     );
   },
   'removeChild'(childPtr) {
-    if (nodes[childPtr] === null || nodes[childPtr] === undefined) return;
+    if (nodes[childPtr] === null) return;
     remove(nodes[childPtr]);
+    nodes[childPtr].remove();
   },
   'appendChild'(parentPtr, childPtr) {
     nodes[parentPtr].appendChild(nodes[childPtr]);
@@ -65,19 +66,19 @@ export default {
       nodes[nodePtr].setAttribute(attr, value);
     }
   },
+  // eslint-disable-next-line
   'parentNode': (nodePtr) => {
-    if (
+    return (
       nodes[nodePtr] !== null && nodes[nodePtr] !== undefined &&
       nodes[nodePtr].parentNode !== null
-    ) return nodes[nodePtr].parentNode.asmDomPtr;
-    return 0;
+    ) ? nodes[nodePtr].parentNode.asmDomPtr : 0;
   },
+  // eslint-disable-next-line
   'nextSibling': (nodePtr) => {
-    if (
+    return (
       nodes[nodePtr] !== null && nodes[nodePtr] !== undefined &&
       nodes[nodePtr].nextSibling !== null
-    ) return nodes[nodePtr].nextSibling.asmDomPtr;
-    return 0;
+    ) ? nodes[nodePtr].nextSibling.asmDomPtr : 0;
   },
   'setTextContent': (nodePtr, text) => {
     nodes[nodePtr].textContent = text;

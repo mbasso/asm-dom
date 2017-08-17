@@ -278,7 +278,7 @@ namespace asmdom {
 		} else {
 			EM_ASM_({
 				var parent = window['asmDomHelpers']['domApi']['parentNode']($1);
-				if (parent) {
+				if (parent !== 0) {
 					window['asmDomHelpers']['domApi']['insertBefore'](
 						parent,
 						$0,

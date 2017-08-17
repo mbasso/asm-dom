@@ -4,7 +4,7 @@
 
 namespace asmdom {
 
-	void init(Config& config) {
+	void init(const Config& config) {
 		VDOMConfig& vdomconfig = VDOMConfig::getConfig();
 		vdomconfig.setClearMemory(config.clearMemory);
 		vdomconfig.setUnsafePatch(config.unsafePatch);
