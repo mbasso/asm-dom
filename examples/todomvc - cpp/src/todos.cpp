@@ -1,6 +1,7 @@
-#include "./todos.hpp"
-#include "./task.hpp"
-#include "./helpers.hpp"
+#include "../../../src/cpp/asm-dom.hpp"
+#include "todos.hpp"
+#include "task.hpp"
+#include "helpers.hpp"
 #include <emscripten/val.h>
 #include <functional>
 #include <vector>

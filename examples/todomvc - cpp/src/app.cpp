@@ -1,5 +1,5 @@
 #include "../../../src/cpp/asm-dom.hpp"
-#include "./todos.hpp"
+#include "todos.hpp"
 #include <emscripten.h>
 #include <emscripten/bind.h>
 

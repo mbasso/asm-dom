@@ -1,6 +1,7 @@
 #ifndef asmdom_todomvc_task_hpp
 #define asmdom_todomvc_task_hpp
 
+#include "../../../src/cpp/asm-dom.hpp"
 #include <functional>
 #include <string>
 

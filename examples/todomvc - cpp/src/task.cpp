@@ -1,6 +1,6 @@
 #include "../../../src/cpp/asm-dom.hpp"
-#include "./task.hpp"
-#include "./helpers.hpp"
+#include "task.hpp"
+#include "helpers.hpp"
 #include <emscripten/val.h>
 #include <functional>
 

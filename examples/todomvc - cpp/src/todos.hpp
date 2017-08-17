@@ -1,7 +1,8 @@
 #ifndef asmdom_todomvc_todos_hpp
 #define asmdom_todomvc_todos_hpp
 
-#include "./task.hpp"
+#include "../../../src/cpp/asm-dom.hpp"
+#include "task.hpp"
 #include <functional>
 #include <vector>
 #include <string>

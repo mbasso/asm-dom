@@ -1,4 +1,4 @@
-#include "./helpers.hpp"
+#include "helpers.hpp"
 #include <codecvt>
 #include <locale>
 #include <string>
