@@ -8,7 +8,7 @@
 using namespace asmdom;
 
 void deleteVNodePtr(const std::uintptr_t& vnodePtr) {
-  deleteVNode(reinterpret_cast<VNode*>(vnodePtr));
+  delete reinterpret_cast<VNode*>(vnodePtr);
 };
 
 int getNode(const std::uintptr_t& vnodePtr) {

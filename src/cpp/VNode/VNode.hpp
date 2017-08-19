@@ -92,6 +92,7 @@ namespace asmdom {
         const Data& nodeData,
         VNode* child
       ): sel(nodeSel), data(nodeData), children{ child } { adjustVNode(); };
+      ~VNode();
 
       std::string sel; 
       std::string key;
@@ -102,8 +103,6 @@ namespace asmdom {
   };
 
   typedef std::vector<VNode*> Children;
-
-	void deleteVNode(VNode* vnode);
 
 }
 

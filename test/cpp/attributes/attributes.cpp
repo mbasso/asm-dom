@@ -30,7 +30,7 @@ void shouldHaveTheirProvidedValues() {
 		emscripten::val("true")
 	);
 
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void attributesCanBeMemoized() {
@@ -76,7 +76,7 @@ void attributesCanBeMemoized() {
 		emscripten::val("true")
 	);
 
-	deleteVNode(vnode2);
+	delete vnode2;
 };
 
 void shouldBeOmittedWhenFalsyValuesAreProvided() {
@@ -104,7 +104,7 @@ void shouldBeOmittedWhenFalsyValuesAreProvided() {
 		emscripten::val::null()
 	);
 
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldBeSetCorrectlyWhenNamespaced() {
@@ -125,7 +125,7 @@ void shouldBeSetCorrectlyWhenNamespaced() {
 		emscripten::val("#foo")
 	);
 
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 EMSCRIPTEN_BINDINGS(attributes_tests) {

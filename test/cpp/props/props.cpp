@@ -17,7 +17,7 @@ void shouldCreateElementWithProps() {
   emscripten::val elm = getBodyFirstChild();
   assertEquals(elm["src"], emscripten::val("http://localhost/"));
 
-  deleteVNode(vnode);
+  delete vnode;
 };
 
 void changesAnElementsProps() {
@@ -40,7 +40,7 @@ void changesAnElementsProps() {
   emscripten::val elm = getBodyFirstChild();
   assertEquals(elm["src"], emscripten::val("http://localhost/"));
 
-  deleteVNode(vnode2);
+  delete vnode2;
 };
 
 void preservesMemoizedProps() {
@@ -60,7 +60,7 @@ void preservesMemoizedProps() {
   elm = getBodyFirstChild();
   assertEquals(elm["src"], emscripten::val("http://other/"));
 
-  deleteVNode(vnode2);
+  delete vnode2;
 };
 
 void removesAnElementsProps() {
@@ -78,7 +78,7 @@ void removesAnElementsProps() {
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["src"], emscripten::val::undefined());
 
-  deleteVNode(vnode2);
+  delete vnode2;
 };
 
 EMSCRIPTEN_BINDINGS(props_tests) {

@@ -23,8 +23,8 @@ void shouldAutomaticallyClearMemory() {
 		throw 20;
 	}
 
-	deleteVNode(vnode1);
-	deleteVNode(vnode2);
+	delete vnode1;
+	delete vnode2;
 };
 
 void shouldAutomaticallyClearMemoryByConfig() {
@@ -47,8 +47,8 @@ void shouldAutomaticallyClearMemoryByConfig() {
 		throw 20;
 	}
 
-	deleteVNode(vnode1);
-	deleteVNode(vnode2);
+	delete vnode1;
+	delete vnode2;
 };
 
 void shouldNotAutomaticallyClearMemoryByConfig() {
@@ -71,8 +71,8 @@ void shouldNotAutomaticallyClearMemoryByConfig() {
 		throw 20;
 	}
 
-	deleteVNode(vnode1);
-	deleteVNode(vnode2);
+	delete vnode1;
+	delete vnode2;
 };
 
 void shouldUseSafePatch() {
@@ -91,8 +91,8 @@ void shouldUseSafePatch() {
 		throw 20;
 	}
 
-	deleteVNode(vnode);
-	deleteVNode(vnode2);
+	delete vnode;
+	delete vnode2;
 };
 
 void shouldUseSafePatchByConfig() {
@@ -112,8 +112,8 @@ void shouldUseSafePatchByConfig() {
 		throw 20;
 	}
 
-	deleteVNode(vnode);
-	deleteVNode(vnode2);
+	delete vnode;
+	delete vnode2;
 };
 
 void shouldNotUseSafePatchByConfig() {
@@ -133,8 +133,8 @@ void shouldNotUseSafePatchByConfig() {
 		throw 20;
 	}
 
-	deleteVNode(vnode);
-	deleteVNode(vnode2);
+	delete vnode;
+	delete vnode2;
 };
 
 

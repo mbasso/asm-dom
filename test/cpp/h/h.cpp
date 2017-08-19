@@ -16,32 +16,32 @@ void shouldDeleteAVNode() {
 			h("video"),
 		}),
 	});
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithAProperTag() {
 	VNode* vnode = h("div");
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithChildren() {
 	VNode* vnode = h("div", Children {h("span"), h("b")});
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithOneChild() {
 	VNode* vnode = h("div", h("span"));
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithTextContentInString() {
 	VNode* vnode = h("div", "I am a string");
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeForComment() {
 	VNode* vnode = h("!", "test");
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithAttrsAndOneChild() {
@@ -51,7 +51,7 @@ void shouldCreateAVNodeWithAttrsAndOneChild() {
 		}),
 		h("span")
 	);
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithAttrsAndTextContentInString() {
@@ -61,7 +61,7 @@ void shouldCreateAVNodeWithAttrsAndTextContentInString() {
 		}),
 		"I am a string"
 	);
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithAttrsAndChildren() {
@@ -71,12 +71,12 @@ void shouldCreateAVNodeWithAttrsAndChildren() {
 		}),
 		Children {h("span"), h("i")}
 	);
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithText() {
 	VNode* vnode = h("this is a text", true);
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithAttrs() {
@@ -92,7 +92,7 @@ void shouldCreateAVNodeWithAttrs() {
 			}
 		)
 	);
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithProps() {
@@ -107,7 +107,7 @@ void shouldCreateAVNodeWithProps() {
 			{"data-float", emscripten::val(0.1)}
 		})
 	);
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithCallbacks() {
@@ -118,7 +118,7 @@ void shouldCreateAVNodeWithCallbacks() {
 			}
 		)
 	);
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithAttrsAndProps() {
@@ -142,7 +142,7 @@ void shouldCreateAVNodeWithAttrsAndProps() {
 			}
 		)
 	);
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithAttrsAndCallbacks() {
@@ -161,7 +161,7 @@ void shouldCreateAVNodeWithAttrsAndCallbacks() {
 			}
 		)
 	);
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithPropsAndCallbacks() {
@@ -180,7 +180,7 @@ void shouldCreateAVNodeWithPropsAndCallbacks() {
 			}
 		)
 	);
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 void shouldCreateAVNodeWithAttrsPropsAndCallbacks() {
@@ -207,7 +207,7 @@ void shouldCreateAVNodeWithAttrsPropsAndCallbacks() {
 			}
 		)
 	);
-	deleteVNode(vnode);
+	delete vnode;
 };
 
 EMSCRIPTEN_BINDINGS(h_function_tests) {

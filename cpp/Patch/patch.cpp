@@ -291,7 +291,7 @@ namespace asmdom {
 
 		#ifndef ASMDOM_JS_SIDE
 			if (config.getClearMemory()) {
-				deleteVNode(oldVnode);
+				delete oldVnode;
 			}
 		#endif
 
