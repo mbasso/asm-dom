@@ -16,7 +16,7 @@ namespace asmdom {
 				EM_ASM_({
 					window['asmDomHelpers']['domApi']['removeAttribute'](
 						$0,
-						Module['Pointer_stringify']($1)
+						Module['UTF8ToString']($1)
 					);
 				}, vnode->elm, it.first.c_str());
 			}
@@ -29,7 +29,7 @@ namespace asmdom {
 						EM_ASM_({
 							window['asmDomHelpers']['domApi']['removeAttribute'](
 								$0,
-								Module['Pointer_stringify']($1)
+								Module['UTF8ToString']($1)
 							);
 						}, vnode->elm, it.first.c_str());
 					} else {
@@ -38,8 +38,8 @@ namespace asmdom {
 					EM_ASM_({
 						window['asmDomHelpers']['domApi']['setAttribute'](
 							$0,
-							Module['Pointer_stringify']($1),
-							Module['Pointer_stringify']($2)
+							Module['UTF8ToString']($1),
+							Module['UTF8ToString']($2)
 						);
 					}, vnode->elm, it.first.c_str(), it.second.c_str());
 				

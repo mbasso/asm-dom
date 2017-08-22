@@ -46,27 +46,27 @@ namespace asmdom {
 		if (vnode->sel.empty()) {
 			vnode->elm = EM_ASM_INT({
 				return window['asmDomHelpers']['domApi']['createTextNode'](
-					Module['Pointer_stringify']($0)
+					Module['UTF8ToString']($0)
 				);
 			}, vnode->text.c_str());
 		} else if (!vnode->sel.compare("!")) {
 			vnode->elm = EM_ASM_INT({
 				return window['asmDomHelpers']['domApi']['createComment'](
-					Module['Pointer_stringify']($0)
+					Module['UTF8ToString']($0)
 				);
 			}, vnode->text.c_str());
 		} else {
 			if (vnode->data.attrs.count(std::string("ns"))) {
 				vnode->elm = EM_ASM_INT({
 					return window['asmDomHelpers']['domApi']['createElementNS'](
-						Module['Pointer_stringify']($0),
-						Module['Pointer_stringify']($1)
+						Module['UTF8ToString']($0),
+						Module['UTF8ToString']($1)
 					);
 				}, vnode->data.attrs["ns"].c_str(), vnode->sel.c_str());
 			} else {
 				vnode->elm = EM_ASM_INT({
 					return window['asmDomHelpers']['domApi']['createElement'](
-						Module['Pointer_stringify']($0)
+						Module['UTF8ToString']($0)
 					);
 				}, vnode->sel.c_str());
 			}
@@ -84,7 +84,7 @@ namespace asmdom {
 					window['asmDomHelpers']['domApi']['appendChild'](
 						$0,
 						window['asmDomHelpers']['domApi']['createTextNode'](
-							Module['Pointer_stringify']($1)
+							Module['UTF8ToString']($1)
 						)
 					);
 				}, vnode->elm, vnode->text.c_str());
@@ -236,7 +236,7 @@ namespace asmdom {
 			EM_ASM_({
 				window['asmDomHelpers']['domApi']['setTextContent'](
 					$0,
-					Module['Pointer_stringify']($1)
+					Module['UTF8ToString']($1)
 				);
 			}, vnode->elm, vnode->text.c_str());
 		}
