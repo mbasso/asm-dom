@@ -1359,6 +1359,36 @@ void shouldSupportAllNullChildren2() {
 	delete vnode3;
 };
 
+void shouldSetAsmDomRaws() {
+	VNode* vnode1 = h("i",
+		Data(
+			Props {
+				{"foo", emscripten::val("")}
+			},
+			Callbacks {
+				{"onclick", [](const emscripten::val& event) -> bool {
+					return true;
+				}}
+			}
+		)
+	);
+	VNode* vnode2 = h("i",
+		Data(
+			Props {
+				{"bar", emscripten::val("")}
+			}
+		)
+	);
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["asmDomRaws"]["length"], emscripten::val(1));
+	assertEquals(elm["asmDomRaws"]["0"], emscripten::val("onclick"));
+	patch(vnode1, vnode2);
+	elm = getBodyFirstChild();
+	assertEquals(elm["asmDomRaws"]["length"], emscripten::val(0));
+	delete vnode2;
+};
+
 EMSCRIPTEN_BINDINGS(patch_tests) {
   emscripten::function("shouldPatchANode", &shouldPatchANode);
 	emscripten::function("shouldHaveATag", &shouldHaveATag);
@@ -1409,4 +1439,5 @@ EMSCRIPTEN_BINDINGS(patch_tests) {
 	emscripten::function("shouldReorderElements", &shouldReorderElements);
 	emscripten::function("shouldSupportNullChildren2", &shouldSupportNullChildren2);
 	emscripten::function("shouldSupportAllNullChildren2", &shouldSupportAllNullChildren2);
+	emscripten::function("shouldSetAsmDomRaws", &shouldSetAsmDomRaws);
 };

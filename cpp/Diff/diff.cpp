@@ -77,19 +77,25 @@ namespace asmdom {
 	void diffCallbacks(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		if (oldVnode->data.callbacks.empty() && vnode->data.callbacks.empty()) return;
 
-		emscripten::val elm = emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm];
+		EM_ASM_({
+			window['asmDomHelpers']['nodes'][$0]['asmDomRaws'] = [];
+		}, vnode->elm);
 
 		for (auto& it : oldVnode->data.callbacks) {
 			if (!vnode->data.callbacks.count(it.first)) {
-				elm.set(it.first.c_str(), emscripten::val::undefined());
+				EM_ASM_({
+					window['asmDomHelpers']['nodes'][$0][Module['UTF8ToString']($1)] = undefined;
+				}, vnode->elm, it.first.c_str());
 			}
 		}
 
 		for (auto& it : vnode->data.callbacks) {
-			elm.set(
-				it.first.c_str(),
-				emscripten::val::global("window")["asmDomHelpers"].call<emscripten::val>("functionCallback", reinterpret_cast<std::uintptr_t>(vnode), emscripten::val(it.first))
-			);
+			EM_ASM_({
+				var key = Module['UTF8ToString']($2);
+				window['asmDomHelpers']['nodes'][$1][key] =
+					window['asmDomHelpers']['functionCallback']($0, key);
+				window['asmDomHelpers']['nodes'][$1]['asmDomRaws'].push(key);
+			}, reinterpret_cast<std::uintptr_t>(vnode), vnode->elm, it.first.c_str());
 		}
 	};
 
@@ -108,7 +114,6 @@ namespace asmdom {
 			diffProps(oldVnode, vnode);
 			diffCallbacks(oldVnode, vnode);
 		#endif
-		
 	};
 
 }

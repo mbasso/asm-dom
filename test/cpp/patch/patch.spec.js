@@ -219,4 +219,8 @@ describe('patch (cpp)', function test() {
   it('should support all null/undefined children', () => {
     app.shouldSupportAllNullChildren2();
   });
+
+  it('should set asmDomRaws', () => {
+    app.shouldSetAsmDomRaws();
+  });
 });

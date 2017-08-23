@@ -23,4 +23,6 @@ export default (oldVnodePtr, vnodePtr, elmPtr) => {
       elm[key] = newRaws[key];
     }
   }
+
+  elm.asmDomRaws = Object.keys(newRaws);
 };

@@ -21,7 +21,8 @@ namespace asmdom {
 
 	#ifndef ASMDOM_JS_SIDE
 		VNode* currentNode = NULL;
-
+	#endif
+	#ifdef ASMDOM_TEST
 		void reset() {
 			currentNode = NULL;
 		};

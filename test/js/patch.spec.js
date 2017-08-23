@@ -745,4 +745,25 @@ describe('patch (js)', function testPatch() {
     expect(map(inner, elm.children)).toEqual(['2', '1']);
     vdom.deleteVNode(vnode3);
   });
+
+  it('should set asmDomRaws', () => {
+    const vnode1 = h('i', {
+      raw: {
+        onclick: () => {},
+        foo: '',
+      },
+    });
+    const vnode2 = h('i', {
+      raw: {
+        bar: '',
+      },
+    });
+    patch(root, vnode1);
+    let elm = document.body.firstChild;
+    expect(elm.asmDomRaws).toEqual(['onclick', 'foo']);
+    patch(vnode1, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.asmDomRaws).toEqual(['bar']);
+    vdom.deleteVNode(vnode2);
+  });
 });

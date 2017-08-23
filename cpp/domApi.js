@@ -1,19 +1,15 @@
+import recycler from './domRecycler';
+
 export const nodes = { 0: null };
 let lastPtr = 0;
-const freePtrs = [];
 
 const addPtr = (node) => {
   if (node === null) return 0;
-  let ptr = freePtrs.pop();
-  if (ptr === undefined) ptr = ++lastPtr;
+  if (node.asmDomPtr !== undefined) return node.asmDomPtr;
+  const ptr = ++lastPtr;
   nodes[ptr] = node;
   node.asmDomPtr = ptr;
   return ptr;
-};
-
-const remove = (node) => {
-  node.childNodes.forEach(remove);
-  freePtrs.push(node.asmDomPtr);
 };
 
 export default {
@@ -23,16 +19,16 @@ export default {
     return addPtr(node);
   },
   'createElement'(tagName) {
-    return addPtr(document.createElement(tagName));
+    return addPtr(recycler.create(tagName));
   },
   'createElementNS'(namespaceURI, qualifiedName) {
-    return addPtr(document.createElementNS(namespaceURI, qualifiedName));
+    return addPtr(recycler.createNS(qualifiedName, namespaceURI));
   },
   'createTextNode'(text) {
-    return addPtr(document.createTextNode(text));
+    return addPtr(recycler.createText(text));
   },
   'createComment'(text) {
-    return addPtr(document.createComment(text));
+    return addPtr(recycler.createComment(text));
   },
   'insertBefore'(parentNodePtr, newNodePtr, referenceNodePtr) {
     nodes[parentNodePtr].insertBefore(
@@ -42,8 +38,7 @@ export default {
   },
   'removeChild'(childPtr) {
     if (nodes[childPtr] === null) return;
-    remove(nodes[childPtr]);
-    nodes[childPtr].remove();
+    recycler.collect(nodes[childPtr]);
   },
   'appendChild'(parentPtr, childPtr) {
     nodes[parentPtr].appendChild(nodes[childPtr]);

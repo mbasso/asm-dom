@@ -15,7 +15,7 @@ namespace asmdom {
 		VNode* const vnode
 	);
 
-	#ifndef ASMDOM_JS_SIDE
+	#ifdef ASMDOM_TEST
 		void reset();
 	#endif
 
