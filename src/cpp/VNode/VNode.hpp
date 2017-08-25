@@ -24,29 +24,40 @@ namespace asmdom {
 
   struct Data {
     Data() {};
-    Data(
-      const Data& data
-    ): attrs(data.attrs), props(data.props), callbacks(data.callbacks) {};
-    Data(
-      const Attrs& dataAttrs,
-      const Props& dataProps = Props(),
-      const Callbacks& dataCallbacks = Callbacks()
-    ): attrs(dataAttrs), props(dataProps), callbacks(dataCallbacks) {};
-    Data(
-      const Attrs& dataAttrs,
-      const Callbacks& dataCallbacks
-    ): attrs(dataAttrs), callbacks(dataCallbacks) {};
-    Data(
-      const Props& dataProps,
-      const Callbacks& dataCallbacks = Callbacks()
-    ): props(dataProps), callbacks(dataCallbacks) {};
-    Data(
-      const Callbacks& dataCallbacks
-    ): callbacks(dataCallbacks) {};
+    #ifdef ASMDOM_JS_SIDE
+      Data(
+        const Data& data
+      ): attrs(data.attrs) {};
+      Data(
+        const Attrs& dataAttrs
+      ): attrs(dataAttrs) {};
+    #else
+      Data(
+        const Data& data
+      ): attrs(data.attrs), props(data.props), callbacks(data.callbacks) {};
+      Data(
+        const Attrs& dataAttrs,
+        const Props& dataProps = Props(),
+        const Callbacks& dataCallbacks = Callbacks()
+      ): attrs(dataAttrs), props(dataProps), callbacks(dataCallbacks) {};
+      Data(
+        const Attrs& dataAttrs,
+        const Callbacks& dataCallbacks
+      ): attrs(dataAttrs), callbacks(dataCallbacks) {};
+      Data(
+        const Props& dataProps,
+        const Callbacks& dataCallbacks = Callbacks()
+      ): props(dataProps), callbacks(dataCallbacks) {};
+      Data(
+        const Callbacks& dataCallbacks
+      ): callbacks(dataCallbacks) {};
+    #endif
 
     Attrs attrs;
-    Props props;
-    Callbacks callbacks;
+    #ifndef ASMDOM_JS_SIDE
+      Props props;
+      Callbacks callbacks;
+    #endif
   };
 
   struct VNode {
