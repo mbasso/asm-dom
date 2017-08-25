@@ -14,7 +14,7 @@ void beforeEach() {
 
 bool callback(emscripten::val event) {
 	std::string tagName = event["target"]["tagName"].as<std::string>();
-	if (tagName.compare("DIV") != 0 && tagName.compare("A") != 0) {
+	if (tagName != "DIV" && tagName != "A") {
 		throw 20;
 	}
 

@@ -6,15 +6,21 @@
 #include <utility>
 #include <vector>
 #include <string>
-#include <map>
+#include <unordered_map>
+#ifdef ASMDOM_JS_SIDE
+  #include <map>
+#endif
 
 namespace asmdom {
 
   typedef std::function<bool(emscripten::val)> Callback;
-
-  typedef std::map<std::string, std::string> Attrs;
-  typedef std::map<std::string, emscripten::val> Props;
-  typedef std::map<std::string, Callback> Callbacks;
+  #ifdef ASMDOM_JS_SIDE
+    typedef std::map<std::string, std::string> Attrs;
+  #else
+    typedef std::unordered_map<std::string, std::string> Attrs;
+  #endif
+  typedef std::unordered_map<std::string, emscripten::val> Props;
+  typedef std::unordered_map<std::string, Callback> Callbacks;
 
   struct Data {
     Data() {};

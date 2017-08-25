@@ -50,10 +50,11 @@ const recycler = {
     return document.createComment(comment);
   },
   clean(node) {
-    while (node.firstChild) recycler.collect(node.firstChild);
-    node.remove();
     let i;
-    if (node.attributes !== undefined) i = node.attributes.length;
+    // eslint-disable-next-line
+    while (i = node.lastChild) recycler.collect(i);
+    node.remove();
+    i = node.attributes !== undefined ? node.attributes.length : 0;
     while (i--) node.removeAttribute(node.attributes[i].name);
     if (node.asmDomRaws !== undefined && node.asmDomRaws.length > 0) {
       node.asmDomRaws.forEach((raw) => {

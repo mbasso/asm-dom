@@ -37,7 +37,7 @@ export default {
     );
   },
   'removeChild'(childPtr) {
-    if (nodes[childPtr] === null) return;
+    if (nodes[childPtr] === null || nodes[childPtr] === undefined) return;
     recycler.collect(nodes[childPtr]);
   },
   'appendChild'(parentPtr, childPtr) {

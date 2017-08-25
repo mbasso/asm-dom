@@ -29,7 +29,7 @@ namespace asmdom {
 	#endif
 
 	bool sameVNode(const VNode* __restrict__ const vnode1, const VNode* __restrict__ const vnode2) {
-		return !vnode1->key.compare(vnode2->key) && !vnode1->sel.compare(vnode2->sel);
+		return vnode1->key == vnode2->key && vnode1->sel == vnode2->sel;
 	};
 
 	std::map<std::string, int>* createKeyToOldIdx(const std::vector<VNode*>& children, int beginIdx, const int endIdx) {
@@ -50,20 +50,21 @@ namespace asmdom {
 					Module['UTF8ToString']($0)
 				);
 			}, vnode->text.c_str());
-		} else if (!vnode->sel.compare("!")) {
+		} else if (vnode->sel == "!") {
 			vnode->elm = EM_ASM_INT({
 				return window['asmDomHelpers']['domApi']['createComment'](
 					Module['UTF8ToString']($0)
 				);
 			}, vnode->text.c_str());
 		} else {
-			if (vnode->data.attrs.count(std::string("ns"))) {
+			if (vnode->data.attrs.count("ns")) {
 				vnode->elm = EM_ASM_INT({
 					return window['asmDomHelpers']['domApi']['createElementNS'](
 						Module['UTF8ToString']($0),
 						Module['UTF8ToString']($1)
 					);
 				}, vnode->data.attrs["ns"].c_str(), vnode->sel.c_str());
+				vnode->data.attrs.erase("ns");
 			} else {
 				vnode->elm = EM_ASM_INT({
 					return window['asmDomHelpers']['domApi']['createElement'](
@@ -185,7 +186,7 @@ namespace asmdom {
 					newStartVnode = newCh[++newStartIdx];
 				} else {
 					elmToMove = oldCh[oldKeyToIdx->at(newStartVnode->key)];
-					if (elmToMove->sel.compare(newStartVnode->sel)) {
+					if (elmToMove->sel != newStartVnode->sel) {
 						EM_ASM_({
 							window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
 						}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
@@ -233,7 +234,7 @@ namespace asmdom {
 					window['asmDomHelpers']['domApi']['setTextContent']($0, "");
 				}, vnode->elm);
 			}
-		} else if (vnode->text.compare(oldVnode->text)) {
+		} else if (vnode->text != oldVnode->text) {
 			EM_ASM_({
 				window['asmDomHelpers']['domApi']['setTextContent'](
 					$0,

@@ -23,9 +23,9 @@ namespace asmdom {
 		}
 
 		for (auto& it : vnode->data.attrs) {
-			if (!oldVnode->data.attrs.count(it.first) || oldVnode->data.attrs[it.first].compare(it.second)) {
+			if (!oldVnode->data.attrs.count(it.first) || oldVnode->data.attrs[it.first] != it.second) {
 				#ifndef ASMDOM_JS_SIDE
-					if (!it.second.compare("false")) {
+					if (it.second == "false") {
 						EM_ASM_({
 							window['asmDomHelpers']['domApi']['removeAttribute'](
 								$0,
@@ -67,7 +67,10 @@ namespace asmdom {
 			if (
 				!oldVnode->data.props.count(it.first) ||
 				!it.second.strictlyEquals(oldVnode->data.props.at(it.first)) ||
-				(!it.first.compare("value") && !it.second.strictlyEquals(elm[it.first.c_str()]))
+				(
+					(it.first == "value" || it.first == "checked") && 
+					!it.second.strictlyEquals(elm[it.first.c_str()])
+				)
 			) {
 				elm.set(it.first.c_str(), it.second);
 			}

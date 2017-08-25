@@ -10,9 +10,9 @@ std::function<void(todomvc::todos::action)> handler;
 
 void onhashchange(std::string filter) {
 	TodoFilter todoFilter = all;
-	if (filter.compare("completed") == 0) {
+	if (filter == "completed") {
 		todoFilter = completed;
-	} else if (filter.compare("active") == 0) {
+	} else if (filter == "active") {
 		todoFilter = active;
 	}
 	handler(todomvc::todos::Action::Filter(todoFilter));

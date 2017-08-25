@@ -10,7 +10,7 @@ namespace asmdom {
 
 	void addNS(VNode* const vnode) {
 		vnode->data.attrs["ns"] = "http://www.w3.org/2000/svg";
-		if (vnode->sel.compare("foreignObject") != 0 && !vnode->children.empty()) {
+		if (vnode->sel != "foreignObject" && !vnode->children.empty()) {
 			for(std::vector<VNode*>::size_type i = 0; i != vnode->children.size(); ++i) {
 				addNS(vnode->children[i]);
 			}
@@ -20,6 +20,7 @@ namespace asmdom {
 	void VNode::adjustVNode() {
 		if (data.attrs.count(std::string("key")) != 0) {
 			key = data.attrs["key"];
+			data.attrs.erase("key");
 		}
 
 		if (sel[0] == 's' && sel[1] == 'v' && sel[2] == 'g') {
