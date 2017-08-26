@@ -29,7 +29,7 @@
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --ignore prefix.js,postfix.js",
     "build:umd": "cross-env BABEL_ENV=commonjs webpack --env.prod src/js/index.js dist/js/asm-dom.js",
     "build:cpp": "cross-env BABEL_ENV=commonjs webpack --env.prod --env.cpp src/cpp/index.js dist/cpp/asm-dom.js",
-    "build": "ncp src/cpp cpp && npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:cpp && ncp dist/cpp cpp",
+    "build": "ncp src/cpp cpp && npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:cpp && ncp dist/cpp cpp && ncp lib/cpp cpp",
     "build:compile": "npm run compile && npm run build",
     "prepublish": "npm run check:src && npm run build",
     "lint": "eslint src test build"

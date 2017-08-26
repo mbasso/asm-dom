@@ -1,52 +1,58 @@
-import recycler from './domRecycler';
+'use strict';
 
-export const nodes = { 0: null };
-let lastPtr = 0;
+exports.__esModule = true;
+exports.nodes = undefined;
 
-const addPtr = (node) => {
+var _domRecycler = require('./domRecycler');
+
+var _domRecycler2 = _interopRequireDefault(_domRecycler);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var nodes = exports.nodes = { 0: null };
+var lastPtr = 0;
+
+var addPtr = function addPtr(node) {
   if (node === null) return 0;
   if (node.asmDomPtr !== undefined) return node.asmDomPtr;
-  const ptr = ++lastPtr;
+  var ptr = ++lastPtr;
   nodes[ptr] = node;
   node.asmDomPtr = ptr;
   return ptr;
 };
 
-export default {
-  'addNode'(node) {
+exports['default'] = {
+  'addNode': function addNode(node) {
     addPtr(node.parentNode);
     addPtr(node.nextSibling);
     return addPtr(node);
   },
-  'createElement'(tagName) {
-    return addPtr(recycler.create(tagName));
+  'createElement': function createElement(tagName) {
+    return addPtr(_domRecycler2['default'].create(tagName));
   },
-  'createElementNS'(namespaceURI, qualifiedName) {
-    return addPtr(recycler.createNS(qualifiedName, namespaceURI));
+  'createElementNS': function createElementNS(namespaceURI, qualifiedName) {
+    return addPtr(_domRecycler2['default'].createNS(qualifiedName, namespaceURI));
   },
-  'createTextNode'(text) {
-    return addPtr(recycler.createText(text));
+  'createTextNode': function createTextNode(text) {
+    return addPtr(_domRecycler2['default'].createText(text));
   },
-  'createComment'(text) {
-    return addPtr(recycler.createComment(text));
+  'createComment': function createComment(text) {
+    return addPtr(_domRecycler2['default'].createComment(text));
   },
-  'insertBefore'(parentNodePtr, newNodePtr, referenceNodePtr) {
-    nodes[parentNodePtr].insertBefore(
-      nodes[newNodePtr],
-      nodes[referenceNodePtr],
-    );
+  'insertBefore': function insertBefore(parentNodePtr, newNodePtr, referenceNodePtr) {
+    nodes[parentNodePtr].insertBefore(nodes[newNodePtr], nodes[referenceNodePtr]);
   },
-  'removeChild'(childPtr) {
+  'removeChild': function removeChild(childPtr) {
     if (nodes[childPtr] === null || nodes[childPtr] === undefined) return;
-    recycler.collect(nodes[childPtr]);
+    _domRecycler2['default'].collect(nodes[childPtr]);
   },
-  'appendChild'(parentPtr, childPtr) {
+  'appendChild': function appendChild(parentPtr, childPtr) {
     nodes[parentPtr].appendChild(nodes[childPtr]);
   },
-  'removeAttribute'(nodePtr, attr) {
+  'removeAttribute': function removeAttribute(nodePtr, attr) {
     nodes[nodePtr].removeAttribute(attr);
   },
-  'setAttribute'(nodePtr, attr, value) {
+  'setAttribute': function setAttribute(nodePtr, attr, value) {
     // xChar = 120
     // colonChar = 58
     if (attr.charCodeAt(0) !== 120) {
@@ -61,21 +67,16 @@ export default {
       nodes[nodePtr].setAttribute(attr, value);
     }
   },
+
   // eslint-disable-next-line
-  'parentNode': (nodePtr) => {
-    return (
-      nodes[nodePtr] !== null && nodes[nodePtr] !== undefined &&
-      nodes[nodePtr].parentNode !== null
-    ) ? nodes[nodePtr].parentNode.asmDomPtr : 0;
+  'parentNode': function parentNode(nodePtr) {
+    return nodes[nodePtr] !== null && nodes[nodePtr] !== undefined && nodes[nodePtr].parentNode !== null ? nodes[nodePtr].parentNode.asmDomPtr : 0;
   },
   // eslint-disable-next-line
-  'nextSibling': (nodePtr) => {
-    return (
-      nodes[nodePtr] !== null && nodes[nodePtr] !== undefined &&
-      nodes[nodePtr].nextSibling !== null
-    ) ? nodes[nodePtr].nextSibling.asmDomPtr : 0;
+  'nextSibling': function nextSibling(nodePtr) {
+    return nodes[nodePtr] !== null && nodes[nodePtr] !== undefined && nodes[nodePtr].nextSibling !== null ? nodes[nodePtr].nextSibling.asmDomPtr : 0;
   },
-  'setTextContent': (nodePtr, text) => {
+  'setTextContent': function setTextContent(nodePtr, text) {
     nodes[nodePtr].textContent = text;
-  },
+  }
 };
