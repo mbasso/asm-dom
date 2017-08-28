@@ -271,8 +271,8 @@ If a DOM element is passed, `newVnode` will be turned into a DOM node, and the p
 **If `unsafePatch` in `init` is equal to false, any old vnode passed must be the resulting vnode from the previous call to patch. Otherwise, no operation is performed and NULL is returned.**
 
 ```c++
-VNode* oldVnode = h(std::string("span"), "old node");
-VNode* newVnode = h(std::string("span"), "new node");
+VNode* oldVnode = h("span", std::string("old node"));
+VNode* newVnode = h("span", std::string("new node"));
 
 patch(
 	emscripten::val::global("document").call<emscripten::val>("getElementById", emscripten::val("root")),
@@ -288,13 +288,13 @@ patch(oldVnode, vnode); // returns NULL, found oldVnode, expected newVnode
 With `unsafePatch = true` you can implement some interesting mechanisms, for example you can do something like this:
 
 ```c++
-VNode* oldText = h(std::string("span"), "old text");
-VNode* vnode = h("div", VNodeChildren {
-  h(std::string("span"), "this is a text"),
+VNode* oldText = h("span", std::string("old text"));
+VNode* vnode = h("div", Children {
+  h("span", std::string("this is a text")),
   oldText
 });
 
-patch(document.getElementById("root"),
+patch(
 	emscripten::val::global("document").call<emscripten::val>("getElementById", emscripten::val("root")),
 	vnode
 );
@@ -312,14 +312,14 @@ As we said before the `h` returns a pointer to a VNode, this means that the memo
 
 ```c++
 VNode* vnode1 = h("div");
-VNode* vnode2 = h("div", VNodeChildren {
+VNode* vnode2 = h("div", Children {
   h("span")
 });
 patch(vnode1, vnode2); // vnode1 automatically deleted
 
 VNode* child1 = h(std::string("span"), "child 1");
 VNode* child2 = h(std::string("span"), "child 2");
-VNode* vnode = h("span", VNodeChildren {
+VNode* vnode = h("span", Children {
   child1,
   child2,
 });
