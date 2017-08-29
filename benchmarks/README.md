@@ -6,11 +6,11 @@
 
 ---
 
-In this directory you can find some code to measure the performance of asm-dom. You can find the results of asm-dom and [snabbdom](https://github.com/snabbdom/snabbdom), this allows you to make a comparison between the performance of asm-dom and a js virtual DOM. Before jumping to conclusions please read this list, this underline some important aspects:
+In this directory you can find some code to measure the performance of asm-dom. In particular you can find the results of asm-dom and [snabbdom](https://github.com/snabbdom/snabbdom), this allows you to make a comparison between the performance of asm-dom and a js virtual DOM. Before jumping to conclusions please read this list, this underline some important aspects:
 
-- asm-dom aims to let you write high perfomance web apps in C++. Your code will be compiled into WebAssembly, this means that it will run until 4 times faster (you can see that in the second test). However asm-dom needs to update the DOM and unfortunately, at the moment, this involves javascript. This means that the internals of asm-dom will call js for you and they will deal with the overhead of the binding between JS and WASM. In the future, without these bindings, asm-dom will be even more powerful. You have to be aware that, for the reason that we have just explained, **the results that you will see later won't represent the performance of your entire app, your code, your algorithms and so on will be a lot faster than this (they will be like the second test). asm-dom will be the only place that will deal with the overhead of the js <-> wasm communication.** 
+- asm-dom aims to let you write high perfomance web apps in C++ that will be compiled into WebAssembly. This means that they will run until 4 times faster. However asm-dom needs to update the DOM and unfortunately, at the moment, this involves javascript. So, the internals of asm-dom will call js for you and they will deal with the overhead of the binding between JS and WASM. In the future, without these bindings, asm-dom will be even more powerful, however, you have to be aware that, for this reason, **the results that you will see later won't represent the performance of your entire app, your code, your algorithms and so on will be a lot faster (they will be like the second test where there are no js calls). asm-dom will be the only place that will deal with the overhead of the js <-> wasm communication.**
 
-- asm-dom does not leave garbage after the execution of its tests, while snabbdom might leave some garbage that need to be collected by the garbage collector
+- asm-dom does not leave garbage after the execution of its tests, while snabbdom might leave some garbage that need to be collected by the garbage collector.
 
 There are 4 tests at the moment:
 

@@ -105,7 +105,7 @@ int main() {
 
 In order to use asm-dom you have to prepare your js and C++ environment.
 
-To do this, **before importing your compiled code from C++** (wasm or asmjs) you have to include our js file: 
+To do this, as first thing, **before importing your compiled code from C++** (wasm or asmjs) you have to include our js file: 
 
 - if you are not using [npm](https://www.npmjs.com/package/asm-dom) you can import [our js file](https://github.com/mbasso/asm-dom/blob/master/dist/cpp/asm-dom.js) from [unpkg](https://unpkg.com/asm-dom/dist/cpp/asm-dom.js)
 
@@ -144,13 +144,24 @@ To do this, **before importing your compiled code from C++** (wasm or asmjs) you
   },
   ```
 
-You can now build your app using the source code in the [cpp](https://github.com/mbasso/asm-dom/tree/master/cpp) folder:
+After that, you can build your app using the source code in the [cpp](https://github.com/mbasso/asm-dom/tree/master/cpp) folder:
 
 - `asm-dom.hpp`
 - `asm-dom.cpp` or `asm-dom.a`
 
-To compile your code you can now use [emscripten (emcc cli)](http://kripken.github.io/emscripten-site/), [here](http://webassembly.org/getting-started/developers-guide/) is the installation guide. Please make sure to use the `--bind` option during the compilation, otherwise asm-dom will not work. You can find an example that uses all the optiminazionts [here](https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpp/package.json).
-You can also notice that we are using 2 extra files with emcc `--pre-js` (`prefix.js`) and `--post-js` (`postfix.js`). These files allow us to import the generated js as a module with the `import` syntax as shown [here](https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpp/src/index.js).
+and compile it using [emscripten (emcc cli)](http://kripken.github.io/emscripten-site/), [here](http://webassembly.org/getting-started/developers-guide/) is the installation guide. A few tips about this step:
+
+- please make sure to use the `--bind` option during the compilation, otherwise asm-dom will not work.
+
+- emcc has a lot of settings that can optimize the build, we suggest you to see [this](https://kripken.github.io/emscripten-site/docs/optimizing/Optimizing-Code.html) page and [our configuration]((https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpp/package.json)) in the TODOMVC example.
+
+- we suggest you to compile your app to `.bc` and then use it to produce a WebAssembly version and an asm.js version that you can use as fallback
+
+After the compilation you can import your app:
+
+- if you are using webpack, you can see our [example]((https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpp/src/index.js)). In order to import it as a module we have used 2 extra files with emcc `--pre-js` (`prefix.js`) and `--post-js` (`postfix.js`).
+
+- If you want to use wasm without webpack, you can see [this](https://gist.github.com/kripken/59c67556dc03bb6d57052fedef1e61ab) gist.
 
 If you are using [babel](https://babeljs.io/), please make sure to ignore the compiled files, the prefix and suffix:
 
