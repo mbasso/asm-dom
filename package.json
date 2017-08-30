@@ -1,7 +1,7 @@
 {
   "name": "asm-dom",
-  "version": "0.2.0",
-  "description": "A minimal WebAssembly virtual DOM with C++ and JS APIs",
+  "version": "0.3.0",
+  "description": "A minimal WebAssembly virtual DOM to build C++ Web Apps",
   "main": "lib/js/index.js",
   "jsnext:main": "es/js/index.js",
   "files": [
