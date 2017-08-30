@@ -1,9 +1,0 @@
-node_modules
-.DS_Store
-*.log
-lib
-es
-coverage
-_book
-.nyc_output
-.vscode

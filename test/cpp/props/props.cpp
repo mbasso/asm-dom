@@ -1,0 +1,89 @@
+#include "../../../src/cpp/asm-dom.hpp"
+#include "../utils.hpp"
+#include <emscripten/bind.h>
+#include <emscripten/val.h>
+
+using namespace asmdom;
+
+void shouldCreateElementWithProps() {
+  VNode* vnode = h("div",
+    Data(
+      Props {
+        {"src", emscripten::val("http://localhost/")}
+      }
+    )
+  );
+  patch(getRoot(), vnode);
+  emscripten::val elm = getBodyFirstChild();
+  assertEquals(elm["src"], emscripten::val("http://localhost/"));
+
+  delete vnode;
+};
+
+void changesAnElementsProps() {
+  VNode* vnode = h("a",
+  Data(
+      Props {
+        {"src", emscripten::val("http://other/")}
+      }
+    )
+  );
+  VNode* vnode2 = h("a",
+  Data(
+      Props {
+        {"src", emscripten::val("http://localhost/")}
+      }
+    )
+  );
+  patch(getRoot(), vnode);
+  patch(vnode, vnode2);
+  emscripten::val elm = getBodyFirstChild();
+  assertEquals(elm["src"], emscripten::val("http://localhost/"));
+
+  delete vnode2;
+};
+
+void preservesMemoizedProps() {
+  Data data = Data(
+    Props {
+      {"src", emscripten::val("http://other/")}
+    }
+  );
+  VNode* vnode = h("a", data);
+  VNode* vnode2 = h("a", data);
+  patch(getRoot(), vnode);
+
+  emscripten::val elm = getBodyFirstChild();
+  assertEquals(elm["src"], emscripten::val("http://other/"));
+
+  patch(vnode, vnode2);
+  elm = getBodyFirstChild();
+  assertEquals(elm["src"], emscripten::val("http://other/"));
+
+  delete vnode2;
+};
+
+void removesAnElementsProps() {
+  VNode* vnode = h("a",
+    Data(
+      Props {
+        {"src", emscripten::val("http://other/")}
+      }
+    )
+  );
+  VNode* vnode2 = h("a");
+  patch(getRoot(), vnode);
+  patch(vnode, vnode2);
+
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["src"], emscripten::val::undefined());
+
+  delete vnode2;
+};
+
+EMSCRIPTEN_BINDINGS(props_tests) {
+  emscripten::function("shouldCreateElementWithProps", &shouldCreateElementWithProps);
+  emscripten::function("changesAnElementsProps", &changesAnElementsProps);
+  emscripten::function("preservesMemoizedProps", &preservesMemoizedProps);
+  emscripten::function("removesAnElementsProps", &removesAnElementsProps);
+};
