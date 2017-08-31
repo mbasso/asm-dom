@@ -5,7 +5,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/asm-dom.svg?maxAge=2592000)](https://www.npmjs.com/package/asm-dom)
 [![Join the chat at https://gitter.im/mbasso/asm-dom](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mbasso/asm-dom?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-> A minimal WebAssembly virtual DOM to build C++ Web Apps
+> A minimal WebAssembly virtual DOM to build C++ SPA (Single page applications)
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@
 
 ## Motivation
 
-asm-dom is a minimal WebAssembly virtual DOM to build C++ Web Apps. You can write an entire Web App in C++ and compile it to WebAssembly (or asmjs as fallback) using [Emscripten](http://kripken.github.io/emscripten-site/), asm-dom will call DOM APIs for you. This will produce an app that `aims to execute at native speed by taking advantage of common hardware capabilities`, also, you can use your C/C++ code without any change, you haven't to create a binding layer to use it (as we have to do if we want to use a C++ lib from JS). Basically we are creating an app in C++ that call javascript if needed instead of the opposite. You can write only once in C++ and share as much code as possible with desktop/mobile apps and web site. If you want to learn more about performance, please see [this](https://github.com/mbasso/asm-dom/tree/master/benchmarks).
+asm-dom is a minimal WebAssembly virtual DOM to build C++ SPA (Single page applications). You can write an entire SPA in C++ and compile it to WebAssembly (or asmjs as fallback) using [Emscripten](http://kripken.github.io/emscripten-site/), asm-dom will call DOM APIs for you. This will produce an app that `aims to execute at native speed by taking advantage of common hardware capabilities`, also, you can use your C/C++ code without any change, you haven't to create a binding layer to use it (as we have to do if we want to use a C++ lib from JS). Basically we are creating an app in C++ that call javascript if needed instead of the opposite. You can write only once in C++ and share as much code as possible with desktop/mobile apps and web site. If you want to learn more about performance, please see [this](https://github.com/mbasso/asm-dom/tree/master/benchmarks).
 
 *How can I structure my application with asm-dom?*
 
