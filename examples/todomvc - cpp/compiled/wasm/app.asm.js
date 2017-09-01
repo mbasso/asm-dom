@@ -181,15 +181,15 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
  var i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0, i6 = 0, i7 = 0, i8 = 0, i9 = 0, i10 = 0, i11 = 0, i12 = 0, i13 = 0, i14 = 0, i15 = 0, i16 = 0, i17 = 0, i18 = 0, i19 = 0, i20 = 0, i21 = 0, i22 = 0, i23 = 0, i24 = 0, i25 = 0, i26 = 0, i27 = 0, i28 = 0, i29 = 0, i32 = 0, i33 = 0, i34 = 0, i35 = 0, i36 = 0, i37 = 0, i38 = 0, i39 = 0, i40 = 0, i41 = 0, i42 = 0, i43 = 0, i44 = 0, i45 = 0, i46 = 0, i47 = 0, i48 = 0, i49 = 0;
  i49 = STACKTOP;
  STACKTOP = STACKTOP + 3008 | 0;
- i4 = HEAP32[i30 + 20 >> 2] | 0;
  i1 = HEAP32[i30 + 16 >> 2] | 0;
- if ((i4 | 0) == (i1 | 0)) i16 = 0; else {
-  i3 = 0;
+ i4 = HEAP32[i30 + 20 >> 2] | 0;
+ if ((i1 | 0) == (i4 | 0)) i16 = 0; else {
+  i3 = i1;
   i2 = 0;
   do {
-   i2 = ((HEAP8[i1 + (i3 << 5) + 16 >> 0] ^ 1) & 255) + i2 | 0;
-   i3 = i3 + 1 | 0;
-  } while (i3 >>> 0 < i4 - i1 >> 5 >>> 0);
+   i2 = ((HEAP8[i3 + 16 >> 0] | 0) == 0 & 1) + i2 | 0;
+   i3 = i3 + 32 | 0;
+  } while ((i3 | 0) != (i4 | 0));
   i16 = i2;
  }
  i2 = HEAP32[i30 + 28 >> 2] | 0;
@@ -200,23 +200,23 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
   if (i4 - i1 >> 5 >>> 0 > 134217727) __ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv();
   i5 = __Znwj(i4 - i1 | 0) | 0;
   i1 = HEAP32[i30 + 16 >> 2] | 0;
-  i4 = HEAP32[i30 + 20 >> 2] | 0;
-  if ((i1 | 0) == (i4 | 0)) {
+  i3 = HEAP32[i30 + 20 >> 2] | 0;
+  if ((i1 | 0) == (i3 | 0)) {
    i48 = i5;
    i1 = i5;
   } else {
-   i3 = i5;
+   i4 = i5;
    i2 = i1;
    i1 = i5;
    do {
-    HEAP32[i3 >> 2] = HEAP32[i2 >> 2];
-    __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_(i3 + 4 | 0, i2 + 4 | 0);
-    HEAP16[i3 + 16 >> 1] = HEAP16[i2 + 16 >> 1] | 0;
-    __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEC2ERKS5_(i3 + 20 | 0, i2 + 20 | 0);
+    HEAP32[i4 >> 2] = HEAP32[i2 >> 2];
+    __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_(i4 + 4 | 0, i2 + 4 | 0);
+    HEAP16[i4 + 16 >> 1] = HEAP16[i2 + 16 >> 1] | 0;
+    __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEC2ERKS5_(i4 + 20 | 0, i2 + 20 | 0);
     i2 = i2 + 32 | 0;
-    i3 = i1 + 32 | 0;
-    i1 = i3;
-   } while ((i2 | 0) != (i4 | 0));
+    i4 = i1 + 32 | 0;
+    i1 = i4;
+   } while ((i2 | 0) != (i3 | 0));
    i48 = i5;
   }
  } else {
@@ -230,7 +230,7 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
   } else {
    i3 = 0;
    while (1) {
-    L19 : do switch (i2 | 0) {
+    L18 : do switch (i2 | 0) {
     case 0:
      {
       i4 = i1 + (i3 << 5) | 0;
@@ -239,14 +239,14 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
        i2 = HEAP32[i6 >> 2] | 0;
        if ((i2 | 0) == (HEAP32[i49 + 360 + 8 >> 2] | 0)) {
         __ZNSt3__26vectorIN7todomvc4task4TaskENS_9allocatorIS3_EEE21__push_back_slow_pathIRKS3_EEvOT_(i49 + 360 | 0, i4);
-        break L19;
+        break L18;
        } else {
         HEAP32[i2 >> 2] = HEAP32[i4 >> 2];
         __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_(i2 + 4 | 0, i1 + (i3 << 5) + 4 | 0);
         HEAP16[i2 + 16 >> 1] = HEAP16[i5 >> 1] | 0;
         __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEC2ERKS5_(i2 + 20 | 0, i1 + (i3 << 5) + 20 | 0);
         HEAP32[i6 >> 2] = i2 + 32;
-        break L19;
+        break L18;
        }
       }
       break;
@@ -259,14 +259,14 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
        i2 = HEAP32[i6 >> 2] | 0;
        if ((i2 | 0) == (HEAP32[i49 + 360 + 8 >> 2] | 0)) {
         __ZNSt3__26vectorIN7todomvc4task4TaskENS_9allocatorIS3_EEE21__push_back_slow_pathIRKS3_EEvOT_(i49 + 360 | 0, i4);
-        break L19;
+        break L18;
        } else {
         HEAP32[i2 >> 2] = HEAP32[i4 >> 2];
         __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_(i2 + 4 | 0, i1 + (i3 << 5) + 4 | 0);
         HEAP16[i2 + 16 >> 1] = HEAP16[i5 >> 1] | 0;
         __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEEC2ERKS5_(i2 + 20 | 0, i1 + (i3 << 5) + 20 | 0);
         HEAP32[i6 >> 2] = i2 + 32;
-        break L19;
+        break L18;
        }
       }
       break;
@@ -288,7 +288,7 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
  i47 = i49 + 2956 + 4 | 0;
  HEAP32[i47 >> 2] = 0;
  HEAP32[i49 + 2956 + 8 >> 2] = 0;
- L35 : do if ((i1 | 0) != (i48 | 0)) {
+ L34 : do if ((i1 | 0) != (i48 | 0)) {
   i14 = i49 + 360 + 4 | 0;
   i9 = i49 + 280 + 16 | 0;
   i15 = i49 + 280 + 28 | 0;
@@ -385,13 +385,13 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
     i6 = HEAP32[i49 + 2956 >> 2] | 0;
     i5 = i5 - i6 | 0;
     if (((i5 >> 2) + 1 | 0) >>> 0 > 1073741823) {
-     i33 = 51;
+     i33 = 50;
      break;
     }
     i2 = i2 - i6 >> 2 >>> 0 < 536870911 ? (i2 - i6 >> 1 >>> 0 < ((i5 >> 2) + 1 | 0) >>> 0 ? (i5 >> 2) + 1 | 0 : i2 - i6 >> 1) : 1073741823;
     if (!i2) i3 = 0; else {
      if (i2 >>> 0 > 1073741823) {
-      i33 = 54;
+      i33 = 53;
       break;
      }
      i3 = __Znwj(i2 << 2) | 0;
@@ -426,9 +426,9 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
    if ((HEAP8[i49 + 360 + 28 + 3 >> 0] | 0) < 0) __ZdlPv(HEAP32[i49 + 360 + 20 >> 2] | 0);
    if ((HEAP8[i14 + 11 >> 0] | 0) < 0) __ZdlPv(HEAP32[i14 >> 2] | 0);
    i12 = i12 + 1 | 0;
-   if (i12 >>> 0 >= i13 >>> 0) break L35; else i4 = i3;
+   if (i12 >>> 0 >= i13 >>> 0) break L34; else i4 = i3;
   }
-  if ((i33 | 0) == 51) __ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv(); else if ((i33 | 0) == 54) {
+  if ((i33 | 0) == 50) __ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv(); else if ((i33 | 0) == 53) {
    i49 = ___cxa_allocate_exception(8) | 0;
    __ZNSt11logic_errorC2EPKc(i49, 8697);
    HEAP32[i49 >> 2] = 4420;
@@ -714,11 +714,11 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
  i3 = HEAP32[i2 >> 2] | 0;
  do if (!i3) {
   i2 = i4 + 24 | 0;
-  i33 = 103;
+  i33 = 102;
  } else {
   if ((i3 | 0) != (i49 + 360 | 0)) {
    HEAP32[i4 + 24 >> 2] = i3;
-   i33 = 103;
+   i33 = 102;
    break;
   }
   HEAP32[i4 + 24 >> 2] = i4 + 8;
@@ -731,7 +731,7 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
   }
   if (i2 | 0) FUNCTION_TABLE_vi[HEAP32[(HEAP32[i2 >> 2] | 0) + 20 >> 2] & 127](i2);
  } while (0);
- if ((i33 | 0) == 103) {
+ if ((i33 | 0) == 102) {
   HEAP32[i2 >> 2] = 0;
   HEAP32[i49 + 152 + 32 >> 2] = i4;
  }
@@ -929,11 +929,11 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
  i3 = HEAP32[i2 >> 2] | 0;
  do if (!i3) {
   i2 = i4 + 24 | 0;
-  i33 = 122;
+  i33 = 121;
  } else {
   if ((i3 | 0) != (i49 + 360 | 0)) {
    HEAP32[i4 + 24 >> 2] = i3;
-   i33 = 122;
+   i33 = 121;
    break;
   }
   HEAP32[i4 + 24 >> 2] = i4 + 8;
@@ -946,7 +946,7 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
   }
   if (i2 | 0) FUNCTION_TABLE_vi[HEAP32[(HEAP32[i2 >> 2] | 0) + 20 >> 2] & 127](i2);
  } while (0);
- if ((i33 | 0) == 122) {
+ if ((i33 | 0) == 121) {
   HEAP32[i2 >> 2] = 0;
   HEAP32[i49 + 88 + 32 >> 2] = i4;
  }
@@ -1682,11 +1682,11 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
  i3 = HEAP32[i2 >> 2] | 0;
  do if (!i3) {
   i2 = i4 + 24 | 0;
-  i33 = 149;
+  i33 = 148;
  } else {
   if ((i3 | 0) != (i49 + 360 | 0)) {
    HEAP32[i4 + 24 >> 2] = i3;
-   i33 = 149;
+   i33 = 148;
    break;
   }
   HEAP32[i4 + 24 >> 2] = i4 + 8;
@@ -1699,7 +1699,7 @@ function __ZN7todomvc5todos4viewENS0_5TodosENSt3__28functionIFvNS3_IFS1_S1_EEEEE
   }
   if (i2 | 0) FUNCTION_TABLE_vi[HEAP32[(HEAP32[i2 >> 2] | 0) + 20 >> 2] & 127](i2);
  } while (0);
- if ((i33 | 0) == 149) {
+ if ((i33 | 0) == 148) {
   HEAP32[i2 >> 2] = 0;
   HEAP32[i49 + 24 + 32 >> 2] = i4;
  }
@@ -4157,7 +4157,7 @@ function _malloc(i1) {
    return i13 | 0;
   }
  }
- HEAP32[4477] = 12;
+ HEAP32[4478] = 12;
  i13 = 0;
  STACKTOP = i14;
  return i13 | 0;
@@ -5221,7 +5221,7 @@ function _printf_core(i16, i1, i17, i18, i19) {
  i5 = 0;
  L1 : while (1) {
   do if ((i1 | 0) > -1) if ((i2 | 0) > (2147483647 - i1 | 0)) {
-   HEAP32[4477] = 75;
+   HEAP32[4478] = 75;
    i1 = -1;
    break;
   } else {
@@ -5575,7 +5575,7 @@ function _printf_core(i16, i1, i17, i18, i19) {
    }
   case 109:
    {
-    i2 = _strerror(HEAP32[4477] | 0) | 0;
+    i2 = _strerror(HEAP32[4478] | 0) | 0;
     i14 = 71;
     break;
    }
@@ -7312,20 +7312,18 @@ function _main() {
  var i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0, i6 = 0, i7 = 0, i8 = 0, i9 = 0, d10 = 0.0, i11 = 0, i12 = 0, i13 = 0, i14 = 0;
  i14 = STACKTOP;
  STACKTOP = STACKTOP + 288 | 0;
- if (!(HEAP8[17200] | 0)) if (___cxa_guard_acquire(17200) | 0) HEAP8[17921] = 1;
- HEAP8[17921] = 1;
+ if (!(HEAP8[17200] | 0)) if (___cxa_guard_acquire(17200) | 0) HEAP8[17925] = 1;
+ HEAP8[17925] = 1;
  _emscripten_asm_const_v(19);
  _emscripten_asm_const_v(20);
- HEAP32[i14 + 112 >> 2] = 1;
  i13 = i14 + 112 + 4 | 0;
  HEAP32[i13 >> 2] = 0;
  HEAP32[i13 + 4 >> 2] = 0;
  HEAP32[i13 + 8 >> 2] = 0;
- HEAP8[i13 + 11 >> 0] = 0;
- HEAP8[i13 >> 0] = 0;
- HEAP32[i14 + 112 + 16 >> 2] = 0;
- HEAP32[i14 + 112 + 20 >> 2] = 0;
- HEAP32[i14 + 112 + 24 >> 2] = 0;
+ HEAP32[i13 + 12 >> 2] = 0;
+ HEAP32[i13 + 16 >> 2] = 0;
+ HEAP32[i13 + 20 >> 2] = 0;
+ HEAP32[i14 + 112 >> 2] = 1;
  HEAP32[i14 + 112 + 28 >> 2] = 2;
  i12 = __emval_get_global(12470) | 0;
  HEAP32[i14 >> 2] = 0;
@@ -9984,129 +9982,131 @@ function __ZNSt3__213unordered_mapINS_12basic_stringIcNS_11char_traitsIcEENS_9al
  return;
 }
 
-function __ZNSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EEclEOSD_(i10, i3, i2) {
- i10 = i10 | 0;
- i3 = i3 | 0;
+function __ZNSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EEclEOSD_(i11, i2, i1) {
+ i11 = i11 | 0;
  i2 = i2 | 0;
- var i1 = 0, i4 = 0, i5 = 0, i6 = 0, i7 = 0, i8 = 0, i9 = 0, i11 = 0, i12 = 0, i13 = 0;
- i13 = STACKTOP;
+ i1 = i1 | 0;
+ var i3 = 0, i4 = 0, i5 = 0, i6 = 0, i7 = 0, i8 = 0, i9 = 0, i10 = 0, i12 = 0;
+ i12 = STACKTOP;
  STACKTOP = STACKTOP + 80 | 0;
- i8 = HEAP32[i2 >> 2] | 0;
- HEAP32[i13 + 32 >> 2] = i8;
- i11 = i13 + 32 + 4 | 0;
- HEAP32[i11 >> 2] = HEAP32[i2 + 4 >> 2];
- HEAP32[i11 + 4 >> 2] = HEAP32[i2 + 4 + 4 >> 2];
- HEAP32[i11 + 8 >> 2] = HEAP32[i2 + 4 + 8 >> 2];
- HEAP32[i2 + 4 >> 2] = 0;
- HEAP32[i2 + 4 + 4 >> 2] = 0;
- HEAP32[i2 + 4 + 8 >> 2] = 0;
- i12 = i13 + 32 + 16 | 0;
- i9 = i13 + 32 + 20 | 0;
- i4 = HEAP32[i2 + 16 >> 2] | 0;
- HEAP32[i12 >> 2] = i4;
- i5 = HEAP32[i2 + 20 >> 2] | 0;
- HEAP32[i9 >> 2] = i5;
- i1 = HEAP32[i2 + 24 >> 2] | 0;
- HEAP32[i13 + 32 + 24 >> 2] = i1;
- HEAP32[i2 + 24 >> 2] = 0;
- HEAP32[i2 + 20 >> 2] = 0;
- HEAP32[i2 + 16 >> 2] = 0;
- HEAP32[i13 + 32 + 28 >> 2] = HEAP32[i2 + 28 >> 2];
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_(i13 + 64 | 0, i3 + 4 | 0);
- HEAP32[i13 >> 2] = i8;
- __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_(i13 + 4 | 0, i13 + 64 | 0);
- HEAP8[i13 + 16 >> 0] = 0;
- HEAP8[i13 + 17 >> 0] = 0;
- HEAP32[i13 + 24 >> 2] = 0;
- HEAP32[i13 + 24 + 4 >> 2] = 0;
- HEAP8[i13 + 28 + 3 >> 0] = 0;
- HEAP32[i13 + 20 >> 2] = 0;
- if (i5 >>> 0 < i1 >>> 0) {
-  HEAP32[i5 >> 2] = HEAP32[i13 >> 2];
-  HEAP32[i5 + 4 >> 2] = HEAP32[i13 + 4 >> 2];
-  HEAP32[i5 + 4 + 4 >> 2] = HEAP32[i13 + 4 + 4 >> 2];
-  HEAP32[i5 + 4 + 8 >> 2] = HEAP32[i13 + 4 + 8 >> 2];
-  HEAP32[i13 + 4 >> 2] = 0;
-  HEAP32[i13 + 4 + 4 >> 2] = 0;
-  HEAP32[i13 + 4 + 8 >> 2] = 0;
-  HEAP16[i5 + 16 >> 1] = HEAP16[i13 + 16 >> 1] | 0;
-  HEAP32[i5 + 20 >> 2] = HEAP32[i13 + 20 >> 2];
-  HEAP32[i5 + 20 + 4 >> 2] = HEAP32[i13 + 20 + 4 >> 2];
-  HEAP32[i5 + 20 + 8 >> 2] = HEAP32[i13 + 20 + 8 >> 2];
-  HEAP32[i13 + 20 >> 2] = 0;
-  HEAP32[i13 + 20 + 4 >> 2] = 0;
-  HEAP32[i13 + 20 + 8 >> 2] = 0;
-  HEAP32[i9 >> 2] = (HEAP32[i9 >> 2] | 0) + 32;
+ i8 = HEAP32[i1 >> 2] | 0;
+ HEAP32[i12 >> 2] = i8;
+ HEAP32[i12 + 4 >> 2] = HEAP32[i1 + 4 >> 2];
+ HEAP32[i12 + 4 + 4 >> 2] = HEAP32[i1 + 4 + 4 >> 2];
+ HEAP32[i12 + 4 + 8 >> 2] = HEAP32[i1 + 4 + 8 >> 2];
+ HEAP32[i1 + 4 >> 2] = 0;
+ HEAP32[i1 + 4 + 4 >> 2] = 0;
+ HEAP32[i1 + 4 + 8 >> 2] = 0;
+ i4 = HEAP32[i1 + 16 >> 2] | 0;
+ HEAP32[i12 + 16 >> 2] = i4;
+ i6 = HEAP32[i1 + 20 >> 2] | 0;
+ HEAP32[i12 + 20 >> 2] = i6;
+ i3 = HEAP32[i1 + 24 >> 2] | 0;
+ HEAP32[i12 + 24 >> 2] = i3;
+ HEAP32[i1 + 24 >> 2] = 0;
+ HEAP32[i1 + 20 >> 2] = 0;
+ HEAP32[i1 + 16 >> 2] = 0;
+ HEAP32[i12 + 28 >> 2] = HEAP32[i1 + 28 >> 2];
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_(i12 + 32 | 0, i2 + 4 | 0);
+ i10 = i12 + 48 + 4 | 0;
+ HEAP32[i10 >> 2] = 0;
+ HEAP32[i10 + 4 >> 2] = 0;
+ HEAP32[i10 + 8 >> 2] = 0;
+ i9 = i12 + 48 + 20 | 0;
+ HEAP32[i9 >> 2] = 0;
+ HEAP32[i9 + 4 >> 2] = 0;
+ HEAP32[i9 + 8 >> 2] = 0;
+ HEAP32[i12 + 48 >> 2] = i8;
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEaSERKS5_(i10, i12 + 32 | 0) | 0;
+ HEAP8[i12 + 48 + 16 >> 0] = 0;
+ HEAP8[i12 + 48 + 17 >> 0] = 0;
+ __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6assignEPKw(i9) | 0;
+ if (i6 >>> 0 < i3 >>> 0) {
+  HEAP32[i6 >> 2] = HEAP32[i12 + 48 >> 2];
+  HEAP32[i6 + 4 >> 2] = HEAP32[i10 >> 2];
+  HEAP32[i6 + 4 + 4 >> 2] = HEAP32[i10 + 4 >> 2];
+  HEAP32[i6 + 4 + 8 >> 2] = HEAP32[i10 + 8 >> 2];
+  HEAP32[i10 >> 2] = 0;
+  HEAP32[i10 + 4 >> 2] = 0;
+  HEAP32[i10 + 8 >> 2] = 0;
+  HEAP16[i6 + 16 >> 1] = HEAP16[i12 + 48 + 16 >> 1] | 0;
+  HEAP32[i6 + 20 >> 2] = HEAP32[i9 >> 2];
+  HEAP32[i6 + 20 + 4 >> 2] = HEAP32[i9 + 4 >> 2];
+  HEAP32[i6 + 20 + 8 >> 2] = HEAP32[i9 + 8 >> 2];
+  HEAP32[i9 >> 2] = 0;
+  HEAP32[i9 + 4 >> 2] = 0;
+  HEAP32[i9 + 8 >> 2] = 0;
+  HEAP32[i12 + 20 >> 2] = (HEAP32[i12 + 20 >> 2] | 0) + 32;
  } else {
-  if (((i5 - i4 >> 5) + 1 | 0) >>> 0 > 134217727) __ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv();
-  i2 = i1 - i4 >> 5 >>> 0 < 67108863 ? (i1 - i4 >> 4 >>> 0 < ((i5 - i4 >> 5) + 1 | 0) >>> 0 ? (i5 - i4 >> 5) + 1 | 0 : i1 - i4 >> 4) : 134217727;
+  if (((i6 - i4 >> 5) + 1 | 0) >>> 0 > 134217727) __ZNKSt3__220__vector_base_commonILb1EE20__throw_length_errorEv();
+  i2 = i3 - i4 >> 5 >>> 0 < 67108863 ? (i3 - i4 >> 4 >>> 0 < ((i6 - i4 >> 5) + 1 | 0) >>> 0 ? (i6 - i4 >> 5) + 1 | 0 : i3 - i4 >> 4) : 134217727;
   do if (!i2) {
-   i1 = i5;
-   i6 = i4;
+   i1 = i6;
+   i5 = i4;
    i3 = 0;
   } else if (i2 >>> 0 > 134217727) {
-   i13 = ___cxa_allocate_exception(8) | 0;
-   __ZNSt11logic_errorC2EPKc(i13, 8697);
-   HEAP32[i13 >> 2] = 4420;
-   ___cxa_throw(i13 | 0, 2008, 95);
+   i12 = ___cxa_allocate_exception(8) | 0;
+   __ZNSt11logic_errorC2EPKc(i12, 8697);
+   HEAP32[i12 >> 2] = 4420;
+   ___cxa_throw(i12 | 0, 2008, 95);
   } else {
    i3 = __Znwj(i2 << 5) | 0;
-   i1 = HEAP32[i9 >> 2] | 0;
-   i6 = HEAP32[i12 >> 2] | 0;
+   i1 = HEAP32[i12 + 20 >> 2] | 0;
+   i5 = HEAP32[i12 + 16 >> 2] | 0;
    break;
   } while (0);
-  i8 = i3 + (i5 - i4 >> 5 << 5) | 0;
+  i8 = i3 + (i6 - i4 >> 5 << 5) | 0;
   i7 = i3 + (i2 << 5) | 0;
-  HEAP32[i8 >> 2] = HEAP32[i13 >> 2];
-  i2 = i3 + (i5 - i4 >> 5 << 5) + 4 | 0;
-  HEAP32[i2 >> 2] = HEAP32[i13 + 4 >> 2];
-  HEAP32[i2 + 4 >> 2] = HEAP32[i13 + 4 + 4 >> 2];
-  HEAP32[i2 + 8 >> 2] = HEAP32[i13 + 4 + 8 >> 2];
-  HEAP32[i13 + 4 >> 2] = 0;
-  HEAP32[i13 + 4 + 4 >> 2] = 0;
-  HEAP32[i13 + 4 + 8 >> 2] = 0;
-  HEAP16[i3 + (i5 - i4 >> 5 << 5) + 16 >> 1] = HEAP16[i13 + 16 >> 1] | 0;
-  i5 = i3 + (i5 - i4 >> 5 << 5) + 20 | 0;
-  HEAP32[i5 >> 2] = HEAP32[i13 + 20 >> 2];
-  HEAP32[i5 + 4 >> 2] = HEAP32[i13 + 20 + 4 >> 2];
-  HEAP32[i5 + 8 >> 2] = HEAP32[i13 + 20 + 8 >> 2];
-  HEAP32[i13 + 20 >> 2] = 0;
-  HEAP32[i13 + 20 + 4 >> 2] = 0;
-  HEAP32[i13 + 20 + 8 >> 2] = 0;
-  if ((i1 | 0) == (i6 | 0)) {
+  HEAP32[i8 >> 2] = HEAP32[i12 + 48 >> 2];
+  i2 = i3 + (i6 - i4 >> 5 << 5) + 4 | 0;
+  HEAP32[i2 >> 2] = HEAP32[i10 >> 2];
+  HEAP32[i2 + 4 >> 2] = HEAP32[i10 + 4 >> 2];
+  HEAP32[i2 + 8 >> 2] = HEAP32[i10 + 8 >> 2];
+  HEAP32[i10 >> 2] = 0;
+  HEAP32[i10 + 4 >> 2] = 0;
+  HEAP32[i10 + 8 >> 2] = 0;
+  HEAP16[i3 + (i6 - i4 >> 5 << 5) + 16 >> 1] = HEAP16[i12 + 48 + 16 >> 1] | 0;
+  i6 = i3 + (i6 - i4 >> 5 << 5) + 20 | 0;
+  HEAP32[i6 >> 2] = HEAP32[i9 >> 2];
+  HEAP32[i6 + 4 >> 2] = HEAP32[i9 + 4 >> 2];
+  HEAP32[i6 + 8 >> 2] = HEAP32[i9 + 8 >> 2];
+  HEAP32[i9 >> 2] = 0;
+  HEAP32[i9 + 4 >> 2] = 0;
+  HEAP32[i9 + 8 >> 2] = 0;
+  if ((i1 | 0) == (i5 | 0)) {
    i2 = i8;
    i4 = i1;
   } else {
    i3 = i8;
    i2 = i8;
    do {
-    i5 = i1;
+    i6 = i1;
     i1 = i1 + -32 | 0;
     HEAP32[i3 + -32 >> 2] = HEAP32[i1 >> 2];
     i4 = i3 + -28 | 0;
-    HEAP32[i4 >> 2] = HEAP32[i5 + -28 >> 2];
-    HEAP32[i4 + 4 >> 2] = HEAP32[i5 + -28 + 4 >> 2];
-    HEAP32[i4 + 8 >> 2] = HEAP32[i5 + -28 + 8 >> 2];
-    HEAP32[i5 + -28 >> 2] = 0;
-    HEAP32[i5 + -28 + 4 >> 2] = 0;
-    HEAP32[i5 + -28 + 8 >> 2] = 0;
-    HEAP16[i3 + -16 >> 1] = HEAP16[i5 + -16 >> 1] | 0;
+    HEAP32[i4 >> 2] = HEAP32[i6 + -28 >> 2];
+    HEAP32[i4 + 4 >> 2] = HEAP32[i6 + -28 + 4 >> 2];
+    HEAP32[i4 + 8 >> 2] = HEAP32[i6 + -28 + 8 >> 2];
+    HEAP32[i6 + -28 >> 2] = 0;
+    HEAP32[i6 + -28 + 4 >> 2] = 0;
+    HEAP32[i6 + -28 + 8 >> 2] = 0;
+    HEAP16[i3 + -16 >> 1] = HEAP16[i6 + -16 >> 1] | 0;
     i4 = i3 + -12 | 0;
-    HEAP32[i4 >> 2] = HEAP32[i5 + -12 >> 2];
-    HEAP32[i4 + 4 >> 2] = HEAP32[i5 + -12 + 4 >> 2];
-    HEAP32[i4 + 8 >> 2] = HEAP32[i5 + -12 + 8 >> 2];
-    HEAP32[i5 + -12 >> 2] = 0;
-    HEAP32[i5 + -12 + 4 >> 2] = 0;
-    HEAP32[i5 + -12 + 8 >> 2] = 0;
+    HEAP32[i4 >> 2] = HEAP32[i6 + -12 >> 2];
+    HEAP32[i4 + 4 >> 2] = HEAP32[i6 + -12 + 4 >> 2];
+    HEAP32[i4 + 8 >> 2] = HEAP32[i6 + -12 + 8 >> 2];
+    HEAP32[i6 + -12 >> 2] = 0;
+    HEAP32[i6 + -12 + 4 >> 2] = 0;
+    HEAP32[i6 + -12 + 8 >> 2] = 0;
     i3 = i2 + -32 | 0;
     i2 = i3;
-   } while ((i1 | 0) != (i6 | 0));
-   i4 = HEAP32[i12 >> 2] | 0;
-   i1 = HEAP32[i9 >> 2] | 0;
+   } while ((i1 | 0) != (i5 | 0));
+   i4 = HEAP32[i12 + 16 >> 2] | 0;
+   i1 = HEAP32[i12 + 20 >> 2] | 0;
   }
-  HEAP32[i12 >> 2] = i2;
-  HEAP32[i9 >> 2] = i8 + 32;
-  HEAP32[i13 + 32 + 24 >> 2] = i7;
+  HEAP32[i12 + 16 >> 2] = i2;
+  HEAP32[i12 + 20 >> 2] = i8 + 32;
+  HEAP32[i12 + 24 >> 2] = i7;
   i3 = i4;
   if ((i1 | 0) != (i3 | 0)) do {
    if ((HEAP8[i1 + -4 + 3 >> 0] | 0) < 0) __ZdlPv(HEAP32[i1 + -12 >> 2] | 0);
@@ -10115,72 +10115,70 @@ function __ZNSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_st
    if ((HEAP8[i2 + 11 >> 0] | 0) < 0) __ZdlPv(HEAP32[i2 >> 2] | 0);
   } while ((i1 | 0) != (i3 | 0));
   if (i4 | 0) __ZdlPv(i4);
-  if ((HEAP8[i13 + 28 + 3 >> 0] | 0) < 0) __ZdlPv(HEAP32[i13 + 20 >> 2] | 0);
+  if ((HEAP8[i12 + 48 + 28 + 3 >> 0] | 0) < 0) __ZdlPv(HEAP32[i9 >> 2] | 0);
  }
- if ((HEAP8[i13 + 4 + 11 >> 0] | 0) < 0) __ZdlPv(HEAP32[i13 + 4 >> 2] | 0);
- if ((HEAP8[i13 + 64 + 11 >> 0] | 0) < 0) __ZdlPv(HEAP32[i13 + 64 >> 2] | 0);
- HEAP32[i13 >> 2] = 0;
- HEAP32[i13 + 4 >> 2] = 0;
- HEAP32[i13 + 8 >> 2] = 0;
- if ((HEAP8[i11 + 11 >> 0] | 0) < 0) {
-  HEAP8[HEAP32[i11 >> 2] >> 0] = 0;
-  HEAP32[i13 + 32 + 8 >> 2] = 0;
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE7reserveEj(i11);
-  HEAP32[i11 >> 2] = HEAP32[i13 >> 2];
-  HEAP32[i11 + 4 >> 2] = HEAP32[i13 + 4 >> 2];
-  HEAP32[i11 + 8 >> 2] = HEAP32[i13 + 8 >> 2];
-  i5 = HEAP32[i13 + 32 >> 2] | 0;
-  i6 = HEAP32[i12 >> 2] | 0;
-  i7 = HEAP32[i9 >> 2] | 0;
-  i8 = HEAP32[i13 + 32 + 24 >> 2] | 0;
-  i9 = HEAP32[i13 + 32 + 28 >> 2] | 0;
-  i12 = i5 + 1 | 0;
-  HEAP32[i13 + 32 >> 2] = i12;
-  HEAP32[i10 >> 2] = i12;
-  i12 = i10 + 4 | 0;
-  HEAP32[i12 >> 2] = HEAP32[i11 >> 2];
-  HEAP32[i12 + 4 >> 2] = HEAP32[i11 + 4 >> 2];
-  HEAP32[i12 + 8 >> 2] = HEAP32[i11 + 8 >> 2];
-  i11 = i10 + 16 | 0;
-  i12 = i10 + 20 | 0;
-  HEAP32[i11 >> 2] = i6;
-  HEAP32[i12 >> 2] = i7;
-  i12 = i10 + 24 | 0;
-  HEAP32[i12 >> 2] = i8;
-  i12 = i10 + 28 | 0;
-  HEAP32[i12 >> 2] = i9;
-  STACKTOP = i13;
-  return;
- } else {
-  HEAP8[i11 >> 0] = 0;
-  HEAP8[i11 + 11 >> 0] = 0;
-  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE7reserveEj(i11);
-  HEAP32[i11 >> 2] = HEAP32[i13 >> 2];
-  HEAP32[i11 + 4 >> 2] = HEAP32[i13 + 4 >> 2];
-  HEAP32[i11 + 8 >> 2] = HEAP32[i13 + 8 >> 2];
-  i5 = HEAP32[i13 + 32 >> 2] | 0;
-  i6 = HEAP32[i12 >> 2] | 0;
-  i7 = HEAP32[i9 >> 2] | 0;
-  i8 = HEAP32[i13 + 32 + 24 >> 2] | 0;
-  i9 = HEAP32[i13 + 32 + 28 >> 2] | 0;
-  i12 = i5 + 1 | 0;
-  HEAP32[i13 + 32 >> 2] = i12;
-  HEAP32[i10 >> 2] = i12;
-  i12 = i10 + 4 | 0;
-  HEAP32[i12 >> 2] = HEAP32[i11 >> 2];
-  HEAP32[i12 + 4 >> 2] = HEAP32[i11 + 4 >> 2];
-  HEAP32[i12 + 8 >> 2] = HEAP32[i11 + 8 >> 2];
-  i11 = i10 + 16 | 0;
-  i12 = i10 + 20 | 0;
-  HEAP32[i11 >> 2] = i6;
-  HEAP32[i12 >> 2] = i7;
-  i12 = i10 + 24 | 0;
-  HEAP32[i12 >> 2] = i8;
-  i12 = i10 + 28 | 0;
-  HEAP32[i12 >> 2] = i9;
-  STACKTOP = i13;
+ if ((HEAP8[i10 + 11 >> 0] | 0) < 0) __ZdlPv(HEAP32[i10 >> 2] | 0);
+ if ((HEAP8[i12 + 32 + 11 >> 0] | 0) >= 0) {
+  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6assignEPKcj(i12 + 4 | 0, 0, 0) | 0;
+  i10 = HEAP32[i12 >> 2] | 0;
+  i10 = i10 + 1 | 0;
+  HEAP32[i12 >> 2] = i10;
+  HEAP32[i11 >> 2] = i10;
+  i10 = i11 + 4 | 0;
+  HEAP32[i10 >> 2] = HEAP32[i12 + 4 >> 2];
+  HEAP32[i10 + 4 >> 2] = HEAP32[i12 + 4 + 4 >> 2];
+  HEAP32[i10 + 8 >> 2] = HEAP32[i12 + 4 + 8 >> 2];
+  HEAP32[i12 + 4 >> 2] = 0;
+  HEAP32[i12 + 4 + 4 >> 2] = 0;
+  HEAP32[i12 + 4 + 8 >> 2] = 0;
+  i10 = i11 + 16 | 0;
+  i9 = i11 + 20 | 0;
+  i8 = HEAP32[i12 + 16 >> 2] | 0;
+  HEAP32[i10 >> 2] = i8;
+  i10 = HEAP32[i12 + 20 >> 2] | 0;
+  HEAP32[i9 >> 2] = i10;
+  i9 = HEAP32[i12 + 24 >> 2] | 0;
+  i10 = i11 + 24 | 0;
+  HEAP32[i10 >> 2] = i9;
+  HEAP32[i12 + 24 >> 2] = 0;
+  HEAP32[i12 + 20 >> 2] = 0;
+  HEAP32[i12 + 16 >> 2] = 0;
+  i11 = i11 + 28 | 0;
+  i10 = HEAP32[i12 + 28 >> 2] | 0;
+  HEAP32[i11 >> 2] = i10;
+  STACKTOP = i12;
   return;
  }
+ __ZdlPv(HEAP32[i12 + 32 >> 2] | 0);
+ __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6assignEPKcj(i12 + 4 | 0, 0, 0) | 0;
+ i10 = HEAP32[i12 >> 2] | 0;
+ i10 = i10 + 1 | 0;
+ HEAP32[i12 >> 2] = i10;
+ HEAP32[i11 >> 2] = i10;
+ i10 = i11 + 4 | 0;
+ HEAP32[i10 >> 2] = HEAP32[i12 + 4 >> 2];
+ HEAP32[i10 + 4 >> 2] = HEAP32[i12 + 4 + 4 >> 2];
+ HEAP32[i10 + 8 >> 2] = HEAP32[i12 + 4 + 8 >> 2];
+ HEAP32[i12 + 4 >> 2] = 0;
+ HEAP32[i12 + 4 + 4 >> 2] = 0;
+ HEAP32[i12 + 4 + 8 >> 2] = 0;
+ i10 = i11 + 16 | 0;
+ i9 = i11 + 20 | 0;
+ i8 = HEAP32[i12 + 16 >> 2] | 0;
+ HEAP32[i10 >> 2] = i8;
+ i10 = HEAP32[i12 + 20 >> 2] | 0;
+ HEAP32[i9 >> 2] = i10;
+ i9 = HEAP32[i12 + 24 >> 2] | 0;
+ i10 = i11 + 24 | 0;
+ HEAP32[i10 >> 2] = i9;
+ HEAP32[i12 + 24 >> 2] = 0;
+ HEAP32[i12 + 20 >> 2] = 0;
+ HEAP32[i12 + 16 >> 2] = 0;
+ i11 = i11 + 28 | 0;
+ i10 = HEAP32[i12 + 28 >> 2] | 0;
+ HEAP32[i11 >> 2] = i10;
+ STACKTOP = i12;
+ return;
 }
 
 function __Z11beforePatchN7todomvc5todos5TodosE(i9) {
@@ -11540,7 +11538,7 @@ function _mbsrtowcs(i5, i9, i1, i4) {
    i8 = 60;
    continue;
   } else i1 = i5;
-  HEAP32[4477] = 84;
+  HEAP32[4478] = 84;
   if (!i1) {
    i1 = -1;
    i8 = 60;
@@ -12713,7 +12711,7 @@ function ___udivmoddi4(i3, i5, i11, i12, i13) {
  return (tempRet0 = i14, i15) | 0;
 }
 
-function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEEclEOSG_(i7, i2) {
+function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEEclEOSG_(i7, i2) {
  i7 = i7 | 0;
  i2 = i2 | 0;
  var i1 = 0, i3 = 0, i4 = 0, i5 = 0, i6 = 0, i8 = 0, i9 = 0, i10 = 0;
@@ -13558,6 +13556,7 @@ function __ZNKSt3__27codecvtIwc11__mbstate_tE5do_inERS1_PKcS5_RS5_PwS7_RS7_(i9, 
  STACKTOP = i14;
  return i1 | 0;
 }
+
 function __ZNKSt3__27codecvtIwc11__mbstate_tE6do_outERS1_PKwS5_RS5_PcS7_RS7_(i8, i2, i1, i7, i10, i3, i6, i9) {
  i8 = i8 | 0;
  i2 = i2 | 0;
@@ -14089,7 +14088,6 @@ function __ZNSt3__2L19utf8_to_ucs4_lengthEPKhS1_jmNS_12codecvt_modeE(i13, i11, i
  } while (0);
  return i1 - i13 | 0;
 }
-
 function __ZNSt3__2L12ucs4_to_utf8EPKjS1_RS1_PhS3_RS3_mNS_12codecvt_modeE(i1, i6, i7, i3, i8, i9, i5, i2) {
  i1 = i1 | 0;
  i6 = i6 | 0;
@@ -15088,7 +15086,7 @@ function _mbrtowc(i2, i3, i7, i1) {
  } while (0);
  if ((i8 | 0) == 17) {
   HEAP32[i6 >> 2] = 0;
-  HEAP32[4477] = 84;
+  HEAP32[4478] = 84;
   i1 = -1;
  }
  STACKTOP = i9;
@@ -16592,7 +16590,7 @@ function __ZN10emscripten8internal7InvokerIvJNSt3__212basic_stringIcNS2_11char_t
  return;
 }
 
-function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE7__cloneEPNS0_6__baseISH_EE(i3, i2) {
+function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE7__cloneEPNS0_6__baseISH_EE(i3, i2) {
  i3 = i3 | 0;
  i2 = i2 | 0;
  var i1 = 0;
@@ -16652,7 +16650,7 @@ function _wcrtomb(i1, i2) {
    i1 = 1;
    break;
   } else {
-   HEAP32[4477] = 84;
+   HEAP32[4478] = 84;
    i1 = -1;
    break;
   }
@@ -16677,7 +16675,7 @@ function _wcrtomb(i1, i2) {
    i1 = 4;
    break;
   } else {
-   HEAP32[4477] = 84;
+   HEAP32[4478] = 84;
    i1 = -1;
    break;
   }
@@ -16724,7 +16722,7 @@ function ___fwritex(i1, i5, i6) {
  return;
 }
 
-function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE7__cloneEv(i3) {
+function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE7__cloneEv(i3) {
  i3 = i3 | 0;
  var i1 = 0, i2 = 0;
  i2 = __Znwj(64) | 0;
@@ -16791,7 +16789,7 @@ function ___newlocale(i5, i6, i1) {
   i4 = 0;
   do {
    i2 = (1 << i3 & i5 | 0) != 0;
-   if ((i1 | 0) == 0 | i2) i2 = ___get_locale(i3, i2 ? i6 : 17920) | 0; else i2 = HEAP32[i1 + (i3 << 2) >> 2] | 0;
+   if ((i1 | 0) == 0 | i2) i2 = ___get_locale(i3, i2 ? i6 : 17924) | 0; else i2 = HEAP32[i1 + (i3 << 2) >> 2] | 0;
    i4 = ((i2 | 0) != 0 & 1) + i4 | 0;
    HEAP32[i7 + (i3 << 2) >> 2] = i2;
    i3 = i3 + 1 | 0;
@@ -16847,7 +16845,7 @@ function _vsnprintf(i1, i2, i6) {
   i1 = i8 + 124 | 0;
   i7 = 4;
  } else {
-  HEAP32[4477] = 75;
+  HEAP32[4478] = 75;
   i1 = -1;
  } else i7 = 4;
  if ((i7 | 0) == 4) {
@@ -16987,6 +16985,31 @@ function __ZNK10__cxxabiv117__class_type_info16search_below_dstEPNS_19__dynamic_
   if ((i3 | 0) == 1) HEAP32[i2 + 32 >> 2] = 1;
  } while (0);
  return;
+}
+
+function __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6assignEPKwj(i5, i4, i3) {
+ i5 = i5 | 0;
+ i4 = i4 | 0;
+ i3 = i3 | 0;
+ var i1 = 0, i2 = 0;
+ i1 = HEAP8[i5 + 8 + 3 >> 0] | 0;
+ if (i1 << 24 >> 24 < 0) i2 = (HEAP32[i5 + 8 >> 2] & 2147483647) + -1 | 0; else i2 = 1;
+ do if (i2 >>> 0 < i3 >>> 0) {
+  if (i1 << 24 >> 24 < 0) i1 = HEAP32[i5 + 4 >> 2] | 0; else i1 = i1 & 255;
+  __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE21__grow_by_and_replaceEjjjjjjPKw(i5, i2, i3 - i2 | 0, i1, 0, i1, i3, i4);
+ } else {
+  if (i1 << 24 >> 24 < 0) i1 = HEAP32[i5 >> 2] | 0; else i1 = i5;
+  __ZNSt3__211char_traitsIwE4moveEPwPKwj(i1, i4, i3);
+  __ZNSt3__211char_traitsIwE6assignERwRKw(i1 + (i3 << 2) | 0, 0);
+  if ((HEAP8[i5 + 8 + 3 >> 0] | 0) < 0) {
+   HEAP32[i5 + 4 >> 2] = i3;
+   break;
+  } else {
+   HEAP8[i5 + 8 + 3 >> 0] = i3;
+   break;
+  }
+ } while (0);
+ return i5 | 0;
 }
 
 function __ZNK10__cxxabiv121__vmi_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi(i6, i3, i2, i5) {
@@ -17175,7 +17198,7 @@ function __ZNK10__cxxabiv117__class_type_info29process_static_type_above_dstEPNS
  return;
 }
 
-function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEEclEOi(i1, i2) {
+function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEEclEOi(i1, i2) {
  i1 = i1 | 0;
  i2 = i2 | 0;
  var i3 = 0;
@@ -17439,7 +17462,7 @@ function __ZN6asmdom5patchEPNS_5VNodeES1_(i1, i2) {
  i1 = i1 | 0;
  i2 = i2 | 0;
  var i3 = 0;
- if (!(HEAP8[17200] | 0)) if (___cxa_guard_acquire(17200) | 0) HEAP8[17921] = 1;
+ if (!(HEAP8[17200] | 0)) if (___cxa_guard_acquire(17200) | 0) HEAP8[17925] = 1;
  i3 = HEAP32[4316] | 0;
  if ((i3 | 0) != (i1 | 0) & (i3 | 0) != 0) {
   i3 = 0;
@@ -17454,7 +17477,7 @@ function __ZN6asmdom5patchEPNS_5VNodeES1_(i1, i2) {
   i3 = __ZN6asmdom9createElmEPNS_5VNodeE(i2) | 0;
   _emscripten_asm_const_iii(17, i3 | 0, HEAP32[i1 + 96 >> 2] | 0) | 0;
  }
- if ((i1 | 0) == 0 | (HEAP8[17921] | 0) == 0) {
+ if ((i1 | 0) == 0 | (HEAP8[17925] | 0) == 0) {
   i3 = i2;
   return i3 | 0;
  }
@@ -17617,7 +17640,7 @@ function __ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8func
  return i2 | 0;
 }
 
-function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEED0Ev(i2) {
+function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEED0Ev(i2) {
  i2 = i2 | 0;
  var i1 = 0;
  HEAP32[i2 >> 2] = 2396;
@@ -17853,7 +17876,7 @@ function __ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8funct
  return 0;
 }
 
-function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE18destroy_deallocateEv(i2) {
+function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE18destroy_deallocateEv(i2) {
  i2 = i2 | 0;
  var i1 = 0;
  if ((HEAP8[i2 + 60 + 3 >> 0] | 0) < 0) __ZdlPv(HEAP32[i2 + 52 >> 2] | 0);
@@ -18052,7 +18075,7 @@ function __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEE6resize
  return;
 }
 
-function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEE7__cloneEPNS0_6__baseISD_EE(i3, i2) {
+function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEE7__cloneEPNS0_6__baseISD_EE(i3, i2) {
  i3 = i3 | 0;
  i2 = i2 | 0;
  var i1 = 0;
@@ -18074,7 +18097,7 @@ function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8fun
  }
 }
 
-function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEE7__cloneEv(i3) {
+function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEE7__cloneEv(i3) {
  i3 = i3 | 0;
  var i1 = 0, i2 = 0;
  i2 = __Znwj(32) | 0;
@@ -18114,7 +18137,7 @@ function __ZN6asmdom5VNodeC2ERKNSt3__212basic_stringIcNS1_11char_traitsIcEENS1_9
  return;
 }
 
-function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEED2Ev(i2) {
+function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEED2Ev(i2) {
  i2 = i2 | 0;
  var i1 = 0;
  HEAP32[i2 >> 2] = 2396;
@@ -18180,7 +18203,7 @@ function __ZN6asmdom5VNodeC2ERKNSt3__212basic_stringIcNS1_11char_traitsIcEENS1_9
  return;
 }
 
-function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE7destroyEv(i2) {
+function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE7destroyEv(i2) {
  i2 = i2 | 0;
  var i1 = 0;
  if ((HEAP8[i2 + 60 + 3 >> 0] | 0) < 0) __ZdlPv(HEAP32[i2 + 52 >> 2] | 0);
@@ -18798,7 +18821,7 @@ function __ZNSt3__29to_stringEi(i1, i2) {
  return;
 }
 
-function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEED0Ev(i2) {
+function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEED0Ev(i2) {
  i2 = i2 | 0;
  var i1 = 0;
  HEAP32[i2 >> 2] = 2440;
@@ -18817,7 +18840,7 @@ function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8func
  return;
 }
 
-function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEE18destroy_deallocateEv(i2) {
+function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEE18destroy_deallocateEv(i2) {
  i2 = i2 | 0;
  var i1 = 0;
  i1 = HEAP32[i2 + 24 >> 2] | 0;
@@ -19134,7 +19157,7 @@ function ___towrite(i2) {
  return i1 | 0;
 }
 
-function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEED2Ev(i2) {
+function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEED2Ev(i2) {
  i2 = i2 | 0;
  var i1 = 0;
  HEAP32[i2 >> 2] = 2440;
@@ -19200,6 +19223,28 @@ function __ZNSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8funct
  return;
 }
 
+function _wmemmove(i4, i2, i1) {
+ i4 = i4 | 0;
+ i2 = i2 | 0;
+ i1 = i1 | 0;
+ var i3 = 0;
+ if (i4 - i2 >> 2 >>> 0 < i1 >>> 0) do {
+  i1 = i1 + -1 | 0;
+  HEAP32[i4 + (i1 << 2) >> 2] = HEAP32[i2 + (i1 << 2) >> 2];
+ } while ((i1 | 0) != 0); else if (i1 | 0) {
+  i3 = i4;
+  while (1) {
+   i1 = i1 + -1 | 0;
+   HEAP32[i3 >> 2] = HEAP32[i2 >> 2];
+   if (!i1) break; else {
+    i3 = i3 + 4 | 0;
+    i2 = i2 + 4 | 0;
+   }
+  }
+ }
+ return i4 | 0;
+}
+
 function _memcmp(i1, i5, i2) {
  i1 = i1 | 0;
  i5 = i5 | 0;
@@ -19224,7 +19269,7 @@ function _memcmp(i1, i5, i2) {
  return i1 | 0;
 }
 
-function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEE7destroyEv(i2) {
+function __ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEE7destroyEv(i2) {
  i2 = i2 | 0;
  var i1 = 0;
  i1 = HEAP32[i2 + 24 >> 2] | 0;
@@ -19357,15 +19402,6 @@ function __ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12
  HEAP32[i1 >> 2] = 3112;
  __ZNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2ERKS5_(i1 + 4 | 0, i2 + 4 | 0);
  return;
-}
-
-function __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6assignEPKwj(i2) {
- i2 = i2 | 0;
- var i1 = 0;
- if ((HEAP8[i2 + 8 + 3 >> 0] | 0) < 0) i1 = HEAP32[i2 >> 2] | 0; else i1 = i2;
- __ZNSt3__211char_traitsIwE6assignERwRKw(i1, 0);
- if ((HEAP8[i2 + 8 + 3 >> 0] | 0) < 0) HEAP32[i2 + 4 >> 2] = 0; else HEAP8[i2 + 8 + 3 >> 0] = 0;
- return i2 | 0;
 }
 
 function __ZNKSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EE7__cloneEPNS0_6__baseISE_EE(i2, i1) {
@@ -19587,7 +19623,7 @@ function __ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12
  return ((HEAP32[i1 + 4 >> 2] | 0) == 9480 ? i2 + 4 | 0 : 0) | 0;
 }
 
-function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE6targetERKSt9type_info(i2, i1) {
+function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE6targetERKSt9type_info(i2, i1) {
  i2 = i2 | 0;
  i1 = i1 | 0;
  return ((HEAP32[i1 + 4 >> 2] | 0) == 11530 ? i2 + 8 | 0 : 0) | 0;
@@ -19737,8 +19773,8 @@ function ___cxa_get_globals_fast() {
  var i1 = 0, i2 = 0;
  i1 = STACKTOP;
  STACKTOP = STACKTOP + 16 | 0;
- if (!(_pthread_once(17896, 2) | 0)) {
-  i2 = _pthread_getspecific(HEAP32[4475] | 0) | 0;
+ if (!(_pthread_once(17900, 2) | 0)) {
+  i2 = _pthread_getspecific(HEAP32[4476] | 0) | 0;
   STACKTOP = i1;
   return i2 | 0;
  } else _abort_message(16555, i1);
@@ -19789,7 +19825,7 @@ function __ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6RemoveEiE4__14NS
  return i2 | 0;
 }
 
-function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEE6targetERKSt9type_info(i2, i1) {
+function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEE6targetERKSt9type_info(i2, i1) {
  i2 = i2 | 0;
  i1 = i1 | 0;
  return ((HEAP32[i1 + 4 >> 2] | 0) == 11152 ? i2 + 8 | 0 : 0) | 0;
@@ -19801,7 +19837,7 @@ function __ZN10__cxxabiv112_GLOBAL__N_19destruct_EPv(i1) {
  i2 = STACKTOP;
  STACKTOP = STACKTOP + 16 | 0;
  _free(i1);
- if (!(_pthread_setspecific(HEAP32[4475] | 0, 0) | 0)) {
+ if (!(_pthread_setspecific(HEAP32[4476] | 0, 0) | 0)) {
   STACKTOP = i2;
   return;
  } else _abort_message(16654, i2);
@@ -20001,7 +20037,7 @@ function __ZN10__cxxabiv112_GLOBAL__N_110construct_Ev() {
  var i1 = 0;
  i1 = STACKTOP;
  STACKTOP = STACKTOP + 16 | 0;
- if (!(_pthread_key_create(17900, 107) | 0)) {
+ if (!(_pthread_key_create(17904, 107) | 0)) {
   STACKTOP = i1;
   return;
  } else _abort_message(16604, i1);
@@ -20068,7 +20104,7 @@ function __ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12
  return 1416;
 }
 
-function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE11target_typeEv(i1) {
+function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE11target_typeEv(i1) {
  i1 = i1 | 0;
  return 1640;
 }
@@ -20111,6 +20147,11 @@ function __ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8funct
  return 1560;
 }
 
+function __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6assignEPKw(i1) {
+ i1 = i1 | 0;
+ return __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6assignEPKwj(i1, 17892, 0) | 0;
+}
+
 function __ZNKSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EE11target_typeEv(i1) {
  i1 = i1 | 0;
  return 1312;
@@ -20127,9 +20168,9 @@ function __ZNSt3__26__clocEv() {
  var i1 = 0;
  if (!(HEAP8[17256] | 0)) if (___cxa_guard_acquire(17256) | 0) {
   i1 = ___newlocale(2147483647, 16165, 0) | 0;
-  HEAP32[4473] = i1;
+  HEAP32[4474] = i1;
  }
- return HEAP32[4473] | 0;
+ return HEAP32[4474] | 0;
 }
 
 function __ZNKSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EE7__cloneEv(i1) {
@@ -20189,11 +20230,6 @@ function __ZNKSt3__214__codecvt_utf8IwE10do_unshiftER11__mbstate_tPcS4_RS4_(i3, 
  i5 = i5 | 0;
  HEAP32[i5 >> 2] = i4;
  return 3;
-}
-
-function __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6assignEPKw(i1) {
- i1 = i1 | 0;
- return __ZNSt3__212basic_stringIwNS_11char_traitsIwEENS_9allocatorIwEEE6assignEPKwj(i1) | 0;
 }
 
 function __ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8functionIFNS2_4task4TaskES7_EEEE4__18NS_9allocatorISA_EEFNS3_5TodosESD_EE11target_typeEv(i1) {
@@ -20261,7 +20297,7 @@ function _i64Add(i1, i2, i3, i4) {
  return (tempRet0 = i2 + i4 + (i1 + i3 >>> 0 >>> 0 < i1 >>> 0 | 0) >>> 0, i1 + i3 >>> 0 | 0) | 0;
 }
 
-function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEE11target_typeEv(i1) {
+function __ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEE11target_typeEv(i1) {
  i1 = i1 | 0;
  return 1584;
 }
@@ -20517,6 +20553,14 @@ function __ZNK10__cxxabiv120__function_type_info9can_catchEPKNS_16__shim_type_in
  return 0;
 }
 
+function __ZNSt3__211char_traitsIwE4moveEPwPKwj(i2, i3, i1) {
+ i2 = i2 | 0;
+ i3 = i3 | 0;
+ i1 = i1 | 0;
+ if (i1 | 0) _wmemmove(i2, i3, i1) | 0;
+ return;
+}
+
 function __ZNSt3__210__function6__funcIZN7todomvc5todos6Action6RemoveEiE4__14NS_9allocatorIS5_EEFNS3_5TodosES8_EE7destroyEv(i1) {
  i1 = i1 | 0;
  return;
@@ -20687,7 +20731,7 @@ function __ZNSt3__211char_traitsIwE6assignEPwjw(i2, i1) {
 function ___syscall_ret(i1) {
  i1 = i1 | 0;
  if (i1 >>> 0 > 4294963200) {
-  HEAP32[4477] = 0 - i1;
+  HEAP32[4478] = 0 - i1;
   i1 = -1;
  }
  return i1 | 0;
@@ -20797,8 +20841,8 @@ function _tolower(i1) {
 
 function __ZSt15get_new_handlerv() {
  var i1 = 0;
- i1 = HEAP32[4476] | 0;
- HEAP32[4476] = i1 + 0;
+ i1 = HEAP32[4477] | 0;
+ HEAP32[4477] = i1 + 0;
  return i1 | 0;
 }
 
@@ -21126,14 +21170,14 @@ function b6() {
 // EMSCRIPTEN_END_FUNCS
 var FUNCTION_TABLE_iiii = [b0,___stdio_write,___stdio_seek,_sn_write,__ZNK10__cxxabiv117__class_type_info9can_catchEPKNS_16__shim_type_infoERPv,__ZNK10__cxxabiv123__fundamental_type_info9can_catchEPKNS_16__shim_type_infoERPv,__ZNK10__cxxabiv119__pointer_type_info9can_catchEPKNS_16__shim_type_infoERPv,__ZNK10__cxxabiv120__function_type_info9can_catchEPKNS_16__shim_type_infoERPv];
 var FUNCTION_TABLE_viiiii = [b1,__ZNK10__cxxabiv117__class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib,__ZNK10__cxxabiv120__si_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib,__ZNK10__cxxabiv121__vmi_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib];
-var FUNCTION_TABLE_vi = [b2,__ZNSt9exceptionD2Ev,__ZNSt3__217bad_function_callD0Ev,__ZNSt3__210__function6__baseIFN7todomvc5todos5TodosES4_EED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEED2Ev,__ZNSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEED0Ev,__ZNSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEE7destroyEv,__ZNSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEE18destroy_deallocateEv,__ZNSt3__210__function6__baseIFbN10emscripten3valEEED2Ev,__ZNSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_ED0Ev,__ZNSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_E7destroyEv,__ZNSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_E18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEED0Ev
+var FUNCTION_TABLE_vi = [b2,__ZNSt9exceptionD2Ev,__ZNSt3__217bad_function_callD0Ev,__ZNSt3__210__function6__baseIFN7todomvc5todos5TodosES4_EED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEED2Ev,__ZNSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEED0Ev,__ZNSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEE7destroyEv,__ZNSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEE18destroy_deallocateEv,__ZNSt3__210__function6__baseIFbN10emscripten3valEEED2Ev,__ZNSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_ED0Ev,__ZNSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_E7destroyEv,__ZNSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_E18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEED0Ev
 ,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action9ToggleAllEbE4__16NS_9allocatorIS5_EEFNS3_5TodosES8_EED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action9ToggleAllEbE4__16NS_9allocatorIS5_EEFNS3_5TodosES8_EE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action9ToggleAllEbE4__16NS_9allocatorIS5_EEFNS3_5TodosES8_EE18destroy_deallocateEv,__ZNSt3__210__function6__baseIFN7todomvc4task4TaskES4_EED2Ev,__ZNSt3__210__function6__funcIZN7todomvc4task6Action6ToggleEbE3__6NS_9allocatorIS5_EEFNS3_4TaskES8_EED0Ev,__ZNSt3__210__function6__funcIZN7todomvc4task6Action6ToggleEbE3__6NS_9allocatorIS5_EEFNS3_4TaskES8_EE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc4task6Action6ToggleEbE3__6NS_9allocatorIS5_EEFNS3_4TaskES8_EE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EE18destroy_deallocateEv,__ZNSt3__27codecvtIwc11__mbstate_tED2Ev,__ZNSt3__212codecvt_utf8IwLm1114111ELNS_12codecvt_modeE0EED0Ev,__ZNSt3__26locale5facet16__on_zero_sharedEv,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__1NS_9allocatorISC_EEFbN10emscripten3valEEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__1NS_9allocatorISC_EEFbN10emscripten3valEEED0Ev,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__1NS_9allocatorISC_EEFbN10emscripten3valEEE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__1NS_9allocatorISC_EEFbN10emscripten3valEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__2NS_9allocatorISC_EEFbN10emscripten3valEEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__2NS_9allocatorISC_EEFbN10emscripten3valEEED0Ev,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__2NS_9allocatorISC_EEFbN10emscripten3valEEE7destroyEv
 ,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__2NS_9allocatorISC_EEFbN10emscripten3valEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__3NS_9allocatorISC_EEFbN10emscripten3valEEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__3NS_9allocatorISC_EEFbN10emscripten3valEEED0Ev,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__3NS_9allocatorISC_EEFbN10emscripten3valEEE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__3NS_9allocatorISC_EEFbN10emscripten3valEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__4NS_9allocatorISC_EEFbN10emscripten3valEEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__4NS_9allocatorISC_EEFbN10emscripten3valEEED0Ev,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__4NS_9allocatorISC_EEFbN10emscripten3valEEE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__4NS_9allocatorISC_EEFbN10emscripten3valEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__5NS_9allocatorISC_EEFbN10emscripten3valEEED2Ev,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__5NS_9allocatorISC_EEFbN10emscripten3valEEED0Ev,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__5NS_9allocatorISC_EEFbN10emscripten3valEEE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__5NS_9allocatorISC_EEFbN10emscripten3valEEE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE3__8NS8_ISB_EEFNS3_4TaskESD_EED2Ev,__ZNSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE3__8NS8_ISB_EEFNS3_4TaskESD_EED0Ev,__ZNSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE3__8NS8_ISB_EEFNS3_4TaskESD_EE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE3__8NS8_ISB_EEFNS3_4TaskESD_EE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc4task6Action10CancelEditEvE3__9NS_9allocatorIS5_EEFNS3_4TaskES8_EED0Ev,__ZNSt3__210__function6__funcIZN7todomvc4task6Action10CancelEditEvE3__9NS_9allocatorIS5_EEFNS3_4TaskES8_EE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc4task6Action10CancelEditEvE3__9NS_9allocatorIS5_EEFNS3_4TaskES8_EE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc4task6Action9StartEditEvE3__7NS_9allocatorIS5_EEFNS3_4TaskES8_EED0Ev,__ZNSt3__210__function6__funcIZN7todomvc4task6Action9StartEditEvE3__7NS_9allocatorIS5_EEFNS3_4TaskES8_EE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc4task6Action9StartEditEvE3__7NS_9allocatorIS5_EEFNS3_4TaskES8_EE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6RemoveEiE4__14NS_9allocatorIS5_EEFNS3_5TodosES8_EED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6RemoveEiE4__14NS_9allocatorIS5_EEFNS3_5TodosES8_EE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6RemoveEiE4__14NS_9allocatorIS5_EEFNS3_5TodosES8_EE18destroy_deallocateEv,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8functionIFNS2_4task4TaskES7_EEEE4__18NS_9allocatorISA_EEFNS3_5TodosESD_EED2Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8functionIFNS2_4task4TaskES7_EEEE4__18NS_9allocatorISA_EEFNS3_5TodosESD_EED0Ev,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8functionIFNS2_4task4TaskES7_EEEE4__18NS_9allocatorISA_EEFNS3_5TodosESD_EE7destroyEv,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8functionIFNS2_4task4TaskES7_EEEE4__18NS_9allocatorISA_EEFNS3_5TodosESD_EE18destroy_deallocateEv
 ,__ZNSt3__27codecvtIwc11__mbstate_tED0Ev,__ZN10__cxxabiv116__shim_type_infoD2Ev,__ZN10__cxxabiv117__class_type_infoD0Ev,__ZNK10__cxxabiv116__shim_type_info5noop1Ev,__ZNK10__cxxabiv116__shim_type_info5noop2Ev,__ZN10__cxxabiv120__si_class_type_infoD0Ev,__ZNSt11logic_errorD2Ev,__ZNSt11logic_errorD0Ev,__ZNSt13runtime_errorD2Ev,__ZNSt13runtime_errorD0Ev,__ZNSt12length_errorD0Ev,__ZNSt12out_of_rangeD0Ev,__ZNSt11range_errorD0Ev,__ZN10__cxxabiv123__fundamental_type_infoD0Ev,__ZN10__cxxabiv119__pointer_type_infoD0Ev,__ZN10__cxxabiv120__function_type_infoD0Ev,__ZN10__cxxabiv121__vmi_class_type_infoD0Ev,__Z12onhashchangeNSt3__212basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE,__ZN10__cxxabiv112_GLOBAL__N_19destruct_EPv,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2
 ,b2,b2,b2,b2,b2,b2,b2,b2,b2];
-var FUNCTION_TABLE_vii = [b3,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EE7__cloneEPNS0_6__baseISA_EE,__ZNKSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEE7__cloneEPNS0_6__baseISB_EE,__ZNSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEEclEOSA_,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE7__cloneEPNS0_6__baseISH_EE,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEEclEOSG_,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEE7__cloneEPNS0_6__baseISD_EE,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEEclEOi,__ZNKSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_E7__cloneEPNS0_6__baseIS4_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISF_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISF_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISF_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EE7__cloneEPNS0_6__baseIS9_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action9ToggleAllEbE4__16NS_9allocatorIS5_EEFNS3_5TodosES8_EE7__cloneEPNS0_6__baseIS9_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action6ToggleEbE3__6NS_9allocatorIS5_EEFNS3_4TaskES8_EE7__cloneEPNS0_6__baseIS9_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EE7__cloneEPNS0_6__baseISE_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__1NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISH_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__2NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISH_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__3NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISH_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__4NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISH_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__5NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISH_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE3__8NS8_ISB_EEFNS3_4TaskESD_EE7__cloneEPNS0_6__baseISE_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CancelEditEvE3__9NS_9allocatorIS5_EEFNS3_4TaskES8_EE7__cloneEPNS0_6__baseIS9_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action9StartEditEvE3__7NS_9allocatorIS5_EEFNS3_4TaskES8_EE7__cloneEPNS0_6__baseIS9_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6RemoveEiE4__14NS_9allocatorIS5_EEFNS3_5TodosES8_EE7__cloneEPNS0_6__baseIS9_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8functionIFNS2_4task4TaskES7_EEEE4__18NS_9allocatorISA_EEFNS3_5TodosESD_EE7__cloneEPNS0_6__baseISE_EE,__ZN10emscripten8internal7InvokerIvJNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEEE6invokeEPFvS8_EPNS0_11BindingTypeIS8_EUt_E,b3,b3
+var FUNCTION_TABLE_vii = [b3,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EE7__cloneEPNS0_6__baseISA_EE,__ZNKSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEE7__cloneEPNS0_6__baseISB_EE,__ZNSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEEclEOSA_,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE7__cloneEPNS0_6__baseISH_EE,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEEclEOSG_,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEE7__cloneEPNS0_6__baseISD_EE,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEEclEOi,__ZNKSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_E7__cloneEPNS0_6__baseIS4_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISF_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISF_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISF_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EE7__cloneEPNS0_6__baseIS9_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action9ToggleAllEbE4__16NS_9allocatorIS5_EEFNS3_5TodosES8_EE7__cloneEPNS0_6__baseIS9_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action6ToggleEbE3__6NS_9allocatorIS5_EEFNS3_4TaskES8_EE7__cloneEPNS0_6__baseIS9_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EE7__cloneEPNS0_6__baseISE_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__1NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISH_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__2NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISH_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__3NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISH_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__4NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISH_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__5NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEPNS0_6__baseISH_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE3__8NS8_ISB_EEFNS3_4TaskESD_EE7__cloneEPNS0_6__baseISE_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CancelEditEvE3__9NS_9allocatorIS5_EEFNS3_4TaskES8_EE7__cloneEPNS0_6__baseIS9_EE,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action9StartEditEvE3__7NS_9allocatorIS5_EEFNS3_4TaskES8_EE7__cloneEPNS0_6__baseIS9_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6RemoveEiE4__14NS_9allocatorIS5_EEFNS3_5TodosES8_EE7__cloneEPNS0_6__baseIS9_EE,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8functionIFNS2_4task4TaskES7_EEEE4__18NS_9allocatorISA_EEFNS3_5TodosESD_EE7__cloneEPNS0_6__baseISE_EE,__ZN10emscripten8internal7InvokerIvJNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEEE6invokeEPFvS8_EPNS0_11BindingTypeIS8_EUt_E,b3,b3
 ,b3,b3,b3];
-var FUNCTION_TABLE_ii = [b4,__ZNKSt9exception4whatEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EE11target_typeEv,__ZNKSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEE7__cloneEv,__ZNKSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEE11target_typeEv,__ZNKSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_E7__cloneEv,__ZNKSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_E11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action9ToggleAllEbE4__16NS_9allocatorIS5_EEFNS3_5TodosES8_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action9ToggleAllEbE4__16NS_9allocatorIS5_EEFNS3_5TodosES8_EE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action6ToggleEbE3__6NS_9allocatorIS5_EEFNS3_4TaskES8_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action6ToggleEbE3__6NS_9allocatorIS5_EEFNS3_4TaskES8_EE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EE11target_typeEv,__ZNKSt3__214__codecvt_utf8IwE11do_encodingEv,__ZNKSt3__214__codecvt_utf8IwE16do_always_noconvEv,__ZNKSt3__214__codecvt_utf8IwE13do_max_lengthEv
+var FUNCTION_TABLE_ii = [b4,__ZNKSt9exception4whatEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EE11target_typeEv,__ZNKSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEE7__cloneEv,__ZNKSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEE11target_typeEv,__ZNKSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_E7__cloneEv,__ZNKSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_E11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action9ToggleAllEbE4__16NS_9allocatorIS5_EEFNS3_5TodosES8_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action9ToggleAllEbE4__16NS_9allocatorIS5_EEFNS3_5TodosES8_EE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action6ToggleEbE3__6NS_9allocatorIS5_EEFNS3_4TaskES8_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action6ToggleEbE3__6NS_9allocatorIS5_EEFNS3_4TaskES8_EE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EE11target_typeEv,__ZNKSt3__214__codecvt_utf8IwE11do_encodingEv,__ZNKSt3__214__codecvt_utf8IwE16do_always_noconvEv,__ZNKSt3__214__codecvt_utf8IwE13do_max_lengthEv
 ,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__1NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__1NS_9allocatorISC_EEFbN10emscripten3valEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__2NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__2NS_9allocatorISC_EEFbN10emscripten3valEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__3NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__3NS_9allocatorISC_EEFbN10emscripten3valEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__4NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__4NS_9allocatorISC_EEFbN10emscripten3valEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__5NS_9allocatorISC_EEFbN10emscripten3valEEE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__5NS_9allocatorISC_EEFbN10emscripten3valEEE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE3__8NS8_ISB_EEFNS3_4TaskESD_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE3__8NS8_ISB_EEFNS3_4TaskESD_EE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CancelEditEvE3__9NS_9allocatorIS5_EEFNS3_4TaskES8_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CancelEditEvE3__9NS_9allocatorIS5_EEFNS3_4TaskES8_EE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action9StartEditEvE3__7NS_9allocatorIS5_EEFNS3_4TaskES8_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action9StartEditEvE3__7NS_9allocatorIS5_EEFNS3_4TaskES8_EE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6RemoveEiE4__14NS_9allocatorIS5_EEFNS3_5TodosES8_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6RemoveEiE4__14NS_9allocatorIS5_EEFNS3_5TodosES8_EE11target_typeEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8functionIFNS2_4task4TaskES7_EEEE4__18NS_9allocatorISA_EEFNS3_5TodosESD_EE7__cloneEv,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8functionIFNS2_4task4TaskES7_EEEE4__18NS_9allocatorISA_EEFNS3_5TodosESD_EE11target_typeEv,___stdio_close,__ZNKSt3__27codecvtIwc11__mbstate_tE11do_encodingEv,__ZNKSt3__27codecvtIwc11__mbstate_tE16do_always_noconvEv,__ZNKSt3__27codecvtIwc11__mbstate_tE13do_max_lengthEv,__ZNKSt11logic_error4whatEv,__ZNKSt13runtime_error4whatEv,__ZN7todomvc5todos7onClickEN10emscripten3valE,b4,b4,b4
 ,b4,b4,b4,b4,b4];
 var FUNCTION_TABLE_viii = [b5,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EEclEOS9_,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EEclEOS8_,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action9ToggleAllEbE4__16NS_9allocatorIS5_EEFNS3_5TodosES8_EEclEOS8_,__ZNSt3__210__function6__funcIZN7todomvc4task6Action6ToggleEbE3__6NS_9allocatorIS5_EEFNS3_4TaskES8_EEclEOS8_,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EEclEOSD_,__ZNSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE3__8NS8_ISB_EEFNS3_4TaskESD_EEclEOSD_,__ZNSt3__210__function6__funcIZN7todomvc4task6Action10CancelEditEvE3__9NS_9allocatorIS5_EEFNS3_4TaskES8_EEclEOS8_,__ZNSt3__210__function6__funcIZN7todomvc4task6Action9StartEditEvE3__7NS_9allocatorIS5_EEFNS3_4TaskES8_EEclEOS8_,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6RemoveEiE4__14NS_9allocatorIS5_EEFNS3_5TodosES8_EEclEOS8_,__ZNSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8functionIFNS2_4task4TaskES7_EEEE4__18NS_9allocatorISA_EEFNS3_5TodosESD_EEclEOSD_,b5,b5,b5,b5,b5];
@@ -21141,7 +21185,7 @@ var FUNCTION_TABLE_v = [b6,__ZL25default_terminate_handlerv,__ZN10__cxxabiv112_G
 var FUNCTION_TABLE_iiiiiiiii = [b7,__ZNKSt3__214__codecvt_utf8IwE6do_outER11__mbstate_tPKwS5_RS5_PcS7_RS7_,__ZNKSt3__214__codecvt_utf8IwE5do_inER11__mbstate_tPKcS5_RS5_PwS7_RS7_,__ZNKSt3__27codecvtIwc11__mbstate_tE6do_outERS1_PKwS5_RS5_PcS7_RS7_,__ZNKSt3__27codecvtIwc11__mbstate_tE5do_inERS1_PKcS5_RS5_PwS7_RS7_,b7,b7,b7];
 var FUNCTION_TABLE_iiiii = [b8,__ZN10emscripten8internal7InvokerINS_3valEJRKjRKNSt3__212basic_stringIcNS5_11char_traitsIcEENS5_9allocatorIcEEEES2_EE6invokeEPFS2_S4_SD_S2_EjPNS0_11BindingTypeISB_EUt_EPNS0_7_EM_VALE];
 var FUNCTION_TABLE_viiiiii = [b9,__ZNK10__cxxabiv117__class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib,__ZNK10__cxxabiv120__si_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib,__ZNK10__cxxabiv121__vmi_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib];
-var FUNCTION_TABLE_iii = [b10,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__19NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFviEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_EclEOS3_,__ZNKSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_E6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEEclEOSE_,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEEclEOSE_,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEEclEOSE_,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action9ToggleAllEbE4__16NS_9allocatorIS5_EEFNS3_5TodosES8_EE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action6ToggleEbE3__6NS_9allocatorIS5_EEFNS3_4TaskES8_EE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__1NS_9allocatorISC_EEFbN10emscripten3valEEEclEOSG_,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__1NS_9allocatorISC_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__2NS_9allocatorISC_EEFbN10emscripten3valEEEclEOSG_,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__2NS_9allocatorISC_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__3NS_9allocatorISC_EEFbN10emscripten3valEEEclEOSG_,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__3NS_9allocatorISC_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__4NS_9allocatorISC_EEFbN10emscripten3valEEEclEOSG_,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__4NS_9allocatorISC_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__5NS_9allocatorISC_EEFbN10emscripten3valEEEclEOSG_,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__5NS_9allocatorISC_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE3__8NS8_ISB_EEFNS3_4TaskESD_EE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CancelEditEvE3__9NS_9allocatorIS5_EEFNS3_4TaskES8_EE6targetERKSt9type_info
+var FUNCTION_TABLE_iii = [b10,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6FilterENS3_10TodoFilterEE4__17NS_9allocatorIS6_EEFNS3_5TodosES9_EE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZ11beforePatchN7todomvc5todos5TodosEE3__0NS_9allocatorIS5_EEFvNS_8functionIFS4_S4_EEEEE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__20NS_9allocatorISA_EEFvNS5_IFNS2_4task4TaskESE_EEEEE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__21NS_9allocatorISA_EEFviEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_EclEOS3_,__ZNKSt3__210__function6__funcIPFbN10emscripten3valEENS_9allocatorIS5_EES4_E6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEEclEOSE_,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__10NS_9allocatorISA_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEEclEOSE_,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__11NS_9allocatorISA_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEEclEOSE_,__ZNKSt3__210__function6__funcIZN7todomvc5todos4viewENS3_5TodosENS_8functionIFvNS5_IFS4_S4_EEEEEEE4__12NS_9allocatorISA_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action7ArchiveEvE4__15NS_9allocatorIS5_EEFNS3_5TodosES8_EE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action9ToggleAllEbE4__16NS_9allocatorIS5_EEFNS3_5TodosES8_EE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action6ToggleEbE3__6NS_9allocatorIS5_EEFNS3_4TaskES8_EE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action3AddENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE4__13NS8_ISB_EEFNS3_5TodosESD_EE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__1NS_9allocatorISC_EEFbN10emscripten3valEEEclEOSG_,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__1NS_9allocatorISC_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__2NS_9allocatorISC_EEFbN10emscripten3valEEEclEOSG_,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__2NS_9allocatorISC_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__3NS_9allocatorISC_EEFbN10emscripten3valEEEclEOSG_,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__3NS_9allocatorISC_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__4NS_9allocatorISC_EEFbN10emscripten3valEEEclEOSG_,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__4NS_9allocatorISC_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__5NS_9allocatorISC_EEFbN10emscripten3valEEEclEOSG_,__ZNKSt3__210__function6__funcIZN7todomvc4task4viewENS3_4TaskENS_8functionIFvNS5_IFS4_S4_EEEEEENS5_IFviEEEE3__5NS_9allocatorISC_EEFbN10emscripten3valEEE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CommitEditENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE3__8NS8_ISB_EEFNS3_4TaskESD_EE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action10CancelEditEvE3__9NS_9allocatorIS5_EEFNS3_4TaskES8_EE6targetERKSt9type_info
 ,__ZNKSt3__210__function6__funcIZN7todomvc4task6Action9StartEditEvE3__7NS_9allocatorIS5_EEFNS3_4TaskES8_EE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6RemoveEiE4__14NS_9allocatorIS5_EEFNS3_5TodosES8_EE6targetERKSt9type_info,__ZNKSt3__210__function6__funcIZN7todomvc5todos6Action6ModifyEiNS_8functionIFNS2_4task4TaskES7_EEEE4__18NS_9allocatorISA_EEFNS3_5TodosESD_EE6targetERKSt9type_info];
 var FUNCTION_TABLE_iiiiii = [b11,__ZNKSt3__214__codecvt_utf8IwE10do_unshiftER11__mbstate_tPcS4_RS4_,__ZNKSt3__214__codecvt_utf8IwE9do_lengthER11__mbstate_tPKcS5_j,__ZNKSt3__27codecvtIwc11__mbstate_tE10do_unshiftERS1_PcS4_RS4_,__ZNKSt3__27codecvtIwc11__mbstate_tE9do_lengthERS1_PKcS5_j,b11,b11,b11];
 var FUNCTION_TABLE_viiii = [b12,__ZNK10__cxxabiv117__class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZNK10__cxxabiv120__si_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZNK10__cxxabiv121__vmi_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,__ZN6asmdom16functionCallbackERKjRKNSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEN10emscripten3valE,b12,b12,b12];

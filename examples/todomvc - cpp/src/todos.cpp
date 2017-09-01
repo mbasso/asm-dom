@@ -4,6 +4,7 @@
 #include "helpers.hpp"
 #include <emscripten/val.h>
 #include <functional>
+#include <algorithm>
 #include <vector>
 #include <string>
 
@@ -18,7 +19,7 @@ namespace todomvc {
 			action Add(std::string title) {
 				return [title](Todos model) -> Todos {
 					model.tasks.push_back(todomvc::task::init(model.nextID, title));
-					model.editingTitle = std::string("");
+					model.editingTitle = {};
 					++model.nextID;
 					return model;
 				};
@@ -89,20 +90,14 @@ namespace todomvc {
 		};
 
 		int remainingTodos(const std::vector<Task>& tasks) {
-			int remaining = 0;
-			for(std::vector<Task>::size_type i = 0; i < tasks.size(); ++i) {
-				if (!tasks[i].done) {
-					++remaining;
-				}
-			}
-			return remaining;
+			return std::count_if(tasks.begin(), tasks.end(), [] (const Task& t) { return !t.done; });
 		};
 
 		std::vector<Task> filteredTodos(const std::vector<Task>& tasks, const TodoFilter& filter) {
 			if (filter == all) return tasks;
 
-			std::vector<Task> filtered = std::vector<Task>();
-			for(std::vector<Task>::size_type i = 0; i < tasks.size(); ++i) {
+			std::vector<Task> filtered;
+			for(size_t i = 0; i < tasks.size(); ++i) {
 				switch(filter) {
 						case completed:
 							if (tasks[i].done) filtered.push_back(tasks[i]);
@@ -300,19 +295,12 @@ namespace todomvc {
 		};
 
 		Todos init(std::vector<Task> tasks) {
-			int nextID = 0;
-			for (auto it = tasks.begin(); it != tasks.end(); ++it) {
-				if (nextID < it->id) {
-					nextID = it->id;
-				}
-			}
-			++nextID;
-			return {
-				.nextID = nextID,
-				.tasks = tasks,
-				.editingTitle = std::string(""),
-				.filter = all,
-			};
+			auto it = std::min_element(tasks.begin(), tasks.end(), [] (const Task& a, const Task& b) { return a.id > b.id; });
+			Todos model;
+			model.nextID = it != tasks.end() ? it->id + 1 : 1;
+			model.tasks = tasks;
+			model.filter = all;
+			return model;
 		};
 
 		Todos update(Todos todos, action act) {

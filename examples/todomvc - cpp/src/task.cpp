@@ -140,13 +140,13 @@ namespace todomvc {
 		};
 
 		Task init(int id, std::string title) {
-			return {
-				.id = id,
-				.title = title,
-				.done = false,
-				.editing = false,
-				.editingValue = L""
-			};
+			Task model;
+			model.id = id;
+			model.title = title;
+			model.done = false;
+			model.editing = false;
+			model.editingValue = L"";
+			return model;
 		};
 
 		Task update(Task model, action act) {
