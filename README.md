@@ -74,8 +74,9 @@ int main() {
   // Patch into empty DOM element – this modifies the DOM as a side effect
   patch(
     emscripten::val::global("document").call<emscripten::val>(
-    "getElementById",
-    std::string("root"),
+      "getElementById",
+      std::string("root")
+    ),
     vnode
   );
 
