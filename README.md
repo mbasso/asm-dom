@@ -12,6 +12,7 @@
 - [Motivation](#motivation)
 - [Inline Example](#inline-example)
 - [Getting started](#getting-started)
+- [Tools](#tools)
 - [Examples](#examples)
 - [Roadmap](#roadmap)
 - [Change Log](#change-log)
@@ -124,6 +125,12 @@ asm-dom aims to be used from C++, however it can be used also from javascript, h
 - [C++ docs](https://github.com/mbasso/asm-dom/blob/master/docs/cpp.md)
 - [JS docs](https://github.com/mbasso/asm-dom/blob/master/docs/js.md)
 
+## Tools
+
+Here you can find a list of related projects:
+
+- [gccx](https://github.com/mbasso/gccx) - CPX (JSX like syntax) support.
+
 ## Examples
 
 Examples are available in the [examples folder](https://github.com/mbasso/asm-dom/tree/master/examples).
@@ -134,6 +141,7 @@ Also, here is the list of the online Demos:
 
 ## Roadmap
 
+- [ ] SSR (Server-side rendering) support
 - [ ] asm-dom aims to be even more powerful with [GC/DOM Integration](http://webassembly.org/docs/future-features/). Unfortunately this is a future feature 🦄, so, we have to be patient and wait a bit.
 
 ## Change Log

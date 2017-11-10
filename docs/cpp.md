@@ -182,6 +182,8 @@ If you are using [babel](https://babeljs.io/), please make sure to ignore the co
 
 You can find a complete example to study in the example folder, [here](https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpp) it is.
 
+If you want to use a [JSX](https://facebook.github.io/jsx/) like syntax in C++ you can also consider using [gccx](https://github.com/mbasso/gccx) before `emcc`, [here](https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpx) you can find the same example with an additional build step.
+
 ## Examples
 
 Examples are available in the [examples folder](https://github.com/mbasso/asm-dom/tree/master/examples):
