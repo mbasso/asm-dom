@@ -59,7 +59,7 @@ int main() {
 
 	EM_ASM(
 		window['todomvc'] = {
-			'onhashchange': Module['onhashchange'],
+			'onhashchange': Module['onhashchange']
 		};
 	);
 
