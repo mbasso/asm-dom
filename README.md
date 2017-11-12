@@ -12,7 +12,7 @@
 - [Motivation](#motivation)
 - [Inline Example](#inline-example)
 - [Getting started](#getting-started)
-- [Tools](#tools)
+- [Ecosystem](#ecosystem)
 - [Examples](#examples)
 - [Roadmap](#roadmap)
 - [Change Log](#change-log)
@@ -125,7 +125,7 @@ asm-dom aims to be used from C++, however it can be used also from javascript, h
 - [C++ docs](https://github.com/mbasso/asm-dom/blob/master/docs/cpp.md)
 - [JS docs](https://github.com/mbasso/asm-dom/blob/master/docs/js.md)
 
-## Tools
+## Ecosystem
 
 Here you can find a list of related projects:
 
