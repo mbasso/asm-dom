@@ -1,0 +1,5 @@
+{
+  "output": "temp",
+  "extensions": [".cpp"],
+  "copyFiles": true
+}
