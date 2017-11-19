@@ -2,10 +2,11 @@
 #define asmdom_diff_hpp
 
 #include "../VNode/VNode.hpp"
+#include <emscripten/val.h>
 
 namespace asmdom {
 
-	void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode);
+	VNode* toVNode(const emscripten::val& node);
 
 }
 

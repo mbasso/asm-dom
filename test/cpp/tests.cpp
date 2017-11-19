@@ -7,6 +7,7 @@
 #include "dataset/dataset.cpp"
 #include "props/props.cpp"
 #include "patch/patch.cpp"
+#include "toVNode/toVNode.cpp"
 
 int main() {
 	Config config = Config();

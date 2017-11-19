@@ -1,5 +1,6 @@
 #include "../cpp/asm-dom.hpp"
 #include <emscripten/bind.h>
+#include <emscripten/val.h>
 #include <cstdint>
 #include <codecvt>
 #include <locale>
@@ -9,6 +10,10 @@ using namespace asmdom;
 
 void deleteVNodePtr(const std::uintptr_t& vnodePtr) {
   delete reinterpret_cast<VNode*>(vnodePtr);
+};
+
+std::uintptr_t toVNodePtr(const emscripten::val& node) {
+  return reinterpret_cast<std::uintptr_t>(toVNode(node));
 };
 
 int getNode(const std::uintptr_t& vnodePtr) {
@@ -78,6 +83,7 @@ EMSCRIPTEN_BINDINGS(bindings) {
   emscripten::register_map<std::string, std::string>("MapStringString");
   emscripten::register_vector<std::uintptr_t>("VNodePtrVector");
   emscripten::function("_deleteVNode", &deleteVNodePtr);
+  emscripten::function("toVNode", &toVNodePtr);
   emscripten::function("_getNode", &getNode);
 	emscripten::function("_patch", &patchPtr);
   emscripten::function("_h_s", &h_s);
