@@ -1,3 +1,4 @@
+#include "toVNode.hpp"
 #include "../VNode/VNode.hpp"
 #include "../h/h.hpp"
 #include <emscripten/val.h>
