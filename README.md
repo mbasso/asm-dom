@@ -141,7 +141,7 @@ Also, here is the list of the online Demos:
 
 ## Roadmap
 
-- [ ] SSR (Server-side rendering) support
+- [ ] Thunks support
 - [ ] asm-dom aims to be even more powerful with [GC/DOM Integration](http://webassembly.org/docs/future-features/). Unfortunately this is a future feature 🦄, so, we have to be patient and wait a bit.
 
 ## Change Log
