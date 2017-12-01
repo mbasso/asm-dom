@@ -138,17 +138,17 @@ namespace asmdom {
 		}
 
     bool isSvg = vnode->data.attrs.count("ns") != 0 && vnode->data.attrs.at("ns") == "http://www.w3.org/2000/svg";
-		bool isContainerElement = std::find(containerElements.begin(), containerElements.end(), vnode->sel) != containerElements.end();
+		bool isSvgContainerElement = isSvg && std::find(containerElements.begin(), containerElements.end(), vnode->sel) != containerElements.end();
 
 		html.append("<" + vnode->sel);
 		appendAttributes(vnode, html);
-    if (isSvg && !isContainerElement) {
+    if (isSvg && !isSvgContainerElement) {
       html.append(" /");
     }
     html.append(">");
 
     if (
-			(isSvg && isContainerElement) ||
+			(isSvgContainerElement) ||
 			(!isSvg && std::find(voidElements.begin(), voidElements.end(), vnode->sel) == voidElements.end())
 		) {
 			#ifdef ASMDOM_JS_SIDE
