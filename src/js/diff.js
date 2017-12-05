@@ -19,7 +19,10 @@ export default (oldVnodePtr, vnodePtr, elmPtr) => {
   }
 
   for (const key in newRaws) {
-    if (oldRaws[key] !== newRaws[key] || (key === 'value' && elm[key] !== newRaws[key])) {
+    if (
+      oldRaws[key] !== newRaws[key] ||
+      ((key === 'value' || key === 'checked') && elm[key] !== newRaws[key])
+    ) {
       elm[key] = newRaws[key];
     }
   }

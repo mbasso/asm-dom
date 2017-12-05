@@ -34,4 +34,12 @@ describe('props (cpp)', function testAttributes() {
   it('removes an elements props', () => {
     app.removesAnElementsProps();
   });
+
+  it('should update value prop if user interacted with the element', () => {
+    app.shouldUpdateValuePropIfUserInteractedWithTheElement();
+  });
+
+  it('should update checked prop if user interacted with the element', () => {
+    app.shouldUpdateCheckedPropIfUserInteractedWithTheElement();
+  });
 });
