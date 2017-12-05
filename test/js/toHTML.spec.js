@@ -76,6 +76,14 @@ describe('toHTML (js)', function testToHTML() {
     expect(toHTML(vnode)).toEqual('<div style="width: 250px; height: 250px;"></div>');
   });
 
+  it('should set truthy attributes to empty string', () => {
+    const vnode = h('div', {
+      readonly: true,
+    });
+
+    expect(toHTML(vnode)).toEqual('<div readonly=""></div>');
+  });
+
   it('should parse props', () => {
     const vnode = h('div', {
       raw: {

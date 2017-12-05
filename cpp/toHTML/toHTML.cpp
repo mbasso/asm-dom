@@ -104,7 +104,11 @@ namespace asmdom {
 	void appendAttributes(const VNode* const vnode, std::string& html) {
 		for (auto& it : vnode->data.attrs) {
 			if (it.first != "ns" && it.second != "false") {
-				html.append(" " + it.first + "=\"" + encode(it.second) + "\"");
+				html.append(" " + it.first + "=\"");
+				if (it.second != "true") {
+					html.append(encode(it.second));
+				}
+				html.append("\"");
 			}
 		}
 

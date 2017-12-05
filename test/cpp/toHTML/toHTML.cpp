@@ -91,6 +91,19 @@ void shouldOmitFalsyAttributes() {
 	);
 };
 
+void shouldSetTruthyAttributesToEmptyString() {
+	VNode* vnode = h("div",
+		Attrs {
+			{"readonly", "true"}
+		}
+	);
+
+	assertEquals(
+		toHTML(vnode),
+		std::string("<div readonly=\"\"></div>")
+	);
+};
+
 void shouldParseProps() {
 	VNode* vnode = h("div",
 		Props {
@@ -293,6 +306,7 @@ EMSCRIPTEN_BINDINGS(tohtml_tests) {
 	emscripten::function("shouldHandleTextContent", &shouldHandleTextContent);
 	emscripten::function("shouldParseAttributes", &shouldParseAttributes);
 	emscripten::function("shouldOmitFalsyAttributes", &shouldOmitFalsyAttributes);
+	emscripten::function("shouldSetTruthyAttributesToEmptyString", &shouldSetTruthyAttributesToEmptyString);
 	emscripten::function("shouldParseProps", &shouldParseProps);
 	emscripten::function("shouldOmitProps", &shouldOmitProps);
 	emscripten::function("shouldOmitCallbacks", &shouldOmitCallbacks);

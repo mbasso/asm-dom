@@ -41,6 +41,10 @@ describe('toHTML (cpp)', function test() {
     app.shouldOmitFalsyAttributes();
   });
 
+  it('should set truthy attributes to empty string', () => {
+    app.shouldSetTruthyAttributesToEmptyString();
+  });
+
   it('should parse props', () => {
     app.shouldParseProps();
   });
