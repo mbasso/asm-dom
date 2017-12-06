@@ -8,6 +8,8 @@
 	- [h](#h)
 	- [patch](#patch)
 	- [deleteVNode](#deletevnode)
+- [Notes](#notes)
+	- [boolean attributes](#boolean-attributes)
 - [Helpers](#helpers)
   - [svg](#svg)
 - [Structuring applications](#structuring-applications)
@@ -189,6 +191,19 @@ const vnode = h('span', [
   child2,
 ]);
 deleteVNode(vnode); // manually delete vnode, child1 and child2 from memory
+```
+
+## Notes
+
+### boolean attributes
+
+If you want to set a boolean attribute, like `readonly`, you can just pass `true` or `false`, asm-dom will handle it for you:
+
+```js
+const vnode = h('input', {
+  readonly: true,
+  // or readonly: false,
+});
 ```
 
 ## Helpers
