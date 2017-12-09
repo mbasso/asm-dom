@@ -8,6 +8,8 @@
 	- [h](#h)
 	- [patch](#patch)
 	- [deleteVNode](#deletevnode)
+	- [toVNode](#tovnode)
+	- [toHTML](#tohtml)
 - [Notes](#notes)
 	- [boolean attributes](#boolean-attributes)
 - [Helpers](#helpers)
@@ -175,7 +177,7 @@ patch(oldText, newText);
 
 ### deleteVNode
 
-As we said before the `h` returns a memory address. This means that this memory have to be deleted manually, as we have to do in C++ for example. By default asm-dom automatically delete the old vnode from memory when `patch` is called. However, if you want to create a vnode that is not patched, or if you want to manually manage this aspect (setting `clearMemory: false` in the `init` function), you have to delete it manually. For this reason we have developed a function that allows you to delete a given vnode and all its children recursively:
+As we said before the `h` returns a memory address. This means that this memory have to be deleted manually, as we have to do in C++ for example. By default asm-dom automatically delete the old vnode from memory when `patch` (or `toHTML`) is called. However, if you want to create a vnode that is not patched, or if you want to manually manage this aspect (setting `clearMemory: false` in the `init` function), you have to delete it manually. For this reason we have developed a function that allows you to delete a given vnode and all its children recursively:
 
 ```js
 const vnode1 = h('div');
@@ -191,6 +193,42 @@ const vnode = h('span', [
   child2,
 ]);
 deleteVNode(vnode); // manually delete vnode, child1 and child2 from memory
+```
+
+## toVNode
+
+Converts a DOM node into a virtual node. This is especially good for patching over an pre-existing, server-side generated content. Using this function together with `toHTML` you can implement server-side rendering.
+
+```js
+// supposing that 'root' is a server-side generated div
+const vnode = toVNode(document.getElementById('root'));
+
+const newVnode = h('div', {
+  id: 'root',
+  style: 'color: #000',
+}, [
+  h('h1', 'Headline'),
+  h('p', 'A paragraph'),
+]);
+
+patch(vnode, newVnode);
+```
+
+## toHTML
+
+Renders a vnode to HTML string. This is particularly useful if you want to generate HTML on the server. Using this function together with `toVNode` you can implement server-side rendering.
+
+```js
+const vnode = h('div', {
+  id: 'root',
+  style: 'color: #000',
+}, [
+  h('h1', 'Headline'),
+  h('p', 'A paragraph'),
+]);
+
+const html = toHTML(vnode);
+// html = '<div id="root" style="color: #000"><h1>Headline</h1><p>A paragraph</p></div>';
 ```
 
 ## Notes
