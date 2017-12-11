@@ -31,6 +31,10 @@ describe('attributes (cpp)', function testAttributes() {
     app.shouldBeOmittedWhenFalsyValuesAreProvided();
   });
 
+  it('should set truthy values to empty string', () => {
+    app.shouldSetTruthyValuesToEmptyString();
+  });
+
   it('should be set correctly when namespaced', () => {
     app.shouldBeSetCorrectlyWhenNamespaced();
   });

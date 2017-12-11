@@ -1,5 +1,6 @@
 import h from './h';
 import patch from './patch';
+import { toHTML, appendProps, insertInnerHTML } from './toHTML';
 import diff from './diff';
 import domApi, { nodes } from '../cpp/domApi';
 
@@ -39,6 +40,7 @@ export default (config) => {
 
       lib.h = h;
       lib.patch = patch;
+      lib.toHTML = toHTML;
       lib.getNode = vnode => nodes[lib._getNode(vnode)];
       lib.deleteVNode = (oldVnode) => {
         window.asmDomHelpers.vnodesData[oldVnode] = undefined;
@@ -50,6 +52,8 @@ export default (config) => {
           domApi,
           vnodesData: {},
           diff,
+          appendProps,
+          insertInnerHTML,
         };
       };
 

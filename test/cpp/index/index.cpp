@@ -1,4 +1,5 @@
 #include "../../../src/cpp/asm-dom.hpp"
+#include "../../../src/cpp/asm-dom-server.hpp"
 #include "../utils.hpp"
 #include <emscripten/bind.h>
 
@@ -25,6 +26,15 @@ void shouldAutomaticallyClearMemory() {
 
 	delete vnode1;
 	delete vnode2;
+
+	vnode = h("div");
+	obj = *vnode;
+
+	toHTML(vnode);
+
+	if (vnode->sel == obj.sel) {
+		throw 20;
+	}
 };
 
 void shouldAutomaticallyClearMemoryByConfig() {
@@ -49,6 +59,15 @@ void shouldAutomaticallyClearMemoryByConfig() {
 
 	delete vnode1;
 	delete vnode2;
+
+	vnode = h("div");
+	obj = *vnode;
+
+	toHTML(vnode);
+
+	if (vnode->sel == obj.sel) {
+		throw 20;
+	}
 };
 
 void shouldNotAutomaticallyClearMemoryByConfig() {
@@ -73,6 +92,15 @@ void shouldNotAutomaticallyClearMemoryByConfig() {
 
 	delete vnode1;
 	delete vnode2;
+
+	vnode = h("div");
+	obj = *vnode;
+
+	toHTML(vnode);
+
+	if (vnode->sel != obj.sel) {
+		throw 20;
+	}
 };
 
 void shouldUseSafePatch() {

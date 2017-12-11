@@ -141,7 +141,7 @@ Also, here is the list of the online Demos:
 
 ## Roadmap
 
-- [ ] SSR (Server-side rendering) support
+- [ ] Thunks support
 - [ ] asm-dom aims to be even more powerful with [GC/DOM Integration](http://webassembly.org/docs/future-features/). Unfortunately this is a future feature 🦄, so, we have to be patient and wait a bit.
 
 ## Change Log
@@ -157,7 +157,10 @@ Every release, along with the migration instructions, is documented on the Githu
 
 ## Copyright and License
 
-Copyright for portions of project asm-dom are held by Simon Friis Vindum, 2015 as part of project snabbdom. All other copyright for project asm-dom are held by Matteo Basso.
+Copyright for portions of project asm-dom are held by:
+- Simon Friis Vindum, 2015 as part of project snabbdom
+- project snabbdom-to-html
+All other copyright for project asm-dom are held by Matteo Basso.
 
 Copyright (c) 2016, Matteo Basso.
 

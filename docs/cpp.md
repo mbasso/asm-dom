@@ -7,12 +7,15 @@
 	- [init](#init)
 	- [h](#h)
 	- [patch](#patch)
+	- [toVNode](#tovnode)
+	- [toHTML](#tohtml)
 - [Notes](#notes)
 	- [memory management](#memory-management)
 	- [boolean attributes](#boolean-attributes)
 	- [string encoding](#string-encoding)
 - [Helpers](#helpers)
   - [svg](#svg)
+- [Server side rendering](#server-side-rendering)
 - [Structuring applications](#structuring-applications)
 
 ## Inline Example
@@ -147,8 +150,8 @@ To do this, as first thing, **before importing your compiled code from C++** (wa
 
 After that, you can build your app using the source code in the [cpp](https://github.com/mbasso/asm-dom/tree/master/cpp) folder:
 
-- `asm-dom.hpp`
-- `asm-dom.cpp` or `asm-dom.a`
+- `asm-dom.hpp` and `asm-dom-server.hpp`
+- `asm-dom.cpp` and `asm-dom-server.cpp` (or `asm-dom.a` that includes both)
 
 and compile it using [emscripten (emcc cli)](http://kripken.github.io/emscripten-site/), [here](http://webassembly.org/getting-started/developers-guide/) is the installation guide. A few tips about this step:
 
@@ -192,7 +195,7 @@ Examples are available in the [examples folder](https://github.com/mbasso/asm-do
 
 ## Documentation
 
-All APIs are available in the namespace `asmdom`.
+All APIs are available in the namespace `asmdom`. They can be used including using `asm-dom.hpp`, except `toHTML` that is defined in `asm-dom-server.hpp`.
 
 ### init
 
@@ -318,11 +321,62 @@ VNode* newText = h(std::string("span"), "new text");
 patch(oldText, newText);
 ```
 
+## toVNode
+
+Converts a DOM node into a virtual node. This is especially good for patching over an pre-existing, server-side generated content.
+
+```c++
+// supposing that 'root' is a server-side generated div
+VNode* vnode = toVNode(
+  emscripten::val::global("document").call<emscripten::val>(
+    "getElementById",
+    emscripten::val("root")
+  )
+);
+
+VNode* newVnode = h("div",
+  Data(
+    Attrs {
+      {"id", "root"}
+      {"style", "color: #000"}
+    }
+  ),
+  Children {
+    h("h1", string("Headline")),
+    h("p", string("A paragraph")),
+  }
+);
+
+patch(vnode, newVnode);
+```
+
+## toHTML
+
+Renders a vnode to HTML string. This is particularly useful if you want to generate HTML on the server.
+
+```c++
+VNode* vnode = h("div",
+  Data(
+    Attrs {
+      {"id", "root"}
+      {"style", "color: #000"}
+    }
+  ),
+  Children {
+    h("h1", string("Headline")),
+    h("p", string("A paragraph")),
+  }
+);
+
+std::string html = toHTML(vnode);
+// html = <div id="root" style="color: #000"><h1>Headline</h1><p>A paragraph</p></div>;
+```
+
 ## Notes
 
 ### memory management
 
-As we said before the `h` returns a pointer to a VNode, this means that the memory have to be deleted manually. By default asm-dom automatically delete the old vnode from memory when `patch` is called. However, if you want to create a vnode that is not patched, or if you want to manually manage this aspect (setting `clearMemory = false` in the `Config` object to pass to the `init` function), you have to delete it manually.
+As we said before the `h` returns a pointer to a VNode, this means that the memory have to be deleted manually. By default asm-dom automatically delete the old vnode from memory when `patch` (or `toHTML`) is called. However, if you want to create a vnode that is not patched, or if you want to manually manage this aspect (setting `clearMemory = false` in the `Config` object to pass to the `init` function), you have to delete it manually.
 
 ```c++
 VNode* vnode1 = h("div");
@@ -433,7 +487,7 @@ VNode* vnode = h("div", Children {
               {"cy", "50"},
               {"r", "40"},
               {"stroke", "green"},
-              {"stroke-width"", "4"},
+              {"stroke-width", "4"},
               {"fill", "yellow"}
             }
           }
@@ -442,6 +496,70 @@ VNode* vnode = h("div", Children {
     }
   )
 });
+```
+
+## Server side rendering
+
+If you are interested in server side rendering, you can do that with asm-dom in 2 simple steps:
+
+- You can use `toHTML` to generate HTML on the server and send it to the client for faster page loads and to allow search engines to crawl your pages for SEO purposes.
+- After that you can call `toVNode` on the node that you have server-rendered and patch it with a vnode created on the client. In this way asm-dom will preserve it and only attach event handlers, providing a fantastic first-load experience.
+
+Here is an example:
+
+```c++
+// a function that returns the view, used on client and server
+VNode* view() {
+  return (
+    h("div",
+      Data(
+        Attrs {
+          {"id", "root"}
+        }
+      ),
+      Children {
+        h("h1", std::string("Title")),
+        h("button",
+          Data(
+            Attrs {
+              {"class", "btn"}
+            },
+            Callbacks {
+              {"onclick", onButtonClick}
+            }
+          ),
+          "Click Me!"
+        )
+      }
+    )
+  );
+}
+
+// on the server
+VNode* vnode = view();
+std::string appString = toHTML(vnode);
+std::string html = (
+  "<!DOCTYPE html>"
+  "<html>"
+    "<head>"
+      "<title>My Awesome App</title>"
+      "<link rel=\"stylesheet\" href=\"/index.css\" />"
+    "</head>"
+    
+    "<body>"
+      + appString +
+    "</body>"
+    
+    "<script src=\"/bundle.js\"></script>"
+  "</html>"
+);
+
+// on the client
+VNode* oldVNode = toVNode(
+  emscripten::val::global("document").call<emscripten::val>("getElementById", emscripten::val("root"))
+);
+VNode* vnode = view();
+patch(oldVNode, vnode); // attach event handlers
 ```
 
 ## Structuring applications

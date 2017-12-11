@@ -8,8 +8,13 @@
 	- [h](#h)
 	- [patch](#patch)
 	- [deleteVNode](#deletevnode)
+	- [toVNode](#tovnode)
+	- [toHTML](#tohtml)
+- [Notes](#notes)
+	- [boolean attributes](#boolean-attributes)
 - [Helpers](#helpers)
   - [svg](#svg)
+- [Server side rendering](#server-side-rendering)
 - [Structuring applications](#structuring-applications)
 
 ## Inline Example
@@ -173,7 +178,7 @@ patch(oldText, newText);
 
 ### deleteVNode
 
-As we said before the `h` returns a memory address. This means that this memory have to be deleted manually, as we have to do in C++ for example. By default asm-dom automatically delete the old vnode from memory when `patch` is called. However, if you want to create a vnode that is not patched, or if you want to manually manage this aspect (setting `clearMemory: false` in the `init` function), you have to delete it manually. For this reason we have developed a function that allows you to delete a given vnode and all its children recursively:
+As we said before the `h` returns a memory address. This means that this memory have to be deleted manually, as we have to do in C++ for example. By default asm-dom automatically delete the old vnode from memory when `patch` (or `toHTML`) is called. However, if you want to create a vnode that is not patched, or if you want to manually manage this aspect (setting `clearMemory: false` in the `init` function), you have to delete it manually. For this reason we have developed a function that allows you to delete a given vnode and all its children recursively:
 
 ```js
 const vnode1 = h('div');
@@ -191,6 +196,55 @@ const vnode = h('span', [
 deleteVNode(vnode); // manually delete vnode, child1 and child2 from memory
 ```
 
+## toVNode
+
+Converts a DOM node into a virtual node. This is especially good for patching over an pre-existing, server-side generated content. Using this function together with `toHTML` you can implement server-side rendering.
+
+```js
+// supposing that 'root' is a server-side generated div
+const vnode = toVNode(document.getElementById('root'));
+
+const newVnode = h('div', {
+  id: 'root',
+  style: 'color: #000',
+}, [
+  h('h1', 'Headline'),
+  h('p', 'A paragraph'),
+]);
+
+patch(vnode, newVnode);
+```
+
+## toHTML
+
+Renders a vnode to HTML string. This is particularly useful if you want to generate HTML on the server. Using this function together with `toVNode` you can implement server-side rendering.
+
+```js
+const vnode = h('div', {
+  id: 'root',
+  style: 'color: #000',
+}, [
+  h('h1', 'Headline'),
+  h('p', 'A paragraph'),
+]);
+
+const html = toHTML(vnode);
+// html = '<div id="root" style="color: #000"><h1>Headline</h1><p>A paragraph</p></div>';
+```
+
+## Notes
+
+### boolean attributes
+
+If you want to set a boolean attribute, like `readonly`, you can just pass `true` or `false`, asm-dom will handle it for you:
+
+```js
+const vnode = h('input', {
+  readonly: true,
+  // or readonly: false,
+});
+```
+
 ## Helpers
 
 ### svg
@@ -203,6 +257,56 @@ const vnode = h('div', [
     h('circle', { cx: 50, cy: 50, r: 40, stroke: 'green', 'stroke-width': 4, fill: 'yellow'})
   ])
 ]);
+```
+
+## Server side rendering
+
+If you are interested in server side rendering, you can do that with asm-dom in 2 simple steps:
+
+- You can use `toHTML` to generate HTML on the server and send it to the client for faster page loads and to allow search engines to crawl your pages for SEO purposes.
+- After that you can call `toVNode` on the node that you have server-rendered and patch it with a vnode created on the client. In this way asm-dom will preserve it and only attach event handlers, providing a fantastic first-load experience.
+
+Here is an example:
+
+```js
+// a function that returns the view, used on client and server
+const view = () => (
+  h('div', {
+    id: 'root',
+  }, [
+    h('h1', 'Title'),
+    h('button', {
+      className: 'btn',
+      raw: {
+        onclick: onButtonClick,
+      },
+    }, 'Click Me!'),
+  ])
+);
+
+// on the server
+const vnode = view();
+const htmlString = toHTML(vnode);
+response.send(`
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>My Awesome App</title>
+      <link rel="stylesheet" href="/index.css" />
+    </head>
+    
+    <body>
+      ${htmlString}
+    </body>
+    
+    <script src="/bundle.js"></script>
+  </html>
+`);
+
+// on the client
+const oldVNode = toVNode(document.getElementById('root'));
+const vnode = view();
+patch(oldVNode, vnode); // attach event handlers
 ```
 
 ## Structuring applications

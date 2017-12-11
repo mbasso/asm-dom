@@ -10,7 +10,7 @@ void shouldHaveTheirProvidedValues() {
 		Attrs {
 			{"href", "/foo"},
 			{"minlength", "1"},
-			{"value", "true"}
+			{"value", "foo"}
 		}
 	));
 	patch(getRoot(), vnode);
@@ -27,7 +27,7 @@ void shouldHaveTheirProvidedValues() {
 	);
 	assertEquals(
 		elm.call<emscripten::val>("getAttribute", emscripten::val("value")),
-		emscripten::val("true")
+		emscripten::val("foo")
 	);
 
 	delete vnode;
@@ -38,7 +38,7 @@ void attributesCanBeMemoized() {
 		Attrs {
 			{"href", "/foo"},
 			{"minlength", "1"},
-			{"value", "true"}
+			{"value", "foo"}
 		}
 	);
 	VNode* vnode = h("div", data);
@@ -57,7 +57,7 @@ void attributesCanBeMemoized() {
 	);
 	assertEquals(
 		elm.call<emscripten::val>("getAttribute", emscripten::val("value")),
-		emscripten::val("true")
+		emscripten::val("foo")
 	);
 	patch(vnode, vnode2);
 	
@@ -73,7 +73,7 @@ void attributesCanBeMemoized() {
 	);
 	assertEquals(
 		elm.call<emscripten::val>("getAttribute", emscripten::val("value")),
-		emscripten::val("true")
+		emscripten::val("foo")
 	);
 
 	delete vnode2;
@@ -107,6 +107,34 @@ void shouldBeOmittedWhenFalsyValuesAreProvided() {
 	delete vnode;
 };
 
+void shouldSetTruthyValuesToEmptyString() {
+	VNode* vnode = h("input", Data(
+		Attrs {
+			{"href", "null"},
+			{"minlength", "0"},
+			{"readonly", "true"}
+		}
+	));
+	patch(getRoot(), vnode);
+	
+	emscripten::val elm = getBodyFirstChild();
+
+	assertEquals(
+		elm.call<emscripten::val>("getAttribute", emscripten::val("href")),
+		emscripten::val("null")
+	);
+	assertEquals(
+		elm.call<emscripten::val>("getAttribute", emscripten::val("minlength")),
+		emscripten::val("0")
+	);
+	assertEquals(
+		elm.call<emscripten::val>("getAttribute", emscripten::val("readonly")),
+		emscripten::val("")
+	);
+
+	delete vnode;
+};
+
 void shouldBeSetCorrectlyWhenNamespaced() {
 	VNode* vnode = h("div", Data(
 		Attrs {
@@ -132,5 +160,6 @@ EMSCRIPTEN_BINDINGS(attributes_tests) {
   emscripten::function("shouldHaveTheirProvidedValues", &shouldHaveTheirProvidedValues);
   emscripten::function("attributesCanBeMemoized", &attributesCanBeMemoized);
   emscripten::function("shouldBeOmittedWhenFalsyValuesAreProvided", &shouldBeOmittedWhenFalsyValuesAreProvided);
-  emscripten::function("shouldBeSetCorrectlyWhenNamespaced", &shouldBeSetCorrectlyWhenNamespaced);
+	emscripten::function("shouldSetTruthyValuesToEmptyString", &shouldSetTruthyValuesToEmptyString);
+	emscripten::function("shouldBeSetCorrectlyWhenNamespaced", &shouldBeSetCorrectlyWhenNamespaced);
 };

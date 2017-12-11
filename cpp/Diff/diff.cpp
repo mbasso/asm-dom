@@ -8,6 +8,8 @@
 
 namespace asmdom {
 
+	const std::string emptyString;
+
 	void diffAttrs(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		if (oldVnode->data.attrs.empty() && vnode->data.attrs.empty()) return;
 
@@ -41,7 +43,7 @@ namespace asmdom {
 							Module['UTF8ToString']($1),
 							Module['UTF8ToString']($2)
 						);
-					}, vnode->elm, it.first.c_str(), it.second.c_str());
+					}, vnode->elm, it.first.c_str(), it.second == "true" ? emptyString.c_str() : it.second.c_str());
 				
 				#ifndef ASMDOM_JS_SIDE
 					}

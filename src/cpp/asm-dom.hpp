@@ -3,6 +3,7 @@
 
 #include "VNode/VNode.hpp"
 #include "h/h.hpp"
+#include "toVNode/toVNode.hpp"
 #include "Patch/patch.hpp"
 #include "Init/init.hpp"
 

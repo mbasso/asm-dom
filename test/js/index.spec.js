@@ -59,7 +59,7 @@ describe('load (js)', function test() {
       hardReload: true,
     }).then((vdom) => {
       expect(vdom.clearMemory).toEqual(true);
-      const { h, patch } = vdom;
+      const { h, patch, toHTML } = vdom;
       const spy = expect.spyOn(vdom, 'deleteVNode');
       const vnode = h('div');
       const vnode1 = h('div');
@@ -67,12 +67,12 @@ describe('load (js)', function test() {
       patch(root, vnode);
       patch(vnode, vnode1);
       patch(vnode1, vnode2);
+      toHTML(vnode2);
       setTimeout(() => {
-        expect(spy.calls.length).toEqual(3);
+        expect(spy.calls.length).toEqual(4);
         expect(spy.calls[1].arguments).toEqual([vnode]);
         expect(spy.calls[2].arguments).toEqual([vnode1]);
-        vdom.deleteVNode(vnode1);
-        vdom.deleteVNode(vnode2);
+        expect(spy.calls[3].arguments).toEqual([vnode2]);
         done();
       }, 500);
     });
@@ -85,7 +85,7 @@ describe('load (js)', function test() {
       clearMemory: true,
     }).then((vdom) => {
       expect(vdom.clearMemory).toEqual(true);
-      const { h, patch } = vdom;
+      const { h, patch, toHTML } = vdom;
       const spy = expect.spyOn(vdom, 'deleteVNode');
       const vnode = h('div');
       const vnode1 = h('div');
@@ -93,14 +93,14 @@ describe('load (js)', function test() {
       patch(root, vnode);
       patch(vnode, vnode1);
       patch(vnode1, vnode2);
+      toHTML(vnode2);
       setTimeout(() => {
-        expect(spy.calls.length).toEqual(3);
+        expect(spy.calls.length).toEqual(4);
         expect(spy.calls[1].arguments).toEqual([vnode]);
         expect(spy.calls[2].arguments).toEqual([vnode1]);
-        vdom.deleteVNode(vnode1);
-        vdom.deleteVNode(vnode2);
+        expect(spy.calls[3].arguments).toEqual([vnode2]);
         done();
-      }, 500);
+      }, 1000);
     });
   });
 
@@ -111,7 +111,7 @@ describe('load (js)', function test() {
       clearMemory: false,
     }).then((vdom) => {
       expect(vdom.clearMemory).toEqual(false);
-      const { h, patch } = vdom;
+      const { h, patch, toHTML } = vdom;
       const spy = expect.spyOn(vdom, 'deleteVNode');
       const vnode = h('div');
       const vnode1 = h('div');
@@ -119,13 +119,14 @@ describe('load (js)', function test() {
       patch(root, vnode);
       patch(vnode, vnode1);
       patch(vnode1, vnode2);
+      toHTML(vnode2);
       setTimeout(() => {
         expect(spy.calls.length).toEqual(0);
         vdom.deleteVNode(vnode);
         vdom.deleteVNode(vnode1);
         vdom.deleteVNode(vnode2);
         done();
-      }, 500);
+      }, 1000);
     });
   });
 
