@@ -14,6 +14,7 @@
 	- [boolean attributes](#boolean-attributes)
 - [Helpers](#helpers)
   - [svg](#svg)
+- [Server side rendering](#server-side-rendering)
 - [Structuring applications](#structuring-applications)
 
 ## Inline Example
@@ -256,6 +257,56 @@ const vnode = h('div', [
     h('circle', { cx: 50, cy: 50, r: 40, stroke: 'green', 'stroke-width': 4, fill: 'yellow'})
   ])
 ]);
+```
+
+## Server side rendering
+
+If you are interested in server side rendering, you can do that with asm-dom in 2 simple steps:
+
+- You can use `toHTML` to generate HTML on the server and send it to the client for faster page loads and to allow search engines to crawl your pages for SEO purposes.
+- After that you can call `toVNode` on the node that you have server-rendered and patch it with a vnode created on the client. In this way asm-dom will preserve it and only attach event handlers, providing a fantastic first-load experience.
+
+Here is an example:
+
+```js
+// a function that returns the view, used on client and server
+const view = () => (
+  h('div', {
+    id: 'root',
+  }, [
+    h('h1', 'Title'),
+    h('button', {
+      className: 'btn',
+      raw: {
+        onclick: onButtonClick,
+      },
+    }, 'Click Me!'),
+  ])
+);
+
+// on the server
+const vnode = view();
+const htmlString = toHTML(vnode);
+response.send(`
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>My Awesome App</title>
+      <link rel="stylesheet" href="/index.css" />
+    </head>
+    
+    <body>
+      ${htmlString}
+    </body>
+    
+    <script src="/bundle.js"></script>
+  </html>
+`);
+
+// on the client
+const oldVNode = toVNode(document.getElementById('root'));
+const vnode = view();
+patch(oldVNode, vnode); // attach event handlers
 ```
 
 ## Structuring applications
