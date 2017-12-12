@@ -6,7 +6,7 @@ var _domApi2 = _interopRequireDefault(_domApi);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-if (global !== undefined && global.window === undefined) global.window = {};
+if (typeof global !== 'undefined' && global.window === undefined) global.window = {};
 
 if (window.asmDomHelpers === undefined) window.asmDomHelpers = {};
 window.asmDomHelpers.domApi = _domApi2['default'];
