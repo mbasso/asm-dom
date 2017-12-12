@@ -1,7 +1,7 @@
 {
-  "name": "asm-dom-todomvc-cpp",
+  "name": "asm-dom-todomvc-ssr",
   "version": "0.0.1",
-  "description": "todomvc using asm-dom",
+  "description": "todomvc using asm-dom and ssr",
   "scripts": {
     "clean": "rimraf lib dist es .nyc_output compiled",
     "compile": "npm run clean && mkdir -p compiled && npm run compile:server && npm run compile:client",

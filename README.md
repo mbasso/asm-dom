@@ -160,6 +160,7 @@ Every release, along with the migration instructions, is documented on the Githu
 Copyright for portions of project asm-dom are held by:
 - Simon Friis Vindum, 2015 as part of project snabbdom
 - project snabbdom-to-html
+
 All other copyright for project asm-dom are held by Matteo Basso.
 
 Copyright (c) 2016, Matteo Basso.
