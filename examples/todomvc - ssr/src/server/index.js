@@ -4,7 +4,7 @@ const config = {};
 
 new Promise(
   (resolve) => {
-    if ('WebAssembly' in window) {
+    if ('WebAssembly' in global) {
       import('../../compiled/server/wasm/app.wasm')
               .then((wasm) => {
                 config.wasmBinary = new Uint8Array(wasm);
