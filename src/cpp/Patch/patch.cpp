@@ -257,7 +257,16 @@ namespace asmdom {
 			)
 		);
 		oldVnode->elm = emscripten::val::global("window")["asmDomHelpers"]["domApi"].call<int>("addNode", element);
-		return patch(oldVnode, vnode);
+		
+		#ifndef ASMDOM_JS_SIDE
+			VNode* result = patch(oldVnode, vnode);
+			if (!VDOMConfig::getConfig().getClearMemory()) {
+				delete oldVnode;
+			}
+			return result;
+		#else
+			return patch(oldVnode, vnode);
+		#endif
 	};
 
 	VNode* patch(VNode* const oldVnode, VNode* const vnode) {

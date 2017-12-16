@@ -121,7 +121,7 @@ describe('load (js)', function test() {
       patch(vnode1, vnode2);
       toHTML(vnode2);
       setTimeout(() => {
-        expect(spy.calls.length).toEqual(0);
+        expect(spy.calls.length).toEqual(1);
         vdom.deleteVNode(vnode);
         vdom.deleteVNode(vnode1);
         vdom.deleteVNode(vnode2);

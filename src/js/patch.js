@@ -7,7 +7,9 @@ export default (oldVnode, vnode) => {
   // eslint-disable-next-line
   if (oldVnode === vnode) return vnode;
   window.asmDomHelpers.currentNode = vnode;
+  let { clearMemory } = window.asmDom;
   if (typeof oldVnode !== 'number') {
+    clearMemory = true;
     const props = new window.asmDom.MapStringString();
     if (oldVnode.id !== '') props.set('id', oldVnode.id);
     if (oldVnode.className !== '') props.set('class', oldVnode.className);
@@ -19,7 +21,7 @@ export default (oldVnode, vnode) => {
     props.delete();
   }
   window.asmDom._patch(oldVnode, vnode);
-  if (window.asmDom.clearMemory === true) {
+  if (clearMemory === true) {
     setTimeout(window.asmDom.deleteVNode.bind(null, oldVnode));
   }
   // eslint-disable-next-line
