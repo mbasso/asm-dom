@@ -33,7 +33,7 @@ describe('eventlisteners (js)', function testEventlisteners() {
     document.body.appendChild(root);
   });
 
-  it('should attach a click event handler to element', () => {
+  it('should attach a click event handler to element (as prop)', () => {
     const result = [];
     const clicked = (ev) => { result.push(ev); };
     const vnode = h('div', { raw: { onclick: clicked } }, [
@@ -46,7 +46,7 @@ describe('eventlisteners (js)', function testEventlisteners() {
     vdom.deleteVNode(vnode);
   });
 
-  it('should detach attached click event handler to element', () => {
+  it('should detach attached click event handler to element (as prop)', () => {
     const result = [];
     const clicked = (ev) => { result.push(ev); };
     const vnode = h('div', { raw: { onclick: clicked } }, [
@@ -66,7 +66,7 @@ describe('eventlisteners (js)', function testEventlisteners() {
     vdom.deleteVNode(vnode2);
   });
 
-  it('should share handlers in parent and child nodes', () => {
+  it('should share handlers in parent and child nodes (as prop)', () => {
     const result = [];
     const sharedHandlers = {
       onclick: (ev) => { result.push(ev); },
@@ -81,5 +81,141 @@ describe('eventlisteners (js)', function testEventlisteners() {
     elm.firstChild.click();
     expect(result.length).toEqual(3);
     vdom.deleteVNode(vnode);
+  });
+
+  it('should update handlers (as prop)', () => {
+    const firstArr = [];
+    const secondArr = [];
+    const pushToFirstArray = (ev) => { firstArr.push(ev); };
+    const pushToSecondArray = (ev) => { secondArr.push(ev); };
+    const vnode = h('div', { raw: { onclick: pushToFirstArray } }, [
+      h('a', 'Click my parent'),
+    ]);
+    patch(root, vnode);
+    let elm = document.body.firstChild;
+    elm.click();
+    expect(firstArr.length).toEqual(1);
+    const vnode2 = h('div', { raw: { onclick: pushToSecondArray } }, [
+      h('a', 'Click my parent'),
+    ]);
+    patch(vnode, vnode2);
+    elm = document.body.firstChild;
+    elm.click();
+    expect(firstArr.length).toEqual(1);
+    expect(secondArr.length).toEqual(1);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should not update handlers (as prop)', () => {
+    const result = [];
+    const clicked = (ev) => { result.push(ev); };
+    const vnode = h('div', { raw: { onclick: clicked } }, [
+      h('a', 'Click my parent'),
+    ]);
+    patch(root, vnode);
+    let elm = document.body.firstChild;
+    elm.click();
+    expect(result.length).toEqual(1);
+    const vnode2 = h('div', { raw: { onclick: clicked } }, [
+      h('a', 'Click my parent'),
+    ]);
+    patch(vnode, vnode2);
+    elm = document.body.firstChild;
+    elm.click();
+    expect(result.length).toEqual(2);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should attach a click event handler to element (as eventListener)', () => {
+    const result = [];
+    const clicked = (ev) => { result.push(ev); };
+    const vnode = h('div', { onclick: clicked }, [
+      h('a', 'Click my parent'),
+    ]);
+    patch(root, vnode);
+    const elm = document.body.firstChild;
+    elm.click();
+    expect(result.length).toEqual(1);
+    vdom.deleteVNode(vnode);
+  });
+
+  it('should detach attached click event handler to element (as eventListener)', () => {
+    const result = [];
+    const clicked = (ev) => { result.push(ev); };
+    const vnode = h('div', { onclick: clicked }, [
+      h('a', 'Click my parent'),
+    ]);
+    patch(root, vnode);
+    let elm = document.body.firstChild;
+    elm.click();
+    expect(result.length).toEqual(1);
+    const vnode2 = h('div', [
+      h('a', 'Click my parent'),
+    ]);
+    patch(vnode, vnode2);
+    elm = document.body.firstChild;
+    elm.click();
+    expect(result.length).toEqual(1);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should share handlers in parent and child nodes (as eventListener)', () => {
+    const result = [];
+    const sharedHandlers = {
+      onclick: (ev) => { result.push(ev); },
+    };
+    const vnode = h('div', sharedHandlers, [
+      h('a', sharedHandlers, 'Click my parent'),
+    ]);
+    patch(root, vnode);
+    const elm = document.body.firstChild;
+    elm.click();
+    expect(result.length).toEqual(1);
+    elm.firstChild.click();
+    expect(result.length).toEqual(3);
+    vdom.deleteVNode(vnode);
+  });
+
+  it('should update handlers (as eventListener)', () => {
+    const firstArr = [];
+    const secondArr = [];
+    const pushToFirstArray = (ev) => { firstArr.push(ev); };
+    const pushToSecondArray = (ev) => { secondArr.push(ev); };
+    const vnode = h('div', { onclick: pushToFirstArray }, [
+      h('a', 'Click my parent'),
+    ]);
+    patch(root, vnode);
+    let elm = document.body.firstChild;
+    elm.click();
+    expect(firstArr.length).toEqual(1);
+    const vnode2 = h('div', { onclick: pushToSecondArray }, [
+      h('a', 'Click my parent'),
+    ]);
+    patch(vnode, vnode2);
+    elm = document.body.firstChild;
+    elm.click();
+    expect(firstArr.length).toEqual(1);
+    expect(secondArr.length).toEqual(1);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should not update handlers (as eventListener)', () => {
+    const result = [];
+    const clicked = (ev) => { result.push(ev); };
+    const vnode = h('div', { onclick: clicked }, [
+      h('a', 'Click my parent'),
+    ]);
+    patch(root, vnode);
+    let elm = document.body.firstChild;
+    elm.click();
+    expect(result.length).toEqual(1);
+    const vnode2 = h('div', { onclick: clicked }, [
+      h('a', 'Click my parent'),
+    ]);
+    patch(vnode, vnode2);
+    elm = document.body.firstChild;
+    elm.click();
+    expect(result.length).toEqual(2);
+    vdom.deleteVNode(vnode2);
   });
 });

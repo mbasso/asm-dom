@@ -223,4 +223,8 @@ describe('patch (cpp)', function test() {
   it('should set asmDomRaws', () => {
     app.shouldSetAsmDomRaws();
   });
+
+  it('should set asmDomEvents', () => {
+    app.shouldSetAsmDomEvents();
+  });
 });

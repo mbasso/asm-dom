@@ -1,31 +1,54 @@
 import { nodes } from '../cpp/domApi';
 
+const emptyObj = {};
+
 export default (oldVnodePtr, vnodePtr, elmPtr) => {
-  let oldRaws = window.asmDomHelpers.vnodesData[oldVnodePtr];
-  let newRaws = window.asmDomHelpers.vnodesData[vnodePtr];
-  if (oldRaws !== undefined) oldRaws = oldRaws.raw;
-  if (newRaws !== undefined) newRaws = newRaws.raw;
-
-  if (oldRaws === undefined && newRaws === undefined || oldRaws === newRaws) return;
-  if (oldRaws === undefined) oldRaws = {};
-  if (newRaws === undefined) newRaws = {};
-
   const elm = nodes[elmPtr];
+  const oldNode = window.asmDomHelpers.vnodesData[oldVnodePtr];
+  const newNode = window.asmDomHelpers.vnodesData[vnodePtr];
+  let oldValues = oldNode !== undefined && oldNode.raw !== undefined ? oldNode.raw : emptyObj;
+  let newValues = newNode !== undefined && newNode.raw !== undefined ? newNode.raw : emptyObj;
 
-  for (const key in oldRaws) {
-    if (newRaws[key] === undefined) {
-      elm[key] = undefined;
+  if (oldValues !== newValues) {
+    for (const key in oldValues) {
+      if (newValues[key] === undefined) {
+        elm[key] = undefined;
+      }
+    }
+
+    elm.asmDomRaws = [];
+    // eslint-disable-next-line
+    for (const key in newValues) {
+      elm.asmDomRaws.push(key);
+      if (
+        oldValues[key] !== newValues[key] ||
+        ((key === 'value' || key === 'checked') && elm[key] !== newValues[key])
+      ) {
+        elm[key] = newValues[key];
+      }
     }
   }
 
-  for (const key in newRaws) {
-    if (
-      oldRaws[key] !== newRaws[key] ||
-      ((key === 'value' || key === 'checked') && elm[key] !== newRaws[key])
-    ) {
-      elm[key] = newRaws[key];
+  oldValues = oldNode !== undefined && oldNode.events !== undefined ? oldNode.events : emptyObj;
+  newValues = newNode !== undefined && newNode.events !== undefined ? newNode.events : emptyObj;
+
+  if (oldValues !== newValues) {
+    for (const key in oldValues) {
+      if (newValues[key] === undefined) {
+        elm.removeEventListener(key, oldValues[key], false);
+      }
+    }
+
+    elm.asmDomEvents = {};
+    // eslint-disable-next-line
+    for (const key in newValues) {
+      elm.asmDomEvents[key] = newValues[key];
+      if (oldValues[key] !== newValues[key]) {
+        if (oldValues[key] !== undefined) {
+          elm.removeEventListener(key, oldValues[key], false);
+        }
+        elm.addEventListener(key, newValues[key], false);
+      }
     }
   }
-
-  elm.asmDomRaws = Object.keys(newRaws);
 };

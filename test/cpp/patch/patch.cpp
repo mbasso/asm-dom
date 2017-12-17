@@ -1364,11 +1364,6 @@ void shouldSetAsmDomRaws() {
 		Data(
 			Props {
 				{"foo", emscripten::val("")}
-			},
-			Callbacks {
-				{"onclick", [](const emscripten::val& event) -> bool {
-					return true;
-				}}
 			}
 		)
 	);
@@ -1379,14 +1374,52 @@ void shouldSetAsmDomRaws() {
 			}
 		)
 	);
+	VNode* vnode3 = h("i");
 	patch(getRoot(), vnode1);
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["asmDomRaws"]["length"], emscripten::val(1));
-	assertEquals(elm["asmDomRaws"]["0"], emscripten::val("onclick"));
+	assertEquals(elm["asmDomRaws"]["0"], emscripten::val("foo"));
 	patch(vnode1, vnode2);
-	elm = getBodyFirstChild();
+	assertEquals(elm["asmDomRaws"]["length"], emscripten::val(1));
+	assertEquals(elm["asmDomRaws"]["0"], emscripten::val("bar"));
+	patch(vnode2, vnode3);
 	assertEquals(elm["asmDomRaws"]["length"], emscripten::val(0));
-	delete vnode2;
+	delete vnode3;
+};
+
+// js only:
+// should automatically set value as raw
+// should automatically set checked as raw
+
+void shouldSetAsmDomEvents() {
+	VNode* vnode1 = h("i",
+		Data(
+			Callbacks {
+				{"onclick", onClick}
+			}
+		)
+	);
+	VNode* vnode2 = h("i",
+		Data(
+			Callbacks {
+				{"onkeydown", onClick}
+			}
+		)
+	);
+	VNode* vnode3 = h("i");
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	emscripten::val keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomEvents"]);
+	assertEquals(keys["length"], emscripten::val(1));
+	assertEquals(keys["0"], emscripten::val("click"));
+	patch(vnode1, vnode2);
+	keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomEvents"]);
+	assertEquals(keys["length"], emscripten::val(1));
+	assertEquals(keys["0"], emscripten::val("keydown"));
+	patch(vnode2, vnode3);
+	keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomEvents"]);
+	assertEquals(keys["length"], emscripten::val(0));
+	delete vnode3;
 };
 
 EMSCRIPTEN_BINDINGS(patch_tests) {
@@ -1440,4 +1473,5 @@ EMSCRIPTEN_BINDINGS(patch_tests) {
 	emscripten::function("shouldSupportNullChildren2", &shouldSupportNullChildren2);
 	emscripten::function("shouldSupportAllNullChildren2", &shouldSupportAllNullChildren2);
 	emscripten::function("shouldSetAsmDomRaws", &shouldSetAsmDomRaws);
+	emscripten::function("shouldSetAsmDomEvents", &shouldSetAsmDomEvents);
 };

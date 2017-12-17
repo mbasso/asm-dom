@@ -56,11 +56,20 @@ const recycler = {
     node.remove();
     i = node.attributes !== undefined ? node.attributes.length : 0;
     while (i--) node.removeAttribute(node.attributes[i].name);
-    if (node.asmDomRaws !== undefined && node.asmDomRaws.length > 0) {
+    if (node.asmDomRaws !== undefined) {
       node.asmDomRaws.forEach((raw) => {
         node[raw] = undefined;
       });
-      node.asmDomRaws = [];
+      node.asmDomRaws = undefined;
+    }
+    if (node.asmDomEvents !== undefined) {
+      const keys = Object.keys(node.asmDomEvents);
+      i = keys.length;
+      // eslint-disable-next-line
+      while (i--) {
+        node.removeEventListener(keys[i], node.asmDomEvents[keys[i]], false);
+      }
+      node.asmDomEvents = undefined;
     }
     if (node.textContent !== null && node.textContent !== '') {
       node.textContent = '';

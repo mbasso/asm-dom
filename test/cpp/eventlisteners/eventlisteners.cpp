@@ -145,9 +145,99 @@ void shouldHandleLambdaWithCapture() {
 	delete vnode;
 };
 
+void shouldUpdateHandlers() {
+	beforeEach();
+	int count = 1;
+
+	VNode* vnode1 = h("div",
+		Data(
+			Callbacks {
+				{"onclick", [&count](emscripten::val e) -> bool {
+					++count;
+					return false;
+				}}
+			}
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	emscripten::val elm = getBodyFirstChild();
+	elm.call<void>("click");
+	// assert
+	if (count != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div",
+		Data(
+			Callbacks {
+				{"onclick", [&count](emscripten::val e) -> bool {
+					--count;
+					return false;
+				}}
+			}
+		)
+	);
+	patch(vnode1, vnode2);
+	
+	elm.call<void>("click");
+	// assert
+	if (count != 1) {
+		throw 20;
+	}
+
+	delete vnode2;
+};
+
+void shouldNotUpdateHandlers() {
+	beforeEach();
+	int count = 1;
+
+	VNode* vnode1 = h("div",
+		Data(
+			Callbacks {
+				{"onclick", [&count](emscripten::val e) -> bool {
+					++count;
+					return false;
+				}}
+			}
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	emscripten::val elm = getBodyFirstChild();
+	elm.call<void>("click");
+	// assert
+	if (count != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div",
+		Data(
+			Callbacks {
+				{"onclick", [&count](emscripten::val e) -> bool {
+					++count;
+					return false;
+				}}
+			}
+		)
+	);
+	patch(vnode1, vnode2);
+	
+	elm.call<void>("click");
+	// assert
+	if (count != 3) {
+		throw 20;
+	}
+
+	delete vnode2;
+};
+
 EMSCRIPTEN_BINDINGS(eventlisteners_tests) {
   emscripten::function("shouldAttachAClickEventHandlerToElement", &shouldAttachAClickEventHandlerToElement);
   emscripten::function("shouldDetachAttachedClickEventHandlerToElement", &shouldDetachAttachedClickEventHandlerToElement);
   emscripten::function("shouldShareHandlersInParentAndChildNodes", &shouldShareHandlersInParentAndChildNodes);
   emscripten::function("shouldHandleLambdaWithCapture", &shouldHandleLambdaWithCapture);
+  emscripten::function("shouldUpdateHandlers", &shouldUpdateHandlers);
+  emscripten::function("shouldNotUpdateHandlers", &shouldNotUpdateHandlers);
 };

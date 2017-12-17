@@ -109,6 +109,27 @@ describe('dom recycler', () => {
     recycler.collect(node);
     expect(node.onclick).toEqual(undefined);
     expect(node.onkeydown).toEqual(undefined);
-    expect(node.asmDomRaws).toEqual([]);
+    expect(node.asmDomRaws).toEqual(undefined);
+  });
+
+  it('should clean asmDomEvents', () => {
+    let calls = 0;
+    const node = recycler.create('div');
+    const callbacks = {
+      click: () => { calls++; },
+      keydown: () => { calls++; },
+    };
+    node.addEventListener('click', callbacks.click);
+    node.addEventListener('keydown', callbacks.keydown);
+    node.asmDomEvents = {
+      click: callbacks.click,
+      keydown: callbacks.keydown,
+    };
+    node.click();
+    expect(calls).toEqual(1);
+    recycler.collect(node);
+    expect(node.asmDomEvents).toEqual(undefined);
+    node.click();
+    expect(calls).toEqual(1);
   });
 });

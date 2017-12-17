@@ -59,6 +59,10 @@ namespace asmdom {
 
 		emscripten::val elm = emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm];
 
+		EM_ASM_({
+			window['asmDomHelpers']['nodes'][$0]['asmDomRaws'] = [];
+		}, vnode->elm);
+
 		for (auto& it : oldVnode->data.props) {
 			if (!vnode->data.props.count(it.first)) {
 				elm.set(it.first.c_str(), emscripten::val::undefined());
@@ -66,6 +70,10 @@ namespace asmdom {
 		}
 
 		for (auto& it : vnode->data.props) {
+			EM_ASM_({
+				window['asmDomHelpers']['nodes'][$0]['asmDomRaws'].push(Module['UTF8ToString']($1));
+			}, vnode->elm, it.first.c_str());
+
 			if (
 				!oldVnode->data.props.count(it.first) ||
 				!it.second.strictlyEquals(oldVnode->data.props.at(it.first)) ||
@@ -82,24 +90,28 @@ namespace asmdom {
 	void diffCallbacks(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		if (oldVnode->data.callbacks.empty() && vnode->data.callbacks.empty()) return;
 
-		EM_ASM_({
-			window['asmDomHelpers']['nodes'][$0]['asmDomRaws'] = [];
-		}, vnode->elm);
-
 		for (auto& it : oldVnode->data.callbacks) {
-			if (!vnode->data.callbacks.count(it.first)) {
-				EM_ASM_({
-					window['asmDomHelpers']['nodes'][$0][Module['UTF8ToString']($1)] = undefined;
-				}, vnode->elm, it.first.c_str());
-			}
+			EM_ASM_({
+				var key = Module['UTF8ToString']($1).replace(/^on/, "");
+				window['asmDomHelpers']['nodes'][$0].removeEventListener(
+					key,
+					window['asmDomHelpers']['nodes'][$0]['asmDomEvents'][key],
+					false
+				);
+			}, vnode->elm, it.first.c_str());
 		}
+
+		EM_ASM_({
+			window['asmDomHelpers']['nodes'][$0]['asmDomEvents'] = {};
+		}, vnode->elm);
 
 		for (auto& it : vnode->data.callbacks) {
 			EM_ASM_({
 				var key = Module['UTF8ToString']($2);
-				window['asmDomHelpers']['nodes'][$1][key] =
-					window['asmDomHelpers']['functionCallback']($0, key);
-				window['asmDomHelpers']['nodes'][$1]['asmDomRaws'].push(key);
+				var callback = window['asmDomHelpers']['functionCallback']($0, key);
+				key = key.replace(/^on/, "");
+				window['asmDomHelpers']['nodes'][$1].addEventListener(key, callback, false);
+				window['asmDomHelpers']['nodes'][$1]['asmDomEvents'][key] = callback;
 			}, reinterpret_cast<std::uintptr_t>(vnode), vnode->elm, it.first.c_str());
 		}
 	};

@@ -766,4 +766,70 @@ describe('patch (js)', function testPatch() {
     expect(elm.asmDomRaws).toEqual(['bar']);
     vdom.deleteVNode(vnode2);
   });
+
+  it('should automatically set value as raw', () => {
+    const vnode1 = h('i', {
+      value: 'foo',
+      raw: {
+        foo: '',
+      },
+    });
+    const vnode2 = h('i', {
+      value: 'bar',
+    });
+    patch(root, vnode1);
+    let elm = document.body.firstChild;
+    expect(elm.asmDomRaws).toEqual(['foo', 'value']);
+    patch(vnode1, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.asmDomRaws).toEqual(['value']);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should automatically set checked as raw', () => {
+    const vnode1 = h('i', {
+      checked: 'foo',
+      raw: {
+        foo: '',
+      },
+    });
+    const vnode2 = h('i', {
+      checked: 'bar',
+    });
+    patch(root, vnode1);
+    let elm = document.body.firstChild;
+    expect(elm.asmDomRaws).toEqual(['foo', 'checked']);
+    patch(vnode1, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.asmDomRaws).toEqual(['checked']);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should set asmDomEvents', () => {
+    const callbacks = {
+      click: () => {},
+      keydown: () => {},
+    };
+    const vnode1 = h('i', {
+      onclick: callbacks.click,
+    });
+    const vnode2 = h('i', {
+      onkeydown: callbacks.keydown,
+      raw: {
+        bar: '',
+      },
+    });
+    patch(root, vnode1);
+    let elm = document.body.firstChild;
+    expect(elm.asmDomEvents).toEqual({
+      click: callbacks.click,
+    });
+    patch(vnode1, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.asmDomRaws).toEqual(['bar']);
+    expect(elm.asmDomEvents).toEqual({
+      keydown: callbacks.keydown,
+    });
+    vdom.deleteVNode(vnode2);
+  });
 });

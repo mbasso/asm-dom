@@ -34,39 +34,39 @@ describe('attributes (js)', function testAttributes() {
   });
 
   it('should have their provided values', () => {
-    const vnode = h('div', { href: '/foo', minlength: 1, value: 'foo' });
+    const vnode = h('div', { href: '/foo', minlength: 1, foo: 'foo' });
     patch(root, vnode);
     const elm = document.body.firstChild;
     expect(elm.getAttribute('href')).toEqual('/foo');
     expect(elm.getAttribute('minlength')).toEqual('1');
-    expect(elm.getAttribute('value')).toEqual('foo');
+    expect(elm.getAttribute('foo')).toEqual('foo');
     vdom.deleteVNode(vnode);
   });
 
   it('can be memoized', () => {
-    const attrs = { href: '/foo', minlength: 1, value: 'foo' };
+    const attrs = { href: '/foo', minlength: 1, foo: 'foo' };
     const vnode = h('div', attrs);
     const vnode2 = h('div', attrs);
     patch(root, vnode);
     let elm = document.body.firstChild;
     expect(elm.getAttribute('href')).toEqual('/foo');
     expect(elm.getAttribute('minlength')).toEqual('1');
-    expect(elm.getAttribute('value')).toEqual('foo');
+    expect(elm.getAttribute('foo')).toEqual('foo');
     patch(vnode, vnode2);
     elm = document.body.firstChild;
     expect(elm.getAttribute('href')).toEqual('/foo');
     expect(elm.getAttribute('minlength')).toEqual('1');
-    expect(elm.getAttribute('value')).toEqual('foo');
+    expect(elm.getAttribute('foo')).toEqual('foo');
     vdom.deleteVNode(vnode2);
   });
 
   it('should be omitted when falsy values are provided', () => {
-    const vnode = h('div', { href: null, minlength: 0, value: false });
+    const vnode = h('div', { href: null, minlength: 0, foo: false });
     patch(root, vnode);
     const elm = document.body.firstChild;
     expect(elm.getAttribute('href')).toEqual('null');
     expect(elm.getAttribute('minlength')).toEqual('0');
-    expect(elm.getAttribute('value')).toEqual(null);
+    expect(elm.getAttribute('foo')).toEqual(null);
     vdom.deleteVNode(vnode);
   });
 
