@@ -40,8 +40,8 @@ describe('load (js)', function test() {
       expect(vdom.usingWasm).toBeTruthy();
       done();
     }).catch((ex) => {
-      // .wasm file throw a SyntaxError in old versions of node
-      expect(ex).toBeA(SyntaxError);
+      // .wasm file throw a Error in old versions of node: no binaryen method succeeded
+      expect(ex).toBeA(Error);
       done();
     });
   });
@@ -55,8 +55,8 @@ describe('load (js)', function test() {
       expect(vdom.usingWasm).toBeTruthy();
       done();
     }).catch((ex) => {
-      // .wasm file throw a SyntaxError in old versions of node
-      expect(ex).toBeA(SyntaxError);
+      // .wasm file throw a Error in old versions of node: no binaryen method succeeded
+      expect(ex).toBeA(Error);
       done();
     });
   });
