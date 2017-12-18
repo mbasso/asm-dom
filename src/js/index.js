@@ -9,6 +9,7 @@ const cache = {};
 // import() is compiled to require.ensure, this is a polyfill for nodejs
 // an alternative solution is needed
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => { c(require); };
+if (typeof global !== 'undefined' && global.window === undefined) global.window = {};
 
 export default (config) => {
   if (config === undefined) config = {};
@@ -24,7 +25,13 @@ export default (config) => {
   const readyPromise = new Promise((resolve) => {
     config['_main'] = () => resolve(cache);
   });
-  if ((config.useWasm === true || 'WebAssembly' in window) && config.useAsmJS !== true) {
+  if (
+    (
+      config.useWasm === true || 'WebAssembly' in window ||
+      (typeof global !== 'undefined' && 'WebAssembly' in global)
+    ) &&
+    config.useAsmJS !== true
+  ) {
     result = import('./loadWasm').then(x => x.default(config));
   } else {
     result = import('../../compiled/asmjs/asm-dom.asm.js');
@@ -35,7 +42,6 @@ export default (config) => {
     .then((lib) => {
       cache.lib = lib;
 
-      if (window === undefined && global !== undefined) global.window = {};
       window.asmDom = lib;
 
       lib.h = h;

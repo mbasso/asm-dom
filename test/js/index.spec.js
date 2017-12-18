@@ -33,21 +33,29 @@ describe('load (js)', function test() {
 
   it('should load asm-dom using wasm', (done) => {
     window.WebAssembly = {};
-    // .wasm file throw a SyntaxError on node
     init({
       hardReload: true,
+    }).then((vdom) => {
+      expect(vdom.h).toExist();
+      expect(vdom.usingWasm).toBeTruthy();
+      done();
     }).catch((ex) => {
+      // .wasm file throw a SyntaxError in old versions of node
       expect(ex).toBeA(SyntaxError);
       done();
     });
   });
 
   it('should load asm-dom using wasm (by config)', (done) => {
-    // .wasm file throw a SyntaxError on node
     init({
       useWasm: true,
       hardReload: true,
+    }).then((vdom) => {
+      expect(vdom.h).toExist();
+      expect(vdom.usingWasm).toBeTruthy();
+      done();
     }).catch((ex) => {
+      // .wasm file throw a SyntaxError in old versions of node
       expect(ex).toBeA(SyntaxError);
       done();
     });

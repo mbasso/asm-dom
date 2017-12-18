@@ -58,22 +58,7 @@ You can install asm-dom using [npm](https://www.npmjs.com/package/asm-dom):
 npm install --save asm-dom
 ```
 
-If you are using this library with webpack you also need to install `arraybuffer-loader`:
-
-```bash
-npm install --save-dev arraybuffer-loader
-```
-
-and add this object to your loaders:
-
-```js
-{
-  test: /\.wasm$/,
-  loaders: ['arraybuffer-loader'],
-}
-```
-
-also, if you have some problems with fs, you can add this to your webpack config:
+if you are using webpack and you have some problems with fs, you can add this to your webpack config:
 
 ```js
 node: {
