@@ -832,4 +832,51 @@ describe('patch (js)', function testPatch() {
     });
     vdom.deleteVNode(vnode2);
   });
+
+  it('should patch a WebComponent', () => {
+    const vnode = h('web-component');
+    patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.nodeName).toEqual('WEB-COMPONENT');
+    vdom.deleteVNode(vnode);
+  });
+
+  it('should patch a WebComponent with attributes', () => {
+    const vnode = h('web-component', {
+      foo: 'bar',
+      bar: 42,
+    });
+    patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.nodeName).toEqual('WEB-COMPONENT');
+    expect(elm.getAttribute('foo')).toEqual('bar');
+    expect(elm.getAttribute('bar')).toEqual('42');
+    vdom.deleteVNode(vnode);
+  });
+
+  it('should patch a WebComponent with eventlisteners', () => {
+    const vnode = h('web-component', {
+      onclick: () => {},
+      'onfoo-event': () => {},
+    });
+    patch(root, vnode);
+    patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.nodeName).toEqual('WEB-COMPONENT');
+    vdom.deleteVNode(vnode);
+  });
+
+  it('should create a template node', () => {
+    const vnode = h('template', {
+      id: 'template-node',
+    }, [
+      h('style', 'p { color: green; }'),
+      h('p', 'Hello world!'),
+    ]);
+    patch(root, vnode);
+    const template = document.getElementById('template-node');
+    const fragment = template.content.cloneNode(true);
+    expect(fragment.nodeName).toEqual('#document-fragment');
+    vdom.deleteVNode(vnode);
+  });
 });

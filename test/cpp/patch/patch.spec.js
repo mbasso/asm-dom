@@ -227,4 +227,20 @@ describe('patch (cpp)', function test() {
   it('should set asmDomEvents', () => {
     app.shouldSetAsmDomEvents();
   });
+
+  it('should patch a WebComponent', () => {
+    app.shouldPatchAWebComponent();
+  });
+
+  it('should patch a WebComponent with attributes', () => {
+    app.shouldPatchAWebComponentWithAttributes();
+  });
+
+  it('should patch a WebComponent with eventlisteners', () => {
+    app.shouldPatchAWebComponentWithEventListeners();
+  });
+
+  it('should create a template node', () => {
+    app.shouldCreateATemplateNode();
+  });
 });

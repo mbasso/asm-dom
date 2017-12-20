@@ -1422,6 +1422,74 @@ void shouldSetAsmDomEvents() {
 	delete vnode3;
 };
 
+void shouldPatchAWebComponent() {
+	VNode* vnode = h("web-component");
+	patch(getRoot(), vnode);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["nodeName"], emscripten::val("WEB-COMPONENT"));
+	delete vnode;
+};
+
+void shouldPatchAWebComponentWithAttributes() {
+	VNode* vnode = h("web-component",
+		Data(
+			Attrs {
+				{"foo", "bar"},
+				{"bar", "42"}
+			}
+		)
+	);
+	patch(getRoot(), vnode);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["nodeName"], emscripten::val("WEB-COMPONENT"));
+	assertEquals(
+		elm.call<emscripten::val>("getAttribute", emscripten::val("foo")),
+		emscripten::val("bar")
+	);
+	assertEquals(
+		elm.call<emscripten::val>("getAttribute", emscripten::val("bar")),
+		emscripten::val("42")
+	);
+	delete vnode;
+};
+
+void shouldPatchAWebComponentWithEventListeners() {
+	VNode* vnode = h("web-component",
+		Data(
+			Callbacks {
+				{"onclick", onClick},
+				{"onfoo-event", onClick}
+			}
+		)
+	);
+	patch(getRoot(), vnode);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["nodeName"], emscripten::val("WEB-COMPONENT"));
+	delete vnode;
+};
+
+void shouldCreateATemplateNode() {
+	VNode* vnode = h("template",
+		Data(
+			Attrs {
+				{"id", "template-node"}
+			}
+		),
+		Children {
+			h("style", std::string("p { color: green; }")),
+			h("p", std::string("Hello world!"))
+		}
+	);
+	patch(getRoot(), vnode);
+	emscripten::val tmpl = emscripten::val::global("document").call<emscripten::val>(
+		"getElementById",
+		emscripten::val("template-node")
+	);
+	emscripten::val fragment = tmpl["content"].call<emscripten::val>("cloneNode", emscripten::val(true));
+	assertEquals(fragment["nodeName"], emscripten::val("#document-fragment"));
+	delete vnode;
+};
+
 EMSCRIPTEN_BINDINGS(patch_tests) {
   emscripten::function("shouldPatchANode", &shouldPatchANode);
 	emscripten::function("shouldHaveATag", &shouldHaveATag);
@@ -1474,4 +1542,8 @@ EMSCRIPTEN_BINDINGS(patch_tests) {
 	emscripten::function("shouldSupportAllNullChildren2", &shouldSupportAllNullChildren2);
 	emscripten::function("shouldSetAsmDomRaws", &shouldSetAsmDomRaws);
 	emscripten::function("shouldSetAsmDomEvents", &shouldSetAsmDomEvents);
+	emscripten::function("shouldPatchAWebComponent", &shouldPatchAWebComponent);
+	emscripten::function("shouldPatchAWebComponentWithAttributes", &shouldPatchAWebComponentWithAttributes);
+	emscripten::function("shouldPatchAWebComponentWithEventListeners", &shouldPatchAWebComponentWithEventListeners);
+	emscripten::function("shouldCreateATemplateNode", &shouldCreateATemplateNode);
 };
