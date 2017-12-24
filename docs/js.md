@@ -97,10 +97,10 @@ const asmDom = await init();
 
 ### h
 
-You can create vnodes using `h` function. `h` accepts a tag/selector as a string, an optional data object and an optional **string** or array of children. The data object contains all attributes and 3 special props:
+You can create vnodes using `h` function. `h` accepts a tag/selector as a string, an optional data object and an optional **string** or array of children. The data object contains all attributes, callbacks and 3 special props:
 - `ns`: the namespace URI to associate with the element
 - `key`: this property is used to keep pointers to DOM nodes that existed previously to avoid recreating them if it is unnecessary. This is very useful for things like list reordering.
-- `raw`: an object that contains **callbacks** and raw values applied to the DOM element with the dot notation. You should also put in `raw` properties like `value` or  `checked`.
+- `raw`: an object that contains values applied to the DOM element with the dot notation instead of `node.setAttribute`.
 
 This returns the memory address of your virtual node.
 
@@ -113,12 +113,12 @@ const vnode = h('div', { style: 'color: #000' }, [
 
 const vnode2 = h('div', {
   id: 'an-id', // node.setAttribute('id', 'an-id')
-  key: 'foo',
+  key: 'foo', // key is a special field
   className: 'foo', // className is a special attribute evaluated as 'class'
   'data-foo': 'bar', // a dataset attribute
+  onclick: (e) => console.log('clicked: ', e.target), // a callback
   raw: {
-    onclick: (e) => console.log('clicked: ', e.target),
-    foo: 'bar', // raw value: node.foo = 'bar'
+    foo: 'bar', // raw value applied with the dot notation: node.foo = 'bar'
   },
 });
 ```
