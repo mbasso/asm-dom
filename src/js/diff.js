@@ -2,6 +2,10 @@ import { nodes } from '../cpp/domApi';
 
 const emptyObj = {};
 
+export function eventProxy(e) {
+  return this.asmDomEvents[e.type](e);
+}
+
 export default (oldVnodePtr, vnodePtr, elmPtr) => {
   const elm = nodes[elmPtr];
   const oldNode = window.asmDomHelpers.vnodesData[oldVnodePtr];
@@ -35,20 +39,20 @@ export default (oldVnodePtr, vnodePtr, elmPtr) => {
   if (oldValues !== newValues) {
     for (const key in oldValues) {
       if (newValues[key] === undefined) {
-        elm.removeEventListener(key, oldValues[key], false);
+        elm.removeEventListener(key, eventProxy, false);
+        delete elm.asmDomEvents[key];
       }
     }
 
-    elm.asmDomEvents = {};
+    if (elm.asmDomEvents === undefined) {
+      elm.asmDomEvents = {};
+    }
     // eslint-disable-next-line
     for (const key in newValues) {
-      elm.asmDomEvents[key] = newValues[key];
-      if (oldValues[key] !== newValues[key]) {
-        if (oldValues[key] !== undefined) {
-          elm.removeEventListener(key, oldValues[key], false);
-        }
-        elm.addEventListener(key, newValues[key], false);
+      if (oldValues[key] === undefined) {
+        elm.addEventListener(key, eventProxy, false);
       }
+      elm.asmDomEvents[key] = newValues[key];
     }
   }
 };

@@ -91,28 +91,41 @@ namespace asmdom {
 		if (oldVnode->data.callbacks.empty() && vnode->data.callbacks.empty()) return;
 
 		for (auto& it : oldVnode->data.callbacks) {
-			EM_ASM_({
-				var key = Module['UTF8ToString']($1).replace(/^on/, "");
-				window['asmDomHelpers']['nodes'][$0].removeEventListener(
-					key,
-					window['asmDomHelpers']['nodes'][$0]['asmDomEvents'][key],
-					false
-				);
-			}, vnode->elm, it.first.c_str());
+			if (!vnode->data.callbacks.count(it.first)) {
+				EM_ASM_({
+					var key = Module['UTF8ToString']($1).replace(/^on/, "");
+					var elm = window['asmDomHelpers']['nodes'][$0];
+					elm.removeEventListener(
+						key,
+						window['asmDomHelpers']['eventProxy'],
+						false
+					);
+					delete elm['asmDomEvents'][key];
+				}, vnode->elm, it.first.c_str());
+			}
 		}
 
 		EM_ASM_({
-			window['asmDomHelpers']['nodes'][$0]['asmDomEvents'] = {};
-		}, vnode->elm);
+			var elm = window['asmDomHelpers']['nodes'][$0];
+			elm.asmDomVNode = $1;
+			if (elm['asmDomEvents'] === undefined) {
+				elm['asmDomEvents'] = {};
+			}
+		}, vnode->elm, reinterpret_cast<std::uintptr_t>(vnode));
 
 		for (auto& it : vnode->data.callbacks) {
-			EM_ASM_({
-				var key = Module['UTF8ToString']($2);
-				var callback = window['asmDomHelpers']['functionCallback']($0, key);
-				key = key.replace(/^on/, "");
-				window['asmDomHelpers']['nodes'][$1].addEventListener(key, callback, false);
-				window['asmDomHelpers']['nodes'][$1]['asmDomEvents'][key] = callback;
-			}, reinterpret_cast<std::uintptr_t>(vnode), vnode->elm, it.first.c_str());
+			if (!oldVnode->data.callbacks.count(it.first)) {
+				EM_ASM_({
+					var key = Module['UTF8ToString']($1).replace(/^on/, "");
+					var elm = window['asmDomHelpers']['nodes'][$0];
+					elm.addEventListener(
+						key,
+						window['asmDomHelpers']['eventProxy'],
+						false
+					);
+					elm['asmDomEvents'][key] = window['asmDomHelpers']['eventProxy'];
+				}, vnode->elm, it.first.c_str());
+			}
 		}
 	};
 

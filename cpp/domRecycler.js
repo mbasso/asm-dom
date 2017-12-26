@@ -60,7 +60,8 @@ var recycler = {
     i = node.attributes !== undefined ? node.attributes.length : 0;
     while (i--) {
       node.removeAttribute(node.attributes[i].name);
-    }if (node.asmDomRaws !== undefined) {
+    }node.asmDomVNode = undefined;
+    if (node.asmDomRaws !== undefined) {
       node.asmDomRaws.forEach(function (raw) {
         node[raw] = undefined;
       });

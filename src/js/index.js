@@ -1,7 +1,7 @@
 import h from './h';
 import patch from './patch';
 import { toHTML, appendProps, insertInnerHTML } from './toHTML';
-import diff from './diff';
+import diff, { eventProxy } from './diff';
 import domApi, { nodes } from '../cpp/domApi';
 
 const cache = {};
@@ -58,6 +58,7 @@ export default (config) => {
           domApi,
           vnodesData: {},
           diff,
+          eventProxy,
           appendProps,
           insertInnerHTML,
         };
