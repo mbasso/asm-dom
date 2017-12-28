@@ -201,14 +201,12 @@ namespace asmdom {
 				}
 			}
 		}
-		if (oldStartIdx > oldEndIdx) {
-			if (newEndIdx + 1 <= newCh.size() - 1) {
-				addVNodes(parentElm, newCh[newEndIdx+1]->elm, newCh, newStartIdx, newEndIdx);
+		if (oldStartIdx <= oldEndIdx || newStartIdx <= newEndIdx) {
+			if (oldStartIdx > oldEndIdx) {
+				addVNodes(parentElm, newEndIdx + 1 <= newCh.size() - 1 ? newCh[newEndIdx+1]->elm : 0, newCh, newStartIdx, newEndIdx);
 			} else {
-				addVNodes(parentElm, 0, newCh, newStartIdx, newEndIdx);
+				removeVNodes(oldCh, oldStartIdx, oldEndIdx);
 			}
-		} else if (newStartIdx > newEndIdx) {
-			removeVNodes(oldCh, oldStartIdx, oldEndIdx);
 		}
 		delete oldKeyToIdx;
 		oldKeyToIdx = NULL;

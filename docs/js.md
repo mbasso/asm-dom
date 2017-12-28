@@ -15,6 +15,9 @@
 - [Helpers](#helpers)
   - [svg](#svg)
 - [Server side rendering](#server-side-rendering)
+- [WebComponents](#webcomponents)
+  - [Using WebComponents in asm-dom](#using-webcomponents-in-asm-dom)
+  - [Using asm-dom in WebComponents](#using-asm-dom-in-webcomponents)
 - [Structuring applications](#structuring-applications)
 
 ## Inline Example
@@ -292,6 +295,76 @@ response.send(`
 const oldVNode = toVNode(document.getElementById('root'));
 const vnode = view();
 patch(oldVNode, vnode); // attach event handlers
+```
+
+## WebComponents
+
+Virtual DOM and WebComponents represent different technologies. Virtual DOM provides a declarative way to write the UI and keep it sync with the data, while WebComponents provide an encapsulation for reusable components. There are no limitation to use them together, you can use asm-dom with WebComponents or use asm-dom inside WebComponents.
+
+### Using WebComponents in asm-dom
+
+With asm-dom you can just use WebComponents as any other element:
+
+```js
+// customElements.define('my-tabs', MyTabs);
+
+const vnode = h('my-tabs', {
+  className: 'css-class',
+  attr: 'an attribute',
+  'tab-select': onTabSelect,
+  raw: {
+    prop: 'a prop',
+  },
+}, [
+  h('p', 'I\'m a child!'),
+]);
+```
+
+### Using asm-dom in WebComponents
+
+If you want to use asm-dom to build a WebComponent, please make sure to enable the usage of [`patch`](#patch) in multiple points of your app with `unsafePatch = true` in the [`init`](#init) function. After that you can do something like this:
+
+```js
+class HelloComponent extends HTMLElement {
+  static get observedAttributes() {
+    return ['name'];
+  }
+
+  constructor() {
+    super();
+    // init the view
+    this.update();
+  }
+
+  attributeChangedCallback() {
+    // update the view
+    this.update();
+  }
+
+  disconnectedCallback() {
+    // clear memory
+    window.asmDom.deleteVNode(this.currentView);
+  }
+
+  update() {
+    const { patch } = window.asmDom;
+    if (!this.currentView) {
+      const root = document.createElement('div');
+      this.attachShadow({ mode: 'open' }).appendChild(root);
+      this.currentView = root;
+    }
+    this.currentView = patch(this.currentView, this.render());
+  }
+
+  render() {
+    const { h } = window.asmDom;
+    const name = this.props.name;
+
+    return h('div', `Hello ${name}!`);
+  }
+}
+
+customElements.define('hello-component', WebComponent);
 ```
 
 ## Structuring applications
