@@ -1,0 +1,45 @@
+{
+  "name": "asm-dom-webcomponents-cpp",
+  "version": "0.0.1",
+  "description": "asm-dom and webcomponents example",
+  "scripts": {
+    "clean": "rimraf lib dist es .nyc_output compiled",
+    "compile": "npm run clean && mkdir -p compiled && npm run compile:cpp && npm run compile:asmjs && npm run compile:wasm",
+    "compile:cpp": "emcc -O3 -Wall -Werror --bind ../../src/cpp/asm-dom.cpp src/index.cpp -o compiled/app.bc && emcc -O3 -Wall -Werror --bind src/index.cpp -o compiled/app.o",
+    "compile:asmjs": "mkdir -p compiled/asmjs && emcc -O3 --bind --memory-init-file 0 --llvm-lto 3 --llvm-opts 3 --js-opts 1 --closure 1 --pre-js src/prefix.js --post-js src/postfix.js -s \"EXPORTED_RUNTIME_METHODS=['UTF8ToString']\" -s AGGRESSIVE_VARIABLE_ELIMINATION=1 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s ABORTING_MALLOC=1 -s NO_EXIT_RUNTIME=1 -s NO_FILESYSTEM=1 -s DISABLE_EXCEPTION_CATCHING=2 compiled/app.bc -o compiled/asmjs/app.asm.js",
+    "compile:wasm": "mkdir -p compiled/wasm && emcc -O3 --bind --memory-init-file 0 --llvm-lto 3 --llvm-opts 3 --js-opts 1 --closure 1 --pre-js src/prefix.js --post-js src/postfix.js -s ALLOW_MEMORY_GROWTH=1 -s \"EXPORTED_RUNTIME_METHODS=['UTF8ToString']\" -s AGGRESSIVE_VARIABLE_ELIMINATION=1 -s ABORTING_MALLOC=1 -s NO_EXIT_RUNTIME=1 -s NO_FILESYSTEM=1 -s DISABLE_EXCEPTION_CATCHING=2 -s BINARYEN=1 -s \"BINARYEN_TRAP_MODE='allow'\" compiled/app.bc -o compiled/wasm/app.js",
+    "start": "npm run compile && webpack-dev-server --env.dev",
+    "build": "npm run compile && npm run build:webpack",
+    "build:webpack": "cross-env BABEL_ENV=commonjs webpack --env.prod src/index.js",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "arraybuffer-loader": "0.2.2",
+    "babel-cli": "6.24.1",
+    "babel-core": "6.24.1",
+    "babel-eslint": "7.2.3",
+    "babel-loader": "7.0.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
+    "babel-plugin-transform-es3-member-expression-literals": "6.22.0",
+    "babel-plugin-transform-es3-property-literals": "6.22.0",
+    "babel-plugin-transform-object-rest-spread": "6.23.0",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "babel-register": "6.24.1",
+    "compression-webpack-plugin": "0.4.0",
+    "copy-webpack-plugin": "4.0.1",
+    "cross-env": "4.0.0",
+    "css-loader": "0.28.1",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-react": "6.10.3",
+    "style-loader": "0.17.0",
+    "webpack": "2.4.1",
+    "webpack-dev-server": "2.4.5"
+  },
+  "dependencies": {
+    "babel-polyfill": "6.23.0"
+  }
+}
