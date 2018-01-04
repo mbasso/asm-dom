@@ -33,7 +33,7 @@ At the beginning asm-dom is born from the idea to test the powerful of WebAssemb
 
 ## Inline Example
 
-```c++
+```js
 #include "asm-dom.hpp"
 
 using namespace asmdom;
@@ -42,34 +42,18 @@ int main() {
   Config config = Config();
   init(config);
 
-  VNode* vnode = h("div",
-    Data(
-      Callbacks {
-        {"onclick", [](emscripten::val e) -> bool {
-          emscripten::val::global("console").call<void>("log", emscripten::val("clicked"));
-          return true;
-        }}
-      }
-    ),
-    Children {
-      h("span",
-        Data(
-          Attrs {
-            {"style", "font-weight: bold"}
-          }
-        ),
-        std::string("This is bold")
-      ),
-      h(" and this is just normal text", true),
-      h("a",
-        Data(
-          Attrs {
-            {"href", "/foo"}
-          }
-        ),
-        std::string("I'll take you places!")
-      )
-    }
+  // asm-dom can be used with a JSX like syntax thanks to gccx
+  VNode* vnode = (
+    <div
+      onclick={[](emscripten::val e) -> bool {
+        emscripten::val::global("console").call<void>("log", emscripten::val("clicked"));
+        return true;
+      }}
+    >
+      <span style="font-weight: bold">This is bold</span>
+      and this is just normal text
+      <a href="/foo">I'll take you places!</a>
+    </div>
   );
 
   // Patch into empty DOM element – this modifies the DOM as a side effect
@@ -81,6 +65,7 @@ int main() {
     vnode
   );
 
+  // without gccx
   VNode* newVnode = h("div",
     Data(
       Callbacks {
