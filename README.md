@@ -33,7 +33,7 @@ At the beginning asm-dom is born from the idea to test the powerful of WebAssemb
 
 ## Inline Example
 
-```js
+```
 #include "asm-dom.hpp"
 
 using namespace asmdom;
