@@ -12,10 +12,8 @@ namespace asmdom {
 		#ifndef ASMDOM_JS_SIDE
 
 			EM_ASM(
-				window['asmDomHelpers']['functionCallback'] = function(vnode, callback) {
-					return function(event) {
-						return Module['functionCallback'](vnode, callback, event);
-					};
+				window['asmDomHelpers']['eventProxy'] = function(e) {
+					return Module['functionCallback'](this.asmDomVNode, e.type, e)
 				};
 			);
 

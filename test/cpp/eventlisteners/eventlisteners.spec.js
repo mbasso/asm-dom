@@ -34,4 +34,12 @@ describe('eventlisteners (cpp)', function testEventlisteners() {
   it('should handle lambda with capture', () => {
     app.shouldHandleLambdaWithCapture();
   });
+
+  it('should update handlers', () => {
+    app.shouldUpdateHandlers();
+  });
+
+  it('should not update handlers', () => {
+    app.shouldNotUpdateHandlers();
+  });
 });

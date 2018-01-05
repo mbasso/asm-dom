@@ -40,9 +40,6 @@ module.exports = env => {
         exclude: [/node_modules/, /compiled/],
       },
       {
-        test: /\.wasm$/,
-        loaders: ['arraybuffer-loader'],
-      }, {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       }],

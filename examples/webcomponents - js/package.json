@@ -1,0 +1,39 @@
+{
+  "name": "asm-dom-webcomponents-js",
+  "version": "0.0.1",
+  "description": "asm-dom and webcomponents example",
+  "scripts": {
+    "start": "webpack-dev-server --env.dev",
+    "build": "cross-env BABEL_ENV=commonjs webpack --env.prod src/index.js",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-core": "6.24.1",
+    "babel-eslint": "7.2.3",
+    "babel-loader": "7.0.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
+    "babel-plugin-transform-es3-member-expression-literals": "6.22.0",
+    "babel-plugin-transform-es3-property-literals": "6.22.0",
+    "babel-plugin-transform-object-rest-spread": "6.23.0",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "babel-register": "6.24.1",
+    "compression-webpack-plugin": "0.4.0",
+    "copy-webpack-plugin": "4.0.1",
+    "cross-env": "4.0.0",
+    "css-loader": "0.28.1",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-react": "6.10.3",
+    "style-loader": "0.17.0",
+    "webpack": "2.4.1",
+    "webpack-dev-server": "2.4.5"
+  },
+  "dependencies": {
+    "asm-dom": "file:../..",
+    "babel-polyfill": "6.23.0"
+  }
+}

@@ -38,7 +38,12 @@ namespace asmdom {
 	#ifndef ASMDOM_JS_SIDE
 
 		emscripten::val functionCallback(const std::uintptr_t& vnode, const std::string& callback, emscripten::val event) {
-			return emscripten::val(reinterpret_cast<VNode*>(vnode)->data.callbacks[callback](event));
+			Callbacks cbs = reinterpret_cast<VNode*>(vnode)->data.callbacks;
+			std::string cb = callback;
+			if (!cbs.count(callback)) {
+				cb = "on" + cb;
+			}
+			return emscripten::val(cbs[cb](event));
 		};
 
 		EMSCRIPTEN_BINDINGS(function_callback) {

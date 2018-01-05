@@ -1364,11 +1364,6 @@ void shouldSetAsmDomRaws() {
 		Data(
 			Props {
 				{"foo", emscripten::val("")}
-			},
-			Callbacks {
-				{"onclick", [](const emscripten::val& event) -> bool {
-					return true;
-				}}
 			}
 		)
 	);
@@ -1379,14 +1374,120 @@ void shouldSetAsmDomRaws() {
 			}
 		)
 	);
+	VNode* vnode3 = h("i");
 	patch(getRoot(), vnode1);
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["asmDomRaws"]["length"], emscripten::val(1));
-	assertEquals(elm["asmDomRaws"]["0"], emscripten::val("onclick"));
+	assertEquals(elm["asmDomRaws"]["0"], emscripten::val("foo"));
 	patch(vnode1, vnode2);
-	elm = getBodyFirstChild();
+	assertEquals(elm["asmDomRaws"]["length"], emscripten::val(1));
+	assertEquals(elm["asmDomRaws"]["0"], emscripten::val("bar"));
+	patch(vnode2, vnode3);
 	assertEquals(elm["asmDomRaws"]["length"], emscripten::val(0));
-	delete vnode2;
+	delete vnode3;
+};
+
+// js only:
+// should automatically set value as raw
+// should automatically set checked as raw
+
+void shouldSetAsmDomEvents() {
+	VNode* vnode1 = h("i",
+		Data(
+			Callbacks {
+				{"onclick", onClick}
+			}
+		)
+	);
+	VNode* vnode2 = h("i",
+		Data(
+			Callbacks {
+				{"onkeydown", onClick}
+			}
+		)
+	);
+	VNode* vnode3 = h("i");
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	emscripten::val keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomEvents"]);
+	assertEquals(keys["length"], emscripten::val(1));
+	assertEquals(keys["0"], emscripten::val("click"));
+	patch(vnode1, vnode2);
+	keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomEvents"]);
+	assertEquals(keys["length"], emscripten::val(1));
+	assertEquals(keys["0"], emscripten::val("keydown"));
+	patch(vnode2, vnode3);
+	keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomEvents"]);
+	assertEquals(keys["length"], emscripten::val(0));
+	delete vnode3;
+};
+
+void shouldPatchAWebComponent() {
+	VNode* vnode = h("web-component");
+	patch(getRoot(), vnode);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["nodeName"], emscripten::val("WEB-COMPONENT"));
+	delete vnode;
+};
+
+void shouldPatchAWebComponentWithAttributes() {
+	VNode* vnode = h("web-component",
+		Data(
+			Attrs {
+				{"foo", "bar"},
+				{"bar", "42"}
+			}
+		)
+	);
+	patch(getRoot(), vnode);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["nodeName"], emscripten::val("WEB-COMPONENT"));
+	assertEquals(
+		elm.call<emscripten::val>("getAttribute", emscripten::val("foo")),
+		emscripten::val("bar")
+	);
+	assertEquals(
+		elm.call<emscripten::val>("getAttribute", emscripten::val("bar")),
+		emscripten::val("42")
+	);
+	delete vnode;
+};
+
+void shouldPatchAWebComponentWithEventListeners() {
+	VNode* vnode = h("web-component",
+		Data(
+			Callbacks {
+				{"onclick", onClick},
+				{"onfoo-event", onClick}
+			}
+		)
+	);
+	patch(getRoot(), vnode);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["nodeName"], emscripten::val("WEB-COMPONENT"));
+	delete vnode;
+};
+
+void shouldCreateATemplateNode() {
+	VNode* vnode = h("template",
+		Data(
+			Attrs {
+				{"id", "template-node"}
+			}
+		),
+		Children {
+			h("style", std::string("p { color: green; }")),
+			h("p", std::string("Hello world!"))
+		}
+	);
+	patch(getRoot(), vnode);
+	emscripten::val tmpl = emscripten::val::global("document").call<emscripten::val>(
+		"getElementById",
+		emscripten::val("template-node")
+	);
+	emscripten::val fragment = tmpl["content"].call<emscripten::val>("cloneNode", emscripten::val(true));
+	assertEquals(fragment["nodeName"], emscripten::val("#document-fragment"));
+	delete vnode;
 };
 
 EMSCRIPTEN_BINDINGS(patch_tests) {
@@ -1440,4 +1541,9 @@ EMSCRIPTEN_BINDINGS(patch_tests) {
 	emscripten::function("shouldSupportNullChildren2", &shouldSupportNullChildren2);
 	emscripten::function("shouldSupportAllNullChildren2", &shouldSupportAllNullChildren2);
 	emscripten::function("shouldSetAsmDomRaws", &shouldSetAsmDomRaws);
+	emscripten::function("shouldSetAsmDomEvents", &shouldSetAsmDomEvents);
+	emscripten::function("shouldPatchAWebComponent", &shouldPatchAWebComponent);
+	emscripten::function("shouldPatchAWebComponentWithAttributes", &shouldPatchAWebComponentWithAttributes);
+	emscripten::function("shouldPatchAWebComponentWithEventListeners", &shouldPatchAWebComponentWithEventListeners);
+	emscripten::function("shouldCreateATemplateNode", &shouldCreateATemplateNode);
 };

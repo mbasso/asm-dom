@@ -1,6 +1,6 @@
 {
   "name": "asm-dom",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "A minimal WebAssembly virtual DOM to build C++ SPA (Single page applications)",
   "main": "lib/js/index.js",
   "jsnext:main": "es/js/index.js",
@@ -53,12 +53,13 @@
   },
   "homepage": "https://mbasso.github.io/asm-dom",
   "devDependencies": {
-    "arraybuffer-loader": "0.2.2",
     "babel-cli": "6.24.1",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.2",
     "babel-loader": "6.4.1",
     "babel-plugin-dynamic-import-webpack": "1.0.1",
+    "babel-plugin-macros": "2.0.0",
+    "babel-plugin-preval": "1.6.2",
     "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
     "babel-plugin-transform-es3-member-expression-literals": "6.22.0",
     "babel-plugin-transform-es3-property-literals": "6.22.0",
@@ -69,6 +70,7 @@
     "compression-webpack-plugin": "0.4.0",
     "coveralls": "2.13.0",
     "cross-env": "4.0.0",
+    "document-register-element": "1.7.0",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "14.1.0",
     "eslint-plugin-import": "2.2.0",
@@ -76,16 +78,13 @@
     "eslint-plugin-react": "6.10.3",
     "expect": "1.20.2",
     "istanbul": "0.4.5",
-    "jsdom": "11.3.0",
+    "jsdom": "11.5.1",
     "knuth-shuffle": "1.0.1",
     "mocha": "3.2.0",
     "ncp": "2.0.0",
     "nyc": "11.0.2",
     "rimraf": "2.6.1",
     "webpack": "2.4.1"
-  },
-  "peerDependencies": {
-    "arraybuffer-loader": "0.2.2"
   },
   "npmName": "asm-dom",
   "npmFileMap": [

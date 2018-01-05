@@ -766,4 +766,117 @@ describe('patch (js)', function testPatch() {
     expect(elm.asmDomRaws).toEqual(['bar']);
     vdom.deleteVNode(vnode2);
   });
+
+  it('should automatically set value as raw', () => {
+    const vnode1 = h('i', {
+      value: 'foo',
+      raw: {
+        foo: '',
+      },
+    });
+    const vnode2 = h('i', {
+      value: 'bar',
+    });
+    patch(root, vnode1);
+    let elm = document.body.firstChild;
+    expect(elm.asmDomRaws).toEqual(['foo', 'value']);
+    patch(vnode1, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.asmDomRaws).toEqual(['value']);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should automatically set checked as raw', () => {
+    const vnode1 = h('i', {
+      checked: 'foo',
+      raw: {
+        foo: '',
+      },
+    });
+    const vnode2 = h('i', {
+      checked: 'bar',
+    });
+    patch(root, vnode1);
+    let elm = document.body.firstChild;
+    expect(elm.asmDomRaws).toEqual(['foo', 'checked']);
+    patch(vnode1, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.asmDomRaws).toEqual(['checked']);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should set asmDomEvents', () => {
+    const callbacks = {
+      click: () => {},
+      keydown: () => {},
+    };
+    const vnode1 = h('i', {
+      onclick: callbacks.click,
+    });
+    const vnode2 = h('i', {
+      onkeydown: callbacks.keydown,
+      raw: {
+        bar: '',
+      },
+    });
+    patch(root, vnode1);
+    let elm = document.body.firstChild;
+    expect(elm.asmDomEvents).toEqual({
+      click: callbacks.click,
+    });
+    patch(vnode1, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.asmDomRaws).toEqual(['bar']);
+    expect(elm.asmDomEvents).toEqual({
+      keydown: callbacks.keydown,
+    });
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should patch a WebComponent', () => {
+    const vnode = h('web-component');
+    patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.nodeName).toEqual('WEB-COMPONENT');
+    vdom.deleteVNode(vnode);
+  });
+
+  it('should patch a WebComponent with attributes', () => {
+    const vnode = h('web-component', {
+      foo: 'bar',
+      bar: 42,
+    });
+    patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.nodeName).toEqual('WEB-COMPONENT');
+    expect(elm.getAttribute('foo')).toEqual('bar');
+    expect(elm.getAttribute('bar')).toEqual('42');
+    vdom.deleteVNode(vnode);
+  });
+
+  it('should patch a WebComponent with eventlisteners', () => {
+    const vnode = h('web-component', {
+      onclick: () => {},
+      'onfoo-event': () => {},
+    });
+    patch(root, vnode);
+    patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.nodeName).toEqual('WEB-COMPONENT');
+    vdom.deleteVNode(vnode);
+  });
+
+  it('should create a template node', () => {
+    const vnode = h('template', {
+      id: 'template-node',
+    }, [
+      h('style', 'p { color: green; }'),
+      h('p', 'Hello world!'),
+    ]);
+    patch(root, vnode);
+    const template = document.getElementById('template-node');
+    const fragment = template.content.cloneNode(true);
+    expect(fragment.nodeName).toEqual('#document-fragment');
+    vdom.deleteVNode(vnode);
+  });
 });

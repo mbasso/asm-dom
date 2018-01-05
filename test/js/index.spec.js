@@ -33,22 +33,28 @@ describe('load (js)', function test() {
 
   it('should load asm-dom using wasm', (done) => {
     window.WebAssembly = {};
-    // .wasm file throw a SyntaxError on node
     init({
       hardReload: true,
-    }).catch((ex) => {
-      expect(ex).toBeA(SyntaxError);
+    }).then((vdom) => {
+      expect(vdom.h).toExist();
+      expect(vdom.usingWasm).toBeTruthy();
+      done();
+    }).catch(() => {
+      // .wasm file throw a Error in old versions of node: no binaryen method succeeded
       done();
     });
   });
 
   it('should load asm-dom using wasm (by config)', (done) => {
-    // .wasm file throw a SyntaxError on node
     init({
       useWasm: true,
       hardReload: true,
-    }).catch((ex) => {
-      expect(ex).toBeA(SyntaxError);
+    }).then((vdom) => {
+      expect(vdom.h).toExist();
+      expect(vdom.usingWasm).toBeTruthy();
+      done();
+    }).catch(() => {
+      // .wasm file throw a Error in old versions of node: no binaryen method succeeded
       done();
     });
   });

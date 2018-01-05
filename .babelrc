@@ -1,6 +1,7 @@
 {
   "presets": ["es2015", "stage-0"],
   "plugins": [
+    "macros",
     "dynamic-import-webpack",
     "transform-object-rest-spread",
     "transform-es3-member-expression-literals",
