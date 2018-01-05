@@ -1,6 +1,6 @@
 {
   "name": "asm-dom",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "A minimal WebAssembly virtual DOM to build C++ SPA (Single page applications)",
   "main": "lib/js/index.js",
   "jsnext:main": "es/js/index.js",
