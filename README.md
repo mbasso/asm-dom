@@ -107,7 +107,7 @@ int main() {
 
 asm-dom aims to be used from C++, however it can be used also from javascript, here you can find the doc of both:
 
-- [C++ docs](https://github.com/mbasso/asm-dom/blob/master/docs/cpp.md)
+- [C++ docs](https://mbasso.github.io/asm-dom/docs/installation.html)
 - [JS docs](https://github.com/mbasso/asm-dom/blob/master/docs/js.md)
 
 ## Ecosystem

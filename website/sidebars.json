@@ -1,0 +1,7 @@
+{
+  "docs": {
+    "Introduction": ["motivation", "inline-example", "installation", "examples"],
+    "Guides": ["memory-management", "boolean-attributes", "string-encoding", "svg", "server-side-rendering", "webcomponents", "structuring-applications"],
+    "API Reference": ["init", "h", "patch", "toVNode", "toHTML"]
+  }
+}

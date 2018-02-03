@@ -13,8 +13,23 @@ script:
 branches:
   only:
     - master
-    - develop
 cache:
   directories:
   - $HOME/.npm
 after_success: npm run test:cov
+
+jobs:
+  include:
+    - stage: Deploy website
+      language: node_js
+      node_js: "9"
+      install: true
+      script:
+        - git config --global user.email "${GH_EMAIL}"
+        - git config --global user.name "${GH_NAME}"
+        - echo "machine github.com login ${GH_NAME} password ${GH_TOKEN}" > ~/.netrc
+        - cd website && npm install && GIT_USER="${GH_NAME}" npm run publish-gh-pages
+      branches:
+        only:
+          - master
+      after_success: echo "Website online"
