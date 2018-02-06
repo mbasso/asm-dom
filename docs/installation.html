@@ -1,0 +1,63 @@
+<html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Installation · asm-dom</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Installation · asm-dom"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mbasso.github.io/asm-dom/index.html"/><meta property="og:description" content="In order to use asm-dom you have to prepare your js and C++ environment."/><link rel="shortcut icon" href="/asm-dom/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/asm-dom/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/asm-dom/"><h2 class="headerTitle">asm-dom</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/asm-dom/docs/motivation.html" target="_self">Docs</a></li><li><a href="/asm-dom/docs/init.html" target="_self">API</a></li><li><a href="https://github.com/mbasso/asm-dom" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Introduction</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Introduction</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/motivation.html">Motivation</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/inline-example.html">Inline example</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/asm-dom/docs/installation.html">Installation</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/examples.html">Examples</a></li></ul></div><div class="navGroup navGroupActive"><h3>Guides</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/memory-management.html">Memory Management</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/boolean-attributes.html">Boolean Attributes</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/string-encoding.html">String Encoding</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/svg.html">SVG</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/server-side-rendering.html">Server Side Rendering</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/webcomponents.html">Web Components</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/structuring-applications.html">Structuring Applications</a></li></ul></div><div class="navGroup navGroupActive"><h3>API Reference</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/init.html">init</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/h.html">h</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/patch.html">patch</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/toVNode.html">toVNode</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/toHTML.html">toHTML</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Installation</h1></header><article><div><span><p>In order to use asm-dom you have to prepare your js and C++ environment.</p>
+<p>To do this, as first thing, <strong>before importing your compiled code from C++</strong> (wasm or asmjs) you have to include our js file:</p>
+<ul>
+<li><p>if you are not using <a href="https://www.npmjs.com/package/asm-dom">npm</a> you can import <a href="https://github.com/mbasso/asm-dom/blob/master/dist/cpp/asm-dom.js">our js file</a> from <a href="https://unpkg.com/asm-dom/dist/cpp/asm-dom.js">unpkg</a></p></li>
+<li><p>if you are using <a href="https://www.npmjs.com/package/asm-dom">npm</a> you can install asm-dom:</p>
+<pre><code class="hljs css bash">npm install --save asm-dom
+</code></pre>
+<p>and import our js file in this way:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> <span class="hljs-string">'asm-dom/cpp/'</span>;
+</code></pre>
+<p>If you are using this library with webpack you also need to install <code>arraybuffer-loader</code>:</p>
+<pre><code class="hljs css bash">npm install --save-dev arraybuffer-loader
+</code></pre>
+<p>and add this object to your loaders:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.wasm$/</span>,
+  <span class="hljs-attr">loaders</span>: [<span class="hljs-string">'arraybuffer-loader'</span>],
+}
+</code></pre>
+<p>also, if you have some problems with fs, you can add this to your webpack config:</p>
+<pre><code class="hljs css js">node: {
+  <span class="hljs-attr">fs</span>: <span class="hljs-string">'empty'</span>,
+},
+</code></pre></li>
+</ul>
+<p>After that, you can build your app using the source code in the <a href="https://github.com/mbasso/asm-dom/tree/master/cpp">cpp</a> folder:</p>
+<ul>
+<li><code>asm-dom.hpp</code> and <code>asm-dom-server.hpp</code></li>
+<li><code>asm-dom.cpp</code> and <code>asm-dom-server.cpp</code> (or <code>asm-dom.a</code> that includes both)</li>
+</ul>
+<p>and compile it using <a href="http://kripken.github.io/emscripten-site/">emscripten (emcc cli)</a>, <a href="http://webassembly.org/getting-started/developers-guide/">here</a> is the installation guide. A few tips about this step:</p>
+<ul>
+<li><p>please make sure to use the <code>--bind</code> option during the compilation, otherwise asm-dom will not work.</p></li>
+<li><p>emcc has a lot of settings that can optimize the build, we suggest you to see <a href="https://kripken.github.io/emscripten-site/docs/optimizing/Optimizing-Code.html">this</a> page and <a href="(https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpp/package.json)">our configuration</a> in the TODOMVC example.</p></li>
+<li><p>we suggest you to compile your app to <code>.bc</code> and then use it to produce a WebAssembly version and an asm.js version that you can use as fallback</p></li>
+</ul>
+<p>After the compilation you can import your app:</p>
+<ul>
+<li><p>if you are using webpack, you can see our <a href="(https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpp/src/index.js)">example</a>. In order to import it as a module we have used 2 extra files with emcc <code>--pre-js</code> (<code>prefix.js</code>) and <code>--post-js</code> (<code>postfix.js</code>).</p></li>
+<li><p>If you want to use wasm without webpack, you can see <a href="https://gist.github.com/kripken/59c67556dc03bb6d57052fedef1e61ab">this</a> gist.</p></li>
+</ul>
+<p>If you are using <a href="https://babeljs.io/">babel</a>, please make sure to ignore the compiled files, the prefix and suffix:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>,
+  <span class="hljs-attr">loaders</span>: [<span class="hljs-string">'babel-loader'</span>],
+  <span class="hljs-attr">exclude</span>: [
+    <span class="hljs-regexp">/node_modules/</span>,
+    /compiled/, <span class="hljs-comment">// folder that contains the compiled code (wasm and asmjs)</span>
+    /\.asm\.js$/, <span class="hljs-comment">// ignore all .asm.js files</span>
+    /prefix\.js$/, <span class="hljs-comment">// ignore --pre-js</span>
+    /postfix\.js$/ <span class="hljs-comment">// ignore --post-js</span>
+  ],
+}
+</code></pre>
+<p>You can find a complete example to study in the example folder, <a href="https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpp">here</a> it is.</p>
+<p>If you want to use a <a href="https://facebook.github.io/jsx/">JSX</a> like syntax in C++ you can also consider using <a href="https://github.com/mbasso/gccx">gccx</a> before <code>emcc</code>, <a href="https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpx">here</a> you can find the same example with an additional build step.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="inline-example.html">← Inline example</a><a class="docs-next button" href="examples.html">Examples →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/asm-dom/" class="nav-home"></a><div><h5>Docs</h5><a href="/asm-dom/docs/motivation.html">Introduction</a><a href="/asm-dom/docs/memory-management.html">Guides</a><a href="/asm-dom/docs/init.html">API Reference</a></div><div><h5>Community</h5><a href="http://stackoverflow.com/questions/tagged/asm-dom" target="_blank" rel="noopener noreferrer">Stack Overflow</a><a href="https://gitter.im/mbasso/asm-dom">Chat on Gitter</a><a href="https://twitter.com/teo_basso"><img alt="Follow teo_basso on Twitter" src="https://img.shields.io/twitter/follow/teo_basso.svg?label=Follow+teo_basso&amp;style=social"/></a></div><div><h5>More</h5><a href="https://github.com/mbasso/asm-dom">GitHub</a><a href="https://github.com/mbasso/asm-dom/issues">Issues</a><a class="github-button" href="https://github.com/mbasso/asm-dom" data-icon="octicon-star" data-count-href="/mbasso/asm-dom/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div></body></html>
