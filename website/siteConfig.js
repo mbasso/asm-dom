@@ -15,7 +15,7 @@ const siteConfig = {
   users: [],
   colors: {
     primaryColor: '#607D8B',
-    secondaryColor: '#FFFFFF',
+    secondaryColor: '#78909C',
   },
   copyright:
     'Copyright © ' +
