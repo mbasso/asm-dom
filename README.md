@@ -115,6 +115,7 @@ asm-dom aims to be used from C++, however it can be used also from javascript, h
 Here you can find a list of related projects:
 
 - [gccx](https://github.com/mbasso/gccx) - CPX (JSX like syntax) support.
+- [asm-dom-boilerplate](https://github.com/mbasso/asm-dom-boilerplate) - A simple boilerplate to start using asm-dom without configuration.
 
 ## Examples
 

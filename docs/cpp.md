@@ -110,6 +110,10 @@ int main() {
 
 ## Installation
 
+If you want to start using asm-dom without configuration you can consider [asm-dom-boilerplate](https://github.com/mbasso/asm-dom-boilerplate), a very simple project that includes all you need, just clone and run it!
+
+Otherwise, here is the guide for the manual installation.
+
 In order to use asm-dom you have to prepare your js and C++ environment.
 
 To do this, as first thing, **before importing your compiled code from C++** (wasm or asmjs) you have to include our js file: 
