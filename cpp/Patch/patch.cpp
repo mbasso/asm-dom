@@ -259,7 +259,7 @@ namespace asmdom {
 		#ifndef ASMDOM_JS_SIDE
 			VNode* result = patch(oldVnode, vnode);
 			if (!VDOMConfig::getConfig().getClearMemory()) {
-				delete oldVnode;
+				deleteVNode(oldVnode);
 			}
 			return result;
 		#else
@@ -300,7 +300,7 @@ namespace asmdom {
 
 		#ifndef ASMDOM_JS_SIDE
 			if (config.getClearMemory()) {
-				delete oldVnode;
+				deleteVNode(oldVnode);
 			}
 		#endif
 

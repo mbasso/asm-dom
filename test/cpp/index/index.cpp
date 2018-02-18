@@ -24,8 +24,8 @@ void shouldAutomaticallyClearMemory() {
 		throw 20;
 	}
 
-	delete vnode1;
-	delete vnode2;
+	deleteVNode(vnode1);
+	deleteVNode(vnode2);
 
 	vnode = h("div");
 	obj = *vnode;
@@ -57,8 +57,8 @@ void shouldAutomaticallyClearMemoryByConfig() {
 		throw 20;
 	}
 
-	delete vnode1;
-	delete vnode2;
+	deleteVNode(vnode1);
+	deleteVNode(vnode2);
 
 	vnode = h("div");
 	obj = *vnode;
@@ -90,8 +90,8 @@ void shouldNotAutomaticallyClearMemoryByConfig() {
 		throw 20;
 	}
 
-	delete vnode1;
-	delete vnode2;
+	deleteVNode(vnode1);
+	deleteVNode(vnode2);
 
 	vnode = h("div");
 	obj = *vnode;
@@ -119,8 +119,8 @@ void shouldUseSafePatch() {
 		throw 20;
 	}
 
-	delete vnode;
-	delete vnode2;
+	deleteVNode(vnode);
+	deleteVNode(vnode2);
 };
 
 void shouldUseSafePatchByConfig() {
@@ -140,8 +140,8 @@ void shouldUseSafePatchByConfig() {
 		throw 20;
 	}
 
-	delete vnode;
-	delete vnode2;
+	deleteVNode(vnode);
+	deleteVNode(vnode2);
 };
 
 void shouldNotUseSafePatchByConfig() {
@@ -161,8 +161,8 @@ void shouldNotUseSafePatchByConfig() {
 		throw 20;
 	}
 
-	delete vnode;
-	delete vnode2;
+	deleteVNode(vnode);
+	deleteVNode(vnode2);
 };
 
 

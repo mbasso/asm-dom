@@ -19,7 +19,7 @@ Attrs toUtf8Attrs(std::map<std::wstring, std::wstring> utf16Attrs) {
 }
 
 void deleteVNodePtr(const std::uintptr_t& vnodePtr) {
-  delete reinterpret_cast<VNode*>(vnodePtr);
+  deleteVNode(reinterpret_cast<VNode*>(vnodePtr));
 };
 
 std::uintptr_t toVNodePtr(const emscripten::val& node) {

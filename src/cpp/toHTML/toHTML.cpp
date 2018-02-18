@@ -181,8 +181,8 @@ namespace asmdom {
 		toHTML(vnode, html);
 
 		#ifndef ASMDOM_JS_SIDE
-			if (VDOMConfig::getConfig().getClearMemory()) {
-				delete vnode;
+			if (vnode != NULL && VDOMConfig::getConfig().getClearMemory()) {
+				deleteVNode(vnode);
 			}
 		#endif
 

@@ -6,6 +6,7 @@
     "tagline": "A minimal WebAssembly virtual DOM to build C++ SPA",
     "boolean-attributes": "Boolean Attributes",
     "cpp": "cpp",
+    "deleteVNode": "deleteVNode",
     "examples": "Examples",
     "h": "h",
     "init": "init",

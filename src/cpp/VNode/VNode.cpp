@@ -30,9 +30,10 @@ namespace asmdom {
 		children.erase(std::remove(children.begin(), children.end(), (VNode*)NULL), children.end());
 	};
 
-	VNode::~VNode() {
-    Children::size_type i = children.size();
-    while (i--) delete children[i];
+	void deleteVNode(const VNode* const vnode) {
+    Children::size_type i = vnode->children.size();
+    while (i--) deleteVNode(vnode->children[i]);
+		delete vnode;
   };
 
 	#ifndef ASMDOM_JS_SIDE

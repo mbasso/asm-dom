@@ -9,6 +9,7 @@
 	- [patch](#patch)
 	- [toVNode](#tovnode)
 	- [toHTML](#tohtml)
+  - [deleteVNode](#deletevnode)
 - [Notes](#notes)
 	- [memory management](#memory-management)
 	- [boolean attributes](#boolean-attributes)
@@ -379,6 +380,33 @@ std::string html = toHTML(vnode);
 // html = <div id="root" style="color: #000"><h1>Headline</h1><p>A paragraph</p></div>;
 ```
 
+## deleteVNode
+
+Deletes a vnode and all its children from memory. This is useful if you want to delete an entire tree. If you want to delete a vnode but not its children you can simply use the C++ keyword `delete`.
+
+```c++
+VNode* child1 = h("h1", string("Headline"));
+VNode* child2 = h("p", string("A paragraph"));
+VNode* vnode = h("div",
+  Data(
+    Attrs {
+      {"id", "root"}
+      {"style", "color: #000"}
+    }
+  ),
+  Children {
+    child1,
+    child2,
+  }
+);
+
+// delete vnode, child1 and child2 from memory
+deleteVNode(vnode);
+
+// delete vnode but not child1 and child2 from memory
+// delete vnode;
+```
+
 ## Notes
 
 ### memory management
@@ -398,7 +426,7 @@ VNode* vnode = h("span", Children {
   child1,
   child2,
 });
-delete vnode; // manually delete vnode, child1 and child2 from memory
+deleteVNode(vnode); // manually delete vnode, child1 and child2 from memory
 ```
 
 ### boolean attributes

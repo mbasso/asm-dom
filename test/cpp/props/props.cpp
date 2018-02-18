@@ -17,7 +17,7 @@ void shouldCreateElementWithProps() {
   emscripten::val elm = getBodyFirstChild();
   assertEquals(elm["src"], emscripten::val("http://localhost/"));
 
-  delete vnode;
+  deleteVNode(vnode);
 };
 
 void changesAnElementsProps() {
@@ -40,7 +40,7 @@ void changesAnElementsProps() {
   emscripten::val elm = getBodyFirstChild();
   assertEquals(elm["src"], emscripten::val("http://localhost/"));
 
-  delete vnode2;
+  deleteVNode(vnode2);
 };
 
 void preservesMemoizedProps() {
@@ -60,7 +60,7 @@ void preservesMemoizedProps() {
   elm = getBodyFirstChild();
   assertEquals(elm["src"], emscripten::val("http://other/"));
 
-  delete vnode2;
+  deleteVNode(vnode2);
 };
 
 void removesAnElementsProps() {
@@ -78,7 +78,7 @@ void removesAnElementsProps() {
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["src"], emscripten::val::undefined());
 
-  delete vnode2;
+  deleteVNode(vnode2);
 };
 
 void shouldUpdateValuePropIfUserInteractedWithTheElement() {
@@ -104,7 +104,7 @@ void shouldUpdateValuePropIfUserInteractedWithTheElement() {
   patch(vnode, vnode2);
 	assertEquals(elm["value"], emscripten::val("foo"));
 
-  delete vnode2;
+  deleteVNode(vnode2);
 };
 
 void shouldUpdateCheckedPropIfUserInteractedWithTheElement() {
@@ -136,7 +136,7 @@ void shouldUpdateCheckedPropIfUserInteractedWithTheElement() {
   patch(vnode, vnode2);
 	assertEquals(elm["checked"], emscripten::val(true));
 
-  delete vnode2;
+  deleteVNode(vnode2);
 };
 
 EMSCRIPTEN_BINDINGS(props_tests) {

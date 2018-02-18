@@ -44,7 +44,7 @@ void shouldAttachAClickEventHandlerToElement() {
 		throw 20;
 	}
 
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldDetachAttachedClickEventHandlerToElement() {
@@ -79,7 +79,7 @@ void shouldDetachAttachedClickEventHandlerToElement() {
 	if (result.size() != 1) {
 		throw 20;
 	}
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldShareHandlersInParentAndChildNodes() {
@@ -116,7 +116,7 @@ void shouldShareHandlersInParentAndChildNodes() {
 		throw 20;
 	}
 
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldHandleLambdaWithCapture() {
@@ -142,7 +142,7 @@ void shouldHandleLambdaWithCapture() {
 		throw 20;
 	}
 
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldUpdateHandlers() {
@@ -186,7 +186,7 @@ void shouldUpdateHandlers() {
 		throw 20;
 	}
 
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldNotUpdateHandlers() {
@@ -230,7 +230,7 @@ void shouldNotUpdateHandlers() {
 		throw 20;
 	}
 
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 EMSCRIPTEN_BINDINGS(eventlisteners_tests) {

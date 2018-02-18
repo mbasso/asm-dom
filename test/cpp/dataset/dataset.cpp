@@ -20,7 +20,7 @@ void shouldSetOnInitialElementCreation() {
 		emscripten::val("foo")
 	);
 
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void datasetCanBeMemoized() {
@@ -57,7 +57,7 @@ void datasetCanBeMemoized() {
 		emscripten::val("bar")
 	);
 
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldUpdateDataset() {
@@ -97,7 +97,7 @@ void shouldUpdateDataset() {
 		emscripten::val::null()
 	);
 
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 EMSCRIPTEN_BINDINGS(dataset_tests) {
