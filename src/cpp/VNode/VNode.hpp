@@ -2,25 +2,26 @@
 #define asmdom_VNode_hpp
 
 #include <emscripten/val.h>
-#include <functional>
-#include <utility>
 #include <vector>
 #include <string>
-#include <unordered_map>
 #ifdef ASMDOM_JS_SIDE
   #include <map>
+#else
+  #include <functional>
+  #include <utility>
+  #include <unordered_map>
 #endif
 
 namespace asmdom {
 
-  typedef std::function<bool(emscripten::val)> Callback;
   #ifdef ASMDOM_JS_SIDE
     typedef std::map<std::string, std::string> Attrs;
   #else
+    typedef std::function<bool(emscripten::val)> Callback;
     typedef std::unordered_map<std::string, std::string> Attrs;
+    typedef std::unordered_map<std::string, emscripten::val> Props;
+    typedef std::unordered_map<std::string, Callback> Callbacks;
   #endif
-  typedef std::unordered_map<std::string, emscripten::val> Props;
-  typedef std::unordered_map<std::string, Callback> Callbacks;
 
   struct Data {
     Data() {};
