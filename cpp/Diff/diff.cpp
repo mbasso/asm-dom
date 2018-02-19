@@ -54,7 +54,7 @@ namespace asmdom {
 
 	#ifndef ASMDOM_JS_SIDE
 
-	void diffProps(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+	void diffProps(const VNode* __restrict__ const oldVnode, const VNode* __restrict__ const vnode) {
 		if (oldVnode->data.props.empty() && vnode->data.props.empty()) return;
 
 		emscripten::val elm = emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm];
@@ -87,7 +87,7 @@ namespace asmdom {
 		}
 	};
 
-	void diffCallbacks(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+	void diffCallbacks(const VNode* __restrict__ const oldVnode, const VNode* __restrict__ const vnode) {
 		if (oldVnode->data.callbacks.empty() && vnode->data.callbacks.empty()) return;
 
 		for (auto& it : oldVnode->data.callbacks) {
