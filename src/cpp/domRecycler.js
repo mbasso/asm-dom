@@ -50,10 +50,10 @@ const recycler = {
     return document.createComment(comment);
   },
   clean(node) {
+    node.remove();
     let i;
     // eslint-disable-next-line
     while (i = node.lastChild) recycler.collect(i);
-    node.remove();
     i = node.attributes !== undefined ? node.attributes.length : 0;
     while (i--) node.removeAttribute(node.attributes[i].name);
     node.asmDomVNode = undefined;

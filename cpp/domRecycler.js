@@ -52,12 +52,12 @@ var recycler = {
     return document.createComment(comment);
   },
   clean: function clean(node) {
+    node.remove();
     var i = void 0;
     // eslint-disable-next-line
     while (i = node.lastChild) {
       recycler.collect(i);
-    }node.remove();
-    i = node.attributes !== undefined ? node.attributes.length : 0;
+    }i = node.attributes !== undefined ? node.attributes.length : 0;
     while (i--) {
       node.removeAttribute(node.attributes[i].name);
     }node.asmDomVNode = undefined;
