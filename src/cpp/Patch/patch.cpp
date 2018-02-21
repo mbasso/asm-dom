@@ -32,11 +32,11 @@ namespace asmdom {
 		return vnode1->key == vnode2->key && vnode1->sel == vnode2->sel;
 	};
 
-	std::map<std::string, int>* createKeyToOldIdx(const std::vector<VNode*>& children, int beginIdx, const int endIdx) {
-		std::map<std::string, int>* map = new std::map<std::string, int>();
+	std::map<std::string, int> createKeyToOldIdx(const std::vector<VNode*>& children, int beginIdx, const int endIdx) {
+		std::map<std::string, int> map;
 		while (beginIdx <= endIdx) {
 			if (!children[beginIdx]->key.empty()) {
-				map->insert(std::make_pair(children[beginIdx]->key, beginIdx));
+				map.insert(std::make_pair(children[beginIdx]->key, beginIdx));
 			}
 			++beginIdx;
 		}
@@ -135,7 +135,8 @@ namespace asmdom {
 		VNode* oldEndVnode = oldCh[oldEndIdx];
 		VNode* newStartVnode = newCh[0];
 		VNode* newEndVnode = newCh[newEndIdx];
-		std::map<std::string, int>* oldKeyToIdx;
+		bool oldKeys = false;
+		std::map<std::string, int> oldKeyToIdx;
 		VNode* elmToMove;
 
 		while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
@@ -176,23 +177,24 @@ namespace asmdom {
 				oldEndVnode = oldCh[--oldEndIdx];
 				newStartVnode = newCh[++newStartIdx];
 			} else {
-				if (!oldKeyToIdx) {
+				if (!oldKeys) {
+					oldKeys = true;
 					oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx);
 				}
-				if (!oldKeyToIdx->count(newStartVnode->key)) {
+				if (!oldKeyToIdx.count(newStartVnode->key)) {
 					EM_ASM_({
 						window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
 					}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
 					newStartVnode = newCh[++newStartIdx];
 				} else {
-					elmToMove = oldCh[oldKeyToIdx->at(newStartVnode->key)];
+					elmToMove = oldCh[oldKeyToIdx.at(newStartVnode->key)];
 					if (elmToMove->sel != newStartVnode->sel) {
 						EM_ASM_({
 							window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
 						}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
 					} else {
 						patchVNode(elmToMove, newStartVnode);
-						oldCh[oldKeyToIdx->at(newStartVnode->key)] = NULL;
+						oldCh[oldKeyToIdx.at(newStartVnode->key)] = NULL;
 						EM_ASM_({
 							window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
 						}, parentElm, elmToMove->elm, oldStartVnode->elm);
@@ -208,8 +210,6 @@ namespace asmdom {
 				removeVNodes(oldCh, oldStartIdx, oldEndIdx);
 			}
 		}
-		delete oldKeyToIdx;
-		oldKeyToIdx = NULL;
 	};
 
 	void patchVNode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
