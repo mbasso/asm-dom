@@ -62,6 +62,14 @@ describe('patch (cpp)', function test() {
     app.shouldCreateComments();
   });
 
+  it('should create fragments', () => {
+    app.shouldCreateFragments();
+  });
+
+  it('should patch an element inside a fragment', () => {
+    app.shouldPatchAnElementInsideAFragment();
+  });
+
   /* should create an element created inside an iframe */
 
   it('should append elements', () => {

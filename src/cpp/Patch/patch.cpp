@@ -17,7 +17,7 @@ namespace asmdom {
 		VNode* __restrict__ const vnode
 	);
 
-	VNode* const emptyNode = new VNode();
+	VNode* const emptyNode = h("");
 
 	#ifndef ASMDOM_JS_SIDE
 		VNode* currentNode = NULL;
@@ -29,7 +29,7 @@ namespace asmdom {
 	#endif
 
 	bool sameVNode(const VNode* __restrict__ const vnode1, const VNode* __restrict__ const vnode2) {
-		return vnode1->key == vnode2->key && vnode1->sel == vnode2->sel;
+		return vnode1->nt == vnode2->nt && vnode1->selHash == vnode2->selHash && vnode1->key == vnode2->key;
 	};
 
 	std::map<std::string, int> createKeyToOldIdx(const std::vector<VNode*>& children, int beginIdx, const int endIdx) {
@@ -44,20 +44,13 @@ namespace asmdom {
 	}
 
 	int createElm(VNode* const vnode) {
-		if (vnode->sel.empty()) {
-			vnode->elm = EM_ASM_INT({
-				return window['asmDomHelpers']['domApi']['createTextNode'](
-					Module['UTF8ToString']($0)
-				);
-			}, vnode->text.c_str());
-		} else if (vnode->sel == "!") {
-			vnode->elm = EM_ASM_INT({
-				return window['asmDomHelpers']['domApi']['createComment'](
-					Module['UTF8ToString']($0)
-				);
-			}, vnode->text.c_str());
-		} else {
-			if (vnode->data.attrs.count("ns")) {
+		bool isFragment = vnode->nt == fragment;
+		if (vnode->nt == element || isFragment) {
+			if (isFragment) {
+				vnode->elm = EM_ASM_INT({
+					return window['asmDomHelpers']['domApi']['createDocumentFragment']();
+				});
+			} else if (vnode->data.attrs.count("ns")) {
 				vnode->elm = EM_ASM_INT({
 					return window['asmDomHelpers']['domApi']['createElementNS'](
 						Module['UTF8ToString']($0),
@@ -76,7 +69,7 @@ namespace asmdom {
 			diff(emptyNode, vnode);
 
 			if (!vnode->children.empty()) {
-				for(std::vector<VNode*>::size_type i = 0; i != vnode->children.size(); ++i) {
+				for(std::vector<VNode*>::size_type i = 0, j = vnode->children.size(); i != j; ++i) {
 					EM_ASM_({
 						window['asmDomHelpers']['domApi']['appendChild']($0, $1);
 					}, vnode->elm, createElm(vnode->children[i]));
@@ -91,6 +84,18 @@ namespace asmdom {
 					);
 				}, vnode->elm, vnode->text.c_str());
 			}
+		} else if (vnode->nt == text) {
+			vnode->elm = EM_ASM_INT({
+				return window['asmDomHelpers']['domApi']['createTextNode'](
+					Module['UTF8ToString']($0)
+				);
+			}, vnode->text.c_str());
+		} else if (vnode->nt == comment) {
+			vnode->elm = EM_ASM_INT({
+				return window['asmDomHelpers']['domApi']['createComment'](
+					Module['UTF8ToString']($0)
+				);
+			}, vnode->text.c_str());
 		}
 		return vnode->elm;
 	};
@@ -188,7 +193,7 @@ namespace asmdom {
 					newStartVnode = newCh[++newStartIdx];
 				} else {
 					elmToMove = oldCh[oldKeyToIdx.at(newStartVnode->key)];
-					if (elmToMove->sel != newStartVnode->sel) {
+					if (elmToMove->selHash != newStartVnode->selHash) {
 						EM_ASM_({
 							window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
 						}, parentElm, createElm(newStartVnode), oldStartVnode->elm);

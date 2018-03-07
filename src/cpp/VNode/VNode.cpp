@@ -5,20 +5,38 @@
 #endif
 #include <cstdint>
 #include <string>
+#include <functional>
+#include <unordered_map>
 
 namespace asmdom {
+
+	std::hash<std::string> hasher;
+	std::unordered_map<std::string, std::size_t> hashes;
 
 	void addNS(VNode* const vnode) {
 		vnode->data.attrs["ns"] = "http://www.w3.org/2000/svg";
 		if (vnode->sel != "foreignObject" && !vnode->children.empty()) {
-			for(std::vector<VNode*>::size_type i = 0; i != vnode->children.size(); ++i) {
+			for(std::vector<VNode*>::size_type i = 0, j = vnode->children.size(); i != j; ++i) {
 				addNS(vnode->children[i]);
 			}
 		}
-	}
+	};
 
-	void VNode::adjustVNode() {
-		if (data.attrs.count(std::string("key")) != 0) {
+	void VNode::normalize() {
+		if (sel[0] == '!') {
+			nt = comment;
+		} else if (sel[0] == '\0') {
+			nt = fragment;
+		} else {
+			nt = element;
+		}
+		selHash = hashes[sel];
+		if (selHash == 0) {
+			selHash = hasher(sel);
+			hashes[sel] = selHash;
+		}
+
+		if (data.attrs.count("key") != 0) {
 			key = data.attrs["key"];
 			data.attrs.erase("key");
 		}

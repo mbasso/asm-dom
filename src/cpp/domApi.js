@@ -30,6 +30,9 @@ export default {
   'createComment'(text) {
     return addPtr(recycler.createComment(text));
   },
+  'createDocumentFragment'() {
+    return addPtr(document.createDocumentFragment());
+  },
   'insertBefore'(parentNodePtr, newNodePtr, referenceNodePtr) {
     nodes[parentNodePtr].insertBefore(
       nodes[newNodePtr],

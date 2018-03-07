@@ -162,6 +162,29 @@ void shouldCreateComments() {
 	deleteVNode(elmPtr);
 };
 
+void shouldCreateFragments() {
+	VNode* vnode = h("", h("foo", true));
+	VNode* elmPtr = patch(getRoot(), vnode);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["nodeType"], emscripten::val::global("document")["TEXT_NODE"]);
+	assertEquals(elm["textContent"], emscripten::val("foo"));
+	deleteVNode(elmPtr);
+};
+
+void shouldPatchAnElementInsideAFragment() {
+	VNode* vnode1 = h("", h("span", std::string("foo")));
+	VNode* vnode2 = h("", h("span", std::string("bar")));
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["textContent"], emscripten::val("foo"));
+	patch(vnode1, vnode2);
+	elm = getBodyFirstChild();
+	assertEquals(elm["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["textContent"], emscripten::val("bar"));
+	deleteVNode(vnode2);
+};
+
 void shouldAppendElements() {
 	VNode* vnode1 = h("span",
 		Children {
@@ -1512,6 +1535,8 @@ EMSCRIPTEN_BINDINGS(patch_tests) {
 	emscripten::function("shouldCreateElementsWithSpanAndTextContent", &shouldCreateElementsWithSpanAndTextContent);
 	emscripten::function("isAPatchOfTheRootElement", &isAPatchOfTheRootElement);
 	emscripten::function("shouldCreateComments", &shouldCreateComments);
+	emscripten::function("shouldCreateFragments", &shouldCreateFragments);
+	emscripten::function("shouldPatchAnElementInsideAFragment", &shouldPatchAnElementInsideAFragment);
 	emscripten::function("shouldAppendElements", &shouldAppendElements);
 	emscripten::function("shouldPrependElements", &shouldPrependElements);
 	emscripten::function("shouldAddElementsInTheMiddle", &shouldAddElementsInTheMiddle);

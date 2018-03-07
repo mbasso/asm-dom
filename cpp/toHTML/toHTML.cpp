@@ -131,12 +131,12 @@ namespace asmdom {
 	void toHTML(const VNode* const vnode, std::string& html) {
 		if (vnode == NULL) return;
 
-		if (vnode->sel.empty() && !vnode->text.empty()) {
+		if (vnode->nt == text && !vnode->text.empty()) {
 			html.append(encode(vnode->text));
 			return;
 		}
 		
-		if (vnode->sel == "!") {
+		if (vnode->nt == comment) {
 			html.append("<!--" + vnode->text + "-->");
       return;
 		}

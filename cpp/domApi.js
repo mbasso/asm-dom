@@ -39,6 +39,9 @@ exports['default'] = {
   'createComment': function createComment(text) {
     return addPtr(_domRecycler2['default'].createComment(text));
   },
+  'createDocumentFragment': function createDocumentFragment() {
+    return addPtr(document.createDocumentFragment());
+  },
   'insertBefore': function insertBefore(parentNodePtr, newNodePtr, referenceNodePtr) {
     nodes[parentNodePtr].insertBefore(nodes[newNodePtr], nodes[referenceNodePtr]);
   },

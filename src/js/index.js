@@ -61,6 +61,7 @@ export default (config) => {
           eventProxy,
           appendProps,
           insertInnerHTML,
+          nodes,
         };
       };
 

@@ -173,6 +173,29 @@ describe('patch (js)', function testPatch() {
     vdom.deleteVNode(elmPtr);
   });
 
+  it('should create fragments', () => {
+    const vnode = h('', 'foo');
+    const elmPtr = patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.nodeType).toEqual(document.TEXT_NODE);
+    expect(elm.textContent).toEqual('foo');
+    vdom.deleteVNode(elmPtr);
+  });
+
+  it('should patch an element inside a fragment', () => {
+    const vnode = h('', h('span', 'foo'));
+    const vnode2 = h('', h('span', 'bar'));
+    patch(root, vnode);
+    let elm = document.body.firstChild;
+    expect(elm.tagName).toEqual('SPAN');
+    expect(elm.textContent).toEqual('foo');
+    patch(vnode, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.tagName).toEqual('SPAN');
+    expect(elm.textContent).toEqual('bar');
+    vdom.deleteVNode(vnode2);
+  });
+
   /*
   it('should create an element created inside an iframe', (done) => {
     // Only run if srcdoc is supported.

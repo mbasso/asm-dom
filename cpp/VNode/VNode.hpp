@@ -23,6 +23,8 @@ namespace asmdom {
     typedef std::unordered_map<std::string, Callback> Callbacks;
   #endif
 
+  enum NodeType { element, text, comment, fragment };
+
   struct Data {
     Data() {};
     #ifdef ASMDOM_JS_SIDE
@@ -63,60 +65,64 @@ namespace asmdom {
 
   struct VNode {
     private:
-      void adjustVNode();
+      void normalize();
     public:
-      VNode() {};
       VNode(
         const std::string& nodeSel
-      ): sel(nodeSel) {};
+      ): sel(nodeSel) { normalize(); };
       VNode(
         const std::string& nodeSel,
         const std::string& nodeText
-      ): sel(nodeSel), text(nodeText) {};
+      ): sel(nodeSel), text(nodeText) { normalize(); };
       VNode(
         const std::string& nodeText,
         bool isText
       ) {
         if (isText) {
           text = nodeText;
+          normalize();
+			    nt = NodeType::text;
         } else {
           sel = nodeText;
+          normalize();
         }
       };
       VNode(
         const std::string& nodeSel,
         const Data& nodeData
-      ): sel(nodeSel), data(nodeData) { adjustVNode(); };
+      ): sel(nodeSel), data(nodeData) { normalize(); };
       VNode(
         const std::string& nodeSel,
         const std::vector<VNode*>& nodeChildren
-      ): sel(nodeSel), children(nodeChildren) { adjustVNode(); };
+      ): sel(nodeSel), children(nodeChildren) { normalize(); };
       VNode(
         const std::string& nodeSel,
         VNode* child
-      ): sel(nodeSel), children{ child } {};
+      ): sel(nodeSel), children{ child } { normalize(); };
       VNode(
         const std::string& nodeSel,
         const Data& nodeData,
         const std::string& nodeText
-      ): sel(nodeSel), text(nodeText), data(nodeData) { adjustVNode(); };
+      ): sel(nodeSel), text(nodeText), data(nodeData) { normalize(); };
       VNode(
         const std::string& nodeSel,
         const Data& nodeData,
         const std::vector<VNode*>& nodeChildren
-      ): sel(nodeSel), data(nodeData), children(nodeChildren) { adjustVNode(); };
+      ): sel(nodeSel), data(nodeData), children(nodeChildren) { normalize(); };
       VNode(
         const std::string& nodeSel,
         const Data& nodeData,
         VNode* child
-      ): sel(nodeSel), data(nodeData), children{ child } { adjustVNode(); };
+      ): sel(nodeSel), data(nodeData), children{ child } { normalize(); };
 
-      std::string sel; 
-      std::string key;
-      std::string text;
-      Data data;
-      int elm;
-      std::vector<VNode*> children;
+    std::string sel;
+    std::string key;
+    std::string text;
+    NodeType nt;
+    std::size_t selHash;
+    Data data;
+    int elm;
+    std::vector<VNode*> children;
   };
 
   void deleteVNode(const VNode* const vnode);
