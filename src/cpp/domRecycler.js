@@ -72,8 +72,8 @@ const recycler = {
       }
       node.asmDomEvents = undefined;
     }
-    if (node.textContent !== null && node.textContent !== '') {
-      node.textContent = '';
+    if (node.nodeValue !== null && node.nodeValue !== '') {
+      node.nodeValue = '';
     }
     Object.keys(node).forEach((key) => {
       if (

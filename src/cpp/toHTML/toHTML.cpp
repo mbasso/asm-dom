@@ -165,13 +165,9 @@ namespace asmdom {
 				} else
 			#endif
 			
-			if (!vnode->text.empty()) {
-        html.append(encode(vnode->text));
-      } else if (!vnode->children.empty()) {
-				for(Children::size_type i = 0; i != vnode->children.size(); ++i) {
-					toHTML(vnode->children[i], html);
-				}
-      }
+			for(Children::size_type i = 0; i != vnode->children.size(); ++i) {
+				toHTML(vnode->children[i], html);
+			}
       html.append("</" + vnode->sel + ">");
 		}
 	};

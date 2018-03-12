@@ -76,8 +76,8 @@ var recycler = {
       }
       node.asmDomEvents = undefined;
     }
-    if (node.textContent !== null && node.textContent !== '') {
-      node.textContent = '';
+    if (node.nodeValue !== null && node.nodeValue !== '') {
+      node.nodeValue = '';
     }
     Object.keys(node).forEach(function (key) {
       if (key[0] !== 'a' || key[1] !== 's' || key[2] !== 'm' || key[3] !== 'D' || key[4] !== 'o' || key[5] !== 'm') {

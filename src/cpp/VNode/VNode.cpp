@@ -49,9 +49,18 @@ namespace asmdom {
 	};
 
 	void deleteVNode(const VNode* const vnode) {
-    Children::size_type i = vnode->children.size();
-    while (i--) deleteVNode(vnode->children[i]);
+		if (!vnode->cleanChildren) {
+			Children::size_type i = vnode->children.size();
+			while (i--) deleteVNode(vnode->children[i]);
+		}
 		delete vnode;
+  };
+
+	VNode::~VNode() {
+		if (cleanChildren) {
+			Children::size_type i = children.size();
+			while (i--) delete children[i];
+		}
   };
 
 	#ifndef ASMDOM_JS_SIDE

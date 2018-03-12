@@ -67,25 +67,14 @@ namespace asmdom {
 			}
 
 			diff(emptyNode, vnode);
-
-			if (!vnode->children.empty()) {
-				for(std::vector<VNode*>::size_type i = 0, j = vnode->children.size(); i != j; ++i) {
-					EM_ASM_({
-						window['asmDomHelpers']['domApi']['appendChild']($0, $1);
-					}, vnode->elm, createElm(vnode->children[i]));
-				}
-			} else if (!vnode->text.empty()) {
+			
+			for(std::vector<VNode*>::size_type i = 0, j = vnode->children.size(); i != j; ++i) {
 				EM_ASM_({
-					window['asmDomHelpers']['domApi']['appendChild'](
-						$0,
-						window['asmDomHelpers']['domApi']['createTextNode'](
-							Module['UTF8ToString']($1)
-						)
-					);
-				}, vnode->elm, vnode->text.c_str());
+					window['asmDomHelpers']['domApi']['appendChild']($0, $1);
+				}, vnode->elm, createElm(vnode->children[i]));
 			}
 		} else if (vnode->nt == text) {
-			vnode->elm = EM_ASM_INT({
+    	vnode->elm = EM_ASM_INT({
 				return window['asmDomHelpers']['domApi']['createTextNode'](
 					Module['UTF8ToString']($0)
 				);
@@ -219,27 +208,20 @@ namespace asmdom {
 
 	void patchVNode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		vnode->elm = oldVnode->elm;
-		diff(oldVnode, vnode);
-		if (vnode->text.empty()) {
-			if (!vnode->children.empty() && !oldVnode->children.empty()) {
+		if (vnode->nt == element || vnode->nt == fragment) {
+			diff(oldVnode, vnode);
+			bool childrenNotEmpty = !vnode->children.empty();
+			bool oldChildrenNotEmpty = !oldVnode->children.empty();
+			if (childrenNotEmpty && oldChildrenNotEmpty) {
 				updateChildren(vnode->elm, oldVnode->children, vnode->children);
-			} else if(!vnode->children.empty()) {
-				if (!oldVnode->text.empty()) {
-					EM_ASM_({
-						window['asmDomHelpers']['domApi']['setTextContent']($0, "");
-					}, vnode->elm);
-				};
+			} else if(childrenNotEmpty) {
 				addVNodes(vnode->elm, 0, vnode->children, 0, vnode->children.size() - 1);
-			} else if(!oldVnode->children.empty()) {
+			} else if(oldChildrenNotEmpty) {
 				removeVNodes(oldVnode->children, 0, oldVnode->children.size() - 1);
-			} else if (!oldVnode->text.empty()) {
-				EM_ASM_({
-					window['asmDomHelpers']['domApi']['setTextContent']($0, "");
-				}, vnode->elm);
 			}
 		} else if (vnode->text != oldVnode->text) {
 			EM_ASM_({
-				window['asmDomHelpers']['domApi']['setTextContent'](
+				window['asmDomHelpers']['domApi']['setNodeValue'](
 					$0,
 					Module['UTF8ToString']($1)
 				);

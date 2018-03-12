@@ -11,10 +11,13 @@ namespace asmdom {
 	const std::string emptyString;
 
 	void diffAttrs(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
-		if (oldVnode->data.attrs.empty() && vnode->data.attrs.empty()) return;
+		Attrs& oldAttrs = oldVnode->data.attrs;
+		Attrs& attrs = vnode->data.attrs;
 
-		for (auto& it : oldVnode->data.attrs) {
-			if (!vnode->data.attrs.count(it.first)) {
+		if (oldAttrs.empty() && attrs.empty()) return;
+
+		for (const auto& it : oldAttrs) {
+			if (!attrs.count(it.first)) {
 				EM_ASM_({
 					window['asmDomHelpers']['domApi']['removeAttribute'](
 						$0,
@@ -24,8 +27,8 @@ namespace asmdom {
 			}
 		}
 
-		for (auto& it : vnode->data.attrs) {
-			if (!oldVnode->data.attrs.count(it.first) || oldVnode->data.attrs[it.first] != it.second) {
+		for (const auto& it : attrs) {
+			if (!oldAttrs.count(it.first) || oldAttrs[it.first] != it.second) {
 				#ifndef ASMDOM_JS_SIDE
 					if (it.second == "false") {
 						EM_ASM_({
@@ -55,7 +58,10 @@ namespace asmdom {
 	#ifndef ASMDOM_JS_SIDE
 
 	void diffProps(const VNode* __restrict__ const oldVnode, const VNode* __restrict__ const vnode) {
-		if (oldVnode->data.props.empty() && vnode->data.props.empty()) return;
+		const Props& oldProps = oldVnode->data.props;
+		const Props& props = vnode->data.props;
+
+		if (oldProps.empty() && props.empty()) return;
 
 		emscripten::val elm = emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm];
 
@@ -63,20 +69,20 @@ namespace asmdom {
 			window['asmDomHelpers']['nodes'][$0]['asmDomRaws'] = [];
 		}, vnode->elm);
 
-		for (auto& it : oldVnode->data.props) {
-			if (!vnode->data.props.count(it.first)) {
+		for (const auto& it : oldProps) {
+			if (!props.count(it.first)) {
 				elm.set(it.first.c_str(), emscripten::val::undefined());
 			}
 		}
 
-		for (auto& it : vnode->data.props) {
+		for (const auto& it : props) {
 			EM_ASM_({
 				window['asmDomHelpers']['nodes'][$0]['asmDomRaws'].push(Module['UTF8ToString']($1));
 			}, vnode->elm, it.first.c_str());
 
 			if (
-				!oldVnode->data.props.count(it.first) ||
-				!it.second.strictlyEquals(oldVnode->data.props.at(it.first)) ||
+				!oldProps.count(it.first) ||
+				!it.second.strictlyEquals(oldProps.at(it.first)) ||
 				(
 					(it.first == "value" || it.first == "checked") && 
 					!it.second.strictlyEquals(elm[it.first.c_str()])
@@ -88,10 +94,13 @@ namespace asmdom {
 	};
 
 	void diffCallbacks(const VNode* __restrict__ const oldVnode, const VNode* __restrict__ const vnode) {
-		if (oldVnode->data.callbacks.empty() && vnode->data.callbacks.empty()) return;
+		const Callbacks& oldCallbacks = oldVnode->data.callbacks;
+		const Callbacks& callbacks = vnode->data.callbacks;
 
-		for (auto& it : oldVnode->data.callbacks) {
-			if (!vnode->data.callbacks.count(it.first)) {
+		if (oldCallbacks.empty() && callbacks.empty()) return;
+
+		for (const auto& it : oldCallbacks) {
+			if (!callbacks.count(it.first)) {
 				EM_ASM_({
 					var key = Module['UTF8ToString']($1).replace(/^on/, "");
 					var elm = window['asmDomHelpers']['nodes'][$0];
@@ -113,8 +122,8 @@ namespace asmdom {
 			}
 		}, vnode->elm, reinterpret_cast<std::uintptr_t>(vnode));
 
-		for (auto& it : vnode->data.callbacks) {
-			if (!oldVnode->data.callbacks.count(it.first)) {
+		for (const auto& it : callbacks) {
+			if (!oldCallbacks.count(it.first)) {
 				EM_ASM_({
 					var key = Module['UTF8ToString']($1).replace(/^on/, "");
 					var elm = window['asmDomHelpers']['nodes'][$0];

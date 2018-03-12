@@ -78,7 +78,7 @@ export default {
       nodes[nodePtr].nextSibling !== null
     ) ? nodes[nodePtr].nextSibling.asmDomPtr : 0;
   },
-  'setTextContent': (nodePtr, text) => {
-    nodes[nodePtr].textContent = text;
+  'setNodeValue': (nodePtr, text) => {
+    nodes[nodePtr].nodeValue = text;
   },
 };

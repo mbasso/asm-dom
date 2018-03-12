@@ -79,7 +79,7 @@ exports['default'] = {
   'nextSibling': function nextSibling(nodePtr) {
     return nodes[nodePtr] !== null && nodes[nodePtr] !== undefined && nodes[nodePtr].nextSibling !== null ? nodes[nodePtr].nextSibling.asmDomPtr : 0;
   },
-  'setTextContent': function setTextContent(nodePtr, text) {
-    nodes[nodePtr].textContent = text;
+  'setNodeValue': function setNodeValue(nodePtr, text) {
+    nodes[nodePtr].nodeValue = text;
   }
 };

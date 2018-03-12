@@ -73,7 +73,15 @@ namespace asmdom {
       VNode(
         const std::string& nodeSel,
         const std::string& nodeText
-      ): sel(nodeSel), text(nodeText) { normalize(); };
+      ): sel(nodeSel) {
+        normalize();
+        if (nt == comment) {
+          text = nodeText;
+        } else {
+          children.push_back(new VNode(nodeText, true));
+          cleanChildren = true;
+			  }
+      };
       VNode(
         const std::string& nodeText,
         bool isText
@@ -103,7 +111,15 @@ namespace asmdom {
         const std::string& nodeSel,
         const Data& nodeData,
         const std::string& nodeText
-      ): sel(nodeSel), text(nodeText), data(nodeData) { normalize(); };
+      ): sel(nodeSel), data(nodeData) {
+        normalize();
+        if (nt == comment) {
+          text = nodeText;
+        } else {
+          children.push_back(new VNode(nodeText, true));
+          cleanChildren = true;
+        }
+      };
       VNode(
         const std::string& nodeSel,
         const Data& nodeData,
@@ -114,6 +130,7 @@ namespace asmdom {
         const Data& nodeData,
         VNode* child
       ): sel(nodeSel), data(nodeData), children{ child } { normalize(); };
+      ~VNode();
 
     std::string sel;
     std::string key;
@@ -122,6 +139,7 @@ namespace asmdom {
     std::size_t selHash;
     Data data;
     int elm;
+    bool cleanChildren;
     std::vector<VNode*> children;
   };
 
