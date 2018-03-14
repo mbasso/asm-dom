@@ -53,7 +53,10 @@ VNode* vnode2 = h("div",
     Props {
       {"foo", emscripten::val(7)} // node.foo = 7
     },
-    Children {
+    Callbacks {
+      // function pointer
+      {"ondblclick", onDblClick},
+      // lambda
       {"onclick", [](emscripten::val e) -> bool {
         // do stuff...
         return true;
