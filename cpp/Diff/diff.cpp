@@ -100,7 +100,7 @@ namespace asmdom {
 		if (oldCallbacks.empty() && callbacks.empty()) return;
 
 		for (const auto& it : oldCallbacks) {
-			if (!callbacks.count(it.first)) {
+			if (!callbacks.count(it.first) && it.first != "ref") {
 				EM_ASM_({
 					var key = Module['UTF8ToString']($1).replace(/^on/, "");
 					var elm = window['asmDomHelpers']['nodes'][$0];
@@ -123,7 +123,7 @@ namespace asmdom {
 		}, vnode->elm, reinterpret_cast<std::uintptr_t>(vnode));
 
 		for (const auto& it : callbacks) {
-			if (!oldCallbacks.count(it.first)) {
+			if (!oldCallbacks.count(it.first) && it.first != "ref") {
 				EM_ASM_({
 					var key = Module['UTF8ToString']($1).replace(/^on/, "");
 					var elm = window['asmDomHelpers']['nodes'][$0];
@@ -136,20 +136,28 @@ namespace asmdom {
 				}, vnode->elm, it.first.c_str());
 			}
 		}
+
+		if (callbacks.count("ref")) {
+			bool(*const* callback)(emscripten::val) = callbacks.at("ref").target<bool(*)(emscripten::val)>();
+			bool(*const* oldCallback)(emscripten::val) = oldCallbacks.count("ref") ? oldCallbacks.at("ref").target<bool(*)(emscripten::val)>() : NULL;
+			if (callback == NULL || oldCallback == NULL || *oldCallback != *callback) {
+				callbacks.at("ref")(
+					emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm]
+				);
+			}
+		}
 	};
 
 	#endif
 
 	void diff(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+		diffAttrs(oldVnode, vnode);
+
 		#ifdef ASMDOM_JS_SIDE
 			EM_ASM_({
 				window['asmDomHelpers']['diff']($0, $1, $2);
 			}, reinterpret_cast<std::uintptr_t>(oldVnode), reinterpret_cast<std::uintptr_t>(vnode), vnode->elm);
-		#endif
-
-		diffAttrs(oldVnode, vnode);
-
-		#ifndef ASMDOM_JS_SIDE
+		#else
 			diffProps(oldVnode, vnode);
 			diffCallbacks(oldVnode, vnode);
 		#endif

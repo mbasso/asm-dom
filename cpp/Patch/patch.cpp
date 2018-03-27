@@ -109,9 +109,25 @@ namespace asmdom {
 		const std::vector<VNode*>::size_type endIdx
 	) {
 		while (startIdx <= endIdx) {
+			VNode* const vnode = vnodes[startIdx++];
 			EM_ASM_({
 				window['asmDomHelpers']['domApi']['removeChild']($0);
-			}, vnodes[startIdx++]->elm);	
+			}, vnode->elm);
+
+			#ifdef ASMDOM_JS_SIDE
+				EM_ASM_({
+					var data = window['asmDomHelpers']['vnodesData'][$0];
+					if (data !== undefined && data['ref'] !== undefined) {
+						data['ref'](null);
+					}
+				}, reinterpret_cast<std::uintptr_t>(vnode));
+			#else
+				if (vnode->data.callbacks.count("ref")) {
+					vnode->data.callbacks["ref"](
+						emscripten::val::null()
+					);
+				}
+			#endif
 		}
 	};
 

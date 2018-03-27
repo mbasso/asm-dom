@@ -42,4 +42,8 @@ describe('eventlisteners (cpp)', function testEventlisteners() {
   it('should not update handlers', () => {
     app.shouldNotUpdateHandlers();
   });
+
+  it('should not attach ref event handler to element', () => {
+    app.shouldNotAttachRefEventHandlerToElement();
+  });
 });

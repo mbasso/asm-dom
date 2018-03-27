@@ -56,7 +56,7 @@ export default (config) => {
         window.asmDomHelpers = {
           currentNode: undefined,
           domApi,
-          vnodesData: {},
+          'vnodesData': {},
           diff,
           eventProxy,
           appendProps,

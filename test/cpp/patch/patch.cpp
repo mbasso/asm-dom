@@ -9,6 +9,17 @@
 
 using namespace asmdom;
 
+int refCount = 1;
+bool refCallback(emscripten::val node) {
+	++refCount;
+	return true;
+};
+
+bool refCallback2(emscripten::val node) {
+	++refCount;
+	return true;
+};
+
 VNode* spanNum(int i) {
 	return h("span",
 		Data(
@@ -1524,6 +1535,308 @@ void shouldCreateATemplateNode() {
 	deleteVNode(vnode);
 };
 
+void shouldCallRefWithDOMNode() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Attrs {
+					{"data-foo", "bar"}
+				},
+				Callbacks {
+					{"ref", [&](emscripten::val node) -> bool {
+						++refCount;
+						if (refCount == 2) {
+							assertEquals(
+								node.call<emscripten::val>("getAttribute", emscripten::val("data-foo")),
+								emscripten::val("bar")
+							);
+						} else {
+							assertEquals(
+								node,
+								emscripten::val::null()
+							);
+						}
+						return true;
+					}}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div");
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 3) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldCallRefOnAdd() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	deleteVNode(vnode1);
+};
+
+void shouldCallRefOnRemove() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div");
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 3) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldNotCallRefOnUpdate() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldCallRefOnChangeLambdaLambda() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", [&](emscripten::val e) -> bool {
+						++refCount;
+						return true;
+					}}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", [&](emscripten::val e) -> bool {
+						refCount = refCount + 1;
+						return false;
+					}}
+				}
+			)
+		)
+	);
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 3) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldCallRefOnChangePointerLambda() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", [&](emscripten::val e) -> bool {
+						++refCount;
+						return false;
+					}}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 3) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldCallRefOnChangePointerPointer() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback2}
+				}
+			)
+		)
+	);
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 3) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldCallRefOnUpdateIfRefIsAdded() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div", h("div"));
+	patch(getRoot(), vnode1);
+
+	VNode* vnode2 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldNotSetRefAsCallback() {
+	VNode* vnode1 = h("i",
+		Data(
+			Callbacks {
+				{"onclick", onClick},
+				{"ref", onClick}
+			}
+		)
+	);
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	emscripten::val keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomEvents"]);
+	assertEquals(keys["length"], emscripten::val(1));
+	assertEquals(keys["0"], emscripten::val("click"));
+	deleteVNode(vnode1);
+};
+
 EMSCRIPTEN_BINDINGS(patch_tests) {
   emscripten::function("shouldPatchANode", &shouldPatchANode);
 	emscripten::function("shouldHaveATag", &shouldHaveATag);
@@ -1582,4 +1895,13 @@ EMSCRIPTEN_BINDINGS(patch_tests) {
 	emscripten::function("shouldPatchAWebComponentWithAttributes", &shouldPatchAWebComponentWithAttributes);
 	emscripten::function("shouldPatchAWebComponentWithEventListeners", &shouldPatchAWebComponentWithEventListeners);
 	emscripten::function("shouldCreateATemplateNode", &shouldCreateATemplateNode);
+	emscripten::function("shouldCallRefWithDOMNode", &shouldCallRefWithDOMNode);
+	emscripten::function("shouldCallRefOnAdd", &shouldCallRefOnAdd);
+	emscripten::function("shouldCallRefOnRemove", &shouldCallRefOnRemove);
+	emscripten::function("shouldNotCallRefOnUpdate", &shouldNotCallRefOnUpdate);
+	emscripten::function("shouldCallRefOnChangeLambdaLambda", &shouldCallRefOnChangeLambdaLambda);
+	emscripten::function("shouldCallRefOnChangePointerLambda", &shouldCallRefOnChangePointerLambda);
+	emscripten::function("shouldCallRefOnChangePointerPointer", &shouldCallRefOnChangePointerPointer);
+	emscripten::function("shouldCallRefOnUpdateIfRefIsAdded", &shouldCallRefOnUpdateIfRefIsAdded);
+	emscripten::function("shouldNotSetRefAsCallback", &shouldNotSetRefAsCallback);
 };

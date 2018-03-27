@@ -17,6 +17,7 @@ const getData = (obj) => {
   let hasRaws = obj.raw !== undefined;
   let hasEvents = false;
 
+  let ref;
   const attrs = new window.asmDom.MapStringString();
   const raw = obj.raw !== undefined ? obj.raw : {};
   const events = {};
@@ -31,8 +32,12 @@ const getData = (obj) => {
       raw[key] = value;
       hasRaws = true;
     } else if (typeof value === 'function') {
-      events[key.replace(/^on/, '')] = value;
-      hasEvents = true;
+      if (key === 'ref') {
+        ref = value;
+      } else {
+        events[key.replace(/^on/, '')] = value;
+        hasEvents = true;
+      }
     } else if (value !== false && key !== 'raw' && key !== 'className') {
       // eslint-disable-next-line
       attrs.set(key, '' + value);
@@ -40,6 +45,7 @@ const getData = (obj) => {
   }
 
   return {
+    ref,
     raw: hasRaws ? raw : undefined,
     events: hasEvents ? events : undefined,
     attrs,
@@ -96,7 +102,11 @@ export default (a, b, c, d) => {
   }
   if (data !== undefined) {
     data.attrs.delete();
-    if (data.raw !== undefined || data.events !== undefined) {
+    if (
+      data.raw !== undefined ||
+      data.events !== undefined ||
+      data.ref !== undefined
+    ) {
       delete data.attrs;
       window.asmDomHelpers.vnodesData[result] = data;
     }
