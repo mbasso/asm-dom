@@ -32,6 +32,20 @@ void shouldParseComments() {
 	);
 };
 
+void shouldParseFragments() {
+	VNode* vnode = h("",
+		Children {
+			h("span"),
+			h("b")
+		}
+	);
+
+	assertEquals(
+		toHTML(vnode),
+		std::string("<span></span><b></b>")
+	);
+};
+
 void shouldParseText() {
 	VNode* vnode = h("a text", true);
 
@@ -301,6 +315,7 @@ EMSCRIPTEN_BINDINGS(tohtml_tests) {
 	emscripten::function("shouldHandleNullVNode", &shouldHandleNullVNode);
 	emscripten::function("shouldParseElements", &shouldParseElements);
 	emscripten::function("shouldParseComments", &shouldParseComments);
+	emscripten::function("shouldParseFragments", &shouldParseFragments);
 	emscripten::function("shouldParseText", &shouldParseText);
 	emscripten::function("shouldHandleChildren", &shouldHandleChildren);
 	emscripten::function("shouldHandleTextContent", &shouldHandleTextContent);

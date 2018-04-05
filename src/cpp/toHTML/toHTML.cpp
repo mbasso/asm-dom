@@ -3,84 +3,83 @@
 #include "../VNode/VNode.hpp"
 #include "../VDOMConfig/VDOMConfig.hpp"
 #include <emscripten/val.h>
-#include <algorithm>
-#include <vector>
+#include <unordered_map>
 #include <string>
 
 namespace asmdom {
 
 	// All SVG children elements, not in this list, should self-close
 
-	std::vector<std::string> containerElements {
+	std::unordered_map<std::string, bool> containerElements {
 		// http://www.w3.org/TR/SVG/intro.html#TermContainerElement
-		"a",
-		"defs",
-		"glyph",
-		"g",
-		"marker",
-		"mask",
-		"missing-glyph",
-		"pattern",
-		"svg",
-		"switch",
-		"symbol",
-		"text",
+		{"a", true},
+		{"defs", true},
+		{"glyph", true},
+		{"g", true},
+		{"marker", true},
+		{"mask", true},
+		{"missing-glyph", true},
+		{"pattern", true},
+		{"svg", true},
+		{"switch", true},
+		{"symbol", true},
+		{"text", true},
 
   	// http://www.w3.org/TR/SVG/intro.html#TermDescriptiveElement
-		"desc",
-		"metadata",
-		"title"
+		{"desc", true},
+		{"metadata", true},
+		{"title", true}
 	};
 
 	// http://www.w3.org/html/wg/drafts/html/master/syntax.html#void-elements
-	std::vector<std::string> voidElements {
-		"area",
-		"base",
-		"br",
-		"col",
-		"embed",
-		"hr",
-		"img",
-		"input",
-		"keygen",
-		"link",
-		"meta",
-		"param",
-		"source",
-		"track",
-		"wbr"
+	std::unordered_map<std::string, bool> voidElements {
+		{"area", true},
+		{"base", true},
+		{"br", true},
+		{"col", true},
+		{"embed", true},
+		{"hr", true},
+		{"img", true},
+		{"input", true},
+		{"keygen", true},
+		{"link", true},
+		{"meta", true},
+		{"param", true},
+		{"source", true},
+		{"track", true},
+		{"wbr", true}
 	};
 
 	#ifndef ASMDOM_JS_SIDE
 		// https://developer.mozilla.org/en-US/docs/Web/API/element
-		std::vector<std::string> omitProps {
-			"attributes",
-			"childElementCount",
-			"children",
-			"classList",
-			"clientHeight",
-			"clientLeft",
-			"clientTop",
-			"clientWidth",
-			"currentStyle",
-			"firstElementChild",
-			"innerHTML",
-			"lastElementChild",
-			"nextElementSibling",
-			"ongotpointercapture",
-			"onlostpointercapture",
-			"onwheel",
-			"outerHTML",
-			"previousElementSibling",
-			"runtimeStyle",
-			"scrollHeight",
-			"scrollLeft",
-			"scrollLeftMax",
-			"scrollTop",
-			"scrollTopMax",
-			"scrollWidth",
-			"tabStop",
-			"tagName"
+		std::unordered_map<std::string, bool> omitProps {
+			{"attributes", true},
+			{"childElementCount", true},
+			{"children", true},
+			{"classList", true},
+			{"clientHeight", true},
+			{"clientLeft", true},
+			{"clientTop", true},
+			{"clientWidth", true},
+			{"currentStyle", true},
+			{"firstElementChild", true},
+			{"innerHTML", true},
+			{"lastElementChild", true},
+			{"nextElementSibling", true},
+			{"ongotpointercapture", true},
+			{"onlostpointercapture", true},
+			{"onwheel", true},
+			{"outerHTML", true},
+			{"previousElementSibling", true},
+			{"runtimeStyle", true},
+			{"scrollHeight", true},
+			{"scrollLeft", true},
+			{"scrollLeftMax", true},
+			{"scrollTop", true},
+			{"scrollTopMax", true},
+			{"scrollWidth", true},
+			{"tabStop", true},
+			{"tagName", true}
 		};
 	#endif
 
@@ -119,7 +118,7 @@ namespace asmdom {
 		#else
 			emscripten::val String = emscripten::val::global("String");
 			for (auto& it : vnode->data.props) {
-				if (std::find(omitProps.begin(), omitProps.end(), it.first) == omitProps.end()) {
+				if (!omitProps[it.first]) {
 					std::string key = it.first;
 					std::transform(key.begin(), key.end(), key.begin(), ::tolower);
 					html.append(" " + key + "=\"" + encode(String(it.second).as<std::string>()) + "\"");
@@ -133,42 +132,42 @@ namespace asmdom {
 
 		if (vnode->nt == text && !vnode->text.empty()) {
 			html.append(encode(vnode->text));
-			return;
-		}
-		
-		if (vnode->nt == comment) {
+		} else if (vnode->nt == comment) {
 			html.append("<!--" + vnode->text + "-->");
-      return;
-		}
-
-    bool isSvg = vnode->data.attrs.count("ns") != 0 && vnode->data.attrs.at("ns") == "http://www.w3.org/2000/svg";
-		bool isSvgContainerElement = isSvg && std::find(containerElements.begin(), containerElements.end(), vnode->sel) != containerElements.end();
-
-		html.append("<" + vnode->sel);
-		appendAttributes(vnode, html);
-    if (isSvg && !isSvgContainerElement) {
-      html.append(" /");
-    }
-    html.append(">");
-
-    if (
-			(isSvgContainerElement) ||
-			(!isSvg && std::find(voidElements.begin(), voidElements.end(), vnode->sel) == voidElements.end())
-		) {
-			#ifdef ASMDOM_JS_SIDE
-				html.append(
-					wstring_to_utf8(emscripten::val::global("window")["asmDomHelpers"].call<std::wstring>("insertInnerHTML", reinterpret_cast<std::uintptr_t>(vnode)))
-				);
-			#else
-				if (vnode->data.props.count("innerHTML") != 0) {
-					html.append(vnode->data.props.at("innerHTML").as<std::string>());
-				} else
-			#endif
-			
+		} else if (vnode->nt == fragment) {
 			for(Children::size_type i = 0; i != vnode->children.size(); ++i) {
 				toHTML(vnode->children[i], html);
 			}
-      html.append("</" + vnode->sel + ">");
+		} else {
+			bool isSvg = vnode->data.attrs.count("ns") != 0 && vnode->data.attrs.at("ns") == "http://www.w3.org/2000/svg";
+			bool isSvgContainerElement = isSvg && containerElements[vnode->sel];
+
+			html.append("<" + vnode->sel);
+			appendAttributes(vnode, html);
+			if (isSvg && !isSvgContainerElement) {
+				html.append(" /");
+			}
+			html.append(">");
+
+			if (
+				isSvgContainerElement ||
+				(!isSvg && !voidElements[vnode->sel])
+			) {
+				#ifdef ASMDOM_JS_SIDE
+					html.append(
+						wstring_to_utf8(emscripten::val::global("window")["asmDomHelpers"].call<std::wstring>("insertInnerHTML", reinterpret_cast<std::uintptr_t>(vnode)))
+					);
+				#else
+					if (vnode->data.props.count("innerHTML") != 0) {
+						html.append(vnode->data.props.at("innerHTML").as<std::string>());
+					} else
+				#endif
+				
+				for(Children::size_type i = 0; i != vnode->children.size(); ++i) {
+					toHTML(vnode->children[i], html);
+				}
+				html.append("</" + vnode->sel + ">");
+			}
 		}
 	};
 
