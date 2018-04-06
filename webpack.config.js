@@ -3,12 +3,6 @@ var resolve = require('path').resolve;
 var BrotliPlugin = require('brotli-webpack-plugin');
 var CompressionPlugin = require('compression-webpack-plugin');
 
-var compressionConfigs = {
-  test: /\.(js|css|html|svg)$/,
-  threshold: 10240,
-  minRatio: 0.8
-};
-
 module.exports = (env) => {
   env = env || {};
   var addPlugin = (add, plugin) => add ? plugin : undefined;
@@ -52,14 +46,18 @@ module.exports = (env) => {
       })),
       ifProd(
         new CompressionPlugin({
-          ...compressionConfigs,
+          test: /\.(js|css|html|svg)$/,
+          threshold: 10240,
+          minRatio: 0.8,
           asset: '[path].gz[query]',
           algorithm: 'gzip'
         })
       ),
       ifProd(
         new BrotliPlugin({
-          ...compressionConfigs,
+          test: /\.(js|css|html|svg)$/,
+          threshold: 10240,
+          minRatio: 0.8,
           asset: '[path].br[query]'
         })
       ),
