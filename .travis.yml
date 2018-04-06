@@ -32,4 +32,5 @@ jobs:
       branches:
         only:
           - master
+      if: tag =~ ^\d+\.\d+\.\d+
       after_success: echo "Website online"
