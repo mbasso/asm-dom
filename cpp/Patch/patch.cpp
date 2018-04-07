@@ -246,28 +246,12 @@ namespace asmdom {
 	};
 
 	VNode* patch(const emscripten::val& element, VNode* const vnode) {
-		std::string sel = element["tagName"].as<std::string>();
-		std::transform(sel.begin(), sel.end(), sel.begin(), ::tolower);
-
-		VNode* oldVnode = h(sel,
-			Data(
-				Attrs {
-					{"id", element["id"].as<std::string>()},
-					{"class", element["className"].as<std::string>()}
-				}
-			)
-		);
-		oldVnode->elm = emscripten::val::global("window")["asmDomHelpers"]["domApi"].call<int>("addNode", element);
-		
-		#ifndef ASMDOM_JS_SIDE
-			VNode* result = patch(oldVnode, vnode);
-			if (!VDOMConfig::getConfig().getClearMemory()) {
-				deleteVNode(oldVnode);
-			}
-			return result;
-		#else
-			return patch(oldVnode, vnode);
-		#endif
+		VNode* oldVnode = toVNode(element);
+		VNode* result = patch(oldVnode, vnode);
+		if (!VDOMConfig::getConfig().getClearMemory()) {
+			deleteVNode(oldVnode);
+		}
+		return result;
 	};
 
 	VNode* patch(VNode* const oldVnode, VNode* const vnode) {
