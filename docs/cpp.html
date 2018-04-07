@@ -10,7 +10,6 @@
 <li><a href="#patch">patch</a></li>
 <li><a href="#tovnode">toVNode</a></li>
 <li><a href="#tohtml">toHTML</a></li>
-<li><a href="#deletevnode">deleteVNode</a></li>
 </ul></li>
 <li><a href="#notes">Notes</a>
 <ul>
@@ -330,29 +329,6 @@ patch(vnode, newVnode);
 <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> html = toHTML(vnode);
 <span class="hljs-comment">// html = &lt;div id="root" style="color: #000"&gt;&lt;h1&gt;Headline&lt;/h1&gt;&lt;p&gt;A paragraph&lt;/p&gt;&lt;/div&gt;;</span>
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="deletevnode"></a><a href="#deletevnode" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>deleteVNode</h2>
-<p>Deletes a vnode and all its children from memory. This is useful if you want to delete an entire tree. If you want to delete a vnode but not its children you can simply use the C++ keyword <code>delete</code>.</p>
-<pre><code class="hljs css c++">VNode* child1 = h(<span class="hljs-string">"h1"</span>, <span class="hljs-built_in">string</span>(<span class="hljs-string">"Headline"</span>));
-VNode* child2 = h(<span class="hljs-string">"p"</span>, <span class="hljs-built_in">string</span>(<span class="hljs-string">"A paragraph"</span>));
-VNode* vnode = h(<span class="hljs-string">"div"</span>,
-  Data(
-    Attrs {
-      {<span class="hljs-string">"id"</span>, <span class="hljs-string">"root"</span>}
-      {<span class="hljs-string">"style"</span>, <span class="hljs-string">"color: #000"</span>}
-    }
-  ),
-  Children {
-    child1,
-    child2,
-  }
-);
-
-<span class="hljs-comment">// delete vnode, child1 and child2 from memory</span>
-deleteVNode(vnode);
-
-<span class="hljs-comment">// delete vnode but not child1 and child2 from memory</span>
-<span class="hljs-comment">// delete vnode;</span>
-</code></pre>
 <h2><a class="anchor" aria-hidden="true" id="notes"></a><a href="#notes" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Notes</h2>
 <h3><a class="anchor" aria-hidden="true" id="memory-management"></a><a href="#memory-management" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>memory management</h3>
 <p>As we said before the <code>h</code> returns a pointer to a VNode, this means that the memory have to be deleted manually. By default asm-dom automatically delete the old vnode from memory when <code>patch</code> (or <code>toHTML</code>) is called. However, if you want to create a vnode that is not patched, or if you want to manually manage this aspect (setting <code>clearMemory = false</code> in the <code>Config</code> object to pass to the <code>init</code> function), you have to delete it manually.</p>
@@ -368,7 +344,7 @@ VNode* vnode = h(<span class="hljs-string">"span"</span>, Children {
   child1,
   child2,
 });
-deleteVNode(vnode); <span class="hljs-comment">// manually delete vnode, child1 and child2 from memory</span>
+<span class="hljs-keyword">delete</span> vnode; <span class="hljs-comment">// manually delete vnode, child1 and child2 from memory</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="boolean-attributes"></a><a href="#boolean-attributes" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>boolean attributes</h3>
 <p>If you want to set a boolean attribute, like <code>readonly</code>, you can just pass true or false as string, asm-dom will handle it for you:</p>
