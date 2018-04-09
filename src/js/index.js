@@ -23,7 +23,7 @@ export default (config) => {
 
   let result;
   const readyPromise = new Promise((resolve) => {
-    config['_main'] = () => resolve(cache);
+    config['onRuntimeInitialized'] = () => resolve(cache);
   });
   if (
     (

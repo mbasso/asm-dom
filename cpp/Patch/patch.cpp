@@ -8,7 +8,7 @@
 #include <cstdint>
 #include <vector>
 #include <string>
-#include <map>
+#include <unordered_map>
 
 namespace asmdom {
 
@@ -31,17 +31,6 @@ namespace asmdom {
 	bool sameVNode(const VNode* __restrict__ const vnode1, const VNode* __restrict__ const vnode2) {
 		return vnode1->nt == vnode2->nt && vnode1->selHash == vnode2->selHash && vnode1->key == vnode2->key;
 	};
-
-	std::map<std::string, int> createKeyToOldIdx(const std::vector<VNode*>& children, int beginIdx, const int endIdx) {
-		std::map<std::string, int> map;
-		while (beginIdx <= endIdx) {
-			if (!children[beginIdx]->key.empty()) {
-				map.insert(std::make_pair(children[beginIdx]->key, beginIdx));
-			}
-			++beginIdx;
-		}
-		return map;
-	}
 
 	int createElm(VNode* const vnode) {
 		bool isFragment = vnode->nt == fragment;
@@ -146,7 +135,7 @@ namespace asmdom {
 		VNode* newStartVnode = newCh[0];
 		VNode* newEndVnode = newCh[newEndIdx];
 		bool oldKeys = false;
-		std::map<std::string, int> oldKeyToIdx;
+		std::unordered_map<std::string, int> oldKeyToIdx;
 		VNode* elmToMove;
 
 		while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
@@ -189,7 +178,13 @@ namespace asmdom {
 			} else {
 				if (!oldKeys) {
 					oldKeys = true;
-					oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx);
+					int beginIdx = oldStartIdx;
+					while (beginIdx <= oldEndIdx) {
+						if (!oldCh[beginIdx]->key.empty()) {
+							oldKeyToIdx.insert(std::make_pair(oldCh[beginIdx]->key, beginIdx));
+						}
+						++beginIdx;
+					}
 				}
 				if (!oldKeyToIdx.count(newStartVnode->key)) {
 					EM_ASM_({
@@ -197,14 +192,14 @@ namespace asmdom {
 					}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
 					newStartVnode = newCh[++newStartIdx];
 				} else {
-					elmToMove = oldCh[oldKeyToIdx.at(newStartVnode->key)];
+					elmToMove = oldCh[oldKeyToIdx[newStartVnode->key]];
 					if (elmToMove->selHash != newStartVnode->selHash) {
 						EM_ASM_({
 							window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
 						}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
 					} else {
 						patchVNode(elmToMove, newStartVnode);
-						oldCh[oldKeyToIdx.at(newStartVnode->key)] = NULL;
+						oldCh[oldKeyToIdx[newStartVnode->key]] = NULL;
 						EM_ASM_({
 							window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
 						}, parentElm, elmToMove->elm, oldStartVnode->elm);
