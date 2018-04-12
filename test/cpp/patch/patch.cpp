@@ -196,6 +196,72 @@ void shouldPatchAnElementInsideAFragment() {
 	deleteVNode(vnode2);
 };
 
+void shouldAppendElementsToFragment() {
+	VNode* vnode1 = h("div",
+		h("",
+			Children {
+				h("span", std::string("foo"))
+			}
+		)
+	);
+	VNode* vnode2 = h("div",
+		h("",
+			Children {
+				h("span", std::string("foo")),
+				h("span", std::string("bar"))
+			}
+		)
+	);
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["tagName"], emscripten::val("DIV"));
+	assertEquals(elm["children"]["length"], emscripten::val(1));
+	assertEquals(elm["children"]["0"]["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("foo"));
+	patch(vnode1, vnode2);
+	elm = getBodyFirstChild();
+	assertEquals(elm["tagName"], emscripten::val("DIV"));
+	assertEquals(elm["children"]["length"], emscripten::val(2));
+	assertEquals(elm["children"]["0"]["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("foo"));
+	assertEquals(elm["children"]["1"]["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["children"]["1"]["textContent"], emscripten::val("bar"));
+	deleteVNode(vnode2);
+};
+
+void shouldRemoveElementsFromFragment() {
+	VNode* vnode1 = h("div",
+		h("",
+			Children {
+				h("span", std::string("foo")),
+				h("span", std::string("bar"))
+			}
+		)
+	);
+	VNode* vnode2 = h("div",
+		h("",
+			Children {
+				h("span", std::string("foo"))
+			}
+		)
+	);
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["tagName"], emscripten::val("DIV"));
+	assertEquals(elm["children"]["length"], emscripten::val(2));
+	assertEquals(elm["children"]["0"]["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("foo"));
+	assertEquals(elm["children"]["1"]["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["children"]["1"]["textContent"], emscripten::val("bar"));
+	patch(vnode1, vnode2);
+	elm = getBodyFirstChild();
+	assertEquals(elm["tagName"], emscripten::val("DIV"));
+	assertEquals(elm["children"]["length"], emscripten::val(1));
+	assertEquals(elm["children"]["0"]["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("foo"));
+	deleteVNode(vnode2);
+};
+
 void shouldAppendElements() {
 	VNode* vnode1 = h("span",
 		Children {
@@ -1850,6 +1916,8 @@ EMSCRIPTEN_BINDINGS(patch_tests) {
 	emscripten::function("shouldCreateComments", &shouldCreateComments);
 	emscripten::function("shouldCreateFragments", &shouldCreateFragments);
 	emscripten::function("shouldPatchAnElementInsideAFragment", &shouldPatchAnElementInsideAFragment);
+	emscripten::function("shouldAppendElementsToFragment", &shouldAppendElementsToFragment);
+	emscripten::function("shouldRemoveElementsFromFragment", &shouldRemoveElementsFromFragment);
 	emscripten::function("shouldAppendElements", &shouldAppendElements);
 	emscripten::function("shouldPrependElements", &shouldPrependElements);
 	emscripten::function("shouldAddElementsInTheMiddle", &shouldAddElementsInTheMiddle);

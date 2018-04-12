@@ -14,7 +14,8 @@ namespace asmdom {
 
 	void patchVNode(
 		VNode* __restrict__ const oldVnode,
-		VNode* __restrict__ const vnode
+		VNode* __restrict__ const vnode,
+		int parentElm
 	);
 
 	VNode* const emptyNode = h("");
@@ -148,15 +149,15 @@ namespace asmdom {
 			} else if (newEndVnode == NULL) {
 				newEndVnode = newCh[--newEndIdx];
 			} else if (sameVNode(oldStartVnode, newStartVnode)) {
-				patchVNode(oldStartVnode, newStartVnode);
+				patchVNode(oldStartVnode, newStartVnode, parentElm);
 				oldStartVnode = oldCh[++oldStartIdx];
 				newStartVnode = newCh[++newStartIdx];
 			} else if (sameVNode(oldEndVnode, newEndVnode)) {
-				patchVNode(oldEndVnode, newEndVnode);
+				patchVNode(oldEndVnode, newEndVnode, parentElm);
 				oldEndVnode = oldCh[--oldEndIdx];
 				newEndVnode = newCh[--newEndIdx];
 			} else if (sameVNode(oldStartVnode, newEndVnode)) {
-				patchVNode(oldStartVnode, newEndVnode);
+				patchVNode(oldStartVnode, newEndVnode, parentElm);
 
 				EM_ASM_({
 					window['asmDomHelpers']['domApi']['insertBefore'](
@@ -168,7 +169,7 @@ namespace asmdom {
 				oldStartVnode = oldCh[++oldStartIdx];
 				newEndVnode = newCh[--newEndIdx];
 			} else if (sameVNode(oldEndVnode, newStartVnode)) {
-				patchVNode(oldEndVnode, newStartVnode);
+				patchVNode(oldEndVnode, newStartVnode, parentElm);
 
 				EM_ASM_({
 					window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
@@ -198,7 +199,7 @@ namespace asmdom {
 							window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
 						}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
 					} else {
-						patchVNode(elmToMove, newStartVnode);
+						patchVNode(elmToMove, newStartVnode, parentElm);
 						oldCh[oldKeyToIdx[newStartVnode->key]] = NULL;
 						EM_ASM_({
 							window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
@@ -217,16 +218,17 @@ namespace asmdom {
 		}
 	};
 
-	void patchVNode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
+	void patchVNode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode, int parentElm) {
 		vnode->elm = oldVnode->elm;
-		if (vnode->nt == element || vnode->nt == fragment) {
+		bool isFragment = vnode->nt == fragment;
+		if (vnode->nt == element || isFragment) {
 			diff(oldVnode, vnode);
 			bool childrenNotEmpty = !vnode->children.empty();
 			bool oldChildrenNotEmpty = !oldVnode->children.empty();
 			if (childrenNotEmpty && oldChildrenNotEmpty) {
-				updateChildren(vnode->elm, oldVnode->children, vnode->children);
+				updateChildren(isFragment ? parentElm : vnode->elm, oldVnode->children, vnode->children);
 			} else if(childrenNotEmpty) {
-				addVNodes(vnode->elm, 0, vnode->children, 0, vnode->children.size() - 1);
+				addVNodes(isFragment ? parentElm : vnode->elm, 0, vnode->children, 0, vnode->children.size() - 1);
 			} else if(oldChildrenNotEmpty) {
 				removeVNodes(oldVnode->children, 0, oldVnode->children.size() - 1);
 			}
@@ -265,7 +267,7 @@ namespace asmdom {
 		#endif
 
 		if (sameVNode(oldVnode, vnode)) {
-			patchVNode(oldVnode, vnode);
+			patchVNode(oldVnode, vnode, oldVnode->elm);
 		} else {
 			EM_ASM_({
 				var parent = window['asmDomHelpers']['domApi']['parentNode']($1);

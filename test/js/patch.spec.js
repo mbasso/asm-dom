@@ -196,6 +196,52 @@ describe('patch (js)', function testPatch() {
     vdom.deleteVNode(vnode2);
   });
 
+  it('should append elements to fragment', () => {
+    const vnode = h('div', h('', h('span', 'foo')));
+    const vnode2 = h('div', h('', [
+      h('span', 'foo'),
+      h('span', 'bar'),
+    ]));
+    patch(root, vnode);
+    let elm = document.body.firstChild;
+    expect(elm.tagName).toEqual('DIV');
+    expect(elm.children.length).toEqual(1);
+    expect(elm.children[0].tagName).toEqual('SPAN');
+    expect(elm.children[0].textContent).toEqual('foo');
+    patch(vnode, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.tagName).toEqual('DIV');
+    expect(elm.children.length).toEqual(2);
+    expect(elm.children[0].tagName).toEqual('SPAN');
+    expect(elm.children[0].textContent).toEqual('foo');
+    expect(elm.children[1].tagName).toEqual('SPAN');
+    expect(elm.children[1].textContent).toEqual('bar');
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should remove elements from fragment', () => {
+    const vnode = h('div', h('', [
+      h('span', 'foo'),
+      h('span', 'bar'),
+    ]));
+    const vnode2 = h('div', h('', h('span', 'foo')));
+    patch(root, vnode);
+    let elm = document.body.firstChild;
+    expect(elm.tagName).toEqual('DIV');
+    expect(elm.children.length).toEqual(2);
+    expect(elm.children[0].tagName).toEqual('SPAN');
+    expect(elm.children[0].textContent).toEqual('foo');
+    expect(elm.children[1].tagName).toEqual('SPAN');
+    expect(elm.children[1].textContent).toEqual('bar');
+    patch(vnode, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.tagName).toEqual('DIV');
+    expect(elm.children.length).toEqual(1);
+    expect(elm.children[0].tagName).toEqual('SPAN');
+    expect(elm.children[0].textContent).toEqual('foo');
+    vdom.deleteVNode(vnode2);
+  });
+
   /*
   it('should create an element created inside an iframe', (done) => {
     // Only run if srcdoc is supported.

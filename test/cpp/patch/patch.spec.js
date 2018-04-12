@@ -70,6 +70,14 @@ describe('patch (cpp)', function test() {
     app.shouldPatchAnElementInsideAFragment();
   });
 
+  it('should append elements to fragment', () => {
+    app.shouldAppendElementsToFragment();
+  });
+
+  it('should remove elements from fragment', () => {
+    app.shouldRemoveElementsFromFragment();
+  });
+
   /* should create an element created inside an iframe */
 
   it('should append elements', () => {
