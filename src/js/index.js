@@ -6,6 +6,21 @@ import domApi, { nodes } from '../cpp/domApi';
 
 const cache = {};
 
+const reset = () => {
+  window.asmDomHelpers = {
+    currentNode: undefined,
+    domApi,
+    'vnodesData': {},
+    diff,
+    eventProxy,
+    appendProps,
+    insertInnerHTML,
+    nodes,
+  };
+};
+
+reset();
+
 // import() is compiled to require.ensure, this is a polyfill for nodejs
 // an alternative solution is needed
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => { c(require); };
@@ -22,9 +37,6 @@ export default (config) => {
   if (config.unsafePatch === undefined) config.unsafePatch = false;
 
   let result;
-  const readyPromise = new Promise((resolve) => {
-    config['onRuntimeInitialized'] = () => resolve(cache);
-  });
   if (
     (
       config.useWasm === true || 'WebAssembly' in window ||
@@ -38,36 +50,24 @@ export default (config) => {
   }
 
   return result
-    .then(lib => lib(config))
-    .then((lib) => {
-      cache.lib = lib;
+    .then(factory => new Promise((resolve) => {
+      factory(config).then((lib) => {
+        cache.lib = lib;
+        window.asmDom = lib;
 
-      window.asmDom = lib;
-
-      lib.h = h;
-      lib.patch = patch;
-      lib.toHTML = toHTML;
-      lib.getNode = vnode => nodes[lib._getNode(vnode)];
-      lib.deleteVNode = (oldVnode) => {
-        window.asmDomHelpers.vnodesData[oldVnode] = undefined;
-        lib._deleteVNode(oldVnode);
-      };
-      lib.reset = () => {
-        window.asmDomHelpers = {
-          currentNode: undefined,
-          domApi,
-          'vnodesData': {},
-          diff,
-          eventProxy,
-          appendProps,
-          insertInnerHTML,
-          nodes,
+        lib.h = h;
+        lib.patch = patch;
+        lib.reset = reset;
+        lib.toHTML = toHTML;
+        lib.getNode = vnode => nodes[lib._getNode(vnode)];
+        lib.deleteVNode = (oldVnode) => {
+          window.asmDomHelpers.vnodesData[oldVnode] = undefined;
+          lib._deleteVNode(oldVnode);
         };
-      };
 
-      lib.reset();
-
-      return readyPromise;
-    })
-    .then(x => x.lib);
+        lib.reset();
+        delete lib.then;
+        resolve(lib);
+      });
+    }));
 };

@@ -37,7 +37,7 @@ module.exports = env => {
       loaders: [{
         test: /\.js$/,
         loaders: ['babel-loader'],
-        exclude: [/node_modules/, /src\/components/, /compiled/, /\.asm\.js$/, /prefix\.js$/, /postfix\.js$/],
+        exclude: [/node_modules/, /src\/components/, /compiled/, /\.asm\.js$/],
       },
       {
         test: /\.wasm$/,

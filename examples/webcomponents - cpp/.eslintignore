@@ -1,5 +1,3 @@
 **/dist/**
 **/node_modules/**
 **/compiled/**
-**/src/prefix.js
-**/src/postfix.js
