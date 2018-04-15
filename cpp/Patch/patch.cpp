@@ -82,7 +82,7 @@ namespace asmdom {
 	void addVNodes(
 		const int parentElm,
 		const int before,
-		std::vector<VNode*>& vnodes,
+		const std::vector<VNode*>& vnodes,
 		std::vector<VNode*>::size_type startIdx,
 		const std::vector<VNode*>::size_type endIdx
 	) {
@@ -123,10 +123,9 @@ namespace asmdom {
 
 	void updateChildren(
 		int parentElm,
-		const std::vector<VNode*>& oldChildren,
-		std::vector<VNode*>& newCh
+		std::vector<VNode*> oldCh,
+		const std::vector<VNode*>& newCh
 	) {
-		std::vector<VNode*> oldCh(oldChildren);
 		int oldStartIdx = 0;
 		int newStartIdx = 0;
 		int oldEndIdx = oldCh.size() - 1;
@@ -137,17 +136,12 @@ namespace asmdom {
 		VNode* newEndVnode = newCh[newEndIdx];
 		bool oldKeys = false;
 		std::unordered_map<std::string, int> oldKeyToIdx;
-		VNode* elmToMove;
 
 		while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
 			if (oldStartVnode == NULL) {
 				oldStartVnode = oldCh[++oldStartIdx];
 			} else if (oldEndVnode == NULL) {
 				oldEndVnode = oldCh[--oldEndIdx];
-			} else if (newStartVnode == NULL) {
-				newStartVnode = newCh[++newStartIdx];
-			} else if (newEndVnode == NULL) {
-				newEndVnode = newCh[--newEndIdx];
 			} else if (sameVNode(oldStartVnode, newStartVnode)) {
 				patchVNode(oldStartVnode, newStartVnode, parentElm);
 				oldStartVnode = oldCh[++oldStartIdx];
@@ -191,9 +185,8 @@ namespace asmdom {
 					EM_ASM_({
 						window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
 					}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
-					newStartVnode = newCh[++newStartIdx];
 				} else {
-					elmToMove = oldCh[oldKeyToIdx[newStartVnode->key]];
+					VNode* elmToMove = oldCh[oldKeyToIdx[newStartVnode->key]];
 					if (elmToMove->selHash != newStartVnode->selHash) {
 						EM_ASM_({
 							window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
@@ -205,8 +198,8 @@ namespace asmdom {
 							window['asmDomHelpers']['domApi']['insertBefore']($0, $1, $2);
 						}, parentElm, elmToMove->elm, oldStartVnode->elm);
 					}
-					newStartVnode = newCh[++newStartIdx];
 				}
+				newStartVnode = newCh[++newStartIdx];
 			}
 		}
 		if (oldStartIdx <= oldEndIdx || newStartIdx <= newEndIdx) {
