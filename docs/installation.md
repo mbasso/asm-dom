@@ -63,11 +63,11 @@ and compile it using [emscripten (emcc cli)](http://kripken.github.io/emscripten
 
 After the compilation you can import your app:
 
-- if you are using webpack, you can see our [example]((https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpp/src/index.js)). In order to import it as a module we have used 2 extra files with emcc `--pre-js` (`prefix.js`) and `--post-js` (`postfix.js`).
+- if you are using webpack, you can see our [example]((https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpp/src/index.js)).
 
 - If you want to use wasm without webpack, you can see [this](https://gist.github.com/kripken/59c67556dc03bb6d57052fedef1e61ab) gist.
 
-If you are using [babel](https://babeljs.io/), please make sure to ignore the compiled files, the prefix and suffix:
+If you are using [babel](https://babeljs.io/), please make sure to ignore the compiled files:
 
 ```js
 {
@@ -76,9 +76,7 @@ If you are using [babel](https://babeljs.io/), please make sure to ignore the co
   exclude: [
     /node_modules/,
     /compiled/, // folder that contains the compiled code (wasm and asmjs)
-    /\.asm\.js$/, // ignore all .asm.js files
-    /prefix\.js$/, // ignore --pre-js
-    /postfix\.js$/ // ignore --post-js
+    /\.asm\.js$/ // ignore all .asm.js files
   ],
 }
 ```

@@ -21,9 +21,14 @@ const config = {};
 import('../compiled/wasm/app.wasm')
 .then((wasm) => {
   config.wasmBinary = new Uint8Array(wasm);
-  return import('../compiled/wasm/app.js');
+  return new Promise((resolve) => {
+    import('../compiled/wasm/app.js').then(factory => {
+      const asmDom = factory(config);
+      delete asmDom.then;
+      resolve(asmDom);
+    });
+  });
 })
-.then(Module => Module(config))
 .then((app) => {
   const asmdomCpp = app;
   window.asmdomCpp = asmdomCpp;
