@@ -44,19 +44,17 @@
 </ul>
 <p>After the compilation you can import your app:</p>
 <ul>
-<li><p>if you are using webpack, you can see our <a href="(https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpp/src/index.js)">example</a>. In order to import it as a module we have used 2 extra files with emcc <code>--pre-js</code> (<code>prefix.js</code>) and <code>--post-js</code> (<code>postfix.js</code>).</p></li>
+<li><p>if you are using webpack, you can see our <a href="(https://github.com/mbasso/asm-dom/tree/master/examples/todomvc%20-%20cpp/src/index.js)">example</a>.</p></li>
 <li><p>If you want to use wasm without webpack, you can see <a href="https://gist.github.com/kripken/59c67556dc03bb6d57052fedef1e61ab">this</a> gist.</p></li>
 </ul>
-<p>If you are using <a href="https://babeljs.io/">babel</a>, please make sure to ignore the compiled files, the prefix and suffix:</p>
+<p>If you are using <a href="https://babeljs.io/">babel</a>, please make sure to ignore the compiled files:</p>
 <pre><code class="hljs css js">{
   <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>,
   <span class="hljs-attr">loaders</span>: [<span class="hljs-string">'babel-loader'</span>],
   <span class="hljs-attr">exclude</span>: [
     <span class="hljs-regexp">/node_modules/</span>,
     /compiled/, <span class="hljs-comment">// folder that contains the compiled code (wasm and asmjs)</span>
-    /\.asm\.js$/, <span class="hljs-comment">// ignore all .asm.js files</span>
-    /prefix\.js$/, <span class="hljs-comment">// ignore --pre-js</span>
-    /postfix\.js$/ <span class="hljs-comment">// ignore --post-js</span>
+    /\.asm\.js$/ <span class="hljs-comment">// ignore all .asm.js files</span>
   ],
 }
 </code></pre>
