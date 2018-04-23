@@ -2,13 +2,6 @@
 
 exports.__esModule = true;
 var recycler = {
-  collect: function collect(node) {
-    recycler.clean(node);
-    var name = node.nodeName;
-    if (node.asmDomNS !== undefined) name += node.namespaceURI;
-    var list = recycler.nodes[name];
-    if (list !== undefined) list.push(node);else recycler.nodes[name] = [node];
-  },
   create: function create(name) {
     name = name.toUpperCase();
     var list = recycler.nodes[name];
@@ -51,13 +44,16 @@ var recycler = {
     }
     return document.createComment(comment);
   },
-  clean: function clean(node) {
-    node.remove();
+  collect: function collect(node) {
+    // clean
     var i = void 0;
+
     // eslint-disable-next-line
     while (i = node.lastChild) {
+      node.removeChild(i);
       recycler.collect(i);
-    }i = node.attributes !== undefined ? node.attributes.length : 0;
+    }
+    i = node.attributes !== undefined ? node.attributes.length : 0;
     while (i--) {
       node.removeAttribute(node.attributes[i].name);
     }node.asmDomVNode = undefined;
@@ -68,12 +64,9 @@ var recycler = {
       node.asmDomRaws = undefined;
     }
     if (node.asmDomEvents !== undefined) {
-      var keys = Object.keys(node.asmDomEvents);
-      i = keys.length;
-      // eslint-disable-next-line
-      while (i--) {
-        node.removeEventListener(keys[i], node.asmDomEvents[keys[i]], false);
-      }
+      Object.keys(node.asmDomEvents).forEach(function (event) {
+        node.removeEventListener(event, node.asmDomEvents[event], false);
+      });
       node.asmDomEvents = undefined;
     }
     if (node.nodeValue !== null && node.nodeValue !== '') {
@@ -84,6 +77,12 @@ var recycler = {
         node[key] = undefined;
       }
     });
+
+    // collect
+    var name = node.nodeName;
+    if (node.asmDomNS !== undefined) name += node.namespaceURI;
+    var list = recycler.nodes[name];
+    if (list !== undefined) list.push(node);else recycler.nodes[name] = [node];
   },
 
   nodes: {}

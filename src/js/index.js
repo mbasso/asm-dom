@@ -50,7 +50,7 @@ export default (config) => {
   }
 
   return result
-    .then(factory => new Promise((resolve) => {
+    .then(factory =>
       factory(config).then((lib) => {
         cache.lib = lib;
         window.asmDom = lib;
@@ -67,7 +67,7 @@ export default (config) => {
 
         lib.reset();
         delete lib.then;
-        resolve(lib);
-      });
-    }));
+        return lib;
+      }),
+    );
 };

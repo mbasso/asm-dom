@@ -130,11 +130,11 @@ namespace asmdom {
 	void toHTML(const VNode* const vnode, std::string& html) {
 		if (vnode == NULL) return;
 
-		if (vnode->nt == text && !vnode->text.empty()) {
-			html.append(encode(vnode->text));
-		} else if (vnode->nt == comment) {
-			html.append("<!--" + vnode->text + "-->");
-		} else if (vnode->nt == fragment) {
+		if (vnode->hash & isText && !vnode->sel.empty()) {
+			html.append(encode(vnode->sel));
+		} else if (vnode->hash & isComment) {
+			html.append("<!--" + vnode->sel + "-->");
+		} else if (vnode->hash & isFragment) {
 			for(Children::size_type i = 0; i != vnode->children.size(); ++i) {
 				toHTML(vnode->children[i], html);
 			}

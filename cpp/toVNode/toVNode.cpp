@@ -7,21 +7,10 @@
 
 namespace asmdom {
 
-	bool isElement(const emscripten::val& node) {
-		return node["nodeType"].as<int>() == 1;
-	};
-
-	bool isText(const emscripten::val& node) {
-		return node["nodeType"].as<int>() == 3;
-	};
-
-	bool isComment(const emscripten::val& node) {
-		return node["nodeType"].as<int>() == 8;
-	};
-
 	VNode* toVNode(const emscripten::val& node) {
 		VNode* vnode;
-		if (isElement(node)) {
+		// isElement
+		if (node["nodeType"].as<int>() == 1) {
 			std::string sel = node["tagName"].as<std::string>();
 			std::transform(sel.begin(), sel.end(), sel.begin(), ::tolower);
 
@@ -43,9 +32,11 @@ namespace asmdom {
 			}
 
 			vnode = h(sel, data, children);
-		} else if (isText(node)) {
+		// isText
+		} else if (node["nodeType"].as<int>() == 3) {
 			vnode = h(node["textContent"].as<std::string>(), true);
-		} else if (isComment(node)) {
+		// isComment
+		} else if (node["nodeType"].as<int>() == 8) {
 			vnode = h("!", node["textContent"].as<std::string>());
 		} else {
 			vnode = h("");

@@ -23,7 +23,29 @@ namespace asmdom {
     typedef std::unordered_map<std::string, Callback> Callbacks;
   #endif
 
-  enum NodeType { element, text, comment, fragment };
+  enum VNodeFlags {
+    // NodeType
+    isElement = 1,
+    isText = 1 << 1,
+    isComment = 1 << 2,
+    isFragment = 1 << 3,
+
+    // flags
+    hasKey = 1 << 4,
+    hasText = 1 << 5,
+    hasAttrs = 1 << 6,
+    hasProps = 1 << 7,
+    hasCallbacks = 1 << 8,
+    hasDirectChildren = 1 << 9,
+    hasChildren = hasDirectChildren | hasText,
+    hasRef = 1 << 10,
+
+    // masks
+    isElementOrFragment = isElement | isFragment,
+    nodeType = isElement | isText | isComment | isFragment,
+    extractSel = UINT_MAX << 11,
+    id = extractSel | hasKey | nodeType
+  };
 
   struct Data {
     Data() {};
@@ -75,21 +97,22 @@ namespace asmdom {
         const std::string& nodeText
       ): sel(nodeSel) {
         normalize();
-        if (nt == comment) {
-          text = nodeText;
+        if (hash & isComment) {
+          sel = nodeText;
         } else {
           children.push_back(new VNode(nodeText, true));
-          cleanChildren = true;
+          hash |= hasText;
 			  }
       };
       VNode(
         const std::string& nodeText,
-        bool isText
+        bool textNode
       ) {
-        if (isText) {
-          text = nodeText;
+        if (textNode) {
           normalize();
-			    nt = NodeType::text;
+          sel = nodeText;
+          // replace current type with text type
+			    hash = hash >> 4 << 4 | isText;
         } else {
           sel = nodeText;
           normalize();
@@ -113,11 +136,11 @@ namespace asmdom {
         const std::string& nodeText
       ): sel(nodeSel), data(nodeData) {
         normalize();
-        if (nt == comment) {
-          text = nodeText;
+        if (hash & isComment) {
+          sel = nodeText;
         } else {
           children.push_back(new VNode(nodeText, true));
-          cleanChildren = true;
+          hash |= hasText;
         }
       };
       VNode(
@@ -132,14 +155,12 @@ namespace asmdom {
       ): sel(nodeSel), data(nodeData), children{ child } { normalize(); };
       ~VNode();
 
+    // contains selector for elements and fragments, text for comments and textNodes
     std::string sel;
     std::string key;
-    std::string text;
-    NodeType nt;
-    std::size_t selHash;
+    unsigned int hash = 0;
     Data data;
     int elm;
-    bool cleanChildren;
     std::vector<VNode*> children;
   };
 

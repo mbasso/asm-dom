@@ -16,11 +16,11 @@ There are 4 tests at the moment:
 
 - `create nodes`: this test create 700 nodes (100 nodes with 3 children, the last of which has 3 more children). Please note that, as we said before, **in the case of asm-dom, this test creates but also destroys the nodes**. While, in the case of snabbdom, the deletion is managed by the garbage collector and it is not measured.
 
-- `create and diff equal nodes`: this test runs the `patch` function 100 times with 2 equal nodes (2 nodes with 100 children, each of them has 1 child), so, the DOM will be not updated.
+- `diff equal nodes`: this test runs the `patch` function 100 times with 2 equal nodes (2 nodes with 100 children, each of them has 1 child), so, the DOM will be not updated.
 
-- `create and diff different nodes`: this test runs the `patch` function 100 times with 2 nodes with different attributes (2 nodes with 100 children, each of them has 1 child), so, the DOM will be updated.
+- `diff different nodes`: this test runs the `patch` function 100 times with 2 nodes with different attributes (2 nodes with 100 children, each of them has 1 child), so, the DOM will be updated.
 
-- `create and add/remove nodes`: this test runs the `patch` function 100 times with 2 nodes, one with 100 children and one without children.
+- `add/remove nodes`: this test runs the `patch` function 100 times with 2 nodes, one with 100 children and one without children.
 
 Here you can find screenshots of the tests (lower is better) runned on a MacBook Pro (Retina, 13-inch, Late 2013), Processor 2,4 GHz Intel Core i5, Memory 8 GB 1600 MHz DDR3:
 
