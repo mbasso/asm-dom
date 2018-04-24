@@ -5,11 +5,15 @@ node_js:
   - "8"
   - "9"
 install: true
+sudo: required
+services:
+  - docker
+before_install:
+  - docker run -dit --name emscripten -v $(pwd):/src trzeci/emscripten:sdk-incoming-64bit bash
 script:
+  - docker exec -it emscripten
   - npm install --ignore-scripts
-  - npm run lint
-  - npm run test:js
-  - npm run build
+  - npm run prepublish
 branches:
   only:
     - master
