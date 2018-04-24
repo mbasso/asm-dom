@@ -11,9 +11,11 @@ services:
 before_install:
   - docker run -dit --name emscripten -v $(pwd):/src trzeci/emscripten:sdk-incoming-64bit bash
 script:
-  - docker exec -it emscripten
   - npm install --ignore-scripts
-  - npm run prepublish
+  - docker exec -it emscripten npm run compile
+  - npm run lint
+  - npm run test:js
+  - npm run build
 branches:
   only:
     - master
