@@ -13,6 +13,7 @@ before_install:
 script:
   - npm install --ignore-scripts
   - docker exec -it emscripten npm run compile
+  - docker exec -it emscripten npm run compile:tests
   - npm run lint
   - npm run test:js
   - npm run build
