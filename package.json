@@ -13,6 +13,7 @@
     "compiled"
   ],
   "scripts": {
+    "lint": "eslint src test build",
     "prepublish": "make clean && make && make lint && make test_js",
     "test:js": "cross-env BABEL_ENV=commonjs nyc --require babel-register --require ./test/setup.js mocha --recursive",
     "test:cov": "nyc report --reporter=text-lcov | coveralls"

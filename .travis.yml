@@ -13,7 +13,7 @@ before_install:
 script:
   - npm install --ignore-scripts
   - docker exec -it emscripten make
-  - make lint
+  - npm run lint
   - npm run test:js
 branches:
   only:
