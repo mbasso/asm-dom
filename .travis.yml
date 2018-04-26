@@ -14,7 +14,7 @@ script:
   - npm install --ignore-scripts
   - docker exec -it emscripten make
   - make lint
-  - make test_js
+  - npm run test:js
 branches:
   only:
     - master
