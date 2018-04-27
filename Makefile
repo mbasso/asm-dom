@@ -1,8 +1,13 @@
-# if you are using windows, comment line 4 and uncomment line 5
+# if you are using windows, comment line 5, 6 and 7 and uncomment line 8, 9 and 10
 # leave it as it was before committing as travis uses linux
 SRCDIR := src
+TESTDIR := test
 SRCS := $(shell find $(SRCDIR) -name "*.js")
-#SRCS := $(shell FORFILES /P $(SRCDIR) /S /M *.cpp /C "CMD /C ECHO @relpath")
+SRCSCPP := $(shell find $(SRCDIR) -name "*.cpp")
+TEST_FILES := $(shell find $(TESTDIR) -name "*.cpp")
+#SRCS := $(shell FORFILES /P $(SRCDIR) /S /M *.js /C "CMD /C ECHO @relpath")
+#SRCSCPP := $(shell FORFILES /P $(SRCDIR) /S /M *.cpp /C "CMD /C ECHO @relpath")
+#TEST_FILES := $(shell FORFILES /P $(TESTDIR) /S /M *.cpp /C "CMD /C ECHO @relpath")
 
 ESDIR := es
 LIBDIR := lib
@@ -106,17 +111,17 @@ build: compiled/asm-dom.a $(BC) compiled/asm-dom.o $(COMPILEDASMJS)/asm-dom.asm.
 	npx ncp $(DISTCPP) $(CPPDIR)
 	npx ncp $(LIBDIR)/cpp $(CPPDIR)
 
-$(TESTCPP):
+$(TESTCPP): $(SRCSCPP) $(TEST_FILES)
 	emcc \
 		-DASMDOM_TEST \
 		$(CFLAGS) \
 		$(ASMJS_OPTIONS) \
 		$(FILES) \
-		test/cpp/tests.cpp \
+		$(TEST_FILES) \
 		-o $@
 
 .SECONDEXPANSION:
-$(COMPILED)/asm-dom.%: $$(@D)
+$(COMPILED)/asm-dom.%: $(SRCSCPP) | $$(@D)
 	emcc \
 		-DASMDOM_JS_SIDE \
 		$(CFLAGS) \

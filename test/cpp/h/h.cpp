@@ -5,10 +5,6 @@
 
 using namespace asmdom;
 
-bool onClick(emscripten::val event) {
-	return true;
-};
-
 void shouldDeleteAVNode() {
 	VNode* vnode = h("div", Children {
 		h("span"),

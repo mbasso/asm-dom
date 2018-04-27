@@ -10,5 +10,6 @@ void assertEquals(const std::string& actual, const std::string& expected);
 emscripten::val getBodyFirstChild();
 emscripten::val getRoot();
 emscripten::val getNode(asmdom::VNode* vnode);
+bool onClick(emscripten::val event);
 
 #endif
