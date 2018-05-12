@@ -8,10 +8,6 @@
 
 namespace asmdom {
 
-	const std::string emptyString;
-	const std::string trueString = "true";
-	const std::string falseString = "false";
-
 	void diffAttrs(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode) {
 		Attrs& oldAttrs = oldVnode->data.attrs;
 		Attrs& attrs = vnode->data.attrs;
@@ -29,28 +25,13 @@ namespace asmdom {
 
 		for (const auto& it : attrs) {
 			if (!oldAttrs.count(it.first) || oldAttrs[it.first] != it.second) {
-				#ifndef ASMDOM_JS_SIDE
-					if (it.second == falseString) {
-						EM_ASM_({
-							Module.removeAttribute(
-								$0,
-								Module['UTF8ToString']($1)
-							);
-						}, vnode->elm, it.first.c_str());
-					} else {
-				#endif
-					
-					EM_ASM_({
-						Module.setAttribute(
-							$0,
-							Module['UTF8ToString']($1),
-							Module['UTF8ToString']($2)
-						);
-					}, vnode->elm, it.first.c_str(), it.second == trueString ? emptyString.c_str() : it.second.c_str());
-				
-				#ifndef ASMDOM_JS_SIDE
-					}
-				#endif
+				EM_ASM_({
+					Module.setAttribute(
+						$0,
+						Module['UTF8ToString']($1),
+						Module['UTF8ToString']($2)
+					);
+				}, vnode->elm, it.first.c_str(), it.second.c_str());
 			}
 		}
 	};
@@ -136,7 +117,7 @@ namespace asmdom {
 		if (vnode->hash & hasRef) {
 			bool(*const* callback)(emscripten::val) = callbacks.at("ref").target<bool(*)(emscripten::val)>();
 			bool(*const* oldCallback)(emscripten::val) = oldVnode->hash & hasRef ? oldCallbacks.at("ref").target<bool(*)(emscripten::val)>() : NULL;
-			if (callback == NULL || oldCallback == NULL || *oldCallback != *callback) {
+			if (!callback || !oldCallback || *oldCallback != *callback) {
 				callbacks.at("ref")(
 					emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm]
 				);

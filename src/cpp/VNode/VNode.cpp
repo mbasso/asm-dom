@@ -13,8 +13,9 @@ namespace asmdom {
 	std::unordered_map<std::string, unsigned int> hashes;
 
 	void addNS(VNode* const vnode) {
-		vnode->data.attrs["ns"] = "http://www.w3.org/2000/svg";
-		if (vnode->sel != "foreignObject" && !vnode->children.empty()) {
+		vnode->hash |= hasNS;
+		vnode->ns = "http://www.w3.org/2000/svg";
+		if ((vnode->hash & hasDirectChildren) && vnode->sel != "foreignObject") {
 			for(std::vector<VNode*>::size_type i = 0, j = vnode->children.size(); i != j; ++i) {
 				addNS(vnode->children[i]);
 			}
@@ -34,6 +35,22 @@ namespace asmdom {
 		} else {
 			children.erase(std::remove(children.begin(), children.end(), (VNode*)NULL), children.end());
 
+			Attrs::iterator it = data.attrs.begin();
+			while (it != data.attrs.end()) {
+				if (it->first == "ns") {
+					hash |= hasNS;
+					ns = it->second;
+					it = data.attrs.erase(it);
+				} else if (it->second == "false") {
+					it = data.attrs.erase(it);
+				} else {
+					if (it->second == "true") {
+						it->second = "";
+					}
+					++it;
+				}
+			}
+
 			if (!data.attrs.empty()) hash |= hasAttrs;
 			#ifndef ASMDOM_JS_SIDE
 				if (!data.props.empty()) hash |= hasProps;
@@ -48,7 +65,7 @@ namespace asmdom {
 					hashes[sel] = ++currentHash;
 				}
 
-				hash |= (hashes[sel] << 11) | isElement;
+				hash |= (hashes[sel] << 12) | isElement;
 
 				#ifndef ASMDOM_JS_SIDE
 					if ((hash & hasCallbacks) && data.callbacks.count("ref")) {

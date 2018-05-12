@@ -39,11 +39,12 @@ namespace asmdom {
     hasDirectChildren = 1 << 9,
     hasChildren = hasDirectChildren | hasText,
     hasRef = 1 << 10,
+    hasNS = 1 << 11,
 
     // masks
     isElementOrFragment = isElement | isFragment,
     nodeType = isElement | isText | isComment | isFragment,
-    extractSel = UINT_MAX << 11,
+    extractSel = ~0 << 12,
     id = extractSel | hasKey | nodeType
   };
 
@@ -158,9 +159,10 @@ namespace asmdom {
     // contains selector for elements and fragments, text for comments and textNodes
     std::string sel;
     std::string key;
+    std::string ns;
     unsigned int hash = 0;
     Data data;
-    int elm;
+    int elm = 0;
     std::vector<VNode*> children;
   };
 

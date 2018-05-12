@@ -43,14 +43,13 @@ namespace asmdom {
 				vnode->elm = EM_ASM_INT({
 					return Module.createDocumentFragment();
 				});
-			} else if (vnode->data.attrs.count("ns")) {
+			} else if (vnode->hash & hasNS) {
 				vnode->elm = EM_ASM_INT({
 					return Module.createElementNS(
 						Module['UTF8ToString']($0),
 						Module['UTF8ToString']($1)
 					);
-				}, vnode->data.attrs["ns"].c_str(), vnode->sel.c_str());
-				vnode->data.attrs.erase("ns");
+				}, vnode->ns.c_str(), vnode->sel.c_str());
 			} else {
 				vnode->elm = EM_ASM_INT({
 					return Module.createElement(
@@ -90,9 +89,12 @@ namespace asmdom {
 		const std::vector<VNode*>::size_type endIdx
 	) {
 		while (startIdx <= endIdx) {
-			EM_ASM_({
-				Module.insertBefore($0, $1, $2)
-			}, parentElm, createElm(vnodes[startIdx++]), before);
+			VNode* const vnode = vnodes[startIdx++];
+			if (vnode) {
+				EM_ASM_({
+					Module.insertBefore($0, $1, $2)
+				}, parentElm, createElm(vnode), before);
+			}
 		}
 	};
 
@@ -103,24 +105,27 @@ namespace asmdom {
 	) {
 		while (startIdx <= endIdx) {
 			VNode* const vnode = vnodes[startIdx++];
-			EM_ASM_({
-				Module.removeChild($0);
-			}, vnode->elm);
 
-			#ifdef ASMDOM_JS_SIDE
+			if (vnode) {
 				EM_ASM_({
-					var data = window['asmDomHelpers']['vnodesData'][$0];
-					if (data !== undefined && data['ref'] !== undefined) {
-						data['ref'](null);
+					Module.removeChild($0);
+				}, vnode->elm);
+
+				#ifdef ASMDOM_JS_SIDE
+					EM_ASM_({
+						var data = window['asmDomHelpers']['vnodesData'][$0];
+						if (data !== undefined && data['ref'] !== undefined) {
+							data['ref'](null);
+						}
+					}, reinterpret_cast<std::uintptr_t>(vnode));
+				#else
+					if (vnode->hash & hasRef) {
+						vnode->data.callbacks["ref"](
+							emscripten::val::null()
+						);
 					}
-				}, reinterpret_cast<std::uintptr_t>(vnode));
-			#else
-				if (vnode->hash & hasRef) {
-					vnode->data.callbacks["ref"](
-						emscripten::val::null()
-					);
-				}
-			#endif
+				#endif
+			}
 		}
 	};
 
@@ -141,10 +146,14 @@ namespace asmdom {
 		std::unordered_map<std::string, int> oldKeyToIdx;
 
 		while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
-			if (oldStartVnode == NULL) {
+			if (!oldStartVnode) {
 				oldStartVnode = oldCh[++oldStartIdx];
-			} else if (oldEndVnode == NULL) {
+			} else if (!oldEndVnode) {
 				oldEndVnode = oldCh[--oldEndIdx];
+			} else if (!newStartVnode) {
+				newStartVnode = oldCh[++newStartIdx];
+			} else if (!newEndVnode) {
+				newEndVnode = oldCh[--newEndIdx];
 			} else if (sameVNode(oldStartVnode, newStartVnode)) {
 				patchVNode(oldStartVnode, newStartVnode, parentElm);
 				oldStartVnode = oldCh[++oldStartIdx];
@@ -222,9 +231,9 @@ namespace asmdom {
 			const unsigned int oldChildrenNotEmpty = oldVnode->hash & hasChildren;
 			if (childrenNotEmpty && oldChildrenNotEmpty) {
 				updateChildren(vnode->hash & isFragment ? parentElm : vnode->elm, oldVnode->children, vnode->children);
-			} else if(childrenNotEmpty) {
+			} else if (childrenNotEmpty) {
 				addVNodes(vnode->hash & isFragment ? parentElm : vnode->elm, 0, vnode->children, 0, vnode->children.size() - 1);
-			} else if(oldChildrenNotEmpty) {
+			} else if (oldChildrenNotEmpty) {
 				removeVNodes(oldVnode->children, 0, oldVnode->children.size() - 1);
 			}
 		} else if (vnode->sel != oldVnode->sel) {
@@ -251,7 +260,7 @@ namespace asmdom {
 			VDOMConfig& config = VDOMConfig::getConfig();
 			if (
 				!config.getUnsafePatch() &&
-				currentNode != oldVnode && currentNode != NULL
+				currentNode != oldVnode && currentNode
 			) return NULL;
 		#endif
 

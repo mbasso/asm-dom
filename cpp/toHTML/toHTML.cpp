@@ -85,8 +85,9 @@ namespace asmdom {
 
 	std::string encode(const std::string& data) {
 		std::string encoded;
-		encoded.reserve(data.size());
-		for(size_t pos = 0; pos != data.size(); ++pos) {
+		size_t size = data.size();
+		encoded.reserve(size);
+		for(size_t pos = 0; pos != size; ++pos) {
 				switch(data[pos]) {
 						case '&':  encoded.append("&amp;");       break;
 						case '\"': encoded.append("&quot;");      break;
@@ -102,13 +103,7 @@ namespace asmdom {
 
 	void appendAttributes(const VNode* const vnode, std::string& html) {
 		for (auto& it : vnode->data.attrs) {
-			if (it.first != "ns" && it.second != "false") {
-				html.append(" " + it.first + "=\"");
-				if (it.second != "true") {
-					html.append(encode(it.second));
-				}
-				html.append("\"");
-			}
+			html.append(" " + it.first + "=\"" + encode(it.second) + "\"");
 		}
 
 		#ifdef ASMDOM_JS_SIDE
@@ -128,7 +123,7 @@ namespace asmdom {
 	};
 
 	void toHTML(const VNode* const vnode, std::string& html) {
-		if (vnode == NULL) return;
+		if (!vnode) return;
 
 		if (vnode->hash & isText && !vnode->sel.empty()) {
 			html.append(encode(vnode->sel));
@@ -139,7 +134,7 @@ namespace asmdom {
 				toHTML(vnode->children[i], html);
 			}
 		} else {
-			bool isSvg = vnode->data.attrs.count("ns") != 0 && vnode->data.attrs.at("ns") == "http://www.w3.org/2000/svg";
+			bool isSvg = (vnode->hash & hasNS) && vnode->ns == "http://www.w3.org/2000/svg";
 			bool isSvgContainerElement = isSvg && containerElements[vnode->sel];
 
 			html.append("<" + vnode->sel);
@@ -176,7 +171,7 @@ namespace asmdom {
 		toHTML(vnode, html);
 
 		#ifndef ASMDOM_JS_SIDE
-			if (vnode != NULL && VDOMConfig::getConfig().getClearMemory()) {
+			if (vnode && VDOMConfig::getConfig().getClearMemory()) {
 				deleteVNode(vnode);
 			}
 		#endif
