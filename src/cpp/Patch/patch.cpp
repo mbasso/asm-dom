@@ -147,10 +147,6 @@ namespace asmdom {
 				oldStartVnode = oldCh[++oldStartIdx];
 			} else if (!oldEndVnode) {
 				oldEndVnode = oldCh[--oldEndIdx];
-			} else if (!newStartVnode) {
-				newStartVnode = oldCh[++newStartIdx];
-			} else if (!newEndVnode) {
-				newEndVnode = oldCh[--newEndIdx];
 			} else if (sameVNode(oldStartVnode, newStartVnode)) {
 				patchVNode(oldStartVnode, newStartVnode, parentElm);
 				oldStartVnode = oldCh[++oldStartIdx];

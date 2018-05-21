@@ -44,6 +44,7 @@ namespace asmdom {
     // masks
     isElementOrFragment = isElement | isFragment,
     nodeType = isElement | isText | isComment | isFragment,
+    removeNodeType = ~0 ^ nodeType,
     extractSel = ~0 << 12,
     id = extractSel | hasKey | nodeType
   };
@@ -113,7 +114,7 @@ namespace asmdom {
           normalize();
           sel = nodeText;
           // replace current type with text type
-			    hash = hash >> 4 << 4 | isText;
+			    hash = (hash & removeNodeType) | isText;
         } else {
           sel = nodeText;
           normalize();
