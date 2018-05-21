@@ -6,6 +6,12 @@
     "tagline": "A minimal WebAssembly virtual DOM to build C++ SPA",
     "boolean-attributes": "Boolean Attributes",
     "cpp": "cpp",
+    "children": "Children",
+    "comments": "Comments",
+    "elements": "Elements",
+    "fragments": "Fragments",
+    "introduction": "Introduction",
+    "tag-attributes": "Tag Attributes",
     "deleteVNode": "deleteVNode",
     "examples": "Examples",
     "h": "h",
@@ -28,7 +34,8 @@
     "GitHub": "GitHub",
     "Introduction": "Introduction",
     "Guides": "Guides",
-    "API Reference": "API Reference"
+    "API Reference": "API Reference",
+    "CPX syntax": "CPX syntax"
   },
   "pages-strings": {
     "Help Translate|recruit community translators for your project": "Help Translate",
