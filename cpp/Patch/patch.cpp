@@ -32,7 +32,7 @@ namespace asmdom {
 	bool sameVNode(const VNode* __restrict__ const vnode1, const VNode* __restrict__ const vnode2) {
 		return
 			// compare selector, nodeType and key existance
-			(vnode1->hash & id) == (vnode2->hash & id) &&
+			((vnode1->hash & id) == (vnode2->hash & id)) &
 			// compare keys
 			(!(vnode1->hash & hasKey) || vnode1->key == vnode2->key);
 	};
@@ -86,12 +86,9 @@ namespace asmdom {
 		const std::vector<VNode*>::size_type endIdx
 	) {
 		while (startIdx <= endIdx) {
-			VNode* const vnode = vnodes[startIdx++];
-			if (vnode) {
-				EM_ASM_({
-					Module.insertBefore($0, $1, $2)
-				}, parentElm, createElm(vnode), before);
-			}
+			EM_ASM_({
+				Module.insertBefore($0, $1, $2)
+			}, parentElm, createElm(vnodes[startIdx++]), before);
 		}
 	};
 
@@ -104,18 +101,19 @@ namespace asmdom {
 			VNode* const vnode = vnodes[startIdx++];
 
 			if (vnode) {
-				EM_ASM_({
-					Module.removeChild($0);
-				}, vnode->elm);
-
 				#ifdef ASMDOM_JS_SIDE
 					EM_ASM_({
-						var data = window['asmDomHelpers']['vnodesData'][$0];
+						Module.removeChild($0);
+						var data = window['asmDomHelpers']['vnodesData'][$1];
 						if (data !== undefined && data['ref'] !== undefined) {
 							data['ref'](null);
 						}
-					}, reinterpret_cast<std::uintptr_t>(vnode));
+					}, vnode->elm, reinterpret_cast<std::uintptr_t>(vnode));
 				#else
+					EM_ASM_({
+						Module.removeChild($0);
+					}, vnode->elm);
+					
 					if (vnode->hash & hasRef) {
 						vnode->data.callbacks["ref"](
 							emscripten::val::null()

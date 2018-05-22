@@ -22,6 +22,18 @@ There are 4 tests at the moment:
 
 - `add/remove nodes`: this test runs the `patch` function 100 times with 2 nodes, one with 100 children and one without children.
 
-Here you can find screenshots of the tests (lower is better) runned on a MacBook Pro (Retina, 13-inch, Late 2013), Processor 2,4 GHz Intel Core i5, Memory 8 GB 1600 MHz DDR3:
+Here you can find the tests (lower is better) runned on a MacBook Pro (Retina, 13-inch, Late 2013), Processor 2,4 GHz Intel Core i5, Memory 8 GB 1600 MHz DDR3:
 
-![Benchmarks](benchmarks.jpg)
+### Firefox 59.0.2 (64 bit)
+
+| library | create nodes | diff equal nodes | diff different nodes | add/remove nodes |
+| --- | --- | --- | --- | --- |
+| asm-dom | 0.0000 | 2.0000 | 34.0000 | 32.0000 |
+| snabbbom | 0.0000 | 12.0000 | 42.0000 | 44.0000 |
+
+### Chrome 66.0.3359.181 (64-bit)
+
+| library | create nodes | diff equal nodes | diff different nodes | add/remove nodes |
+| --- | --- | --- | --- | --- |
+| asm-dom | 0.9000 | 3.2000 | 16.4000 | 15.1000 |
+| snabbbom | 0.5000 | 4.6000 | 8.7000 | 13.3000 |
