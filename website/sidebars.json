@@ -11,6 +11,8 @@
       "boolean-attributes",
       "string-encoding",
       "svg",
+      "ref",
+      "fragments",
       "server-side-rendering",
       "webcomponents",
       "structuring-applications"

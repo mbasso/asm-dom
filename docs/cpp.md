@@ -14,6 +14,8 @@
 	- [memory management](#memory-management)
 	- [boolean attributes](#boolean-attributes)
 	- [string encoding](#string-encoding)
+  - [ref](#ref)
+  - [fragments](#fragments)
 - [Helpers](#helpers)
   - [svg](#svg)
 - [Server side rendering](#server-side-rendering)
@@ -243,6 +245,9 @@ The data object contains optional attributes, optional props and optional callba
 - `ns`: the namespace URI to associate with the element
 - `key`: this property is used to keep pointers to DOM nodes that existed previously to avoid recreating them if it is unnecessary. This is very useful for things like list reordering.
 
+And callbacks can contain a special key:
+- `ref`: a callback that provides a way to access DOM nodes, you can learn more about that [here](#ref)
+
 Here is an example, please use our `typedef` to do that:
 
 ```c++
@@ -282,7 +287,9 @@ VNode* vnode2 = h("div",
       {"onclick", [](emscripten::val e) -> bool {
         // do stuff...
         return true;
-      }}
+      }},
+      // ref
+      {"ref", divRef}
     }
   )
 );
@@ -497,6 +504,143 @@ int main() {
 
   // some code here...
 };
+```
+
+### Ref
+
+If you want to access direclty DOM nodes created by asm-dom, for example to managing focus, text selection, or integrating with third-party DOM libraries, you can use `refs callbacks`. `ref` is a special callback that takes the DOM node as param and can return `true` or `false` unconditionally, this is just for semplicity, to mantain the same signatures of other events.
+`ref` is called after that the DOM node is mounted, if the ref callback changes or after that the DOM node is removed from the DOM tree, in this case the param is evaluated `emscripten::val::null`.
+Here is an example of the first and the last case:
+
+```c++
+bool refCallback(emscripten::val node) {
+  // check if node === null
+  if (node.strictlyEquals(emscripten::val::null())) {
+    // node unmounted
+    // do nothing
+  } else {
+    // node mounted
+    // focus input
+    node.call<void>("focus");
+  }
+
+  return true;
+};
+
+int main() {
+  Config config = Config();
+  init(config);
+
+  VNode* vnode1 = h("div",
+    h("input",
+      Data(
+        Callbacks {
+          {"ref", refCallback}
+        }
+      )
+    )
+  );
+
+  patch(
+    emscripten::val::global("document").call<emscripten::val>(
+      "getElementById",
+      std::string("root")
+    ),
+    vnode1
+  );
+
+  VNode* vnode2 = h("div");
+  patch(vnode1, vnode2);
+
+  deleteVNode(vnode2);
+
+  return 0;
+}
+```
+
+As we said before `ref callback` is also invoked if it changes, in the following example asm-dom will call `refCallback` after that the DOM node is mounted and then `anotherRefCallback` after the update:
+
+```c++
+VNode* vnode1 = h("div",
+  h("input",
+    Data(
+      Callbacks {
+        {"ref", refCallback}
+      }
+    )
+  )
+);
+
+patch(
+  emscripten::val::global("document").call<emscripten::val>(
+    "getElementById",
+    std::string("root")
+  ),
+  vnode1
+);
+
+VNode* vnode2 = h("div",
+  h("input",
+    Data(
+      Callbacks {
+        {"ref", anotherRefCallback}
+      }
+    )
+  )
+);
+
+patch(vnode1, vnode2);
+```
+
+Please note that if you want to use a lambda as a ref asm-dom will call it on every update, so, you probably want to avoid something like this:
+
+```c++
+VNode* vnode1 = h("div",
+  h("input",
+    Data(
+      Callbacks {
+        {"ref", [&](emscripten::val node) -> bool {
+          if (!node.strictlyEquals(emscripten::val::null())) {
+            // node mounted
+            // focus input
+            node.call<void>("focus");
+          }
+
+          return true;
+        }}
+      }
+    )
+  )
+);
+```
+
+### Fragments
+
+If you want to group a list of children without adding extra nodes to the DOM or you want to use [DocumentFragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) to improve the performance of your app, you can do that creating a `VNode` with an empty selector:
+
+```js
+// without fragments if you want to return 3 div
+// you have to add a parent node that is inserted into the DOM tree
+/* asmdom::VNode* vnode = (
+    h("div",
+        Children {
+            h("div", std::string("Child 1")),
+            h("div", std::string("Child 2")),
+            h("div", std::string("Child 3"))
+        }
+    )
+); */
+
+// with fragments you can just add them without additional nodes
+asmdom::VNode* vnode = (
+    h("",
+        Children {
+            h("div", std::string("Child 1")),
+            h("div", std::string("Child 2")),
+            h("div", std::string("Child 3"))
+        }
+    )
+);
 ```
 
 ## Helpers

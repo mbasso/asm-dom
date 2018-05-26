@@ -12,6 +12,8 @@
 	- [toHTML](#tohtml)
 - [Notes](#notes)
 	- [boolean attributes](#boolean-attributes)
+  - [ref](#ref)
+  - [fragments](#fragments)
 - [Helpers](#helpers)
   - [svg](#svg)
 - [Server side rendering](#server-side-rendering)
@@ -100,10 +102,11 @@ const asmDom = await init();
 
 ### h
 
-You can create vnodes using `h` function. `h` accepts a tag/selector as a string, an optional data object and an optional **string** or array of children. The data object contains all attributes, callbacks and 3 special props:
+You can create vnodes using `h` function. `h` accepts a tag/selector as a string, an optional data object and an optional **string** or array of children. The data object contains all attributes, callbacks and 4 special props:
 - `ns`: the namespace URI to associate with the element
 - `key`: this property is used to keep pointers to DOM nodes that existed previously to avoid recreating them if it is unnecessary. This is very useful for things like list reordering.
 - `raw`: an object that contains values applied to the DOM element with the dot notation instead of `node.setAttribute`.
+- `ref`: a callback that provides a way to access DOM nodes, you can learn more about that [here](#ref)
 
 This returns the memory address of your virtual node.
 
@@ -120,6 +123,7 @@ const vnode2 = h('div', {
   className: 'foo', // className is a special attribute evaluated as 'class'
   'data-foo': 'bar', // a dataset attribute
   onclick: (e) => console.log('clicked: ', e.target), // a callback
+  ref: (node) => console.log('DOM node: ', node),
   raw: {
     foo: 'bar', // raw value applied with the dot notation: node.foo = 'bar'
   },
@@ -231,6 +235,84 @@ const vnode = h('input', {
   readonly: true,
   // or readonly: false,
 });
+```
+
+## Ref
+
+If you want to access direclty DOM nodes created by asm-dom, for example to managing focus, text selection, or integrating with third-party DOM libraries, you can use `refs callbacks`.
+`ref` is a special callback called after that the DOM node is mounted, if the ref callback changes or after that the DOM node is removed from the DOM tree, in this case the param is equal to `null`.
+Here is an example of the first and the last case:
+
+```js
+const refCallback = (node) => {
+  if (node === null) {
+    // node unmounted
+    // do nothing
+  } else {
+    // node mounted
+    // focus input
+    node.focus();
+  }
+};
+
+const vnode1 = h('div',
+  h('input', {
+    ref: refCallback
+  })
+);
+
+patch(
+  document.getElementById('root'),
+  vnode1
+);
+
+const vnode2 = h('div');
+patch(vnode1, vnode2);
+
+deleteVNode(vnode2);
+```
+
+As we said before `ref callback` is also invoked if it changes, in the following example asm-dom will call `refCallback` after that the DOM node is mounted and then `anotherRefCallback` after the update:
+
+```c++
+const vnode1 = h('div',
+  h('input', {
+    ref: refCallback
+  })
+);
+
+patch(
+  document.getElementById('root'),
+  vnode1
+);
+
+const vnode1 = h('div',
+  h('input', {
+    ref: anotherRefCallback
+  })
+);
+
+patch(vnode1, vnode2);
+```
+
+## Fragments
+
+If you want to group a list of children without adding extra nodes to the DOM or you want to use [DocumentFragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) to improve the performance of your app, you can do that creating a `VNode` with an empty selector:
+
+```js
+// this cannot be done
+/* const vnode = [
+    h('div', 'Child 1'),
+    h('div', 'Child 2'),
+    h('div', 'Child 3')
+]; */
+
+// this is a valid alternative to the code above
+const vnode = h('', [
+  h('div', 'Child 1'),
+  h('div', 'Child 2'),
+  h('div', 'Child 3')
+]);
 ```
 
 ## Helpers
