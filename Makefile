@@ -86,7 +86,8 @@ ASMJS_OPTIONS = \
 	-s NO_EXIT_RUNTIME=1 \
 	-s NO_FILESYSTEM=1 \
 	-s DISABLE_EXCEPTION_CATCHING=2 \
-	-s EXPORTED_RUNTIME_METHODS=[\'UTF8ToString\']
+	-s EXPORTED_RUNTIME_METHODS=[\'UTF8ToString\'] \
+	-s WASM=0
 
 .PHONY: all install clean lint test test_js test_watch build
 
