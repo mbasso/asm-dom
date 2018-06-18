@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>deleteVNode · asm-dom</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Deletes a vnode and all its children from memory. This is useful if you want to delete an entire tree. If you want to delete a vnode but not its children you can simply use the C++ keyword `delete`."/><meta property="og:title" content="deleteVNode · asm-dom"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mbasso.github.io/asm-dom/index.html"/><meta property="og:description" content="Deletes a vnode and all its children from memory. This is useful if you want to delete an entire tree. If you want to delete a vnode but not its children you can simply use the C++ keyword `delete`."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/asm-dom/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/asm-dom/css/main.css"/></head><body class="sideNavVisible doc"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/asm-dom/"><h2 class="headerTitle">asm-dom</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/asm-dom/docs/motivation.html" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/asm-dom/docs/init.html" target="_self">API</a></li><li class=""><a href="https://github.com/mbasso/asm-dom" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>API Reference</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Introduction</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/motivation.html">Motivation</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/inline-example.html">Inline example</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/installation.html">Installation</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/examples.html">Examples</a></li></ul></div><div class="navGroup navGroupActive"><h3>Guides</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/memory-management.html">Memory Management</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/boolean-attributes.html">Boolean Attributes</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/string-encoding.html">String Encoding</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/svg.html">SVG</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/ref.html">Ref</a></li></ul></div><div class="navGroup navGroupActive"><h3>CPX syntax</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/fragments.html">Fragments</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>deleteVNode</h1></header><article><div><span><p>Deletes a vnode and all its children from memory. This is useful if you want to delete an entire tree. If you want to delete a vnode but not its children you can simply use the C++ keyword <code>delete</code>.</p>
+<pre><code class="hljs css languages- c++">VNode* child1 = h(<span class="hljs-string">"h1"</span>, <span class="hljs-built_in">string</span>(<span class="hljs-string">"Headline"</span>));
+VNode* child2 = h(<span class="hljs-string">"p"</span>, <span class="hljs-built_in">string</span>(<span class="hljs-string">"A paragraph"</span>));
+VNode* vnode = h(<span class="hljs-string">"div"</span>,
+  Data(
+    Attrs {
+      {<span class="hljs-string">"id"</span>, <span class="hljs-string">"root"</span>}
+      {<span class="hljs-string">"style"</span>, <span class="hljs-string">"color: #000"</span>}
+    }
+  ),
+  Children {
+    child1,
+    child2,
+  }
+);
+
+<span class="hljs-comment">// delete vnode, child1 and child2 from memory</span>
+deleteVNode(vnode);
+
+<span class="hljs-comment">// delete vnode but not child1 and child2 from memory</span>
+<span class="hljs-comment">// delete vnode;</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/asm-dom/docs/toHTML.html">← toHTML</a><a class="docs-next button" href="/asm-dom/docs/introduction.html">Introduction →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/asm-dom/" class="nav-home"></a><div><h5>Docs</h5><a href="/asm-dom/docs/motivation.html">Introduction</a><a href="/asm-dom/docs/memory-management.html">Guides</a><a href="/asm-dom/docs/init.html">API Reference</a></div><div><h5>Community</h5><a href="http://stackoverflow.com/questions/tagged/asm-dom" target="_blank" rel="noopener noreferrer">Stack Overflow</a><a href="https://gitter.im/mbasso/asm-dom">Chat on Gitter</a><a href="https://twitter.com/teo_basso"><img alt="Follow teo_basso on Twitter" src="https://img.shields.io/twitter/follow/teo_basso.svg?label=Follow+teo_basso&amp;style=social"/></a></div><div><h5>More</h5><a href="https://github.com/mbasso/asm-dom">GitHub</a><a href="https://github.com/mbasso/asm-dom/issues">Issues</a><a class="github-button" href="https://github.com/mbasso/asm-dom" data-icon="octicon-star" data-count-href="/mbasso/asm-dom/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div></body></html>

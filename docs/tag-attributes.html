@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Tag Attributes · asm-dom</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Attributes (attributes, props, and callbacks) can be set as string literals with double quotes just like in XML:"/><meta property="og:title" content="Tag Attributes · asm-dom"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mbasso.github.io/asm-dom/index.html"/><meta property="og:description" content="Attributes (attributes, props, and callbacks) can be set as string literals with double quotes just like in XML:"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/asm-dom/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/asm-dom/css/main.css"/></head><body class="sideNavVisible doc"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/asm-dom/"><h2 class="headerTitle">asm-dom</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/asm-dom/docs/motivation.html" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/asm-dom/docs/init.html" target="_self">API</a></li><li class=""><a href="https://github.com/mbasso/asm-dom" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>CPX syntax</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Introduction</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/motivation.html">Motivation</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/inline-example.html">Inline example</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/installation.html">Installation</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/examples.html">Examples</a></li></ul></div><div class="navGroup navGroupActive"><h3>Guides</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/memory-management.html">Memory Management</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/boolean-attributes.html">Boolean Attributes</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/string-encoding.html">String Encoding</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/svg.html">SVG</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/ref.html">Ref</a></li></ul></div><div class="navGroup navGroupActive"><h3>CPX syntax</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/fragments.html">Fragments</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Tag Attributes</h1></header><article><div><span><p>Attributes (attributes, props, and callbacks) can be set as string literals with double quotes just like in XML:</p>
+<pre><code class="hljs css languages- js">&lt;img src=<span class="hljs-string">"hello.png"</span> /&gt;
+</code></pre>
+<p>or you can assign an expression inside curly brackets:</p>
+<pre><code class="hljs css languages- js"><span class="hljs-comment">// std::string filename = "hello";</span>
+<span class="hljs-comment">// std::string extension = "png";</span>
+
+&lt;img src={filename + <span class="hljs-string">"."</span> + extension} /&gt;
+</code></pre>
+<p>Differently from JSX, you can set any attribute just like in html, you don't have to use for example <code>className</code> or camel case identifiers:</p>
+<pre><code class="hljs css languages- js"><span class="hljs-comment">// in JSX:</span>
+&lt;div className=<span class="hljs-string">"css-class"</span> tabIndex=<span class="hljs-string">"0"</span> /&gt;
+
+<span class="hljs-comment">// in CPX:</span>
+&lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"css-class"</span> tabindex=<span class="hljs-string">"0"</span> /&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="attributes"></a><a href="#attributes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Attributes</h2>
+<p>Attributes corresponds to <a href="https://github.com/mbasso/asm-dom/blob/master/docs/cpp.md#h"><code>asmdom::Attrs</code></a>, they are <code>std::string</code> and are set using <code>domNode.setAttribute(attr, val)</code>. Here is the syntax:</p>
+<pre><code class="hljs">&lt;image
+  attribute=<span class="hljs-string">"this is an attribute"</span>
+  <span class="hljs-keyword">class</span>=<span class="hljs-string">"css-class"</span>
+  data-id=<span class="hljs-string">"foo"</span> <span class="hljs-comment">// dataset attribute</span>
+  xlink:href=<span class="hljs-string">"link"</span> <span class="hljs-comment">// namespaced attribute</span>
+/&gt;
+</code></pre>
+<p>However there are some special identifiers that are automatically interpreted as props like <code>value</code> or <code>checked</code>. This is particularly convenient to avoid a code like <code>&lt;input [value]={variable} /&gt;</code> every time.
+In addition, <code>ref</code> and every attribute that starts with <code>on</code> is automatically interpreted as callbacks and rendered lowercase, for example:</p>
+<pre><code class="hljs">&lt;<span class="hljs-selector-tag">button</span> onClick={callback} /&gt;
+&lt;<span class="hljs-selector-tag">button</span> ref={callback} /&gt;
+
+<span class="hljs-comment">// is equal to</span>
+
+&lt;<span class="hljs-selector-tag">button</span> (onclick)={callback}&gt;
+&lt;<span class="hljs-selector-tag">button</span> (ref)={callback}&gt;
+</code></pre>
+<p>If you want to declare an attribute that stars with <code>on</code>, <code>ref</code>, <code>value</code> or <code>checked</code>, so, you want to ignore these rules, you can surround it with curly brackets:</p>
+<pre><code class="hljs">&lt;button onClick={callback} <span class="hljs-regexp">/&gt; /</span>/ <span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> an <span class="hljs-string">"onclick"</span> callback
+&lt;button {onClick}=<span class="hljs-string">"callback"</span> <span class="hljs-regexp">/&gt; /</span>/ <span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> an <span class="hljs-string">"onClick"</span> attribute
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="props"></a><a href="#props" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Props</h2>
+<p>Props corresponds to <a href="https://github.com/mbasso/asm-dom/blob/master/docs/cpp.md#h"><code>asmdom::Props</code></a>, they are <a href="https://kripken.github.io/emscripten-site/docs/api_reference/val.h.html"><code>emscripten::val</code></a> and are set using the dot notation <code>node.prop = val</code>. You can specify that an attribute is a prop surrounding it with square brackets:</p>
+<pre><code class="hljs">&lt;<span class="hljs-keyword">div</span>
+  attribute=<span class="hljs-string">"this is a attribute"</span>
+  [<span class="hljs-keyword">prop</span>]=<span class="hljs-string">"this is a prop"</span>
+/&gt;
+</code></pre>
+<p>Using gccx you don't have to care about the type, values are automatically passed to <code>emscripten::val</code> constructor, so, you can do something like this:</p>
+<pre><code class="hljs"><span class="hljs-comment">// you can provide any type:</span>
+<span class="hljs-comment">// int foo = 7;</span>
+
+<span class="hljs-comment">// or emscripten::val</span>
+<span class="hljs-comment">// emscripten::val bar = emscripten::val::undefined();</span>
+
+&lt;div
+  [<span class="hljs-meta">foo</span>]={foo}
+  [<span class="hljs-meta">bar</span>]={bar}
+/&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="callbacks"></a><a href="#callbacks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Callbacks</h2>
+<p>Callbacks corresponds to <a href="https://github.com/mbasso/asm-dom/blob/master/docs/cpp.md#h"><code>asmdom::Callbacks</code></a> and they are <code>std::function&lt;bool(emscripten::val)&gt;</code>. You can specify that an attribute is a callback surrounding it with parens:</p>
+<pre><code class="hljs"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">onclick</span>)=<span class="hljs-string">{handler}</span> /&gt;</span>
+</code></pre>
+<p>You can provide to callbacks a <code>std::function&lt;bool(emscripten::val)&gt;</code>, a pointer to a function or a lambda:</p>
+<pre><code class="hljs">/*
+<span class="hljs-built_in">bool</span> onChange(emscripten::val event) {
+    // <span class="hljs-keyword">do</span> stuff...
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+};
+*/
+
+&lt;input
+  (onchange)={onChange}
+  (onkeydown)={[&amp;](emscripten::val e) -&gt; <span class="hljs-built_in">bool</span> {
+    // <span class="hljs-keyword">do</span> stuff...
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }}
+/&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="default-to-true"></a><a href="#default-to-true" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Default to true</h2>
+<p>If you pass no value for an attribute or a prop, it defaults to true:</p>
+<pre><code class="hljs">&lt;<span class="hljs-built_in">input</span> [booleanVal] readonly&gt;
+// <span class="hljs-keyword">is</span> equal <span class="hljs-keyword">to</span>
+&lt;<span class="hljs-built_in">input</span> [booleanVal]={true} readonly=<span class="hljs-string">"true"</span>&gt;
+
+// falsy <span class="hljs-built_in">values</span> can <span class="hljs-keyword">be</span> used <span class="hljs-keyword">as</span> follow<span class="hljs-variable">s:</span>
+&lt;<span class="hljs-built_in">input</span> [booleanVal]={false} readonly=<span class="hljs-string">"false"</span>&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="spread-attributes"></a><a href="#spread-attributes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Spread attributes</h2>
+<p>If you already have an <code>asmdom::Data</code> object, and you want to pass it in <code>CPX</code>, you can use <code>...</code> as a <code>spread</code> operator to pass the whole object:</p>
+<pre><code class="hljs css languages- js"><span class="hljs-comment">/*
+asmdom::Data data(
+  Attrs {
+    {"class", "css-class"},
+    {"style", "font-weight: bold"}
+  }
+)
+*/</span>
+
+&lt;div attribute=<span class="hljs-string">"foo"</span> {...data} /&gt;
+<span class="hljs-comment">// is equal to</span>
+&lt;div attribute=<span class="hljs-string">"foo"</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"css-class"</span> style=<span class="hljs-string">"font-weight: bold"</span> /&gt;
+
+<span class="hljs-comment">// you can overwrite values in spread putting them after it</span>
+&lt;div attribute=<span class="hljs-string">"foo"</span> {...data} <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"another-css-class"</span>/&gt;
+<span class="hljs-comment">// &lt;div attribute="foo" style="font-weight: bold" class="another-css-class" /&gt;</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/asm-dom/docs/elements.html">← Elements</a><a class="docs-next button" href="/asm-dom/docs/children.html">Children →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/asm-dom/" class="nav-home"></a><div><h5>Docs</h5><a href="/asm-dom/docs/motivation.html">Introduction</a><a href="/asm-dom/docs/memory-management.html">Guides</a><a href="/asm-dom/docs/init.html">API Reference</a></div><div><h5>Community</h5><a href="http://stackoverflow.com/questions/tagged/asm-dom" target="_blank" rel="noopener noreferrer">Stack Overflow</a><a href="https://gitter.im/mbasso/asm-dom">Chat on Gitter</a><a href="https://twitter.com/teo_basso"><img alt="Follow teo_basso on Twitter" src="https://img.shields.io/twitter/follow/teo_basso.svg?label=Follow+teo_basso&amp;style=social"/></a></div><div><h5>More</h5><a href="https://github.com/mbasso/asm-dom">GitHub</a><a href="https://github.com/mbasso/asm-dom/issues">Issues</a><a class="github-button" href="https://github.com/mbasso/asm-dom" data-icon="octicon-star" data-count-href="/mbasso/asm-dom/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div></body></html>
