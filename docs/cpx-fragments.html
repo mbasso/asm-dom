@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Fragments · asm-dom</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="[DocumentFragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) can be written using a special selector `Fragment`:"/><meta property="og:title" content="Fragments · asm-dom"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mbasso.github.io/asm-dom/index.html"/><meta property="og:description" content="[DocumentFragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) can be written using a special selector `Fragment`:"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/asm-dom/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/asm-dom/css/main.css"/></head><body class="sideNavVisible doc"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/asm-dom/"><h2 class="headerTitle">asm-dom</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/asm-dom/docs/motivation.html" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/asm-dom/docs/init.html" target="_self">API</a></li><li class=""><a href="https://github.com/mbasso/asm-dom" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>CPX syntax</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Introduction</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/motivation.html">Motivation</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/inline-example.html">Inline example</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/installation.html">Installation</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/examples.html">Examples</a></li></ul></div><div class="navGroup navGroupActive"><h3>Guides</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/memory-management.html">Memory Management</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/boolean-attributes.html">Boolean Attributes</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/string-encoding.html">String Encoding</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/svg.html">SVG</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/ref.html">Ref</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/fragments.html">Fragments</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/server-side-rendering.html">Server Side Rendering</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/webcomponents.html">Web Components</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/structuring-applications.html">Structuring Applications</a></li></ul></div><div class="navGroup navGroupActive"><h3>API Reference</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/init.html">init</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/h.html">h</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/patch.html">patch</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/toVNode.html">toVNode</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/toHTML.html">toHTML</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/deleteVNode.html">deleteVNode</a></li></ul></div><div class="navGroup navGroupActive"><h3>CPX syntax</h3><ul><li class="navListItem"><a class="navItem" href="/asm-dom/docs/introduction.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/elements.html">Elements</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/tag-attributes.html">Tag Attributes</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/children.html">Children</a></li><li class="navListItem"><a class="navItem" href="/asm-dom/docs/comments.html">Comments</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/asm-dom/docs/cpx-fragments.html">Fragments</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Fragments</h1></header><article><div><span><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment">DocumentFragments</a> can be written using a special selector <code>Fragment</code>:</p>
+<pre><code class="hljs css languages- js">&lt;Fragment&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Div content<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  Hello World!
+<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">Fragment</span>&gt;</span></span>
+</code></pre>
+<p>In this way you can group a list of children without adding extra nodes to the DOM.</p>
+<pre><code class="hljs css languages- js">
+<span class="hljs-comment">// this cannot be done</span>
+<span class="hljs-comment">/* asmdom::VNode* vnode = (
+    &lt;div&gt;Child 1&lt;/div&gt;
+    &lt;div&gt;Child 2&lt;/div&gt;
+    &lt;div&gt;Child 3&lt;/div&gt;
+); */</span>
+
+<span class="hljs-comment">// this is a valid alternative to the code above</span>
+asmdom::VNode* vnode = (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Fragment</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Child 1<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Child 2<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Child 3<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Fragment</span>&gt;</span></span>
+);
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/asm-dom/docs/comments.html">← Comments</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/asm-dom/" class="nav-home"></a><div><h5>Docs</h5><a href="/asm-dom/docs/motivation.html">Introduction</a><a href="/asm-dom/docs/memory-management.html">Guides</a><a href="/asm-dom/docs/init.html">API Reference</a></div><div><h5>Community</h5><a href="http://stackoverflow.com/questions/tagged/asm-dom" target="_blank" rel="noopener noreferrer">Stack Overflow</a><a href="https://gitter.im/mbasso/asm-dom">Chat on Gitter</a><a href="https://twitter.com/teo_basso"><img alt="Follow teo_basso on Twitter" src="https://img.shields.io/twitter/follow/teo_basso.svg?label=Follow+teo_basso&amp;style=social"/></a></div><div><h5>More</h5><a href="https://github.com/mbasso/asm-dom">GitHub</a><a href="https://github.com/mbasso/asm-dom/issues">Issues</a><a class="github-button" href="https://github.com/mbasso/asm-dom" data-icon="octicon-star" data-count-href="/mbasso/asm-dom/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div></body></html>
