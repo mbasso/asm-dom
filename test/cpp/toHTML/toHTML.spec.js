@@ -21,6 +21,10 @@ describe('toHTML (cpp)', function test() {
     app.shouldParseComments();
   });
 
+  it('should parse fragments', () => {
+    app.shouldParseFragments();
+  });
+
   it('should parse text', () => {
     app.shouldParseText();
   });

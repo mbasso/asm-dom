@@ -1,12 +1,4 @@
 const recycler = {
-  collect(node) {
-    recycler.clean(node);
-    let name = node.nodeName;
-    if (node.asmDomNS !== undefined) name += node.namespaceURI;
-    const list = recycler.nodes[name];
-    if (list !== undefined) list.push(node);
-    else recycler.nodes[name] = [node];
-  },
   create(name) {
     name = name.toUpperCase();
     const list = recycler.nodes[name];
@@ -49,11 +41,15 @@ const recycler = {
     }
     return document.createComment(comment);
   },
-  clean(node) {
+  collect(node) {
+    // clean
     let i;
+
     // eslint-disable-next-line
-    while (i = node.lastChild) recycler.collect(i);
-    node.remove();
+    while (i = node.lastChild) {
+      node.removeChild(i);
+      recycler.collect(i);
+    }
     i = node.attributes !== undefined ? node.attributes.length : 0;
     while (i--) node.removeAttribute(node.attributes[i].name);
     node.asmDomVNode = undefined;
@@ -64,16 +60,13 @@ const recycler = {
       node.asmDomRaws = undefined;
     }
     if (node.asmDomEvents !== undefined) {
-      const keys = Object.keys(node.asmDomEvents);
-      i = keys.length;
-      // eslint-disable-next-line
-      while (i--) {
-        node.removeEventListener(keys[i], node.asmDomEvents[keys[i]], false);
-      }
+      Object.keys(node.asmDomEvents).forEach((event) => {
+        node.removeEventListener(event, node.asmDomEvents[event], false);
+      });
       node.asmDomEvents = undefined;
     }
-    if (node.textContent !== null && node.textContent !== '') {
-      node.textContent = '';
+    if (node.nodeValue !== null && node.nodeValue !== '') {
+      node.nodeValue = '';
     }
     Object.keys(node).forEach((key) => {
       if (
@@ -83,6 +76,13 @@ const recycler = {
         node[key] = undefined;
       }
     });
+
+    // collect
+    let name = node.nodeName;
+    if (node.asmDomNS !== undefined) name += node.namespaceURI;
+    const list = recycler.nodes[name];
+    if (list !== undefined) list.push(node);
+    else recycler.nodes[name] = [node];
   },
   nodes: {},
 };

@@ -56,6 +56,10 @@ describe('h (cpp)', function test() {
     app.shouldCreateAVNodeForComment();
   });
 
+  it('should create a vnode for fragment', () => {
+    app.shouldCreateAVNodeForFragment();
+  });
+
   it('should create a vnode with attrs and text content in string', () => {
     app.shouldCreateAVNodeWithAttrsAndTextContentInString();
   });

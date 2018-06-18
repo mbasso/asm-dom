@@ -19,7 +19,7 @@ Attrs toUtf8Attrs(std::map<std::wstring, std::wstring> utf16Attrs) {
 }
 
 void deleteVNodePtr(const std::uintptr_t& vnodePtr) {
-  delete reinterpret_cast<VNode*>(vnodePtr);
+  deleteVNode(reinterpret_cast<VNode*>(vnodePtr));
 };
 
 std::uintptr_t toVNodePtr(const emscripten::val& node) {
@@ -42,8 +42,8 @@ std::uintptr_t h_s(const std::wstring& sel) {
   return reinterpret_cast<std::uintptr_t>(h(wstring_to_utf8(sel)));
 };
 
-std::uintptr_t h_ti(const std::wstring& nodeText, bool isText) {
-  return reinterpret_cast<std::uintptr_t>(h(wstring_to_utf8(nodeText), isText));
+std::uintptr_t h_ti(const std::wstring& nodeText, bool text) {
+  return reinterpret_cast<std::uintptr_t>(h(wstring_to_utf8(nodeText), text));
 };
 
 std::uintptr_t h_sn(const std::wstring& sel, const std::uintptr_t& node) {
@@ -86,6 +86,13 @@ std::uintptr_t h_elm(const std::wstring& sel, const std::map<std::wstring, std::
   VNode* vnode = h(wstring_to_utf8(sel), Data(toUtf8Attrs(nodeAttrs)));
   vnode->elm = elm;
   return reinterpret_cast<std::uintptr_t>(vnode);
+};
+
+int main() {
+  Config config = Config();
+  init(config);
+
+  return 0;
 };
 
 EMSCRIPTEN_BINDINGS(bindings) {

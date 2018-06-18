@@ -173,6 +173,75 @@ describe('patch (js)', function testPatch() {
     vdom.deleteVNode(elmPtr);
   });
 
+  it('should create fragments', () => {
+    const vnode = h('', 'foo');
+    const elmPtr = patch(root, vnode);
+    const elm = document.body.firstChild;
+    expect(elm.nodeType).toEqual(document.TEXT_NODE);
+    expect(elm.textContent).toEqual('foo');
+    vdom.deleteVNode(elmPtr);
+  });
+
+  it('should patch an element inside a fragment', () => {
+    const vnode = h('', h('span', 'foo'));
+    const vnode2 = h('', h('span', 'bar'));
+    patch(root, vnode);
+    let elm = document.body.firstChild;
+    expect(elm.tagName).toEqual('SPAN');
+    expect(elm.textContent).toEqual('foo');
+    patch(vnode, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.tagName).toEqual('SPAN');
+    expect(elm.textContent).toEqual('bar');
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should append elements to fragment', () => {
+    const vnode = h('div', h('', h('span', 'foo')));
+    const vnode2 = h('div', h('', [
+      h('span', 'foo'),
+      h('span', 'bar'),
+    ]));
+    patch(root, vnode);
+    let elm = document.body.firstChild;
+    expect(elm.tagName).toEqual('DIV');
+    expect(elm.children.length).toEqual(1);
+    expect(elm.children[0].tagName).toEqual('SPAN');
+    expect(elm.children[0].textContent).toEqual('foo');
+    patch(vnode, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.tagName).toEqual('DIV');
+    expect(elm.children.length).toEqual(2);
+    expect(elm.children[0].tagName).toEqual('SPAN');
+    expect(elm.children[0].textContent).toEqual('foo');
+    expect(elm.children[1].tagName).toEqual('SPAN');
+    expect(elm.children[1].textContent).toEqual('bar');
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should remove elements from fragment', () => {
+    const vnode = h('div', h('', [
+      h('span', 'foo'),
+      h('span', 'bar'),
+    ]));
+    const vnode2 = h('div', h('', h('span', 'foo')));
+    patch(root, vnode);
+    let elm = document.body.firstChild;
+    expect(elm.tagName).toEqual('DIV');
+    expect(elm.children.length).toEqual(2);
+    expect(elm.children[0].tagName).toEqual('SPAN');
+    expect(elm.children[0].textContent).toEqual('foo');
+    expect(elm.children[1].tagName).toEqual('SPAN');
+    expect(elm.children[1].textContent).toEqual('bar');
+    patch(vnode, vnode2);
+    elm = document.body.firstChild;
+    expect(elm.tagName).toEqual('DIV');
+    expect(elm.children.length).toEqual(1);
+    expect(elm.children[0].tagName).toEqual('SPAN');
+    expect(elm.children[0].textContent).toEqual('foo');
+    vdom.deleteVNode(vnode2);
+  });
+
   /*
   it('should create an element created inside an iframe', (done) => {
     // Only run if srcdoc is supported.
@@ -878,5 +947,131 @@ describe('patch (js)', function testPatch() {
     const fragment = template.content.cloneNode(true);
     expect(fragment.nodeName).toEqual('#document-fragment');
     vdom.deleteVNode(vnode);
+  });
+
+  it('should call ref with DOM node', () => {
+    let param;
+    const data = {
+      'data-foo': 'bar',
+      ref: (node) => {
+        param = node;
+        if (node !== null) {
+          expect(node.getAttribute('data-foo')).toEqual('bar');
+        }
+      },
+    };
+    const vnode = h('div', h('div', data));
+    patch(root, vnode);
+    expect(param).toBeTruthy();
+
+    const vnode2 = h('div');
+    patch(vnode, vnode2);
+    expect(param).toEqual(null);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should call ref on add', () => {
+    const data = {
+      ref: (node) => {
+        expect(node.getAttribute('data-foo')).toEqual('bar');
+      },
+    };
+    const spy = expect.spyOn(data, 'ref');
+    const vnode = h('div', h('div', data));
+    patch(root, vnode);
+    expect(spy.calls.length).toEqual(1);
+
+    const vnode2 = h('div', h('div', data));
+    patch(vnode, vnode2);
+    expect(spy.calls.length).toEqual(1);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should call ref on remove', () => {
+    const data = {
+      ref: () => {},
+    };
+    const spy = expect.spyOn(data, 'ref');
+    const vnode = h('div', h('div', data));
+    patch(root, vnode);
+
+    const vnode2 = h('div');
+    patch(vnode, vnode2);
+    expect(spy.calls.length).toEqual(2);
+    expect(spy.calls[1].arguments).toEqual([null]);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should not call ref on update', () => {
+    const data = {
+      ref: (node) => {
+        expect(node.getAttribute('data-foo')).toEqual('bar');
+      },
+    };
+    const spy = expect.spyOn(data, 'ref');
+    const vnode = h('div', h('div', data));
+    patch(root, vnode);
+    expect(spy.calls.length).toEqual(1);
+
+    const vnode2 = h('div', h('div', data));
+    patch(vnode, vnode2);
+    expect(spy.calls.length).toEqual(1);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should call ref on change', () => {
+    const data1 = {
+      ref: (node) => {
+        expect(node.getAttribute('data-foo')).toEqual('bar');
+      },
+    };
+    const data2 = {
+      ref: (node) => {
+        expect(node.getAttribute('data-foo')).toEqual('bar');
+      },
+    };
+    const spy1 = expect.spyOn(data1, 'ref');
+    const spy2 = expect.spyOn(data2, 'ref');
+    const vnode = h('div', h('div', data1));
+    patch(root, vnode);
+    expect(spy1.calls.length).toEqual(1);
+    expect(spy2.calls.length).toEqual(0);
+
+    const vnode2 = h('div', h('div', data2));
+    patch(vnode, vnode2);
+    expect(spy1.calls.length).toEqual(1);
+    expect(spy2.calls.length).toEqual(1);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should call ref on update if ref is added', () => {
+    const data = {
+      ref: () => {},
+    };
+    const spy = expect.spyOn(data, 'ref');
+    const vnode = h('div', h('div'));
+    patch(root, vnode);
+
+    const vnode2 = h('div', h('div', data));
+    patch(vnode, vnode2);
+    expect(spy.calls.length).toEqual(1);
+    vdom.deleteVNode(vnode2);
+  });
+
+  it('should not set ref as callback', () => {
+    const callbacks = {
+      click: () => {},
+      ref: () => {},
+    };
+    const vnode1 = h('i', {
+      onclick: callbacks.click,
+      ref: callbacks.ref,
+    });
+    patch(root, vnode1);
+    const elm = document.body.firstChild;
+    expect(elm.asmDomEvents).toEqual({
+      click: callbacks.click,
+    });
+    vdom.deleteVNode(vnode1);
   });
 });

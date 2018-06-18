@@ -18,5 +18,5 @@ VNode* vnode = h("span", Children {
   child1,
   child2,
 });
-delete vnode; // manually delete vnode, child1 and child2 from memory
+deleteVNode(vnode); // manually delete vnode, child1 and child2 from memory
 ```

@@ -18,7 +18,7 @@ void shouldConvertANodeToVNode() {
 		emscripten::val("DIV")
 	);
 
-  delete vnode;
+  deleteVNode(vnode);
 };
 
 void shouldConvertTextNodeToVNode() {
@@ -38,7 +38,7 @@ void shouldConvertTextNodeToVNode() {
 		emscripten::val("Hello world!")
 	);
 
-  delete vnode;
+  deleteVNode(vnode);
 };
 
 void shouldConvertCommentNodeToVNode() {
@@ -58,7 +58,7 @@ void shouldConvertCommentNodeToVNode() {
 		emscripten::val("Hello world!")
 	);
 
-  delete vnode;
+  deleteVNode(vnode);
 
 };
 
@@ -90,7 +90,7 @@ void shouldConvertANodeWithAttributesToVNode() {
 		emscripten::val("foo")
 	);
 
-  delete vnode;
+  deleteVNode(vnode);
 };
 
 void shouldConvertANodeWithChildrenToVNode() {
@@ -124,7 +124,7 @@ void shouldConvertANodeWithChildrenToVNode() {
 	assertEquals(elm["childNodes"]["1"]["childNodes"]["1"]["textContent"], emscripten::val("bar"));
 	assertEquals(elm["childNodes"]["2"]["tagName"], emscripten::val("DIV"));
 
-  delete vnode;
+  deleteVNode(vnode);
 };
 
 void shouldConvertANodeWithAttributesAndChildrenToVNode() {
@@ -154,7 +154,7 @@ void shouldConvertANodeWithAttributesAndChildrenToVNode() {
 	);
 	assertEquals(elm["childNodes"]["1"]["tagName"], emscripten::val("DIV"));
 
-  delete vnode;
+  deleteVNode(vnode);
 };
 
 void shouldRemovePreviousChildrenOfTheRootElement() {
@@ -189,7 +189,7 @@ void shouldRemovePreviousChildrenOfTheRootElement() {
 	assertEquals(elm["childNodes"]["0"]["tagName"], emscripten::val("SPAN"));
 	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Hi"));
 
-	delete nextVNode;
+	deleteVNode(nextVNode);
 };
 
 void shouldSupportPatchingInADocumentFragment() {
@@ -225,7 +225,7 @@ void shouldSupportPatchingInADocumentFragment() {
 	assertEquals(elm["childNodes"]["0"]["childNodes"]["0"]["tagName"], emscripten::val("SPAN"));
 	assertEquals(elm["childNodes"]["0"]["childNodes"]["0"]["textContent"], emscripten::val("Hi"));
 
-	delete nextVNode;
+	deleteVNode(nextVNode);
 };
 
 void shouldRemoveSomeChildrenOfTheRootElement() {
@@ -264,7 +264,7 @@ void shouldRemoveSomeChildrenOfTheRootElement() {
 	assertEquals(elm["childNodes"]["0"]["wholeText"], emscripten::val("Foobar"));
 	assertEquals(elm["childNodes"]["0"]["testProperty"], emscripten::val(123));
 
-	delete nextVNode;
+	deleteVNode(nextVNode);
 };
 
 void shouldRemoveTextElements() {
@@ -301,7 +301,7 @@ void shouldRemoveTextElements() {
 	assertEquals(elm["childNodes"]["0"]["nodeType"], emscripten::val(1));
 	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Hello"));
 
-	delete nextVNode;
+	deleteVNode(nextVNode);
 };
 
 EMSCRIPTEN_BINDINGS(toVNode_tests) {

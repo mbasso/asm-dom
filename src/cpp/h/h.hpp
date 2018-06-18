@@ -10,7 +10,7 @@ namespace asmdom {
 
 	VNode* h(const std::string& sel);
 	VNode* h(const std::string& sel, const std::string& text);
-	VNode* h(const std::string& sel, bool isText);
+	VNode* h(const std::string& sel, bool text);
 	VNode* h(const std::string& sel, const Data& data);
 	VNode* h(const std::string& sel, const Children& children);
 	VNode* h(const std::string& sel, VNode* child);

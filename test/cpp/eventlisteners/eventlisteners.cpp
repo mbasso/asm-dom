@@ -44,7 +44,7 @@ void shouldAttachAClickEventHandlerToElement() {
 		throw 20;
 	}
 
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldDetachAttachedClickEventHandlerToElement() {
@@ -79,7 +79,7 @@ void shouldDetachAttachedClickEventHandlerToElement() {
 	if (result.size() != 1) {
 		throw 20;
 	}
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldShareHandlersInParentAndChildNodes() {
@@ -116,7 +116,7 @@ void shouldShareHandlersInParentAndChildNodes() {
 		throw 20;
 	}
 
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldHandleLambdaWithCapture() {
@@ -142,7 +142,7 @@ void shouldHandleLambdaWithCapture() {
 		throw 20;
 	}
 
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldUpdateHandlers() {
@@ -186,7 +186,7 @@ void shouldUpdateHandlers() {
 		throw 20;
 	}
 
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldNotUpdateHandlers() {
@@ -230,7 +230,32 @@ void shouldNotUpdateHandlers() {
 		throw 20;
 	}
 
-	delete vnode2;
+	deleteVNode(vnode2);
+};
+
+void shouldNotAttachRefEventHandlerToElement() {
+	beforeEach();
+
+	VNode* vnode1 = h("div",
+		Data(
+			Callbacks {
+				{"ref", [](emscripten::val e) -> bool {
+					return false;
+				}}
+			}
+		)
+	);
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	emscripten::val keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomEvents"]);
+	assertEquals(keys["length"], emscripten::val(0));
+
+	VNode* vnode2 = h("div");
+	patch(vnode1, vnode2);
+	keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomEvents"]);
+	assertEquals(keys["length"], emscripten::val(0));
+
+	deleteVNode(vnode2);
 };
 
 EMSCRIPTEN_BINDINGS(eventlisteners_tests) {
@@ -240,4 +265,5 @@ EMSCRIPTEN_BINDINGS(eventlisteners_tests) {
   emscripten::function("shouldHandleLambdaWithCapture", &shouldHandleLambdaWithCapture);
   emscripten::function("shouldUpdateHandlers", &shouldUpdateHandlers);
   emscripten::function("shouldNotUpdateHandlers", &shouldNotUpdateHandlers);
+  emscripten::function("shouldNotAttachRefEventHandlerToElement", &shouldNotAttachRefEventHandlerToElement);
 };

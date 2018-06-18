@@ -4,12 +4,18 @@ node_js:
   - "7"
   - "8"
   - "9"
+  - "10"
 install: true
+sudo: required
+services:
+  - docker
+before_install:
+  - docker run -dit --name emscripten -v $(pwd):/src trzeci/emscripten:sdk-incoming-64bit bash
 script:
   - npm install --ignore-scripts
+  - docker exec -it emscripten make
   - npm run lint
   - npm run test:js
-  - npm run build
 branches:
   only:
     - master
@@ -32,4 +38,5 @@ jobs:
       branches:
         only:
           - master
+      if: tag =~ ^\d+\.\d+\.\d+
       after_success: echo "Website online"

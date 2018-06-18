@@ -6,10 +6,9 @@ let lastPtr = 0;
 const addPtr = (node) => {
   if (node === null) return 0;
   if (node.asmDomPtr !== undefined) return node.asmDomPtr;
-  const ptr = ++lastPtr;
-  nodes[ptr] = node;
-  node.asmDomPtr = ptr;
-  return ptr;
+  nodes[++lastPtr] = node;
+  node.asmDomPtr = lastPtr;
+  return lastPtr;
 };
 
 export default {
@@ -30,6 +29,9 @@ export default {
   'createComment'(text) {
     return addPtr(recycler.createComment(text));
   },
+  'createDocumentFragment'() {
+    return addPtr(document.createDocumentFragment());
+  },
   'insertBefore'(parentNodePtr, newNodePtr, referenceNodePtr) {
     nodes[parentNodePtr].insertBefore(
       nodes[newNodePtr],
@@ -37,8 +39,11 @@ export default {
     );
   },
   'removeChild'(childPtr) {
-    if (nodes[childPtr] === null || nodes[childPtr] === undefined) return;
-    recycler.collect(nodes[childPtr]);
+    const node = nodes[childPtr];
+    if (node === null || node === undefined) return;
+    const parent = node.parentNode;
+    if (parent !== null) parent.removeChild(node);
+    recycler.collect(node);
   },
   'appendChild'(parentPtr, childPtr) {
     nodes[parentPtr].appendChild(nodes[childPtr]);
@@ -63,19 +68,21 @@ export default {
   },
   // eslint-disable-next-line
   'parentNode': (nodePtr) => {
+    const node = nodes[nodePtr];
     return (
-      nodes[nodePtr] !== null && nodes[nodePtr] !== undefined &&
-      nodes[nodePtr].parentNode !== null
-    ) ? nodes[nodePtr].parentNode.asmDomPtr : 0;
+      node !== null && node !== undefined &&
+      node.parentNode !== null
+    ) ? node.parentNode.asmDomPtr : 0;
   },
   // eslint-disable-next-line
   'nextSibling': (nodePtr) => {
+    const node = nodes[nodePtr];
     return (
-      nodes[nodePtr] !== null && nodes[nodePtr] !== undefined &&
-      nodes[nodePtr].nextSibling !== null
-    ) ? nodes[nodePtr].nextSibling.asmDomPtr : 0;
+      node !== null && node !== undefined &&
+      node.nextSibling !== null
+    ) ? node.nextSibling.asmDomPtr : 0;
   },
-  'setTextContent': (nodePtr, text) => {
-    nodes[nodePtr].textContent = text;
+  'setNodeValue': (nodePtr, text) => {
+    nodes[nodePtr].nodeValue = text;
   },
 };

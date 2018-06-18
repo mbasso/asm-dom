@@ -21,12 +21,10 @@ const config = {};
 import('../compiled/wasm/app.wasm')
 .then((wasm) => {
   config.wasmBinary = new Uint8Array(wasm);
-  return new Promise((resolve) => {
-    import('../compiled/wasm/app.js').then(factory => {
-      const asmDom = factory(config);
-      delete asmDom.then;
-      resolve(asmDom);
-    });
+  return import('../compiled/wasm/app.js').then(factory => {
+    const asmDom = factory(config);
+    delete asmDom.then;
+    return asmDom;
   });
 })
 .then((app) => {
@@ -48,19 +46,19 @@ import('../compiled/wasm/app.wasm')
         message: 'create nodes',
         fn: asmdomCpp.create,
       }, {
-        message: 'create and diff equal nodes',
+        message: 'diff equal nodes',
         setup: function () {
           asmdomCpp.patchWithoutChangesSetup();
         },
         fn: asmdomCpp.patchWithoutChanges,
       }, {
-        message: 'create and diff different nodes',
+        message: 'diff different nodes',
         setup: function () {
           asmdomCpp.patchWithChangesSetup();
         },
         fn: asmdomCpp.patchWithChanges,
       }, {
-        message: 'create and add/remove nodes',
+        message: 'add/remove nodes',
         setup: function () {
           asmdomCpp.patchWithAdditionSetup();
         },
@@ -89,7 +87,7 @@ import('../compiled/wasm/app.wasm')
           }
         },
       }, {
-        message: 'create and diff equal nodes',
+        message: 'diff equal nodes',
         setup: function() {
           var elm = document.getElementById('root');
           var children = [];
@@ -140,7 +138,7 @@ import('../compiled/wasm/app.wasm')
           }
         },
       }, {
-        message: 'create and diff different nodes',
+        message: 'diff different nodes',
         setup: function() {
           const elm = document.getElementById('root');
           var children = [];
@@ -191,7 +189,7 @@ import('../compiled/wasm/app.wasm')
           }
         },
       }, {
-        message: 'create and add/remove nodes',
+        message: 'add/remove nodes',
         setup: function() {
           var elm = document.getElementById('root');
           var children = [];

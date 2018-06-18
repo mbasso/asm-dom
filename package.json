@@ -1,6 +1,6 @@
 {
   "name": "asm-dom",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "A minimal WebAssembly virtual DOM to build C++ SPA (Single page applications)",
   "main": "lib/js/index.js",
   "jsnext:main": "es/js/index.js",
@@ -13,26 +13,10 @@
     "compiled"
   ],
   "scripts": {
-    "clean": "rimraf lib dist es cpp .nyc_output compiled",
-    "compile": "npm run clean && mkdir -p compiled && npm run compile:cpp && npm run compile:asmjs && npm run compile:wasm",
-    "compile:cpp": "emcc -O3 -DASMDOM_JS_SIDE -Wall -Werror --bind src/cpp/asm-dom.cpp src/cpp/asm-dom-server.cpp src/js/index.cpp -o compiled/asm-dom.bc && emcc -O3 -Wall -Werror --bind src/cpp/asm-dom.cpp src/cpp/asm-dom-server.cpp -o compiled/asm-dom.o && emcc -O3 -Wall -Werror --bind src/cpp/asm-dom.cpp src/cpp/asm-dom-server.cpp -o compiled/asm-dom.a",
-    "compile:asmjs": "mkdir -p compiled/asmjs && emcc -O3 --bind --memory-init-file 0 --llvm-lto 3 --llvm-opts 3 --js-opts 1 --closure 1 -s MODULARIZE=1 -s \"EXPORTED_RUNTIME_METHODS=['UTF8ToString']\" -s AGGRESSIVE_VARIABLE_ELIMINATION=1 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s ABORTING_MALLOC=1 -s NO_EXIT_RUNTIME=1 -s NO_FILESYSTEM=1 -s DISABLE_EXCEPTION_CATCHING=2 compiled/asm-dom.bc -o compiled/asmjs/asm-dom.asm.js",
-    "compile:wasm": "mkdir -p compiled/wasm && emcc -O3 --bind --memory-init-file 0 --llvm-lto 3 --llvm-opts 3 --js-opts 1 --closure 1 -s MODULARIZE=1 -s ALLOW_MEMORY_GROWTH=1 -s \"EXPORTED_RUNTIME_METHODS=['UTF8ToString']\" -s AGGRESSIVE_VARIABLE_ELIMINATION=1 -s ABORTING_MALLOC=1 -s NO_EXIT_RUNTIME=1 -s NO_FILESYSTEM=1 -s DISABLE_EXCEPTION_CATCHING=2 -s BINARYEN=1 -s \"BINARYEN_TRAP_MODE='allow'\" compiled/asm-dom.bc -o compiled/wasm/asm-dom.js",
-    "compile:tests": "emcc -O3 -DASMDOM_TEST -Wall -Werror --bind --memory-init-file 0 --llvm-lto 3 --llvm-opts 3 --js-opts 1 --closure 1 -s MODULARIZE=1 -s \"EXPORTED_RUNTIME_METHODS=['UTF8ToString']\" -s AGGRESSIVE_VARIABLE_ELIMINATION=1 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s ABORTING_MALLOC=1 -s NO_EXIT_RUNTIME=1 -s NO_FILESYSTEM=1 -s DISABLE_EXCEPTION_CATCHING=2 src/cpp/asm-dom.cpp src/cpp/asm-dom-server.cpp test/cpp/tests.cpp -o test/cpp/app.asm.js",
-    "test": "npm run test:js",
-    "pretest": "npm run compile && npm run compile:tests",
+    "lint": "eslint src test build",
+    "prepublish": "make clean && make && make lint && make test_js",
     "test:js": "cross-env BABEL_ENV=commonjs nyc --require babel-register --require ./test/setup.js mocha --recursive",
-    "test:watch": "npm test -- --watch",
-    "test:cov": "nyc report --reporter=text-lcov | coveralls",
-    "check:src": "npm run lint && npm run test",
-    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
-    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
-    "build:umd": "cross-env BABEL_ENV=commonjs webpack --env.prod src/js/index.js dist/js/asm-dom.js",
-    "build:cpp": "cross-env BABEL_ENV=commonjs webpack --env.prod --env.cpp src/cpp/index.js dist/cpp/asm-dom.js",
-    "build": "ncp src/cpp cpp && npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:cpp && ncp dist/cpp cpp && ncp lib/cpp cpp",
-    "build:compile": "npm run compile && npm run build",
-    "prepublish": "npm run check:src && npm run build",
-    "lint": "eslint src test build"
+    "test:cov": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -67,6 +51,7 @@
     "babel-preset-es2015": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
     "babel-register": "6.24.1",
+    "brotli-webpack-plugin": "0.5.0",
     "compression-webpack-plugin": "0.4.0",
     "coveralls": "2.13.0",
     "cross-env": "4.0.0",
@@ -80,6 +65,7 @@
     "istanbul": "0.4.5",
     "jsdom": "11.5.1",
     "knuth-shuffle": "1.0.1",
+    "mkdirp": "0.5.1",
     "mocha": "3.2.0",
     "ncp": "2.0.0",
     "nyc": "11.0.2",

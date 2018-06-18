@@ -97,6 +97,11 @@ describe('h (js)', function test() {
     vdom.deleteVNode(vnodePtr);
   });
 
+  it('should create a vnode for fragment', () => {
+    const vnodePtr = h('');
+    vdom.deleteVNode(vnodePtr);
+  });
+
   it('should create a vnode with attrs and text content in string', () => {
     const vnodePtr = h('div', {
       foo: 'bar',

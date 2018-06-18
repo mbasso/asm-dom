@@ -15,10 +15,9 @@ var lastPtr = 0;
 var addPtr = function addPtr(node) {
   if (node === null) return 0;
   if (node.asmDomPtr !== undefined) return node.asmDomPtr;
-  var ptr = ++lastPtr;
-  nodes[ptr] = node;
-  node.asmDomPtr = ptr;
-  return ptr;
+  nodes[++lastPtr] = node;
+  node.asmDomPtr = lastPtr;
+  return lastPtr;
 };
 
 exports['default'] = {
@@ -39,12 +38,18 @@ exports['default'] = {
   'createComment': function createComment(text) {
     return addPtr(_domRecycler2['default'].createComment(text));
   },
+  'createDocumentFragment': function createDocumentFragment() {
+    return addPtr(document.createDocumentFragment());
+  },
   'insertBefore': function insertBefore(parentNodePtr, newNodePtr, referenceNodePtr) {
     nodes[parentNodePtr].insertBefore(nodes[newNodePtr], nodes[referenceNodePtr]);
   },
   'removeChild': function removeChild(childPtr) {
-    if (nodes[childPtr] === null || nodes[childPtr] === undefined) return;
-    _domRecycler2['default'].collect(nodes[childPtr]);
+    var node = nodes[childPtr];
+    if (node === null || node === undefined) return;
+    var parent = node.parentNode;
+    if (parent !== null) parent.removeChild(node);
+    _domRecycler2['default'].collect(node);
   },
   'appendChild': function appendChild(parentPtr, childPtr) {
     nodes[parentPtr].appendChild(nodes[childPtr]);
@@ -70,13 +75,15 @@ exports['default'] = {
 
   // eslint-disable-next-line
   'parentNode': function parentNode(nodePtr) {
-    return nodes[nodePtr] !== null && nodes[nodePtr] !== undefined && nodes[nodePtr].parentNode !== null ? nodes[nodePtr].parentNode.asmDomPtr : 0;
+    var node = nodes[nodePtr];
+    return node !== null && node !== undefined && node.parentNode !== null ? node.parentNode.asmDomPtr : 0;
   },
   // eslint-disable-next-line
   'nextSibling': function nextSibling(nodePtr) {
-    return nodes[nodePtr] !== null && nodes[nodePtr] !== undefined && nodes[nodePtr].nextSibling !== null ? nodes[nodePtr].nextSibling.asmDomPtr : 0;
+    var node = nodes[nodePtr];
+    return node !== null && node !== undefined && node.nextSibling !== null ? node.nextSibling.asmDomPtr : 0;
   },
-  'setTextContent': function setTextContent(nodePtr, text) {
-    nodes[nodePtr].textContent = text;
+  'setNodeValue': function setNodeValue(nodePtr, text) {
+    nodes[nodePtr].nodeValue = text;
   }
 };

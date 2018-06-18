@@ -25,51 +25,25 @@ git clone https://github.com/mbasso/asm-dom.git
 
 #### Building asm-dom
 
-Running the `build` task will create both a CommonJS module-per-module build and a UMD build.
+Running `make` will create both the C++ and the JS version of asm-dom, a CommonJS module-per-module build and a UMD build.
 ```
-npm run build
-```
-
-To create just a CommonJS module-per-module build:
-
-```
-npm run build:commonjs
+make
 ```
 
-The result will be in the `lib` folder.
-
-To create just a UMD build:
-```
-npm run build:umd
-npm run build:umd:min
-```
-
-The result will be in the `dist` folder.
+The result will be in the `lib`, `es` and `dist` folder.
 
 ### Testing and Linting
 
-To run both linting and testing at once, run the following:
+To run linting:
 
 ```
-npm run check:src
+make lint
 ```
 
-To only run linting:
+To run tests:
 
 ```
-npm run lint
-```
-
-To only run tests:
-
-```
-npm run test
-```
-
-To continuously watch and run tests, run the following:
-
-```
-npm run test:watch
+make test
 ```
 
 ### Docs

@@ -9,6 +9,28 @@
 
 using namespace asmdom;
 
+int refCount = 1;
+bool refCallback(emscripten::val node) {
+	++refCount;
+	return true;
+};
+
+bool refCallback2(emscripten::val node) {
+	++refCount;
+	return true;
+};
+
+VNode* spanNum(int i) {
+	return h("span",
+		Data(
+			Attrs {
+				{"key", std::to_string(i)}
+			}
+		),
+		std::to_string(i)
+	);
+};
+
 void shouldPatchANode() {
 	assertEquals(emscripten::val::global("document")["body"]["children"]["length"], emscripten::val(1));
 	assertEquals(emscripten::val::global("document")["body"]["firstChild"], emscripten::val(getRoot()));
@@ -18,7 +40,7 @@ void shouldPatchANode() {
 	assertEquals(emscripten::val::global("document")["body"]["children"]["length"], emscripten::val(1));
 	assertEquals(elm["nodeName"], emscripten::val("SPAN"));
 	assertEquals(elm["className"], emscripten::val(""));
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldHaveATag() {
@@ -26,7 +48,7 @@ void shouldHaveATag() {
 	VNode* elmPtr = patch(getRoot(), vnode);
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["tagName"], emscripten::val("DIV"));
-	delete elmPtr;
+	deleteVNode(elmPtr);
 };
 
 void shouldHaveTheCorrectNamespace() {
@@ -43,7 +65,7 @@ void shouldHaveTheCorrectNamespace() {
 	patch(getRoot(), vnode);
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["firstChild"]["namespaceURI"], emscripten::val(svgNamespace));
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldInjectSvgNamespace() {
@@ -68,7 +90,7 @@ void shouldInjectSvgNamespace() {
 	assertEquals(elm["namespaceURI"], emscripten::val(svgNamespace));
 	assertEquals(elm["firstChild"]["namespaceURI"], emscripten::val(svgNamespace));
 	assertEquals(elm["firstChild"]["firstChild"]["namespaceURI"], emscripten::val(XHTMLNamespace));
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateElementsWithClass() {
@@ -85,7 +107,7 @@ void shouldCreateElementsWithClass() {
 		elm.call<emscripten::val>("getAttribute", emscripten::val("class")),
 		emscripten::val("foo")
 	);
-	delete elmPtr;
+	deleteVNode(elmPtr);
 };
 
 void shouldCreateElementsWithTextContent() {
@@ -97,7 +119,7 @@ void shouldCreateElementsWithTextContent() {
 	VNode* elmPtr = patch(getRoot(), vnode);
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["innerHTML"], emscripten::val("I am a string"));
-	delete elmPtr;
+	deleteVNode(elmPtr);
 };
 
 // TODO : how can we test this?
@@ -114,7 +136,7 @@ void shouldCreateElementsWithSpanAndTextContent() {
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["childNodes"]["0"]["tagName"], emscripten::val("SPAN"));
 	assertEquals(elm["childNodes"]["1"]["textContent"], emscripten::val("I am a string"));
-	delete elmPtr;
+	deleteVNode(elmPtr);
 };
 
 void isAPatchOfTheRootElement() {
@@ -139,7 +161,7 @@ void isAPatchOfTheRootElement() {
 	assertEquals(elm["tagName"], emscripten::val("DIV"));
 	assertEquals(elm["id"], emscripten::val("id"));
 	assertEquals(elm["className"], emscripten::val("class"));
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateComments() {
@@ -148,20 +170,109 @@ void shouldCreateComments() {
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["nodeType"], emscripten::val::global("document")["COMMENT_NODE"]);
 	assertEquals(elm["textContent"], emscripten::val("test"));
-	delete elmPtr;
+	deleteVNode(elmPtr);
+};
+
+void shouldCreateFragments() {
+	VNode* vnode = h("", h("foo", true));
+	VNode* elmPtr = patch(getRoot(), vnode);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["nodeType"], emscripten::val::global("document")["TEXT_NODE"]);
+	assertEquals(elm["textContent"], emscripten::val("foo"));
+	deleteVNode(elmPtr);
+};
+
+void shouldPatchAnElementInsideAFragment() {
+	VNode* vnode1 = h("", h("span", std::string("foo")));
+	VNode* vnode2 = h("", h("span", std::string("bar")));
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["textContent"], emscripten::val("foo"));
+	patch(vnode1, vnode2);
+	elm = getBodyFirstChild();
+	assertEquals(elm["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["textContent"], emscripten::val("bar"));
+	deleteVNode(vnode2);
+};
+
+void shouldAppendElementsToFragment() {
+	VNode* vnode1 = h("div",
+		h("",
+			Children {
+				h("span", std::string("foo"))
+			}
+		)
+	);
+	VNode* vnode2 = h("div",
+		h("",
+			Children {
+				h("span", std::string("foo")),
+				h("span", std::string("bar"))
+			}
+		)
+	);
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["tagName"], emscripten::val("DIV"));
+	assertEquals(elm["children"]["length"], emscripten::val(1));
+	assertEquals(elm["children"]["0"]["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("foo"));
+	patch(vnode1, vnode2);
+	elm = getBodyFirstChild();
+	assertEquals(elm["tagName"], emscripten::val("DIV"));
+	assertEquals(elm["children"]["length"], emscripten::val(2));
+	assertEquals(elm["children"]["0"]["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("foo"));
+	assertEquals(elm["children"]["1"]["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["children"]["1"]["textContent"], emscripten::val("bar"));
+	deleteVNode(vnode2);
+};
+
+void shouldRemoveElementsFromFragment() {
+	VNode* vnode1 = h("div",
+		h("",
+			Children {
+				h("span", std::string("foo")),
+				h("span", std::string("bar"))
+			}
+		)
+	);
+	VNode* vnode2 = h("div",
+		h("",
+			Children {
+				h("span", std::string("foo"))
+			}
+		)
+	);
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	assertEquals(elm["tagName"], emscripten::val("DIV"));
+	assertEquals(elm["children"]["length"], emscripten::val(2));
+	assertEquals(elm["children"]["0"]["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("foo"));
+	assertEquals(elm["children"]["1"]["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["children"]["1"]["textContent"], emscripten::val("bar"));
+	patch(vnode1, vnode2);
+	elm = getBodyFirstChild();
+	assertEquals(elm["tagName"], emscripten::val("DIV"));
+	assertEquals(elm["children"]["length"], emscripten::val(1));
+	assertEquals(elm["children"]["0"]["tagName"], emscripten::val("SPAN"));
+	assertEquals(elm["children"]["0"]["textContent"], emscripten::val("foo"));
+	deleteVNode(vnode2);
 };
 
 void shouldAppendElements() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1"))
+			spanNum(1)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -172,23 +283,23 @@ void shouldAppendElements() {
 	assertEquals(elm["children"]["length"], emscripten::val(3));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("3"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldPrependElements() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -202,25 +313,25 @@ void shouldPrependElements() {
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("3"));
 	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("4"));
 	assertEquals(elm["children"]["4"]["innerHTML"], emscripten::val("5"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldAddElementsInTheMiddle() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -234,24 +345,24 @@ void shouldAddElementsInTheMiddle() {
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("3"));
 	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("4"));
 	assertEquals(elm["children"]["4"]["innerHTML"], emscripten::val("5"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldAddElementsAtBeginAndEnd() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4"))
+			spanNum(2),
+			spanNum(3),
+			spanNum(4)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -265,7 +376,7 @@ void shouldAddElementsAtBeginAndEnd() {
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("3"));
 	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("4"));
 	assertEquals(elm["children"]["4"]["innerHTML"], emscripten::val("5"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldAddChildrenToParentWithNoChildren() {
@@ -297,7 +408,7 @@ void shouldAddChildrenToParentWithNoChildren() {
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("1"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("3"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldRemoveAllChildrenFromParent() {
@@ -329,7 +440,7 @@ void shouldRemoveAllChildrenFromParent() {
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
 	assertEquals(elm["children"]["length"], emscripten::val(0));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldUpdateOneChildWithSameKeyButDifferentSel() {
@@ -340,9 +451,9 @@ void shouldUpdateOneChildWithSameKeyButDifferentSel() {
 			}
 		),
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3)
 		}
 	);
 	VNode* vnode2 = h("span",
@@ -352,7 +463,7 @@ void shouldUpdateOneChildWithSameKeyButDifferentSel() {
 			}
 		),
 		Children {
-			h(std::string("span"), std::string("1")),
+			spanNum(1),
 			h("i",
 				Data (
 					Attrs {
@@ -361,7 +472,7 @@ void shouldUpdateOneChildWithSameKeyButDifferentSel() {
 				),
 				std::string("2")
 			),
-			h(std::string("span"), std::string("3"))
+			spanNum(3)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -377,24 +488,24 @@ void shouldUpdateOneChildWithSameKeyButDifferentSel() {
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("3"));
 	assertEquals(elm["children"]["1"]["tagName"], emscripten::val("I"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldRemoveElementsFromTheBeginning() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(3),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -406,24 +517,24 @@ void shouldRemoveElementsFromTheBeginning() {
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("3"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("4"));
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("5"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldRemoveElementsFromTheEnd() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -435,25 +546,25 @@ void shouldRemoveElementsFromTheEnd() {
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("1"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("3"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldRemoveElementsFromTheMiddle() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -466,24 +577,24 @@ void shouldRemoveElementsFromTheMiddle() {
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("4"));
 	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("5"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldMoveElementForward() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(4)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("4"))
+			spanNum(2),
+			spanNum(3),
+			spanNum(1),
+			spanNum(4)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -496,22 +607,22 @@ void shouldMoveElementForward() {
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("3"));
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("1"));
 	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("4"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldMoveElementToEnd() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("1"))
+			spanNum(2),
+			spanNum(3),
+			spanNum(1)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -523,24 +634,24 @@ void shouldMoveElementToEnd() {
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("3"));
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("1"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldMoveElementBackwards() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(4)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3"))
+			spanNum(1),
+			spanNum(4),
+			spanNum(2),
+			spanNum(3)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -553,24 +664,24 @@ void shouldMoveElementBackwards() {
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("4"));
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("3"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldSwapFirstAndLast() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(4)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("1"))
+			spanNum(4),
+			spanNum(2),
+			spanNum(3),
+			spanNum(1)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -583,26 +694,26 @@ void shouldSwapFirstAndLast() {
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("3"));
 	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("1"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldMoveToLeftAndReplace() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("6"))
+			spanNum(4),
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(6)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -616,21 +727,21 @@ void shouldMoveToLeftAndReplace() {
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("3"));
 	assertEquals(elm["children"]["4"]["innerHTML"], emscripten::val("6"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldMoveToLeftAndLeavesHole() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(1),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("6"))
+			spanNum(4),
+			spanNum(6)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -641,22 +752,22 @@ void shouldMoveToLeftAndLeavesHole() {
 	assertEquals(elm["children"]["length"], emscripten::val(2));
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("4"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("6"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldHandleMovedAndSetToUndefinedElementEndingAtEnd() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(2),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5")),
-			h(std::string("span"), std::string("3"))
+			spanNum(4),
+			spanNum(5),
+			spanNum(3)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -668,13 +779,13 @@ void shouldHandleMovedAndSetToUndefinedElementEndingAtEnd() {
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("4"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("5"));
 	assertEquals(elm["children"]["2"]["innerHTML"], emscripten::val("3"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldMoveAKeyInNonKeyedNodesWithASizeUp() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
+			spanNum(1),
 			h(std::string("span"), std::string("a")),
 			h(std::string("span"), std::string("b")),
 			h(std::string("span"), std::string("c"))
@@ -686,7 +797,7 @@ void shouldMoveAKeyInNonKeyedNodesWithASizeUp() {
 			h(std::string("span"), std::string("a")),
 			h(std::string("span"), std::string("b")),
 			h(std::string("span"), std::string("c")),
-			h(std::string("span"), std::string("1")),
+			spanNum(1),
 			h(std::string("span"), std::string("e"))
 		}
 	);
@@ -698,32 +809,32 @@ void shouldMoveAKeyInNonKeyedNodesWithASizeUp() {
 	elm = getBodyFirstChild();
 	assertEquals(elm["children"]["length"], emscripten::val(6));
 	assertEquals(elm["textContent"], emscripten::val("dabc1e"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldReverseElements() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5")),
-			h(std::string("span"), std::string("6")),
-			h(std::string("span"), std::string("7")),
-			h(std::string("span"), std::string("8"))
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(4),
+			spanNum(5),
+			spanNum(6),
+			spanNum(7),
+			spanNum(8)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("8")),
-			h(std::string("span"), std::string("7")),
-			h(std::string("span"), std::string("6")),
-			h(std::string("span"), std::string("5")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("1"))
+			spanNum(8),
+			spanNum(7),
+			spanNum(6),
+			spanNum(5),
+			spanNum(4),
+			spanNum(3),
+			spanNum(2),
+			spanNum(1)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -740,28 +851,28 @@ void shouldReverseElements() {
 	assertEquals(elm["children"]["5"]["innerHTML"], emscripten::val("3"));
 	assertEquals(elm["children"]["6"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["7"]["innerHTML"], emscripten::val("1"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldReverseElementsWith0() {
 	VNode* vnode1 = h("span",
 		Children {
-			h(std::string("span"), std::string("0")),
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("5"))
+			spanNum(0),
+			spanNum(1),
+			spanNum(2),
+			spanNum(3),
+			spanNum(4),
+			spanNum(5)
 		}
 	);
 	VNode* vnode2 = h("span",
 		Children {
-			h(std::string("span"), std::string("4")),
-			h(std::string("span"), std::string("3")),
-			h(std::string("span"), std::string("2")),
-			h(std::string("span"), std::string("1")),
-			h(std::string("span"), std::string("5")),
-			h(std::string("span"), std::string("0"))
+			spanNum(4),
+			spanNum(3),
+			spanNum(2),
+			spanNum(1),
+			spanNum(5),
+			spanNum(0)
 		}
 	);
 	patch(getRoot(), vnode1);
@@ -776,7 +887,7 @@ void shouldReverseElementsWith0() {
 	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("1"));
 	assertEquals(elm["children"]["4"]["innerHTML"], emscripten::val("5"));
 	assertEquals(elm["children"]["5"]["innerHTML"], emscripten::val("0"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 VNode* spanNumWithOpacity(int z, std::string o) {
@@ -852,7 +963,7 @@ void shouldHandleRandomShuffles() {
 			assertEquals(elm["children"][std::to_string(i)]["innerHTML"], emscripten::val(std::to_string(shufArr[i])));
 			assertEquals(emscripten::val(opacities[i]).call<emscripten::val>("indexOf", elm["children"][std::to_string(i)]["style"]["opacity"]), emscripten::val(0));
 		}
-		delete vnode2;
+		deleteVNode(vnode2);
 	}
 };
 
@@ -895,7 +1006,7 @@ void shouldSupportNullChildren() {
 	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("5"));
 	assertEquals(elm["children"]["4"]["innerHTML"], emscripten::val("4"));
 	assertEquals(elm["children"]["5"]["innerHTML"], emscripten::val("3"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldSupportAllNullChildren() {
@@ -942,7 +1053,7 @@ void shouldSupportAllNullChildren() {
 	assertEquals(elm["children"]["3"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["4"]["innerHTML"], emscripten::val("1"));
 	assertEquals(elm["children"]["5"]["innerHTML"], emscripten::val("0"));
-	delete vnode3;
+	deleteVNode(vnode3);
 };
 
 void shouldHandleRandomShufflesWithNullChildren() {
@@ -982,7 +1093,7 @@ void shouldHandleRandomShufflesWithNullChildren() {
 		assertEquals(elm["children"]["length"], emscripten::val(r));
 		vnode1 = vnode2;
 	}
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldAppendElements2() {
@@ -1006,7 +1117,7 @@ void shouldAppendElements2() {
 	assertEquals(elm["children"]["length"], emscripten::val(2));
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("Hello"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("World"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldHandleUnmovedTextNodes() {
@@ -1028,7 +1139,7 @@ void shouldHandleUnmovedTextNodes() {
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
 	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Text"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldHandleChangingTextChildren() {
@@ -1050,7 +1161,7 @@ void shouldHandleChangingTextChildren() {
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
 	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Text2"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldHandleUnmovedCommentNodes() {
@@ -1072,7 +1183,7 @@ void shouldHandleUnmovedCommentNodes() {
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
 	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Text"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldHandleChangingCommentText() {
@@ -1094,7 +1205,7 @@ void shouldHandleChangingCommentText() {
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
 	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Text2"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldHandleChangingEmptyComment() {
@@ -1116,7 +1227,7 @@ void shouldHandleChangingEmptyComment() {
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
 	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Test"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldPrependElements2() {
@@ -1140,7 +1251,7 @@ void shouldPrependElements2() {
 	assertEquals(elm["children"]["length"], emscripten::val(2));
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("Hello"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("World"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldPrependElementOfDifferentTagType() {
@@ -1166,7 +1277,7 @@ void shouldPrependElementOfDifferentTagType() {
 	assertEquals(elm["children"]["1"]["tagName"], emscripten::val("SPAN"));
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("Hello"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("World"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldRemoveElements() {
@@ -1192,7 +1303,7 @@ void shouldRemoveElements() {
 	elm = getBodyFirstChild();
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("One"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("Three"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldRemoveASingleTextNode() {
@@ -1204,7 +1315,7 @@ void shouldRemoveASingleTextNode() {
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
 	assertEquals(elm["textContent"], emscripten::val(""));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldRemoveASingleTextNodeWhenChildrenAreUpdated() {
@@ -1222,7 +1333,7 @@ void shouldRemoveASingleTextNodeWhenChildrenAreUpdated() {
 	elm = getBodyFirstChild();
 	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Two"));
 	assertEquals(elm["childNodes"]["1"]["textContent"], emscripten::val("Three"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldRemoveATextNodeAmongOtherElements() {
@@ -1246,7 +1357,7 @@ void shouldRemoveATextNodeAmongOtherElements() {
 	assertEquals(elm["childNodes"]["length"], emscripten::val(1));
 	assertEquals(elm["childNodes"]["0"]["tagName"], emscripten::val("DIV"));
 	assertEquals(elm["childNodes"]["0"]["textContent"], emscripten::val("Three"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldReorderElements() {
@@ -1279,7 +1390,7 @@ void shouldReorderElements() {
 	assertEquals(elm["children"]["0"]["tagName"], emscripten::val("B"));
 	assertEquals(elm["children"]["1"]["tagName"], emscripten::val("SPAN"));
 	assertEquals(elm["children"]["2"]["tagName"], emscripten::val("DIV"));
-	delete vnode2;
+	deleteVNode(vnode2);
 };
 
 void shouldSupportNullChildren2() {
@@ -1326,7 +1437,7 @@ void shouldSupportNullChildren2() {
 	assertEquals(elm["children"]["length"], emscripten::val(2));
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("1"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("2"));
-	delete vnode3;
+	deleteVNode(vnode3);
 };
 
 void shouldSupportAllNullChildren2() {
@@ -1356,7 +1467,7 @@ void shouldSupportAllNullChildren2() {
 	elm = getBodyFirstChild();
 	assertEquals(elm["children"]["0"]["innerHTML"], emscripten::val("2"));
 	assertEquals(elm["children"]["1"]["innerHTML"], emscripten::val("1"));
-	delete vnode3;
+	deleteVNode(vnode3);
 };
 
 void shouldSetAsmDomRaws() {
@@ -1384,7 +1495,7 @@ void shouldSetAsmDomRaws() {
 	assertEquals(elm["asmDomRaws"]["0"], emscripten::val("bar"));
 	patch(vnode2, vnode3);
 	assertEquals(elm["asmDomRaws"]["length"], emscripten::val(0));
-	delete vnode3;
+	deleteVNode(vnode3);
 };
 
 // js only:
@@ -1419,7 +1530,7 @@ void shouldSetAsmDomEvents() {
 	patch(vnode2, vnode3);
 	keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomEvents"]);
 	assertEquals(keys["length"], emscripten::val(0));
-	delete vnode3;
+	deleteVNode(vnode3);
 };
 
 void shouldPatchAWebComponent() {
@@ -1427,7 +1538,7 @@ void shouldPatchAWebComponent() {
 	patch(getRoot(), vnode);
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["nodeName"], emscripten::val("WEB-COMPONENT"));
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldPatchAWebComponentWithAttributes() {
@@ -1450,7 +1561,7 @@ void shouldPatchAWebComponentWithAttributes() {
 		elm.call<emscripten::val>("getAttribute", emscripten::val("bar")),
 		emscripten::val("42")
 	);
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldPatchAWebComponentWithEventListeners() {
@@ -1465,7 +1576,7 @@ void shouldPatchAWebComponentWithEventListeners() {
 	patch(getRoot(), vnode);
 	emscripten::val elm = getBodyFirstChild();
 	assertEquals(elm["nodeName"], emscripten::val("WEB-COMPONENT"));
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateATemplateNode() {
@@ -1487,7 +1598,309 @@ void shouldCreateATemplateNode() {
 	);
 	emscripten::val fragment = tmpl["content"].call<emscripten::val>("cloneNode", emscripten::val(true));
 	assertEquals(fragment["nodeName"], emscripten::val("#document-fragment"));
-	delete vnode;
+	deleteVNode(vnode);
+};
+
+void shouldCallRefWithDOMNode() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Attrs {
+					{"data-foo", "bar"}
+				},
+				Callbacks {
+					{"ref", [&](emscripten::val node) -> bool {
+						++refCount;
+						if (refCount == 2) {
+							assertEquals(
+								node.call<emscripten::val>("getAttribute", emscripten::val("data-foo")),
+								emscripten::val("bar")
+							);
+						} else {
+							assertEquals(
+								node,
+								emscripten::val::null()
+							);
+						}
+						return true;
+					}}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div");
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 3) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldCallRefOnAdd() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	deleteVNode(vnode1);
+};
+
+void shouldCallRefOnRemove() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div");
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 3) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldNotCallRefOnUpdate() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldCallRefOnChangeLambdaLambda() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", [&](emscripten::val e) -> bool {
+						++refCount;
+						return true;
+					}}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", [&](emscripten::val e) -> bool {
+						refCount = refCount + 1;
+						return false;
+					}}
+				}
+			)
+		)
+	);
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 3) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldCallRefOnChangePointerLambda() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", [&](emscripten::val e) -> bool {
+						++refCount;
+						return false;
+					}}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 3) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldCallRefOnChangePointerPointer() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	VNode* vnode2 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback2}
+				}
+			)
+		)
+	);
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 3) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldCallRefOnUpdateIfRefIsAdded() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div", h("div"));
+	patch(getRoot(), vnode1);
+
+	VNode* vnode2 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(vnode1, vnode2);
+	
+	// assert
+	if (refCount != 2) {
+		throw 20;
+	}
+
+	deleteVNode(vnode2);
+};
+
+void shouldNotSetRefAsCallback() {
+	VNode* vnode1 = h("i",
+		Data(
+			Callbacks {
+				{"onclick", onClick},
+				{"ref", onClick}
+			}
+		)
+	);
+	patch(getRoot(), vnode1);
+	emscripten::val elm = getBodyFirstChild();
+	emscripten::val keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomEvents"]);
+	assertEquals(keys["length"], emscripten::val(1));
+	assertEquals(keys["0"], emscripten::val("click"));
+	deleteVNode(vnode1);
 };
 
 EMSCRIPTEN_BINDINGS(patch_tests) {
@@ -1501,6 +1914,10 @@ EMSCRIPTEN_BINDINGS(patch_tests) {
 	emscripten::function("shouldCreateElementsWithSpanAndTextContent", &shouldCreateElementsWithSpanAndTextContent);
 	emscripten::function("isAPatchOfTheRootElement", &isAPatchOfTheRootElement);
 	emscripten::function("shouldCreateComments", &shouldCreateComments);
+	emscripten::function("shouldCreateFragments", &shouldCreateFragments);
+	emscripten::function("shouldPatchAnElementInsideAFragment", &shouldPatchAnElementInsideAFragment);
+	emscripten::function("shouldAppendElementsToFragment", &shouldAppendElementsToFragment);
+	emscripten::function("shouldRemoveElementsFromFragment", &shouldRemoveElementsFromFragment);
 	emscripten::function("shouldAppendElements", &shouldAppendElements);
 	emscripten::function("shouldPrependElements", &shouldPrependElements);
 	emscripten::function("shouldAddElementsInTheMiddle", &shouldAddElementsInTheMiddle);
@@ -1546,4 +1963,13 @@ EMSCRIPTEN_BINDINGS(patch_tests) {
 	emscripten::function("shouldPatchAWebComponentWithAttributes", &shouldPatchAWebComponentWithAttributes);
 	emscripten::function("shouldPatchAWebComponentWithEventListeners", &shouldPatchAWebComponentWithEventListeners);
 	emscripten::function("shouldCreateATemplateNode", &shouldCreateATemplateNode);
+	emscripten::function("shouldCallRefWithDOMNode", &shouldCallRefWithDOMNode);
+	emscripten::function("shouldCallRefOnAdd", &shouldCallRefOnAdd);
+	emscripten::function("shouldCallRefOnRemove", &shouldCallRefOnRemove);
+	emscripten::function("shouldNotCallRefOnUpdate", &shouldNotCallRefOnUpdate);
+	emscripten::function("shouldCallRefOnChangeLambdaLambda", &shouldCallRefOnChangeLambdaLambda);
+	emscripten::function("shouldCallRefOnChangePointerLambda", &shouldCallRefOnChangePointerLambda);
+	emscripten::function("shouldCallRefOnChangePointerPointer", &shouldCallRefOnChangePointerPointer);
+	emscripten::function("shouldCallRefOnUpdateIfRefIsAdded", &shouldCallRefOnUpdateIfRefIsAdded);
+	emscripten::function("shouldNotSetRefAsCallback", &shouldNotSetRefAsCallback);
 };

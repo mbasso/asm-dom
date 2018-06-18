@@ -55,4 +55,11 @@ export default (oldVnodePtr, vnodePtr, elmPtr) => {
       elm.asmDomEvents[key] = newValues[key];
     }
   }
+
+  oldValues = oldNode !== undefined && oldNode.ref !== undefined ? oldNode.ref : undefined;
+  newValues = newNode !== undefined && newNode.ref !== undefined ? newNode.ref : undefined;
+
+  if (oldValues !== newValues && newValues !== undefined) {
+    newValues(elm);
+  }
 };

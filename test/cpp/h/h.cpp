@@ -5,10 +5,6 @@
 
 using namespace asmdom;
 
-bool onClick(emscripten::val event) {
-	return true;
-};
-
 void shouldDeleteAVNode() {
 	VNode* vnode = h("div", Children {
 		h("span"),
@@ -16,32 +12,37 @@ void shouldDeleteAVNode() {
 			h("video"),
 		}),
 	});
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithAProperTag() {
 	VNode* vnode = h("div");
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithChildren() {
 	VNode* vnode = h("div", Children {h("span"), h("b")});
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithOneChild() {
 	VNode* vnode = h("div", h("span"));
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithTextContentInString() {
 	VNode* vnode = h("div", "I am a string");
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeForComment() {
 	VNode* vnode = h("!", "test");
-	delete vnode;
+	deleteVNode(vnode);
+};
+
+void shouldCreateAVNodeForFragment() {
+	VNode* vnode = h("");
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithAttrsAndOneChild() {
@@ -51,7 +52,7 @@ void shouldCreateAVNodeWithAttrsAndOneChild() {
 		}),
 		h("span")
 	);
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithAttrsAndTextContentInString() {
@@ -61,7 +62,7 @@ void shouldCreateAVNodeWithAttrsAndTextContentInString() {
 		}),
 		"I am a string"
 	);
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithAttrsAndChildren() {
@@ -71,12 +72,12 @@ void shouldCreateAVNodeWithAttrsAndChildren() {
 		}),
 		Children {h("span"), h("i")}
 	);
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithText() {
 	VNode* vnode = h("this is a text", true);
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithAttrs() {
@@ -92,7 +93,7 @@ void shouldCreateAVNodeWithAttrs() {
 			}
 		)
 	);
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithProps() {
@@ -107,7 +108,7 @@ void shouldCreateAVNodeWithProps() {
 			{"data-float", emscripten::val(0.1)}
 		})
 	);
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithCallbacks() {
@@ -118,7 +119,7 @@ void shouldCreateAVNodeWithCallbacks() {
 			}
 		)
 	);
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithAttrsAndProps() {
@@ -142,7 +143,7 @@ void shouldCreateAVNodeWithAttrsAndProps() {
 			}
 		)
 	);
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithAttrsAndCallbacks() {
@@ -161,7 +162,7 @@ void shouldCreateAVNodeWithAttrsAndCallbacks() {
 			}
 		)
 	);
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithPropsAndCallbacks() {
@@ -180,7 +181,7 @@ void shouldCreateAVNodeWithPropsAndCallbacks() {
 			}
 		)
 	);
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 void shouldCreateAVNodeWithAttrsPropsAndCallbacks() {
@@ -207,7 +208,7 @@ void shouldCreateAVNodeWithAttrsPropsAndCallbacks() {
 			}
 		)
 	);
-	delete vnode;
+	deleteVNode(vnode);
 };
 
 EMSCRIPTEN_BINDINGS(h_function_tests) {
@@ -217,6 +218,7 @@ EMSCRIPTEN_BINDINGS(h_function_tests) {
   emscripten::function("shouldCreateAVNodeWithOneChild", &shouldCreateAVNodeWithOneChild);
   emscripten::function("shouldCreateAVNodeWithTextContentInString", &shouldCreateAVNodeWithTextContentInString);
   emscripten::function("shouldCreateAVNodeForComment", &shouldCreateAVNodeForComment);
+  emscripten::function("shouldCreateAVNodeForFragment", &shouldCreateAVNodeForFragment);
   emscripten::function("shouldCreateAVNodeWithAttrsAndOneChild", &shouldCreateAVNodeWithAttrsAndOneChild);
   emscripten::function("shouldCreateAVNodeWithAttrsAndTextContentInString", &shouldCreateAVNodeWithAttrsAndTextContentInString);
   emscripten::function("shouldCreateAVNodeWithAttrsAndChildren", &shouldCreateAVNodeWithAttrsAndChildren);

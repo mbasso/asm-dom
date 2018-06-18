@@ -38,6 +38,15 @@ describe('toHTML (js)', function testToHTML() {
     expect(toHTML(vnode)).toEqual('<!--comment-->');
   });
 
+  it('should parse fragments', () => {
+    const vnode = h('', [
+      h('span'),
+      h('b'),
+    ]);
+
+    expect(toHTML(vnode)).toEqual('<span></span><b></b>');
+  });
+
   it('should parse text', () => {
     const vnode = h('a text', true);
 

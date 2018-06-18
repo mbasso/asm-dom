@@ -62,6 +62,22 @@ describe('patch (cpp)', function test() {
     app.shouldCreateComments();
   });
 
+  it('should create fragments', () => {
+    app.shouldCreateFragments();
+  });
+
+  it('should patch an element inside a fragment', () => {
+    app.shouldPatchAnElementInsideAFragment();
+  });
+
+  it('should append elements to fragment', () => {
+    app.shouldAppendElementsToFragment();
+  });
+
+  it('should remove elements from fragment', () => {
+    app.shouldRemoveElementsFromFragment();
+  });
+
   /* should create an element created inside an iframe */
 
   it('should append elements', () => {
@@ -242,5 +258,41 @@ describe('patch (cpp)', function test() {
 
   it('should create a template node', () => {
     app.shouldCreateATemplateNode();
+  });
+
+  it('should call ref with DOM node', () => {
+    app.shouldCallRefWithDOMNode();
+  });
+
+  it('should call ref on add', () => {
+    app.shouldCallRefOnAdd();
+  });
+
+  it('should call ref on remove', () => {
+    app.shouldCallRefOnRemove();
+  });
+
+  it('should not call ref on update', () => {
+    app.shouldNotCallRefOnUpdate();
+  });
+
+  it('should call ref on change (lambda - lambda)', () => {
+    app.shouldCallRefOnChangeLambdaLambda();
+  });
+
+  it('should call ref on change (pointer - lambda)', () => {
+    app.shouldCallRefOnChangePointerLambda();
+  });
+
+  it('should call ref on change (pointer - pointer)', () => {
+    app.shouldCallRefOnChangePointerPointer();
+  });
+
+  it('should call ref on update if ref is added', () => {
+    app.shouldCallRefOnUpdateIfRefIsAdded();
+  });
+
+  it('should not set ref as callback', () => {
+    app.shouldNotSetRefAsCallback();
   });
 });

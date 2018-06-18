@@ -10,15 +10,7 @@ export default (oldVnode, vnode) => {
   let { clearMemory } = window.asmDom;
   if (typeof oldVnode !== 'number') {
     clearMemory = true;
-    const props = new window.asmDom.MapStringString();
-    if (oldVnode.id !== '') props.set('id', oldVnode.id);
-    if (oldVnode.className !== '') props.set('class', oldVnode.className);
-    oldVnode = window.asmDom._h_elm(
-      oldVnode.tagName.toLowerCase(),
-      props,
-      window.asmDomHelpers.domApi.addNode(oldVnode),
-    );
-    props.delete();
+    oldVnode = window.asmDom.toVNode(oldVnode);
   }
   window.asmDom._patch(oldVnode, vnode);
   if (clearMemory === true) {
