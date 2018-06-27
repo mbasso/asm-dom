@@ -16,8 +16,8 @@ var addPtr = function addPtr(node) {
   if (node === null) return 0;
   if (node.asmDomPtr !== undefined) return node.asmDomPtr;
   nodes[++lastPtr] = node;
-  node.asmDomPtr = lastPtr;
-  return lastPtr;
+  // eslint-disable-next-line
+  return node.asmDomPtr = lastPtr;
 };
 
 exports['default'] = {
