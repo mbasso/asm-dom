@@ -14,9 +14,7 @@ void beforeEach() {
 
 bool callback(emscripten::val event) {
 	std::string tagName = event["target"]["tagName"].as<std::string>();
-	if (tagName != "DIV" && tagName != "A") {
-		throw 20;
-	}
+	assert(tagName == "DIV" || tagName == "A");
 
 	result.push_back(event);
 	return true;
@@ -39,10 +37,7 @@ void shouldAttachAClickEventHandlerToElement() {
 	emscripten::val elm = getBodyFirstChild();
 	elm.call<void>("click");
 
-	// assert
-	if (result.size() != 1) {
-		throw 20;
-	}
+	assert(result.size() == 1);
 
 	deleteVNode(vnode);
 };
@@ -62,10 +57,7 @@ void shouldDetachAttachedClickEventHandlerToElement() {
 	patch(getRoot(), vnode1);
 	emscripten::val elm = getBodyFirstChild();
 	elm.call<void>("click");
-	// assert
-	if (result.size() != 1) {
-		throw 20;
-	}
+	assert(result.size() == 1);
 
 	VNode* vnode2 = h("div",
 		Children {
@@ -75,10 +67,7 @@ void shouldDetachAttachedClickEventHandlerToElement() {
 	patch(vnode1, vnode2);
 	elm = getBodyFirstChild();
 	elm.call<void>("click");
-	// assert
-	if (result.size() != 1) {
-		throw 20;
-	}
+	assert(result.size() == 1);
 	deleteVNode(vnode2);
 };
 
@@ -105,16 +94,10 @@ void shouldShareHandlersInParentAndChildNodes() {
 	
 	emscripten::val elm = getBodyFirstChild();
 	elm.call<void>("click");
-	// assert
-	if (result.size() != 1) {
-		throw 20;
-	}
+	assert(result.size() == 1);
 
 	elm["firstChild"].call<void>("click");
-	// assert
-	if (result.size() != 3) {
-		throw 20;
-	}
+	assert(result.size() == 3);
 
 	deleteVNode(vnode);
 };
@@ -137,10 +120,7 @@ void shouldHandleLambdaWithCapture() {
 	
 	emscripten::val elm = getBodyFirstChild();
 	elm.call<void>("click");
-	// assert
-	if (count != 2) {
-		throw 20;
-	}
+	assert(count == 2);
 
 	deleteVNode(vnode);
 };
@@ -163,10 +143,7 @@ void shouldUpdateHandlers() {
 	
 	emscripten::val elm = getBodyFirstChild();
 	elm.call<void>("click");
-	// assert
-	if (count != 2) {
-		throw 20;
-	}
+	assert(count == 2);
 
 	VNode* vnode2 = h("div",
 		Data(
@@ -181,10 +158,7 @@ void shouldUpdateHandlers() {
 	patch(vnode1, vnode2);
 	
 	elm.call<void>("click");
-	// assert
-	if (count != 1) {
-		throw 20;
-	}
+	assert(count == 1);
 
 	deleteVNode(vnode2);
 };
@@ -207,10 +181,7 @@ void shouldNotUpdateHandlers() {
 	
 	emscripten::val elm = getBodyFirstChild();
 	elm.call<void>("click");
-	// assert
-	if (count != 2) {
-		throw 20;
-	}
+	assert(count == 2);
 
 	VNode* vnode2 = h("div",
 		Data(
@@ -225,10 +196,7 @@ void shouldNotUpdateHandlers() {
 	patch(vnode1, vnode2);
 	
 	elm.call<void>("click");
-	// assert
-	if (count != 3) {
-		throw 20;
-	}
+	assert(count == 3);
 
 	deleteVNode(vnode2);
 };

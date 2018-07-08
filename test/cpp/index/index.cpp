@@ -20,9 +20,7 @@ void shouldAutomaticallyClearMemory() {
 	patch(vnode, vnode1);
 	patch(vnode1, vnode2);
 
-	if (vnode->sel == obj.sel) {
-		throw 20;
-	}
+	assert(vnode->sel != obj.sel);
 
 	deleteVNode(vnode1);
 	deleteVNode(vnode2);
@@ -32,9 +30,7 @@ void shouldAutomaticallyClearMemory() {
 
 	toHTML(vnode);
 
-	if (vnode->sel == obj.sel) {
-		throw 20;
-	}
+	assert(vnode->sel != obj.sel);
 };
 
 void shouldAutomaticallyClearMemoryByConfig() {
@@ -53,9 +49,7 @@ void shouldAutomaticallyClearMemoryByConfig() {
 	patch(vnode, vnode1);
 	patch(vnode1, vnode2);
 
-	if (vnode->sel == obj.sel) {
-		throw 20;
-	}
+	assert(vnode->sel != obj.sel);
 
 	deleteVNode(vnode1);
 	deleteVNode(vnode2);
@@ -65,9 +59,7 @@ void shouldAutomaticallyClearMemoryByConfig() {
 
 	toHTML(vnode);
 
-	if (vnode->sel == obj.sel) {
-		throw 20;
-	}
+	assert(vnode->sel != obj.sel);
 };
 
 void shouldNotAutomaticallyClearMemoryByConfig() {
@@ -86,9 +78,7 @@ void shouldNotAutomaticallyClearMemoryByConfig() {
 	patch(vnode, vnode1);
 	patch(vnode1, vnode2);
 
-	if (vnode->sel != obj.sel) {
-		throw 20;
-	}
+	assert(vnode->sel == obj.sel);
 
 	deleteVNode(vnode1);
 	deleteVNode(vnode2);
@@ -98,9 +88,7 @@ void shouldNotAutomaticallyClearMemoryByConfig() {
 
 	toHTML(vnode);
 
-	if (vnode->sel != obj.sel) {
-		throw 20;
-	}
+	assert(vnode->sel == obj.sel);
 };
 
 void shouldUseSafePatch() {
@@ -112,12 +100,8 @@ void shouldUseSafePatch() {
 	VNode* vnode1 = h("div");
 	VNode* vnode2 = h("div");
 
-	if (patch(getRoot(), vnode) != vnode) {
-		throw 20;
-	}
-	if (patch(vnode1, vnode2) != NULL) {
-		throw 20;
-	}
+	assert(patch(getRoot(), vnode) == vnode);
+	assert(patch(vnode1, vnode2) == NULL);
 
 	deleteVNode(vnode);
 	deleteVNode(vnode2);
@@ -133,12 +117,8 @@ void shouldUseSafePatchByConfig() {
 	VNode* vnode1 = h("div");
 	VNode* vnode2 = h("div");
 
-	if (patch(getRoot(), vnode) != vnode) {
-		throw 20;
-	}
-	if (patch(vnode1, vnode2) != NULL) {
-		throw 20;
-	}
+	assert(patch(getRoot(), vnode) == vnode);
+	assert(patch(vnode1, vnode2) == NULL);
 
 	deleteVNode(vnode);
 	deleteVNode(vnode2);
@@ -154,12 +134,8 @@ void shouldNotUseSafePatchByConfig() {
 	VNode* vnode1 = h("div");
 	VNode* vnode2 = h("div");
 
-	if (patch(getRoot(), vnode) != vnode) {
-		throw 20;
-	}
-	if (patch(vnode1, vnode2) != vnode2) {
-		throw 20;
-	}
+	assert(patch(getRoot(), vnode) == vnode);
+	assert(patch(vnode1, vnode2) == vnode2);
 
 	deleteVNode(vnode);
 	deleteVNode(vnode2);
