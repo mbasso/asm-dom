@@ -1,13 +1,12 @@
 #include "init.hpp"
-#include "../VDOMConfig/VDOMConfig.hpp"
+#include "../Config/Config.hpp"
 #include <emscripten.h>
 
 namespace asmdom {
 
 	void init(const Config& config) {
-		VDOMConfig& vdomconfig = VDOMConfig::getConfig();
-		vdomconfig.setClearMemory(config.clearMemory);
-		vdomconfig.setUnsafePatch(config.unsafePatch);
+		CLEAR_MEMORY = config.clearMemory;
+		UNSAFE_PATCH = config.unsafePatch;
 
 		EM_ASM(
 			#ifndef ASMDOM_JS_SIDE

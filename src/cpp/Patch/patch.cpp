@@ -2,7 +2,7 @@
 #include "../Diff/diff.hpp"
 #include "../VNode/VNode.hpp"
 #include "../h/h.hpp"
-#include "../VDOMConfig/VDOMConfig.hpp"
+#include "../Config/Config.hpp"
 #include <emscripten/val.h>
 #include <algorithm>
 #include <cstdint>
@@ -26,6 +26,8 @@ namespace asmdom {
 	#ifdef ASMDOM_TEST
 		void reset() {
 			currentNode = NULL;
+			CLEAR_MEMORY = true;
+			UNSAFE_PATCH = false;
 		};
 	#endif
 
@@ -240,7 +242,7 @@ namespace asmdom {
 	VNode* patch(const emscripten::val& element, VNode* const vnode) {
 		VNode* oldVnode = toVNode(element);
 		VNode* result = patch(oldVnode, vnode);
-		if (!VDOMConfig::getConfig().getClearMemory()) {
+		if (!CLEAR_MEMORY) {
 			deleteVNode(oldVnode);
 		}
 		return result;
@@ -248,9 +250,8 @@ namespace asmdom {
 
 	VNode* patch(VNode* const oldVnode, VNode* const vnode) {
 		#ifndef ASMDOM_JS_SIDE
-			VDOMConfig& config = VDOMConfig::getConfig();
 			if (
-				!config.getUnsafePatch() &&
+				!UNSAFE_PATCH &&
 				currentNode != oldVnode && currentNode
 			) return NULL;
 		#endif
@@ -278,7 +279,7 @@ namespace asmdom {
 		}
 
 		#ifndef ASMDOM_JS_SIDE
-			if (config.getClearMemory()) {
+			if (CLEAR_MEMORY) {
 				deleteVNode(oldVnode);
 			}
 		#endif
