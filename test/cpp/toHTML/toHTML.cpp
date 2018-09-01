@@ -8,8 +8,8 @@ using namespace asmdom;
 void shouldHandleNullVNode() {
 	VNode* vnode = NULL;
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("")
 	);
 };
@@ -17,8 +17,8 @@ void shouldHandleNullVNode() {
 void shouldParseElements() {
 	VNode* vnode = h("div");
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<div></div>")
 	);
 };
@@ -26,8 +26,8 @@ void shouldParseElements() {
 void shouldParseComments() {
 	VNode* vnode = h("!", std::string("comment"));
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<!--comment-->")
 	);
 };
@@ -40,18 +40,18 @@ void shouldParseFragments() {
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<span></span><b></b>")
 	);
 };
 
 void shouldParseText() {
-	VNode* vnode = h("a text", true);
+	VNode* vnode = h("a text 字à", true);
 
-	assertEquals(
-		toHTML(vnode),
-		std::string("a text")
+	assert(
+		toHTML(vnode) ==
+		std::string("a text 字à")
 	);
 };
 
@@ -63,31 +63,31 @@ void shouldHandleChildren() {
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<div><span></span><b></b></div>")
 	);
 };
 
 void shouldHandleTextContent() {
-	VNode* vnode = h("p", std::string("a text"));
+	VNode* vnode = h("p", std::string("a text 字à"));
 
-	assertEquals(
-		toHTML(vnode),
-		std::string("<p>a text</p>")
+	assert(
+		toHTML(vnode) ==
+		std::string("<p>a text 字à</p>")
 	);
 };
 
 void shouldParseAttributes() {
 	VNode* vnode = h("div",
 		Attrs {
-			{"data-foo", "bar"}
+			{"data-foo", "bar 字à"}
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
-		std::string("<div data-foo=\"bar\"></div>")
+	assert(
+		toHTML(vnode) ==
+		std::string("<div data-foo=\"bar 字à\"></div>")
 	);
 };
 
@@ -99,8 +99,8 @@ void shouldOmitFalsyAttributes() {
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<div style=\"width: 250px; height: 250px;\"></div>")
 	);
 };
@@ -112,8 +112,8 @@ void shouldSetTruthyAttributesToEmptyString() {
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<div readonly=\"\"></div>")
 	);
 };
@@ -125,8 +125,8 @@ void shouldParseProps() {
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<div readonly=\"true\"></div>")
 	);
 };
@@ -164,8 +164,8 @@ void shouldOmitProps() {
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<div>foo</div>")
 	);
 };
@@ -181,8 +181,8 @@ void shouldOmitCallbacks() {
 		)
 	);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<div></div>")
 	);
 };
@@ -190,13 +190,13 @@ void shouldOmitCallbacks() {
 void shouldHandleInnerHTML() {
 	VNode* vnode = h("div",
 		Props {
-			{"innerHTML", emscripten::val(u8"<p>a text 字à</p>")}
+			{"innerHTML", emscripten::val(std::string(u8"<p>a text 字à</p>"))}
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
-		std::string("<div><p>a text 字à</p></div>")
+	assert(
+		toHTML(vnode) ==
+		std::string(u8"<div><p>a text 字à</p></div>")
 	);
 };
 
@@ -221,8 +221,8 @@ void shouldHandleSvgContainerElements() {
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<svg><a></a><defs></defs><glyph></glyph><g></g><marker></marker><mask></mask><missing-glyph></missing-glyph><pattern></pattern><svg></svg><switch></switch><symbol></symbol><text></text><desc></desc><metadata></metadata><title></title></svg>")
 	);
 };
@@ -234,8 +234,8 @@ void shouldHandleSvgNonContainerElements() {
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<svg><rect /></svg>")
 	);
 };
@@ -261,8 +261,8 @@ void shouldHandleVoidElements() {
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<div><area><base><br><col><embed><hr><img><input><keygen><link><meta><param><source><track><wbr></div>")
 	);
 };
@@ -270,8 +270,8 @@ void shouldHandleVoidElements() {
 void shouldEscapeText() {
 	VNode* vnode = h("<>\"'&`text", true);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("&lt;&gt;&quot;&apos;&amp;&#96;text")
 	);
 };
@@ -279,8 +279,8 @@ void shouldEscapeText() {
 void shouldEscapeTextContent() {
 	VNode* vnode = h("p", std::string("<>\"'&`text"));
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<p>&lt;&gt;&quot;&apos;&amp;&#96;text</p>")
 	);
 };
@@ -292,8 +292,8 @@ void shouldEscapeAttributes() {
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<div data-foo=\"&lt;&gt;&quot;&apos;&amp;&#96;text\"></div>")
 	);
 };
@@ -305,8 +305,8 @@ void shouldEscapeProps() {
 		}
 	);
 
-	assertEquals(
-		toHTML(vnode),
+	assert(
+		toHTML(vnode) ==
 		std::string("<div data-foo=\"&lt;&gt;&quot;&apos;&amp;&#96;text\"></div>")
 	);
 };

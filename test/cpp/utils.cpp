@@ -9,10 +9,6 @@ void assertEquals(emscripten::val actual, emscripten::val expected) {
 	assert(actual.strictlyEquals(expected));
 };
 
-void assertEquals(const std::string& actual, const std::string& expected) {
-	assert(actual == expected);
-};
-
 emscripten::val getBodyFirstChild() {
 	return emscripten::val::global("document")["body"]["firstChild"];
 };
