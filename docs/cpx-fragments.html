@@ -14,6 +14,10 @@
                 var toggler = document.querySelector(togglerSelector);
                 var target = document.querySelector(targetSelector);
 
+                if (!toggler) {
+                  return;
+                }
+
                 toggler.onclick = function(event) {
                   event.preventDefault();
 
@@ -22,13 +26,13 @@
               }
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Fragments</h1></header><article><div><span><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment">DocumentFragments</a> can be written using a special selector <code>Fragment</code>:</p>
-<pre><code class="hljs css languages- js">&lt;Fragment&gt;
+<pre><code class="hljs css language-js">&lt;Fragment&gt;
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Div content<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   Hello World!
 <span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">Fragment</span>&gt;</span></span>
 </code></pre>
 <p>In this way you can group a list of children without adding extra nodes to the DOM.</p>
-<pre><code class="hljs css languages- js">
+<pre><code class="hljs css language-js">
 <span class="hljs-comment">// this cannot be done</span>
 <span class="hljs-comment">/* asmdom::VNode* vnode = (
     &lt;div&gt;Child 1&lt;/div&gt;

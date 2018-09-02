@@ -14,6 +14,10 @@
                 var toggler = document.querySelector(togglerSelector);
                 var target = document.querySelector(targetSelector);
 
+                if (!toggler) {
+                  return;
+                }
+
                 toggler.onclick = function(event) {
                   event.preventDefault();
 
@@ -22,7 +26,7 @@
               }
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Elements</h1></header><article><div><span><p>To create a VNode, you can simply write a tag as you do in XML:</p>
-<pre><code class="hljs css languages- js">&lt;img src=<span class="hljs-string">"hello.png"</span> /&gt;
+<pre><code class="hljs css language-js">&lt;img src=<span class="hljs-string">"hello.png"</span> /&gt;
 </code></pre>
 <p>If you want to dynamically choose a tag of an element, you can use <code>-&gt;</code> and <code>.</code> operators on your vars:</p>
 <pre><code class="hljs">&lt;<span class="hljs-function"><span class="hljs-title">foo</span>.bar-&gt;</span>baz src=<span class="hljs-string">"hello.png"</span> /&gt;

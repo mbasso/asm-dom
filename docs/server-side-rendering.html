@@ -14,6 +14,10 @@
                 var toggler = document.querySelector(togglerSelector);
                 var target = document.querySelector(targetSelector);
 
+                if (!toggler) {
+                  return;
+                }
+
                 toggler.onclick = function(event) {
                   event.preventDefault();
 
@@ -27,7 +31,7 @@
 <li>After that you can call <code>toVNode</code> on the node that you have server-rendered and patch it with a vnode created on the client. In this way asm-dom will preserve it and only attach event handlers, providing a fantastic first-load experience.</li>
 </ul>
 <p>Here is an example:</p>
-<pre><code class="hljs css languages- c++"><span class="hljs-comment">// a function that returns the view, used on client and server</span>
+<pre><code class="hljs css language-c++"><span class="hljs-comment">// a function that returns the view, used on client and server</span>
 <span class="hljs-function">VNode* <span class="hljs-title">view</span><span class="hljs-params">()</span> </span>{
   <span class="hljs-keyword">return</span> (
     h(<span class="hljs-string">"div"</span>,

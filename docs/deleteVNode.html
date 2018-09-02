@@ -14,6 +14,10 @@
                 var toggler = document.querySelector(togglerSelector);
                 var target = document.querySelector(targetSelector);
 
+                if (!toggler) {
+                  return;
+                }
+
                 toggler.onclick = function(event) {
                   event.preventDefault();
 
@@ -22,7 +26,7 @@
               }
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">deleteVNode</h1></header><article><div><span><p>Deletes a vnode and all its children from memory. This is useful if you want to delete an entire tree. If you want to delete a vnode but not its children you can simply use the C++ keyword <code>delete</code>.</p>
-<pre><code class="hljs css languages- c++">VNode* child1 = h(<span class="hljs-string">"h1"</span>, <span class="hljs-built_in">string</span>(<span class="hljs-string">"Headline"</span>));
+<pre><code class="hljs css language-c++">VNode* child1 = h(<span class="hljs-string">"h1"</span>, <span class="hljs-built_in">string</span>(<span class="hljs-string">"Headline"</span>));
 VNode* child2 = h(<span class="hljs-string">"p"</span>, <span class="hljs-built_in">string</span>(<span class="hljs-string">"A paragraph"</span>));
 VNode* vnode = h(<span class="hljs-string">"div"</span>,
   Data(

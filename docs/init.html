@@ -14,6 +14,10 @@
                 var toggler = document.querySelector(togglerSelector);
                 var target = document.querySelector(targetSelector);
 
+                if (!toggler) {
+                  return;
+                }
+
                 toggler.onclick = function(event) {
                   event.preventDefault();
 
@@ -22,7 +26,7 @@
               }
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">init</h1></header><article><div><span><p>The <code>init</code> function has to been called before using <code>asm-dom</code>, in the <code>main</code> function, to prepare its environment. It takes a <code>Config</code> struct defined as follows:</p>
-<pre><code class="hljs css languages- c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Config</span> {</span> 
+<pre><code class="hljs css language-c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Config</span> {</span> 
   <span class="hljs-keyword">bool</span> clearMemory = <span class="hljs-literal">true</span>;
   <span class="hljs-keyword">bool</span> unsafePatch = <span class="hljs-literal">false</span>;
 }
@@ -31,7 +35,7 @@
 <li><code>clearMemory</code>: <code>true</code> by default, set it to <code>false</code> if you want to free memory manually, for more information see <a href="memory-management.html">memory management</a>.</li>
 <li><code>unsafePatch</code>: <code>false</code> by default, set it to <code>true</code> if you haven't a single <code>patch</code> in your application. This allows you to call patch with an <code>oldVnode</code> that hasn't been used previously.</li>
 </ul>
-<pre><code class="hljs css languages- c++">Config config = Config();
+<pre><code class="hljs css language-c++">Config config = Config();
 config.unsafePatch = <span class="hljs-literal">true</span>;
 init(config);
 </code></pre>

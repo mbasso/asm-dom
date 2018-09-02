@@ -14,6 +14,10 @@
                 var toggler = document.querySelector(togglerSelector);
                 var target = document.querySelector(targetSelector);
 
+                if (!toggler) {
+                  return;
+                }
+
                 toggler.onclick = function(event) {
                   event.preventDefault();
 
@@ -24,7 +28,7 @@
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Ref</h1></header><article><div><span><p>If you want to access direclty DOM nodes created by asm-dom, for example to managing focus, text selection, or integrating with third-party DOM libraries, you can use <code>refs callbacks</code>. <code>ref</code> is a special callback that takes the DOM node as param and can return <code>true</code> or <code>false</code> unconditionally, this is just for semplicity, to mantain the same signatures of other events.
 <code>ref</code> is called after that the DOM node is mounted, if the ref callback changes or after that the DOM node is removed from the DOM tree, in this case the param is evaluated <code>emscripten::val::null</code>.
 Here is an example of the first and the last case:</p>
-<pre><code class="hljs css languages- c++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">refCallback</span><span class="hljs-params">(emscripten::val node)</span> </span>{
+<pre><code class="hljs css language-c++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">refCallback</span><span class="hljs-params">(emscripten::val node)</span> </span>{
   <span class="hljs-comment">// check if node === null</span>
   <span class="hljs-keyword">if</span> (node.strictlyEquals(emscripten::val::null())) {
     <span class="hljs-comment">// node unmounted</span>
@@ -69,7 +73,7 @@ Here is an example of the first and the last case:</p>
 }
 </code></pre>
 <p>As we said before <code>ref callback</code> is also invoked if it changes, in the following example asm-dom will call <code>refCallback</code> after that the DOM node is mounted and then <code>anotherRefCallback</code> after the update:</p>
-<pre><code class="hljs css languages- c++">VNode* vnode1 = h(<span class="hljs-string">"div"</span>,
+<pre><code class="hljs css language-c++">VNode* vnode1 = h(<span class="hljs-string">"div"</span>,
   h(<span class="hljs-string">"input"</span>,
     Data(
       Callbacks {
@@ -100,7 +104,7 @@ VNode* vnode2 = h(<span class="hljs-string">"div"</span>,
 patch(vnode1, vnode2);
 </code></pre>
 <p>Please note that if you want to use a lambda as a ref asm-dom will call it on every update, so, you probably want to avoid something like this:</p>
-<pre><code class="hljs css languages- c++">VNode* vnode1 = h(<span class="hljs-string">"div"</span>,
+<pre><code class="hljs css language-c++">VNode* vnode1 = h(<span class="hljs-string">"div"</span>,
   h(<span class="hljs-string">"input"</span>,
     Data(
       Callbacks {

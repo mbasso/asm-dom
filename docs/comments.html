@@ -14,6 +14,10 @@
                 var toggler = document.querySelector(togglerSelector);
                 var target = document.querySelector(targetSelector);
 
+                if (!toggler) {
+                  return;
+                }
+
                 toggler.onclick = function(event) {
                   event.preventDefault();
 
@@ -22,7 +26,7 @@
               }
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Comments</h1></header><article><div><span><p>Comments can be written just like in JSX as follows:</p>
-<pre><code class="hljs css languages- js">&lt;div&gt;
+<pre><code class="hljs css language-js">&lt;div&gt;
   { <span class="hljs-comment">/* I'm a comment */</span>}
   Hello World!
 <span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>

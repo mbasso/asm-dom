@@ -14,6 +14,10 @@
                 var toggler = document.querySelector(togglerSelector);
                 var target = document.querySelector(targetSelector);
 
+                if (!toggler) {
+                  return;
+                }
+
                 toggler.onclick = function(event) {
                   event.preventDefault();
 
@@ -28,22 +32,22 @@
 <ul>
 <li><p>if you are not using <a href="https://www.npmjs.com/package/asm-dom">npm</a> you can import <a href="https://github.com/mbasso/asm-dom/blob/master/dist/cpp/asm-dom.js">our js file</a> from <a href="https://unpkg.com/asm-dom/dist/cpp/asm-dom.js">unpkg</a></p></li>
 <li><p>if you are using <a href="https://www.npmjs.com/package/asm-dom">npm</a> you can install asm-dom:</p>
-<pre><code class="hljs css languages- bash">npm install --save asm-dom
+<pre><code class="hljs css language-bash">npm install --save asm-dom
 </code></pre>
 <p>and import our js file in this way:</p>
-<pre><code class="hljs css languages- js"><span class="hljs-keyword">import</span> <span class="hljs-string">'asm-dom/cpp/'</span>;
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> <span class="hljs-string">'asm-dom/cpp/'</span>;
 </code></pre>
 <p>If you are using this library with webpack you also need to install <code>arraybuffer-loader</code>:</p>
-<pre><code class="hljs css languages- bash">npm install --save-dev arraybuffer-loader
+<pre><code class="hljs css language-bash">npm install --save-dev arraybuffer-loader
 </code></pre>
 <p>and add this object to your loaders:</p>
-<pre><code class="hljs css languages- js">{
+<pre><code class="hljs css language-js">{
   <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.wasm$/</span>,
   <span class="hljs-attr">loaders</span>: [<span class="hljs-string">'arraybuffer-loader'</span>],
 }
 </code></pre>
 <p>also, if you have some problems with fs, you can add this to your webpack config:</p>
-<pre><code class="hljs css languages- js">node: {
+<pre><code class="hljs css language-js">node: {
   <span class="hljs-attr">fs</span>: <span class="hljs-string">'empty'</span>,
 },
 </code></pre></li>
@@ -65,7 +69,7 @@
 <li><p>If you want to use wasm without webpack, you can see <a href="https://gist.github.com/kripken/59c67556dc03bb6d57052fedef1e61ab">this</a> gist.</p></li>
 </ul>
 <p>If you are using <a href="https://babeljs.io/">babel</a>, please make sure to ignore the compiled files:</p>
-<pre><code class="hljs css languages- js">{
+<pre><code class="hljs css language-js">{
   <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>,
   <span class="hljs-attr">loaders</span>: [<span class="hljs-string">'babel-loader'</span>],
   <span class="hljs-attr">exclude</span>: [
