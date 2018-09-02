@@ -1,7 +1,7 @@
 #include "toHTML.hpp"
 #include "../utils/utils.hpp"
 #include "../VNode/VNode.hpp"
-#include "../VDOMConfig/VDOMConfig.hpp"
+#include "../Config/Config.hpp"
 #include <emscripten/val.h>
 #include <unordered_map>
 #include <string>
@@ -171,8 +171,8 @@ namespace asmdom {
 		toHTML(vnode, html);
 
 		#ifndef ASMDOM_JS_SIDE
-			if (vnode && VDOMConfig::getConfig().getClearMemory()) {
-				deleteVNode(vnode);
+			if (vnode && CLEAR_MEMORY) {
+        deleteVNode(vnode);
 			}
 		#endif
 

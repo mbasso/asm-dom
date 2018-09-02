@@ -1632,18 +1632,12 @@ void shouldCallRefWithDOMNode() {
 	);
 	patch(getRoot(), vnode1);
 
-	// assert
-	if (refCount != 2) {
-		throw 20;
-	}
+	assert(refCount == 2);
 
 	VNode* vnode2 = h("div");
 	patch(vnode1, vnode2);
 	
-	// assert
-	if (refCount != 3) {
-		throw 20;
-	}
+	assert(refCount == 3);
 
 	deleteVNode(vnode2);
 };
@@ -1662,10 +1656,7 @@ void shouldCallRefOnAdd() {
 	);
 	patch(getRoot(), vnode1);
 	
-	// assert
-	if (refCount != 2) {
-		throw 20;
-	}
+	assert(refCount == 2);
 
 	deleteVNode(vnode1);
 };
@@ -1684,18 +1675,12 @@ void shouldCallRefOnRemove() {
 	);
 	patch(getRoot(), vnode1);
 	
-	// assert
-	if (refCount != 2) {
-		throw 20;
-	}
+	assert(refCount == 2);
 
 	VNode* vnode2 = h("div");
 	patch(vnode1, vnode2);
 	
-	// assert
-	if (refCount != 3) {
-		throw 20;
-	}
+	assert(refCount == 3);
 
 	deleteVNode(vnode2);
 };
@@ -1714,10 +1699,7 @@ void shouldNotCallRefOnUpdate() {
 	);
 	patch(getRoot(), vnode1);
 	
-	// assert
-	if (refCount != 2) {
-		throw 20;
-	}
+	assert(refCount == 2);
 
 	VNode* vnode2 = h("div",
 		h("div",
@@ -1730,10 +1712,7 @@ void shouldNotCallRefOnUpdate() {
 	);
 	patch(vnode1, vnode2);
 	
-	// assert
-	if (refCount != 2) {
-		throw 20;
-	}
+	assert(refCount == 2);
 
 	deleteVNode(vnode2);
 };
@@ -1755,10 +1734,7 @@ void shouldCallRefOnChangeLambdaLambda() {
 	);
 	patch(getRoot(), vnode1);
 	
-	// assert
-	if (refCount != 2) {
-		throw 20;
-	}
+	assert(refCount == 2);
 
 	VNode* vnode2 = h("div",
 		h("div",
@@ -1774,10 +1750,7 @@ void shouldCallRefOnChangeLambdaLambda() {
 	);
 	patch(vnode1, vnode2);
 	
-	// assert
-	if (refCount != 3) {
-		throw 20;
-	}
+	assert(refCount == 3);
 
 	deleteVNode(vnode2);
 };
@@ -1799,10 +1772,7 @@ void shouldCallRefOnChangePointerLambda() {
 	);
 	patch(getRoot(), vnode1);
 	
-	// assert
-	if (refCount != 2) {
-		throw 20;
-	}
+	assert(refCount == 2);
 
 	VNode* vnode2 = h("div",
 		h("div",
@@ -1815,10 +1785,7 @@ void shouldCallRefOnChangePointerLambda() {
 	);
 	patch(vnode1, vnode2);
 	
-	// assert
-	if (refCount != 3) {
-		throw 20;
-	}
+	assert(refCount == 3);
 
 	deleteVNode(vnode2);
 };
@@ -1837,10 +1804,7 @@ void shouldCallRefOnChangePointerPointer() {
 	);
 	patch(getRoot(), vnode1);
 	
-	// assert
-	if (refCount != 2) {
-		throw 20;
-	}
+	assert(refCount == 2);
 
 	VNode* vnode2 = h("div",
 		h("div",
@@ -1853,10 +1817,7 @@ void shouldCallRefOnChangePointerPointer() {
 	);
 	patch(vnode1, vnode2);
 	
-	// assert
-	if (refCount != 3) {
-		throw 20;
-	}
+	assert(refCount == 3);
 
 	deleteVNode(vnode2);
 };
@@ -1878,10 +1839,7 @@ void shouldCallRefOnUpdateIfRefIsAdded() {
 	);
 	patch(vnode1, vnode2);
 	
-	// assert
-	if (refCount != 2) {
-		throw 20;
-	}
+	assert(refCount == 2);
 
 	deleteVNode(vnode2);
 };

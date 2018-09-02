@@ -5,20 +5,12 @@ var recycler = {
   create: function create(name) {
     name = name.toUpperCase();
     var list = recycler.nodes[name];
-    if (list !== undefined) {
-      var node = list.pop();
-      if (node !== undefined) return node;
-    }
-    return document.createElement(name);
+    return list !== undefined && list.pop() || document.createElement(name);
   },
   createNS: function createNS(name, ns) {
     name = name.toUpperCase();
     var list = recycler.nodes[name + ns];
-    if (list !== undefined) {
-      var _node = list.pop();
-      if (_node !== undefined) return _node;
-    }
-    var node = document.createElementNS(ns, name);
+    var node = list !== undefined && list.pop() || document.createElementNS(ns, name);
     node.asmDomNS = ns;
     return node;
   },

@@ -1,12 +1,9 @@
 #ifndef asmdom_Init_hpp
 #define asmdom_Init_hpp
 
-namespace asmdom {
+#include "../Config/Config.hpp"
 
-	struct Config { 
-		bool clearMemory = true;
-		bool unsafePatch = false;
-	};
+namespace asmdom {
 
 	void init(const Config& config);
 

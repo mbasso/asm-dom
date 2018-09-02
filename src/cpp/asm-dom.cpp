@@ -1,4 +1,4 @@
-#include "VDOMConfig/VDOMConfig.cpp"
+#include "Config/Config.cpp"
 #include "VNode/VNode.cpp"
 #include "h/h.cpp"
 #include "toVNode/toVNode.cpp"

@@ -2,7 +2,7 @@
 #include "../Diff/diff.hpp"
 #include "../VNode/VNode.hpp"
 #include "../h/h.hpp"
-#include "../VDOMConfig/VDOMConfig.hpp"
+#include "../Config/Config.hpp"
 #include <emscripten/val.h>
 #include <algorithm>
 #include <cstdint>
@@ -26,6 +26,8 @@ namespace asmdom {
 	#ifdef ASMDOM_TEST
 		void reset() {
 			currentNode = NULL;
+			CLEAR_MEMORY = true;
+			UNSAFE_PATCH = false;
 		};
 	#endif
 
@@ -146,15 +148,15 @@ namespace asmdom {
 			} else if (!oldEndVnode) {
 				oldEndVnode = oldCh[--oldEndIdx];
 			} else if (sameVNode(oldStartVnode, newStartVnode)) {
-				patchVNode(oldStartVnode, newStartVnode, parentElm);
+				if (oldStartVnode != newStartVnode) patchVNode(oldStartVnode, newStartVnode, parentElm);
 				oldStartVnode = oldCh[++oldStartIdx];
 				newStartVnode = newCh[++newStartIdx];
 			} else if (sameVNode(oldEndVnode, newEndVnode)) {
-				patchVNode(oldEndVnode, newEndVnode, parentElm);
+				if (oldEndVnode != newEndVnode) patchVNode(oldEndVnode, newEndVnode, parentElm);
 				oldEndVnode = oldCh[--oldEndIdx];
 				newEndVnode = newCh[--newEndIdx];
 			} else if (sameVNode(oldStartVnode, newEndVnode)) {
-				patchVNode(oldStartVnode, newEndVnode, parentElm);
+				if (oldStartVnode != newEndVnode) patchVNode(oldStartVnode, newEndVnode, parentElm);
 
 				EM_ASM_({
 					Module.insertBefore(
@@ -166,7 +168,7 @@ namespace asmdom {
 				oldStartVnode = oldCh[++oldStartIdx];
 				newEndVnode = newCh[--newEndIdx];
 			} else if (sameVNode(oldEndVnode, newStartVnode)) {
-				patchVNode(oldEndVnode, newStartVnode, parentElm);
+				if (oldEndVnode != newStartVnode) patchVNode(oldEndVnode, newStartVnode, parentElm);
 
 				EM_ASM_({
 					Module.insertBefore($0, $1, $2);
@@ -195,7 +197,7 @@ namespace asmdom {
 							Module.insertBefore($0, $1, $2);
 						}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
 					} else {
-						patchVNode(elmToMove, newStartVnode, parentElm);
+						if (elmToMove != newStartVnode) patchVNode(elmToMove, newStartVnode, parentElm);
 						oldCh[oldKeyToIdx[newStartVnode->key]] = NULL;
 						EM_ASM_({
 							Module.insertBefore($0, $1, $2);
@@ -240,7 +242,7 @@ namespace asmdom {
 	VNode* patch(const emscripten::val& element, VNode* const vnode) {
 		VNode* oldVnode = toVNode(element);
 		VNode* result = patch(oldVnode, vnode);
-		if (!VDOMConfig::getConfig().getClearMemory()) {
+		if (!CLEAR_MEMORY) {
 			deleteVNode(oldVnode);
 		}
 		return result;
@@ -248,9 +250,8 @@ namespace asmdom {
 
 	VNode* patch(VNode* const oldVnode, VNode* const vnode) {
 		#ifndef ASMDOM_JS_SIDE
-			VDOMConfig& config = VDOMConfig::getConfig();
 			if (
-				!config.getUnsafePatch() &&
+				!UNSAFE_PATCH &&
 				currentNode != oldVnode && currentNode
 			) return NULL;
 		#endif
@@ -278,7 +279,7 @@ namespace asmdom {
 		}
 
 		#ifndef ASMDOM_JS_SIDE
-			if (config.getClearMemory()) {
+			if (CLEAR_MEMORY) {
 				deleteVNode(oldVnode);
 			}
 		#endif

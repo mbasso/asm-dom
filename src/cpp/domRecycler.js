@@ -2,20 +2,12 @@ const recycler = {
   create(name) {
     name = name.toUpperCase();
     const list = recycler.nodes[name];
-    if (list !== undefined) {
-      const node = list.pop();
-      if (node !== undefined) return node;
-    }
-    return document.createElement(name);
+    return list !== undefined && list.pop() || document.createElement(name);
   },
   createNS(name, ns) {
     name = name.toUpperCase();
     const list = recycler.nodes[name + ns];
-    if (list !== undefined) {
-      const node = list.pop();
-      if (node !== undefined) return node;
-    }
-    const node = document.createElementNS(ns, name);
+    const node = list !== undefined && list.pop() || document.createElementNS(ns, name);
     node.asmDomNS = ns;
     return node;
   },

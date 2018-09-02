@@ -6,15 +6,7 @@
 using namespace asmdom;
 
 void assertEquals(emscripten::val actual, emscripten::val expected) {
-	if (!actual.strictlyEquals(expected)) {
-		throw 20;
-	}
-};
-
-void assertEquals(const std::string& actual, const std::string& expected) {
-	if (actual != expected) {
-		throw 20;
-	}
+	assert(actual.strictlyEquals(expected));
 };
 
 emscripten::val getBodyFirstChild() {
