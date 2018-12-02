@@ -107,7 +107,11 @@ lint:
 
 test: $(COMPILEDASMJS)/asm-dom.asm.js $(COMPILEDWASM)/asm-dom.js $(TESTCPP) test_js
 
+# test server side rendering in both cpp and js
+# and then test library with jsdom
 test_js:
+	npx cross-env BABEL_ENV=commonjs nyc --require babel-register mocha test/cpp/toHTML/toHTML.spec.js
+	npx cross-env BABEL_ENV=commonjs nyc --require babel-register mocha test/js/toHTML.spec.js
 	npx cross-env BABEL_ENV=commonjs nyc --require babel-register --require ./test/setup.js mocha --recursive
 
 build: compiled/asm-dom.a $(BC) compiled/asm-dom.o $(COMPILEDASMJS)/asm-dom.asm.js $(COMPILEDWASM)/asm-dom.js $(TESTCPP) $(LIBS) $(ES) $(UMDJS) $(UMDCPP)
