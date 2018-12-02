@@ -24,6 +24,9 @@ COMPILEDASMJS := $(COMPILED)/asmjs
 COMPILEDWASM := $(COMPILED)/wasm
 CPPDIR := cpp
 
+SCRIPTDIR := scripts
+MODULARIZESCRIPT := $(SCRIPTDIR)/modularize.js
+
 TREE := \
 	$(COMPILED) \
 	$(COMPILEDASMJS) \
@@ -61,7 +64,6 @@ WASM_OPTIONS = \
 	--js-opts 1 \
 	--closure 1 \
 	-s ENVIRONMENT=node \
-	-s MODULARIZE=1 \
 	-s ALLOW_MEMORY_GROWTH=1 \
 	-s AGGRESSIVE_VARIABLE_ELIMINATION=1 \
 	-s ABORTING_MALLOC=1 \
@@ -81,7 +83,6 @@ ASMJS_OPTIONS = \
 	--js-opts 1 \
 	--closure 1 \
 	-s ENVIRONMENT=node \
-	-s MODULARIZE=1 \
 	-s AGGRESSIVE_VARIABLE_ELIMINATION=1 \
 	-s ELIMINATE_DUPLICATE_FUNCTIONS=1 \
 	-s ABORTING_MALLOC=1 \
@@ -122,6 +123,7 @@ $(TESTCPP): $(SRCSCPP) $(TEST_FILES)
 		$(FILES) \
 		$(TEST_FILES) \
 		-o $@
+	node $(MODULARIZESCRIPT) $@
 
 .SECONDEXPANSION:
 $(COMPILED)/asm-dom.%: $(SRCSCPP) | $$(@D)
@@ -137,12 +139,14 @@ $(COMPILEDASMJS)/asm-dom.asm.js: $(BC) | $$(@D)
 		$(ASMJS_OPTIONS) \
 		$(BC) \
 		-o $@
+	node $(MODULARIZESCRIPT) $@
 
 $(COMPILEDWASM)/asm-dom.js: $(BC) | $$(@D)
 	emcc \
 		$(WASM_OPTIONS) \
 		$(BC) \
 		-o $@
+	node $(MODULARIZESCRIPT) $@
 
 $(ESDIR)/%: $(SRCDIR)/% | $$(@D)
 	npx cross-env BABEL_ENV=es babel $< --out-file $@

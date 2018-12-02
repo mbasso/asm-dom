@@ -1,13 +1,19 @@
+(function(rootScope) {
+	var createGlobalModule = function(factory) {
+		if (typeof exports === 'object' && typeof module === 'object')
+			module.exports = factory;
+		else if (typeof define === 'function' && define['amd'])
+			define([], function() { return factory; });
+		else if (typeof exports === 'object')
+			exports["Module"] = factory;
+		else
+			rootScope.Module = factory;
+	};
 
-var Module = (function() {
-  var _scriptDir = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : undefined;
-  return (
-function(Module) {
-  Module = Module || {};
-
-var e;e||(e=typeof Module !== 'undefined' ? Module : {});var l={},p;for(p in e)e.hasOwnProperty(p)&&(l[p]=e[p]);e.arguments=[];e.thisProgram="./this.program";e.quit=function(a,b){throw b;};e.preRun=[];e.postRun=[];var aa="";aa=__dirname+"/";var ba,ca;
+	var moduleFactory = function(Module) {
+			Module = Module || {};var e;e||(e=typeof Module !== 'undefined' ? Module : {});var l={},p;for(p in e)e.hasOwnProperty(p)&&(l[p]=e[p]);e.arguments=[];e.thisProgram="./this.program";e.quit=function(a,b){throw b;};e.preRun=[];e.postRun=[];var aa="";aa=__dirname+"/";var ba,ca;
 e.read=function(a,b){if(String.prototype.startsWith?a.startsWith(r):0===a.indexOf(r)){var c=a.slice(r.length);try{var d=Buffer.from(c,"base64")}catch(f){d=new Buffer(c,"base64")}c=new Uint8Array(d.buffer,d.byteOffset,d.byteLength)}else c=void 0;c||(ba||(ba=require("fs")),ca||(ca=require("path")),a=ca.normalize(a),c=ba.readFileSync(a));return b?c:c.toString()};e.readBinary=function(a){a=e.read(a,!0);a.buffer||(a=new Uint8Array(a));assert(a.buffer);return a};
-1<process.argv.length&&(e.thisProgram=process.argv[1].replace(/\\/g,"/"));e.arguments=process.argv.slice(2);process.on("uncaughtException",function(a){if(!(a instanceof t))throw a;});process.on("unhandledRejection",u);e.quit=function(a){process.exit(a)};e.inspect=function(){return"[Emscripten Module object]"};
+1<process.argv.length&&(e.thisProgram=process.argv[1].replace(/\\/g,"/"));e.arguments=process.argv.slice(2);"undefined"!==typeof module&&(module.exports=e);process.on("uncaughtException",function(a){if(!(a instanceof t))throw a;});process.on("unhandledRejection",u);e.quit=function(a){process.exit(a)};e.inspect=function(){return"[Emscripten Module object]"};
 var da=e.print||("undefined"!==typeof console?console.log.bind(console):"undefined"!==typeof print?print:null),ea=e.printErr||("undefined"!==typeof printErr?printErr:"undefined"!==typeof console&&console.warn.bind(console)||da);for(p in l)l.hasOwnProperty(p)&&(e[p]=l[p]);l=void 0;function fa(a){var b;b||(b=16);return Math.ceil(a/b)*b}var tempRet0=0,ha=!1;function assert(a,b){a||u("Assertion failed: "+b)}
 function ia(a){var b;if(0===b||!a)return"";for(var c=0,d,f=0;;){d=v[a+f>>0];c|=d;if(0==d&&!b)break;f++;if(b&&f==b)break}b||(b=f);d="";if(128>c){for(;0<b;)c=String.fromCharCode.apply(String,v.subarray(a,a+Math.min(b,1024))),d=d?d+c:c,a+=1024,b-=1024;return d}return ja(a)}var ka="undefined"!==typeof TextDecoder?new TextDecoder("utf8"):void 0;
 function la(a,b){for(var c=b;a[c];)++c;if(16<c-b&&a.subarray&&ka)return ka.decode(a.subarray(b,c));for(c="";;){var d=a[b++];if(!d)return c;if(d&128){var f=a[b++]&63;if(192==(d&224))c+=String.fromCharCode((d&31)<<6|f);else{var g=a[b++]&63;if(224==(d&240))d=(d&15)<<12|f<<6|g;else{var k=a[b++]&63;if(240==(d&248))d=(d&7)<<18|f<<12|g<<6|k;else{var h=a[b++]&63;if(248==(d&252))d=(d&3)<<24|f<<18|g<<12|k<<6|h;else{var n=a[b++]&63;d=(d&1)<<30|f<<24|g<<18|k<<12|h<<6|n}}}65536>d?c+=String.fromCharCode(d):(d-=
@@ -85,21 +91,27 @@ var bc=[Wh,Cf,ag,Wh];var cc=[Sh,Fh,Fh,Rg,Tf,uf,Fh,Df,sh,sh,fg,Ih,qg,Xg,Ih,Kg,ah,
 (e.Ga,e.Ha,buffer),Ka=e.__GLOBAL__sub_I_asm_dom_cpp=Z.__GLOBAL__sub_I_asm_dom_cpp,La=e.__GLOBAL__sub_I_asm_dom_server_cpp=Z.__GLOBAL__sub_I_asm_dom_server_cpp,Na=e.__GLOBAL__sub_I_bind_cpp=Z.__GLOBAL__sub_I_bind_cpp,Ma=e.__GLOBAL__sub_I_index_cpp=Z.__GLOBAL__sub_I_index_cpp;e.___cxa_can_catch=Z.___cxa_can_catch;e.___cxa_is_pointer_type=Z.___cxa_is_pointer_type;var Qb=e.___getTypeName=Z.___getTypeName;e.___muldi3=Z.___muldi3;e.___udivdi3=Z.___udivdi3;
 e._bitshift64Lshr=Z._bitshift64Lshr;e._bitshift64Shl=Z._bitshift64Shl;var X=e._free=Z._free;e._i64Add=Z._i64Add;e._i64Subtract=Z._i64Subtract;e._llvm_bswap_i32=Z._llvm_bswap_i32;e._main=Z._main;var H=e._malloc=Z._malloc;e._memcpy=Z._memcpy;e._memmove=Z._memmove;e._memset=Z._memset;e._sbrk=Z._sbrk;e.establishStackSpace=Z.establishStackSpace;e.runPostSets=Z.runPostSets;e.setThrew=Z.setThrew;var pa=e.stackAlloc=Z.stackAlloc;e.stackRestore=Z.stackRestore;e.stackSave=Z.stackSave;e.dynCall_i=Z.dynCall_i;
 e.dynCall_ii=Z.dynCall_ii;e.dynCall_iii=Z.dynCall_iii;e.dynCall_iiii=Z.dynCall_iiii;e.dynCall_iiiii=Z.dynCall_iiiii;e.dynCall_iiiiii=Z.dynCall_iiiiii;e.dynCall_iiiiiiiii=Z.dynCall_iiiiiiiii;e.dynCall_v=Z.dynCall_v;e.dynCall_vi=Z.dynCall_vi;e.dynCall_vii=Z.dynCall_vii;e.dynCall_viii=Z.dynCall_viii;e.dynCall_viiii=Z.dynCall_viiii;e.dynCall_viiiii=Z.dynCall_viiiii;e.dynCall_viiiiii=Z.dynCall_viiiiii;e.asm=Z;e.UTF8ToString=ja;
-if(D){if(String.prototype.startsWith?!D.startsWith(r):0!==D.indexOf(r)){var sc=D;D=e.locateFile?e.locateFile(sc,aa):aa+sc}var tc=e.readBinary(D);v.set(tc,8)}e.then=function(a){if(e.calledRun)a(e);else{var b=e.onRuntimeInitialized;e.onRuntimeInitialized=function(){b&&b();a(e)}}return e};function t(a){this.name="ExitStatus";this.message="Program terminated with exit("+a+")";this.status=a}t.prototype=Error();t.prototype.constructor=t;
+if(D){if(String.prototype.startsWith?!D.startsWith(r):0!==D.indexOf(r)){var sc=D;D=e.locateFile?e.locateFile(sc,aa):aa+sc}var tc=e.readBinary(D);v.set(tc,8)}function t(a){this.name="ExitStatus";this.message="Program terminated with exit("+a+")";this.status=a}t.prototype=Error();t.prototype.constructor=t;
 e.callMain=function(a){a=a||[];Ha||(Ha=!0,C(Da));var b=a.length+1,c=pa(4*(b+1));y[c>>2]=oa(e.thisProgram);for(var d=1;d<b;d++)y[(c>>2)+d]=oa(a[d-1]);y[(c>>2)+b]=0;try{var f=e._main(b,c,0);if(!e.noExitRuntime||0!==f){if(!e.noExitRuntime&&(ha=!0,wa=void 0,C(Fa),e.onExit))e.onExit(f);e.quit(f,new t(f))}}catch(g){g instanceof t||("SimulateInfiniteLoop"==g?e.noExitRuntime=!0:((a=g)&&"object"===typeof g&&g.stack&&(a=[g,g.stack]),ea("exception thrown: "+a),e.quit(1,g)))}finally{}};
 function uc(a){function b(){if(!e.calledRun&&(e.calledRun=!0,!ha)){Ha||(Ha=!0,C(Da));C(Ea);if(e.onRuntimeInitialized)e.onRuntimeInitialized();e._main&&vc&&e.callMain(a);if(e.postRun)for("function"==typeof e.postRun&&(e.postRun=[e.postRun]);e.postRun.length;){var b=e.postRun.shift();Ga.unshift(b)}C(Ga)}}a=a||e.arguments;if(e.preRun)for("function"==typeof e.preRun&&(e.preRun=[e.preRun]);e.preRun.length;)Ia();C(Ca);e.calledRun||(e.setStatus?(e.setStatus("Running..."),setTimeout(function(){setTimeout(function(){e.setStatus("")},
 1);b()},1)):b())}e.run=uc;function u(a){if(e.onAbort)e.onAbort(a);void 0!==a?(da(a),ea(a),a=JSON.stringify(a)):a="";ha=!0;throw"abort("+a+"). Build with -s ASSERTIONS=1 for more info.";}e.abort=u;if(e.preInit)for("function"==typeof e.preInit&&(e.preInit=[e.preInit]);0<e.preInit.length;)e.preInit.pop()();var vc=!0;e.noInitialRun&&(vc=!1);e.noExitRuntime=!0;uc();
 
+		Module.then = function(cb) {
+			if(Module.calledRun)
+				cb(Module);
+			else {
+				var b = Module.onRuntimeInitialized;
+				Module.onRuntimeInitialized = function(){
+					b && b();
+					cb(Module);
+				};
+			}
+			return Module;
+		};
 
+		createGlobalModule(moduleFactory);
+		return Module;
+	};
 
-  return Module;
-}
-);
-})();
-if (typeof exports === 'object' && typeof module === 'object')
-    module.exports = Module;
-  else if (typeof define === 'function' && define['amd'])
-    define([], function() { return Module; });
-  else if (typeof exports === 'object')
-    exports["Module"] = Module;
-  
+	createGlobalModule(moduleFactory);
+})(this);

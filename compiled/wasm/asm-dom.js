@@ -1,12 +1,18 @@
+(function(rootScope) {
+	var createGlobalModule = function(factory) {
+		if (typeof exports === 'object' && typeof module === 'object')
+			module.exports = factory;
+		else if (typeof define === 'function' && define['amd'])
+			define([], function() { return factory; });
+		else if (typeof exports === 'object')
+			exports["Module"] = factory;
+		else
+			rootScope.Module = factory;
+	};
 
-var Module = (function() {
-  var _scriptDir = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : undefined;
-  return (
-function(Module) {
-  Module = Module || {};
-
-var d;d||(d=typeof Module !== 'undefined' ? Module : {});var n={},q;for(q in d)d.hasOwnProperty(q)&&(n[q]=d[q]);d.arguments=[];d.thisProgram="./this.program";d.quit=function(a,b){throw b;};d.preRun=[];d.postRun=[];var aa="";function ba(a){return d.locateFile?d.locateFile(a,aa):aa+a}aa=__dirname+"/";var ca,da;d.read=function(a,b){ca||(ca=require("fs"));da||(da=require("path"));a=da.normalize(a);a=ca.readFileSync(a);return b?a:a.toString()};
-d.readBinary=function(a){a=d.read(a,!0);a.buffer||(a=new Uint8Array(a));assert(a.buffer);return a};1<process.argv.length&&(d.thisProgram=process.argv[1].replace(/\\/g,"/"));d.arguments=process.argv.slice(2);process.on("uncaughtException",function(a){if(!(a instanceof r))throw a;});process.on("unhandledRejection",t);d.quit=function(a){process.exit(a)};d.inspect=function(){return"[Emscripten Module object]"};
+	var moduleFactory = function(Module) {
+			Module = Module || {};var d;d||(d=typeof Module !== 'undefined' ? Module : {});var n={},q;for(q in d)d.hasOwnProperty(q)&&(n[q]=d[q]);d.arguments=[];d.thisProgram="./this.program";d.quit=function(a,b){throw b;};d.preRun=[];d.postRun=[];var aa="";function ba(a){return d.locateFile?d.locateFile(a,aa):aa+a}aa=__dirname+"/";var ca,da;d.read=function(a,b){ca||(ca=require("fs"));da||(da=require("path"));a=da.normalize(a);a=ca.readFileSync(a);return b?a:a.toString()};
+d.readBinary=function(a){a=d.read(a,!0);a.buffer||(a=new Uint8Array(a));assert(a.buffer);return a};1<process.argv.length&&(d.thisProgram=process.argv[1].replace(/\\/g,"/"));d.arguments=process.argv.slice(2);"undefined"!==typeof module&&(module.exports=d);process.on("uncaughtException",function(a){if(!(a instanceof r))throw a;});process.on("unhandledRejection",t);d.quit=function(a){process.exit(a)};d.inspect=function(){return"[Emscripten Module object]"};
 var ea=d.print||("undefined"!==typeof console?console.log.bind(console):"undefined"!==typeof print?print:null),v=d.printErr||("undefined"!==typeof printErr?printErr:"undefined"!==typeof console&&console.warn.bind(console)||ea);for(q in n)n.hasOwnProperty(q)&&(d[q]=n[q]);n=void 0;function fa(a){var b;b||(b=16);return Math.ceil(a/b)*b}var ha={"f64-rem":function(a,b){return a%b},"debugger":function(){debugger}},tempRet0=0,ja=!1;function assert(a,b){a||t("Assertion failed: "+b)}
 function ka(a){var b;if(0===b||!a)return"";for(var c=0,e,f=0;;){e=w[a+f>>0];c|=e;if(0==e&&!b)break;f++;if(b&&f==b)break}b||(b=f);e="";if(128>c){for(;0<b;)c=String.fromCharCode.apply(String,w.subarray(a,a+Math.min(b,1024))),e=e?e+c:c,a+=1024,b-=1024;return e}return la(a)}var ma="undefined"!==typeof TextDecoder?new TextDecoder("utf8"):void 0;
 function na(a,b){for(var c=b;a[c];)++c;if(16<c-b&&a.subarray&&ma)return ma.decode(a.subarray(b,c));for(c="";;){var e=a[b++];if(!e)return c;if(e&128){var f=a[b++]&63;if(192==(e&224))c+=String.fromCharCode((e&31)<<6|f);else{var g=a[b++]&63;if(224==(e&240))e=(e&15)<<12|f<<6|g;else{var k=a[b++]&63;if(240==(e&248))e=(e&7)<<18|f<<12|g<<6|k;else{var h=a[b++]&63;if(248==(e&252))e=(e&3)<<24|f<<18|g<<12|k<<6|h;else{var m=a[b++]&63;e=(e&1)<<30|f<<24|g<<18|k<<12|h<<6|m}}}65536>e?c+=String.fromCharCode(e):(e-=
@@ -76,21 +82,26 @@ c,e)},Q:function(a,b,c){w.set(w.subarray(b,b+c),a);return a},v:Pb,P:function(a){
 var Qa=d.__GLOBAL__sub_I_asm_dom_cpp=function(){return d.asm._.apply(null,arguments)},Ra=d.__GLOBAL__sub_I_asm_dom_server_cpp=function(){return d.asm.$.apply(null,arguments)},Ta=d.__GLOBAL__sub_I_bind_cpp=function(){return d.asm.aa.apply(null,arguments)},Sa=d.__GLOBAL__sub_I_index_cpp=function(){return d.asm.ba.apply(null,arguments)},xb=d.___getTypeName=function(){return d.asm.ca.apply(null,arguments)},Da=d._emscripten_replace_memory=function(){return d.asm._emscripten_replace_memory.apply(null,arguments)},
 Y=d._free=function(){return d.asm.da.apply(null,arguments)};d._main=function(){return d.asm.ea.apply(null,arguments)};var Qb=d._malloc=function(){return d.asm.fa.apply(null,arguments)},ra=d.stackAlloc=function(){return d.asm.ua.apply(null,arguments)};d.dynCall_i=function(){return d.asm.ga.apply(null,arguments)};d.dynCall_ii=function(){return d.asm.ha.apply(null,arguments)};d.dynCall_iii=function(){return d.asm.ia.apply(null,arguments)};d.dynCall_iiii=function(){return d.asm.ja.apply(null,arguments)};
 d.dynCall_iiiii=function(){return d.asm.ka.apply(null,arguments)};d.dynCall_iiiiii=function(){return d.asm.la.apply(null,arguments)};d.dynCall_iiiiiiiii=function(){return d.asm.ma.apply(null,arguments)};d.dynCall_v=function(){return d.asm.na.apply(null,arguments)};d.dynCall_vi=function(){return d.asm.oa.apply(null,arguments)};d.dynCall_vii=function(){return d.asm.pa.apply(null,arguments)};d.dynCall_viii=function(){return d.asm.qa.apply(null,arguments)};
-d.dynCall_viiii=function(){return d.asm.ra.apply(null,arguments)};d.dynCall_viiiii=function(){return d.asm.sa.apply(null,arguments)};d.dynCall_viiiiii=function(){return d.asm.ta.apply(null,arguments)};d.asm=Xb;d.UTF8ToString=la;d.then=function(a){if(d.calledRun)a(d);else{var b=d.onRuntimeInitialized;d.onRuntimeInitialized=function(){b&&b();a(d)}}return d};function r(a){this.name="ExitStatus";this.message="Program terminated with exit("+a+")";this.status=a}r.prototype=Error();
-r.prototype.constructor=r;G=function Yb(){d.calledRun||Zb();d.calledRun||(G=Yb)};
+d.dynCall_viiii=function(){return d.asm.ra.apply(null,arguments)};d.dynCall_viiiii=function(){return d.asm.sa.apply(null,arguments)};d.dynCall_viiiiii=function(){return d.asm.ta.apply(null,arguments)};d.asm=Xb;d.UTF8ToString=la;function r(a){this.name="ExitStatus";this.message="Program terminated with exit("+a+")";this.status=a}r.prototype=Error();r.prototype.constructor=r;G=function Yb(){d.calledRun||Zb();d.calledRun||(G=Yb)};
 d.callMain=function(a){a=a||[];La||(La=!0,E(Ha));var b=a.length+1,c=ra(4*(b+1));y[c>>2]=qa(d.thisProgram);for(var e=1;e<b;e++)y[(c>>2)+e]=qa(a[e-1]);y[(c>>2)+b]=0;try{var f=d._main(b,c,0);if(!d.noExitRuntime||0!==f){if(!d.noExitRuntime&&(ja=!0,Aa=void 0,E(Ja),d.onExit))d.onExit(f);d.quit(f,new r(f))}}catch(g){g instanceof r||("SimulateInfiniteLoop"==g?d.noExitRuntime=!0:((a=g)&&"object"===typeof g&&g.stack&&(a=[g,g.stack]),v("exception thrown: "+a),d.quit(1,g)))}finally{}};
 function Zb(a){function b(){if(!d.calledRun&&(d.calledRun=!0,!ja)){La||(La=!0,E(Ha));E(Ia);if(d.onRuntimeInitialized)d.onRuntimeInitialized();d._main&&$b&&d.callMain(a);if(d.postRun)for("function"==typeof d.postRun&&(d.postRun=[d.postRun]);d.postRun.length;){var b=d.postRun.shift();Ka.unshift(b)}E(Ka)}}a=a||d.arguments;if(!(0<F)){if(d.preRun)for("function"==typeof d.preRun&&(d.preRun=[d.preRun]);d.preRun.length;)Ma();E(Ga);0<F||d.calledRun||(d.setStatus?(d.setStatus("Running..."),setTimeout(function(){setTimeout(function(){d.setStatus("")},
 1);b()},1)):b())}}d.run=Zb;function t(a){if(d.onAbort)d.onAbort(a);void 0!==a?(ea(a),v(a),a=JSON.stringify(a)):a="";ja=!0;throw"abort("+a+"). Build with -s ASSERTIONS=1 for more info.";}d.abort=t;if(d.preInit)for("function"==typeof d.preInit&&(d.preInit=[d.preInit]);0<d.preInit.length;)d.preInit.pop()();var $b=!0;d.noInitialRun&&($b=!1);d.noExitRuntime=!0;Zb();
+		Module.then = function(cb) {
+			if(Module.calledRun)
+				cb(Module);
+			else {
+				var b = Module.onRuntimeInitialized;
+				Module.onRuntimeInitialized = function(){
+					b && b();
+					cb(Module);
+				};
+			}
+			return Module;
+		};
 
+		createGlobalModule(moduleFactory);
+		return Module;
+	};
 
-  return Module;
-}
-);
-})();
-if (typeof exports === 'object' && typeof module === 'object')
-    module.exports = Module;
-  else if (typeof define === 'function' && define['amd'])
-    define([], function() { return Module; });
-  else if (typeof exports === 'object')
-    exports["Module"] = Module;
-  
+	createGlobalModule(moduleFactory);
+})(this);
