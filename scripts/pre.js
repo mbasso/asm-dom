@@ -12,3 +12,9 @@
 
 	var moduleFactory = function(Module) {
 			Module = Module || {};
+			if (typeof document === 'undefined') var document = {};
+			if (typeof navigator === 'undefined') var navigator = {};
+			if (typeof window === 'undefined') {
+				var window = global && global.window || {};
+				window.addEventListener = function(){};
+			}
