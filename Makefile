@@ -116,8 +116,8 @@ test: $(COMPILEDASMJS)/asm-dom.asm.js $(COMPILEDWASM)/asm-dom.js $(TESTCPPWEB) $
 # test server side rendering in both cpp and js
 # and then test library with jsdom
 test_js:
-	npx cross-env BABEL_ENV=commonjs nyc --require babel-register mocha test/js/toHTML.spec.js
-	npx cross-env BABEL_ENV=commonjs SERVER_SIDE=1 nyc --require babel-register mocha test/cpp/toHTML/toHTML.spec.js
+	npx cross-env BABEL_ENV=commonjs mocha --require babel-register test/js/toHTML.spec.js
+	npx cross-env BABEL_ENV=commonjs SERVER_SIDE=1 mocha --require babel-register test/cpp/toHTML/toHTML.spec.js
 	npx cross-env BABEL_ENV=commonjs nyc --require babel-register --require ./test/setup.js mocha 'test/{cpp,cpp/**,js}/*.spec.js'
 
 build: compiled/asm-dom.a $(BC) compiled/asm-dom.o $(COMPILEDASMJS)/asm-dom.asm.js $(COMPILEDWASM)/asm-dom.js $(TESTCPPWEB) $(TESTCPPNODE) $(LIBS) $(ES) $(UMDJS) $(UMDCPP)
