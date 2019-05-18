@@ -1,15 +1,8 @@
-import { nodes } from '../cpp/domApi';
-
 const emptyObj = {};
 
-export function eventProxy(e) {
-  return this.asmDomEvents[e.type](e);
-}
-
-export default (oldVnodePtr, vnodePtr, elmPtr) => {
-  const elm = nodes[elmPtr];
-  const oldNode = window.asmDomHelpers.vnodesData[oldVnodePtr];
-  const newNode = window.asmDomHelpers.vnodesData[vnodePtr];
+export default (Module, oldVnodePtr, vnodePtr, elm, eventProxy) => {
+  const oldNode = Module.vnodesData[oldVnodePtr];
+  const newNode = Module.vnodesData[vnodePtr];
   let oldValues = oldNode !== undefined && oldNode.raw !== undefined ? oldNode.raw : emptyObj;
   let newValues = newNode !== undefined && newNode.raw !== undefined ? newNode.raw : emptyObj;
 

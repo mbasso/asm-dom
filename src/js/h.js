@@ -1,11 +1,11 @@
 // eslint-disable-next-line
 Array.prototype.instanceofArray = true;
 
-const getChildren = (arr) => {
-  const result = new window.asmDom.VNodePtrVector();
+const getChildren = (Module, arr) => {
+  const result = new Module.VNodePtrVector();
   for (let i = 0; i < arr.length; i++) {
     if (typeof arr[i] === 'string') {
-      result.push_back(window.asmDom._h_ti(arr[i], true));
+      result.push_back(Module._h_ti(arr[i], true));
     } else if (arr[i] !== false && arr[i] !== null && arr[i] !== undefined) {
       result.push_back(arr[i]);
     }
@@ -13,12 +13,12 @@ const getChildren = (arr) => {
   return result;
 };
 
-const getData = (obj) => {
+const getData = (Module, obj) => {
   let hasRaws = obj.raw !== undefined;
   let hasEvents = false;
 
   let ref;
-  const attrs = new window.asmDom.MapStringString();
+  const attrs = new Module.MapStringString();
   const raw = obj.raw !== undefined ? obj.raw : {};
   const events = {};
 
@@ -52,46 +52,46 @@ const getData = (obj) => {
   };
 };
 
-export default (a, b, c, d) => {
+export default (Module, a, b, c, d) => {
   let result;
   let data;
   if (b === undefined) {
-    result = window.asmDom._h_s(a);
+    result = Module._h_s(a);
   } else if (c === undefined) {
     if (b.instanceofArray === true) {
-      result = window.asmDom._h_sc(a, b = getChildren(b));
+      result = Module._h_sc(a, b = getChildren(Module, b));
       b.delete();
     } else {
       switch (typeof b) {
         case 'boolean':
-          result = window.asmDom._h_ti(a, b);
+          result = Module._h_ti(a, b);
           break;
         case 'string':
-          result = window.asmDom._h_st(a, b);
+          result = Module._h_st(a, b);
           break;
         case 'number':
-          result = window.asmDom._h_sn(a, b);
+          result = Module._h_sn(a, b);
           break;
         case 'object':
-          data = getData(b);
-          result = window.asmDom._h_sd(a, data.attrs);
+          data = getData(Module, b);
+          result = Module._h_sd(a, data.attrs);
           break;
         default:
           throw new Error('Invalid argument: ', b);
       }
     }
   } else if (d === undefined) {
-    data = getData(b);
+    data = getData(Module, b);
     if (c.instanceofArray === true) {
-      result = window.asmDom._h_sdc(a, data.attrs, c = getChildren(c));
+      result = Module._h_sdc(a, data.attrs, c = getChildren(Module, c));
       c.delete();
     } else {
       switch (typeof c) {
         case 'string':
-          result = window.asmDom._h_sdt(a, data.attrs, c);
+          result = Module._h_sdt(a, data.attrs, c);
           break;
         case 'number':
-          result = window.asmDom._h_sdn(a, data.attrs, c);
+          result = Module._h_sdn(a, data.attrs, c);
           break;
         default:
           throw new Error('Invalid argument: ', c);
@@ -108,7 +108,7 @@ export default (a, b, c, d) => {
       data.ref !== undefined
     ) {
       delete data.attrs;
-      window.asmDomHelpers.vnodesData[result] = data;
+      Module.vnodesData[result] = data;
     }
   }
   return result;

@@ -40,8 +40,8 @@ const escapes = {
 
 const escape = string => String(string).replace(/[&<>"'`]/g, char => escapes[char]);
 
-export const appendProps = (vnodePtr) => {
-  let raws = window.asmDomHelpers.vnodesData[vnodePtr];
+export const appendProps = (Module, vnodePtr) => {
+  let raws = Module.vnodesData[vnodePtr];
   if (raws === undefined) return '';
 
   raws = raws.raw;
@@ -59,8 +59,8 @@ export const appendProps = (vnodePtr) => {
   return props;
 };
 
-export const insertInnerHTML = (vnodePtr) => {
-  const data = window.asmDomHelpers.vnodesData[vnodePtr];
+export const insertInnerHTML = (Module, vnodePtr) => {
+  const data = Module.vnodesData[vnodePtr];
   return (
     data !== undefined &&
     data.raw !== undefined &&
@@ -69,13 +69,13 @@ export const insertInnerHTML = (vnodePtr) => {
      : '';
 };
 
-export const toHTML = (vnode) => {
+export const toHTML = (Module, vnode) => {
   if (typeof vnode !== 'number') return '';
 
-  const html = window.asmDom._toHTML(vnode);
+  const html = Module._toHTML(vnode);
 
-  if (window.asmDom.clearMemory === true) {
-    setTimeout(window.asmDom.deleteVNode.bind(null, vnode));
+  if (Module.clearMemory === true) {
+    setTimeout(Module.deleteVNode.bind(null, vnode));
   }
 
   return html;

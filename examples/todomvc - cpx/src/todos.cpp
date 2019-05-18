@@ -156,6 +156,7 @@ namespace todomvc {
 						style={"display: " + std::string(model.tasks.size() > 0 ? "block" : "none")}
 					>
             <input
+              id="toggle-all"
               class="toggle-all"
               type="checkbox"
               checked={remaining == 0}
@@ -164,6 +165,7 @@ namespace todomvc {
                 return true;
               }}
             />
+						<label for="toggle-all" />
 						<ul class="todo-list">
 							{...tasksViews}
 						</ul>

@@ -1,5 +1,6 @@
 import expect from 'expect';
 import init from '../../src/js/';
+import setup from '../setup';
 
 describe('toHTML (js)', function testToHTML() {
   this.timeout(30000);
@@ -9,9 +10,9 @@ describe('toHTML (js)', function testToHTML() {
   let toHTML;
 
   before((done) => {
+    setup();
     init({
       useAsmJS: true,
-      hardReload: true,
     }).then((asmDom) => {
       vdom = asmDom;
       h = vdom.h;

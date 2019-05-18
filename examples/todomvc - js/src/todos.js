@@ -65,12 +65,16 @@ function view(h, model, handler) {
       style: `display: ${model.tasks.length ? 'block' : 'none'}`,
     }, [
       h('input', {
+        id: 'toggle-all',
         className: 'toggle-all',
         type: 'checkbox',
         raw: {
           checked: remaining === 0,
           onclick: sequence(targetChecked, Action.ToggleAll, handler),
         },
+      }),
+      h('label', {
+        for: 'toggle-all'
       }),
       h('ul', {
         className: 'todo-list',

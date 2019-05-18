@@ -1,4 +1,5 @@
 import init from '../';
+import setup from '../../setup';
 
 describe('eventlisteners (cpp)', function testEventlisteners() {
   this.timeout(30000);
@@ -6,6 +7,7 @@ describe('eventlisteners (cpp)', function testEventlisteners() {
   let app;
 
   before((done) => {
+    setup();
     app = init(done);
   });
 

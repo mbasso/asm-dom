@@ -106,7 +106,7 @@ namespace asmdom {
 				#ifdef ASMDOM_JS_SIDE
 					EM_ASM_({
 						Module.removeChild($0);
-						var data = window['asmDomHelpers']['vnodesData'][$1];
+						var data = Module['vnodesData'][$1];
 						if (data !== undefined && data['ref'] !== undefined) {
 							data['ref'](null);
 						}

@@ -15,9 +15,7 @@ ES := $(SRCS:$(SRCDIR)/%=$(ESDIR)/%)
 LIBS := $(SRCS:$(SRCDIR)/%=$(LIBDIR)/%)
 DISTDIR := dist
 DISTJS := $(DISTDIR)/js
-DISTCPP := $(DISTDIR)/cpp
 UMDJS := $(DISTJS)/asm-dom.js
-UMDCPP := $(DISTCPP)/asm-dom.js
 TESTCPP := test/cpp/app.asm.js
 COMPILED := compiled
 COMPILEDASMJS := $(COMPILED)/asmjs
@@ -30,7 +28,6 @@ TREE := \
 	$(COMPILEDWASM) \
 	$(DISTDIR) \
 	$(DISTJS) \
-	$(DISTCPP) \
 	$(ESDIR) \
 	$(LIBDIR) \
 	$(sort $(patsubst %/,%,$(dir $(ES)))) \
@@ -107,12 +104,10 @@ lint:
 test: $(COMPILEDASMJS)/asm-dom.asm.js $(COMPILEDWASM)/asm-dom.js $(TESTCPP) test_js
 
 test_js:
-	npx cross-env BABEL_ENV=commonjs nyc --require babel-register --require ./test/setup.js mocha --recursive
+	npx cross-env BABEL_ENV=commonjs nyc --require babel-register mocha --recursive
 
-build: compiled/asm-dom.a $(BC) compiled/asm-dom.o $(COMPILEDASMJS)/asm-dom.asm.js $(COMPILEDWASM)/asm-dom.js $(TESTCPP) $(LIBS) $(ES) $(UMDJS) $(UMDCPP)
+build: compiled/asm-dom.a $(BC) compiled/asm-dom.o $(COMPILEDASMJS)/asm-dom.asm.js $(COMPILEDWASM)/asm-dom.js $(TESTCPP) $(LIBS) $(ES) $(UMDJS)
 	npx ncp $(SRCDIR)/cpp $(CPPDIR)
-	npx ncp $(DISTCPP) $(CPPDIR)
-	npx ncp $(LIBDIR)/cpp $(CPPDIR)
 
 $(TESTCPP): $(SRCSCPP) $(TEST_FILES)
 	emcc \
@@ -152,9 +147,6 @@ $(LIBDIR)/%: $(SRCDIR)/% | $$(@D)
 
 $(UMDJS): $(SRCS) | $$(@D)
 	npx cross-env BABEL_ENV=commonjs webpack --env.prod src/js/index.js $@
-
-$(UMDCPP): $(SRCS) | $$(@D)
-	npx cross-env BABEL_ENV=commonjs webpack --env.prod --env.cpp src/cpp/index.js $@
 
 $(TREE): %:
 	npx mkdirp $@

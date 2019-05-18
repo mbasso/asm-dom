@@ -1,4 +1,3 @@
-import '../../src/cpp/';
 import Perf from './Perf';
 
 console.log('Preparing...');

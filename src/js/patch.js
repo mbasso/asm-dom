@@ -1,20 +1,20 @@
-export default (oldVnode, vnode) => {
+export default (Module, oldVnode, vnode) => {
   if (
-    window.asmDom.unsafePatch === false &&
-    window.asmDomHelpers.currentNode !== oldVnode &&
-    window.asmDomHelpers.currentNode !== undefined
+    Module.unsafePatch === false &&
+    Module.currentNode !== oldVnode &&
+    Module.currentNode !== undefined
   ) return;
   // eslint-disable-next-line
   if (oldVnode === vnode) return vnode;
-  window.asmDomHelpers.currentNode = vnode;
-  let { clearMemory } = window.asmDom;
+  Module.currentNode = vnode;
+  let { clearMemory } = Module;
   if (typeof oldVnode !== 'number') {
     clearMemory = true;
-    oldVnode = window.asmDom.toVNode(oldVnode);
+    oldVnode = Module.toVNode(oldVnode);
   }
-  window.asmDom._patch(oldVnode, vnode);
+  Module._patch(oldVnode, vnode);
   if (clearMemory === true) {
-    setTimeout(window.asmDom.deleteVNode.bind(null, oldVnode));
+    setTimeout(Module.deleteVNode.bind(null, oldVnode));
   }
   // eslint-disable-next-line
   return vnode;

@@ -9,8 +9,9 @@ namespace asmdom {
 
 	VNode* toVNode(const emscripten::val& node) {
 		VNode* vnode;
+		int nodeType = node["nodeType"].as<int>();
 		// isElement
-		if (node["nodeType"].as<int>() == 1) {
+		if (nodeType == 1) {
 			std::string sel = node["tagName"].as<std::string>();
 			std::transform(sel.begin(), sel.end(), sel.begin(), ::tolower);
 
@@ -33,15 +34,15 @@ namespace asmdom {
 
 			vnode = h(sel, data, children);
 		// isText
-		} else if (node["nodeType"].as<int>() == 3) {
+		} else if (nodeType == 3) {
 			vnode = h(node["textContent"].as<std::string>(), true);
 		// isComment
-		} else if (node["nodeType"].as<int>() == 8) {
+		} else if (nodeType == 8) {
 			vnode = h("!", node["textContent"].as<std::string>());
 		} else {
 			vnode = h("");
 		}
-		vnode->elm = emscripten::val::global("window")["asmDomHelpers"]["domApi"].call<int>("addNode", node);
+		vnode->elm = emscripten::val::module_property("addNode")(node).as<int>();
 		return vnode;
 	};
 

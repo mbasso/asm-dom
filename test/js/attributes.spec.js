@@ -1,5 +1,6 @@
 import expect from 'expect';
 import init from '../../src/js/';
+import setup from '../setup';
 
 describe('attributes (js)', function testAttributes() {
   this.timeout(30000);
@@ -10,9 +11,9 @@ describe('attributes (js)', function testAttributes() {
   let patch;
 
   before((done) => {
+    setup();
     init({
       useAsmJS: true,
-      hardReload: true,
     }).then((asmDom) => {
       vdom = asmDom;
       h = vdom.h;

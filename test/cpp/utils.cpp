@@ -18,7 +18,7 @@ emscripten::val getRoot() {
 };
 
 emscripten::val getNode(VNode* vnode) {
-	return emscripten::val::global("window")["asmDomHelpers"]["nodes"][std::to_string(vnode->elm).c_str()];
+	return emscripten::val::module_property("nodes")[std::to_string(vnode->elm).c_str()];
 };
 
 bool onClick(emscripten::val event) {

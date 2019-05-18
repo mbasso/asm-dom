@@ -1,6 +1,7 @@
 import expect from 'expect';
 import { knuthShuffle } from 'knuth-shuffle';
 import init from '../../src/js/';
+import setup from '../setup';
 
 describe('patch (js)', function testPatch() {
   this.timeout(30000);
@@ -35,9 +36,9 @@ describe('patch (js)', function testPatch() {
   const inner = prop('innerHTML');
 
   before((done) => {
+    setup();
     init({
       useAsmJS: true,
-      hardReload: true,
     }).then((asmDom) => {
       vdom = asmDom;
       h = vdom.h;

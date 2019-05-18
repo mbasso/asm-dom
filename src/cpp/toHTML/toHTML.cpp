@@ -108,7 +108,7 @@ namespace asmdom {
 
 		#ifdef ASMDOM_JS_SIDE
 			html.append(
-				wstring_to_utf8(emscripten::val::global("window")["asmDomHelpers"].call<std::wstring>("appendProps", reinterpret_cast<std::uintptr_t>(vnode)))
+				wstring_to_utf8(emscripten::val::module_property("appendProps")(reinterpret_cast<std::uintptr_t>(vnode)).as<std::wstring>())
 			);
 		#else
 			emscripten::val String = emscripten::val::global("String");
@@ -150,7 +150,7 @@ namespace asmdom {
 			) {
 				#ifdef ASMDOM_JS_SIDE
 					html.append(
-						wstring_to_utf8(emscripten::val::global("window")["asmDomHelpers"].call<std::wstring>("insertInnerHTML", reinterpret_cast<std::uintptr_t>(vnode)))
+						wstring_to_utf8(emscripten::val::module_property("insertInnerHTML")(reinterpret_cast<std::uintptr_t>(vnode)).as<std::wstring>())
 					);
 				#else
 					if (vnode->data.props.count("innerHTML") != 0) {

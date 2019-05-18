@@ -1,5 +1,6 @@
 import expect from 'expect';
 import init from '../../src/js/';
+import setup from '../setup';
 
 describe('props (js)', function testProps() {
   this.timeout(30000);
@@ -10,9 +11,9 @@ describe('props (js)', function testProps() {
   let patch;
 
   before((done) => {
+    setup();
     init({
       useAsmJS: true,
-      hardReload: true,
     }).then((asmDom) => {
       vdom = asmDom;
       h = vdom.h;
