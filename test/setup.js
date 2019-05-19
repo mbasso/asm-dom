@@ -13,7 +13,7 @@ export default () => {
     global.navigator = dom.window.navigator;
     global.HTMLElement = dom.window.HTMLElement;
     installCE(global, 'force');
-  
+
     class WebComponent extends HTMLElement { }
     customElements.define('web-component', WebComponent);
   }
