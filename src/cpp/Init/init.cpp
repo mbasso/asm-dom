@@ -10,11 +10,11 @@ namespace asmdom {
 
 		EM_ASM(
 			#ifndef ASMDOM_JS_SIDE
-				Module.eventProxy = function(e) {
+				Module['eventProxy'] = function(e) {
 					return Module['functionCallback'](this['asmDomVNode'], e.type, e);
 				};
 			#else
-				Module.eventProxy = function(e) {
+				Module['eventProxy'] = function(e) {
 					return this['asmDomEvents'][e.type](e);
 				};
 			#endif

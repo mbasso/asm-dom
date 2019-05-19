@@ -83,7 +83,7 @@ namespace asmdom {
 					var elm = Module['nodes'][$0];
 					elm.removeEventListener(
 						key,
-						Module.eventProxy,
+						Module['eventProxy'],
 						false
 					);
 					delete elm['asmDomEvents'][key];
@@ -106,10 +106,10 @@ namespace asmdom {
 					var elm = Module['nodes'][$0];
 					elm.addEventListener(
 						key,
-						Module.eventProxy,
+						Module['eventProxy'],
 						false
 					);
-					elm['asmDomEvents'][key] = Module.eventProxy;
+					elm['asmDomEvents'][key] = Module['eventProxy'];
 				}, vnode->elm, it.first.c_str());
 			}
 		}
@@ -139,7 +139,7 @@ namespace asmdom {
 
 		#ifdef ASMDOM_JS_SIDE
 			EM_ASM_({
-				Module['diff']($0, $1, Module['nodes'][$2], Module.eventProxy);
+				Module['diff']($0, $1, $2);
 			}, reinterpret_cast<std::uintptr_t>(oldVnode), reinterpret_cast<std::uintptr_t>(vnode), vnode->elm);
 		#else
 			if (vnodes & hasProps) diffProps(oldVnode, vnode);

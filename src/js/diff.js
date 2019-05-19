@@ -1,6 +1,7 @@
 const emptyObj = {};
 
-export default (Module, oldVnodePtr, vnodePtr, elm, eventProxy) => {
+export default (Module, oldVnodePtr, vnodePtr, elmPtr) => {
+  const elm = Module.nodes[elmPtr];
   const oldNode = Module.vnodesData[oldVnodePtr];
   const newNode = Module.vnodesData[vnodePtr];
   let oldValues = oldNode !== undefined && oldNode.raw !== undefined ? oldNode.raw : emptyObj;
@@ -32,7 +33,7 @@ export default (Module, oldVnodePtr, vnodePtr, elm, eventProxy) => {
   if (oldValues !== newValues) {
     for (const key in oldValues) {
       if (newValues[key] === undefined) {
-        elm.removeEventListener(key, eventProxy, false);
+        elm.removeEventListener(key, Module.eventProxy, false);
         delete elm.asmDomEvents[key];
       }
     }
@@ -43,7 +44,7 @@ export default (Module, oldVnodePtr, vnodePtr, elm, eventProxy) => {
     // eslint-disable-next-line
     for (const key in newValues) {
       if (oldValues[key] === undefined) {
-        elm.addEventListener(key, eventProxy, false);
+        elm.addEventListener(key, Module.eventProxy, false);
       }
       elm.asmDomEvents[key] = newValues[key];
     }
