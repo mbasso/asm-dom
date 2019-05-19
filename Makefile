@@ -104,6 +104,8 @@ lint:
 test: $(COMPILEDASMJS)/asm-dom.asm.js $(COMPILEDWASM)/asm-dom.js $(TESTCPP) test_js
 
 test_js:
+	npx cross-env BABEL_ENV=commonjs TEST_ENV=node mocha --require babel-register test/cpp/toHTML/toHTML.spec.js
+	npx cross-env BABEL_ENV=commonjs TEST_ENV=node mocha --require babel-register test/js/toHTML.spec.js
 	npx cross-env BABEL_ENV=commonjs nyc --require babel-register mocha --recursive
 
 build: compiled/asm-dom.a $(BC) compiled/asm-dom.o $(COMPILEDASMJS)/asm-dom.asm.js $(COMPILEDWASM)/asm-dom.js $(TESTCPP) $(LIBS) $(ES) $(UMDJS)
