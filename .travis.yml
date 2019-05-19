@@ -40,4 +40,5 @@ jobs:
       branches:
         only:
           - master
+      if: type = push
       after_success: echo "Website online"
