@@ -166,8 +166,9 @@ namespace asmdom {
 		}
 	};
 
-	std::string toHTML(const VNode* const vnode) {
+	std::string toHTML(VNode* const vnode) {
 		std::string html;
+		vnode->normalize();
 		toHTML(vnode, html);
 
 		#ifndef ASMDOM_JS_SIDE

@@ -12,71 +12,76 @@ namespace asmdom {
 	unsigned int currentHash = 0;
 	std::unordered_map<std::string, unsigned int> hashes;
 
-	void addNS(VNode* const vnode) {
-		vnode->hash |= hasNS;
-		vnode->ns = "http://www.w3.org/2000/svg";
-		if ((vnode->hash & hasDirectChildren) && vnode->sel != "foreignObject") {
-			for(std::vector<VNode*>::size_type i = 0, j = vnode->children.size(); i != j; ++i) {
-				addNS(vnode->children[i]);
-			}
-		}
-	};
-
-	void VNode::normalize() {
-		if (data.attrs.count("key")) {
-			hash |= hasKey;
-			key = data.attrs["key"];
-			data.attrs.erase("key");
-		}
-
-		if (sel[0] == '!') {
-			hash |= isComment;
-			sel = "";
-		} else {
-			children.erase(std::remove(children.begin(), children.end(), (VNode*)NULL), children.end());
-
-			Attrs::iterator it = data.attrs.begin();
-			while (it != data.attrs.end()) {
-				if (it->first == "ns") {
-					hash |= hasNS;
-					ns = it->second;
-					it = data.attrs.erase(it);
-				} else if (it->second == "false") {
-					it = data.attrs.erase(it);
-				} else {
-					if (it->second == "true") {
-						it->second = "";
-					}
-					++it;
-				}
+	void VNode::normalize(bool injectSvgNamespace) {
+		if (!(hash & isNormalized)) {
+			if (data.attrs.count("key")) {
+				hash |= hasKey;
+				key = data.attrs["key"];
+				data.attrs.erase("key");
 			}
 
-			if (!data.attrs.empty()) hash |= hasAttrs;
-			#ifndef ASMDOM_JS_SIDE
-				if (!data.props.empty()) hash |= hasProps;
-				if (!data.callbacks.empty()) hash |= hasCallbacks;
-			#endif
-			if (!children.empty()) hash |= hasDirectChildren;
-
-			if (sel[0] == '\0') {
-				hash |= isFragment;
+			if (sel[0] == '!') {
+				hash |= isComment;
+				sel = "";
 			} else {
-				if (hashes[sel] == 0) {
-					hashes[sel] = ++currentHash;
+				children.erase(std::remove(children.begin(), children.end(), (VNode*)NULL), children.end());
+
+				Attrs::iterator it = data.attrs.begin();
+				while (it != data.attrs.end()) {
+					if (it->first == "ns") {
+						hash |= hasNS;
+						ns = it->second;
+						it = data.attrs.erase(it);
+					} else if (it->second == "false") {
+						it = data.attrs.erase(it);
+					} else {
+						if (it->second == "true") {
+							it->second = "";
+						}
+						++it;
+					}
 				}
 
-				hash |= (hashes[sel] << 12) | isElement;
+				bool addNS = injectSvgNamespace || (sel[0] == 's' && sel[1] == 'v' && sel[2] == 'g');
+				if (addNS) {
+					hash |= hasNS;
+					ns = "http://www.w3.org/2000/svg";
+				}
 
+				if (!data.attrs.empty()) hash |= hasAttrs;
 				#ifndef ASMDOM_JS_SIDE
-					if ((hash & hasCallbacks) && data.callbacks.count("ref")) {
-						hash |= hasRef;
-					}
+					if (!data.props.empty()) hash |= hasProps;
+					if (!data.callbacks.empty()) hash |= hasCallbacks;
 				#endif
+				if (!children.empty()) {
+					hash |= hasDirectChildren;
 
-				if (sel[0] == 's' && sel[1] == 'v' && sel[2] == 'g') {
-					addNS(this);
+					Children::size_type i = children.size();
+					while (i--) {
+						children[i]->normalize(
+							addNS && sel != "foreignObject"
+						);
+					}
+				}
+
+				if (sel[0] == '\0') {
+					hash |= isFragment;
+				} else {
+					if (hashes[sel] == 0) {
+						hashes[sel] = ++currentHash;
+					}
+
+					hash |= (hashes[sel] << 13) | isElement;
+
+					#ifndef ASMDOM_JS_SIDE
+						if ((hash & hasCallbacks) && data.callbacks.count("ref")) {
+							hash |= hasRef;
+						}
+					#endif
 				}
 			}
+
+			hash |= isNormalized;
 		}
 	};
 

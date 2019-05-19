@@ -262,6 +262,9 @@ namespace asmdom {
 			currentNode = vnode;
 		#endif
 
+		oldVnode->normalize();
+		vnode->normalize();
+
 		if (sameVNode(oldVnode, vnode)) {
 			patchVNode(oldVnode, vnode, oldVnode->elm);
 		} else {

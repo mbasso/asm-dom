@@ -40,12 +40,13 @@ namespace asmdom {
     hasChildren = hasDirectChildren | hasText,
     hasRef = 1 << 10,
     hasNS = 1 << 11,
+    isNormalized = 1 << 12,
 
     // masks
     isElementOrFragment = isElement | isFragment,
     nodeType = isElement | isText | isComment | isFragment,
     removeNodeType = ~0 ^ nodeType,
-    extractSel = ~0 << 12,
+    extractSel = ~0 << 13,
     id = extractSel | hasKey | nodeType
   };
 
@@ -89,11 +90,11 @@ namespace asmdom {
 
   struct VNode {
     private:
-      void normalize();
+      void normalize(bool injectSvgNamespace);
     public:
       VNode(
         const std::string& nodeSel
-      ): sel(nodeSel) { normalize(); };
+      ): sel(nodeSel) {};
       VNode(
         const std::string& nodeSel,
         const std::string& nodeText
@@ -123,15 +124,15 @@ namespace asmdom {
       VNode(
         const std::string& nodeSel,
         const Data& nodeData
-      ): sel(nodeSel), data(nodeData) { normalize(); };
+      ): sel(nodeSel), data(nodeData) {};
       VNode(
         const std::string& nodeSel,
         const std::vector<VNode*>& nodeChildren
-      ): sel(nodeSel), children(nodeChildren) { normalize(); };
+      ): sel(nodeSel), children(nodeChildren) {};
       VNode(
         const std::string& nodeSel,
         VNode* child
-      ): sel(nodeSel), children{ child } { normalize(); };
+      ): sel(nodeSel), children{ child } {};
       VNode(
         const std::string& nodeSel,
         const Data& nodeData,
@@ -149,13 +150,15 @@ namespace asmdom {
         const std::string& nodeSel,
         const Data& nodeData,
         const std::vector<VNode*>& nodeChildren
-      ): sel(nodeSel), data(nodeData), children(nodeChildren) { normalize(); };
+      ): sel(nodeSel), data(nodeData), children(nodeChildren) {};
       VNode(
         const std::string& nodeSel,
         const Data& nodeData,
         VNode* child
-      ): sel(nodeSel), data(nodeData), children{ child } { normalize(); };
+      ): sel(nodeSel), data(nodeData), children{ child } {};
       ~VNode();
+
+      void normalize() { normalize(false); };
 
     // contains selector for elements and fragments, text for comments and textNodes
     std::string sel;
