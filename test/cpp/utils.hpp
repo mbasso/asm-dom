@@ -6,6 +6,7 @@
 #include <string>
 
 void assertEquals(emscripten::val actual, emscripten::val expected);
+void assertNotEquals(emscripten::val actual, emscripten::val expected);
 emscripten::val getBodyFirstChild();
 emscripten::val getRoot();
 emscripten::val getNode(asmdom::VNode* vnode);

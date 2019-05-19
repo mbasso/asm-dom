@@ -52,7 +52,8 @@ export default (Module, oldVnodePtr, vnodePtr, elm, eventProxy) => {
   oldValues = oldNode !== undefined && oldNode.ref !== undefined ? oldNode.ref : undefined;
   newValues = newNode !== undefined && newNode.ref !== undefined ? newNode.ref : undefined;
 
-  if (oldValues !== newValues && newValues !== undefined) {
-    newValues(elm);
+  if (oldValues !== newValues) {
+    if (oldValues !== undefined) oldValues(null);
+    if (newValues !== undefined) newValues(elm);
   }
 };

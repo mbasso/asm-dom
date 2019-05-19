@@ -274,6 +274,10 @@ describe('patch (cpp)', function test() {
     app.shouldCallRefOnRemove();
   });
 
+  it('should call ref on ref remove itself', () => {
+    app.shouldCallRefOnRefRemoveItself();
+  });
+
   it('should not call ref on update', () => {
     app.shouldNotCallRefOnUpdate();
   });

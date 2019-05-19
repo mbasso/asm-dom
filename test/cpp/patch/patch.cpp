@@ -16,8 +16,27 @@ bool refCallback(emscripten::val node) {
 };
 
 bool refCallback2(emscripten::val node) {
+	return refCallback(node);
+};
+
+bool refCallbackWithChecks(emscripten::val node) {
 	++refCount;
+	if (refCount % 2 == 0) {
+		assertNotEquals(
+			node,
+			emscripten::val::null()
+		);
+	} else {
+		assertEquals(
+			node,
+			emscripten::val::null()
+		);
+	}
 	return true;
+};
+
+bool refCallbackWithChecks2(emscripten::val node) {
+	return refCallbackWithChecks(node);
 };
 
 VNode* spanNum(int i) {
@@ -1685,6 +1704,30 @@ void shouldCallRefOnRemove() {
 	deleteVNode(vnode2);
 };
 
+void shouldCallRefOnRefRemoveItself() {
+	refCount = 1;
+
+	VNode* vnode1 = h("div",
+		h("div",
+			Data(
+				Callbacks {
+					{"ref", refCallback}
+				}
+			)
+		)
+	);
+	patch(getRoot(), vnode1);
+	
+	assert(refCount == 2);
+
+	VNode* vnode2 = h("div", h("div"));
+	patch(vnode1, vnode2);
+	
+	assert(refCount == 3);
+
+	deleteVNode(vnode2);
+};
+
 void shouldNotCallRefOnUpdate() {
 	refCount = 1;
 
@@ -1725,7 +1768,7 @@ void shouldCallRefOnChangeLambdaLambda() {
 			Data(
 				Callbacks {
 					{"ref", [&](emscripten::val e) -> bool {
-						++refCount;
+						refCallbackWithChecks(e);
 						return true;
 					}}
 				}
@@ -1741,7 +1784,7 @@ void shouldCallRefOnChangeLambdaLambda() {
 			Data(
 				Callbacks {
 					{"ref", [&](emscripten::val e) -> bool {
-						refCount = refCount + 1;
+						refCallbackWithChecks(e);
 						return false;
 					}}
 				}
@@ -1750,7 +1793,7 @@ void shouldCallRefOnChangeLambdaLambda() {
 	);
 	patch(vnode1, vnode2);
 	
-	assert(refCount == 3);
+	assert(refCount == 4);
 
 	deleteVNode(vnode2);
 };
@@ -1763,7 +1806,7 @@ void shouldCallRefOnChangePointerLambda() {
 			Data(
 				Callbacks {
 					{"ref", [&](emscripten::val e) -> bool {
-						++refCount;
+						refCallbackWithChecks(e);
 						return false;
 					}}
 				}
@@ -1778,14 +1821,14 @@ void shouldCallRefOnChangePointerLambda() {
 		h("div",
 			Data(
 				Callbacks {
-					{"ref", refCallback}
+					{"ref", refCallbackWithChecks}
 				}
 			)
 		)
 	);
 	patch(vnode1, vnode2);
 	
-	assert(refCount == 3);
+	assert(refCount == 4);
 
 	deleteVNode(vnode2);
 };
@@ -1797,7 +1840,7 @@ void shouldCallRefOnChangePointerPointer() {
 		h("div",
 			Data(
 				Callbacks {
-					{"ref", refCallback}
+					{"ref", refCallbackWithChecks}
 				}
 			)
 		)
@@ -1810,14 +1853,14 @@ void shouldCallRefOnChangePointerPointer() {
 		h("div",
 			Data(
 				Callbacks {
-					{"ref", refCallback2}
+					{"ref", refCallbackWithChecks2}
 				}
 			)
 		)
 	);
 	patch(vnode1, vnode2);
 	
-	assert(refCount == 3);
+	assert(refCount == 4);
 
 	deleteVNode(vnode2);
 };
@@ -1924,6 +1967,7 @@ EMSCRIPTEN_BINDINGS(patch_tests) {
 	emscripten::function("shouldCallRefWithDOMNode", &shouldCallRefWithDOMNode);
 	emscripten::function("shouldCallRefOnAdd", &shouldCallRefOnAdd);
 	emscripten::function("shouldCallRefOnRemove", &shouldCallRefOnRemove);
+	emscripten::function("shouldCallRefOnRefRemoveItself", &shouldCallRefOnRefRemoveItself);
 	emscripten::function("shouldNotCallRefOnUpdate", &shouldNotCallRefOnUpdate);
 	emscripten::function("shouldCallRefOnChangeLambdaLambda", &shouldCallRefOnChangeLambdaLambda);
 	emscripten::function("shouldCallRefOnChangePointerLambda", &shouldCallRefOnChangePointerLambda);

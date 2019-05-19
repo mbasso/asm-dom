@@ -118,10 +118,15 @@ namespace asmdom {
 			bool(*const* callback)(emscripten::val) = callbacks.at("ref").target<bool(*)(emscripten::val)>();
 			bool(*const* oldCallback)(emscripten::val) = oldVnode->hash & hasRef ? oldCallbacks.at("ref").target<bool(*)(emscripten::val)>() : NULL;
 			if (!callback || !oldCallback || *oldCallback != *callback) {
+				if (oldVnode->hash & hasRef) {
+					oldCallbacks.at("ref")(emscripten::val::null());
+				}
 				callbacks.at("ref")(
 					emscripten::val::module_property("nodes")[vnode->elm]
 				);
 			}
+		} else if (oldVnode->hash & hasRef) {
+			oldCallbacks.at("ref")(emscripten::val::null());
 		}
 	};
 

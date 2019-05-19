@@ -9,6 +9,10 @@ void assertEquals(emscripten::val actual, emscripten::val expected) {
 	assert(actual.strictlyEquals(expected));
 };
 
+void assertNotEquals(emscripten::val actual, emscripten::val expected) {
+	assert(!actual.strictlyEquals(expected));
+};
+
 emscripten::val getBodyFirstChild() {
 	return emscripten::val::global("document")["body"]["firstChild"];
 };
