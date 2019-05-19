@@ -15,7 +15,7 @@ namespace asmdom {
 	void patchVNode(
 		VNode* __restrict__ const oldVnode,
 		VNode* __restrict__ const vnode,
-		int parentElm
+		const int parentElm
 	);
 
 	VNode* const emptyNode = h("");
@@ -216,7 +216,7 @@ namespace asmdom {
 		}
 	};
 
-	void patchVNode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode, int parentElm) {
+	void patchVNode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode, const int parentElm) {
 		vnode->elm = oldVnode->elm;
 		if (vnode->hash & isElementOrFragment) {
 			const unsigned int childrenNotEmpty = vnode->hash & hasChildren;

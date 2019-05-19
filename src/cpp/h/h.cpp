@@ -14,7 +14,7 @@ namespace asmdom {
 		return new VNode(sel, text);
 	};
 
-	VNode* h(const std::string& sel, bool text) {
+	VNode* h(const std::string& sel, const bool text) {
 		return new VNode(sel, text);
 	};
 

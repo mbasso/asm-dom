@@ -12,7 +12,7 @@ namespace asmdom {
 	unsigned int currentHash = 0;
 	std::unordered_map<std::string, unsigned int> hashes;
 
-	void VNode::normalize(bool injectSvgNamespace) {
+	void VNode::normalize(const bool injectSvgNamespace) {
 		if (!(hash & isNormalized)) {
 			if (data.attrs.count("key")) {
 				hash |= hasKey;

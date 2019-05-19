@@ -90,7 +90,7 @@ namespace asmdom {
 
   struct VNode {
     private:
-      void normalize(bool injectSvgNamespace);
+      void normalize(const bool injectSvgNamespace);
     public:
       VNode(
         const std::string& nodeSel
@@ -109,7 +109,7 @@ namespace asmdom {
       };
       VNode(
         const std::string& nodeText,
-        bool textNode
+        const bool textNode
       ) {
         if (textNode) {
           normalize();
