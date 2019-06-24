@@ -19,12 +19,12 @@ const reset = () => {
   };
 };
 
-reset();
-
 // import() is compiled to require.ensure, this is a polyfill for nodejs
 // an alternative solution is needed
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => { c(require); };
 if (typeof global !== 'undefined' && global.window === undefined) global.window = {};
+
+reset();
 
 export default (config) => {
   if (config === undefined) config = {};

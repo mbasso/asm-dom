@@ -8,7 +8,8 @@
     "transform-es3-property-literals"
   ],
   "ignore": [
-    "*.asm.js"
+    "*.asm.js",
+    "pthread-main.js"
   ],
   "env": {
     "commonjs": {
