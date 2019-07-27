@@ -70,9 +70,10 @@ namespace asmdom {
 		}
 		
 		for(std::vector<VNode*>::size_type i = 0, j = vnode->children.size(); i != j; ++i) {
+			int elm = createElm(vnode->children[i]);
 			EM_ASM_({
 				Module.appendChild($0, $1);
-			}, vnode->elm, createElm(vnode->children[i]));
+			}, vnode->elm, elm);
 		}
 
 		diff(emptyNode, vnode);
@@ -88,9 +89,10 @@ namespace asmdom {
 		const std::vector<VNode*>::size_type endIdx
 	) {
 		while (startIdx <= endIdx) {
+			int elm = createElm(vnodes[startIdx++]);
 			EM_ASM_({
 				Module.insertBefore($0, $1, $2)
-			}, parentElm, createElm(vnodes[startIdx++]), before);
+			}, parentElm, elm, before);
 		}
 	};
 
@@ -187,15 +189,17 @@ namespace asmdom {
 					}
 				}
 				if (!oldKeyToIdx.count(newStartVnode->key)) {
+					int elm = createElm(newStartVnode);
 					EM_ASM_({
 						Module.insertBefore($0, $1, $2);
-					}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
+					}, parentElm, elm, oldStartVnode->elm);
 				} else {
 					VNode* elmToMove = oldCh[oldKeyToIdx[newStartVnode->key]];
 					if ((elmToMove->hash & extractSel) != (newStartVnode->hash & extractSel)) {
+						int elm = createElm(newStartVnode);
 						EM_ASM_({
 							Module.insertBefore($0, $1, $2);
-						}, parentElm, createElm(newStartVnode), oldStartVnode->elm);
+						}, parentElm, elm, oldStartVnode->elm);
 					} else {
 						if (elmToMove != newStartVnode) patchVNode(elmToMove, newStartVnode, parentElm);
 						oldCh[oldKeyToIdx[newStartVnode->key]] = NULL;
@@ -265,6 +269,7 @@ namespace asmdom {
 		if (sameVNode(oldVnode, vnode)) {
 			patchVNode(oldVnode, vnode, oldVnode->elm);
 		} else {
+			int elm = createElm(vnode);
 			EM_ASM_({
 				var parent = Module.parentNode($1);
 				if (parent !== 0) {
@@ -275,7 +280,7 @@ namespace asmdom {
 					);
 					Module.removeChild($1);
 				}
-			}, createElm(vnode), oldVnode->elm);
+			}, elm, oldVnode->elm);
 		}
 
 		#ifndef ASMDOM_JS_SIDE
