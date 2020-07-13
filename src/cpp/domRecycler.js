@@ -1,12 +1,10 @@
 const recycler = {
   create(name) {
-    name = name.toUpperCase();
-    const list = recycler.nodes[name];
+    const list = recycler.nodes[name.toUpperCase()];
     return list !== undefined && list.pop() || document.createElement(name);
   },
   createNS(name, ns) {
-    name = name.toUpperCase();
-    const list = recycler.nodes[name + ns];
+    const list = recycler.nodes[name.toUpperCase() + ns];
     const node = list !== undefined && list.pop() || document.createElementNS(ns, name);
     node.asmDomNS = ns;
     return node;
