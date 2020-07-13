@@ -54,7 +54,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Server Side Rendering</h1></header><article><div><span><p>If you are interested in server side rendering, you can do that with asm-dom in 2 simple steps:</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Server Side Rendering</h1></header><article><div><span><p>If you are interested in server side rendering, you can do that with asm-dom in 2 simple steps:</p>
 <ul>
 <li>You can use <code>toHTML</code> to generate HTML on the server and send it to the client for faster page loads and to allow search engines to crawl your pages for SEO purposes.</li>
 <li>After that you can call <code>toVNode</code> on the node that you have server-rendered and patch it with a vnode created on the client. In this way asm-dom will preserve it and only attach event handlers, providing a fantastic first-load experience.</li>

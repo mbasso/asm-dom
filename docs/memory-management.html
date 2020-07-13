@@ -54,7 +54,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Memory Management</h1></header><article><div><span><p>As we said before the <code>h</code> returns a pointer to a VNode, this means that the memory have to be deleted manually. By default asm-dom automatically delete the old vnode from memory when <code>patch</code> (or <code>toHTML</code>) is called. However, if you want to create a vnode that is not patched, or if you want to manually manage this aspect (setting <code>clearMemory = false</code> in the <code>Config</code> object to pass to the <code>init</code> function), you have to delete it manually.</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Memory Management</h1></header><article><div><span><p>As we said before the <code>h</code> returns a pointer to a VNode, this means that the memory have to be deleted manually. By default asm-dom automatically delete the old vnode from memory when <code>patch</code> (or <code>toHTML</code>) is called. However, if you want to create a vnode that is not patched, or if you want to manually manage this aspect (setting <code>clearMemory = false</code> in the <code>Config</code> object to pass to the <code>init</code> function), you have to delete it manually.</p>
 <pre><code class="hljs css language-c++">VNode* vnode1 = h(<span class="hljs-string">"div"</span>);
 VNode* vnode2 = h(<span class="hljs-string">"div"</span>, Children {
   h(<span class="hljs-string">"span"</span>)
