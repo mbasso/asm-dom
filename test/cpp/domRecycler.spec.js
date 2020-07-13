@@ -9,25 +9,25 @@ describe('dom recycler', () => {
   it('should create and recycler texts', () => {
     const node = recycler.createText('Hello World!');
     expect(node.nodeValue).toEqual('Hello World!');
-    expect(recycler.nodes['#text']).toEqual(undefined);
+    expect(recycler.nodes['#TEXT']).toEqual(undefined);
     recycler.collect(node);
-    expect(recycler.nodes['#text']).toEqual([node]);
+    expect(recycler.nodes['#TEXT']).toEqual([node]);
     const newNode = recycler.createText('New Hello World!');
     expect(node.nodeValue).toEqual('New Hello World!');
     expect(newNode).toEqual(node);
-    expect(recycler.nodes['#text']).toEqual([]);
+    expect(recycler.nodes['#TEXT']).toEqual([]);
   });
 
   it('should create and recycler comments', () => {
     const node = recycler.createComment('Hello World!');
     expect(node.nodeValue).toEqual('Hello World!');
-    expect(recycler.nodes['#comment']).toEqual(undefined);
+    expect(recycler.nodes['#COMMENT']).toEqual(undefined);
     recycler.collect(node);
-    expect(recycler.nodes['#comment']).toEqual([node]);
+    expect(recycler.nodes['#COMMENT']).toEqual([node]);
     const newNode = recycler.createComment('New Hello World!');
     expect(node.nodeValue).toEqual('New Hello World!');
     expect(newNode).toEqual(node);
-    expect(recycler.nodes['#comment']).toEqual([]);
+    expect(recycler.nodes['#COMMENT']).toEqual([]);
   });
 
   it('should create and normal nodes', () => {
@@ -44,12 +44,12 @@ describe('dom recycler', () => {
 
   it('should create and nodes with namespace', () => {
     const node = recycler.createNS('svg', 'http://www.w3.org/2000/svg');
-    expect(node.nodeName).toEqual('SVG');
+    expect(node.nodeName).toEqual('svg');
     expect(recycler.nodes['SVGhttp://www.w3.org/2000/svg']).toEqual(undefined);
     recycler.collect(node);
     expect(recycler.nodes['SVGhttp://www.w3.org/2000/svg']).toEqual([node]);
     const newNode = recycler.createNS('svg', 'http://www.w3.org/2000/svg');
-    expect(node.nodeName).toEqual('SVG');
+    expect(node.nodeName).toEqual('svg');
     expect(newNode).toEqual(node);
     expect(recycler.nodes['SVGhttp://www.w3.org/2000/svg']).toEqual([]);
   });
