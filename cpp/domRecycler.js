@@ -3,19 +3,17 @@
 exports.__esModule = true;
 var recycler = {
   create: function create(name) {
-    name = name.toUpperCase();
-    var list = recycler.nodes[name];
+    var list = recycler.nodes[name.toUpperCase()];
     return list !== undefined && list.pop() || document.createElement(name);
   },
   createNS: function createNS(name, ns) {
-    name = name.toUpperCase();
-    var list = recycler.nodes[name + ns];
+    var list = recycler.nodes[name.toUpperCase() + ns];
     var node = list !== undefined && list.pop() || document.createElementNS(ns, name);
     node.asmDomNS = ns;
     return node;
   },
   createText: function createText(text) {
-    var list = recycler.nodes['#text'];
+    var list = recycler.nodes['#TEXT'];
     if (list !== undefined) {
       var node = list.pop();
       if (node !== undefined) {
@@ -26,7 +24,7 @@ var recycler = {
     return document.createTextNode(text);
   },
   createComment: function createComment(comment) {
-    var list = recycler.nodes['#comment'];
+    var list = recycler.nodes['#COMMENT'];
     if (list !== undefined) {
       var node = list.pop();
       if (node !== undefined) {
@@ -71,7 +69,7 @@ var recycler = {
     });
 
     // collect
-    var name = node.nodeName;
+    var name = node.nodeName.toUpperCase();
     if (node.asmDomNS !== undefined) name += node.namespaceURI;
     var list = recycler.nodes[name];
     if (list !== undefined) list.push(node);else recycler.nodes[name] = [node];

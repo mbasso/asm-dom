@@ -1,18 +1,16 @@
 const recycler = {
   create(name) {
-    name = name.toUpperCase();
-    const list = recycler.nodes[name];
+    const list = recycler.nodes[name.toUpperCase()];
     return list !== undefined && list.pop() || document.createElement(name);
   },
   createNS(name, ns) {
-    name = name.toUpperCase();
-    const list = recycler.nodes[name + ns];
+    const list = recycler.nodes[name.toUpperCase() + ns];
     const node = list !== undefined && list.pop() || document.createElementNS(ns, name);
     node.asmDomNS = ns;
     return node;
   },
   createText(text) {
-    const list = recycler.nodes['#text'];
+    const list = recycler.nodes['#TEXT'];
     if (list !== undefined) {
       const node = list.pop();
       if (node !== undefined) {
@@ -23,7 +21,7 @@ const recycler = {
     return document.createTextNode(text);
   },
   createComment(comment) {
-    const list = recycler.nodes['#comment'];
+    const list = recycler.nodes['#COMMENT'];
     if (list !== undefined) {
       const node = list.pop();
       if (node !== undefined) {
@@ -70,7 +68,7 @@ const recycler = {
     });
 
     // collect
-    let name = node.nodeName;
+    let name = node.nodeName.toUpperCase();
     if (node.asmDomNS !== undefined) name += node.namespaceURI;
     const list = recycler.nodes[name];
     if (list !== undefined) list.push(node);
