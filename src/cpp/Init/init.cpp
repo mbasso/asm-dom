@@ -23,19 +23,17 @@ namespace asmdom {
 				'nodes': {}
 			};
 			recycler['create'] = function(name) {
-				name = name.toUpperCase();
-				var list = recycler['nodes'][name];
+				var list = recycler['nodes'][name.toUpperCase()];
 				return list !== undefined && list.pop() || document.createElement(name);
 			};
 			recycler['createNS'] = function(name, ns) {
-				name = name.toUpperCase();
-				var list = recycler['nodes'][name + ns];
+				var list = recycler['nodes'][name.toUpperCase() + ns];
 				var node = list !== undefined && list.pop() || document.createElementNS(ns, name);
 				node['asmDomNS'] = ns;
 				return node;
 			};
 			recycler['createText'] = function(text) {
-				var list = recycler['nodes']['#text'];
+				var list = recycler['nodes']['#TEXT'];
 				if (list !== undefined) {
 					var node = list.pop();
 					if (node !== undefined) {
@@ -46,7 +44,7 @@ namespace asmdom {
 				return document.createTextNode(text);
 			};
 			recycler['createComment'] = function(comment) {
-				var list = recycler['nodes']['#comment'];
+				var list = recycler['nodes']['#COMMENT'];
 				if (list !== undefined) {
 					var node = list.pop();
 					if (node !== undefined) {
@@ -93,7 +91,7 @@ namespace asmdom {
 				});
 
 				// collect
-				var name = node.nodeName;
+				var name = node.nodeName.toUpperCase();
 				if (node['asmDomNS'] !== undefined) name += node.namespaceURI;
 				var list = recycler['nodes'][name];
 				if (list !== undefined) list.push(node);
