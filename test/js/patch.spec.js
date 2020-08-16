@@ -1,6 +1,7 @@
 import expect from 'expect';
 import { knuthShuffle } from 'knuth-shuffle';
 import init from '../../src/js/';
+import setup from '../setup';
 
 describe('patch (js)', function testPatch() {
   this.timeout(30000);
@@ -35,9 +36,9 @@ describe('patch (js)', function testPatch() {
   const inner = prop('innerHTML');
 
   before((done) => {
+    setup();
     init({
       useAsmJS: true,
-      hardReload: true,
     }).then((asmDom) => {
       vdom = asmDom;
       h = vdom.h;
@@ -1002,6 +1003,21 @@ describe('patch (js)', function testPatch() {
     vdom.deleteVNode(vnode2);
   });
 
+  it('should call ref on ref remove itself', () => {
+    const data = {
+      ref: () => {},
+    };
+    const spy = expect.spyOn(data, 'ref');
+    const vnode = h('div', h('div', data));
+    patch(root, vnode);
+
+    const vnode2 = h('div', h('div'));
+    patch(vnode, vnode2);
+    expect(spy.calls.length).toEqual(2);
+    expect(spy.calls[1].arguments).toEqual([null]);
+    vdom.deleteVNode(vnode2);
+  });
+
   it('should not call ref on update', () => {
     const data = {
       ref: (node) => {
@@ -1039,7 +1055,8 @@ describe('patch (js)', function testPatch() {
 
     const vnode2 = h('div', h('div', data2));
     patch(vnode, vnode2);
-    expect(spy1.calls.length).toEqual(1);
+    expect(spy1.calls.length).toEqual(2);
+    expect(spy1.calls[1].arguments).toEqual([null]);
     expect(spy2.calls.length).toEqual(1);
     vdom.deleteVNode(vnode2);
   });

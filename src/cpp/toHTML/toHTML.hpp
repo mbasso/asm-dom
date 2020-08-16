@@ -6,7 +6,7 @@
 
 namespace asmdom {
 
-	std::string toHTML(const VNode* const vnode);
+	std::string toHTML(VNode* const vnode);
 
 }
 

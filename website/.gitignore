@@ -4,6 +4,5 @@ lib/core/metadata.js
 lib/core/MetadataBlog.js
 translated_docs/
 build/
-node_modules/
 i18n/*
 !i18n/en.json

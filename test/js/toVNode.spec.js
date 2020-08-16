@@ -1,5 +1,6 @@
 import expect from 'expect';
 import init from '../../src/js/';
+import setup from '../setup';
 
 describe('toVNode (js)', function test() {
   this.timeout(30000);
@@ -12,9 +13,9 @@ describe('toVNode (js)', function test() {
   let getNode;
 
   before((done) => {
+    setup();
     init({
       useAsmJS: true,
-      hardReload: true,
     }).then((asmDom) => {
       vdom = asmDom;
       h = vdom.h;

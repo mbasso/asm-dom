@@ -1,10 +1,15 @@
 import expect from 'expect';
 import init from '../../src/js/';
+import setup from '../setup';
 
 describe('load (js)', function test() {
   this.timeout(30000);
 
   let root;
+
+  before(() => {
+    setup();
+  });
 
   beforeEach(() => {
     while (document.body.firstChild) {
@@ -23,7 +28,6 @@ describe('load (js)', function test() {
   it('should load asm-dom using asm.js (by config)', (done) => {
     init({
       useAsmJS: true,
-      hardReload: true,
     }).then((vdom) => {
       expect(vdom.h).toExist();
       expect(vdom.usingWasm).toBeFalsy();
@@ -33,9 +37,7 @@ describe('load (js)', function test() {
 
   it('should load asm-dom using wasm', (done) => {
     window.WebAssembly = {};
-    init({
-      hardReload: true,
-    }).then((vdom) => {
+    init().then((vdom) => {
       expect(vdom.h).toExist();
       expect(vdom.usingWasm).toBeTruthy();
       done();
@@ -48,7 +50,6 @@ describe('load (js)', function test() {
   it('should load asm-dom using wasm (by config)', (done) => {
     init({
       useWasm: true,
-      hardReload: true,
     }).then((vdom) => {
       expect(vdom.h).toExist();
       expect(vdom.usingWasm).toBeTruthy();
@@ -62,7 +63,6 @@ describe('load (js)', function test() {
   it('should automatically clear memory', (done) => {
     init({
       useAsmJS: true,
-      hardReload: true,
     }).then((vdom) => {
       expect(vdom.clearMemory).toEqual(true);
       const { h, patch, toHTML } = vdom;
@@ -87,7 +87,6 @@ describe('load (js)', function test() {
   it('should automatically clear memory (by config)', (done) => {
     init({
       useAsmJS: true,
-      hardReload: true,
       clearMemory: true,
     }).then((vdom) => {
       expect(vdom.clearMemory).toEqual(true);
@@ -113,7 +112,6 @@ describe('load (js)', function test() {
   it('should not automatically clear memory (by config)', (done) => {
     init({
       useAsmJS: true,
-      hardReload: true,
       clearMemory: false,
     }).then((vdom) => {
       expect(vdom.clearMemory).toEqual(false);
@@ -139,7 +137,6 @@ describe('load (js)', function test() {
   it('should use safe patch', () => {
     init({
       useAsmJS: true,
-      hardReload: true,
     }).then((vdom) => {
       expect(vdom.unsafePatch).toEqual(false);
       const { h, patch } = vdom;
@@ -156,7 +153,6 @@ describe('load (js)', function test() {
   it('should use safe patch (by config)', () => {
     init({
       useAsmJS: true,
-      hardReload: true,
       unsafePatch: false,
     }).then((vdom) => {
       expect(vdom.unsafePatch).toEqual(false);
@@ -174,7 +170,6 @@ describe('load (js)', function test() {
   it('should not use safe patch (by config)', () => {
     init({
       useAsmJS: true,
-      hardReload: true,
       unsafePatch: true,
     }).then((vdom) => {
       expect(vdom.unsafePatch).toEqual(true);

@@ -1,7 +1,17 @@
 import expect from 'expect';
-import recycler from '../../src/cpp/domRecycler';
+import setup from '../setup';
+import init from './';
 
-describe('dom recycler', () => {
+describe('dom recycler', function testDomRecycler() {
+  this.timeout(30000);
+
+  let recycler;
+
+  before((done) => {
+    setup();
+    recycler = init(done).recycler;
+  });
+
   beforeEach(() => {
     recycler.nodes = {};
   });

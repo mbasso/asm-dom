@@ -15,7 +15,7 @@ namespace asmdom {
 	void patchVNode(
 		VNode* __restrict__ const oldVnode,
 		VNode* __restrict__ const vnode,
-		int parentElm
+		const int parentElm
 	);
 
 	VNode* const emptyNode = h("");
@@ -108,7 +108,7 @@ namespace asmdom {
 				#ifdef ASMDOM_JS_SIDE
 					EM_ASM_({
 						Module.removeChild($0);
-						var data = window['asmDomHelpers']['vnodesData'][$1];
+						var data = Module['vnodesData'][$1];
 						if (data !== undefined && data['ref'] !== undefined) {
 							data['ref'](null);
 						}
@@ -220,7 +220,7 @@ namespace asmdom {
 		}
 	};
 
-	void patchVNode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode, int parentElm) {
+	void patchVNode(VNode* __restrict__ const oldVnode, VNode* __restrict__ const vnode, const int parentElm) {
 		vnode->elm = oldVnode->elm;
 		if (vnode->hash & isElementOrFragment) {
 			const unsigned int childrenNotEmpty = vnode->hash & hasChildren;
@@ -265,6 +265,9 @@ namespace asmdom {
 		#ifndef ASMDOM_JS_SIDE
 			currentNode = vnode;
 		#endif
+
+		oldVnode->normalize();
+		vnode->normalize();
 
 		if (sameVNode(oldVnode, vnode)) {
 			patchVNode(oldVnode, vnode, oldVnode->elm);

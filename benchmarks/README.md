@@ -24,16 +24,16 @@ There are 4 tests at the moment:
 
 Here you can find the tests (lower is better) runned on a MacBook Pro (Retina, 13-inch, Late 2013), Processor 2,4 GHz Intel Core i5, Memory 8 GB 1600 MHz DDR3:
 
-### Firefox 59.0.2 (64 bit)
+### Firefox 67.0.1 (64 bit)
 
 | library | create nodes | diff equal nodes | diff different nodes | add/remove nodes |
 | --- | --- | --- | --- | --- |
-| asm-dom | 0.0000 | 2.0000 | 34.0000 | 32.0000 |
-| snabbbom | 0.0000 | 12.0000 | 42.0000 | 44.0000 |
+| asm-dom | 1.0000 | 2.0000 | 20.0000 | 22.0000 |
+| snabbbom | 0.0000 | 9.0000 | 23.0000 | 25.0000 |
 
-### Chrome 66.0.3359.181 (64-bit)
+### Chrome 75.0.3770.80 (64-bit)
 
 | library | create nodes | diff equal nodes | diff different nodes | add/remove nodes |
 | --- | --- | --- | --- | --- |
-| asm-dom | 0.9000 | 3.2000 | 16.4000 | 15.1000 |
-| snabbbom | 0.5000 | 4.6000 | 8.7000 | 13.3000 |
+| asm-dom | 0.5850 | 2.3950 | 17.7950 | 15.1700 |
+| snabbbom | 0.4550 | 3.1100 | 11.4050 | 15.6300 |

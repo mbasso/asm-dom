@@ -184,6 +184,7 @@ namespace todomvc {
 							h("input",
 								Data(
 									Attrs {
+										{"id", "toggle-all"},
 										{"class", "toggle-all"},
 										{"type", "checkbox"}
 									},
@@ -195,6 +196,13 @@ namespace todomvc {
 											handler(Action::ToggleAll(targetChecked(e)));
 											return true;
 										}}
+									}
+								)
+							),
+							h("label",
+								Data(
+									Attrs {
+										{"for", "toggle-all"}
 									}
 								)
 							),

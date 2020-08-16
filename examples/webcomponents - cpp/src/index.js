@@ -1,10 +1,10 @@
-import '../../../src/cpp/';
 import './components/HelloComponent';
 
 (() => {
   const config = {};
 
   const instantiate = (Module) => {
+    window.asmDom = config;
     Module(config);
   };
 

@@ -42,10 +42,10 @@ namespace asmdom {
 		const Props& oldProps = oldVnode->data.props;
 		const Props& props = vnode->data.props;
 
-		emscripten::val elm = emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm];
+		emscripten::val elm = emscripten::val::module_property("nodes")[vnode->elm];
 
 		EM_ASM_({
-			Module.nodes[$0]['asmDomRaws'] = [];
+			Module['nodes'][$0]['asmDomRaws'] = [];
 		}, vnode->elm);
 
 		for (const auto& it : oldProps) {
@@ -56,7 +56,7 @@ namespace asmdom {
 
 		for (const auto& it : props) {
 			EM_ASM_({
-				Module.nodes[$0]['asmDomRaws'].push(Module['UTF8ToString']($1));
+				Module['nodes'][$0]['asmDomRaws'].push(Module['UTF8ToString']($1));
 			}, vnode->elm, it.first.c_str());
 
 			if (
@@ -80,10 +80,10 @@ namespace asmdom {
 			if (!callbacks.count(it.first) && it.first != "ref") {
 				EM_ASM_({
 					var key = Module['UTF8ToString']($1).replace(/^on/, "");
-					var elm = Module.nodes[$0];
+					var elm = Module['nodes'][$0];
 					elm.removeEventListener(
 						key,
-						Module.eventProxy,
+						Module['eventProxy'],
 						false
 					);
 					delete elm['asmDomEvents'][key];
@@ -92,8 +92,8 @@ namespace asmdom {
 		}
 
 		EM_ASM_({
-			var elm = Module.nodes[$0];
-			elm.asmDomVNode = $1;
+			var elm = Module['nodes'][$0];
+			elm['asmDomVNode'] = $1;
 			if (elm['asmDomEvents'] === undefined) {
 				elm['asmDomEvents'] = {};
 			}
@@ -103,13 +103,13 @@ namespace asmdom {
 			if (!oldCallbacks.count(it.first) && it.first != "ref") {
 				EM_ASM_({
 					var key = Module['UTF8ToString']($1).replace(/^on/, "");
-					var elm = Module.nodes[$0];
+					var elm = Module['nodes'][$0];
 					elm.addEventListener(
 						key,
-						Module.eventProxy,
+						Module['eventProxy'],
 						false
 					);
-					elm['asmDomEvents'][key] = Module.eventProxy;
+					elm['asmDomEvents'][key] = Module['eventProxy'];
 				}, vnode->elm, it.first.c_str());
 			}
 		}
@@ -118,10 +118,15 @@ namespace asmdom {
 			bool(*const* callback)(emscripten::val) = callbacks.at("ref").target<bool(*)(emscripten::val)>();
 			bool(*const* oldCallback)(emscripten::val) = oldVnode->hash & hasRef ? oldCallbacks.at("ref").target<bool(*)(emscripten::val)>() : NULL;
 			if (!callback || !oldCallback || *oldCallback != *callback) {
+				if (oldVnode->hash & hasRef) {
+					oldCallbacks.at("ref")(emscripten::val::null());
+				}
 				callbacks.at("ref")(
-					emscripten::val::global("window")["asmDomHelpers"]["nodes"][vnode->elm]
+					emscripten::val::module_property("nodes")[vnode->elm]
 				);
 			}
+		} else if (oldVnode->hash & hasRef) {
+			oldCallbacks.at("ref")(emscripten::val::null());
 		}
 	};
 
@@ -134,7 +139,7 @@ namespace asmdom {
 
 		#ifdef ASMDOM_JS_SIDE
 			EM_ASM_({
-				Module.diff($0, $1, $2);
+				Module['diff']($0, $1, $2);
 			}, reinterpret_cast<std::uintptr_t>(oldVnode), reinterpret_cast<std::uintptr_t>(vnode), vnode->elm);
 		#else
 			if (vnodes & hasProps) diffProps(oldVnode, vnode);

@@ -1,5 +1,6 @@
 import expect from 'expect';
 import init from '../../src/js/';
+import setup from '../setup';
 
 describe('h (js)', function test() {
   this.timeout(30000);
@@ -9,9 +10,9 @@ describe('h (js)', function test() {
   let h;
 
   before((done) => {
+    setup();
     init({
       useAsmJS: true,
-      hardReload: true,
     }).then((asmDom) => {
       vdom = asmDom;
       h = vdom.h;
@@ -51,7 +52,7 @@ describe('h (js)', function test() {
 
   it('should create vnode with tag, attrs and elm', () => {
     expect(() => {
-      const attrs = new window.asmDom.MapStringString();
+      const attrs = new vdom.MapStringString();
       attrs.set('id', 'foo');
       attrs.set('class', 'bar');
       const vnode = vdom._h_elm('div', attrs, 1);

@@ -1,15 +1,9 @@
-import { nodes } from '../cpp/domApi';
-
 const emptyObj = {};
 
-export function eventProxy(e) {
-  return this.asmDomEvents[e.type](e);
-}
-
-export default (oldVnodePtr, vnodePtr, elmPtr) => {
-  const elm = nodes[elmPtr];
-  const oldNode = window.asmDomHelpers.vnodesData[oldVnodePtr];
-  const newNode = window.asmDomHelpers.vnodesData[vnodePtr];
+export default (Module, oldVnodePtr, vnodePtr, elmPtr) => {
+  const elm = Module.nodes[elmPtr];
+  const oldNode = Module.vnodesData[oldVnodePtr];
+  const newNode = Module.vnodesData[vnodePtr];
   let oldValues = oldNode !== undefined && oldNode.raw !== undefined ? oldNode.raw : emptyObj;
   let newValues = newNode !== undefined && newNode.raw !== undefined ? newNode.raw : emptyObj;
 
@@ -39,7 +33,7 @@ export default (oldVnodePtr, vnodePtr, elmPtr) => {
   if (oldValues !== newValues) {
     for (const key in oldValues) {
       if (newValues[key] === undefined) {
-        elm.removeEventListener(key, eventProxy, false);
+        elm.removeEventListener(key, Module.eventProxy, false);
         delete elm.asmDomEvents[key];
       }
     }
@@ -50,7 +44,7 @@ export default (oldVnodePtr, vnodePtr, elmPtr) => {
     // eslint-disable-next-line
     for (const key in newValues) {
       if (oldValues[key] === undefined) {
-        elm.addEventListener(key, eventProxy, false);
+        elm.addEventListener(key, Module.eventProxy, false);
       }
       elm.asmDomEvents[key] = newValues[key];
     }
@@ -59,7 +53,8 @@ export default (oldVnodePtr, vnodePtr, elmPtr) => {
   oldValues = oldNode !== undefined && oldNode.ref !== undefined ? oldNode.ref : undefined;
   newValues = newNode !== undefined && newNode.ref !== undefined ? newNode.ref : undefined;
 
-  if (oldValues !== newValues && newValues !== undefined) {
-    newValues(elm);
+  if (oldValues !== newValues) {
+    if (oldValues !== undefined) oldValues(null);
+    if (newValues !== undefined) newValues(elm);
   }
 };

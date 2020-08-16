@@ -1,12 +1,10 @@
-import '../../../../src/cpp/';
-
 const config = {};
 
 const instantiate = (Module) => {
   Module(config);
 };
 
-if ('WebAssembly' in window) {
+if ('WebAssembly' in global) {
   import('../../compiled/server/wasm/app.wasm')
           .then((wasm) => {
             config.wasmBinary = new Uint8Array(wasm);

@@ -1,4 +1,5 @@
 import init from '../';
+import setup from '../../setup';
 
 describe('attributes (cpp)', function testAttributes() {
   this.timeout(30000);
@@ -6,6 +7,7 @@ describe('attributes (cpp)', function testAttributes() {
   let app;
 
   before((done) => {
+    setup();
     app = init(done);
   });
 

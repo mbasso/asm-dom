@@ -10,4 +10,3 @@ _book
 .vscode
 test/cpp/app.asm.js
 TODO.md
-package-lock.json

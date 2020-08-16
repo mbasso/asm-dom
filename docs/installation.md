@@ -7,25 +7,9 @@ If you want to start using asm-dom without configuration you can consider [asm-d
 
 Otherwise, here is the guide for the manual installation.
 
-In order to use asm-dom you have to prepare your js and C++ environment.
+If you are using webpack, in order to use asm-dom, you have to prepare your environment:
 
-To do this, as first thing, **before importing your compiled code from C++** (wasm or asmjs) you have to include our js file: 
-
-- if you are not using [npm](https://www.npmjs.com/package/asm-dom) you can import [our js file](https://github.com/mbasso/asm-dom/blob/master/dist/cpp/asm-dom.js) from [unpkg](https://unpkg.com/asm-dom/dist/cpp/asm-dom.js)
-
-- if you are using [npm](https://www.npmjs.com/package/asm-dom) you can install asm-dom:
-
-  ```bash
-  npm install --save asm-dom
-  ```
-
-  and import our js file in this way:
-
-  ```js
-  import 'asm-dom/cpp/';
-  ```
-
-  If you are using this library with webpack you also need to install `arraybuffer-loader`:
+- Install `arraybuffer-loader`:
 
   ```bash
   npm install --save-dev arraybuffer-loader

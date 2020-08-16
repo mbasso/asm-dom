@@ -4,6 +4,7 @@ import './components/HelloComponent';
 init({
   unsafePatch: true,
 }).then((asmDom) => {
+  window.asmDom = asmDom;
   const { h, patch } = asmDom;
 
   const oldVnode = h('div', {

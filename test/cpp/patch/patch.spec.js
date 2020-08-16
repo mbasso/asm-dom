@@ -1,4 +1,5 @@
 import init from '../';
+import setup from '../../setup';
 
 describe('patch (cpp)', function test() {
   this.timeout(30000);
@@ -6,6 +7,7 @@ describe('patch (cpp)', function test() {
   let app;
 
   before((done) => {
+    setup();
     app = init(done);
   });
 
@@ -270,6 +272,10 @@ describe('patch (cpp)', function test() {
 
   it('should call ref on remove', () => {
     app.shouldCallRefOnRemove();
+  });
+
+  it('should call ref on ref remove itself', () => {
+    app.shouldCallRefOnRefRemoveItself();
   });
 
   it('should not call ref on update', () => {
