@@ -93,11 +93,11 @@ namespace asmdom {
 
 		EM_ASM_({
 			var elm = Module['nodes'][$0];
-			elm['asmDomVNode'] = $1;
+			elm['asmDomCallbacks'] = $1;
 			if (elm['asmDomEvents'] === undefined) {
 				elm['asmDomEvents'] = {};
 			}
-		}, vnode->elm, reinterpret_cast<std::uintptr_t>(vnode));
+		}, vnode->elm, reinterpret_cast<std::uintptr_t>(&vnode->data.callbacks));
 
 		for (const auto& it : callbacks) {
 			if (!oldCallbacks.count(it.first) && it.first != "ref") {
@@ -109,7 +109,7 @@ namespace asmdom {
 						Module['eventProxy'],
 						false
 					);
-					elm['asmDomEvents'][key] = Module['eventProxy'];
+					elm['asmDomEvents'][key] = true;
 				}, vnode->elm, it.first.c_str());
 			}
 		}

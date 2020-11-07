@@ -11,7 +11,7 @@ namespace asmdom {
 		EM_ASM(
 			#ifndef ASMDOM_JS_SIDE
 				Module['eventProxy'] = function(e) {
-					return Module['functionCallback'](this['asmDomVNode'], e.type, e);
+					return Module['functionCallback'](this['asmDomCallbacks'], e.type, e);
 				};
 			#else
 				Module['eventProxy'] = function(e) {
@@ -65,7 +65,7 @@ namespace asmdom {
 				}
 				i = node.attributes !== undefined ? node.attributes.length : 0;
 				while (i--) node.removeAttribute(node.attributes[i].name);
-				node['asmDomVNode'] = undefined;
+				node['asmDomCallbacks'] = undefined;
 				if (node['asmDomRaws'] !== undefined) {
 					Object.keys(node['asmDomRaws']).forEach(function(raw) {
 						node[raw] = undefined;
