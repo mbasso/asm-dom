@@ -45,7 +45,7 @@ namespace asmdom {
 		emscripten::val elm = emscripten::val::module_property("nodes")[vnode->elm];
 
 		EM_ASM_({
-			Module['nodes'][$0]['asmDomRaws'] = [];
+			Module['nodes'][$0]['asmDomRaws'] = {};
 		}, vnode->elm);
 
 		for (const auto& it : oldProps) {
@@ -56,7 +56,7 @@ namespace asmdom {
 
 		for (const auto& it : props) {
 			EM_ASM_({
-				Module['nodes'][$0]['asmDomRaws'].push(Module['UTF8ToString']($1));
+				Module['nodes'][$0]['asmDomRaws'][Module['UTF8ToString']($1)] = true;
 			}, vnode->elm, it.first.c_str());
 
 			if (

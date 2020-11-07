@@ -113,7 +113,10 @@ describe('dom recycler', function testDomRecycler() {
     const callback = () => {};
     node.onclick = callback;
     node.onkeydown = callback;
-    node.asmDomRaws = ['onclick', 'onkeydown'];
+    node.asmDomRaws = {
+      onclick: true,
+      onkeydown: true,
+    };
     expect(node.onclick).toEqual(callback);
     expect(node.onkeydown).toEqual(callback);
     recycler.collect(node);

@@ -67,7 +67,7 @@ namespace asmdom {
 				while (i--) node.removeAttribute(node.attributes[i].name);
 				node['asmDomVNode'] = undefined;
 				if (node['asmDomRaws'] !== undefined) {
-					node['asmDomRaws'].forEach(function(raw) {
+					Object.keys(node['asmDomRaws']).forEach(function(raw) {
 						node[raw] = undefined;
 					});
 					node['asmDomRaws'] = undefined;
