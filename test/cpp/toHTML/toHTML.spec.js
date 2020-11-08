@@ -6,9 +6,9 @@ describe('toHTML (cpp)', function test() {
 
   let app;
 
-  before(done => {
+  before((done) => {
     setup();
-    init().then(res => {
+    init().then((res) => {
       app = res;
       done();
     });

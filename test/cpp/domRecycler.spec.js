@@ -9,7 +9,7 @@ describe('dom recycler', function testDomRecycler() {
 
   before((done) => {
     setup();
-    init().then(res => {
+    init().then((res) => {
       recycler = res.recycler;
       done();
     });

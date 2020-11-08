@@ -8,7 +8,7 @@ describe('h (cpp)', function test() {
 
   before((done) => {
     setup();
-    init().then(res => {
+    init().then((res) => {
       app = res;
       done();
     });
