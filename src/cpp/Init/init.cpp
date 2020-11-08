@@ -65,6 +65,10 @@ namespace asmdom {
 				}
 				i = node.attributes !== undefined ? node.attributes.length : 0;
 				while (i--) node.removeAttribute(node.attributes[i].name);
+				if (node['asmDomDeleteCallbacks'] === true) {
+					Module['deleteCallbacks'](node['asmDomCallbacks']);
+				}
+				node['asmDomDeleteCallbacks'] = undefined;
 				node['asmDomCallbacks'] = undefined;
 				if (node['asmDomRaws'] !== undefined) {
 					Object.keys(node['asmDomRaws']).forEach(function(raw) {
@@ -134,12 +138,12 @@ namespace asmdom {
 					nodes[referenceNodePtr]
 				);
 			};
-			Module.removeChild = function(childPtr) {
+			Module.removeChild = function(childPtr, collect) {
 				var node = nodes[childPtr];
 				if (node === null || node === undefined) return;
 				var parent = node.parentNode;
 				if (parent !== null) parent.removeChild(node);
-				recycler['collect'](node);
+				if (collect === true) recycler['collect'](node);
 			};
 			Module.appendChild = function(parentPtr, childPtr) {
 				nodes[parentPtr].appendChild(nodes[childPtr]);
@@ -178,6 +182,11 @@ namespace asmdom {
 			};
 			Module.setNodeValue = function(nodePtr, text) {
 				nodes[nodePtr].nodeValue = text;
+			};
+			Module.deleteElement = function(nodePtr) {
+				var node = nodes[nodePtr];
+				if (node === null || node === undefined) return;
+				recycler['collect'](node);
 			};
 		);
 	};

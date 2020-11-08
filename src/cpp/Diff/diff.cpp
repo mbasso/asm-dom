@@ -14,24 +14,13 @@ namespace asmdom {
 
 		for (const auto& it : oldAttrs) {
 			if (!attrs.count(it.first)) {
-				EM_ASM_({
-					Module.removeAttribute(
-						$0,
-						Module['UTF8ToString']($1)
-					);
-				}, vnode->elm, it.first.c_str());
+				direct::removeAttribute(vnode->elm, it.first.c_str());
 			}
 		}
 
 		for (const auto& it : attrs) {
 			if (!oldAttrs.count(it.first) || oldAttrs[it.first] != it.second) {
-				EM_ASM_({
-					Module.setAttribute(
-						$0,
-						Module['UTF8ToString']($1),
-						Module['UTF8ToString']($2)
-					);
-				}, vnode->elm, it.first.c_str(), it.second.c_str());
+				direct::setAttribute(vnode->elm, it.first.c_str(), it.second.c_str());
 			}
 		}
 	};
