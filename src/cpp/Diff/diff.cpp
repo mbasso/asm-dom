@@ -31,7 +31,7 @@ namespace asmdom {
 		const Props& oldProps = oldVnode->data.props;
 		const Props& props = vnode->data.props;
 
-		emscripten::val elm = emscripten::val::module_property("nodes")[vnode->elm];
+		emscripten::val elm = direct::getElement(vnode->elm);
 
 		EM_ASM_({
 			Module['nodes'][$0]['asmDomRaws'] = {};
@@ -110,9 +110,7 @@ namespace asmdom {
 				if (oldVnode->hash & hasRef) {
 					oldCallbacks.at("ref")(emscripten::val::null());
 				}
-				callbacks.at("ref")(
-					emscripten::val::module_property("nodes")[vnode->elm]
-				);
+				callbacks.at("ref")(direct::getElement(vnode->elm));
 			}
 		} else if (oldVnode->hash & hasRef) {
 			oldCallbacks.at("ref")(emscripten::val::null());

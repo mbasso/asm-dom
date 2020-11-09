@@ -113,14 +113,12 @@ namespace asmdom {
 			};
 
 			Module['addNode'] = function(node) {
-				addPtr(node.parentNode);
-				addPtr(node.nextSibling);
 				return addPtr(node);
 			};
 			Module.createElement = function(tagName) {
 				return addPtr(recycler['create'](tagName));
 			};
-			Module.createElementNS = function(namespaceURI, qualifiedName) {
+			Module.createElementNS = function(qualifiedName, namespaceURI) {
 				return addPtr(recycler['createNS'](qualifiedName, namespaceURI));
 			};
 			Module.createTextNode = function(text) {
@@ -171,14 +169,21 @@ namespace asmdom {
 				return (
 					node !== null && node !== undefined &&
 					node.parentNode !== null
-				) ? node.parentNode['asmDomPtr'] : 0;
+				) ? addPtr(node.parentNode) : 0;
+			};
+			Module.firstChild = function(nodePtr) {
+				var node = nodes[nodePtr];
+				return (
+					node !== null && node !== undefined &&
+					node.firstChild !== null
+				) ? addPtr(node.firstChild) : 0;
 			};
 			Module.nextSibling = function(nodePtr) {
 				var node = nodes[nodePtr];
 				return (
 					node !== null && node !== undefined &&
 					node.nextSibling !== null
-				) ? node.nextSibling['asmDomPtr'] : 0;
+				) ? addPtr(node.nextSibling) : 0;
 			};
 			Module.setNodeValue = function(nodePtr, text) {
 				nodes[nodePtr].nodeValue = text;
