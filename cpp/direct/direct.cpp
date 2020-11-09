@@ -49,13 +49,13 @@ namespace asmdom {
 		};
 
 		void updateCallback(const std::uintptr_t callbacks, const std::uintptr_t callback, const std::string event) {
-			Callbacks cbs = *reinterpret_cast<Callbacks*>(callbacks);
-			Callback cb = *reinterpret_cast<Callback*>(callback);
+			Callbacks& cbs = *reinterpret_cast<Callbacks*>(callbacks);
+			Callback& cb = *reinterpret_cast<Callback*>(callback);
 			cbs[event] = cb;
 		};
 
 		void deleteCallback(const std::uintptr_t callbacks, std::string event) {
-			Callbacks cbs = *reinterpret_cast<Callbacks*>(callbacks);
+			Callbacks& cbs = *reinterpret_cast<Callbacks*>(callbacks);
 			if (cbs.count(event)) {
 				cbs.erase(event);
 			} else {
@@ -102,13 +102,15 @@ namespace asmdom {
 				var elm = Module['nodes'][$0];
 				if (elm['asmDomEvents'] !== undefined) {
 					var key = Module['UTF8ToString']($1).replace(/^on/, "");
-					delete elm['asmDomEvents'][key];
-					Module['deleteCallback'](this['asmDomCallbacks'], key);
-					elm.removeEventListener(
-						key,
-						Module['eventProxy'],
-						false
-					);
+					if (key in elm['asmDomEvents']) {
+						delete elm['asmDomEvents'][key];
+						Module['deleteCallback'](elm['asmDomCallbacks'], key);
+						elm.removeEventListener(
+							key,
+							Module['eventProxy'],
+							false
+						);
+					}
 				}
 			}, elm, event);
 		};

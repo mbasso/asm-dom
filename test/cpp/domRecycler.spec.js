@@ -6,10 +6,12 @@ describe('dom recycler', function testDomRecycler() {
   this.timeout(30000);
 
   let recycler;
+  let Module;
 
   before((done) => {
     setup();
     init().then((res) => {
+      Module = res;
       recycler = res.recycler;
       done();
     });
@@ -130,16 +132,18 @@ describe('dom recycler', function testDomRecycler() {
 
   it('should clean asmDomEvents', () => {
     let calls = 0;
-    const node = recycler.create('div');
-    const callbacks = {
-      click: () => { calls++; },
-      keydown: () => { calls++; },
+
+    const oldEventProxy = Module.eventProxy;
+    Module.eventProxy = () => {
+      calls++;
     };
-    node.addEventListener('click', callbacks.click);
-    node.addEventListener('keydown', callbacks.keydown);
+
+    const node = recycler.create('div');
+    node.addEventListener('click', Module.eventProxy);
+    node.addEventListener('keydown', Module.eventProxy);
     node.asmDomEvents = {
-      click: callbacks.click,
-      keydown: callbacks.keydown,
+      click: true,
+      keydown: true,
     };
     node.click();
     expect(calls).toEqual(1);
@@ -147,5 +151,7 @@ describe('dom recycler', function testDomRecycler() {
     expect(node.asmDomEvents).toEqual(undefined);
     node.click();
     expect(calls).toEqual(1);
+
+    Module.eventProxy = oldEventProxy;
   });
 });

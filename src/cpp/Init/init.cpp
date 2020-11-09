@@ -78,7 +78,7 @@ namespace asmdom {
 				}
 				if (node['asmDomEvents'] !== undefined) {
 					Object.keys(node['asmDomEvents']).forEach(function(event) {
-						node.removeEventListener(event, node['asmDomEvents'][event], false);
+						node.removeEventListener(event, Module['eventProxy'], false);
 					});
 					node['asmDomEvents'] = undefined;
 				}
