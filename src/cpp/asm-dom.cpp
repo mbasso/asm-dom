@@ -1,5 +1,6 @@
 #include "Config/Config.cpp"
 #include "VNode/VNode.cpp"
+#include "direct/direct.cpp"
 #include "h/h.cpp"
 #include "toVNode/toVNode.cpp"
 #include "Diff/diff.cpp"

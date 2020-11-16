@@ -6,10 +6,15 @@ describe('dom recycler', function testDomRecycler() {
   this.timeout(30000);
 
   let recycler;
+  let Module;
 
   before((done) => {
     setup();
-    recycler = init(done).recycler;
+    init().then((res) => {
+      Module = res;
+      recycler = res.recycler;
+      done();
+    });
   });
 
   beforeEach(() => {
@@ -113,7 +118,10 @@ describe('dom recycler', function testDomRecycler() {
     const callback = () => {};
     node.onclick = callback;
     node.onkeydown = callback;
-    node.asmDomRaws = ['onclick', 'onkeydown'];
+    node.asmDomRaws = {
+      onclick: true,
+      onkeydown: true,
+    };
     expect(node.onclick).toEqual(callback);
     expect(node.onkeydown).toEqual(callback);
     recycler.collect(node);
@@ -124,16 +132,18 @@ describe('dom recycler', function testDomRecycler() {
 
   it('should clean asmDomEvents', () => {
     let calls = 0;
-    const node = recycler.create('div');
-    const callbacks = {
-      click: () => { calls++; },
-      keydown: () => { calls++; },
+
+    const oldEventProxy = Module.eventProxy;
+    Module.eventProxy = () => {
+      calls++;
     };
-    node.addEventListener('click', callbacks.click);
-    node.addEventListener('keydown', callbacks.keydown);
+
+    const node = recycler.create('div');
+    node.addEventListener('click', Module.eventProxy);
+    node.addEventListener('keydown', Module.eventProxy);
     node.asmDomEvents = {
-      click: callbacks.click,
-      keydown: callbacks.keydown,
+      click: true,
+      keydown: true,
     };
     node.click();
     expect(calls).toEqual(1);
@@ -141,5 +151,7 @@ describe('dom recycler', function testDomRecycler() {
     expect(node.asmDomEvents).toEqual(undefined);
     node.click();
     expect(calls).toEqual(1);
+
+    Module.eventProxy = oldEventProxy;
   });
 });

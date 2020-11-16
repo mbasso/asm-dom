@@ -41,39 +41,21 @@ namespace asmdom {
 
 	int createElm(VNode* const vnode) {
 		if (vnode->hash & isElement) {
-			vnode->elm = EM_ASM_INT({
-				return $1 === 0
-					? Module.createElement(
-							Module['UTF8ToString']($0)
-						)
-					: Module.createElementNS(
-							Module['UTF8ToString']($1),
-							Module['UTF8ToString']($0)
-						);
-			}, vnode->sel.c_str(), vnode->hash & hasNS ? vnode->ns.c_str() : 0);
+			const char* sel = vnode->sel.c_str();
+			vnode->elm = vnode->hash & hasNS
+				? direct::createElementNS(sel, vnode->ns.c_str())
+				: direct::createElement(sel);
 		} else if (vnode->hash & isText) {
-    	return vnode->elm = EM_ASM_INT({
-				return Module.createTextNode(
-					Module['UTF8ToString']($0)
-				);
-			}, vnode->sel.c_str());
+    	return vnode->elm = direct::createTextNode(vnode->sel.c_str());
 		} else if (vnode->hash & isFragment) {
-			vnode->elm = EM_ASM_INT({
-				return Module.createDocumentFragment();
-			});
+			vnode->elm = direct::createDocumentFragment();
 		} else if (vnode->hash & isComment) {
-			return vnode->elm = EM_ASM_INT({
-				return Module.createComment(
-					Module['UTF8ToString']($0)
-				);
-			}, vnode->sel.c_str());
+			return vnode->elm = direct::createComment(vnode->sel.c_str());
 		}
 		
 		for(std::vector<VNode*>::size_type i = 0, j = vnode->children.size(); i != j; ++i) {
 			int elm = createElm(vnode->children[i]);
-			EM_ASM_({
-				Module.appendChild($0, $1);
-			}, vnode->elm, elm);
+			direct::appendChild(vnode->elm, elm);
 		}
 
 		diff(emptyNode, vnode);
@@ -90,9 +72,7 @@ namespace asmdom {
 	) {
 		while (startIdx <= endIdx) {
 			int elm = createElm(vnodes[startIdx++]);
-			EM_ASM_({
-				Module.insertBefore($0, $1, $2)
-			}, parentElm, elm, before);
+			direct::insertBefore(parentElm, elm, before);
 		}
 	};
 
@@ -107,7 +87,7 @@ namespace asmdom {
 			if (vnode) {
 				#ifdef ASMDOM_JS_SIDE
 					EM_ASM_({
-						Module.removeChild($0);
+						Module.removeChild($0, true);
 						var data = Module['vnodesData'][$1];
 						if (data !== undefined && data['ref'] !== undefined) {
 							data['ref'](null);
@@ -115,7 +95,7 @@ namespace asmdom {
 					}, vnode->elm, reinterpret_cast<std::uintptr_t>(vnode));
 				#else
 					EM_ASM_({
-						Module.removeChild($0);
+						Module.removeChild($0, true);
 					}, vnode->elm);
 					
 					if (vnode->hash & hasRef) {
@@ -172,9 +152,7 @@ namespace asmdom {
 			} else if (sameVNode(oldEndVnode, newStartVnode)) {
 				if (oldEndVnode != newStartVnode) patchVNode(oldEndVnode, newStartVnode, parentElm);
 
-				EM_ASM_({
-					Module.insertBefore($0, $1, $2);
-				}, parentElm, oldEndVnode->elm, oldStartVnode->elm);
+				direct::insertBefore(parentElm, oldEndVnode->elm, oldStartVnode->elm);
 				oldEndVnode = oldCh[--oldEndIdx];
 				newStartVnode = newCh[++newStartIdx];
 			} else {
@@ -190,22 +168,16 @@ namespace asmdom {
 				}
 				if (!oldKeyToIdx.count(newStartVnode->key)) {
 					int elm = createElm(newStartVnode);
-					EM_ASM_({
-						Module.insertBefore($0, $1, $2);
-					}, parentElm, elm, oldStartVnode->elm);
+					direct::insertBefore(parentElm, elm, oldStartVnode->elm);
 				} else {
 					VNode* elmToMove = oldCh[oldKeyToIdx[newStartVnode->key]];
 					if ((elmToMove->hash & extractSel) != (newStartVnode->hash & extractSel)) {
 						int elm = createElm(newStartVnode);
-						EM_ASM_({
-							Module.insertBefore($0, $1, $2);
-						}, parentElm, elm, oldStartVnode->elm);
+						direct::insertBefore(parentElm, elm, oldStartVnode->elm);
 					} else {
 						if (elmToMove != newStartVnode) patchVNode(elmToMove, newStartVnode, parentElm);
 						oldCh[oldKeyToIdx[newStartVnode->key]] = NULL;
-						EM_ASM_({
-							Module.insertBefore($0, $1, $2);
-						}, parentElm, elmToMove->elm, oldStartVnode->elm);
+						direct::insertBefore(parentElm, elmToMove->elm, oldStartVnode->elm);
 					}
 				}
 				newStartVnode = newCh[++newStartIdx];
@@ -234,12 +206,7 @@ namespace asmdom {
 			}
 			diff(oldVnode, vnode);
 		} else if (vnode->sel != oldVnode->sel) {
-			EM_ASM_({
-				Module.setNodeValue(
-					$0,
-					Module['UTF8ToString']($1)
-				);
-			}, vnode->elm, vnode->sel.c_str());
+			direct::setNodeValue(vnode->elm, vnode->sel.c_str());
 		}
 	};
 
@@ -281,7 +248,7 @@ namespace asmdom {
 						$0,
 						Module.nextSibling($1)
 					);
-					Module.removeChild($1);
+					Module.removeChild($1, true);
 				}
 			}, elm, oldVnode->elm);
 		}

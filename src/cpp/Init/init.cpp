@@ -11,7 +11,7 @@ namespace asmdom {
 		EM_ASM(
 			#ifndef ASMDOM_JS_SIDE
 				Module['eventProxy'] = function(e) {
-					return Module['functionCallback'](this['asmDomVNode'], e.type, e);
+					return Module['functionCallback'](this['asmDomCallbacks'], e.type, e);
 				};
 			#else
 				Module['eventProxy'] = function(e) {
@@ -65,16 +65,20 @@ namespace asmdom {
 				}
 				i = node.attributes !== undefined ? node.attributes.length : 0;
 				while (i--) node.removeAttribute(node.attributes[i].name);
-				node['asmDomVNode'] = undefined;
+				if (node['asmDomDeleteCallbacks'] === true) {
+					Module['deleteCallbacks'](node['asmDomCallbacks']);
+				}
+				node['asmDomDeleteCallbacks'] = undefined;
+				node['asmDomCallbacks'] = undefined;
 				if (node['asmDomRaws'] !== undefined) {
-					node['asmDomRaws'].forEach(function(raw) {
+					Object.keys(node['asmDomRaws']).forEach(function(raw) {
 						node[raw] = undefined;
 					});
 					node['asmDomRaws'] = undefined;
 				}
 				if (node['asmDomEvents'] !== undefined) {
 					Object.keys(node['asmDomEvents']).forEach(function(event) {
-						node.removeEventListener(event, node['asmDomEvents'][event], false);
+						node.removeEventListener(event, Module['eventProxy'], false);
 					});
 					node['asmDomEvents'] = undefined;
 				}
@@ -109,14 +113,12 @@ namespace asmdom {
 			};
 
 			Module['addNode'] = function(node) {
-				addPtr(node.parentNode);
-				addPtr(node.nextSibling);
 				return addPtr(node);
 			};
 			Module.createElement = function(tagName) {
 				return addPtr(recycler['create'](tagName));
 			};
-			Module.createElementNS = function(namespaceURI, qualifiedName) {
+			Module.createElementNS = function(qualifiedName, namespaceURI) {
 				return addPtr(recycler['createNS'](qualifiedName, namespaceURI));
 			};
 			Module.createTextNode = function(text) {
@@ -134,12 +136,12 @@ namespace asmdom {
 					nodes[referenceNodePtr]
 				);
 			};
-			Module.removeChild = function(childPtr) {
+			Module.removeChild = function(childPtr, collect) {
 				var node = nodes[childPtr];
 				if (node === null || node === undefined) return;
 				var parent = node.parentNode;
 				if (parent !== null) parent.removeChild(node);
-				recycler['collect'](node);
+				if (collect === true) recycler['collect'](node);
 			};
 			Module.appendChild = function(parentPtr, childPtr) {
 				nodes[parentPtr].appendChild(nodes[childPtr]);
@@ -167,17 +169,29 @@ namespace asmdom {
 				return (
 					node !== null && node !== undefined &&
 					node.parentNode !== null
-				) ? node.parentNode['asmDomPtr'] : 0;
+				) ? addPtr(node.parentNode) : 0;
+			};
+			Module.firstChild = function(nodePtr) {
+				var node = nodes[nodePtr];
+				return (
+					node !== null && node !== undefined &&
+					node.firstChild !== null
+				) ? addPtr(node.firstChild) : 0;
 			};
 			Module.nextSibling = function(nodePtr) {
 				var node = nodes[nodePtr];
 				return (
 					node !== null && node !== undefined &&
 					node.nextSibling !== null
-				) ? node.nextSibling['asmDomPtr'] : 0;
+				) ? addPtr(node.nextSibling) : 0;
 			};
 			Module.setNodeValue = function(nodePtr, text) {
 				nodes[nodePtr].nodeValue = text;
+			};
+			Module.deleteElement = function(nodePtr) {
+				var node = nodes[nodePtr];
+				if (node === null || node === undefined) return;
+				recycler['collect'](node);
 			};
 		);
 	};

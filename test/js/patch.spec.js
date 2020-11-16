@@ -830,10 +830,15 @@ describe('patch (js)', function testPatch() {
     });
     patch(root, vnode1);
     let elm = document.body.firstChild;
-    expect(elm.asmDomRaws).toEqual(['onclick', 'foo']);
+    expect(elm.asmDomRaws).toEqual({
+      onclick: true,
+      foo: true,
+    });
     patch(vnode1, vnode2);
     elm = document.body.firstChild;
-    expect(elm.asmDomRaws).toEqual(['bar']);
+    expect(elm.asmDomRaws).toEqual({
+      bar: true,
+    });
     vdom.deleteVNode(vnode2);
   });
 
@@ -849,10 +854,15 @@ describe('patch (js)', function testPatch() {
     });
     patch(root, vnode1);
     let elm = document.body.firstChild;
-    expect(elm.asmDomRaws).toEqual(['foo', 'value']);
+    expect(elm.asmDomRaws).toEqual({
+      foo: true,
+      value: true,
+    });
     patch(vnode1, vnode2);
     elm = document.body.firstChild;
-    expect(elm.asmDomRaws).toEqual(['value']);
+    expect(elm.asmDomRaws).toEqual({
+      value: true,
+    });
     vdom.deleteVNode(vnode2);
   });
 
@@ -868,10 +878,15 @@ describe('patch (js)', function testPatch() {
     });
     patch(root, vnode1);
     let elm = document.body.firstChild;
-    expect(elm.asmDomRaws).toEqual(['foo', 'checked']);
+    expect(elm.asmDomRaws).toEqual({
+      foo: true,
+      checked: true,
+    });
     patch(vnode1, vnode2);
     elm = document.body.firstChild;
-    expect(elm.asmDomRaws).toEqual(['checked']);
+    expect(elm.asmDomRaws).toEqual({
+      checked: true,
+    });
     vdom.deleteVNode(vnode2);
   });
 
@@ -896,7 +911,9 @@ describe('patch (js)', function testPatch() {
     });
     patch(vnode1, vnode2);
     elm = document.body.firstChild;
-    expect(elm.asmDomRaws).toEqual(['bar']);
+    expect(elm.asmDomRaws).toEqual({
+      bar: true,
+    });
     expect(elm.asmDomEvents).toEqual({
       keydown: callbacks.keydown,
     });

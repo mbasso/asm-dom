@@ -8,7 +8,10 @@ describe('patch (cpp)', function test() {
 
   before((done) => {
     setup();
-    app = init(done);
+    init().then((res) => {
+      app = res;
+      done();
+    });
   });
 
   beforeEach(() => {

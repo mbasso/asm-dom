@@ -1507,13 +1507,16 @@ void shouldSetAsmDomRaws() {
 	VNode* vnode3 = h("i");
 	patch(getRoot(), vnode1);
 	emscripten::val elm = getBodyFirstChild();
-	assertEquals(elm["asmDomRaws"]["length"], emscripten::val(1));
-	assertEquals(elm["asmDomRaws"]["0"], emscripten::val("foo"));
+	emscripten::val keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomRaws"]);
+	assertEquals(keys["length"], emscripten::val(1));
+	assertEquals(keys["0"], emscripten::val("foo"));
 	patch(vnode1, vnode2);
-	assertEquals(elm["asmDomRaws"]["length"], emscripten::val(1));
-	assertEquals(elm["asmDomRaws"]["0"], emscripten::val("bar"));
+	keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomRaws"]);
+	assertEquals(keys["length"], emscripten::val(1));
+	assertEquals(keys["0"], emscripten::val("bar"));
 	patch(vnode2, vnode3);
-	assertEquals(elm["asmDomRaws"]["length"], emscripten::val(0));
+	keys = emscripten::val::global("Object").call<emscripten::val>("keys", elm["asmDomRaws"]);
+	assertEquals(keys["length"], emscripten::val(0));
 	deleteVNode(vnode3);
 };
 

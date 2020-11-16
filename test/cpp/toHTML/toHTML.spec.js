@@ -8,7 +8,10 @@ describe('toHTML (cpp)', function test() {
 
   before((done) => {
     setup();
-    app = init(done);
+    init().then((res) => {
+      app = res;
+      done();
+    });
   });
 
   it('should handle NULL VNode', () => {

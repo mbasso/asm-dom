@@ -42,7 +42,7 @@ namespace asmdom {
 		} else {
 			vnode = h("");
 		}
-		vnode->elm = emscripten::val::module_property("addNode")(node).as<int>();
+		vnode->elm = direct::toElement(node);
 		return vnode;
 	};
 

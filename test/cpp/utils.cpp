@@ -1,6 +1,7 @@
 #include "utils.hpp"
 #include "../../src/cpp/asm-dom.hpp"
 #include <emscripten/val.h>
+#include <cassert>
 #include <string>
 
 using namespace asmdom;

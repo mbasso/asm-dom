@@ -2,6 +2,7 @@
 #define asmdom_asmDom_hpp
 
 #include "VNode/VNode.hpp"
+#include "direct/direct.hpp"
 #include "h/h.hpp"
 #include "toVNode/toVNode.hpp"
 #include "Patch/patch.hpp"

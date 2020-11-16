@@ -1,4 +1,1 @@
-export default onRuntimeInitialized =>
-  require('./app.asm.js')({
-    'onRuntimeInitialized': onRuntimeInitialized,
-  });
+export default () => require('./app.asm.js')();
