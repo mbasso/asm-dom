@@ -102,7 +102,7 @@ namespace asmdom {
 		extern void (*setText)(const int, const char*);
 		extern void (*setComment)(const int, const char*);
 
-		void setProperty(const int elm, const char* property, const char* value);
+		void setProperty(const int elm, const char* property, const emscripten::val value);
 		void removeProperty(const int elm, const char* property);
 
 		void setCallback(const int elm, const char* event, const Callback callback);

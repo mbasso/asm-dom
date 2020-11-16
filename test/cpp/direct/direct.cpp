@@ -320,11 +320,17 @@ void shouldDirectlySetProperty() {
 	const int elm = createElement("a");
 	const emscripten::val element = getElement(elm);
 
-	setProperty(elm, "foo", "foo-prop");
+	setProperty(elm, "foo", emscripten::val("foo-prop"));
 	assertEquals(element["foo"], emscripten::val("foo-prop"));
 
-	setProperty(elm, "foo", "bar");
+	setProperty(elm, "foo", emscripten::val("bar"));
 	assertEquals(element["foo"], emscripten::val("bar"));
+
+	setProperty(elm, "foo", emscripten::val(true));
+	assertEquals(element["foo"], emscripten::val(true));
+
+	setProperty(elm, "foo", emscripten::val(42));
+	assertEquals(element["foo"], emscripten::val(42));
 };
 
 void shouldDirectlyRemoveProperty() {
@@ -335,7 +341,7 @@ void shouldDirectlyRemoveProperty() {
 	removeProperty(elm, "bar");
 	assertEquals(element["bar"], emscripten::val::undefined());
 
-	setProperty(elm, "foo", "foo-prop");
+	setProperty(elm, "foo", emscripten::val("foo-prop"));
 	assertEquals(element["foo"], emscripten::val("foo-prop"));
 
 	removeProperty(elm, "foo");
@@ -345,7 +351,7 @@ void shouldDirectlyRemoveProperty() {
 	removeProperty(elm, "bar");
 	assertEquals(element["bar"], emscripten::val::undefined());
 
-	setProperty(elm, "foo", "foo-prop");
+	setProperty(elm, "foo", emscripten::val("foo-prop"));
 	assertEquals(element["foo"], emscripten::val("foo-prop"));
 	deleteElement(elm);
 	assertEquals(element["foo"], emscripten::val::undefined());

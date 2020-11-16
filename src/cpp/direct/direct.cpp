@@ -17,7 +17,7 @@ namespace asmdom {
 		void (*setComment)(const int, const char*) = &setNodeValue;
 
 
-		void setProperty(const int elm, const char* property, const char* value) {
+		void setProperty(const int elm, const char* property, const emscripten::val value) {
 			EM_ASM_({
 				var node = Module['nodes'][$0];
 				var key = Module['UTF8ToString']($1);
@@ -25,8 +25,9 @@ namespace asmdom {
 					node['asmDomRaws'] = {};
 				}
 				node['asmDomRaws'][key] = true;
-				node[key] = Module['UTF8ToString']($2);
-			}, elm, property, value);
+			}, elm, property);
+
+			getElement(elm).set(property, value);
 		};
 
 		void removeProperty(const int elm, const char* property) {
