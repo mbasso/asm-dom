@@ -14,10 +14,10 @@ export default (Module, oldVnodePtr, vnodePtr, elmPtr) => {
       }
     }
 
-    elm.asmDomRaws = [];
+    elm.asmDomRaws = {};
     // eslint-disable-next-line
     for (const key in newValues) {
-      elm.asmDomRaws.push(key);
+      elm.asmDomRaws[key] = true;
       if (
         oldValues[key] !== newValues[key] ||
         ((key === 'value' || key === 'checked') && elm[key] !== newValues[key])

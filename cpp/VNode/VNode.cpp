@@ -102,8 +102,8 @@ namespace asmdom {
 
 	#ifndef ASMDOM_JS_SIDE
 
-		emscripten::val functionCallback(const std::uintptr_t& vnode, std::string callback, emscripten::val event) {
-			Callbacks cbs = reinterpret_cast<VNode*>(vnode)->data.callbacks;
+		emscripten::val functionCallback(const std::uintptr_t callbacks, std::string callback, emscripten::val event) {
+			Callbacks cbs = *reinterpret_cast<Callbacks*>(callbacks);
 			if (!cbs.count(callback)) {
 				callback = "on" + callback;
 			}
@@ -111,7 +111,7 @@ namespace asmdom {
 		};
 
 		EMSCRIPTEN_BINDINGS(function_callback) {
-			emscripten::function("functionCallback", &functionCallback, emscripten::allow_raw_pointers());
+			emscripten::function("functionCallback", &functionCallback);
 		};
 
 	#endif

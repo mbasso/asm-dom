@@ -37,8 +37,6 @@ FILES = \
 	src/cpp/asm-dom.cpp \
 	src/cpp/asm-dom-server.cpp
 
-BC = compiled/asm-dom.bc
-
 CFLAGS = \
 	-O3 \
 	--bind \
@@ -56,7 +54,6 @@ WASM_OPTIONS = \
 	--llvm-lto 3 \
 	--llvm-opts 3 \
 	--js-opts 1 \
-	--closure 1 \
 	-s ENVIRONMENT=node \
 	-s MODULARIZE=1 \
 	-s ALLOW_MEMORY_GROWTH=1 \
@@ -66,8 +63,7 @@ WASM_OPTIONS = \
 	-s NO_FILESYSTEM=1 \
 	-s DISABLE_EXCEPTION_CATCHING=2 \
 	-s BINARYEN=1 \
-	-s EXPORTED_RUNTIME_METHODS=[\'UTF8ToString\'] \
-	-s BINARYEN_TRAP_MODE=\'allow\'
+	-s EXPORTED_RUNTIME_METHODS=[\'UTF8ToString\']
 
 ASMJS_OPTIONS = \
 	-O3 \
@@ -76,7 +72,6 @@ ASMJS_OPTIONS = \
 	--llvm-lto 3 \
 	--llvm-opts 3 \
 	--js-opts 1 \
-	--closure 1 \
 	-s ENVIRONMENT=node \
 	-s MODULARIZE=1 \
 	-s AGGRESSIVE_VARIABLE_ELIMINATION=1 \
@@ -108,7 +103,7 @@ test_js:
 	npx cross-env BABEL_ENV=commonjs TEST_ENV=node mocha --require babel-register test/js/toHTML.spec.js
 	npx cross-env BABEL_ENV=commonjs nyc --require babel-register mocha --recursive
 
-build: compiled/asm-dom.a $(BC) compiled/asm-dom.o $(COMPILEDASMJS)/asm-dom.asm.js $(COMPILEDWASM)/asm-dom.js $(TESTCPP) $(LIBS) $(ES) $(UMDJS)
+build: $(COMPILED)/asm-dom.a $(COMPILEDASMJS)/asm-dom.asm.js $(COMPILEDWASM)/asm-dom.js $(TESTCPP) $(LIBS) $(ES) $(UMDJS)
 	npx ncp $(SRCDIR)/cpp $(CPPDIR)
 
 $(TESTCPP): $(SRCSCPP) $(TEST_FILES)
@@ -121,24 +116,27 @@ $(TESTCPP): $(SRCSCPP) $(TEST_FILES)
 		-o $@
 
 .SECONDEXPANSION:
-$(COMPILED)/asm-dom.%: $(SRCSCPP) | $$(@D)
+$(COMPILED)/asm-dom.a: $(SRCSCPP) | $$(@D)
 	emcc \
 		-DASMDOM_JS_SIDE \
 		$(CFLAGS) \
 		$(FILES) \
 		src/js/index.cpp \
 		-o $@
-
-$(COMPILEDASMJS)/asm-dom.asm.js: $(BC) | $$(@D)
+$(COMPILEDASMJS)/asm-dom.asm.js: $(FILES) | $$(@D)
 	emcc \
+		-DASMDOM_JS_SIDE \
 		$(ASMJS_OPTIONS) \
-		$(BC) \
+		$(FILES) \
+		src/js/index.cpp \
 		-o $@
 
-$(COMPILEDWASM)/asm-dom.js: $(BC) | $$(@D)
+$(COMPILEDWASM)/asm-dom.js: $(FILES) | $$(@D)
 	emcc \
+		-DASMDOM_JS_SIDE \
 		$(WASM_OPTIONS) \
-		$(BC) \
+		$(FILES) \
+		src/js/index.cpp \
 		-o $@
 
 $(ESDIR)/%: $(SRCDIR)/% | $$(@D)

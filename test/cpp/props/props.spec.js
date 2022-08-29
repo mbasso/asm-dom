@@ -8,7 +8,10 @@ describe('props (cpp)', function testAttributes() {
 
   before((done) => {
     setup();
-    app = init(done);
+    init().then((res) => {
+      app = res;
+      done();
+    });
   });
 
   beforeEach(() => {
