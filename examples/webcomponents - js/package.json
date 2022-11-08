@@ -20,7 +20,7 @@
     "babel-preset-stage-0": "6.24.1",
     "babel-register": "6.24.1",
     "compression-webpack-plugin": "0.4.0",
-    "copy-webpack-plugin": "4.0.1",
+    "copy-webpack-plugin": "4.6.0",
     "cross-env": "4.0.0",
     "css-loader": "0.28.1",
     "eslint": "3.19.0",
@@ -29,7 +29,7 @@
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.10.3",
     "style-loader": "0.17.0",
-    "webpack": "2.4.1",
+    "webpack": "5.74.0",
     "webpack-dev-server": "2.4.5"
   },
   "dependencies": {
