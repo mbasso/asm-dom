@@ -40,7 +40,7 @@
     "babel-cli": "6.24.1",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.2",
-    "babel-loader": "6.4.1",
+    "babel-loader": "9.1.0",
     "babel-plugin-dynamic-import-webpack": "1.0.1",
     "babel-plugin-macros": "2.0.0",
     "babel-plugin-preval": "1.6.2",
@@ -70,7 +70,7 @@
     "ncp": "2.0.0",
     "nyc": "11.0.2",
     "rimraf": "2.6.1",
-    "webpack": "2.4.1"
+    "webpack": "5.74.0"
   },
   "npmName": "asm-dom",
   "npmFileMap": [
