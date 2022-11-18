@@ -14,7 +14,7 @@
     "lint": "eslint src"
   },
   "devDependencies": {
-    "arraybuffer-loader": "0.2.2",
+    "arraybuffer-loader": "1.0.8",
     "babel-cli": "6.24.1",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
@@ -27,7 +27,7 @@
     "babel-preset-stage-0": "6.24.1",
     "babel-register": "6.24.1",
     "compression-webpack-plugin": "0.4.0",
-    "copy-webpack-plugin": "4.0.1",
+    "copy-webpack-plugin": "4.6.0",
     "cross-env": "4.0.0",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "14.1.0",
@@ -35,7 +35,7 @@
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.10.3",
     "rimraf": "2.6.2",
-    "webpack": "2.4.1",
+    "webpack": "5.75.0",
     "webpack-dev-server": "2.4.5"
   },
   "dependencies": {
